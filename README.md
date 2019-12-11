@@ -1,6 +1,6 @@
 # Batch Info Document
 
-**Batch Name:** 190422-Java-Spark-USF
+**Batch Name:** 191216-Java-USF
 
 **Skill Type:** Full Stack Java/JEE
 
@@ -8,9 +8,9 @@
 
 **Trainer email:** wezley.singleton@revature.com
 
-**HR POC:** David Fay
+**HR POC:** Desiree Saroniero
 
-**HR POC email:** david.fay@revature.com
+**HR POC email:** desiree.saroniero@revature.com
 
 **Main HR email:** hr@revature.com
 
@@ -50,9 +50,9 @@ ___
 
 **Week 4:** Servlets, TypeScript, & Angular
 
-**Week 5:** AWS DevOps, Docker, & Hibernate
+**Week 5:** DevOps Principals, AWS Cloud, & Hibernate
 
-**Week 6:** Spring Framework, Spring Boot, Spring Data
+**Week 6:** Spring Framework
 
 **Week 7:** Web Services & Microservices
 
@@ -79,7 +79,7 @@ ___
 
 ## Quality Control
 
-**Quality Analyst:** Dylan McBee
+**Quality Analyst:** TBD
 
 + Weekly assessments to ensure quality of learning environment
 
