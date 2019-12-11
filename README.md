@@ -128,7 +128,7 @@ ___
 
 ## Parking
 
-+ **Only available to associates working from BSN or living in Reflections apartments**
++ **Reimbursement for passes is only available to associates working from BSN or living in Reflections apartments**
 
 + Go to Parking Administration (on USF Campus, off of Holly drive - see USF map)
 
