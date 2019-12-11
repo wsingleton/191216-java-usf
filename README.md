@@ -67,11 +67,11 @@ ___
 
 ## Projects
 
-**Project 0:** Individual or Paired Programming
+**Project 0:** Individual
 
 **Project 1:** Individual or Paired Programming
 
-**Project 2:** Group (3+)
+**Project 2:** Group (teams of 3+)
 
 **Project 3:** Batch (an in-production, enterprise-level application presented to Revature product owners, stakeholders, and clients)
 
@@ -79,7 +79,7 @@ ___
 
 ## Quality Control
 
-**Quality Analyst:** TBD
+**Quality Analyst:** Jonathan Gworek
 
 + Weekly assessments to ensure quality of learning environment
 
@@ -103,9 +103,9 @@ ___
 
 ## Benefits
 
-+ Medical and vision insurance sign up is available on the 1st of the month following 60 days of employment (starting from Orientation Day)
++ Medical, vision, and dental insurance sign up is available on the 1st of the month following 60 days of employment (starting from Orientation Day)
 
-+ Dental, life, and disability insurance sign up is available on the 1st of the month following 180 days of employment (starting from Orientation Day)
++ Life and disability insurance sign up is available on the 1st of the month following 180 days of employment (starting from Orientation Day)
 
 + Commuter benefits for those who use mass transit
 
@@ -128,7 +128,7 @@ ___
 
 ## Parking
 
-+ **Only available to associates not in living the IQ Apartments**
++ **Only available to associates working from BSN or living in Reflections apartments**
 
 + Go to Parking Administration (on USF Campus, off of Holly drive - see USF map)
 
