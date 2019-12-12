@@ -115,7 +115,7 @@ ___
 
 + Prepare all associates for the Oracle Certified Associate (OCA) certification
 
-+ Certain certifications will be reimbursed by Revature (email HR for specifics)
+    - Certain certifications will be reimbursed by Revature (email HR for specifics)
 
 + Interview Preparation
 
