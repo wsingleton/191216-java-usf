@@ -5,4 +5,5 @@ Class Revature {
 	string
 	double
 	bool
+	another double
 }
