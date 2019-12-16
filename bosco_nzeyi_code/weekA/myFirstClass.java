@@ -1,4 +1,4 @@
-Public myFirstClass {
+public class myFirstClass {
 
 	public static void main(String[] args){
 		
