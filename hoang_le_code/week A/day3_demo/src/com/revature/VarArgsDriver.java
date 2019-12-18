@@ -11,7 +11,7 @@ public class VarArgsDriver {
     varArgs("test",1);
     varArgs("test",1,2,3);
 
-    System.out.println("--------- check -----check ------check-------");
+    System.out.println("--------- check -----check ------check-------check---");
     // 2 d array
         int[][] twoDimArr={
                 {1,2,3},
