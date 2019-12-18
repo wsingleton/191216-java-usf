@@ -28,6 +28,7 @@ public class VarArgsDriver {
                 {"Ervin","Stewart"},
                 {"Evan","Hsi"}
         };
+        showVals(associates191216);
     }
     /*  Variable arguments must be the last parameter in the parameters list.
         There can only be one variable argument parameter in a method.*/
