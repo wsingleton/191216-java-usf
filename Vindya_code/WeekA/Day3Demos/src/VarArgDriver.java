@@ -6,7 +6,7 @@ public class VarArgDriver {
       varArg( "test3", 1,2,3);
 //instantiating a 2-d array using literals
         int [][] twoDimArr ={
-                {1, 2, 3},
+                {1,2,3},
                 {4,5,6},
                 {7,8,9}
         };
