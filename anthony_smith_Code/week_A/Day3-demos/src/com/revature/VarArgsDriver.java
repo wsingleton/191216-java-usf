@@ -30,12 +30,12 @@ public class VarArgsDriver {
      just add a set of square of a square brackets and the ellipses to pass
      in a multi-dimensional
      */
-    public static void show(int[]... my2dArray){
-
-        for(int arr : my2dArray){
-            for (int: arr){
-                System.out.println((i));
-            }
-        }
-    }
+//    public static void show(int[]... my2dArray){
+//
+//        for(int arr : my2dArray){
+//            for (int: arr){
+//                System.out.println((i));
+//            }
+//        }
+//    }
 }
