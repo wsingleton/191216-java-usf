@@ -106,3 +106,7 @@ rbs-db-user-setup.sql
 
 # All .mp4 files
 *.mp4
+
+#IntelliJ-specific files
+*.iml
+.idea/
