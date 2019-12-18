@@ -73,5 +73,8 @@ public class StringDriver {
         out.println(sb2 == sb3); // false
         out.println(sb2.equals(sb3)); // false
 
+        sb2.append(" How's it going?");
+        out.println(sb2);
+
     }
 }
