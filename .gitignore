@@ -109,3 +109,4 @@ rbs-db-user-setup.sql
 
 # IntelliJ-specific files
 *.iml
+.idea/
