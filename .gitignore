@@ -104,5 +104,9 @@ target/
 # RBS DCL script
 rbs-db-user-setup.sql
 
+# IntelliJ-specific files
+*.iml
+.idea/
+
 # All .mp4 files
 *.mp4

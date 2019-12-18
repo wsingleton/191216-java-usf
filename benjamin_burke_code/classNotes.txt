@@ -1,0 +1,240 @@
+Object Orientation Programming
+
+Abstraction (hiding implementation)
+Polymorphism (many forms)
+Inheritance (extends + implements)
+Encapsulation -----> Composition (Hiding data/state--->the members of it, the state of something)
+
+pogramming --> process of building and designing piece of software, represent some process to accomplish some sort of task.
+Types:
+web/mobile/desktop
+Embedded Systems
+Operating Systems
+Much More..
+
+PROGRAMMING LANGUAGES
+A language which comprises of instructions that produce an output --->directions and results/outputs
+
+eg.  java, c, c+, javascript, python, ruby etc
+
+Markup Language?
+HTML Hyper Text Markup Language
+annotates a document and structures it
+
+eg
+html
+css
+xml
+sgml/dtd
+
+Building blocks?
+Values + variables
+operations
+expressions and statements
+decisions ---branches 
+loops
+function methods
+
+PROGRAMMING PARADIGMS
+iperative
+->Procedural (C, Basic, Fortram)
+->Object-Oriented (java, c#, c++, javascript)
+->describes exactly how to perform a task
+-->resources are mutable and can change state
+--->data and operations are tightly-coupled together
+
+let myArrayy = [1, 2, 3, 4, 5];
+let result = [];
+
+for(let i =0; i<myArray.length; i++) {
+	if(myArray[i]< 4) {
+		result.push(myArray[i] +10);
+	}
+}
+
+
+
+declarative
+->Functional(Javascript, Python, Haskell, lisp)
+->Domain-specific(SQL, HTML, XML)
+
+->Declares what taks need to be performed
+-->Resources are immutable: no state changes
+--->Data and  operations are loosely-coupled
+
+let myArray =[1, 2, 3, 4, 5];
+let result = myArray
+		.filter(value => value<4)
+		(think of filter like a for loop)
+		.map(value => value +10);
+		(map is like printing the result)
+
+
+
+TIER ARCHITECTURE
+SQL(persistence tier)->(jdbc calls) java (application tier) ->(json/xml) HTML/CSS/JS (client tier)
+
+
+BUILDING BLOCKS OF PROGRAMMING
+Values and variables
+
+->variables name representing some vaule stored in computer memory
+->labeled as specific type--primitive or object
+eg    String username = ""jsmith";
+      String password = ";alsdkjf;alksdf";
+	int, double
+	->Variable naming rules, reserved keywords cannot be used, cannot start with a digit but digits can be used, start with a letter, underscore or dollar sign
+		cannot use other symbols or spaces, best practice, give variables meaningful names. 
+
+PIMITIVE DATA TYPES 8 TOTAL
+->boolean Boolean false
+->byte Byte 0
+->char Character blank character
+->double Double 0.0d
+->float Float 0.0l
+->int integer 0
+->long Long ol
+->short Short 0
+
+wrapper class?
+
+OPERATORS
+addition +
+substraction -
+Modules %
+postfix increment x++ 
+
+ARITHMETIC
+COMPARISONS
+BITWISE
+LOGICAL
+ASSIGNMENT
+OTHERS
+
+JAVA OPERATORS: ORDER OF PRECEDENCE
+(look at the documentation)
+
+JAVA EXPRESSION AND STATEMENTS
+expression - clause in english which portrays specific meaning, a statement is one or more expressions that forms a complete unit of execution (;)
+
+JAVA FLOW CONTROL
+Decision-making statements
+->if, switch
+-->if statements, has condition with statement(s), the statements only executed when conditon is true, if false statement is ignored.
+
+int num =72;
+if(num <100) {
+	System.out.println("The variable is less than 100");
+}
+
+-->if-else, the statements inside of the if block will eecute if the concition is true, and the statmentsinside the else block would execute if the condtion is false
+if-else-if statements
+-->checks multiple conditions, once conditon is met the statement is executed, if none is met the else is executed
+hot fuzz examples...
+
+Iterative statements
+->for, while, do loops
+Branching statements
+->break statements, continue statements
+
+Switch statements
+use switch keyword followed by a set of parenthesis used to pass a value into the switch block. 
+The Value passed into the switch block is compared to nested code block called cases.
+Eache case has a value associated to it that is compared to the value passed inot the switch statement to determine if that case's code blok should be executed.
+There can be an optional default block that will be executed in case none of the case conditions are met.
+
+String str= " ";
+
+switch(str){
+case "greeting";
+	System.out.println("");
+	break;
+case "goodbye";
+	System.out.println("");
+	break;
+default:
+	System.out.println("Nothing matched")
+}
+
+Only works with byte, short, char and int, and string objects.
+
+Subject to 'fall-through' happens when a case is not met but its code block is not terminated with a break statement,
+ resulting in the execution path falling-through to the next case's logic could use intentionally.
+
+
+FOR LOOPS
+Accumulator initialization->Conditon Evaluation -> Inner Logic execution ->Accumulator increment/decrement
+
+eg. for (int i =0; i<5; i++){
+	System.out.println("the value of i is " + i);
+}
+
+WHILE AND DO LOOPS
+While-> The condition is evaluated first and if it returns true then the statemnts inside while loop will execute. When conditon returns false, the control comes out of the loop and jumps to the next statement after while loop.
+Do -> logically the same as a while loop, the difference is simply that the code within the do block will execute first before the while conditional is ever evaluated.
+
+BRANCHING STATEMENT
+break keyword is used to divert the execution of the code by exiting the current code block -> most often emmployed within switch statements and looping statements
+continue keyword is used to do exactly what it states; continue on to the next iteration of a loop
+Can be used in conjuction with labels to specify what the logic is and what is being broken or continued.
+
+CLASSES
+a template which includes a set of states and behaviors that will become the properties and methods of objects are instances of that class
+eg. Constructors, static and non-static fields, static and non-static methods, static and non-static blocks, and static and non-static nested class (static is a keyword used to describe how members are managed in memory)
+
+OBJECT
+a (digital) representation of a real world thinig, instantiated from a class declaration usaing a constructor
+->an object is often called an instance of a class
+
+initialize has raw values(primitive)
+declare a value
+instantiation immplies an object
+
+METHODS
+objects have states and behaviors
+->methods represent the functionality, the behavior of an object
+methods are primary way that we interact with objects and change their states
+->public methods that retrieve and manipulate an objects states are known as getters/accessors and setters/mutators
+
+PASS-BY-VALUE
+When a variable is passed into a method, a 'copy' of that variable is made and manipulated within the scope of the method
+this means that the value of the original variable will be unaffected by changes made with the method
+
+WHAT ABOUT OBJECTS
+pass-by-values within variables that represent primitives is simple enough to understand, but objects require some more thought
+If variables that represent an object is passed as a parameter to a method, it could be altered by operations within the method
+This is because the value of a variable representing an objec is an object reference. so the 'copy' that is made points to the same object in memory, manipulating it affects the original object.
+
+
+CONSTRUCTORS
+member inside of a class, used to instantiate an instance of a class, used with a new keyword
+->no return type, constructor names must match the containing class name.
+
+Type of constructor
+default constructor, no-args
+
+default is implemented if any constructor is not implemented by you
+not in source clode, but exists in class file,
+if you do implement constructor, there is no default
+
+No-Args Constructor 
+->explicity declared constructor with no argument known as no-args constructor, not always the same as a default constructor
+
+public FlashCard(Integer id, String question, list<Category> categories, String answer) {
+	super();
+	
+}
+
+copy constructor (look up)
+
+Constructor chaining
+->can call to other constructors in the same class using this keyword
+->constructor can call to parent class constructor using the super keyword
+
+
+VARIABLE SCOPES
+
+->Class ->Declariations scoped to the class itself, not to any particular instance, a member that belong to the class, not an instance.
+->instance -> Declarations are scopedto a particular instance, Declarations are not shared across instances
+-> Method -> Declarations are scoped to the method body. Parameters within the method signature scoped here aswell
+->Block->Declaraitons are scoped to the block they are declared in
