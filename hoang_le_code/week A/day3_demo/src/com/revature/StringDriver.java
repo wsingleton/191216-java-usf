@@ -52,6 +52,9 @@ public class StringDriver {
         System.out.println(sb2.equals(sb1));
         // false because the Stringbuilder classes donot overide the impelementation
         //of the .equal() method. keeping the original implementation provide by
-        // the object class is exact double equal (==) 
+        // the object class, which  is exact double equal (==)
+
+        sb2.append(" how's is going");
+        System.out.println(sb2); // Stringbuilder is mulable 
     }
 }
