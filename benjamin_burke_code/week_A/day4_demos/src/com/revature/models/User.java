@@ -1,6 +1,9 @@
 package com.revature.models;
 
+import com.revature.ObjectDriver;
+
 import java.util.Objects;
+
 
 public class User {
 
@@ -103,6 +106,7 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, username, password, role);
+
     }
 
     @Override
@@ -117,5 +121,5 @@ public class User {
                 '}';
     }
 
-    
+
 }
