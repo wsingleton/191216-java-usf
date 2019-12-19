@@ -4,6 +4,8 @@ import com.revature.Role;
 
 import java.util.Objects;
 
+// All classes that do not explicitly extend an object will extend the Object class.
+
 public class User {
 
     private int id;
@@ -12,7 +14,9 @@ public class User {
     private String username;
     private String password;
     private Role role;
-
+/*
+    constructors are invoked to create a new instance of a class
+ */
     public User() {
         super();
     }
@@ -101,7 +105,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, username, password, role);
+        return Objects.hash(id, firstName, lastName, username, password, role); // nothing can go after the return statement
     }
 
     @Override
