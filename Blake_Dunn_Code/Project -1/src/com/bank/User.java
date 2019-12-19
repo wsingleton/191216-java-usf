@@ -3,6 +3,11 @@ import java.util.Scanner;
 
 public class User {
 
+    public void display(){
+
+
+    }
+
     public void signIn() {
 
         
