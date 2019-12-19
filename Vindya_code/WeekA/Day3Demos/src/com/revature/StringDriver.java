@@ -1,5 +1,4 @@
-public class StringDriver {
-    public static void main(String[] arg) {
+public static void main(String[] arg) {
         String s1 = "North";
         String s2 = "North";
         String s3 = new String("North");
@@ -42,5 +41,5 @@ StringBuffer
 
         sb2.append("How's it going");
         System.out.println(sb2);
-    }
-}
+        }
+        }
