@@ -1,7 +1,7 @@
 package com.revature;
 
 public class VarArgsDriver {
-    //String... is also valid
+    //String... is also a valid main method signature
     public static void main(String[] args){
 
     }
