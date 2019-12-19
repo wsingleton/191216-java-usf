@@ -1,8 +1,7 @@
-package com.bank.UI;
+package com.bank;
+import com.bank.ui.UI;
 
-import java.util.Scanner;
-
-public class main {
+public class BankDriver {
     public static void main(String... args){
         UI.loginScreen();
     }
