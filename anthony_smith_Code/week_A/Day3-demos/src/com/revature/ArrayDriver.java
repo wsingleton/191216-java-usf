@@ -1,5 +1,6 @@
 package com.revature;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static java.util.Arrays.*;
@@ -14,6 +15,7 @@ public class ArrayDriver {
 
         printValues(intArray);
 
+        //accessing
         intArray[0] = 99;
         intArray[intArray.length-1] = 42;
 
