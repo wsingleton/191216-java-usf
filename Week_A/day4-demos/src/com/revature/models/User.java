@@ -2,6 +2,7 @@ package com.revature.models;
 
 import java.util.Objects;
 
+// All classes that do not explicitly extend another class, will implicitly extend Object
 public class User {
 
     private int id;
@@ -11,6 +12,18 @@ public class User {
     private String password;
     private Role role;
 
+    /*
+
+        Constructors are invoked to create a new instance of a class. We can include as many constructors as we need
+        to give us various ways to instantiate the same class, depending on what states we want to initialize.
+
+        Constructor overloading - including multiple constructors within the same class
+        Constructor chaining - calling a constructor belonging to the same class, within another constructor for that class
+
+        super - a keyword which is used to invoke members belonging to the parent class (constructors, fields, etc.)
+        this - a keyword which is used to invoke members belonging to THIS particular instance
+
+     */
     public User() {
         super();
     }
@@ -114,5 +127,5 @@ public class User {
                 ", role=" + role +
                 '}';
     }
-    
+
 }
