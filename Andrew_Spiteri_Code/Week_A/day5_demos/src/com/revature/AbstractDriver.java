@@ -1,7 +1,6 @@
 package com.revature;
 
-import com.revature.models.Animal;
-import com.revature.models.Cat;
+import com.revature.models.*;
 
 public class AbstractDriver {
     public static void main(String[] args) {
@@ -10,7 +9,7 @@ public class AbstractDriver {
         Cat hisCat = new Cat(5, "Persian", true);
         Cat herCat = new Cat(7, "Serval", true);
 
-        Animal myAnimal = new Cat(9, "Himilayan", true);
+        Animal myAnimal = new Cat(9, "Himalayan", true);
         //Animal noAnimal = new Animal(); //abstract classes cannot be directly instantiated
 
         System.out.println(myCat.getBreed());
@@ -23,5 +22,19 @@ public class AbstractDriver {
 //        Although, if any methods of the parent are overridden by the
 //        subtype, those methods will behave differently.
         System.out.println(myAnimal.numberOfLives);  //covariance
+
+        System.out.println("+------------------------------------+");
+
+        InterfaceImpl impl = new InterfaceImpl();
+        impl.doSomething();
+        impl.doSomethingElse();
+
+//      Interfaces cannot be instantiated because they do not have constructors.
+//      InterfaceA interA = new InterfaceA();
+
+        InterfaceA a = new InterfaceImpl(); //another exp of covariance
+        InterfaceB b = new InterfaceImpl();
+        a.doSomethingElse();
+        b.doSomethingElse();
     }
 }
