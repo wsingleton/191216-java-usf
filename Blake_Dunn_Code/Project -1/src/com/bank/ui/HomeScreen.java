@@ -1,12 +1,17 @@
 package com.bank.ui;
 
 import java.util.Scanner;
-
+import com.bank.ui.DepositScreen;
+import com.bank.ui.BalanceScreen;
+import com.bank.ui.WithdrawScreen;
 
 public class HomeScreen {
 
    public void display() {
 
+        DepositScreen d = new DepositScreen();
+        WithdrawScreen w = new WithdrawScreen();
+        BalanceScreen b = new BalanceScreen();
 
        Scanner input = new Scanner(System.in);
 
@@ -18,15 +23,15 @@ public class HomeScreen {
 
        if (number == 0){
 
-           checkBalance();
+           b.checkBalance();
        }
        else if(number == 1){
 
-           deposit();
+           d.deposit();
        }
        else if(number == 2){
 
-           withdraw();
+           w.withdraw();
        }
        else{
 

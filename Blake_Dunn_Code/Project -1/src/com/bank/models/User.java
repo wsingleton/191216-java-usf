@@ -15,12 +15,17 @@ public class User {
         super();
     }
 
-    public User(String fn, String ln, String un, String pw, Role role) {
-
+    public User(String fn, String ln, String un, String pw) {
         this.firstName = fn;
         this.lastName = ln;
         this.userName = un;
         this.password = pw;
+    }
+
+
+    public User(String fn, String ln, String un, String pw, Role role) {
+
+        this(fn, ln, un, pw);
         this.role = role;
 
     }
