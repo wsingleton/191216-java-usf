@@ -5,6 +5,7 @@ import java.util.Objects;
 public class cat extends Animal {
 
 
+    private int numberOfLives; // Animal.numberOfLives is shadowed by this declaration
     private String bread;
     private  String brand;
     private boolean hasfur;
@@ -18,8 +19,16 @@ public class cat extends Animal {
         this.hasfur = true;
     }
 
+    public cat(int i, String bbbb, boolean hasfur) {
+    }
 
+    public int getNumberOfLives() {
+        return numberOfLives;
+    }
 
+    public void setNumberOfLives(int numberOfLives) {
+        this.numberOfLives = numberOfLives;
+    }
 
     public cat(String bread, String brand, boolean hasfur) {
         this.bread = bread;

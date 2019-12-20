@@ -1,7 +1,6 @@
 package com.revature;
 
-import com.revature.model.Animal;
-import com.revature.model.cat;
+import com.revature.model.*;
 
 public class AbstractDriver {
     public static void main(String args[]){
@@ -18,13 +17,27 @@ public class AbstractDriver {
         herCat.makeSound();
 
 
-        /*
-        coverience is when you have a reference ig a super type that point to an object
-        of a subtype, this refernce will have 
+      /*
+            Covariance is when you have a reference of a super type that points to an object
+            of a subtype. This reference will have access to only the states and behaviors
+            of the super type. Although, if any methods of the parent are overridden by the subtype,
+            those methods will behave differently.
          */
-        System.out.println(myCat.getBread());
-        System.out.println(myCat.getBread());
+        System.out.println(myAnimal.numberOfLife);
+       // System.out.println(myAnimal.getNumberOfLives());
+        System.out.println(".........................");
 
+
+        InterfaceImp impl = new InterfaceImp();
+        impl.doSomeThing();;
+        impl.doSomeThingElse();
+        // interface cannot be inniciation  because they dont have contructor
+        //InterfaceA intfA = new InterfaceA()
+
+        InterfaceA A = new InterfaceImp();
+        InterfaceB B = new InterfaceImp();
+        A.doSomeThingElse();
+        B.doSomeThingElse();
 
 
     }
