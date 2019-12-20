@@ -1,5 +1,6 @@
 package com.revature;
 import com.revature.models.Cat;
+import com.revature.models.InterfaceImpl;
 import com.revature.models.Mammal;
 
 public class AbstractDriver {
@@ -13,5 +14,9 @@ public class AbstractDriver {
         System.out.println(bobTail.isHasTail());
         dipper.cry();
         goethe.liveBirths();
+        System.out.println("+------------------------------+");
+        InterfaceImpl impl= new InterfaceImpl();
+        impl.getYourTowel();
+        impl.soLong();
     }
 }
