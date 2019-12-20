@@ -6,9 +6,12 @@ public class MockBankDriver {
 
         switch(System.in.read()){
             case 0:
-
+                RegisterUser.registerUser();
                 break;
             case 1:
+
+                break;
+            default:
 
                 break;
         }

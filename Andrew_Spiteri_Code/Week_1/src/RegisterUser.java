@@ -1,45 +1,33 @@
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.System;
+import java.util.Random;
+import java.util.Scanner;
 
 public class RegisterUser {
-    private String username, password, firstName, lastName, id, role;
+    public static User registerUser() throws IOException{
+        Scanner sc = new Scanner(System.in);
+        System.out.print("First name: ");
+        String firstname =sc.next();
+        System.out.print("Last name: ");
+        String lastname =sc.next();
+        System.out.print("Username: ");
+        String username =sc.next();
+        System.out.print("Password: ");
+        String password =sc.next();
 
-    RegisterUser(){
+        Random random = new Random();
+        random.setSeed(1234567890);
 
-        String[] user = {getUserName(), getPassword(),getFirstName(),getLastName(),getID(),getRole()};
-        registerUser(user);
-    }
-    private void setUsername(String username){
-        this.username = username;
-    }
-    private void setPassword(String password){
-        this.password = password;
-    }
-    private void setFirstName(String firstName){
-        this.firstName = firstName;
-    }
-    private void setLastName(String lastName){
-        this.lastName = lastName;
-    }
-    protected static void registerUser(String[] user){
-        User newUser = new User(user);
-    }
-    public  String getUserName(){
-        return username;
-    }
-    public String getPassword(){
-        return password;
-    }
-   public String getFirstName(){
-        return firstName;
-    }
-    public String getLastName(){
-        return lastName;
-    }
-    public String getID(){
-        return id;
-    }
-    public String getRole() {
-        return role;
+        User user = new User(random.nextInt(),firstname, lastname, username, password, Role.MEMBER);
+        FileOutputStream fout=new FileOutputStream("C:\\Users\\Andrew Spiteri\\Documents\\Revature\\Projects\\testout.txt");
+        BufferedOutputStream bout=new BufferedOutputStream(fout);
+        byte b[] = user.toString().getBytes();
+        bout.write(b);
+        bout.flush();
+        bout.close();
+        fout.close();
+        return user;
     }
 }
