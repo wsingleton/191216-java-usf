@@ -20,7 +20,9 @@ public class AbstractDriver {
         System.out.println(hisCat.isHasFur());
         herCat.makeSound();
 
-        System.out.println(myAnimal.numberOfLives); // covariance 
+        System.out.println(myAnimal.numberOfLives); // covariance is when you a reference of a super type that points to and object of a subtype
+        // this reference will have access to only the states and behaviors of the super type. Although, if any methods of the parent are overriden
+        // by the subtype, those methods will behave differently
 
     }
 }
