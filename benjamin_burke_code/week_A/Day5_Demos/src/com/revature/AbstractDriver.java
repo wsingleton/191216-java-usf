@@ -1,7 +1,6 @@
 package com.revature;
 
-import com.revature.models.Animal;
-import com.revature.models.Cat;
+import com.revature.models.*;
 
 public class AbstractDriver {
 
@@ -27,5 +26,19 @@ public class AbstractDriver {
 
         System.out.println(myAnimal.numberOfLives); //covariance
 
+
+        System.out.println("-------------------------------------------------------");
+
+
+        InterfaceImpl Impl = new InterfaceImpl();
+        Impl.doSomething();
+        Impl.doSomethingElse();
+
+        InterfaceA a = new InterfaceImpl();
+        InterfaceB b = new InterfaceImpl();
+
+        //
+        a.doSomethingElse();
+        b.doSomethingElse();
     }
 }
