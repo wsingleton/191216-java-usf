@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":Assignment-Word_counter" external.linked.project.path="$MODULE_DIR$/../../../../Assignment/Word counter" external.root.project.path="$MODULE_DIR$/../../../.." external.system.id="GRADLE" external.system.module.group="Core_Java_Assignment" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../Assignment/Word counter">
+      <excludeFolder url="file://$MODULE_DIR$/../../../../Assignment/Word counter/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../Assignment/Word counter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../Assignment/Word counter/out" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
