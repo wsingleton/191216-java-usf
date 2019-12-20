@@ -1,7 +1,6 @@
 package com.revature;
 
-import com.revature.models.Animal;
-import com.revature.models.Cat;
+import com.revature.models.*;
 
 public class AbstractDriver {
 
@@ -28,6 +27,23 @@ public class AbstractDriver {
          */
         System.out.println(myAnimal.numberOfLives);
         System.out.println(myAnimal.getNumberOfLives());
+
+        System.out.println("+---------------------------+");
+
+        InterfaceImpl impl = new InterfaceImpl();
+        impl.doSomething();
+        impl.doSomethingElse();
+
+
+        // interfaces cannot be instantiated (they don't have constructors!)
+//        InterfaceA interfaceA = new InterfaceA();
+
+        InterfaceA a = new InterfaceImpl(); // another example of covariance
+        InterfaceB b = new InterfaceImpl();
+
+        // both print out see
+        a.doSomethingElse();
+        b.doSomethingElse();
     }
 
 }
