@@ -1,16 +1,17 @@
 package com.bank.services;
 
 public class UserValidation {
+    //public boolean
 
-    public static void isEmail(String email){
+    public void isFirstName(String firstname){
         boolean continuation = false;
         do {
 
-            if (email.contains("@")) {
-                continuation = true;
+            if (firstname.equals(" ") || firstname.equals(null)) {
+                System.out.println("Invalid input enter a valid first name");
                 //continue;
 
-            } else System.out.println("invalid email");
+            } else
         }while(!continuation);
     }
 }

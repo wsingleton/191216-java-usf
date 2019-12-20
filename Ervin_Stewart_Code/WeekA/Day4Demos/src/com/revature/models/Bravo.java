@@ -20,15 +20,15 @@ public class Bravo extends Alpha {
     }
 
     //CANNOT REDUCE THE visibility OF INHERiTED METHODS
-    @Override
-    protected double protectedDoubleGetter() {
-        return super.myProtectedDouble();
-    }
+//    @Override
+//    protected double protectedDoubleGetter() {
+//        return super.myProtectedDouble();
+//    }
 
-    @Override
-    public double protectedDoubleGetter(){
-        return 1.0;
-    }
+//    @Override
+//    public double protectedDoubleGetter(){
+//        return 1.0;
+//    }
 
     //cannot reduce visibility (package-private is less visible than protected)
   //  @Override

@@ -6,9 +6,12 @@ import java.util.Scanner;
 public class UI {
     static int UserNumInput;
     static String UserStringInput;
+
+
     public static void loginScreen(){
         System.out.println("To Login Enter 0");
         System.out.println("To Create An Account Enter 1");
+        System.out.println("To exit the program press 2");
         Scanner input = new Scanner(System.in);
         UserNumInput = input.nextInt();
     switch (UserNumInput){
@@ -20,6 +23,9 @@ public class UI {
             System.out.println("User can create a login");
             loginScreen();
             break;
+        case 3:
+            System.out.println("Program exiting...");
+            break;
         default:
             System.out.println("Not a Valid input");
             loginScreen();
@@ -28,8 +34,9 @@ public class UI {
     }
 }
 
-    public void createAccount(){
-        System.out.println("please enter an email ");
+    public void createFirstName(){
+        System.out.println("Please create An account ");
+        System.out.println("Please enter your first name:")
         Scanner input = new Scanner(System.in);
         UserStringInput = input.next();
         //String email = UserStringInput;
@@ -37,4 +44,11 @@ public class UI {
 
     }
 
+    public void createLastName(){
+
+    }
+    public String createUsername(){
+
+    }
+    public
 }

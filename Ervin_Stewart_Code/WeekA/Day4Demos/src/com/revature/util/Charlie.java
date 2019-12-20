@@ -4,10 +4,10 @@ import com.revature.models.Alpha;
 import com.revature.models.Circle;
 
 public class Charlie extends Alpha {
-    @Override
-    String packageStringGetter() {
-        return "a";
-    }
+//    @Override
+//    String packageStringGetter() {
+//        return "a";
+//    }
 
     //protected member are visible to all subclasses, even if they
     // are located in a different package
@@ -33,4 +33,4 @@ public class Charlie extends Alpha {
 
     }
 
-}}
+}
