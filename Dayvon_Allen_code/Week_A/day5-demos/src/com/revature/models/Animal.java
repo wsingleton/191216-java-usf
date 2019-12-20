@@ -21,7 +21,7 @@ public abstract class Animal {
         this.numberOfLives = lives;
     }
 
-    //abstract methods are methods are methods that has no implementation/ don't have a body.
+    //abstract methods are methods that has no implementation/ don't have a body.
     //They consist of only a method signature or "method stub"
     public abstract void makeSound();
 
