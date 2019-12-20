@@ -1,7 +1,6 @@
 package com.revature;
 
-import com.revature.models.Animal;
-import com.revature.models.Cat;
+import com.revature.models.*;
 
 public class AbstractDriver {
     public static void main(String[] args){
@@ -26,5 +25,23 @@ public class AbstractDriver {
             overridden by the subtype, those methods will behave differently.
          */
         System.out.println(myAnimal.numberOfLives); // original numberOfLives from Animal class
+      //  System.out.println(myAnimal.getNumberOfLives());
+
+        System.out.println("----------------------");
+
+        InterfaceImpl impl = new InterfaceImpl();
+        impl.doSomething();
+        impl.doSomethingElse();
+
+        // research Covariance
+        // interfaces cannot be instantiated (they dont have constructors)
+     //   InterfaceA interfaceA = new InterfaceA();
+
+        InterfaceA a = new InterfaceImpl(); //another example of covariance !!!!
+        InterfaceB b = new InterfaceImpl();
+
+        //
+        a.doSomethingElse();
+        b.doSomethingElse();
     }
 }
