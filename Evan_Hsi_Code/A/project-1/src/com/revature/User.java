@@ -5,7 +5,7 @@ import java.util.*;
 
 public class User {
 
-    private int id;
+    private int id = -1;
     private String firstName;
     private String lastName;
     private String userName;
@@ -14,19 +14,21 @@ public class User {
     private ArrayList<Account> accounts;
 
     public User() {
+        this.accounts = new ArrayList<Account>();
     }
 
-    public User(String firstName, String lastName, String userName, String password, Role role, ArrayList<Account> accounts) {
+    public User(String firstName, String lastName, String userName, String password, Role role) {
+        this.id = userName.hashCode();
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.role = role;
-        this.accounts = accounts;
+        this.accounts = new ArrayList<Account>();
     }
 
-    public User(int id, String firstName, String lastName, String userName, String password, Role role, ArrayList<Account> accounts) {
-        this(firstName, lastName, userName, password, role, accounts);
+    public User(int id, String firstName, String lastName, String userName, String password, Role role) {
+        this(firstName, lastName, userName, password, role);
         this.id = id;
     }
 
@@ -121,6 +123,10 @@ public class User {
 
     public void setAccounts(ArrayList<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    public int getAccountsLength() {
+        return accounts.size();
     }
 
     public void addAccount(Account account) {

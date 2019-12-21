@@ -11,6 +11,7 @@ public class Account {
     private int ownerID;
 
     public Account() {
+        this.transactions = new ArrayList<Transaction>();
     }
 
     public Account(int actId, int balance, Type type, int ownerID) {
