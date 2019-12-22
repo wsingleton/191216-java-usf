@@ -53,13 +53,4 @@ public class AccountManager {
         }
     }
 
-    public static void main (String[] args){
-
-        AccountManager bosco = new AccountManager();
-        bosco.deposit(200);
-        bosco.withdraw(43);
-        bosco.activityLog();
-
-
-    }
 }
