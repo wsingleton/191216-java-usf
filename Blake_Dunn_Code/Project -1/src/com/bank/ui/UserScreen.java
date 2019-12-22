@@ -4,7 +4,10 @@ import com.bank.models.Account;
 import com.bank.models.User;
 
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import static com.bank.service.UserService.*;
 
 
 public class UserScreen extends User {
@@ -15,21 +18,18 @@ public class UserScreen extends User {
 
         System.out.println("Welcome to Faux Bank");
         System.out.println("To sign in, press 0");
-        System.out.println("To create an account, press 1 ");
-
+        System.out.println("To create an account, press 1:  ");
         int number = input.nextInt();
 
         if (number == 0){
-
             login();
         }
         else if (number == 1){
-
             register();
         }
         else{
-
             System.out.println("Error: Please press 0 or 1");
+            homeScreen();
         }
 
     }
@@ -40,15 +40,19 @@ public class UserScreen extends User {
 
         System.out.print("First name: " );
         String fn = scanner.next();
+        validateNames(fn);
         System.out.println("");
         System.out.print("Last name: " );
         String ln = scanner.next();
+        validateNames(ln);
         System.out.println("");
         System.out.print("Username: " );
         String un = scanner.next();
+        validateUserName(un);
         System.out.println("");
-        System.out.print("Password: " );
+        System.out.print("Password (must contain a special character): " );
         String pw = scanner.next();
+        validatePassword(pw);
         System.out.println("");
         int newId = createId();
 
@@ -92,15 +96,15 @@ public class UserScreen extends User {
 
         if (number == 0){
 
-            acct.checkBalance(acct);
+            checkBalance(acct);
         }
         else if(number == 1){
 
-            acct.deposit(acct);
+            deposit(acct);
         }
         else if(number == 2){
 
-            acct.withdraw(acct);
+            withdraw(acct);
         }
         else{
 
@@ -111,7 +115,7 @@ public class UserScreen extends User {
 
     }
 
-    public void withdraw(Account acct) {
+    public static void withdraw(Account acct) {
 
 
         double bal = acct.getBalance();
@@ -119,13 +123,49 @@ public class UserScreen extends User {
 
         System.out.println("");
         System.out.print("Enter the withdrawal amount: ");
-        double amount = input.nextDouble();
+
+        double amount = 0;
+        try {
+            amount = input.nextDouble();
+        }catch (InputMismatchException e) {
+            System.out.println("Invalid value");
+            deposit(acct);
+        }
+
+        if(amount > bal) {
+
+            System.out.println("Sorry, no overdrafts allowed.");
+            System.out.println("Please try again");
+            withdraw(acct);
+        }
+        else {
 
         bal -= amount;
         acct.setBalance(bal);
+
+        }
+
+        System.out.println("Your new balance is $" + bal);
+        System.out.println("Would you like to perform another transaction?");
+        System.out.print("1 = Yes, 0 = No: ");
+
+        int num = 0;
+        try{
+            num = input.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid value");
+            System.exit(0);
+        }
+
+        if(num == 1) {
+            display(acct);
+        }
+        else {
+            System.exit(num);
+        }
     }
 
-    public void checkBalance(Account acct){
+    public static void checkBalance(Account acct){
 
         Scanner scanner = new Scanner(System.in);
         double bal = acct.getBalance();
@@ -133,12 +173,26 @@ public class UserScreen extends User {
         System.out.println("");
         System.out.println("Your Balance: $" + bal);
 
-        System.out.println("To go back to the Home Screen, press 0");
-        System.out.println("To sign out, press 1");
+        System.out.println("Would you like to perform another transaction?");
+        System.out.print("1 = Yes, 0 = No: ");
+        int num = 0;
+        try{
+            num = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid value");
+            System.exit(0);
+        }
+
+        if(num == 1) {
+            display(acct);
+        }
+        else {
+            System.exit(num);
+        }
 
     }
 
-    public void deposit(Account acct) {
+    public static void deposit(Account acct) {
 
 
         double bal = acct.getBalance();
@@ -147,10 +201,35 @@ public class UserScreen extends User {
         System.out.println("");
         System.out.println("Your Account Balance: $" + bal);
         System.out.print("Enter the deposit amount: ");
-        double amount = input.nextDouble();
+        double amount = 0;
+        try {
+            amount = input.nextDouble();
+        }catch (InputMismatchException e) {
+            System.out.println("Invalid value");
+            deposit(acct);
+        }
 
         bal += amount;
         acct.setBalance(bal);
+
+        System.out.println("Your new balance is $" + bal);
+        System.out.println("Would you like to perform another transaction?");
+        System.out.print("1 = Yes, 0 = No: ");
+
+        int num = 0;
+        try{
+            num = input.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid value");
+            System.exit(0);
+        }
+
+        if(num == 1) {
+            display(acct);
+        }
+        else {
+            System.exit(num);
+        }
 
     }
 }

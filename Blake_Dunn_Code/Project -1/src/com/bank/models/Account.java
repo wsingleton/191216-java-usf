@@ -35,8 +35,6 @@ public class Account extends User {
     }
 
 
-
-
     public double getBalance() {
         return balance;
     }
