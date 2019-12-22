@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class User {
 
-    private int id;
+    private int iD;
     private String firstName;
     private String lastName;
     private String userName;
@@ -15,34 +15,50 @@ public class User {
         super();
     }
 
-    public User(String fn, String ln, String un, String pw) {
-        this.firstName = fn;
-        this.lastName = ln;
+    public User(String un, String pw) {
+
         this.userName = un;
         this.password = pw;
     }
 
+    public User(String fn, String ln, String un, String pw) {
 
-    public User(String fn, String ln, String un, String pw, Role role) {
+        this(un, pw);
+        this.firstName = fn;
+        this.lastName = ln;
+
+    }
+
+    public User(int id, String fn, String ln, String un, String pw) {
 
         this(fn, ln, un, pw);
+        iD = id;
+    }
+
+
+    public User(int id, String fn, String ln, String un, String pw, Role role) {
+
+        this(id, fn, ln, un, pw);
         this.role = role;
 
     }
 
-    public User(int id, String fn, String ln, String un, String pw, Role role) {
+    public static int createId() {
 
-        this(fn, ln, un, pw, role);
-        this.id = id;
+        int x = (int) (Math.random() * ((99999999 - 0) + 1));
+        return x;
+    }
+
+    public static void register() {
 
     }
 
     public int getId() {
-        return id;
+        return iD;
     }
 
     public void setId(int id) {
-        this.id = id;
+        iD = id;
     }
 
     public String getFirstName() {
@@ -90,7 +106,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
+        return iD == user.iD &&
                 firstName.equals(user.firstName) &&
                 lastName.equals(user.lastName) &&
                 userName.equals(user.userName) &&
@@ -100,13 +116,13 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, userName, password, role);
+        return Objects.hash(iD, firstName, lastName, userName, password, role);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + iD +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +

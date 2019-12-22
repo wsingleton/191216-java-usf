@@ -2,31 +2,40 @@ package com.bank.models;
 
 import java.util.Objects;
 
-public class Account {
+public class Account extends User {
 
-    private int id;
+    int iD = getId();
     public double balance;
-    private int acctNumber;
 
     public Account() {
         super();
     }
 
-    public Account(int id, double b, int an) {
+    public Account(int id, double b) {
 
-        this.id = id;
+        this.iD = id;
         this.balance = b;
-        this.acctNumber = an;
 
     }
 
-    public int getId() {
-        return id;
+    public void display(Account iD) {
+
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void deposit(Account iD) {
+
     }
+
+    public void checkBalance(Account iD) {
+
+    }
+
+    public void withdraw(Account iD) {
+
+    }
+
+
+
 
     public double getBalance() {
         return balance;
@@ -36,35 +45,25 @@ public class Account {
         this.balance = balance;
     }
 
-    public int getAcctNumber() {
-        return acctNumber;
-    }
-
-    public void setAcctNumber(int acctNumber) {
-        this.acctNumber = acctNumber;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return id == account.id &&
-                Double.compare(account.balance, balance) == 0 &&
-                acctNumber == account.acctNumber;
+        return iD == account.iD &&
+                Double.compare(account.balance, balance) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, balance, acctNumber);
+        return Objects.hash(iD, balance);
     }
 
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + id +
+                "iD=" + iD +
                 ", balance=" + balance +
-                ", acctNumber=" + acctNumber +
                 '}';
     }
 }
