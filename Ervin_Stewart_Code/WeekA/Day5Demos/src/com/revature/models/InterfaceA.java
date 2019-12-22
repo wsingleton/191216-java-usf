@@ -1,13 +1,13 @@
 package com.revature.models;
 /*
-Interfaces in java act as a contract what this means is that the abstract
+Interfaces in java act as a contract, what this means is that the abstract
 methods defined within the interface will be required to be implemented by
-all cincrete classes which implement this interface.
+all concrete classes which implement this interface.
 
 Prior to java 8 interfaces could only have fields(which were implicitly
 public, static, and final)and method stubs. Since Java 8, we have the
 ability to declare default methods- or methods that have implementation
- within out interface
+ within our interface
 
 Interfaces in Java act as a "contract", what this means is that the abstract
     methods defined within the interface will be required to be implemented by

@@ -4,14 +4,14 @@ import com.bank.services.UserValidation;
 
 import java.util.Objects;
 
-public class User {
+ public class User {
 
 
-    private int Id;
-    private String firstName;
-    private String lastName;
-    private String userName;
-    private String password;
+    private static int Id;
+    private static String firstName;
+    private static String lastName;
+    private static String userName;
+    private static String password;
     private  Role role;
 
     public User() {
@@ -32,53 +32,59 @@ public class User {
 
     }
 
-    public int getId() {
-        return Id;
-    }
+     public int getId() {
+         return Id;
+     }
 
-    public void setId(int id) {
-        Id = id;
-    }
+     public static void generateId( User newUser){
 
-    public String getFirstName() {
-        return firstName;
-    }
+         int x = (int)(Math.random()*((99999999-0)+1))+0;
+         setId(x);
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+     }
 
-    public String getLastName() {
-        return lastName;
-    }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+     public static void setId(int id) { Id = id;}
 
-    public String getUserName() {
-        return userName;
-    }
+     public String getFirstName() {
+         return firstName;
+     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+     public static void setFirstName(String firstName) {
+         firstName = firstName;
+     }
 
-    public String getPassword() {
-        return password;
-    }
+     public String getLastName() {
+         return lastName;
+     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+     public void setLastName(String lastName) {
+         this.lastName = lastName;
+     }
 
-    public Role getRole() {
-        return role;
-    }
+     public String getUserName() {
+         return userName;
+     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+     public void setUserName(String userName) {
+         this.userName = userName;
+     }
+
+     public String getPassword() {
+         return password;
+     }
+
+     public void setPassword(String password) {
+         this.password = password;
+     }
+
+     public Role getRole() {
+         return role;
+     }
+
+     public void setRole(Role role) {
+         this.role = role;
+     }
 
     @Override
     public String toString() {

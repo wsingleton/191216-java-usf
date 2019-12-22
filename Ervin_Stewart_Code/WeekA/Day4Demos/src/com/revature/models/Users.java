@@ -1,6 +1,9 @@
 package com.revature.models;
 
 import java.util.Objects;
+import java.util.Scanner;
+import java.util.*;
+import static java.lang.Math.abs;
 
 public class Users {
     private int Id;
@@ -10,6 +13,7 @@ public class Users {
     private String password;
     private Role role;
 
+    //establish default user object
     public Users() {
         super();
     }
@@ -22,6 +26,42 @@ public class Users {
         this.role = Role;
         this.password = pw;
     }
+
+
+
+    //create User object (firstname, lastname, username) updated with the password variable
+    public Users(Users myfirstname, Users mylastname, Users myusername, String mypw){
+        this.firstName = myfirstname.firstName;
+        this.lastName = mylastname.lastName;
+        this.userName = myusername.userName;
+        this.password = mypw;
+    }
+
+
+    public Users(String username){
+        this.userName = username;
+    }
+
+
+    //create User object( firstname, lastname, ) updated with the username variable
+    public Users(Users myfirstname, Users mylastname ,String username){
+        this.firstName = myfirstname.firstName;
+        this.lastName = mylastname.lastName;
+        this.userName = username;
+    }
+    public static int generateId(){
+
+        int x = (int)(Math.random()*((99999999-0)+1))+0;
+            return x;
+
+    }
+
+
+    //create User object updated with  lastname variable
+    public Users(Users mylastname,String lastname){
+        this.lastName = mylastname.lastName;
+        this.lastName = lastname;
+    }
     public Users(int id,String Firstname, String Lastname, String Username, String pw, Role Role){
         this(Firstname,Lastname,Username,pw,Role);
         this.Id= id;
@@ -33,7 +73,7 @@ public class Users {
     }
 
     public void setId(int id) {
-        Id = id;
+        this.Id = id;
     }
 
     public String getFirstName() {
@@ -59,6 +99,7 @@ public class Users {
     public void setUserName(String userName) {
         //optional validation logic can be included in setters
         this.userName = userName;
+
     }
 
     public String getPassword() {

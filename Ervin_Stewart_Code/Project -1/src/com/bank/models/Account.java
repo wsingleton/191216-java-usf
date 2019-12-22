@@ -1,9 +1,9 @@
 package com.bank.models;
 
 public class Account {
-    private int Id;
-    private long balance;
-    private  long ownerId;
+    private static int Id;
+    private static double balance;
+    private static long ownerId;
     //private  Type type;
 
     public Account() {
@@ -17,4 +17,27 @@ public class Account {
 
     }
 
+    public static int getId() {
+        return Id;
+    }
+
+    public static void setId(int id) {
+        Id = id;
+    }
+
+    public static double getBalance() {
+        return balance;
+    }
+
+    public static void setBalance(double balance) {
+        balance = balance;
+    }
+
+    public static long getOwnerId() {
+        return ownerId;
+    }
+
+    public static void setOwnerId(long ownerId) {
+        ownerId = ownerId;
+    }
 }
