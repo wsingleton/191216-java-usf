@@ -72,12 +72,12 @@ public class User {
             System.out.println("Invalid Last Name: No Input");
             return;
         }
-        if(lastName.length() < 2 || lastName.length() > 15) {
+        if(!(lastName.length() > 2 && lastName.length() < 20)) {
             System.out.println("Invalid Last Name: Invalid Length");
             return;
         }
         for(int i = 0; i < lastName.length(); i++) {
-            if(!Character.isAlphabetic(firstName.charAt(i)) && !(firstName.charAt(i) == '-')) {
+            if(!Character.isAlphabetic(lastName.charAt(i)) && !(lastName.charAt(i) == '-')) {
                 System.out.println("Invalid Last Name: Cannot Contain Non-Alphabetical, Non-Hyphen Characters");
                 return;
             }
@@ -143,7 +143,9 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName);
+        int hash = Objects.hash(userName);
+        if(hash < 0) hash = hash*-1;
+        return hash;
     }
 
     @Override

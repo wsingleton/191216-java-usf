@@ -1,6 +1,9 @@
 package com.revature;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Hashtable;
+import java.util.Scanner;
 
 public class BankDriver {
 
@@ -8,31 +11,36 @@ public class BankDriver {
 
         Bank bank = new Bank();
 
-        //Testing output format to console
+        //Testing reading from file to makeUser();
 
+        String path = "/Users/evanhsi/Documents/repos/191216-java-usf/Evan_Hsi_Code/A/project-1/userBase.txt";
+        File file = new File(path);
+        Scanner scanner = null;
+        try {scanner = new Scanner(file); } catch (FileNotFoundException fnf) { System.out.println("File not Found"); }
+
+        while(scanner.hasNext()) {
+            bank.makeUser(scanner, true);
+        }
+
+        bank.userBase.forEach((k,v)->System.out.println(v.serialString()));
+
+        //Testing output format to console
+/*
         System.out.println("Testing serialString() method: ");
-        User user = new User("Evan", "Hsi", "ehsi", "12345", Role.ADMIN);
+        User user = new User("Evan", "Hsi", "evanhsi", "12345", Role.ADMIN);
+        bank.userBase.put(user.getId(), user);
         System.out.println(user.serialString());
+ */
 
         //Testing reading in a user from console + lookup in the database
         int testId1;
-        testId1 = bank.makeUser(System.in);
-        System.out.println("Exited makeUser()");
+        testId1 = bank.makeUser(new Scanner(System.in), false);
+        //System.out.println("Exited makeUser()");
 
         User user1 = bank.userBase.get(testId1);
         System.out.println(user1.serialString());
 
-
-        /*
-        Hashtable<Integer, Integer> hashtest = new Hashtable<>();
-        hashtest.put(1, 4);
-        hashtest.put(2, 5);
-        System.out.println(hashtest.get(1));
-        System.out.println(hashtest.get(2));
-        hashtest.forEach((k, v) -> {
-            System.out.println(k + ", " + v);
-        } );
-        /*
-         */
+        //testing writing users to file
+        bank.serializeUser();
     }
 }

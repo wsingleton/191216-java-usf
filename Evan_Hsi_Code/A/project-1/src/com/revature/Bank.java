@@ -8,8 +8,14 @@ public class Bank {
     public Hashtable<Integer, User> userBase = new Hashtable<Integer, User>();
     public Hashtable<Integer, Account> acctBase = new Hashtable<Integer, Account>();
 
-    public void serializeUser(OutputStream out, String fileName) throws IOException {
-        FileWriter fileWriter = new FileWriter(fileName);
+    public void serializeUser() {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter("/Users/evanhsi/Documents" +
+                    "/repos/191216-java-usf/Evan_Hsi_Code/A/project-1/userBase.txt");
+        }
+        catch (IOException a) { System.out.println(a.getMessage()); }
+
         PrintWriter printWriter = new PrintWriter(fileWriter);
         userBase.forEach((Integer, User) -> printWriter.println(User.serialString()));
         printWriter.close();
@@ -52,28 +58,27 @@ public class Bank {
         return acctId;
     }
 
-    public int makeUser(InputStream inputStream) {
+    public int makeUser(Scanner scanner, boolean file) {
         User user = new User();
-        Scanner scanner = new Scanner(System.in);
         int id = 0;
-        if(!inputStream.equals(System.in)) {
-            System.out.println("Please input id");
+
+        if(file) {
             id = scanner.nextInt();
             user.setId(id);
         }
-        System.out.println("First Name: ");
+        if(!file) { System.out.println("First Name: "); }
         user.setFirstName(scanner.next());
 
-        System.out.println("Last Name: ");
+        if(!file) { System.out.println("Last Name: "); }
         user.setLastName(scanner.next());
 
-        System.out.println("Username: ");
+        if(!file) { System.out.println("Username: "); }
         user.setUserName(scanner.next());
 
-        System.out.println("Password: ");
+        if(!file) { System.out.println("Password: "); }
         user.setPassword(scanner.next());
 
-        System.out.println("Role: ");
+        if(!file) { System.out.println("Role: "); }
         String roleString = scanner.next();
         switch(roleString) {
             case "ADMIN":
@@ -92,8 +97,8 @@ public class Bank {
                 break;
         }
 
-        if(inputStream.equals(System.in)) {
-            id = user.getUserName().hashCode();
+        if(!file) {
+            id = user.hashCode();
             user.setId(id);
         }
 
