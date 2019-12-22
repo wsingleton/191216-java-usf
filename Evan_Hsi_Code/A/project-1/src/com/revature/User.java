@@ -146,4 +146,19 @@ public class User {
         return Objects.hash(userName);
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
+    }
+
+    public String serialString() {
+        return id + " " + firstName + " " + lastName + " " + userName + " " + password + " " + role;
+    }
 }

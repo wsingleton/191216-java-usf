@@ -1,21 +1,25 @@
 package com.revature;
 
+import javax.net.ssl.SSLEngineResult;
 import java.util.*;
 import java.io.*;
 
 public class Bank {
-    private Hashtable<Integer, User> userBase;
-    private Hashtable<Integer, Account> acctBase;
+    public Hashtable<Integer, User> userBase = new Hashtable<Integer, User>();
+    public Hashtable<Integer, Account> acctBase = new Hashtable<Integer, Account>();
 
-    public void serializeUser() {
-        userBase.get("username");
+    public void serializeUser(OutputStream out, String fileName) throws IOException {
+        FileWriter fileWriter = new FileWriter(fileName);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        userBase.forEach((Integer, User) -> printWriter.println(User.serialString()));
+        printWriter.close();
     }
 
     public void serializeAcct() {
 
     }
 
-    public void makeAcct(InputStream inputStream, User user) {
+    public int makeAcct(InputStream inputStream, User user) {
         Account account = new Account();
         Scanner scanner = new Scanner(inputStream);
         int acctId = 0;
@@ -45,20 +49,31 @@ public class Bank {
         }
         acctBase.put(acctId, account);
 
+        return acctId;
     }
 
-    public void makeUser(InputStream inputStream) {
+    public int makeUser(InputStream inputStream) {
         User user = new User();
         Scanner scanner = new Scanner(System.in);
         int id = 0;
         if(!inputStream.equals(System.in)) {
+            System.out.println("Please input id");
             id = scanner.nextInt();
             user.setId(id);
         }
+        System.out.println("First Name: ");
         user.setFirstName(scanner.next());
+
+        System.out.println("Last Name: ");
         user.setLastName(scanner.next());
+
+        System.out.println("Username: ");
         user.setUserName(scanner.next());
+
+        System.out.println("Password: ");
         user.setPassword(scanner.next());
+
+        System.out.println("Role: ");
         String roleString = scanner.next();
         switch(roleString) {
             case "ADMIN":
@@ -76,12 +91,14 @@ public class Bank {
             default:
                 break;
         }
+
         if(inputStream.equals(System.in)) {
             id = user.getUserName().hashCode();
             user.setId(id);
         }
 
         userBase.put(id, user);
+        return id;
     }
 
     public int makeDeposit(int accountId, int depositAmount) {
