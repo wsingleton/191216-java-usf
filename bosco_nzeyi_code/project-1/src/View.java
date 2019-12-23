@@ -52,7 +52,6 @@ public class View {
             default:
                 System.out.println(" Please enter the appropriate operator");
 
-
         }
 
 
@@ -60,13 +59,12 @@ public class View {
 
     public static void main (String [] args){
 //        AccountManager manager = new AccountManager();
-        System.out.println("What do you want to do?" + "\n" + "Another line");
+        System.out.println("What do you want to do?");
         Scanner input = new Scanner(System.in);
         String activity = input.nextLine();
 
         View task = new View();
         task.findOperator(activity);
-
 
     }
 }
