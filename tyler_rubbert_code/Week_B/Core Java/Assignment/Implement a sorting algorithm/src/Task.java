@@ -5,7 +5,14 @@ public class Task {
 
     public int[] sortNumbers(int[] numbersForSorting) {
 
-        /* Provide your implementation here */
+        for (int i = 0; i < numbersForSorting.length-1; i ++) {
+            int[] clone = numbersForSorting;
+            int lowest = clone[i];
+            for (int j = i; j < numbersForSorting.length-1; j++) {
+                int newLowest;
+
+            }
+        }
 
     }
 }

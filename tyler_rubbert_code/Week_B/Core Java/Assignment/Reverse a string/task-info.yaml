@@ -3,8 +3,8 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 101
-    length: 35
+  - offset: 116
+    length: 107
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -33,8 +33,8 @@ files:
 
               // Return the reversed string
               return String.copyValueOf(stringChars);
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Solved
   text: |-
     import java.util.Stack;
 
@@ -121,5 +121,5 @@ files:
 
     }
   learner_created: false
-status: Unchecked
+status: Solved
 record: -1

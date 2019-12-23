@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 302
-    length: 35
+    length: 45
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -33,9 +33,9 @@ files:
               }
 
               return textArray;
-    selected: false
+    selected: true
     status: Unchecked
-  - offset: 424
+  - offset: 434
     length: 30
     placeholder_text: // Provide your implementation
     initial_state:
@@ -58,7 +58,7 @@ files:
               }
 
               return wordCountMap;
-    selected: false
+    selected: true
     status: Unchecked
   text: |
     import java.io.BufferedReader;

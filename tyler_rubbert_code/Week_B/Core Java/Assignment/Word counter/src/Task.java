@@ -11,7 +11,7 @@ public class Task {
 
     public String[] extractTextFromFile(File file) {
 
-        // Provide your implementation here
+        BufferedReader reader = new BufferedReader();
 
     }
 
