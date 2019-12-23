@@ -1,0 +1,116 @@
+type: edu
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 99
+    length: 35
+    placeholder_text: // Provide your implementation here
+    initial_state:
+      length: 35
+      offset: 99
+    initialized_from_dependency: false
+    possible_answer: |-
+      StringBuilder substrBuilder = new StringBuilder("");
+
+              if (mainString == null || mainString.equals("") || start < 0 || start >= end) {
+                  return substrBuilder.toString();
+              }
+
+              for (int i = 0; i < end; i++) {
+                  if (i >= start) substrBuilder.append(mainString.charAt(i));
+              }
+
+              return substrBuilder.toString();
+    selected: false
+    status: Unchecked
+  text: |-
+    public class Task {
+
+        public String substring(String mainString, int start, int end) {
+
+            // Provide your implementation here
+
+        }
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |-
+    import org.junit.*;
+    import org.junit.rules.ExpectedException;
+    import org.junit.rules.Timeout;
+    import org.mockito.Mock;
+    import org.mockito.Mockito;
+    import org.mockito.MockitoAnnotations;
+
+    import static org.junit.Assert.assertEquals;
+    import static org.mockito.Mockito.*;
+
+    public class Tests {
+
+      private Task sut;
+
+      @Rule
+      public ExpectedException expectedException = ExpectedException.none();
+
+      @Rule
+      public Timeout globalTimeout = Timeout.seconds(3);
+
+      @Before
+      public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        sut = new Task();
+      }
+
+      @After
+      public void tearDown() {
+        sut = null;
+      }
+
+      @Test
+      public void testSolutionWithValidStringAndValidBoundaries() {
+        String expectedResult = "test";
+        String actualResult = sut.substring("This is a test string.", 10, 14);
+        assertEquals(expectedResult, actualResult);
+      }
+
+      @Test
+      public void testSolutionWithValidStringAndNegativeBoundaries() {
+        String expectedResult = "";
+        String actualResult = sut.substring("This is a test string.", -1, -1);
+        assertEquals(expectedResult, actualResult);
+      }
+
+      @Test
+      public void testSolutionWithValidStringAndNegativeStart() {
+        String expectedResult = "";
+        String actualResult = sut.substring("This is a test string.", -1, 14);
+        assertEquals(expectedResult, actualResult);
+      }
+
+      @Test
+      public void testSolutionWithValidStringAndEndLessThanStart() {
+        String expectedResult = "";
+        String actualResult = sut.substring("This is a test string.", 14, 10);
+        assertEquals(expectedResult, actualResult);
+      }
+
+      @Test
+      public void testSolutionWithEmptyStringAndValidBoundaries() {
+        String expectedResult = "";
+        String actualResult = sut.substring("", 10, 14);
+        assertEquals(expectedResult, actualResult);
+      }
+
+      @Test
+      public void testSolutionWithNullStringAndValidBoundaries() {
+        String expectedResult = "";
+        String actualResult = sut.substring(null, 10, 14);
+        assertEquals(expectedResult, actualResult);
+      }
+
+    }
+  learner_created: false
+status: Unchecked
+record: -1

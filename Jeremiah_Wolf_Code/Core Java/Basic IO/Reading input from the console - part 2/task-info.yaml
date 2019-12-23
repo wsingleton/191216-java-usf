@@ -1,0 +1,121 @@
+type: edu
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 165
+    length: 35
+    placeholder_text: // Provide your implementation here
+    initial_state:
+      length: 35
+      offset: 165
+    initialized_from_dependency: false
+    possible_answer: |-
+      // Create a reference to hold the provided user value (initialized to -1)
+              int userValue = -1;
+
+              consoleScanner = new Scanner(System.in);
+              System.out.print("Please provide a integer value: ");
+
+              // Wrap the risky logic within a try/catch
+              try {
+                  userValue = consoleScanner.nextInt();
+              }
+
+              // Handle exceptions
+              catch (InputMismatchException ime) {
+                  System.err.println("Invalid input provided.");
+              } catch (Exception e) {
+                  System.err.println("An unexpected exception was thrown.");
+              }
+
+              // Always close your closeable resources!
+              finally {
+                  consoleScanner.close();
+              }
+
+              // Return the provided value
+              return userValue;
+    selected: false
+    status: Unchecked
+  text: |
+    import java.util.InputMismatchException;
+    import java.util.Scanner;
+
+    public class Task {
+
+        Scanner consoleScanner;
+
+        public int getIntegerFromUser() {
+
+            // Provide your implementation here
+
+        }
+
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |
+    import org.hamcrest.CoreMatchers;
+    import org.junit.After;
+    import org.junit.Before;
+    import org.junit.Rule;
+    import org.junit.Test;
+    import org.junit.rules.ExpectedException;
+    import org.junit.rules.Timeout;
+
+    import java.io.ByteArrayInputStream;
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.util.InputMismatchException;
+
+    import static org.hamcrest.CoreMatchers.containsString;
+    import static org.hamcrest.CoreMatchers.equalTo;
+    import static org.junit.Assert.*;
+
+    public class Tests {
+
+      private Task sut;
+      private InputStream sysIn = System.in;
+
+      @Rule
+      public ExpectedException expectedException = ExpectedException.none();
+
+      @Rule
+      public Timeout globalTimeout = Timeout.seconds(3);
+
+      @Before
+      public void setUp() {
+        sut = new Task();
+      }
+
+      @After
+      public void tearDown() {
+        sut = null;
+        System.setIn(sysIn);
+      }
+
+      @Test
+      public void testSolutionWithNumericInput() {
+        System.setIn(new ByteArrayInputStream("42".getBytes()));
+
+        assertEquals("The implementation did not retrieve input from the user correctly.",
+                sut.getIntegerFromUser(), 42);
+
+        assertNotNull("The Scanner member cannot be null!", sut.consoleScanner);
+
+
+      }
+
+      @Test
+      public void testThatSolutionWithNonNumericInput() {
+        System.setIn(new ByteArrayInputStream("test".getBytes()));
+        sut.getIntegerFromUser();
+        assertNotNull("The Scanner member cannot be null!", sut.consoleScanner);
+      }
+
+    }
+  learner_created: false
+status: Unchecked
+record: -1
