@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 194
-    length: 35
+    length: 1089
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -42,8 +42,8 @@ files:
 
               // Return the lines array
               return lines;
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Solved
   text: |
     import java.io.*;
     import java.util.Arrays;
@@ -141,5 +141,5 @@ files:
 - name: resources/empty.txt
   visible: false
   learner_created: false
-status: Unchecked
+status: Solved
 record: -1
