@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="4" skipped="0" failures="0" errors="0" timestamp="2019-12-23T16:54:23" hostname="LAPTOP-BU1ED0LM" time="0.029">
+  <properties/>
+  <testcase name="testSolutionWithValidTestFile" classname="Tests" time="0.015"/>
+  <testcase name="testSolutionWithEmptyFile" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionWithNullFile" classname="Tests" time="0.008"/>
+  <testcase name="testSolutionWithNonExistentFile" classname="Tests" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Invalid file provided.
+Invalid file provided.
+]]></system-err>
+</testsuite>

@@ -1,0 +1,169 @@
+type: edu
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 353
+    length: 1001
+    placeholder_text: // Provide your implementation here
+    initial_state:
+      length: 35
+      offset: 274
+    initialized_from_dependency: false
+    possible_answer: |-
+      // Verify that the arguments provided are valid for use
+              if (linesToWrite == null) {
+                  return;
+              }
+
+              // Wrap risky logic in a try/catch, and write lines to file - encoded using default charset
+              try {
+
+                  // Create the file which will be written to
+                  File writeFile = new File("resources/write.txt");
+                  //noinspection ResultOfMethodCallIgnored
+                  writeFile.createNewFile();
+
+                  // Define a file path for the output
+                  Path outPath = Paths.get("resources/write.txt");
+
+                  // Convert String array into an ArrayList for use with the Files.write() method
+                  ArrayList<String> linesArrList = new ArrayList<>(Arrays.asList(linesToWrite));
+
+                  // Write the lines to the file
+                  Files.write(outPath, linesArrList, Charset.defaultCharset());
+              }
+
+              // Handle exceptions
+              catch (Exception e) {
+                  e.printStackTrace();
+                  System.err.println("An unexpected exception was thrown.");
+              }
+    selected: true
+    status: Unchecked
+  text: |-
+    import java.io.File;
+    import java.nio.charset.Charset;
+    import java.nio.file.Files;
+    import java.nio.file.Path;
+    import java.nio.file.Paths;
+    import java.util.ArrayList;
+    import java.util.Arrays;
+
+    public class Task {
+
+        public void writeToFile(String[] linesToWrite) {
+
+            // Provide your implementation here
+
+        }
+
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |-
+    import org.junit.*;
+    import org.junit.rules.*;
+
+    import java.io.File;
+    import java.nio.file.Files;
+    import java.nio.file.Path;
+    import java.nio.file.Paths;
+    import java.util.ArrayList;
+
+    import static org.junit.Assert.*;
+
+    public class Tests {
+
+      private Task sut;
+
+      @Rule
+      public ExpectedException expectedException = ExpectedException.none();
+
+      @Rule
+      public Timeout globalTimeout = Timeout.seconds(3);
+
+      @Before
+      public void setUp() {
+        sut = new Task();
+      }
+
+      @After
+      public void tearDown() {
+        sut = null;
+
+        try {
+          File fileForDeletion = new File("resources/write.txt");
+          if (fileForDeletion.exists()) Files.delete(Paths.get(fileForDeletion.getPath()));
+        } catch (Exception e) {
+          System.err.println("Something went wrong while attempting to delete the file.");
+        }
+
+      }
+
+      @Test
+      public void testSolutionWithValidArray() {
+        String[] validLines = {
+                "This is test line 1",
+                "This is test line 2",
+                "This is test line 3",
+                "This is test line 4",
+                "This is test line 5"
+        };
+
+        sut.writeToFile(validLines);
+
+        File expectedFile = new File("resources/write.txt");
+        assertTrue("The expected file, write.txt, does not exist.", expectedFile.exists());
+
+        String[] resultingLines = readSolutionFile();
+
+        assertArrayEquals("The implementation did not write to the file correctly.", validLines, resultingLines);
+
+      }
+
+      @Test
+      public void testSolutionWithEmptyArray() {
+        String[] emptyLines = {};
+
+        sut.writeToFile(emptyLines);
+
+        File expectedFile = new File("resources/write.txt");
+        assertTrue("The expected file, write.txt, does not exist.", expectedFile.exists());
+
+        String[] resultingLines = readSolutionFile();
+
+        assertArrayEquals("The implementation did not write to the file correctly.", emptyLines, resultingLines);
+
+      }
+
+      @Test
+      public void testSolutionWithNullArray() {
+
+        sut.writeToFile(null);
+        File shouldNotExist = new File("resources/write.txt");
+        assertFalse(shouldNotExist.exists());
+
+      }
+
+      private String[] readSolutionFile() {
+        ArrayList<String> lineList = new ArrayList<>();
+        Path filePath = Paths.get("resources/write.txt");
+
+        try {
+          Files.lines(filePath).forEach(lineList::add);
+        } catch (Exception e) {
+          fail();
+        }
+
+
+        String[] lineArray = new String[lineList.size()];
+        for(int i = 0; i < lineArray.length; i++) lineArray[i] = lineList.get(i);
+        return lineArray;
+      }
+
+    }
+  learner_created: false
+status: Unchecked
+record: -1
