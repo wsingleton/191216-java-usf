@@ -2,13 +2,12 @@ package com.bank.ui;
 
 import com.bank.models.Account;
 import com.bank.models.User;
-
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static com.bank.dao.WriteFile.writeToAcctFile;
+import static com.bank.dao.WriteFile.writeToUserFile;
 import static com.bank.service.UserService.*;
-
 
 public class UserScreen extends User {
 
@@ -46,7 +45,7 @@ public class UserScreen extends User {
         String ln = scanner.next();
         validateNames(ln);
         System.out.println("");
-        System.out.print("Username: " );
+        System.out.print("Username (Must be at least 8 characters and no more than 14: " );
         String un = scanner.next();
         validateUserName(un);
         System.out.println("");
@@ -58,15 +57,20 @@ public class UserScreen extends User {
 
         User newUser = new User(newId, fn, ln, un, pw);
 
+        System.out.println(newUser);
+        writeToUserFile(newUser);
+
         System.out.println("Thank you!");
         System.out.print("Please enter the amount you'd like to deposit: ");
         double bal = scanner.nextDouble();
 
         Account newAcct = new Account(newId, bal);
+        writeToAcctFile(newAcct);
 
         display(newAcct);
 
     }
+
 
 
     public static void login() {
@@ -110,7 +114,7 @@ public class UserScreen extends User {
 
             System.out.println("Error: Please try again");
             System.out.println("");
-            acct.display(acct);
+            display(acct);
         }
 
     }
@@ -129,7 +133,7 @@ public class UserScreen extends User {
             amount = input.nextDouble();
         }catch (InputMismatchException e) {
             System.out.println("Invalid value");
-            deposit(acct);
+            withdraw(acct);
         }
 
         if(amount > bal) {

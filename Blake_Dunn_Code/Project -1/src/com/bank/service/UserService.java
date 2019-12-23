@@ -1,11 +1,7 @@
 package com.bank.service;
 
-
-
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import static com.bank.ui.UserScreen.register;
 
 public class UserService {

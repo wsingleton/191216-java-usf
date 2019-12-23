@@ -25,7 +25,7 @@ public class MainDriver {
         }
 
         WriteFile data = new WriteFile(fileName, true);
-        data.writeToFile("This is another line of text");
+        data.writeToFile(" \n This is another line of text");
 
         System.out.println("Text File Written To");
 

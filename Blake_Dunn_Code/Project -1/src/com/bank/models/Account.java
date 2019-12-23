@@ -1,8 +1,9 @@
 package com.bank.models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Account extends User {
+public class Account extends User implements Serializable {
 
     int iD = getId();
     public double balance;

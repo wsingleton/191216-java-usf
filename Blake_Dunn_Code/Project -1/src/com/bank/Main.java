@@ -2,7 +2,6 @@ package com.bank;
 
 import com.bank.models.User;
 import com.bank.ui.*;
-
 import java.util.Scanner;
 
 
