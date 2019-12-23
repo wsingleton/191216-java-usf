@@ -5,6 +5,7 @@ import com.bank.models.User;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static com.bank.dao.ReadFile.checkLogIn;
 import static com.bank.dao.WriteFile.writeToAcctFile;
 import static com.bank.dao.WriteFile.writeToUserFile;
 import static com.bank.service.UserService.*;
@@ -78,11 +79,13 @@ public class UserScreen extends User {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Username: ");
-        String input = scanner.next();
+        String un = scanner.next();
         System.out.println("");
 
         System.out.print("Password: ");
-        String input2 = scanner.next();
+        String pw = scanner.next();
+
+
 
         // display();
 
