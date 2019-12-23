@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 274
-    length: 35
+    length: 983
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -39,7 +39,7 @@ files:
                   e.printStackTrace();
                   System.err.println("An unexpected exception was thrown.");
               }
-    selected: false
+    selected: true
     status: Unchecked
   text: |-
     import java.io.File;
