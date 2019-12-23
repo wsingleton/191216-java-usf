@@ -6,8 +6,11 @@ public class Vehicle {
     private String model = "";
     private String company = " ";
     private String engine = "800";
+    public static int count =0;
 
-    public  Vehicle(){};
+    public  Vehicle(){
+        count ++;
+    };
     //constructor overloading
     public Vehicle(String name, String color, String model, String company, String engine) {
         this.name = name;
@@ -15,6 +18,7 @@ public class Vehicle {
         this.model = model;
         this.company = company;
         this.engine = engine;
+        count++;
 
 
 
@@ -61,5 +65,10 @@ public class Vehicle {
         }
     }
 
+
+    //static can only be called form a static
+    public static String getVehicle(){
+        return "You have set the Name and Color of that Vehicle";
+    }
 
 }

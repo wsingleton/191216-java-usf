@@ -1,0 +1,74 @@
+type: edu
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 58
+    length: 35
+    placeholder_text: // Provide your implementation here
+    initial_state:
+      length: 35
+      offset: 58
+    initialized_from_dependency: false
+    possible_answer: System.out.println("Hello, world!");
+    selected: false
+    status: Unchecked
+  text: |-
+    public class Task {
+
+        public void sayHello() {
+            // Provide your implementation here
+        }
+
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |-
+    import org.junit.*;
+    import org.junit.rules.ExpectedException;
+    import org.junit.rules.Timeout;
+
+    import java.io.ByteArrayOutputStream;
+    import java.io.PrintStream;
+
+    import static org.hamcrest.CoreMatchers.*;
+    import static org.junit.Assert.*;
+
+    public class Tests {
+
+      private Task sut;
+
+      private PrintStream sysOut;
+      private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+      @Rule
+      public ExpectedException expectedException = ExpectedException.none();
+
+      @Rule
+      public Timeout globalTimeout = Timeout.seconds(3);
+
+      @Before
+      public void setUp() {
+        sut = new Task();
+        sysOut = System.out;
+        System.setOut(new PrintStream(outContent));
+      }
+
+      @After
+      public void tearDown() {
+        sut = null;
+        System.setOut(sysOut);
+      }
+
+      @Test
+      public void testSolution() {
+        sut.sayHello();
+        assertThat("Output should be \"Hello, world!\", exactly.",
+                outContent.toString(), containsString("Hello, world!"));
+      }
+
+    }
+  learner_created: false
+status: Unchecked
+record: -1

@@ -17,8 +17,10 @@ public class MainDriver {
         System.out.println(vehicle1.getName());
         vehicle1.setColor("Blue");
         System.out.println(vehicle1.getColor());
+        System.out.println(vehicle1.count);
 
         System.out.println(vehicle1.getSpeed());
 
+        System.out.println(vehicle1.getVehicle());
     }
 }
