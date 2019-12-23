@@ -1,9 +1,10 @@
 package com.revature;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import com.revature.models.User;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReadFileDriver {
     public static void main(String[] args) {
@@ -24,5 +25,26 @@ public class ReadFileDriver {
             e.printStackTrace();
             System.err.println("An unexpected exception was caught.");
         }
+         System.out.println("+--------------------------------------------+");
+
+        File users = new File("src/resources/users.txt");
+        List<User> userList = new ArrayList<>();
+
+        //try with resources (introduced in Java 7) :: auto-closes objects declared as resources
+        //only allows for the instantiation of objects that implement AutoCloseable interface
+        try(BufferedReader reader = new BufferedReader(new FileReader(users))){
+            String userLine = reader.readLine();
+            while(userLine != null){
+                String[] userFields  = userLine.split(":");
+                User u = new User(Integer.parseInt(userFields[0]),userFields[1], userFields[2]);
+                userList.add(u);
+            }
+        }catch (IOException ioe){
+            ioe.printStackTrace();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 }
