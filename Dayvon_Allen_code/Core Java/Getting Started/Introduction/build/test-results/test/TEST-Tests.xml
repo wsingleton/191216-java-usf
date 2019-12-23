@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-23T17:45:52" hostname="USF-Guest-Wifi-50-101.laptops.usf.edu" time="0.01">
+  <properties/>
+  <testcase name="testSolution" classname="Tests" time="0.01"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
