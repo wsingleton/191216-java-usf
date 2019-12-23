@@ -1,7 +1,7 @@
 public class Task {
 
     public void sayHello() {
-        // Provide your implementation here
+        System.out.println("Hello, world!");
     }
 
 }
