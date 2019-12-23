@@ -3,52 +3,40 @@ package com.bank.dao;
 import com.bank.models.Account;
 import com.bank.models.User;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class WriteFile {
 
-    private String path;
-    private boolean appendToFile = false;
+    public static void writeToUser(User newUser) {
 
+        File writeFile = new File("src/resources/users.txt");
 
-    public WriteFile(String filePath, boolean appendValue) {
-        path = filePath;
-        appendToFile = appendValue;
-    }
+        //try-with-resources (introduced in Java 7) :: auto-closes objects declared as resources
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(writeFile, true))) {
 
-    public static void writeToUserFile(User newUser) {
+            writer.write("\n" + newUser.toFileStringUser());
 
-        final String filePath =
-                "C:/Users/bdunn/OneDrive/Desktop/repos/191216-java-usf/Blake_Dunn_Code/Project -1/Users.txt";
-
-        try {
-
-            FileOutputStream fileOut = new FileOutputStream(filePath);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(newUser);
-            objectOut.close();
-            System.out.println("You have successfully registered an account!");
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public static void writeToAcctFile(Account newUser) {
+    public static void writeToAccount(Account newAcct) {
 
-        final String filePath =
-                "C:/Users/bdunn/OneDrive/Desktop/repos/191216-java-usf/Blake_Dunn_Code/Project -1/Accounts.txt";
+        File writeFile = new File("src/resources/account.txt");
 
-        try {
+        //try-with-resources (introduced in Java 7) :: auto-closes objects declared as resources
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(writeFile, true))) {
 
-            FileOutputStream fileOut = new FileOutputStream(filePath);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(newUser);
-            objectOut.close();
-            System.out.println("You have successfully created an account!");
+            writer.write("\n" + newAcct.toFileStringAccount());
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
+
+
 }

@@ -1,28 +1,59 @@
 package com.bank.dao;
 
-import java.io.*;
+import com.bank.models.Account;
+import com.bank.models.User;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class ReadFile {
 
-    static String acctFile =
-            "C:/Users/bdunn/OneDrive/Desktop/repos/191216-java-usf/Blake_Dunn_Code/Project -1/Users.txt";
 
-    public static void checkLogIn(String un, String pw) {
+    public static void readUserFile(User newUser) {
 
-        String line = null;
-        boolean bool = false;
+        File userFile = new File("src/resources/users.txt");
+        System.out.println("Does the file exist? ::" + userFile.exists());
 
         try {
 
-            FileReader fileReader = new FileReader(acctFile);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            BufferedReader reader = new BufferedReader(new FileReader(userFile));
+            String line = reader.readLine();
 
-            while((line = bufferedReader.readline()) != null) {
-
+            while (line != null) {
+                line = reader.readLine();
             }
+
+        }catch (IOException ioe) {
+            System.err.println("Exception thrown while reading file.");
+        }catch (Exception e) {
+            System.err.println("An unexpected exception occurred.");
+        }
+    }
+
+    public static void readAccountFile(int id) {
+
+        File userFile = new File("src/resources/account.txt");
+        System.out.println("Does the file exist? ::" + userFile.exists());
+
+        try {
+
+            BufferedReader reader = new BufferedReader(new FileReader(userFile));
+            String line = reader.readLine();
+
+            while (line != null) {
+                line = reader.readLine();
+            }
+
+        }catch (IOException ioe) {
+            System.err.println("Exception thrown while reading file.");
+        }catch (Exception e) {
+            System.err.println("An unexpected exception occurred.");
         }
 
+
     }
+
 
 }

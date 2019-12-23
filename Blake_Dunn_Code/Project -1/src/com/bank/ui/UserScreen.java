@@ -5,9 +5,9 @@ import com.bank.models.User;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static com.bank.dao.ReadFile.checkLogIn;
-import static com.bank.dao.WriteFile.writeToAcctFile;
-import static com.bank.dao.WriteFile.writeToUserFile;
+
+import static com.bank.dao.WriteFile.writeToAccount;
+import static com.bank.dao.WriteFile.writeToUser;
 import static com.bank.service.UserService.*;
 
 public class UserScreen extends User {
@@ -38,14 +38,6 @@ public class UserScreen extends User {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("First name: " );
-        String fn = scanner.next();
-        validateNames(fn);
-        System.out.println("");
-        System.out.print("Last name: " );
-        String ln = scanner.next();
-        validateNames(ln);
-        System.out.println("");
         System.out.print("Username (Must be at least 8 characters and no more than 14: " );
         String un = scanner.next();
         validateUserName(un);
@@ -54,19 +46,28 @@ public class UserScreen extends User {
         String pw = scanner.next();
         validatePassword(pw);
         System.out.println("");
+        System.out.print("First name: " );
+        String fn = scanner.next();
+        validateNames(fn);
+        System.out.println("");
+        System.out.print("Last name: " );
+        String ln = scanner.next();
+        validateNames(ln);
+        System.out.println("");
+
         int newId = createId();
 
-        User newUser = new User(newId, fn, ln, un, pw);
-
+        User newUser = new User(newId, un, pw, fn, ln);
         System.out.println(newUser);
-        writeToUserFile(newUser);
+
+        writeToUser(newUser);
 
         System.out.println("Thank you!");
         System.out.print("Please enter the amount you'd like to deposit: ");
         double bal = scanner.nextDouble();
 
         Account newAcct = new Account(newId, bal);
-        writeToAcctFile(newAcct);
+        writeToAccount(newAcct);
 
         display(newAcct);
 
@@ -84,6 +85,7 @@ public class UserScreen extends User {
 
         System.out.print("Password: ");
         String pw = scanner.next();
+
 
 
 

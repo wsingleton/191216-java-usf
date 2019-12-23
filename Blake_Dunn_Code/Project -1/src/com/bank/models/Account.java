@@ -3,9 +3,9 @@ package com.bank.models;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Account extends User implements Serializable {
+public class Account extends User {
 
-    int iD = getId();
+    int iD;
     public double balance;
 
     public Account() {
@@ -35,6 +35,18 @@ public class Account extends User implements Serializable {
 
     }
 
+    public String toFileStringAccount() {
+        return iD + ":" + balance;
+    }
+
+
+    public int getiD() {
+        return iD;
+    }
+
+    public void setiD(int iD) {
+        this.iD = iD;
+    }
 
     public double getBalance() {
         return balance;

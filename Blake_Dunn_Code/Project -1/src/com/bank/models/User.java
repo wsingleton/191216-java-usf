@@ -1,16 +1,16 @@
 package com.bank.models;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class User implements Serializable {
+public class User {
 
     private int iD;
-    private String firstName;
-    private String lastName;
     private String userName;
     private String password;
-    private Role role;
+    private String firstName;
+    private String lastName;
+
+
 
     public User() {
         super();
@@ -30,18 +30,10 @@ public class User implements Serializable {
 
     }
 
-    public User(int id, String fn, String ln, String un, String pw) {
+    public User(int id, String un, String pw, String fn, String ln) {
 
-        this(fn, ln, un, pw);
+        this(un, pw, fn, ln);
         iD = id;
-    }
-
-
-    public User(int id, String fn, String ln, String un, String pw, Role role) {
-
-        this(id, fn, ln, un, pw);
-        this.role = role;
-
     }
 
     public static int createId() {
@@ -54,28 +46,17 @@ public class User implements Serializable {
 
     }
 
-    public int getId() {
+    public String toFileStringUser() {
+        return iD + ":" + userName + ":" + password + ":"
+                + firstName + ":" + lastName;
+    }
+
+    public int getiD() {
         return iD;
     }
 
-    public void setId(int id) {
-        iD = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setiD(int iD) {
+        this.iD = iD;
     }
 
     public String getUserName() {
@@ -94,12 +75,20 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override
@@ -108,27 +97,25 @@ public class User implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return iD == user.iD &&
-                firstName.equals(user.firstName) &&
-                lastName.equals(user.lastName) &&
-                userName.equals(user.userName) &&
-                password.equals(user.password) &&
-                role == user.role;
+                Objects.equals(userName, user.userName) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(iD, firstName, lastName, userName, password, role);
+        return Objects.hash(iD, userName, password, firstName, lastName);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + iD +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "iD=" + iD +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", role=" + role +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 '}';
     }
 }
