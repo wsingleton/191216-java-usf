@@ -5,13 +5,14 @@ import java.util.*;
 public class Account {
 
     private int actId;
-    private int balance;
+    private double balance;
     private ArrayList<Transaction> transactions;
     private Type type;
     private int ownerID;
 
     public Account() {
         this.transactions = new ArrayList<Transaction>();
+        this.balance = 0.00;
     }
 
     public Account(int actId, int balance, Type type, int ownerID) {
@@ -29,11 +30,11 @@ public class Account {
         this.actId = actId;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -54,6 +55,23 @@ public class Account {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return actId == account.actId &&
+                Double.compare(account.balance, balance) == 0 &&
+                ownerID == account.ownerID &&
+                Objects.equals(transactions, account.transactions) &&
+                type == account.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(actId, balance, transactions, type, ownerID);
+    }
+
+    @Override
     public String toString() {
         return "Account{" +
                 "actId=" + actId +
@@ -62,6 +80,8 @@ public class Account {
                 ", ownerID=" + ownerID +
                 '}';
     }
-
+    public String serialString() {
+        return actId + " " + balance + " " + type + " " + ownerID;
+    }
 
 }

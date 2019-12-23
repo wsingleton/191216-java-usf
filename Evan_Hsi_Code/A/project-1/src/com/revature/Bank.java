@@ -22,21 +22,32 @@ public class Bank {
     }
 
     public void serializeAcct() {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter("/Users/evanhsi/Documents" +
+                    "/repos/191216-java-usf/Evan_Hsi_Code/A/project-1/acctBase.txt");
+        }
+        catch (IOException a) { System.out.println(a.getMessage()); }
 
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        acctBase.forEach((Integer, Account) -> printWriter.println(Account.serialString()));
+        printWriter.close();
     }
 
-    public int makeAcct(InputStream inputStream, User user) {
-        Account account = new Account();
-        Scanner scanner = new Scanner(inputStream);
+    public int makeAcct(Scanner scanner, User user, boolean file) {
         int acctId = 0;
+        Account account = new Account();
 
         // acctid, balance, type, ownerId
 
-        if(!inputStream.equals(System.in)) {
+        if(file) {
             acctId = scanner.nextInt();
             account.setActId(acctId);
         }
-        account.setBalance(scanner.nextInt());
+        if(file) {
+            account.setBalance(scanner.nextDouble());
+        }
+        if(!file) { System.out.print("Select Account Type (CHECKING/SAVINGS)"); }
         String typeString = scanner.next();
         switch (typeString) {
             case "CHECKING":
@@ -49,11 +60,12 @@ public class Bank {
                 break;
         }
         account.setOwnerID(user.getId());
-        if(inputStream.equals(System.in)) {
+        if(!file) {
             acctId = user.getUserName().hashCode()+user.getAccountsLength()+1;
             account.setActId(acctId);
         }
         acctBase.put(acctId, account);
+        userBase.get(user.getId()).addAccount(account);
 
         return acctId;
     }
@@ -78,24 +90,26 @@ public class Bank {
         if(!file) { System.out.println("Password: "); }
         user.setPassword(scanner.next());
 
-        if(!file) { System.out.println("Role: "); }
-        String roleString = scanner.next();
-        switch(roleString) {
-            case "ADMIN":
-                user.setRole(Role.ADMIN);
-                break;
-            case "DEV":
-                user.setRole(Role.DEV);
-                break;
-            case "TESTER":
-                user.setRole(Role.TESTER);
-                break;
-            case "MEMBER":
-                user.setRole(Role.MEMBER);
-                break;
-            default:
-                break;
+        if(file) {
+            String roleString = scanner.next();
+            switch (roleString) {
+                case "ADMIN":
+                    user.setRole(Role.ADMIN);
+                    break;
+                case "DEV":
+                    user.setRole(Role.DEV);
+                    break;
+                case "TESTER":
+                    user.setRole(Role.TESTER);
+                    break;
+                case "MEMBER":
+                    user.setRole(Role.MEMBER);
+                    break;
+                default:
+                    break;
+            }
         }
+        else { user.setRole(Role.MEMBER); }
 
         if(!file) {
             id = user.hashCode();
@@ -106,7 +120,7 @@ public class Bank {
         return id;
     }
 
-    public int makeDeposit(int accountId, int depositAmount) {
+    public double makeDeposit(int accountId, double depositAmount) {
         if(depositAmount < 1) {
             System.out.print("Invalid deposit amount.");
             return 0;
@@ -115,10 +129,14 @@ public class Bank {
         return acctBase.get(accountId).getBalance();
     }
 
-    public int makeWithdrawal(int accountId, int withdrawalAmount) {
+    public double makeWithdrawal(int accountId, double withdrawalAmount) {
         if(withdrawalAmount < 1) {
-            System.out.print("Invalid withdrawal amount.");
-            return 0;
+            System.out.println("Invalid withdrawal amount.");
+            return acctBase.get(accountId).getBalance();
+        }
+        if(withdrawalAmount > acctBase.get(accountId).getBalance()) {
+            System.out.println("Insufficient Funds");
+            return acctBase.get(accountId).getBalance();
         }
         acctBase.get(accountId).setBalance(acctBase.get(accountId).getBalance() - withdrawalAmount);
         return acctBase.get(accountId).getBalance();

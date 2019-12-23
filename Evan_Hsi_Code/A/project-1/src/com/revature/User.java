@@ -121,6 +121,10 @@ public class User {
         return accounts;
     }
 
+    public Account getAccount(int index) {
+        return accounts.get(index);
+    }
+
     public void setAccounts(ArrayList<Account> accounts) {
         this.accounts = accounts;
     }
