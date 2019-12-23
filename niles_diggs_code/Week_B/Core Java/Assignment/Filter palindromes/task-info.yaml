@@ -2,6 +2,40 @@ type: edu
 files:
 - name: src/Task.java
   visible: true
+  placeholders:
+  - offset: 152
+    length: 38
+    placeholder_text: /* Provide your implementation here */
+    initial_state:
+      length: 38
+      offset: 152
+    initialized_from_dependency: false
+    possible_answer: |-
+      if (wordArray == null || wordArray.length == 0) {
+                  return new String[0];
+              }
+
+              Object[] _palindromes = Arrays.stream(wordArray)
+                      .filter(word -> word != null && isPalindrome(word))
+                      .toArray();
+
+              return Arrays.copyOf(_palindromes, _palindromes.length, String[].class);
+    selected: false
+    status: Unchecked
+  - offset: 255
+    length: 38
+    placeholder_text: /* Provide your implementation here */
+    initial_state:
+      length: 38
+      offset: 255
+    initialized_from_dependency: false
+    possible_answer: |-
+      String sanitizedWord = word.toLowerCase().replaceAll("\\W", "");
+              StringBuilder reversedWord = new StringBuilder(sanitizedWord).reverse();
+
+              return sanitizedWord.equals(reversedWord.toString());
+    selected: false
+    status: Unchecked
   text: |-
     import java.util.Arrays;
     import java.util.stream.Collectors;
@@ -10,24 +44,13 @@ files:
 
         public String[] filterPalindromes(String[] wordArray) {
 
-            if (wordArray == null || wordArray.length == 0) {
-                return new String[0];
-            }
-
-            Object[] _palindromes = Arrays.stream(wordArray)
-                    .filter(word -> word != null && isPalindrome(word))
-                    .toArray();
-
-            return Arrays.copyOf(_palindromes, _palindromes.length, String[].class);
+            /* Provide your implementation here */
 
         }
 
         public boolean isPalindrome(String word) {
 
-            String sanitizedWord = word.toLowerCase().replaceAll("\\W", "");
-            StringBuilder reversedWord = new StringBuilder(sanitizedWord).reverse();
-
-            return sanitizedWord.equals(reversedWord.toString());
+            /* Provide your implementation here */
 
         }
 

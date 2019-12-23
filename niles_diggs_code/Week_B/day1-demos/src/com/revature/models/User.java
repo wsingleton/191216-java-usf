@@ -42,6 +42,10 @@ public class User {
         this.password = password;
     }
 
+    public String toFileString() {
+        return id + ":" + username + ":" + password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
