@@ -11,13 +11,13 @@ public class CollectionDriver {
         /*
             Set
 
-                A Set is a collection that cannot contain dupliate elements.
-                It models the mathemarical concept of set abstraction. The set interface
-                contains only methods inherited from the Collection interfaves and adds the restriction that duplicated prohibited.
+                A Set is a collection that cannot contain duplicate elements.
+                It models the mathematical concept of set abstraction. The set interface
+                contains only methods inherited from the Collection interfaces and adds the restriction that duplicated prohibited.
                 Swt implementations also add a stronger contract on the behaviors
                 of the equals() and hashCode() operations, allowing Set
                 instances to be compared meaningfully even if their implementations differ
-                Lastly, it is i,portant to note that sets have no pmplicit ordering.
+                Lastly, it is important to note that sets have no implicit ordering.
 
          */
 

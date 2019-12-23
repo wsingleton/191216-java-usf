@@ -2,6 +2,38 @@ type: edu
 files:
 - name: src/Task.java
   visible: true
+  placeholders:
+  - offset: 147
+    length: 38
+    placeholder_text: /* Provide your implementation here */
+    initial_state:
+      length: 38
+      offset: 147
+    initialized_from_dependency: false
+    possible_answer: |-
+      // Check the base cases
+              if(numbersForSorting == null || numbersForSorting.length == 0) {
+                  return new int[0];
+              }
+
+              // Make a copy of the original array, this copy will be sorted instead (functional)
+              int[] arr = Arrays.copyOf(numbersForSorting, numbersForSorting.length);
+
+              // Sort the array
+              int n = arr.length;
+              IntStream.range(0, n - 1)
+                       .flatMap(i -> IntStream.range(1, n - i))
+                       .forEach(j -> {
+                          if(arr[j -1] > arr[j]) {
+                              int temp = arr[j];
+                              arr[j] = arr[j - 1];
+                              arr[j - 1] = temp;
+                          }
+                       });
+
+              return arr;
+    selected: false
+    status: Unchecked
   text: |-
     import java.util.Arrays;
     import java.util.stream.IntStream;
@@ -10,27 +42,7 @@ files:
 
         public int[] sortNumbers(int[] numbersForSorting) {
 
-            // Check the base cases
-            if(numbersForSorting == null || numbersForSorting.length == 0) {
-                return new int[0];
-            }
-
-            // Make a copy of the original array, this copy will be sorted instead (functional)
-            int[] arr = Arrays.copyOf(numbersForSorting, numbersForSorting.length);
-
-            // Sort the array
-            int n = arr.length;
-            IntStream.range(0, n - 1)
-                     .flatMap(i -> IntStream.range(1, n - i))
-                     .forEach(j -> {
-                        if(arr[j -1] > arr[j]) {
-                            int temp = arr[j];
-                            arr[j] = arr[j - 1];
-                            arr[j - 1] = temp;
-                        }
-                     });
-
-            return arr;
+            /* Provide your implementation here */
 
         }
     }

@@ -33,7 +33,7 @@ files:
 
               // Return the reversed string
               return String.copyValueOf(stringChars);
-    selected: false
+    selected: true
     status: Unchecked
   text: |-
     import java.util.Stack;
