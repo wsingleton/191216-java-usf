@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 public class Task {
 
     public String createAcronymFromPhrase(String phrase) {
-
-        // Provide your implementation here
+        if (phrase==null||phrase=="") {
+            return "";
+        }
 
     }
-
 }
