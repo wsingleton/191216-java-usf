@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":Assignment-Implement_a_sorting_algorithm" external.linked.project.path="$MODULE_DIR$/../../../../Assignment/Implement a sorting algorithm" external.root.project.path="$MODULE_DIR$/../../../.." external.system.id="GRADLE" external.system.module.group="Core_Java" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../Assignment/Implement a sorting algorithm">
+      <excludeFolder url="file://$MODULE_DIR$/../../../../Assignment/Implement a sorting algorithm/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../Assignment/Implement a sorting algorithm/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../Assignment/Implement a sorting algorithm/out" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

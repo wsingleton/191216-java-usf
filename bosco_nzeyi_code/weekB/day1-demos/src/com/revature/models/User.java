@@ -42,6 +42,10 @@ public class User {
         this.password = password;
     }
 
+    public String toFileString(){
+        return id + ": " + username + ": " + password; // we can use this just in case we don't want to use the control + enter to get the toString method.
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

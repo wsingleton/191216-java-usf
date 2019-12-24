@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":Assignment-Determine_minimum_and_maximum" external.linked.project.path="$MODULE_DIR$/../../../../Assignment/Determine minimum and maximum" external.root.project.path="$MODULE_DIR$/../../../.." external.system.id="GRADLE" external.system.module.group="Core_Java" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../Assignment/Determine minimum and maximum">
+      <excludeFolder url="file://$MODULE_DIR$/../../../../Assignment/Determine minimum and maximum/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../Assignment/Determine minimum and maximum/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../Assignment/Determine minimum and maximum/out" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":Assignment-Determine_if_a_number_is_even_or_odd" external.linked.project.path="$MODULE_DIR$/../../../../Assignment/Determine if a number is even or odd" external.root.project.path="$MODULE_DIR$/../../../.." external.system.id="GRADLE" external.system.module.group="Core_Java" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../Assignment/Determine if a number is even or odd">
+      <excludeFolder url="file://$MODULE_DIR$/../../../../Assignment/Determine if a number is even or odd/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../Assignment/Determine if a number is even or odd/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../Assignment/Determine if a number is even or odd/out" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

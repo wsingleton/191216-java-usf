@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="Assignment-Alphabet_Soup_main" target="1.8" />
+      <module name="Assignment-Alphabet_Soup_test" target="1.8" />
+      <module name="Assignment-Compound_interest_calculator_main" target="1.8" />
+      <module name="Assignment-Compound_interest_calculator_test" target="1.8" />
+      <module name="Assignment-Create_a_generic_method_main" target="1.8" />
+      <module name="Assignment-Create_a_generic_method_test" target="1.8" />
+      <module name="Assignment-Determine_if_a_number_is_even_or_odd_main" target="1.8" />
+      <module name="Assignment-Determine_if_a_number_is_even_or_odd_test" target="1.8" />
+      <module name="Assignment-Determine_if_a_number_is_prime_main" target="1.8" />
+      <module name="Assignment-Determine_if_a_number_is_prime_test" target="1.8" />
+      <module name="Assignment-Determine_minimum_and_maximum_main" target="1.8" />
+      <module name="Assignment-Determine_minimum_and_maximum_test" target="1.8" />
+      <module name="Assignment-Filter_palindromes_main" target="1.8" />
+      <module name="Assignment-Filter_palindromes_test" target="1.8" />
+      <module name="Assignment-FizzBuzz_main" target="1.8" />
+      <module name="Assignment-FizzBuzz_test" target="1.8" />
+      <module name="Assignment-Implement_a_sorting_algorithm_main" target="1.8" />
+      <module name="Assignment-Implement_a_sorting_algorithm_test" target="1.8" />
+      <module name="Assignment-Implement_a_stack_main" target="1.8" />
+      <module name="Assignment-Implement_a_stack_test" target="1.8" />
+      <module name="Assignment-Implement_substring_main" target="1.8" />
+      <module name="Assignment-Implement_substring_test" target="1.8" />
+      <module name="Assignment-Remove_spaces_from_string_main" target="1.8" />
+      <module name="Assignment-Remove_spaces_from_string_test" target="1.8" />
+      <module name="Assignment-Reverse_a_string_main" target="1.8" />
+      <module name="Assignment-Reverse_a_string_test" target="1.8" />
+      <module name="Assignment-Sort_employees_using_Comparator_main" target="1.8" />
+      <module name="Assignment-Sort_employees_using_Comparator_test" target="1.8" />
+      <module name="Assignment-Word_counter_main" target="1.8" />
+      <module name="Assignment-Word_counter_test" target="1.8" />
+      <module name="Getting_Started-Introduction_main" target="1.8" />
+      <module name="Getting_Started-Introduction_test" target="1.8" />
+      <module name="util_main" target="1.8" />
+      <module name="util_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
