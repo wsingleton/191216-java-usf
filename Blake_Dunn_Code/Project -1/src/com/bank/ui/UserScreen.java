@@ -6,8 +6,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
-import static com.bank.dao.WriteFile.writeToAccount;
-import static com.bank.dao.WriteFile.writeToUser;
+import static com.bank.dao.ReadFile.checkLogin;
+import static com.bank.dao.ReadFile.checkRegister;
+import static com.bank.dao.WriteFile.*;
 import static com.bank.service.UserService.*;
 
 public class UserScreen extends User {
@@ -54,6 +55,7 @@ public class UserScreen extends User {
         String ln = scanner.next();
         validateNames(ln);
         System.out.println("");
+        checkRegister(un, pw);
 
         int newId = createId();
 
@@ -86,10 +88,7 @@ public class UserScreen extends User {
         System.out.print("Password: ");
         String pw = scanner.next();
 
-
-
-
-        // display();
+        checkLogin(un, pw);
 
     }
 
@@ -163,6 +162,7 @@ public class UserScreen extends User {
             num = input.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("Invalid value");
+            // Update balance in account file method
             System.exit(0);
         }
 
@@ -170,6 +170,7 @@ public class UserScreen extends User {
             display(acct);
         }
         else {
+            // Update balance in account file method
             System.exit(num);
         }
     }
@@ -189,6 +190,7 @@ public class UserScreen extends User {
             num = scanner.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("Invalid value");
+            // Update balance in account file method
             System.exit(0);
         }
 
@@ -196,6 +198,7 @@ public class UserScreen extends User {
             display(acct);
         }
         else {
+            // Update balance in account file method
             System.exit(num);
         }
 
@@ -230,6 +233,7 @@ public class UserScreen extends User {
             num = input.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("Invalid value");
+            // Update balance in account file method
             System.exit(0);
         }
 
@@ -237,6 +241,7 @@ public class UserScreen extends User {
             display(acct);
         }
         else {
+            // Update balance in account file method
             System.exit(num);
         }
 
