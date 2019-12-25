@@ -10,6 +10,7 @@ Objectives:
 - and to see their activity logs.
  */
 
+import java.io.File;
 import java.util.Scanner;
 
 public class View {
@@ -18,14 +19,7 @@ public class View {
 
     public void findOperator (String input){
         input.toLowerCase().trim();
-
         String [] fullInput = input.split(" ");
-
-//        System.out.println(fullInput.length);
-//        for (String word: fullInput
-//             ) {
-//            System.out.println(word);
-//        }
         String operator = fullInput[0].toLowerCase();
         String number = fullInput[1];
         System.out.println(operator);
@@ -74,34 +68,34 @@ public class View {
         3) test the reader.
          */
 
-        System.out.println("enter your details in the following sequence: " + "\n"
-        + "first name, last name, username, and password"
-        );
-        Scanner userInput = new Scanner(System.in);
-        String fname;
-        String lname;
-        String uname;
-        String pword;
-        fname = userInput.nextLine();
-        System.out.println("lastname");
-        lname = userInput.nextLine();
-        System.out.println("Username");
-        uname = userInput.nextLine();
-        System.out.println("password");
-        pword = userInput.nextLine();
-        System.out.println("you entered " + fname +
-                " " + lname + " " + uname + " " + pword);
+//        System.out.println("enter your details in the following sequence: " + "\n"
+//        + "first name, last name, username, and password"
+//        );
+//        Scanner userInput = new Scanner(System.in);
+//        String fname;
+//        String lname;
+//        String uname;
+//        String pword;
+//        fname = userInput.nextLine();
+//        System.out.println("lastname");
+//        lname = userInput.nextLine();
+//        System.out.println("Username");
+//        uname = userInput.nextLine();
+//        System.out.println("password");
+//        pword = userInput.nextLine();
+//        System.out.println("you entered " + fname +
+//                " " + lname + " " + uname + " " + pword);
 
         System.out.println("Please wait while the system is creating an account for you");
         // create the file first.
                 // get the id to complement the user input form console
-        int userId = FileManager.getId();
-
-        String toWrite = userId + "|" + fname + "|" + lname + "|" + uname + "|" + pword;
+//        int userId = FileManager.getId();
+//
+//        String toWrite = userId + "|" + fname + "|" + lname + "|" + uname + "|" + pword;
 //            FileManager.writeFile("users.txt", toWrite);
 //            System.out.println("Wrote the following to the file: " + "\n" + toWrite);
-        SignUpUsers signup = new SignUpUsers();
-        signup.registerUser(fname, lname, uname, pword);
+//        SignUpUsers signup = new SignUpUsers();
+//        signup.registerUser(fname, lname, uname, pword);
 
         /*
         We will create if statements or switch cases that chose what operation to perform
@@ -113,6 +107,32 @@ public class View {
         case
          */
 
+        // test readfile method
+
+//        FileManager.readFile("users.txt");
+
+        UserLogIn in = new UserLogIn();
+        in.login("coffee", "passcod");
+        if(in.LoggedId != null){
+            System.out.println("Your id is " + in.LoggedId);
+        } else {
+            System.out.println("Username or password mismatch. Try again!");
+        }
+
+//        Scanner userInput = new Scanner(System.in);
+////        String fname;
+////        String lname;
+//        String uname;
+//        String pword;
+////        fname = userInput.nextLine();
+////        System.out.println("lastname");
+////        lname = userInput.nextLine();
+//        System.out.println("Username");
+//        uname = userInput.nextLine();
+//        System.out.println("password");
+//        pword = userInput.nextLine();
+//        in.login(uname, pword);
+//        System.out.println("We are compiling your data!");
 
 
 

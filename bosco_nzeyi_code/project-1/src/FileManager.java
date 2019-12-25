@@ -8,6 +8,7 @@ This class is used to manage the creation of new and writing to files
 public class FileManager {
 
     public static int id;
+    public ArrayList<String> textonFile = new ArrayList<>();
 // method to create and write to the file
     public static void writeFile (String fileName, String input){
 
@@ -29,7 +30,7 @@ public class FileManager {
     }
 
     // method to read file
-    public static void readFile(String fileName){
+    public void readFile(String fileName){
     /* this method can be reused if the files to read are stored in the appropriate repository.
     for other repositories, the pathname should be changed to match the appropriate repository.
      */
@@ -47,22 +48,38 @@ public class FileManager {
                 lines = read.readLine();
             }
             System.out.println("the length is " + allLines.size());
+            this.textonFile = allLines;
             for(String data: allLines){
-//                System.out.println(data);
-//                data.split(" ");
-//                data.indexOf(0);
-                // search the 1st empty location in the string
-                int indexOfEmpty = data.indexOf(" ");
-                System.out.println("first empty in the string is at index " + indexOfEmpty);
-                String userId = data.substring(0, indexOfEmpty);
-                Integer idInNumber = new Integer(userId);
-                System.out.println("The user id is = " + idInNumber);
+                System.out.println(data);
             }
             reader.close();
         }catch (Exception e){
             e.printStackTrace();
             System.err.println("An error occurred");
         }
+    }
+
+    public static ArrayList<String> readerTool (String filepath){
+        // this method will be used to return an arrayList of file content.
+        String directory = "src/resources/";
+        File filename = new File(directory + filepath);
+        ArrayList<String> content = new ArrayList<>();
+        try{
+            BufferedReader read = new BufferedReader(new FileReader(filename));
+            String lines = read.readLine();
+//            ArrayList<String> content = new ArrayList<>();
+            while(lines != null){
+                content.add(lines);
+                lines = read.readLine();
+            }
+            // return content array when this method is called
+
+        } catch (Exception e){
+            e.printStackTrace();
+            System.err.println("An error occurred while trying to read a file");
+        }
+
+        return content;
     }
 
     // method to read a file and get id
