@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 
 public class Bank {
-    private User u;
+    //fields that are needed for the bank app
     private String input = "";
     private String loginInput = "";
     private String registerInput = "";
@@ -69,13 +69,17 @@ public class Bank {
                                     if(MenuDriver.usernameExists(username) && MenuDriver.passwordMatches(password)) {
                                         //use conditional to check before you allow user to customer portal
                                         while (mainInput.intern() != "q") {
+                                            //Getting rid of past user input(can cause bugs if you don't empty out the fields)
                                             exitInput = "";
                                             mainInput = "";
+                                            //show customer portals
                                             MenuDriver.showCustomerPortal();
                                             Scanner scanner2 = new Scanner(System.in);
                                             System.out.print("Input: ");
                                             mainInput = scanner2.nextLine();
+                                            //checks if the user is trying to check their balance
                                             if(mainInput.equals("3")){
+                                                //checks if the user is trying to exit to the portal
                                                 while (exitInput != "q") {
                                                     System.out.println("+----------------------------------+");
                                                     System.out.println("Type q or Q to return to customer portal(Press 3 to close the application)");
@@ -83,16 +87,20 @@ public class Bank {
                                                     System.out.println("+----------------------------------+");
                                                     System.out.print("\nInput: ");
                                                     exitInput = scanner2.nextLine();
+                                                    //makes string lowercase to check whether user wants to exit or not.
                                                     exitInput = exitInput.toLowerCase();
                                                     if(exitInput.equals("3")){
                                                         System.out.println(username + " has been logged out successfully!");
+                                                        //breaks from the highest while loop
                                                         break OUTER;
                                                     }
+                                                    //checks if user is trying to exit.
                                                     else if(exitInput.equals("q")){
                                                         break;
                                                     }
                                                 }
                                             }
+                                            //checks to see if the user wants to deposit money
                                             else if(mainInput.equals("2")){
                                                 while (exitInput != "q"){
                                                     System.out.println("+----------------------------------+");
@@ -109,18 +117,25 @@ public class Bank {
                                                     else if(exitInput.equals("q")){
                                                         break;
                                                     }
+                                                    //makes sure that the input can only be numbers
+                                                    else if(!exitInput.matches("\\d+")){
+                                                        System.out.println("Must contain only digits!");
+                                                        continue ;
+                                                    }
+                                                    //Checks if you have enough money to withdraw
                                                     else if(Integer.parseInt(MenuDriver.showBalance(username)) < Integer.parseInt(withdrawAmount)){
                                                         System.out.println("Insufficient funds");
                                                         continue ;
                                                     }
+                                                    //subtract the withdraw amount from your balance
                                                     else if(Integer.parseInt(MenuDriver.showBalance(username)) >= Integer.parseInt(withdrawAmount)){
                                                         int newBalanceCalcu = Integer.parseInt(MenuDriver.showBalance(username)) - Integer.parseInt(withdrawAmount);
                                                         String newBalance = Integer.toString(newBalanceCalcu);
                                                         MenuDriver.withdrawHelper(username,password,MenuDriver.showBalance(username),newBalance);
+                                                        //prints new balance
                                                         System.out.println("Your new balance is $" + MenuDriver.showBalance(username));
                                                     }
                                                 }
-
                                             }
                                             else if(mainInput.equals("1")){
                                                 while (exitInput != "q"){
@@ -129,7 +144,7 @@ public class Bank {
                                                     System.out.print("Input: ");
                                                     exitInput = scanner2.nextLine();
                                                     exitInput = exitInput.toLowerCase();
-                                                    withdrawAmount = exitInput;
+                                                    depositAmount = exitInput;
                                                     System.out.println("+----------------------------------+");
                                                     if(exitInput.equals("3")){
                                                         System.out.println(username + " has been logged out successfully!");
@@ -138,11 +153,14 @@ public class Bank {
                                                     else if(exitInput.equals("q")){
                                                         break;
                                                     }
-                                                        int newBalanceCalcu = Integer.parseInt(MenuDriver.showBalance(username)) + Integer.parseInt(withdrawAmount);
+                                                    else if(!exitInput.matches("\\d+")){
+                                                        System.out.println("Must contain only digits!");
+                                                        continue ;
+                                                    }
+                                                        int newBalanceCalcu = Integer.parseInt(MenuDriver.showBalance(username)) + Integer.parseInt(depositAmount);
                                                         String newBalance = Integer.toString(newBalanceCalcu);
                                                         MenuDriver.withdrawHelper(username,password,MenuDriver.showBalance(username),newBalance);
                                                         System.out.println("Your new balance is $" + MenuDriver.showBalance(username));
-
                                                 }
                                         }}
                                     }
@@ -196,23 +214,40 @@ public class Bank {
     }
 
     //boilerplate default stuff
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bank bank = (Bank) o;
-        return Objects.equals(u, bank.u);
+        return Objects.equals(input, bank.input) &&
+                Objects.equals(loginInput, bank.loginInput) &&
+                Objects.equals(registerInput, bank.registerInput) &&
+                Objects.equals(mainInput, bank.mainInput) &&
+                Objects.equals(username, bank.username) &&
+                Objects.equals(password, bank.password) &&
+                Objects.equals(exitInput, bank.exitInput) &&
+                Objects.equals(withdrawAmount, bank.withdrawAmount) &&
+                Objects.equals(depositAmount, bank.depositAmount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(u);
+        return Objects.hash(input, loginInput, registerInput, mainInput, username, password, exitInput, withdrawAmount, depositAmount);
     }
 
     @Override
     public String toString() {
         return "Bank{" +
-                "u=" + u +
+                "input='" + input + '\'' +
+                ", loginInput='" + loginInput + '\'' +
+                ", registerInput='" + registerInput + '\'' +
+                ", mainInput='" + mainInput + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", exitInput='" + exitInput + '\'' +
+                ", withdrawAmount='" + withdrawAmount + '\'' +
+                ", depositAmount='" + depositAmount + '\'' +
                 '}';
     }
 }

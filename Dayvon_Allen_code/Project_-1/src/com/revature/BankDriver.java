@@ -2,7 +2,6 @@ package com.revature;
 
 
 import com.revature.models.Bank;
-import com.revature.models.User;
 
 public class BankDriver {
 
