@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="8" skipped="0" failures="4" errors="0" timestamp="2019-12-23T18:32:07" hostname="USF-Guest-Wifi-50-101.laptops.usf.edu" time="0.028">
+<testsuite name="Tests" tests="8" skipped="0" failures="4" errors="0" timestamp="2019-12-23T18:49:59" hostname="USF-Guest-Wifi-50-101.laptops.usf.edu" time="0.029">
   <properties/>
-  <testcase name="testSolutionUsingOnlyWhiteSpace" classname="Tests" time="0.004"/>
-  <testcase name="testSolutionUsingNullPhrase" classname="Tests" time="0.007">
-    <failure message="java.lang.NullPointerException" type="java.lang.NullPointerException">java.lang.NullPointerException
-	at Task.createAcronymFromPhrase(Task.java:12)
+  <testcase name="testSolutionUsingOnlyWhiteSpace" classname="Tests" time="0.005"/>
+  <testcase name="testSolutionUsingNullPhrase" classname="Tests" time="0.006">
+    <failure message="java.lang.AssertionError: expected:&lt;&gt; but was:&lt;null&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;&gt; but was:&lt;null&gt;
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:144)
 	at Tests.testSolutionUsingNullPhrase(Tests.java:65)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -23,7 +26,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionUsingPhraseWithHyphenatedWord" classname="Tests" time="0.003">
+  <testcase name="testSolutionUsingPhraseWithHyphenatedWord" classname="Tests" time="0.011">
     <failure message="org.junit.ComparisonFailure: expected:&lt;C[MOS]&gt; but was:&lt;C[]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;C[MOS]&gt; but was:&lt;C[]&gt;
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
@@ -45,7 +48,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionUsingPhraseWithAcronym" classname="Tests" time="0.009">
+  <testcase name="testSolutionUsingPhraseWithAcronym" classname="Tests" time="0.002">
     <failure message="org.junit.ComparisonFailure: expected:&lt;YAML[]&gt; but was:&lt;YAML[AML]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;YAML[]&gt; but was:&lt;YAML[AML]&gt;
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
@@ -90,7 +93,7 @@
 </failure>
   </testcase>
   <testcase name="testSolutionUsingEmptyPhrase" classname="Tests" time="0.001"/>
-  <testcase name="testSolutionUsingSimplePhrase" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionUsingSimplePhrase" classname="Tests" time="0.001"/>
   <testcase name="testSolutionUsingPhraseWithPunctuation" classname="Tests" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

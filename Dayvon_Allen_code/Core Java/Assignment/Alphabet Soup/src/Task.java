@@ -9,6 +9,10 @@ public class Task {
 
         String acronym = "";
 
+        if( phrase == null || phrase == ""){
+            return phrase;
+        }
+//        phrase.replaceAll("")
         for (int i = 0; i < phrase.length(); i++){
             char testChar = phrase.charAt(i);
             if(testChar == Character.toUpperCase(phrase.charAt(i)) && Character.isAlphabetic(testChar)){
