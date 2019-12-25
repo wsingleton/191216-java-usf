@@ -48,4 +48,8 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    public String toFileString() {
+        return username + ":" + ":" + password;
+    }
 }
