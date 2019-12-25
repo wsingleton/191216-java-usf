@@ -31,5 +31,14 @@ public class App {
         }
         scan.close();
     }
+    static void logIn(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Logging in \n"
+                            + "Enter your username: ");
+        String username = in.nextLine();
 
+    }
+    static void signUp(){
+        System.out.println("testing the sign up");
+    }
 }
