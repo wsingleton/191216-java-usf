@@ -125,7 +125,7 @@ public class Bank {
                                             else if(mainInput.equals("1")){
                                                 while (exitInput != "q"){
                                                     System.out.println("+----------------------------------+");
-                                                    System.out.println("Please enter withdraw amount(Type q or Q to return to customer portal press 3 to close the application)");
+                                                    System.out.println("Please enter deposit amount(Type q or Q to return to customer portal press 3 to close the application)");
                                                     System.out.print("Input: ");
                                                     exitInput = scanner2.nextLine();
                                                     exitInput = exitInput.toLowerCase();
