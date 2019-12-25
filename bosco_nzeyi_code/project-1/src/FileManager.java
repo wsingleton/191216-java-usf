@@ -15,10 +15,11 @@ public class FileManager {
         String directory = "src/resources/";
         File writeFile = new File(directory + fileName);
         try {
-            FileWriter write = new FileWriter(writeFile);
+            FileWriter write = new FileWriter(writeFile, true);
             BufferedWriter writer = new BufferedWriter(write);
-            writer.write(input);
+            writer.write(input + "\n");
             System.out.println("Wrote to the file " + writeFile.getName());
+            System.out.println("Wrote the following to the file: " + "\n" + input);
             writer.close();
 
         }catch (Exception e){
@@ -74,11 +75,14 @@ public class FileManager {
             String lines = read.readLine();
 
             ArrayList<String> allLines = new ArrayList<String>();
+            if(allLines.isEmpty()) id = 1;
             while (lines != null){
                 allLines.add(lines);
 //                System.out.println(lines);
                 lines = read.readLine();
             }
+
+            // set the id to 1 if the array is empty
             id = allLines.size() + 1;
             System.out.println("the new id is " + id + " which is the the current array size " + allLines.size() + " 1");
             reader.close();

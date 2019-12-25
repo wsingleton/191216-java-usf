@@ -59,12 +59,61 @@ public class View {
 
     public static void main (String [] args){
 //        AccountManager manager = new AccountManager();
-        System.out.println("What do you want to do?");
-        Scanner input = new Scanner(System.in);
-        String activity = input.nextLine();
+//        System.out.println("What do you want to do?");
+//        Scanner input = new Scanner(System.in);
+//        String activity = input.nextLine();
+//
+//        View task = new View();
+//        task.findOperator(activity);
 
-        View task = new View();
-        task.findOperator(activity);
+        /*
+        Logical flow of the application
+
+        1) user sign up: action = scanner reader to read user input and transform it to the format of user signup method;
+        2) create a file: call file manager to create a file at the same time while input the user info to the file.
+        3) test the reader.
+         */
+
+        System.out.println("enter your details in the following sequence: " + "\n"
+        + "first name, last name, username, and password"
+        );
+        Scanner userInput = new Scanner(System.in);
+        String fname;
+        String lname;
+        String uname;
+        String pword;
+        fname = userInput.nextLine();
+        System.out.println("lastname");
+        lname = userInput.nextLine();
+        System.out.println("Username");
+        uname = userInput.nextLine();
+        System.out.println("password");
+        pword = userInput.nextLine();
+        System.out.println("you entered " + fname +
+                " " + lname + " " + uname + " " + pword);
+
+        System.out.println("Please wait while the system is creating an account for you");
+        // create the file first.
+                // get the id to complement the user input form console
+        int userId = FileManager.getId();
+
+        String toWrite = userId + "|" + fname + "|" + lname + "|" + uname + "|" + pword;
+//            FileManager.writeFile("users.txt", toWrite);
+//            System.out.println("Wrote the following to the file: " + "\n" + toWrite);
+        SignUpUsers signup = new SignUpUsers();
+        signup.registerUser(fname, lname, uname, pword);
+
+        /*
+        We will create if statements or switch cases that chose what operation to perform
+        depending on user selection.
+
+        eg.
+        case "signup". Initialize a method for user sign up (signup.registerUser);
+
+        case
+         */
+
+
 
 
     }

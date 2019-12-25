@@ -35,9 +35,10 @@ public class SignUpUsers {
 
         // build a string to write into the users.txt file
         System.out.println("the generated id is " + this.generateId());
-        String userData = this.generateId() + "|" + firstName + "|" + lastName + "|" + username + "|" + password + "\n";
+        String userData = this.generateId() + "|" + firstName + "|" + lastName + "|" + username + "|" + password;
 
         // write the string to the file by calling the file manager class to do it
         FileManager.writeFile("users.txt", userData);
+
     }
 }
