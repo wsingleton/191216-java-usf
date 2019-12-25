@@ -1,6 +1,5 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
@@ -8,45 +7,85 @@ This class is used to manage the creation of new and writing to files
  */
 public class FileManager {
 
-    public void createFile(String name){
+    public static int id;
+// method to create and write to the file
+    public static void writeFile (String fileName, String input){
+
+        // create a file
+        String directory = "src/resources/";
+        File writeFile = new File(directory + fileName);
         try {
-            File files = new File(name);
-            if(files.createNewFile()){
-                System.out.println("file created! " + files.getName() + "\n" + "Can write? " + files.canWrite());
-            } else {
-                System.out.println("file creation failed");
+            FileWriter write = new FileWriter(writeFile);
+            BufferedWriter writer = new BufferedWriter(write);
+            writer.write(input);
+            System.out.println("Wrote to the file " + writeFile.getName());
+            writer.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.err.println("An error occurred while creating / writing to the file");
+        }
+    }
+
+    // method to read file
+    public static void readFile(String fileName){
+    /* this method can be reused if the files to read are stored in the appropriate repository.
+    for other repositories, the pathname should be changed to match the appropriate repository.
+     */
+        String directory = "src/resources/";
+        File myFile = new File( directory + fileName);
+
+        try {
+            FileReader reader = new FileReader(myFile);
+            BufferedReader read = new BufferedReader(reader);
+            String lines = read.readLine();
+            ArrayList<String> allLines = new ArrayList<String>();
+            while (lines != null){
+                allLines.add(lines);
+//                System.out.println(lines);
+                lines = read.readLine();
             }
-        } catch (IOException e){
-            System.out.println("Error creating file");
+            System.out.println("the length is " + allLines.size());
+            for(String data: allLines){
+//                System.out.println(data);
+//                data.split(" ");
+//                data.indexOf(0);
+                // search the 1st empty location in the string
+                int indexOfEmpty = data.indexOf(" ");
+                System.out.println("first empty in the string is at index " + indexOfEmpty);
+                String userId = data.substring(0, indexOfEmpty);
+                Integer idInNumber = new Integer(userId);
+                System.out.println("The user id is = " + idInNumber);
+            }
+            reader.close();
+        }catch (Exception e){
             e.printStackTrace();
+            System.err.println("An error occurred");
         }
     }
 
-    public void write (String text){
-        try{
-            FileWriter write = new FileWriter("users.txt");
-            write.write(text);
-            write.close();
-            System.out.println("Wrote the following to the file: " + "\n" + text);
-        } catch (IOException e){
-            System.out.println("Error writing to the file");
+    // method to read a file and get id
+
+    public static int getId(){
+        File myFile = new File("src/resources/users.txt");
+        try {
+            FileReader reader = new FileReader(myFile);
+            BufferedReader read = new BufferedReader(reader);
+            String lines = read.readLine();
+
+            ArrayList<String> allLines = new ArrayList<String>();
+            while (lines != null){
+                allLines.add(lines);
+//                System.out.println(lines);
+                lines = read.readLine();
+            }
+            id = allLines.size() + 1;
+            System.out.println("the new id is " + id + " which is the the current array size " + allLines.size() + " 1");
+            reader.close();
+        }catch (Exception e){
             e.printStackTrace();
+            System.err.println("An error occurred");
         }
+        return id;
     }
-
-    public void read (String text){
-
-    }
-
-    public static void main (String[] args){
-//        FileManager file1 = new FileManager();
-//        System.out.println("Write your message below: ");
-//        Scanner input = new Scanner(System.in);
-//        String message = input.nextLine();
-//        file1.write(message);
-
-
-
-    }
-
 }

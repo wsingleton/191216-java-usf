@@ -66,5 +66,6 @@ public class View {
         View task = new View();
         task.findOperator(activity);
 
+
     }
 }
