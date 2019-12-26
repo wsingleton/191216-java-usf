@@ -42,10 +42,13 @@ public class ReadFileDriver {
         try{
             BufferedReader reader = new BufferedReader(new FileReader(users));
             String userLine = reader.readLine();
-            String[] userFiles= userLine.split(":");
-            User u = new User(Integer.parseInt(userFiles[0]), userFiles[1],userFiles[2]);
-            userList.add(u);
-            userLine = reader.readLine();
+            while(userLine != null){
+                String[] userFiles= userLine.split(":");
+                User u = new User(Integer.parseInt(userFiles[0]), userFiles[1],userFiles[2]);
+                userList.add(u);
+                userLine = reader.readLine();
+            }
+
         }
 
 
@@ -57,7 +60,7 @@ public class ReadFileDriver {
             System.err.println("an unexcpected exception occurred");
 
         }
-        for(User u : userList) System.out.println(u);
+        for(User u : userList) {System.out.println(u);}
 
     }
 }
