@@ -1,10 +1,19 @@
 package com.revature;
 
+
+
+import com.revature.models.User;
+import resources.UserService;
+
 import java.util.Scanner;
 
 public class App {
+    static UserService service = new UserService();
     public static void main(String[] args){
-            start();
+//            start();
+
+
+
 
     }
     static  void start(){
@@ -36,9 +45,44 @@ public class App {
         System.out.println("Logging in \n"
                             + "Enter your username: ");
         String username = in.nextLine();
+        if(!service.exists(username)) {
+            System.out.println("You are not a user. Please try again.");
+            logIn();
+        } else
+        {
+            User use = service.getByUsername(username);
+            System.out.println(use.toString());
+            System.out.println("Enter Password");
+            String password = in.nextLine();
+            //Lets see if password is valid
+            if(use.getPassword().equals(password)) {
+                doThings(use);
+            }
+            else {
+                System.out.println("Your password is incorrect try again!");
+                logIn();
+            }
+        }
 
     }
+
+
     static void signUp(){
-        System.out.println("testing the sign up");
+//        System.out.println("testing the sign up");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter your username: ");
+        String username = scan.nextLine();
+        if(service.exists(username)){
+            System.out.println("Sorry, the username is taken,");
+            signUp();
+        } else {
+            //validation for username
+            System.out.println("Thanks" + username + ". What's your password?");
+            
+        }
+
+    }
+    static void doThings(User u) {
+        System.out.println("hello....");
     }
 }
