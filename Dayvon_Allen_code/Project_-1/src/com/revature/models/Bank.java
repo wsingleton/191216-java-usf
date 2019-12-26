@@ -1,7 +1,5 @@
 package com.revature.models;
 
-import com.revature.MenuDriver;
-
 import java.io.*;
 import java.util.Objects;
 import java.util.Scanner;
@@ -27,7 +25,7 @@ public class Bank {
             loginInput = "";
             mainInput = "";
             //main menu
-            MenuDriver.showMainMenu();
+            Menu.showMainMenu();
             //capture input for main menu
             Scanner scanner = new Scanner(System.in);
             input = scanner.nextLine();
@@ -38,7 +36,7 @@ public class Bank {
                     loginInput = "";
                     //captures input for username
                     Scanner scanner1 = new Scanner(System.in);
-                    MenuDriver.usernamePrompt();
+                    Menu.usernamePrompt();
                     loginInput = scanner1.nextLine();
                     username = loginInput.replaceAll("\\s", "").toLowerCase();
                     //converts input to lowercase to check if the user wants to quit(user might type Q instead of q)
@@ -50,7 +48,7 @@ public class Bank {
                     if( loginInput.length() > 0) {
                         //Checks if a username was input or if the user pressed "q" to quit
                         if (loginInput.intern() != "q") {
-                            MenuDriver.passwordPrompt();
+                            Menu.passwordPrompt();
                             //captures input for password
                             loginInput = scanner1.nextLine();
                             password = loginInput.replaceAll("\\s", "");
@@ -59,21 +57,21 @@ public class Bank {
                            //checks if there was input for the password
                             if(password.equals("")){
                                 //Prints invalid credentials
-                                MenuDriver.invalidCredential();
+                                Menu.invalidCredential();
                                 //continues to next iteration
                                 continue;
                             }
                             if(loginInput.length() > 0) {
                                 if (loginInput.intern() != "q") {
                                     //checks if the username and password matches
-                                    if(MenuDriver.usernameExists(username) && MenuDriver.passwordMatches(password)) {
+                                    if(Menu.usernameExists(username) && Menu.passwordMatches(password)) {
                                         //use conditional to check before you allow user to customer portal
                                         while (mainInput.intern() != "q") {
                                             //Getting rid of past user input(can cause bugs if you don't empty out the fields)
                                             exitInput = "";
                                             mainInput = "";
                                             //show customer portals
-                                            MenuDriver.showCustomerPortal();
+                                            Menu.showCustomerPortal();
                                             Scanner scanner2 = new Scanner(System.in);
                                             System.out.print("Input: ");
                                             mainInput = scanner2.nextLine();
@@ -83,7 +81,7 @@ public class Bank {
                                                 while (exitInput != "q") {
                                                     System.out.println("+----------------------------------+");
                                                     System.out.println("Type q or Q to return to customer portal(Press 3 to close the application)");
-                                                    System.out.println("Your available balance is $" + MenuDriver.showBalance(username));
+                                                    System.out.println("Your available balance is $" + Menu.showBalance(username));
                                                     System.out.println("+----------------------------------+");
                                                     System.out.print("\nInput: ");
                                                     exitInput = scanner2.nextLine();
@@ -110,6 +108,7 @@ public class Bank {
                                                     exitInput = exitInput.toLowerCase();
                                                     withdrawAmount = exitInput;
                                                     System.out.println("+----------------------------------+");
+                                                    //breaks out the whole loop
                                                     if(exitInput.equals("3")){
                                                         System.out.println(username + " has been logged out successfully!");
                                                         break OUTER;
@@ -123,20 +122,21 @@ public class Bank {
                                                         continue ;
                                                     }
                                                     //Checks if you have enough money to withdraw
-                                                    else if(Integer.parseInt(MenuDriver.showBalance(username)) < Integer.parseInt(withdrawAmount)){
+                                                    else if(Integer.parseInt(Menu.showBalance(username)) < Integer.parseInt(withdrawAmount)){
                                                         System.out.println("Insufficient funds");
                                                         continue ;
                                                     }
                                                     //subtract the withdraw amount from your balance
-                                                    else if(Integer.parseInt(MenuDriver.showBalance(username)) >= Integer.parseInt(withdrawAmount)){
-                                                        int newBalanceCalcu = Integer.parseInt(MenuDriver.showBalance(username)) - Integer.parseInt(withdrawAmount);
+                                                    else if(Integer.parseInt(Menu.showBalance(username)) >= Integer.parseInt(withdrawAmount)){
+                                                        int newBalanceCalcu = Integer.parseInt(Menu.showBalance(username)) - Integer.parseInt(withdrawAmount);
                                                         String newBalance = Integer.toString(newBalanceCalcu);
-                                                        MenuDriver.withdrawHelper(username,password,MenuDriver.showBalance(username),newBalance);
+                                                        Menu.withdrawHelper(username,password, Menu.showBalance(username),newBalance);
                                                         //prints new balance
-                                                        System.out.println("Your new balance is $" + MenuDriver.showBalance(username));
+                                                        System.out.println("Your new balance is $" + Menu.showBalance(username));
                                                     }
                                                 }
                                             }
+                                            //checks if the user wants to deposit
                                             else if(mainInput.equals("1")){
                                                 while (exitInput != "q"){
                                                     System.out.println("+----------------------------------+");
@@ -144,8 +144,10 @@ public class Bank {
                                                     System.out.print("Input: ");
                                                     exitInput = scanner2.nextLine();
                                                     exitInput = exitInput.toLowerCase();
+                                                    //uses user input for the deposit amount
                                                     depositAmount = exitInput;
                                                     System.out.println("+----------------------------------+");
+                                                    //Logs user out and closes the whole app
                                                     if(exitInput.equals("3")){
                                                         System.out.println(username + " has been logged out successfully!");
                                                         break OUTER;
@@ -153,20 +155,24 @@ public class Bank {
                                                     else if(exitInput.equals("q")){
                                                         break;
                                                     }
+                                                    //makes sure only digits can be input
                                                     else if(!exitInput.matches("\\d+")){
                                                         System.out.println("Must contain only digits!");
+                                                        //continues to the next iteration
                                                         continue ;
                                                     }
-                                                        int newBalanceCalcu = Integer.parseInt(MenuDriver.showBalance(username)) + Integer.parseInt(depositAmount);
+                                                    //adds the deposit amount to the balance
+                                                        int newBalanceCalcu = Integer.parseInt(Menu.showBalance(username)) + Integer.parseInt(depositAmount);
                                                         String newBalance = Integer.toString(newBalanceCalcu);
-                                                        MenuDriver.withdrawHelper(username,password,MenuDriver.showBalance(username),newBalance);
-                                                        System.out.println("Your new balance is $" + MenuDriver.showBalance(username));
+                                                        Menu.withdrawHelper(username,password, Menu.showBalance(username),newBalance);
+                                                        //prints the new balance
+                                                        System.out.println("Your new balance is $" + Menu.showBalance(username));
                                                 }
                                         }}
                                     }
                                     else{
                                         //Prints invalid credentials
-                                       MenuDriver.invalidCredential();
+                                       Menu.invalidCredential();
                                         //continues to next iteration
                                         continue;
                                     }
@@ -182,7 +188,7 @@ public class Bank {
             else if (input.intern() == "2") {
                 //loops to keep user in login menu
                 while(registerInput.intern() != "q"){
-                    MenuDriver.usernamePrompt();
+                    Menu.usernamePrompt();
                     //captures input for username
                     Scanner scanner1 = new Scanner(System.in);
                     registerInput = scanner1.nextLine();
@@ -191,13 +197,18 @@ public class Bank {
                     //converts input to lowercase to check if the user wants to quit(user might type Q instead of q)
                     registerInput = registerInput.toLowerCase();
                     if(registerInput.intern() != "q") {
-                        MenuDriver.passwordPrompt();
+                        Menu.passwordPrompt();
                         //captures input for password
                         registerInput = scanner1.nextLine();
                         password = registerInput.replaceAll("//s", "");;
                         //converts input to lowercase to check if the user wants to quit(user might type Q instead of q)
                         registerInput = registerInput.toLowerCase();
                     }
+                    if (Menu.usernameExists(username)){
+                        System.out.println("Username is taken");
+                        continue ;
+                    }
+                    //writes the users info to the users file
                     File writeFile = new File("src/com/revature/resources/users.txt");
                     try (BufferedWriter writer = new BufferedWriter(new FileWriter(writeFile, true))) {
                         String newUser = "\n" + username + " " + password + " " + "0";

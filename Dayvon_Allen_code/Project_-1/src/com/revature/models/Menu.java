@@ -1,10 +1,10 @@
-package com.revature;
+package com.revature.models;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuDriver {
+public class Menu {
 
     public static void showMainMenu(){
         System.out.print("+---------------------------------+" +
@@ -183,6 +183,7 @@ public class MenuDriver {
             e.printStackTrace();
         }
     }
+
 
 
 }

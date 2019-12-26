@@ -1,13 +1,5 @@
 
-haroldkumar yellow 50
+haroldkumar yellow 39
 johndoe p4ssw0rd 0
-
-
-
-
-
-
-
-
-
+karensmith p4ssw0rd 21
 
