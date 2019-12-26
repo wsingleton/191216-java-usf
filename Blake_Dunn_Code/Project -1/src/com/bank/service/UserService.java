@@ -31,7 +31,6 @@ public class UserService {
         }
         else {
         }
-
     }
 
     public static void validatePassword(String input) {

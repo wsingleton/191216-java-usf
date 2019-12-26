@@ -81,6 +81,7 @@ public class UserScreen extends User {
 
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println("");
         System.out.print("Username: ");
         String un = scanner.next();
         System.out.println("");
@@ -94,32 +95,37 @@ public class UserScreen extends User {
 
     public static void display(Account acct) {
 
-        Scanner input = new Scanner(System.in);
+        try{
+            Scanner input = new Scanner(System.in);
 
-        System.out.println("Check Balance = 0");
-        System.out.println("Deposit = 1");
-        System.out.println("Withdraw = 2");
-        System.out.print("Please choose an option: ");
-        int number = input.nextInt();
+            System.out.println("Check Balance = 0");
+            System.out.println("Deposit = 1");
+            System.out.println("Withdraw = 2");
+            System.out.print("Please choose an option: ");
+            int number = input.nextInt();
 
-        if (number == 0){
+            if (number == 0){
 
-            checkBalance(acct);
-        }
-        else if(number == 1){
+                checkBalance(acct);
+            }
+            else if(number == 1){
 
-            deposit(acct);
-        }
-        else if(number == 2){
+                deposit(acct);
+            }
+            else if(number == 2){
 
-            withdraw(acct);
-        }
-        else{
+                withdraw(acct);
+            }
+            else{
 
-            System.out.println("Error: Please try again");
-            System.out.println("");
+                System.out.println("Error: Please try again");
+                System.out.println("");
+                display(acct);
+            }
+        }catch(InputMismatchException ime){
             display(acct);
         }
+
 
     }
 
@@ -150,6 +156,7 @@ public class UserScreen extends User {
 
         bal -= amount;
         acct.setBalance(bal);
+//        replaceBalance(acct);
 
         }
 

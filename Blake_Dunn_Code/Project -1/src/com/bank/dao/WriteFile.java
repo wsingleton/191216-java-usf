@@ -18,6 +18,8 @@ public class WriteFile {
 
             writer.write("\n" + newUser.toFileStringUser());
 
+            writer.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,42 +40,45 @@ public class WriteFile {
 
     }
 
-    public static void replaceBalance(Account newBalanceAcct) {
+    public static void replaceBalance(Account acct) {
 
         File acctFile = new File("src/resources/account.txt");
+        File tempFile = new File("src/resources/temp.txt");
+
+
+        int acctNumber = acct.getiD();
+        String acctNum = Integer.toString(acctNumber);
+
 
         try {
-
             BufferedReader reader = new BufferedReader(new FileReader(acctFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile, true));
             String line = reader.readLine();
-            String newBalance = newBalanceAcct.toString();
-            String[] newStringArray = new String[newBalance.length()];
 
             while (line != null) {
                 line = reader.readLine();
                 String[] token = line.split(":");
-                if(token[0].equals(newStringArray[0])){
-                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(acctFile, true))) {
-                        String line2 = reader.readLine();
-                        String[] token2 = line2.split(":");
-                        if(token2[0].equals(newStringArray[0])){
-                        line2 = line2.replace(token[1], newStringArray[1]);
-                        }
+                if(token[0].equals(acctNum)){
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
+                }else {
+                    writer.write(token[0] + ":" + token[1] + ":" + "\n");
                 }
             }
+            writer.write("\n" + acct.toFileStringAccount());
 
-        }catch (IOException ioe) {
+            writer.close();
+            reader.close();
+
+            acctFile.delete();
+            tempFile.renameTo(acctFile);
+
+        }catch (NullPointerException np1) {
+
+        } catch (IOException ioe) {
             System.err.println("Exception thrown while reading file.");
         }catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
-
 }

@@ -8,13 +8,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static com.bank.ui.UserScreen.display;
-import static com.bank.ui.UserScreen.register;
+import static com.bank.ui.UserScreen.*;
 
 public class ReadFile {
 
 
-    public static void checkRegister(String userName, String password) {
+    public static void checkRegister (String userName, String password) {
 
         File userFile = new File("src/resources/users.txt");
 
@@ -33,9 +32,14 @@ public class ReadFile {
                 }
             }
 
+            reader.close();
+
+        }catch (NullPointerException np){
+
         }catch (IOException ioe) {
             System.err.println("Exception thrown while reading file.");
         }catch (Exception e) {
+            e.printStackTrace();
             System.err.println("An unexpected exception occurred.");
         }
 
@@ -71,11 +75,20 @@ public class ReadFile {
                         }
                     }
                 }
+
             }
 
+
+            reader.close();
+            reader2.close();
+
+        }catch (NullPointerException np){
+            System.err.println("Username and password do not match. Try again, bitch!" + "\n");
+            login();
         }catch (IOException ioe) {
             System.err.println("Exception thrown while reading file.");
         }catch (Exception e) {
+            e.printStackTrace();
             System.err.println("An unexpected exception occurred.");
         }
 
