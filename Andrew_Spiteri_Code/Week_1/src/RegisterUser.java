@@ -1,6 +1,7 @@
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import models.Role;
+import models.User;
+
+import java.io.*;
 import java.lang.System;
 import java.util.Random;
 import java.util.Scanner;
@@ -20,14 +21,15 @@ public class RegisterUser {
         Random random = new Random();
         random.setSeed(1234567890);
 
-        User user = new User(random.nextInt(),firstname, lastname, username, password, Role.MEMBER);
-        FileOutputStream fout=new FileOutputStream("C:\\Users\\Andrew Spiteri\\Documents\\Revature\\Projects\\testout.txt");
-        BufferedOutputStream bout=new BufferedOutputStream(fout);
-        byte b[] = user.toString().getBytes();
-        bout.write(b);
-        bout.flush();
-        bout.close();
-        fout.close();
-        return user;
+        File file =new File("resources\\users.txt");
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
+            User user = new User(random.nextInt(),firstname, lastname, username, password, Role.MEMBER);
+            writer.write("\n" + user.toFileString());
+            return user;
+        }catch (IOException ioe){
+            ioe.printStackTrace();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

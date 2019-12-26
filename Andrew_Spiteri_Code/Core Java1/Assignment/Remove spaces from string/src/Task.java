@@ -2,7 +2,11 @@ public class Task {
 
     public String collapseWhiteSpace(String str) {
 
-        // Provide your implementation here
+        if (str == null || str.isEmpty()){
+            return "";
+        }
+            str = str.replace(" ","");
+        return str;
 
     }
 

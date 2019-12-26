@@ -1,3 +1,7 @@
+package models;
+
+import java.util.Objects;
+
 public class User {
     private String username, password, firstName, lastName;
     private int id;
@@ -9,7 +13,7 @@ public class User {
         // super();
 
         firstName = fn; // "this" is not required if no parameters match the field name
-        this.lastName = ln; // you can still include it though
+        lastName = ln; // you can still include it though
         this.username = username; // here we must use "this" to clarify which one we are referencing
         password = pw;
         this.role = role;
@@ -32,7 +36,7 @@ public class User {
     }
     private void setId(int id){ this.id = id; }
 //    protected static void registerUser(String[] user){
-//        User newUser = new User(user);
+//        models.User newUser = new models.User(user);
 //    }
     public  String getUserName(){
         return username;
@@ -53,15 +57,36 @@ public class User {
         return role;
     }
 
+    public String toFileString(){
+        return id + "," + username + "," + hashCode() + "," + firstName + "," + lastName + "," + role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id &&
+                Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                role == user.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(password);
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
+        return ";" + id +
+                ","+ firstName +
+                "," + lastName +
+                "," + username +
+                "," + password +
+                "," + role +
+                ';';
     }
 }

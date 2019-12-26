@@ -3,8 +3,8 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 302
-    length: 35
+  - offset: 114
+    length: 598
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -33,10 +33,10 @@ files:
               }
 
               return textArray;
-    selected: false
-    status: Unchecked
-  - offset: 424
-    length: 30
+    selected: true
+    status: Solved
+  - offset: 798
+    length: 462
     placeholder_text: // Provide your implementation
     initial_state:
       length: 30
@@ -58,8 +58,8 @@ files:
               }
 
               return wordCountMap;
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Solved
   text: |
     import java.io.BufferedReader;
     import java.io.File;
@@ -192,5 +192,5 @@ files:
 - name: resources/empty.txt
   visible: false
   learner_created: false
-status: Unchecked
+status: Solved
 record: -1

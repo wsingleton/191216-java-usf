@@ -7,8 +7,28 @@ public class Task {
 
     public String createAcronymFromPhrase(String phrase) {
 
-        // Provide your implementation here
+        if (phrase == null || phrase == "")
+            return "";
+        phrase = phrase.trim();
+        char[] charArr = phrase.toCharArray();
 
+        String acronym = new String();
+        char holder =  ' ';
+        for(int i = 0; i < charArr.length; i++){
+               if(holder == ' ' || holder == '-' && charArr[i] != ' ' | charArr[i] != '-')
+                   acronym = acronym + charArr[i];
+               holder = charArr[i];
+        }
+
+        charArr = acronym.toCharArray();
+        String answer = new String();
+        for (char c:
+             charArr) {
+            if(c != ' ')
+                answer = answer + c;
+        }
+
+        return answer.toUpperCase();
     }
 
 }

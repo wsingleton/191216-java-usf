@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 147
-    length: 38
+    length: 401
     placeholder_text: /* Provide your implementation here */
     initial_state:
       length: 38
@@ -32,7 +32,7 @@ files:
                        });
 
               return arr;
-    selected: false
+    selected: true
     status: Unchecked
   text: |-
     import java.util.Arrays;
