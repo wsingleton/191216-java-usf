@@ -1,24 +1,19 @@
 package mockBank;
 
+import java.util.ArrayList;
+
 public class Account {
-
+    //name of account holder
+    private String name;
+    //account number
+    private String accountID;
+    //current account balance
     private double balance;
-    //setting balance to 0
-     public Account(){
-         balance =0.0;
-     }
-     //Deposit
-    public void deposit(double amount) {
-         balance = balance + amount;
-    }
+    //user object who owns the account
+    private User holder;
+    //transactions
+    private ArrayList<Transaction> transactions;
 
-    //withdraw
-    public void withdraw(double amount) {
-         balance = balance - amount;
-    }
-    //Get balance
 
-    public double getBalance() {
-        return balance;
-    }
+
 }
