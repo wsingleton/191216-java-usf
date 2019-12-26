@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class App {
     static UserService service = new UserService();
     public static void main(String[] args){
-//            start();
+            start();
 
 
 
@@ -78,11 +78,18 @@ public class App {
         } else {
             //validation for username
             System.out.println("Thanks" + username + ". What's your password?");
-            
+            String password = scan.nextLine();
+            //hmmm idk what to do here thought it'd work
+            User user = service.addUser(username, password);
+            doThings(user);
         }
 
     }
     static void doThings(User u) {
         System.out.println("hello....");
+    }
+
+    static void logOut(){
+        System.out.println("goodbye");
     }
 }

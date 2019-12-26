@@ -2,9 +2,16 @@ package resources;
 
 import com.revature.models.User;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class DAO {
@@ -28,8 +35,8 @@ public class DAO {
             while ((line=b.readLine()) !=null) {
                 String[] data = line.split(":");
                 User temp = new User();
-                temp.setUsername(data[1]);
-                temp.setPassword(data[2]);
+                temp.setUsername(data[0]);
+                temp.setPassword(data[1]);
                 users.add(temp);
             }
         } catch (FileNotFoundException e) {

@@ -13,7 +13,8 @@ public class UserService {
 
     ArrayList<User>getAllUsers(){
         DAO dao= new DAO();
-        return dao.readUsers();
+        ArrayList<User> users = dao.readUsers();
+        return users;
     }
     public boolean exists(String username){
         ArrayList<User>users = getAllUsers();
@@ -24,7 +25,7 @@ public class UserService {
         return getAllUsers().stream().filter(u -> u.getUsername()
                 .equalsIgnoreCase(username)).findFirst().get();
     }
-    User addUser(String username, String password) {
+    public User addUser(String username, String password) {
 
         User u = new User(username, password);
         DAO dao = new DAO();
