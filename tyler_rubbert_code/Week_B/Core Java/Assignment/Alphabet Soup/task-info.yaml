@@ -46,7 +46,7 @@ files:
 
                       // collect the resulting strings and join them into a single one
                       .collect(Collectors.joining());
-    selected: false
+    selected: true
     status: Unchecked
   text: |-
     import java.util.ArrayList;

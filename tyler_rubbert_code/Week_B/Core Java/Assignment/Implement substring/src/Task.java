@@ -2,7 +2,16 @@ public class Task {
 
     public String substring(String mainString, int start, int end) {
 
-        // Provide your implementation here
+        String s = "";
+        for (int i = start; i < end; i ++) {
+            if (mainString.length() - 1 > i){
+                s = s + mainString.charAt(i);
+            }
+            else{
+                break;
+            }
+        }
+        return s;
 
     }
 }

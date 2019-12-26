@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 105
-    length: 38
+    length: 3
     placeholder_text: /* Provide your implementation here */
     initial_state:
       length: 38
@@ -23,7 +23,7 @@ files:
               }
 
               return minMax;
-    selected: false
+    selected: true
     status: Unchecked
   text: |-
     import java.util.Arrays;

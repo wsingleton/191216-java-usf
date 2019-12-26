@@ -6,7 +6,8 @@ public class Task {
 
     public double calculateInterest(double principal, double time, double rate, double freq) {
 
-        // Provide your implementation here
+        double ans = principal * (1 + rate / freq ) * ((freq * time) * (1 + rate / freq));
+
 
     }
 
