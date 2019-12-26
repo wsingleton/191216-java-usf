@@ -5,8 +5,23 @@ import java.util.*;
 import java.io.*;
 
 public class Bank {
-    public Hashtable<Integer, User> userBase = new Hashtable<Integer, User>();
-    public Hashtable<Integer, Account> acctBase = new Hashtable<Integer, Account>();
+    private Hashtable<Integer, User> userBase = new Hashtable<Integer, User>();
+    private Hashtable<Integer, Account> acctBase = new Hashtable<Integer, Account>();
+
+    public Bank() {
+    }
+
+    public User userAt(int id) {
+        return userBase.get(id);
+    }
+
+    public boolean userContains(String userName) {
+        return userBase.contains(Objects.hash(userName));
+    }
+
+    public Account accountAt(int id) {
+        return acctBase.get(id);
+    }
 
     public void serializeUser() {
         FileWriter fileWriter = null;
@@ -59,13 +74,18 @@ public class Bank {
             default:
                 break;
         }
-        account.setOwnerID(user.getId());
+        if(file) {
+            account.setOwnerID(scanner.nextInt());
+        }
+        else {
+            account.setOwnerID(user.getId());
+        }
         if(!file) {
             acctId = user.getUserName().hashCode()+user.getAccountsLength()+1;
             account.setActId(acctId);
         }
         acctBase.put(acctId, account);
-        userBase.get(user.getId()).addAccount(account);
+        userBase.get(account.getOwnerID()).addAccount(account);
 
         return acctId;
     }
@@ -116,6 +136,11 @@ public class Bank {
             user.setId(id);
         }
 
+        if(userBase.contains(id)) {
+            System.out.println("Username already exists");
+            return -1;
+        }
+
         userBase.put(id, user);
         return id;
     }
@@ -140,6 +165,12 @@ public class Bank {
         }
         acctBase.get(accountId).setBalance(acctBase.get(accountId).getBalance() - withdrawalAmount);
         return acctBase.get(accountId).getBalance();
+    }
+
+    public void listAccounts(int userId) {
+        for( int i = 0; i < userBase.get(userId).getAccountsLength(); i++) {
+            System.out.println("Account " + i + ": " + userBase.get(userId).getAccount(i).serialString());
+        }
     }
 
 }

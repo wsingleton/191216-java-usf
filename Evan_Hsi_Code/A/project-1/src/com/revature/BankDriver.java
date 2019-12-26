@@ -58,18 +58,18 @@ public class BankDriver {
         try {userScan = new Scanner(file2); } catch (FileNotFoundException fnf) { System.out.println("File not Found"); }
 
         int acctTest = bank.makeUser(userScan, true);
-        int acctId = bank.makeAcct(acctScan, bank.userBase.get(acctTest), true);
-        bank.acctBase.get(acctId).setBalance(0);
+        int acctId = bank.makeAcct(acctScan, bank.userAt(acctTest), true);
+        bank.accountAt(acctId).setBalance(0);
         System.out.println(bank.makeDeposit(acctId, 100.00));
         System.out.println(bank.makeWithdrawal(acctId, 30.00));
         System.out.println(bank.makeWithdrawal(acctId, 90));
         System.out.println("The account stored in acctBase");
-        System.out.println(bank.acctBase.get(acctId).serialString());
+        System.out.println(bank.accountAt(acctId).serialString());
         System.out.println("The user this account belongs to");
-        System.out.println(bank.userBase.get(bank.acctBase.get(acctId).getOwnerID()).serialString());
+        System.out.println(bank.userAt(bank.accountAt(acctId).getOwnerID()).serialString());
         System.out.println("The account inside the user's account List");
-        for(int i = 0; i < bank.userBase.get(bank.acctBase.get(acctId).getOwnerID()).getAccountsLength(); i++) {
-            System.out.println(bank.userBase.get(bank.acctBase.get(acctId).getOwnerID()).getAccount(i).serialString());
+        for(int i = 0; i < bank.userAt(bank.accountAt(acctId).getOwnerID()).getAccountsLength(); i++) {
+            System.out.println(bank.userAt(bank.accountAt(acctId).getOwnerID()).getAccount(i).serialString());
         }
 
         bank.serializeUser();
