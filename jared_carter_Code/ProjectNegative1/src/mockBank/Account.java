@@ -16,5 +16,9 @@ public class Account {
     public void withdraw(double amount) {
          balance = balance - amount;
     }
+    //Get balance
 
+    public double getBalance() {
+        return balance;
+    }
 }
