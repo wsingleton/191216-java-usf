@@ -1,8 +1,8 @@
 package com.revature;
 
-
-import com.revature.models.ReadInput;
-import com.revature.models.User;
+import com.revature.RegisterDriver.*;
+//import com.revature.models.ReadInput;
+//import com.revature.models.UserB.*;
 
 import java.util.Scanner;
 
@@ -22,7 +22,8 @@ public class MainPageDriver {
         switch(option){
             case 1:
                 System.out.println("Welcome New User");
-                RegisterDriver = new RegisterDriver();
+                RegisterDriver myRegister = new RegisterDriver();
+                myRegister.Register();
                 break;
             case 2:
                 System.out.println("Please login");
