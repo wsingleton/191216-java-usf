@@ -130,7 +130,7 @@ public class Bank {
                                                     else if(Integer.parseInt(Menu.showBalance(username)) >= Integer.parseInt(withdrawAmount)){
                                                         int newBalanceCalcu = Integer.parseInt(Menu.showBalance(username)) - Integer.parseInt(withdrawAmount);
                                                         String newBalance = Integer.toString(newBalanceCalcu);
-                                                        Menu.withdrawHelper(username,password, Menu.showBalance(username),newBalance);
+                                                        Menu.transactionHelper(username,password, Menu.showBalance(username),newBalance);
                                                         //prints new balance
                                                         System.out.println("Your new balance is $" + Menu.showBalance(username));
                                                     }
@@ -164,7 +164,7 @@ public class Bank {
                                                     //adds the deposit amount to the balance
                                                         int newBalanceCalcu = Integer.parseInt(Menu.showBalance(username)) + Integer.parseInt(depositAmount);
                                                         String newBalance = Integer.toString(newBalanceCalcu);
-                                                        Menu.withdrawHelper(username,password, Menu.showBalance(username),newBalance);
+                                                        Menu.transactionHelper(username,password, Menu.showBalance(username),newBalance);
                                                         //prints the new balance
                                                         System.out.println("Your new balance is $" + Menu.showBalance(username));
                                                 }
@@ -211,7 +211,7 @@ public class Bank {
                     //writes the users info to the users file
                     File writeFile = new File("src/com/revature/resources/users.txt");
                     try (BufferedWriter writer = new BufferedWriter(new FileWriter(writeFile, true))) {
-                        String newUser = "\n" + username + " " + password + " " + "0";
+                        String newUser =  username + " " + password + " " + "0" + "\n";
                         writer.write(newUser);
                     }
                     catch (Exception e) {

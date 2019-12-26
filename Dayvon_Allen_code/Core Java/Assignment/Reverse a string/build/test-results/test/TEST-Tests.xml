@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-26T15:51:09" hostname="Dayvons-MacBook-Pro.local" time="0.045">
+  <properties/>
+  <testcase name="testSolutionUsingStringWithCapitalizedLetter" classname="Tests" time="0.008"/>
+  <testcase name="testSolutionUsingPalindrome" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionUsingNullString" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionUsingStringWithNewLines" classname="Tests" time="0.022"/>
+  <testcase name="testSolutionUsingEmptyString" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionUsingSimpleString" classname="Tests" time="0.005"/>
+  <testcase name="testSolutionUsingStringWithPunctuationAndSpaces" classname="Tests" time="0.003"/>
+  <system-out><![CDATA[n
+e
+m
+a
+R
+r
+a
+c
+e
+c
+a
+r
+
+6
+5
+4
+
+
+f
+e
+d
+
+
+3
+2
+1
+
+
+c
+b
+a
+
+t
+o
+b
+o
+r
+!
+y
+r
+g
+n
+u
+h
+ 
+m
+'
+I
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

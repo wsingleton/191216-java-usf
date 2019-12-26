@@ -13,7 +13,15 @@ public class Main {
 //        }
 //        acronym = acronym.replaceAll("\\s", "");
 //        System.out.println(acronym);
-        String[] arr = "L-know".split("-");
-        System.out.println(arr);
+        String word = "name";
+        String answer = "";
+        String[] test = word.split("");
+        int counter = test.length - 1;
+        for (String i :  test){
+            System.out.println(test[counter]);
+            answer += test[counter];
+            counter--;
+        }
+
     }
 }

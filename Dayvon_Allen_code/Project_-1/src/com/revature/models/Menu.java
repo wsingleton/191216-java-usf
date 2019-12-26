@@ -104,7 +104,6 @@ public class Menu {
 
 
             while (line != null) {
-//                System.out.println(line);
                 line = reader.readLine();
                 lines.add(line);
             }
@@ -128,7 +127,7 @@ public class Menu {
         System.out.println("\nInvalid credentials!\n");
     }
 
-    public static void withdrawHelper(String username, String password, String balance, String newBalance){
+    public static void transactionHelper(String username, String password, String balance, String newBalance){
         File userText = new File("src/com/revature/resources/users.txt");
         File writeFile = new File("src/com/revature/resources/users.txt");
         String fullContent = "\n";
@@ -140,11 +139,13 @@ public class Menu {
 
             while (line != null) {
                 line = reader.readLine();
-                fullContent += line + "\n";
+                if(line.length() > 0) {
+                    fullContent += line + "\n";
+                }
             }
         }
         catch (Exception e) {
-            System.err.println("An unexpected exception");
+
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(writeFile))) {
@@ -156,34 +157,32 @@ public class Menu {
         }
     }
 
-    public static void depositHelper(String username, String password, String balance, String newBalance){
-        File userText = new File("src/com/revature/resources/users.txt");
-        File writeFile = new File("src/com/revature/resources/users.txt");
-        String fullContent = "\n";
-        String modified;
-
-        try {
-            BufferedReader reader = new BufferedReader((new FileReader(userText)));
-            String line = reader.readLine();
-
-            while (line != null) {
-                line = reader.readLine();
-                fullContent += line + "\n";
-            }
-        }
-        catch (Exception e) {
-            System.err.println("An unexpected exception");
-        }
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(writeFile))) {
-            modified = fullContent.replaceAll(username + " " + password + " " + balance, newBalance).replaceAll("null", "");
-            writer.write(modified);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
+//    public static void depositHelper(String username, String password, String balance, String newBalance){
+//        File userText = new File("src/com/revature/resources/users.txt");
+//        File writeFile = new File("src/com/revature/resources/users.txt");
+//        String fullContent = "\n";
+//        String modified;
+//
+//        try {
+//            BufferedReader reader = new BufferedReader((new FileReader(userText)));
+//            String line = reader.readLine();
+//
+//            while (line != null) {
+//                line = reader.readLine();
+//                fullContent += line + "\n";
+//            }
+//        }
+//        catch (Exception e) {
+//            System.err.println("An unexpected exception");
+//        }
+//
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(writeFile))) {
+//            modified = fullContent.replaceAll(username + " " + password + " " + balance, newBalance).replaceAll("null", "");
+//            writer.write(modified);
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }
