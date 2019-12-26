@@ -133,6 +133,7 @@ public class UserScreen extends User {
 
 
         double bal = acct.getBalance();
+        double newBalance = 0;
         Scanner input = new Scanner(System.in);
 
         System.out.println("");
@@ -154,13 +155,18 @@ public class UserScreen extends User {
         }
         else {
 
-        bal -= amount;
-        acct.setBalance(bal);
-//        replaceBalance(acct);
+        newBalance = bal - amount;
+        acct.setBalance(newBalance);
+        int oldAcct =  acct.getiD();
+        String oldAcctBalance = Double.toString(bal);
+        String oldAcctNum = Integer.toString(oldAcct);
+        String newAcctNum = Integer.toString(oldAcct);
+        String newAcctBal = Double.toString(newBalance);
+        replaceBalance(oldAcctNum, oldAcctBalance, newAcctNum, newAcctBal);
 
         }
 
-        System.out.println("Your new balance is $" + bal);
+        System.out.println("Your new balance is $" + newBalance);
         System.out.println("Would you like to perform another transaction?");
         System.out.print("1 = Yes, 0 = No: ");
 
@@ -215,6 +221,7 @@ public class UserScreen extends User {
 
 
         double bal = acct.getBalance();
+        double newBalance = 0;
         Scanner input = new Scanner(System.in);
 
         System.out.println("");
@@ -228,8 +235,14 @@ public class UserScreen extends User {
                 System.out.println("You're a dumbass, try again!!");
                 deposit(acct);
             }else {
-                bal += amount;
-                acct.setBalance(bal);
+                newBalance = bal + amount;
+                acct.setBalance(newBalance);
+                int oldAcct =  acct.getiD();
+                String oldAcctBalance = Double.toString(bal);
+                String oldAcctNum = Integer.toString(oldAcct);
+                String newAcctNum = Integer.toString(oldAcct);
+                String newAcctBal = Double.toString(newBalance);
+                replaceBalance(oldAcctNum, oldAcctBalance, newAcctNum, newAcctBal);
             }
         }catch (InputMismatchException e) {
             System.out.println("Invalid value");

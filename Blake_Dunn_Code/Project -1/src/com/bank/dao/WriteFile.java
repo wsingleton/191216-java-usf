@@ -40,37 +40,35 @@ public class WriteFile {
 
     }
 
-    public static void replaceBalance(Account acct) {
+    public static void replaceBalance(String oldAcctNum, String oldAcctBal, String newAcctNum, String newAcctBal) {
 
         File acctFile = new File("src/resources/account.txt");
-        File tempFile = new File("src/resources/temp.txt");
 
 
-        int acctNumber = acct.getiD();
-        String acctNum = Integer.toString(acctNumber);
+        String fullContent = "\n";
 
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(acctFile));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile, true));
+
             String line = reader.readLine();
 
             while (line != null) {
                 line = reader.readLine();
-                String[] token = line.split(":");
-                if(token[0].equals(acctNum)){
 
-                }else {
-                    writer.write(token[0] + ":" + token[1] + ":" + "\n");
-                }
+                fullContent += line + "\n";
+
             }
-            writer.write("\n" + acct.toFileStringAccount());
 
-            writer.close();
-            reader.close();
 
-            acctFile.delete();
-            tempFile.renameTo(acctFile);
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(acctFile))) {
+
+                String modified = fullContent.replaceAll(oldAcctNum + ":" + oldAcctBal, newAcctNum + ":" + newAcctBal).replaceAll("null", "");
+                writer.write(modified);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }catch (NullPointerException np1) {
 
