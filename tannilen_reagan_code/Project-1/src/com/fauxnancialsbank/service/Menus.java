@@ -1,5 +1,5 @@
-package com.fauxnancialsbank;
-import com.fauxnancialsbank.resources.User;
+package com.fauxnancialsbank.service;
+import com.fauxnancialsbank.domainobjects.User;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,7 +8,7 @@ public class Menus {
     static Scanner scanner=new Scanner(System.in);
     static int selection;
     static boolean valid;
-    public static int showLoginScreen() {
+    public int showLoginScreen() {
         do {
             System.out.println("Are you a new or returning user?");
             System.out.println("1. New");
@@ -28,7 +28,7 @@ public class Menus {
         } while (!valid);
         return selection;
     }
-    public static User registerNew(ArrayList<User> knownAccts){
+    public User registerNew(ArrayList<User> knownAccts){
         String username;
         String given;
         String family;

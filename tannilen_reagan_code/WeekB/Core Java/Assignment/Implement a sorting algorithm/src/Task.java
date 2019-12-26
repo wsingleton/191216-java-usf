@@ -5,7 +5,7 @@ public class Task {
 
     public int[] sortNumbers(int[] numbersForSorting) {
 
-        /* Provide your implementation here */
+        int count = numbersForSorting.length;
 
     }
 }

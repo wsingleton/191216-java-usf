@@ -1,4 +1,4 @@
-package com.fauxnancialsbank.resources;
+package com.fauxnancialsbank.domainobjects;
 import java.util.Objects;
 
 public class User {

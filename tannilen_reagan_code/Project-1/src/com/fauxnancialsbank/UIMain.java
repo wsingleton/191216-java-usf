@@ -1,12 +1,12 @@
 package com.fauxnancialsbank;
-import com.fauxnancialsbank.resources.User;
+import com.fauxnancialsbank.domainobjects.User;
+import com.fauxnancialsbank.service.Menus;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class UIMain {
@@ -50,7 +50,7 @@ public class UIMain {
                 System.out.println("I didn't catch that.  Please answer y or n.");
             }
         } while (!valid);
-        choice=Menus.showLoginScreen();
+        choice= Menus.showLoginScreen();
         switch (choice) {
             case 1: {
                 User newUser = (Menus.registerNew(usersList));
