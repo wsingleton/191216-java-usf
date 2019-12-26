@@ -146,7 +146,7 @@ public class UserScreen extends User {
             withdraw(acct);
         }
 
-        if(amount > bal) {
+        if(amount > bal || amount < 0) {
 
             System.out.println("Sorry, no overdrafts allowed.");
             System.out.println("Please try again");
@@ -223,13 +223,20 @@ public class UserScreen extends User {
         double amount = 0;
         try {
             amount = input.nextDouble();
+
+            if(amount < 0){
+                System.out.println("You're a dumbass, try again!!");
+                deposit(acct);
+            }else {
+                bal += amount;
+                acct.setBalance(bal);
+            }
         }catch (InputMismatchException e) {
             System.out.println("Invalid value");
             deposit(acct);
         }
 
-        bal += amount;
-        acct.setBalance(bal);
+
 
         System.out.println("Your new balance is $" + bal);
         System.out.println("Would you like to perform another transaction?");

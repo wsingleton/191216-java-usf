@@ -7,7 +7,18 @@ public class Task {
 
     public String createAcronymFromPhrase(String phrase) {
 
-        // Provide your implementation here
+        if (phrase == null)
+            return "";
+
+        phrase = phrase.trim();
+
+        if(phrase.equals(""))
+            return "";
+
+        List<String> phraseWordList = new ArrayList<>(Arrays.asList(phrase.split("")));
+
+
+
 
     }
 
