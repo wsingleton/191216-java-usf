@@ -15,7 +15,14 @@ public class AccountManager {
     private ArrayList<String> activities = new ArrayList<String>(); // an arrayList that record account activities.
     Date now = new Date();
 
+
     public void deposit (int amount){
+        // get the balance buy picking the last balance
+        RecordKeeper records = new RecordKeeper();
+        ArrayList<String> history = records.data;
+        // calculate the new balance
+        // write the current transaction to the record keeper class
+
 
         balance += amount;
         activities.add("Deposited $" + amount + " on " + now.toString());

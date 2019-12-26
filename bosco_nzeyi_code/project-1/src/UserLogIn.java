@@ -3,10 +3,12 @@ This class is used to log in an existing account holder
  */
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UserLogIn {
 
     public String LoggedId;
+    public String nextChoice;
 
     public void login(String username, String password){
 // read the file to check whether the provided inputs are included
@@ -24,6 +26,11 @@ public class UserLogIn {
                 String firstAndLastName = user.substring(indexOfBar, userNameIndex);
                 String fullName = firstAndLastName.replace("|", " ");
                 System.out.println("Welcome!" + fullName);
+                Scanner cont = new Scanner(System.in);
+                System.out.println("Choose any of the option below to continue " + "\n"+
+                        "");
+
+
             }
         }
 

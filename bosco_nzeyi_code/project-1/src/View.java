@@ -35,13 +35,13 @@ public class View {
                 record.withdraw(amount);
                 break;
 
-            case "balance":
-                record.getBalance();
-                break;
-
-            case "activities":
-                record.activityLog();
-                break;
+//            case "balance":
+//                record.getBalance();
+//                break;
+//
+//            case "activities":
+//                record.activityLog();
+//                break;
 
             default:
                 System.out.println(" Please enter the appropriate operator");
