@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-12-27T14:14:27" hostname="DESKTOP-78D8MC1" time="0.014">
+  <properties/>
+  <testcase name="testSolutionWithEvenNegativeNumber" classname="Tests" time="0.003"/>
+  <testcase name="testSolutionWithEvenNumber" classname="Tests" time="0.005"/>
+  <testcase name="testSolutionWithOddNegativeNumber" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithOddNumber" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithZero" classname="Tests" time="0.002"/>
+  <system-out><![CDATA[DO YOU EVEN PRINT?!
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

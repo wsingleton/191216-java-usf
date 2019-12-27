@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="8" skipped="0" failures="1" errors="0" timestamp="2019-12-24T15:56:40" hostname="DESKTOP-78D8MC1" time="0.026">
+<testsuite name="Tests" tests="8" skipped="0" failures="1" errors="0" timestamp="2019-12-27T19:39:55" hostname="DESKTOP-78D8MC1" time="0.034">
   <properties/>
-  <testcase name="testSolutionUsingOnlyWhiteSpace" classname="Tests" time="0.004"/>
-  <testcase name="testSolutionUsingNullPhrase" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionUsingOnlyWhiteSpace" classname="Tests" time="0.008"/>
+  <testcase name="testSolutionUsingNullPhrase" classname="Tests" time="0.001"/>
   <testcase name="testSolutionUsingPhraseWithHyphenatedWord" classname="Tests" time="0.002"/>
-  <testcase name="testSolutionUsingPhraseWithAcronym" classname="Tests" time="0.003"/>
-  <testcase name="testSolutionUsingPhraseWithExcessWhiteSpace" classname="Tests" time="0.009">
+  <testcase name="testSolutionUsingPhraseWithAcronym" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionUsingPhraseWithExcessWhiteSpace" classname="Tests" time="0.004">
     <failure message="java.lang.StringIndexOutOfBoundsException: String index out of range: 0" type="java.lang.StringIndexOutOfBoundsException">java.lang.StringIndexOutOfBoundsException: String index out of range: 0
 	at java.lang.String.charAt(String.java:658)
-	at Task.createAcronymFromPhrase(Task.java:21)
+	at Task.createAcronymFromPhrase(Task.java:27)
 	at Tests.testSolutionUsingPhraseWithExcessWhiteSpace(Tests.java:79)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -27,9 +27,9 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="testSolutionUsingEmptyPhrase" classname="Tests" time="0.002"/>
-  <testcase name="testSolutionUsingSimplePhrase" classname="Tests" time="0.0"/>
-  <testcase name="testSolutionUsingPhraseWithPunctuation" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionUsingEmptyPhrase" classname="Tests" time="0.006"/>
+  <testcase name="testSolutionUsingSimplePhrase" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionUsingPhraseWithPunctuation" classname="Tests" time="0.008"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

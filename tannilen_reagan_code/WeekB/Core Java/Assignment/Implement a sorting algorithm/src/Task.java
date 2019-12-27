@@ -5,7 +5,8 @@ public class Task {
 
     public int[] sortNumbers(int[] numbersForSorting) {
 
-        int count = numbersForSorting.length;
+        int[] sorted = new int[numbersForSorting.length];
+
 
     }
 }
