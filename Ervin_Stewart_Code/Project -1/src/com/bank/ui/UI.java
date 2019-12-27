@@ -1,9 +1,17 @@
 package com.bank.ui;
+import com.bank.dao.WriteToTxt;
 import com.bank.models.User;
 import com.bank.models.Account;
 import com.bank.services.UserValidation;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import static com.bank.dao.ReadFromDao.getUserAccount;
+import static com.bank.dao.ReadFromDao.isUser;
+import static com.bank.dao.WriteToTxt.replaceBalance;
+import static com.bank.services.UserValidation.validateDeposit;
+import static com.bank.services.UserValidation.validateWithdrawBalance;
 
 public class UI extends User {
     private static int UserNumInput;
@@ -15,17 +23,15 @@ public class UI extends User {
         System.out.println("Welcome!");
         System.out.println("To Login Enter 1");
         System.out.println("To Create An Account Enter 2");
-        System.out.println("To Exit The Program Enter 2");
+        System.out.println("To Exit The Program Enter 0");
         Scanner input = new Scanner(System.in);
         UserNumInput = input.nextInt();
     switch (UserNumInput){
         case 1:
-           // System.out.println("User Can now login");
+
             accountLoginScreen();
 
         case 2:
-            //System.out.println("User can create a login");
-            //loginScreen();
             createUserAccount();
 
         case 0:
@@ -40,19 +46,14 @@ public class UI extends User {
     }
 
 
-
-
-
-
     public static void userConsole(User User, Account Account){
-        System.out.println("Welcome!");
+        System.out.println("Welcome, " +User.getFirstName() +"!");
         System.out.println("To view balance, make a deposit or make a withdrawal enter 1");
         System.out.println("To exit enter 0");
         Scanner input = new Scanner(System.in);
         UserNumInput = input.nextInt();
         switch (UserNumInput){
             case 1:
-                System.out.println("User Can now view");
                 viewBalance(User,Account);
 
             case 0:
@@ -72,28 +73,27 @@ public class UI extends User {
     User currentUser = new User();
     Account currentAccount = new Account();
 
-        System.out.println("Please Login");
-        enterUsername();
-        enterPassword();
-        userConsole();
+        System.out.println("Please Login.");
+        String username = enterUsername();
+       currentUser= enterPassword( username);
+       currentAccount = getUserAccount(currentUser);
+        userConsole(currentUser, currentAccount);
 
     }
 
     public static void createUserAccount(){
-        System.out.println("Please create An Account ");
+        System.out.println("Please create an account.");
         User newUser = new User();
         Account newUserAccount = new Account();
-        //Scanner input = new Scanner(System.in);
-
-       // UserStringInput = input.next();
         createFirstName(UserStringInput, newUser);
         createLastName(UserStringInput, newUser);
         createUserName(UserStringInput,newUser);
         createPassword(UserStringInput,newUser);
         generateId(newUser);
-        Account.setId(newUser.getId());
-
-        System.out.println("the user Details are as follows \n" + newUser +"\n"+ newUserAccount);
+        newUserAccount.setAccountId(newUser.getId());
+        WriteToTxt.writeUserToFile(newUser);
+        WriteToTxt.writeAccountToFile(newUserAccount);
+        //System.out.println("the user Details are as follows: \n" + newUser +"\n"+ newUserAccount.toFileString());
         userConsole(newUser,newUserAccount);
 
     }
@@ -138,36 +138,52 @@ public class UI extends User {
 
     }
 
-    public static void enterPassword(){
+    public static User enterPassword(String userstringinput){
     Scanner input = new Scanner(System.in);
+    User currentUser = new User();
    System.out.println("Please enter your password");
    UserStringInput = input.next();
-   //comparePassword(UserStringInput);
+   currentUser = isUser(UserStringInput, userstringinput);
+   return currentUser;
 }
 
     public static String enterUsername() {
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter your username");
         UserStringInput = input.next();
-        //comparePassword(UserStringInput);
-        return ;
+        return UserStringInput;
     }
 
     public static void deposit(User User, Account Account){
-        double deposit=0;
+        double deposit = 0;
         double newbalance;
         double currentbalance;
-        System.out.println("How much money in yo pocket homie?");
+        System.out.println("How much would you like to deposit today " +User.getFirstName()+"?");
         Scanner input = new Scanner(System.in);
         UserMoneyInput = input.nextDouble();
-        deposit = UserNumInput;
-        //validDeposit(deposit);
+        try{
+        deposit = UserMoneyInput;}
+        catch(InputMismatchException e){
+            System.out.println("Must be a ");
+            deposit(User,Account);
+        }
+        validateDeposit(User,Account,deposit);
         currentbalance = Account.getBalance();
+        String oldID = Integer.toString(Account.getAccountId());
+        String newID = Integer.toString(Account.getAccountId());
+        String oldbalance = Double.toString(currentbalance);
         newbalance = deposit + currentbalance;
         Account.setBalance(newbalance);
-        System.out.println("The new balance is:\n" + Account.getBalance());
+        String currentBalance = Double.toString(newbalance);
+        System.out.println("The new balance is:\n" + newbalance);
+        //System.out.println(oldID);
+        //System.out.println(oldbalance);
+        //System.out.println(newID);
+        //System.out.println(currentBalance);
+        replaceBalance(oldID, oldbalance,newID,currentBalance);
         viewBalance(User,Account);
     }
+
 
     public static void viewBalance(User User, Account Account){
         double balance=0;
@@ -180,12 +196,12 @@ public class UI extends User {
         switch (UserNumInput){
 
             case 1:
-                System.out.println("User can make a deposit");
+                //System.out.println("User can make a deposit");
                 deposit(User,Account);
 
             case 2:
-                System.out.println("You can now make a withdrawal");
-                //withdrawBalance(User, Account);
+                //System.out.println("You can now make a withdrawal");
+                withdrawBalance(User, Account);
             case 0:
                 System.out.println("Program exiting...");
                 System.exit(0);
@@ -196,6 +212,28 @@ public class UI extends User {
 
         }
 
+    }
+
+    public static void withdrawBalance(User user, Account account){
+        System.out.println("The balance is: \n" + account.getBalance());
+        Scanner input = new Scanner(System.in);
+        UserMoneyInput = input.nextDouble();
+        double withdrawal = 0;
+        double newbalance;
+        double currentbalance;
+        System.out.println("How broke you wanna be homie?");
+        try{
+            withdrawal = UserMoneyInput;}
+        catch(InputMismatchException e){
+            System.out.println("Must be a ");
+            withdrawBalance(user,account);
+        }
+        currentbalance = account.getBalance();
+        validateWithdrawBalance(user, account, withdrawal, currentbalance);
+        newbalance = withdrawal - currentbalance;
+        account.setBalance(newbalance);
+        System.out.println("The new balance is:\n" + newbalance);
+        viewBalance(user,account);
     }
 }
 

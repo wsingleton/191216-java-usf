@@ -18,6 +18,13 @@ import java.util.Objects;
         super();
     }
 
+     public User(String Username, String pw){
+
+         this.userName = Username;
+
+         this.password = pw;
+     }
+
     public User(String Firstname, String Lastname, String Username, String pw, Role Role){
         this.role = Role;
         this.firstName = Firstname;
@@ -26,6 +33,16 @@ import java.util.Objects;
         this.role = Role;
         this.password = pw;
     }
+
+     public User( int id, String Firstname, String Lastname, String Username, String pw){
+
+         this.firstName = Firstname;
+         this.lastName = Lastname;
+         this.userName = Username;
+
+         this.password = pw;
+     }
+
     public User(int id,String Firstname, String Lastname, String Username, String pw, Role Role){
         this(Firstname,Lastname,Username,pw,Role);
         this.Id= id;
@@ -50,8 +67,8 @@ import java.util.Objects;
          return firstName;
      }
 
-     public static void setFirstName(String firstName) {
-         firstName = firstName;
+     public void setFirstName(String firstName) {
+         this.firstName = firstName;
      }
 
      public String getLastName() {
@@ -85,6 +102,8 @@ import java.util.Objects;
      public void setRole(Role role) {
          this.role = role;
      }
+
+     public String toFileString(){return Id + ":" + firstName+ ":"+ lastName+ ":"+ userName + ":" + password +":"+role;}
 
     @Override
     public String toString() {

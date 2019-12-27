@@ -1,5 +1,6 @@
 package com.bank.services;
 
+import com.bank.models.Account;
 import com.bank.models.User;
 import com.bank.ui.UI;
 
@@ -22,13 +23,17 @@ public class UserValidation extends UI {
         } else createLastName(lastname, myUser);
 
     }
+
     public static void isUserName(String username, User myUser){
         int lenght =8;
         if (username.length() <= lenght) {
 
-        } else createUserName(username, myUser);
-
+        } else {
+            System.out.println("username can only be up to 8 characters long. try again");
+            createUserName(username, myUser);
+        }
     }
+
     public static void isPassword(String password, User myUser){
         int maxlength = 14;
         int minlength = 7;
@@ -54,7 +59,22 @@ public class UserValidation extends UI {
 
         }
 
-    }}
+    }
+
+    public static void validateDeposit(User user, Account account, double deposit){
+        if(deposit<0){
+            System.out.println("No negative deposits, try again.");
+            deposit(user,account);
+        }
+    }
+
+    public static void validateWithdrawBalance(User user, Account account, double withdrawal, double balance){
+        if(withdrawal> balance || withdrawal <0){
+            System.out.println("Invalid withdrawal, try again.");
+           withdrawBalance(user,account);
+        }
+    }
+}
 
 
 

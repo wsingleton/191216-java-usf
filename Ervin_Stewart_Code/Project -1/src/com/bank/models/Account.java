@@ -1,43 +1,52 @@
 package com.bank.models;
 
-public class Account {
-    private static int Id;
-    private static double balance;
-    private static long ownerId;
+import java.util.Objects;
+
+public class Account extends User {
+    private int Id;
+    private double balance;
+    //private long ownerId;
     //private  Type type;
 
-    public Account() {
-        super();
-    }
+    public Account(){super();}
 
-    public Account(int ID, long Balance, long ownerID){
-        this.Id = ID;
-        this.balance = Balance;
-        this.ownerId = ownerID;
+    public Account(int id, double balance){
+        this.Id= id;
+        this.balance = balance;
 
     }
 
-    public static int getId() {
+//    public Account(int ID, double Balance, long ownerID){
+//        this(ID,Balance);
+//        this.ownerId = ownerID;
+//
+//    }
+
+  public int getAccountId() {
         return Id;
     }
 
-    public static void setId(int id) {
-        Id = id;
+   public void setAccountId(int id) {
+        this.Id = id;
     }
 
-    public static double getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public static void setBalance(double balance) {
-        balance = balance;
+
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
-    public static long getOwnerId() {
-        return ownerId;
-    }
+//    public long getOwnerId() {
+//        return ownerId;
+//    }
+//
+//    public void setOwnerId(long ownerId) {
+//        this.ownerId = ownerId;
+//    }
 
-    public static void setOwnerId(long ownerId) {
-        ownerId = ownerId;
-    }
+    public String toFileString(){return Id + ":" + balance; }
 }
