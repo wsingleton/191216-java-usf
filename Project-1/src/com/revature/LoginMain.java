@@ -9,7 +9,18 @@ public class LoginMain {
 
     public static void main(String[] args) {
 
-        File name =
+        // Make a file to store the user info
+        File takeNames = new File("src/stored/usernames_passwords.txt");
+
+        try (BufferedWriter storing = new BufferedWriter(new FileWriter(takeNames, true))) {
+
+            UserInfo u = new UserInfo(username, password, 0.0);
+            storing.write("\n" + u.addToStored());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //Ask user to create their username and password
         System.out.println("Please enter your desired username");
         Scanner console = new Scanner(System.in);
@@ -22,11 +33,14 @@ public class LoginMain {
             username = console.nextLine();
         }
         // Checking username availability
-
         try {
-            BufferedReader nameCheck = new BufferedReader(new FileReader(takeN));
+            BufferedReader nameCheck = new BufferedReader(new FileReader(takeNames));
         } catch (IOException e) {
             System.out.println("An unexpected error occured");
+        }
+
+        while ((line = nameCheck.readLine()) != null) {
+
         }
         /*ArrayList<String> savedNames = new ArrayList<>();
 
@@ -45,22 +59,6 @@ public class LoginMain {
 
         System.out.println("Please enter your desired password");
         String password = console.nextLine();
-
-
-
-        // Make a file to store the user info
-        File takeNames = new File("src/stored/usernames_passwords.txt");
-
-        try (BufferedWriter storing = new BufferedWriter(new FileWriter(takeNames, true))) {
-
-            UserInfo u = new UserInfo(username, password, 0.0);
-            storing.write("\n" + u.addToStored());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
         System.out.println("Your username is: " + username + " and your password is: " + password);
 
 

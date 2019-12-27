@@ -1,11 +1,11 @@
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class Task {
 
     public String reverse(String reverseMe) {
 
-        // Provide your implementation here
-
+        for (int i = 1; i < reverseMe.length(); i++) {
+            reverseMe.substring(reverseMe.length() - i );
     }
-
 }
