@@ -14,7 +14,7 @@ public class BankMenu {
         System.out.println("A: View balance");
         System.out.println("B: Deposit money");
         System.out.println("C: Withdraw money");
-        System.out.println("d: Exit");
+        System.out.println("D: Exit");
 
         do {
             System.out.println("Enter an option");
@@ -34,6 +34,14 @@ public class BankMenu {
                     double amount = scanner.nextDouble();
                     withdraw(amount);
                     break;
+                case 'D':
+                    System.out.println("Thank you!");
+
+                    break;
+
+                default:
+                    System.out.println("Invalid entry, please try again");
+
             }
 
             }

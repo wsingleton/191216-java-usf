@@ -7,8 +7,29 @@ public class Task {
 
     public String createAcronymFromPhrase(String phrase) {
 
-        // Provide your implementation here
+        if (phrase == null) return "";
+        phrase = phrase.trim();
+        if (phrase.equals("")) return "";
+        List<String> phraseWordsList = new ArrayList<>(Arrays.asList(phrase.split(" ")));
+        return phraseWordsList.stream()
+                .map(word -> {
+                    String a = "";
+
+                    word = word.trim();
+                    if (word.equals("")) {
+                        return a;
+                    } else if (word.contains("-")) {
+                        for (String part : word.split("-")) a += part.charAt(0);
+                    } else {
+                        a += word.charAt(0);
+
+                    }
+                    return a.toUpperCase();
+
+                })
+                .collect(Collectors.joining());
+
 
     }
-
 }
+

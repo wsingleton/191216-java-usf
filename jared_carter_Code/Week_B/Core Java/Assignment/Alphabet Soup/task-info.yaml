@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 202
-    length: 35
+    length: 764
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -46,8 +46,8 @@ files:
 
                       // collect the resulting strings and join them into a single one
                       .collect(Collectors.joining());
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Solved
   text: |-
     import java.util.ArrayList;
     import java.util.Arrays;
@@ -150,5 +150,5 @@ files:
 
     }
   learner_created: false
-status: Unchecked
+status: Solved
 record: -1
