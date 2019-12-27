@@ -6,10 +6,11 @@ import java.util.stream.Collectors;
 public class Task {
 
     public String createAcronymFromPhrase(String phrase) {
-
-        // do stuff
-
-
+        if (phrase != null) {
+        String s = phrase.replaceAll("[a-z]","").replaceAll("[\\W]", "");
+        return s;
+        }
+        else return "";
     }
 
 }

@@ -3,54 +3,66 @@ package com.revature.models;
 import java.util.Objects;
 
 public class Account {
-    private int id;
-    private int amount;
+    private User user;
+    private double amount;
 
     public Account() {
         super();
     }
 
-    public Account(int id, int amount) {
-        this.id = id;
+    public Account(User user, int amount) {
+        this.user = user;
         this.amount = amount;
     }
 
-    public int getId() {
-        return id;
+    public User getId() {
+        return user;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    private void setUser(User user) {
+        this.user = user;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    private void setAmount(int amount) {
         this.amount = amount;
     }
+
+    // method to deposit
+    public void deposit(double depAmount) {
+        this.amount = amount + depAmount;
+    }
+
+    // method to withdraw
+    public void withdraw(double withAmount) {
+        this.amount = amount - withAmount;
+    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return id == account.id &&
+        return user == account.user &&
                 amount == account.amount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, amount);
+        return Objects.hash(user, amount);
     }
 
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + id +
+                "user=" + user +
                 ", amount=" + amount +
                 '}';
     }
+
 
 }
