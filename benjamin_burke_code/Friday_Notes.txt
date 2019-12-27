@@ -2,5 +2,60 @@ Maven
 --------
 
 ->Made by Apache
-->Build automation tool
+->Build automation tool (lifecycle hooks)
 ->Dependency Management Tool
+->pom.xml file->project object model, xml file that represents your file, its like a bio info for your project. 
+--->what is buildautomation tool? ->java has multiple files if we want to condense or make an executable maven has a built in executable
+
+-------------------------------------------
+Reading from the console.
+
+System.out.println()
+
+Scanner is better for parsing information. next, nextInt, nextDouble, nextByte, nextFloat, nextBoolean -> any kind of primitive and built in java class
+
+
+----------------------------------------------
+Error vs Exception
+
+Error is when you can't do something about it. It happens when you run out of memeory.
+-> Out of memory error -> happens when you run out of heap
+-> Stack overflow error -> happens when you used too many references out of stack
+Exceptions are good because they tell us what happened. 
+If you throw any kind of exception and you do not handle it, in try catch or method didn't throw something->The application will halt where
+it was thrown. The application will halt the application all together. 
+
+class scope variables get default values. 
+
+pojo---> data holders, hold states and getter and setters. encapsulation that hold states! 
+
+abstract class...
+a class that uses a base for another class
+a stub of a method...
+concrete extends to abstract, concrete must extend to abstract..
+
+interfaces can't be directly instantiated, but the don't have constructors at all.
+->used to create a contract, 
+-->classes
+DAO-data access object
+
+default methods
+
+inheritance like extends like, class extends class
+interface extends another interface
+classes can implements interface
+interface cannot implement class
+
+abstract classes vs interfaces?
+interfaces can have concrete implementations
+
+Abstract ->constructors, use abstract for when there is inheritable mutable state
+interfaces -> implicitly abstract, fields are public static final, final so they can't change the value, useful cause classes can implement
+ many interfaces as  much as they need
+
+aplication programming interface - API
+A heiarchy  of collections-Iterable-Collection(core)-3 main types extends from collection-List, Set, Queues->Deque(double ended queue, always access the front and access the back, stack lifo)
+
+array list,linked list, vectors(List) Sets: hash sets, tree sets. Queues: priority->bank, standard and business line, fifo, array deck->double ended queue, on queue and d queue
+sets->no dublicates
+fifo first in first out

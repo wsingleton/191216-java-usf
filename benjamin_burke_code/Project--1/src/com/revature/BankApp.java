@@ -2,44 +2,47 @@ package com.revature;
 
 
 import com.revature.models.User;
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-import org.w3c.dom.ls.LSOutput;
+
 
 import java.util.Scanner;
 
 public class BankApp {
+
     public static void main(String[] args) {
         Service service = new Service();
 
         start();
     }
+
     static void start(){
+        System.out.println("Welcome to Ben's App!"
+                + "\nplease Select an option"
+                + "\n1: Log In"
+                + "\n2: Sign up");
 
-        System.out.println("Welcome to Bens Banking App!"
-                            + "\nPlease log in or register"
-                            + "\n: Log In"
-                            + "\n: Sign Up");
         Scanner scan = new Scanner(System.in);
-        //we need to do a switch statement for user input
-        int option =0;
+        int option = 0;
 
-            while(true){
-                try{
+//        start_loop:
+        while(true) {
+            try {
+                option = Integer.parseInt(scan.nextLine());
 
-                    option = Integer.parseInt(scan.nextLine());
-
-                    switch (option){
-                        case 1: logIn(); break;
-                        case 2: signUp(); break;
-                    }
+                switch(option) {
+                    case 1: logIn(); break ;
+                    case 2: signUp(); break ;
+                    default: System.out.println("Sorry, that's not an option. Please try again");
                 }
-                catch (NumberFormatException nfe){
-                    System.out.println("That is not an option");
-                }
-                scan.close();
             }
-
+            catch(NumberFormatException nfe) {
+                //nfe.printStackTrace();
+                System.out.println("Sorry, that's not an option. Please try again");
+            }
+        }
+//        scan.close();
     }
+
+
     //create the log in
     static void signUp(){
         Scanner scan = new Scanner(System.in);
@@ -65,7 +68,20 @@ public class BankApp {
     }
 
     static void logIn(){
-
+//        System.out.println("testing the Login");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter your username: ");
+        String username = scan.nextLine();
+        while(Service.findUser(username)==null){
+            System.out.println("not a user.");
+            username = scan.nextLine();
+        }
+        System.out.println("Enter password");
+        String password = scan.nextLine();
+        while(!Service.findUser(username).getPassword().equals(password)){
+            System.out.println("wrong password. try again.");
+            password = scan.nextLine();
+        }
     }
 
 }

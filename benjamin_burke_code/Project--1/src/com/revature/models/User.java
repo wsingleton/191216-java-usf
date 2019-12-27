@@ -17,6 +17,15 @@ public class User {
         this.balance = balance;
     }
 
+    public User(String[] list) {
+        super();
+        if(list.length == 3) {
+           this.username = list[0];
+           this.password = list[1];
+           this.balance = Double.parseDouble(list[2]);
+        }
+
+    }
 
 
     public String getUsername() {

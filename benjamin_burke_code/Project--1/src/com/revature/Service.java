@@ -28,6 +28,14 @@ public class Service {
             DAO.syncUsers(users);
             return true;
     }
+    boolean deleteUser(String username){
+        User u = findUser(username);
+        if(users.remove(u)) {
+            DAO.syncUsers(users);
+            return true;
+        }
+        return false;
+    }
 
     static User findUser(String username){
         for(User u : users) {
