@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-12-27T02:48:12" hostname="DESKTOP-9VJVNCN" time="0.047">
+  <properties/>
+  <testcase name="testSolutionWithReversedArray" classname="Tests" time="0.021"/>
+  <testcase name="testSolutionWithPresortedArray" classname="Tests" time="0.007"/>
+  <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.005"/>
+  <testcase name="testSolutionWithRandomArray" classname="Tests" time="0.004"/>
+  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

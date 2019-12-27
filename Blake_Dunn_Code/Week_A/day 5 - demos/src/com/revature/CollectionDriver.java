@@ -7,7 +7,11 @@ import java.util.ArrayList;
 public class CollectionDriver {
 
     public static void main(String[] args) {
+        int newInt = 5/2;
+        System.out.println(newInt);
 
+        String newString = "What is for dinner?".substring(5);
+        System.out.println(newString);
         /*
          * List
          *
@@ -36,28 +40,28 @@ public class CollectionDriver {
          */
 
         // Raw collections (without the use of generics) - everything is an object, always
-        ArrayList objects = new ArrayList();
-        objects.add("test");
-        objects.add(new Cat());
-        objects.add(1);
-
-        String s = (String) objects.get(0);
-//        String ss = (String) objects.get(1); // throws ClassCastException
-
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("test");
-//        strings.add(new Cat()); // generics have provided us with TYPE SAFETY!!
-        strings.add("test-2");
-        strings.add("test"); // duplicates are allowed
-
-        // All Collections are iterable, and can be used with a for-each loop
-        for (String val : strings) {
-            System.out.println(val);
-        }
-
-        for(int i = 0; i < strings.size(); i++) {
-//            System.out.print(strings[i]); // DO NOT USE SQUARE BRACKETS TO ACCESS INDEX POSITIONS
-            System.out.print(strings.get(i));
-        }
+//        ArrayList objects = new ArrayList();
+//        objects.add("test");
+//        objects.add(new Cat());
+//        objects.add(1);
+//
+//        String s = (String) objects.get(0);
+////        String ss = (String) objects.get(1); // throws ClassCastException
+//
+//        ArrayList<String> strings = new ArrayList<>();
+//        strings.add("test");
+////        strings.add(new Cat()); // generics have provided us with TYPE SAFETY!!
+//        strings.add("test-2");
+//        strings.add("test"); // duplicates are allowed
+//
+//        // All Collections are iterable, and can be used with a for-each loop
+//        for (String val : strings) {
+//            System.out.println(val);
+//        }
+//
+//        for(int i = 0; i < strings.size(); i++) {
+////            System.out.print(strings[i]); // DO NOT USE SQUARE BRACKETS TO ACCESS INDEX POSITIONS
+//            System.out.print(strings.get(i));
+//        }
     }
 }
