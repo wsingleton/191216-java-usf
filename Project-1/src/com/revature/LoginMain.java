@@ -1,8 +1,7 @@
 package com.revature;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -10,18 +9,39 @@ public class LoginMain {
 
     public static void main(String[] args) {
 
-
+        File name =
         //Ask user to create their username and password
         System.out.println("Please enter your desired username");
         Scanner console = new Scanner(System.in);
         String username = console.nextLine();
         username = username.replaceAll(" ", ""); // stops the spacing bug
-        // Check for entering nothing
+        // Checking if the username is blank
         while (username.equals("")) {
             System.out.println("A username is required");
             console = new Scanner(System.in);
             username = console.nextLine();
         }
+        // Checking username availability
+
+        try {
+            BufferedReader nameCheck = new BufferedReader(new FileReader(takeN));
+        } catch (IOException e) {
+            System.out.println("An unexpected error occured");
+        }
+        /*ArrayList<String> savedNames = new ArrayList<>();
+
+        System.out.println(savedNames);
+        for (String name: savedNames) {
+            if (name.equals(username)) {
+                System.out.println("This username is already taken");
+                continue;
+            }
+        }
+
+        savedNames.add(username);
+
+         */
+
 
         System.out.println("Please enter your desired password");
         String password = console.nextLine();
