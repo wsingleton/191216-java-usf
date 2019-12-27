@@ -32,5 +32,17 @@ public class BankApp {
                     System.out.println("That is not an option");
                 }
             }
+            scan.close();
+    }
+    //create the log in
+    static void signUp(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter a username!");
+        String username = scan.nextLine();
+
+        //validation for the username
+        while(true) {
+
+        }
     }
 }

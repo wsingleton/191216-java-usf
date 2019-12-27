@@ -18,4 +18,13 @@ public class Service {
     static boolean addUser(User u) {
 
     }
+
+    static User findUser(String username){
+        for(User u : users) {
+            if(u.getUsername().equals(username)){
+                return u;
+            }
+        }
+        return null;
+    }
 }
