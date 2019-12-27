@@ -1,6 +1,10 @@
 package com.revature;
 
 
+import com.revature.models.User;
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Scanner;
 
 public class BankApp {
@@ -10,6 +14,7 @@ public class BankApp {
         start();
     }
     static void start(){
+
         System.out.println("Welcome to Bens Banking App!"
                             + "\nPlease log in or register"
                             + "\n: Log In"
@@ -31,8 +36,9 @@ public class BankApp {
                 catch (NumberFormatException nfe){
                     System.out.println("That is not an option");
                 }
+                scan.close();
             }
-            scan.close();
+
     }
     //create the log in
     static void signUp(){
@@ -42,7 +48,24 @@ public class BankApp {
 
         //validation for the username
         while(true) {
-
+            if(Service.findUser(username) != null){
+                System.out.println("sorry, that username is taken, Enter a different one");
+                username = scan.nextLine();
+            }
+            else {
+                break;
+            }
         }
+        System.out.println("What is your password: ");
+        String password = scan.nextLine();
+
+        User u = new User(username, password, 0);
+        //adduser class
+        Service.addUser(u);
     }
+
+    static void logIn(){
+
+    }
+
 }

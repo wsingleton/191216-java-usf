@@ -1,6 +1,11 @@
 package com.revature;
 
-import java.io.File;
+import com.revature.models.User;
+
+import java.io.*;
+import java.util.ArrayList;
+
+import static com.revature.Service.addUser;
 
 public class DAO {
     private final static String fileLocation = "src/com/revature/Users.txt";
@@ -24,5 +29,37 @@ public class DAO {
         else System.out.println("no users.txt");
     }
 
+    static public ArrayList<User> readAllUsers() {
+        ArrayList<User> list = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(fileLocation))) {
+            String line = null;
+            while((line=br.readLine()) !=null){
+                String[] data = line.split(":");
+                //I think i will need to create a constructor....
+                User temp = new User(data);
+                list.add(temp);
+            }
+        }catch(FileNotFoundException e) {
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return list;
+    }
 
+    static void syncUsers(ArrayList<User> list){
+        cleanup();
+        for(User u : list ) {
+                addUser(u);
+        }
+    }
+
+    static void cleanup(){
+        try {
+            PrintWriter ps = new PrintWriter(fileLocation);
+            ps.close();
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }
 }

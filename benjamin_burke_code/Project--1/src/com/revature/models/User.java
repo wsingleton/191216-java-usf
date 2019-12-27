@@ -17,6 +17,8 @@ public class User {
         this.balance = balance;
     }
 
+
+
     public String getUsername() {
         return username;
     }

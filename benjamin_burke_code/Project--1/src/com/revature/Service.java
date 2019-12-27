@@ -16,7 +16,17 @@ public class Service {
     }
 
     static boolean addUser(User u) {
+        if(findUser(u.getUsername()) !=null)
+            return false;
 
+        int i = 0;
+        //hmmmmm
+        for (; i<users.size(); i++){
+
+        }
+           users.add(i, u);
+            DAO.syncUsers(users);
+            return true;
     }
 
     static User findUser(String username){
@@ -27,4 +37,6 @@ public class Service {
         }
         return null;
     }
+
+
 }
