@@ -1,2 +1,0 @@
-
-User{username='benjiman', password='benji', balance=0.0}

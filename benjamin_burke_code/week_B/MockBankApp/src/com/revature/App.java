@@ -60,7 +60,7 @@ public class App {
             String password = in.nextLine();
             //Lets see if password is valid
             if(use.getPassword().equals(password)) {
-                doThings(use);
+                System.out.println("Logged in test");
             }
             else {
                 System.out.println("Your password is incorrect try again!");

@@ -1,4 +1,4 @@
 package com.revature;
 
-public class DAO {
+public class App {
 }
