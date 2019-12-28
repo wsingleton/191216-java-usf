@@ -66,7 +66,7 @@ public class UserMenu {
                     break;
                 case 4:
                     System.out.println("Thank you for using Kannon's Bank!");
-
+                    System.exit(0);
                     break;
 
                 default:
