@@ -61,15 +61,23 @@ public class App {
             System.out.println("Would you like to add $ to your account?");
             String deposit = scan.nextLine();
             double balance = 0;
-            balance=Double.parseDouble(deposit);
-            if (balance < 2.0){
-                System.out.println("Enter amount greater than $2.00");
-                signUp();
-            } else if (balance>100000.00) {
-                System.out.println("Woah there that is too much money!");
-            }
-            //get an error
-            Account account = service.addAccount(username, password, balance);
+          try {
+              balance=Double.parseDouble(deposit);
+              if (balance < 2.0){
+                  System.out.println("Enter amount greater than $2.00");
+                  signUp();
+              } else if (balance>100000.00) {
+                  System.out.println("Woah there that is too much money!");
+              }
+          } catch (NumberFormatException nfe) {
+              System.out.println("Not a valid amount of money. Try again.");
+              signUp();
+          }
+
+            
+            Account Account = service.addAccount(username, password, balance);
+          //need a login method
+          loggedIn(Account);
         }
     }
 }
