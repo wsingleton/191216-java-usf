@@ -1,7 +1,6 @@
-package com.revature;
+package com.revature.models;
 
 public class User {
-
     private String username;
     private String password;
     private double balance;
@@ -11,7 +10,6 @@ public class User {
     }
 
     public User(String username, String password, double balance) {
-       super();
         this.username = username;
         this.password = password;
         this.balance = balance;
