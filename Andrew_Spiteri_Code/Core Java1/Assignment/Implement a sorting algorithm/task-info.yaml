@@ -33,7 +33,7 @@ files:
 
               return arr;
     selected: true
-    status: Unchecked
+    status: Failed
   text: |-
     import java.util.Arrays;
     import java.util.stream.IntStream;
@@ -117,5 +117,5 @@ files:
 
     }
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

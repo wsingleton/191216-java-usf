@@ -4,11 +4,12 @@ import java.util.Objects;
 
 public class User {
     private String username, password, firstName, lastName;
-    private int id;
-    private Role role;
+    private String id;
+    private String role;
+    private Account account;
 
 
-    public User(String fn, String ln, String username, String pw, Role role) {
+    public User(String fn, String ln, String username, String pw, String role) {
         // a call to the super class's constructor is implicitly here if it not provided
         // super();
 
@@ -18,8 +19,8 @@ public class User {
         password = pw;
         this.role = role;
     }
-    public User(int id, String fn, String ln, String un, String pw, Role role) {
-        this(fn, ln, un, pw, role); // constructor chaining
+    public User(String id, String fn, String ln, String un, String pw, String role) {
+        this(fn, ln, un, pw, role ); // constructor chaining
         this.id = id;
     }
     private void setUsername(String username){
@@ -34,7 +35,23 @@ public class User {
     private void setLastName(String lastName){
         this.lastName = lastName;
     }
-    private void setId(int id){ this.id = id; }
+    private void setId(String id){ this.id = id; }
+    private void setRole(Role role){
+        switch (role){
+            case DEV:
+                this.role = "DEV";
+                break;
+            case ADMIN:
+                this.role = "ADMIN";
+                break;
+            case MEMBER:
+                this.role = "MEMBER";
+                break;
+            case TESTER:
+                this.role = "TESTER";
+                break;
+        }
+    }
 //    protected static void registerUser(String[] user){
 //        models.User newUser = new models.User(user);
 //    }
@@ -50,15 +67,23 @@ public class User {
     public String getLastName(){
         return lastName;
     }
-    public int getID(){
+    public String getID(){
         return id;
     }
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public  Account getAccount(){
+        return account;
+    }
+
     public String toFileString(){
-        return id + "," + username + "," + hashCode() + "," + firstName + "," + lastName + "," + role;
+        return id + "," + username + "," + hashCode() + "," + firstName + "," + lastName + "," + role + ";";
     }
 
     @Override
