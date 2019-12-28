@@ -1,5 +1,5 @@
 
-haroldkumar yellow 19
+haroldkumar yellow 100
 johndoe p4ssw0rd 0
 karensmith p4ssw0rd 21
 q lol 0
@@ -13,3 +13,4 @@ harold p4ssw0rd 25
 barry p4ssw0rd 20
 sean p4ssw0rd 50
 jimmy p4ssw0rd 25
+dayvon p4ssw0rd 0

@@ -16,6 +16,7 @@ public class Car {
         this.color = color;
     }
 
+
     public int getVin() {
         return vin;
     }

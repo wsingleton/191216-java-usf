@@ -8,19 +8,25 @@ public class Task {
     public String createAcronymFromPhrase(String phrase) {
 
         String acronym = "";
+        String word = "";
 
-        if( phrase == null || phrase == ""){
-            return phrase;
+        if( phrase == null || phrase.equals("")){
+            return "";
         }
-//        phrase.replaceAll("")
-        for (int i = 0; i < phrase.length(); i++){
-            char testChar = phrase.charAt(i);
-            if(testChar == Character.toUpperCase(phrase.charAt(i)) && Character.isAlphabetic(testChar)){
-                acronym += Character.toString(testChar);
+        String[] phraseHolder;
+        word = phrase.trim();
+        word = word.replaceAll("[0-9]", "").replaceAll("[^a-zA-Z]+", " ");
+        phraseHolder = phrase.split(" ");
+        try {
+            for (String phrase1 : phraseHolder
+            ) {
+                acronym += phrase1.charAt(0);
             }
+        }catch (Exception E){
+
         }
-        acronym = acronym.replaceAll("\\s", "");
-        return acronym;
+
+        return acronym.toUpperCase();
     }
 
 }
