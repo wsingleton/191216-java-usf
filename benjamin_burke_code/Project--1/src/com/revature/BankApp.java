@@ -4,14 +4,25 @@ package com.revature;
 import com.revature.models.User;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BankApp {
 
     public static void main(String[] args) {
+        //create a service object to run services
         Service service = new Service();
-
+        //grab the users to read the text file while printing it out
+        service.users = DAO.readAllUsers();
+        printAll(service.users);
+        //allows for the main menu to appear
         start();
+    }
+    //to print the list
+    private static void printAll(ArrayList<User> list) {
+        for(User u : list){
+            System.out.println(u.toString());
+        }
     }
 
     static void start(){
@@ -65,6 +76,8 @@ public class BankApp {
         User u = new User(username, password, 0);
         //adduser class
         Service.addUser(u);
+        System.out.println("Signed up, returning to menu");
+        start();
     }
 
     static void logIn(){
@@ -72,6 +85,8 @@ public class BankApp {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter your username: ");
         String username = scan.nextLine();
+        System.out.println(username);
+        System.out.println(Service.findUser(username));
         while(Service.findUser(username)==null){
             System.out.println("not a user.");
             username = scan.nextLine();
@@ -82,6 +97,15 @@ public class BankApp {
             System.out.println("wrong password. try again.");
             password = scan.nextLine();
         }
+
+    }
+
+    static void printLogInMenu(){
+        System.out.println("Logged in!"
+                            + "\n1: Balance"
+                            + "\n2: Deposit"
+                            + "\n3: Withdraw"
+                            + "\n4: Log Out");
     }
 
 }

@@ -36,7 +36,7 @@ public class DAO {
                 String[] data = line.split(":");
                 User temp = new User();
                 temp.setUsername(data[0]);
-                temp.setPassword(data[1]);
+//                temp.setPassword(data[1]);
                 users.add(temp);
             }
         } catch (FileNotFoundException e) {

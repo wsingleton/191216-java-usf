@@ -31,12 +31,16 @@ public class App {
                 catch (NumberFormatException nfe){
                     System.out.println("Sorry...please pick another number!");
                     start();
+                    scan.close();
+                    return;
                 }
         switch(op) {
             case 1: logIn(); break;
             case 2: signUp(); break;
             default: System.out.println("Sorry, that's not an option. Please try again");
                 start();
+                scan.close();
+                return;
         }
         scan.close();
     }
@@ -51,7 +55,7 @@ public class App {
         } else
         {
             User use = service.getByUsername(username);
-            System.out.println(use.toString());
+//            System.out.println(use.toString());
             System.out.println("Enter Password");
             String password = in.nextLine();
             //Lets see if password is valid
@@ -77,16 +81,17 @@ public class App {
             signUp();
         } else {
             //validation for username
-            System.out.println("Thanks" + username + ". What's your password?");
+            System.out.println("Thanks " + username + ". What's your password?");
             String password = scan.nextLine();
             //hmmm idk what to do here thought it'd work
             User user = service.addUser(username, password);
-            doThings(user);
+            loggedIn(user);
         }
 
     }
-    static void doThings(User u) {
+    static void loggedIn(User u) {
         System.out.println("hello....");
+        start();
     }
 
     static void logOut(){

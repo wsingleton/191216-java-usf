@@ -10,10 +10,14 @@ public class Service {
     static {
         users = new ArrayList<>();
         users.add(new User("username1", "password1", 0));
-        users.add(new User("username1", "password2", 540));
-        users.add(new User("username1", "password3", 100));
+        users.add(new User("username2", "password2", 540));
+        users.add(new User("username3", "password3", 100));
 
     }
+
+//    ArrayList<User> getAllLocal(){
+//        return users;
+//    }
 
     static boolean addUser(User u) {
         if(findUser(u.getUsername()) !=null)
@@ -28,18 +32,18 @@ public class Service {
             DAO.syncUsers(users);
             return true;
     }
-    boolean deleteUser(String username){
-        User u = findUser(username);
-        if(users.remove(u)) {
-            DAO.syncUsers(users);
-            return true;
-        }
-        return false;
-    }
+//    boolean deleteUser(String username){
+//        User u = findUser(username);
+//        if(users.remove(u)) {
+//            DAO.syncUsers(users);
+//            return true;
+//        }
+//        return false;
+//    }
 
-    static User findUser(String username){
+    static User findUser(String username) {
         for(User u : users) {
-            if(u.getUsername().equals(username)){
+            if(u.getUsername().equals(username)) {
                 return u;
             }
         }

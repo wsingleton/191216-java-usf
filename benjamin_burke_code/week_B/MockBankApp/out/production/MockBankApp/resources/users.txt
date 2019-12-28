@@ -1,2 +1,2 @@
 
-4::password
+4::passwordUser{username='benji', password='ben'}

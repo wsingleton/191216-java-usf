@@ -33,7 +33,8 @@ public class DAO {
         ArrayList<User> list = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(fileLocation))) {
             String line = null;
-            while((line=br.readLine()) !=null){
+            while((br.readLine()) !=null){
+                line= br.readLine();
                 String[] data = line.split(":");
                 //I think i will need to create a constructor....
                 User temp = new User(data);
@@ -45,6 +46,15 @@ public class DAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    static void addUser(User u) {
+        try(BufferedWriter w = new BufferedWriter(new FileWriter(fileLocation, true))) {
+            w.write(u.toString());
+            w.newLine();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     static void syncUsers(ArrayList<User> list){
