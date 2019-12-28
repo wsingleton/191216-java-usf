@@ -41,14 +41,14 @@ public class Service {
 //        return false;
 //    }
 
-    static User findUser(String username) {
-        for(User u : users) {
-            if(u.getUsername().equals(username)) {
-                return u;
-            }
-        }
-        return null;
-    }
+//    static User findUser(String username) {
+//        for(User u : users) {
+//            if(u.getUsername().equals(username)) {
+//                return u;
+//            }
+//        }
+//        return null;
+//    }
 
 
 }
