@@ -1,69 +1,71 @@
 package mockBank;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.Scanner;
 
-public class BankMenu {
-
+public class UserMenu {
     double balance;
 
-    double deposit(double amount){
-        if (amount > 0)
-        {
+
+    double deposit(double amount) {
+        if (amount > 0) {
             balance = amount + balance;
-        }
-        else {
+        } else {
             System.out.println("Please deposit amount greater than zero.");
         }
         return balance;
 
     }
 
-    double withdraw(double amount){
-        if (amount > 0)
-        {
+    double withdraw(double amount) {
+        if (amount > 0) {
             balance = balance - amount;
             System.out.println("Your balance is now : " + balance);
 
+        } else {
+            System.out.println("Please withdraw amount greater than zero.");
         }
-        else{
-            System.out.println("Please withdraw amount greater than zero.");}
-        
+
         return balance;
     }
 
+    void viewBalance() {
 
-    void Menu() {
-        char option = 'o';
+        System.out.println("Your current balance: " + balance);
+
+
+    }
+
+    void transactionMenu() {
+        int option;
         Scanner scanner = new Scanner(System.in);
+        System.out.println("----------------------------------------");
         System.out.println("Hello " + userName + " your account number is :");
-        System.out.println("A: View balance");
-        System.out.println("B: Deposit money");
-        System.out.println("C: Withdraw money");
-        System.out.println("D: Exit");
+        System.out.println("1: View balance");
+        System.out.println("2: Deposit money");
+        System.out.println("3: Withdraw money");
+        System.out.println("4: Exit");
+        System.out.println("------------------------------------------");
 
         do {
             System.out.println("Enter an option");
-            option = scanner.next().charAt(0);
+            option = scanner.nextInt();
             System.out.println("/n");
             switch (option) {
-                case 'A':
+                case 1:
                     System.out.println("Balance = " + balance);
                     break;
-                case 'B':
+                case 2:
                     System.out.println("Enter deposit amount: ");
                     double amount = scanner.nextDouble();
                     deposit(amount);
                     break;
-                case 'C':
+                case 3:
                     System.out.println("Enter withdraw amount: ");
                     double amount = scanner.nextDouble();
                     withdraw(amount);
                     break;
-                case 'D':
-                    System.out.println("Thank you!");
+                case 4:
+                    System.out.println("Thank you for using Kannon's Bank!");
 
                     break;
 
@@ -71,15 +73,10 @@ public class BankMenu {
                     System.out.println("Invalid entry, please try again");
 
             }
+            while (option != 4) ;
 
-            }
+
         }
+
     }
 }
-
-
-
-
-
-
-
