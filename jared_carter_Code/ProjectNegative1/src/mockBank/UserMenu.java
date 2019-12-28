@@ -16,9 +16,9 @@ public class UserMenu {
 
     }
 
-    double withdraw(double amount) {
-        if (amount > 0) {
-            balance = balance - amount;
+    double withdraw(double amount2) {
+        if (amount2 > 0) {
+            balance = balance - amount2;
             System.out.println("Your balance is now : " + balance);
 
         } else {
@@ -39,7 +39,7 @@ public class UserMenu {
         int option;
         Scanner scanner = new Scanner(System.in);
         System.out.println("----------------------------------------");
-        System.out.println("Hello " + userName + " your account number is :");
+        // System.out.println("Hello " + userName + " your account number is :");
         System.out.println("1: View balance");
         System.out.println("2: Deposit money");
         System.out.println("3: Withdraw money");
@@ -61,8 +61,8 @@ public class UserMenu {
                     break;
                 case 3:
                     System.out.println("Enter withdraw amount: ");
-                    double amount = scanner.nextDouble();
-                    withdraw(amount);
+                    double amount2 = scanner.nextDouble();
+                    withdraw(amount2);
                     break;
                 case 4:
                     System.out.println("Thank you for using Kannon's Bank!");
@@ -71,12 +71,13 @@ public class UserMenu {
 
                 default:
                     System.out.println("Invalid entry, please try again");
-
             }
-            while (option != 4) ;
 
+        } while (option != 4);
 
-        }
-
+        System.out.println("Thank you for using Kannon's Bank.");
     }
+
 }
+
+

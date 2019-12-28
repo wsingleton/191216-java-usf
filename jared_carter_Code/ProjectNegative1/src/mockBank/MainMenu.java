@@ -35,13 +35,12 @@ public class MainMenu {
                 default:
                     System.out.println("Invalid entry, please try again");
             }
-            while(option != 3);
+            while (option != 3) ;
             System.out.println("Thank you for using Kannon's Bank.");
-            {
 
-            }
-
-
+        }
+    }
+}
 
 
 
