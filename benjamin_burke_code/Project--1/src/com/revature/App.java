@@ -1,5 +1,8 @@
 package com.revature;
 
+
+import com.revature.models.Account;
+
 import java.util.Scanner;
 
 public class App {
@@ -40,8 +43,33 @@ public class App {
 
     static void logIn(){
         System.out.println("test for login");
+        Scanner in = new Scanner(System.in);
+
     }
     static void signUp(){
-        System.out.println("test for register");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter your username: ");
+        String username = scan.nextLine();
+        //need to add an exist method for username
+        if(service.exists(username)){
+            System.out.println("the username exists");
+            signUp();
+        } else {
+            System.out.println(username + ", Enter a password!");
+            String password = scan.nextLine();
+            //I will ask the user here if balance should be added
+            System.out.println("Would you like to add $ to your account?");
+            String deposit = scan.nextLine();
+            double balance = 0;
+            balance=Double.parseDouble(deposit);
+            if (balance < 2.0){
+                System.out.println("Enter amount greater than $2.00");
+                signUp();
+            } else if (balance>100000.00) {
+                System.out.println("Woah there that is too much money!");
+            }
+            //get an error
+            Account account = service.addAccount(username, password, balance);
+        }
     }
 }
