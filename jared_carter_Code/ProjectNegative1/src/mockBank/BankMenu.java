@@ -7,7 +7,35 @@ import java.util.Scanner;
 
 public class BankMenu {
 
-    void showMenu() {
+    double balance;
+
+    double deposit(double amount){
+        if (amount > 0)
+        {
+            balance = amount + balance;
+        }
+        else {
+            System.out.println("Please deposit amount greater than zero.");
+        }
+        return balance;
+
+    }
+
+    double withdraw(double amount){
+        if (amount > 0)
+        {
+            balance = balance - amount;
+            System.out.println("Your balance is now : " + balance);
+
+        }
+        else{
+            System.out.println("Please withdraw amount greater than zero.");}
+        
+        return balance;
+    }
+
+
+    void Menu() {
         char option = 'o';
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello " + userName + " your account number is :");

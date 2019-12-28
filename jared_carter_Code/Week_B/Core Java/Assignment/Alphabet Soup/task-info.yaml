@@ -47,7 +47,7 @@ files:
                       // collect the resulting strings and join them into a single one
                       .collect(Collectors.joining());
     selected: true
-    status: Solved
+    status: Unchecked
   text: |-
     import java.util.ArrayList;
     import java.util.Arrays;
@@ -150,5 +150,5 @@ files:
 
     }
   learner_created: false
-status: Solved
+status: Unchecked
 record: -1
