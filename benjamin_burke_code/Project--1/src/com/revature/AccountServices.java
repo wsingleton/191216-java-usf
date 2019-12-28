@@ -12,7 +12,12 @@ public class AccountServices {
         accounts.add(new Account("Benji", "Bruce", 0));
     }
 
-    
+    ArrayList<Account> getAllAccounts() {
+
+
+        DAO dao = new DAO();
+        return dao.readAccounts();
+    }
 
     public Account addAccount(String username, String password, Double balance){
 

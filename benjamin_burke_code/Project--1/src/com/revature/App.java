@@ -37,4 +37,11 @@ public class App {
         }
         scan.close();
     }
+
+    static void logIn(){
+        System.out.println("test for login");
+    }
+    static void signUp(){
+        System.out.println("test for register");
+    }
 }
