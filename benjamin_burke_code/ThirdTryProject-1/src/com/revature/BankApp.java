@@ -3,8 +3,10 @@ package com.revature;
 import java.util.Scanner;
 
 public class BankApp {
-    public static void main(String[] args) {
+    static Service service = new Service();
 
+    public static void main(String[] args) {
+            start();
     }
 
     static void start(){
@@ -32,5 +34,14 @@ public class BankApp {
                 System.out.println("Sorry, that's not an option. Please try again");
             }
         }
+    }
+
+    static void logIn(){
+        System.out.println("test log in");
+    }
+
+    static void signUp(){
+        System.out.println("testing sign up");
+
     }
 }
