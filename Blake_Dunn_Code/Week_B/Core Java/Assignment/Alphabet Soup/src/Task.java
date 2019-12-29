@@ -7,15 +7,15 @@ public class Task {
 
     public String createAcronymFromPhrase(String phrase) {
 
-        if (phrase == null)
-            return "";
+        if (phrase == null || phrase.equals(""))
+            return new String("");
 
         phrase = phrase.trim();
+        if(phrase.equals("")) {
+            return phrase = null;
+        }
 
-        if(phrase.equals(""))
-            return "";
 
-        List<String> phraseWordList = new ArrayList<>(Arrays.asList(phrase.split("")));
 
 
 

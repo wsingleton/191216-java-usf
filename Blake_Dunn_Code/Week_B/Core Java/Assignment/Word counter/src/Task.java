@@ -2,45 +2,57 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Task {
 
     public String[] extractTextFromFile(File file) {
 
-        if (file.exists()){
-            System.out.println("It exists!");
-        }else {
-            System.out.println("File does not exist.");
+        if (file == null){
             return new String[0];
         }
+        String[] token = new String[0];
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line = reader.readLine();
-            Arrays extractedText = new Arrays();
+        try (Scanner reader = new Scanner(new FileReader(file))) {
 
-            while(line != null) {
 
-                extractedText = extractedText.add
-
+            while (reader.hasNext()) {
+                String line = reader.next();
+                token = Arrays.copyOf(token, token.length + 1);
+                token[token.length - 1] = line;
             }
 
         }catch (FileNotFoundException fnf) {
             System.err.println("File does not exist.");
+            return new String[0];
         }catch (Exception e) {
             e.printStackTrace();
+            return new String[0];
         }
-
-
+        return token;
     }
 
     public Map<String, Integer> countWords(String[] extractedText) {
 
-        // Provide your implementation
+
+        Map<String, Integer> map = new HashMap<>();
+
+        if (extractedText == null || extractedText.length == 0) {
+            return map;
+        }
+
+
+        for (String s : extractedText) {
+            if (!map.containsKey(s)) {
+                map.put(s, 1);
+            }
+            else {
+                int count = map.get(s);
+                map.put(s, count + 1);
+            }
+        }
+
+        return map;
 
     }
 

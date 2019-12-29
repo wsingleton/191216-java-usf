@@ -6,7 +6,9 @@ public class Task {
 
     public List<Employee> sortEmployeesBySalary(List<Employee> employeesForSorting) {
 
-        // Provide your implementation here
+
+
+        List<Employee> employees = new ArrayList<>(employeesForSorting);
 
     }
 

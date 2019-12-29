@@ -3,8 +3,8 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 198
-    length: 35
+  - offset: 191
+    length: 73
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -14,7 +14,7 @@ files:
       if (employeesForSorting == null || employeesForSorting.isEmpty()) return new ArrayList<>();
               Collections.sort(employeesForSorting, new EmployeeComparator());
               return employeesForSorting;
-    selected: false
+    selected: true
     status: Unchecked
   text: |
     import java.util.ArrayList;
@@ -35,7 +35,7 @@ files:
   visible: true
   placeholders:
   - offset: 56
-    length: 35
+    length: 1694
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -117,7 +117,7 @@ files:
                       ", salary=" + salary +
                       '}';
           }
-    selected: false
+    selected: true
     status: Unchecked
   text: |+
     import java.util.Objects;
@@ -133,7 +133,7 @@ files:
   visible: true
   placeholders:
   - offset: 62
-    length: 25
+    length: 31
     placeholder_text: /* Something goes here */
     initial_state:
       length: 25
@@ -142,8 +142,8 @@ files:
     possible_answer: implements Comparator<Employee>
     selected: false
     status: Unchecked
-  - offset: 95
-    length: 39
+  - offset: 101
+    length: 224
     placeholder_text: // A method implementation will go here
     initial_state:
       length: 39
@@ -165,7 +165,7 @@ files:
               return -1;
 
           }
-    selected: false
+    selected: true
     status: Unchecked
   text: |
     import java.util.Comparator;
