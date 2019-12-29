@@ -52,9 +52,15 @@ public class InterfaceDriver {
                 System.out.println("Please enter your password.  Note that passwords ARE case sensitive.");
                 String pass=scanner.next();
                 currentUser=Menus.loginScreen(userList,user,pass);
-                currentUserBalance=accountList.get(currentUser.getUsername());
-                Menus.browseAccount(currentUser,currentUserBalance);
-                break;
+                if (currentUser==null) {
+                    System.out.println("Please try again later.");
+                    System.exit(0);
+                }
+                else {
+                    currentUserBalance = accountList.get(currentUser.getUsername());
+                    Menus.browseAccount(currentUser, currentUserBalance);
+                    break;
+                }
             }
             case 3: {
                 System.out.println("Goodbye!");
