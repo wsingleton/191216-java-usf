@@ -27,4 +27,14 @@ public class AccountServices {
         dao.addAccount(a);
         return a;
     }
+
+    boolean exists(String username){
+        ArrayList<Account> accounts = getAllAccounts();
+        return accounts.stream().anyMatch(s->s.getUsername().equalsIgnoreCase(username));
+    }
+
+    Account getByUsername(String username){
+        return getAllAccounts().stream().filter(s->s.getUsername().equalsIgnoreCase(username)).findFirst().get();
+    }
+
 }

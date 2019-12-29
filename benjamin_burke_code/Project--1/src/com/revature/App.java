@@ -44,6 +44,28 @@ public class App {
     static void logIn(){
         System.out.println("test for login");
         Scanner in = new Scanner(System.in);
+        System.out.println("Logging in \n"
+                + "Enter your username: ");
+        String username = in.nextLine();
+        if(!service.exists(username)) {
+            System.out.println("You are not a user. Please try again.");
+            logIn();
+        } else
+        {
+            Account use = service.getByUsername(username);
+//            System.out.println(use.toString());
+            System.out.println("Enter Password");
+            String password = in.nextLine();
+            //Lets see if password is valid
+            if(use.getPassword().equals(password)) {
+                System.out.println("Logged in test");
+            }
+            else {
+                System.out.println("Your password is incorrect try again!");
+                logIn();
+            }
+        }
+
 
     }
     static void signUp(){
@@ -74,10 +96,15 @@ public class App {
               signUp();
           }
 
-            
+
             Account Account = service.addAccount(username, password, balance);
           //need a login method
           loggedIn(Account);
         }
     }
+    //once user successfuly logs in
+    static void loggedIn(Account a) {
+
+    }
+
 }
