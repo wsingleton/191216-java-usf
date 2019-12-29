@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-29T02:13:15" hostname="107-144-156-227.biz.spectrum.com" time="0.022">
+  <properties/>
+  <testcase name="testCountWordsWithEmptyStringArray" classname="Tests" time="0.003"/>
+  <testcase name="testExtractTextWithExistingFileContainingText" classname="Tests" time="0.004"/>
+  <testcase name="testCountWordsWithValidStringArray" classname="Tests" time="0.001"/>
+  <testcase name="testExtractTextWithNullFile" classname="Tests" time="0.005"/>
+  <testcase name="testExtractTextWithMissingFile" classname="Tests" time="0.005"/>
+  <testcase name="testCountWordsWithNullStringArray" classname="Tests" time="0.001"/>
+  <testcase name="testExtractTextWithExistingEmptyFile" classname="Tests" time="0.001"/>
+  <system-out><![CDATA[the quick brown fox jumped over the lazy dog
+]]></system-out>
+  <system-err><![CDATA[An unexpected exception occurred.
+Exception thrown while reading file.
+]]></system-err>
+</testsuite>

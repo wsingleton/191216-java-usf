@@ -14,9 +14,9 @@ public class Task {
             return "";
         }
         String[] phraseHolder;
-        word = phrase.trim();
+        word = phrase.trim().replaceAll("'", "");
         word = word.replaceAll("[0-9]", "").replaceAll("[^a-zA-Z]+", " ");
-        phraseHolder = phrase.split(" ");
+        phraseHolder = word.split(" ");
         try {
             for (String phrase1 : phraseHolder
             ) {

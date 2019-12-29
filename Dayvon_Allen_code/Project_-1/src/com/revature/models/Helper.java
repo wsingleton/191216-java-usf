@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Menu {
+public class Helper {
 
     public static void showMainMenu(){
         System.out.print("+---------------------------------+" +

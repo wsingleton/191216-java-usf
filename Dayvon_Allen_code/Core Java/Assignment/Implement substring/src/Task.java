@@ -7,8 +7,13 @@ public class Task {
         }
         String[] substringArr = mainString.split("");
         String arr = "";
-        for (int i = start; i < end; i++){
-            arr += substringArr[i];
+        if(start >= 0 && end >=0 ) {
+            for (int i = start; i < end; i++) {
+                arr += substringArr[i];
+            }
+        }
+        else{
+            return "";
         }
         return arr;
     }
