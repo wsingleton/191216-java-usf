@@ -1,8 +1,7 @@
-package mockBank.UI;
+package com.revature.mockBank.UI;
 
-import mockBank.Service.BalancePage;
-import mockBank.Service.Deposit;
-import mockBank.Service.Withdraw;
+import com.revature.mockBank.Service.Account;
+
 
 import java.util.Scanner;
 
@@ -12,7 +11,7 @@ public class TransactionMenu {
         int option;
         Scanner scanner = new Scanner(System.in);
         System.out.println("----------------------------------------");
-        // System.out.println("Hello " + userName + " your account number is :");
+        //System.out.println("Hello " + userName + " your account number is :");
         System.out.println("1: View balance");
         System.out.println("2: Deposit money");
         System.out.println("3: Withdraw money");
@@ -25,13 +24,13 @@ public class TransactionMenu {
             System.out.println("/n");
             switch (option) {
                 case 1:
-                    BalancePage.showBalance();
+                    Account.showBalance();
                     break;
                 case 2:
-                    Deposit.deposit();
+                    Account.deposit();
                     break;
                 case 3:
-                    Withdraw.withdraw();
+                    Account.withdraw();
                     break;
                 case 4:
                     System.out.println("Thank you for using Kannon's Bank!");
@@ -43,7 +42,7 @@ public class TransactionMenu {
             }
 
         } while (option != 4);
-        
+
     }
 
 }

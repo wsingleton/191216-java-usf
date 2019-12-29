@@ -1,7 +1,6 @@
-package mockBank.UI;
+package com.revature.mockBank.UI;
 
-import mockBank.Service.Login;
-import mockBank.Service.Register;
+import com.revature.mockBank.Service.Account;
 
 import java.util.Scanner;
 
@@ -24,11 +23,12 @@ public class SignInMenu {
             System.out.println("/n");
             switch (option) {
                 case 1:
-                    Login login = new Login();
-                    login.login();
+                    Account login = new Account();
+                    login.loginAccount();
+
                     break;
                 case 2:
-                    Register register = new Register();
+                    Account register = new Account();
                     register.registerAccount();
                     break;
                 case 3:
