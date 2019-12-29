@@ -2,7 +2,10 @@ import java.util.Objects;
 
 public class Employee {
 
-    // Provide your implementation here
+    private int id;
+    private String firstName;
+    private String lastName;
+    private double salary;
 
 }
 

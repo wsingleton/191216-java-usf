@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 180
-    length: 871
+    length: 468
     placeholder_text: /* Provide your implementation here */
     initial_state:
       length: 38
@@ -21,9 +21,9 @@ files:
 
               return Arrays.copyOf(_palindromes, _palindromes.length, String[].class);
     selected: true
-    status: Failed
-  - offset: 1114
-    length: 12
+    status: Solved
+  - offset: 950
+    length: 13
     placeholder_text: /* Provide your implementation here */
     initial_state:
       length: 38
@@ -35,7 +35,7 @@ files:
 
               return sanitizedWord.equals(reversedWord.toString());
     selected: true
-    status: Failed
+    status: Solved
   text: |-
     import java.util.Arrays;
     import java.util.stream.Collectors;
@@ -208,5 +208,5 @@ files:
 
     }
   learner_created: false
-status: Failed
+status: Solved
 record: -1

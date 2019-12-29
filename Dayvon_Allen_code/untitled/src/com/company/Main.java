@@ -29,14 +29,32 @@ public class Main {
 //
 //        return temp[temp.length - 1];
 
-        String[] wordArray = {"test", "house", "racecar"};
-        int count = 0;
-        StringBuilder[] reverseString = {new StringBuilder("name")};
+       String[] wordArray = {    "alice",
+               "not a palindrome",
+               "java",
+               "blah",
+               "test",
+               "nope"};
+        if(wordArray == null || wordArray.length == 0){
+            System.out.println(new String[0]);
+        }
+        String palinString = "";
         for (String s: wordArray
+        ) {
+            if (s != null && !s.equals("")){
+                if(Generic.isPalindrome(s)){
+                    palinString += s.replaceAll("[^a-zA-Z]+", "") + " ";
+                }
+            }
+        }
+        System.out.println(palinString);
+        System.out.println(palinString.length());
+        System.out.println(palinString.split(" ").length);
+        System.out.println(palinString.split(" ").toString());
+        for (String s: palinString.split(" ")
              ) {
-            reverseString[count].append(s).reverse();
-            System.out.println(reverseString[count].toString());
-            count++;
+            System.out.println(s);
+
         }
 
     }

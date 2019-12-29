@@ -1,11 +1,14 @@
 package com.company;
 
-public class Generic<T> {
+public class Generic{
 
-    public void genericPrinter(T...arr){
-        for (T s: arr
-             ) {
-            System.out.println(s);
+    public static boolean isPalindrome(String word) {
+        StringBuffer s = new StringBuffer(word.replaceAll("[^a-zA-Z]+", "").toLowerCase());
+        System.out.println(s.toString());
+        s = s.reverse();
+        if(s.toString().equals(word.replaceAll("[^a-zA-Z]+", "").toLowerCase())){
+            return true;
         }
+        return false;
     }
 }

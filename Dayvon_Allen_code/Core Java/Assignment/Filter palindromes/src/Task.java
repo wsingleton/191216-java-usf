@@ -9,31 +9,30 @@ public class Task {
         if(wordArray == null || wordArray.length == 0){
             return new String[0];
         }
-        ArrayList<String> holder = new ArrayList<>();
-        StringBuilder[] reverseString = new StringBuilder[wordArray.length];
-        String[] temp = wordArray;
-        for(int i = 0; i < wordArray.length; i++){
-            reverseString[i] = reverseString[i].reverse();
-        }
-
-        for (int i = 0; i < wordArray.length; i++){
-            if(reverseString[i].toString().trim().replaceAll("[^a-zA-Z]+", " ").equals(temp[i].trim().replaceAll("[^a-zA-Z]+", " "))){
-                holder.add(temp[i]);
+        String palinString = "";
+        for (String s: wordArray
+             ) {
+            if (s != null && !s.equals("")){
+                if(isPalindrome(s)){
+                    palinString += s + " _";
+                }
             }
         }
-        String[] palin = new String[holder.size()];
-        for(int i = 0; i < holder.size(); i++){
-            palin[i] = holder.get(i);
+        if(palinString.length() > 0){
+            return palinString.split(" _");
         }
-        if(palin.length > 0){
-            return palin;
-        }
+
         return new String[0];
+
     }
 
     public boolean isPalindrome(String word) {
-
-        return true;
+        StringBuffer s = new StringBuffer(word.replaceAll("[^A-Za-z0-9]+", "").toLowerCase());
+        s = s.reverse();
+        if(s.toString().equals(word.replaceAll("[^A-Za-z0-9]+", "").toLowerCase())){
+            return true;
+        }
+        return false;
     }
 
 }
