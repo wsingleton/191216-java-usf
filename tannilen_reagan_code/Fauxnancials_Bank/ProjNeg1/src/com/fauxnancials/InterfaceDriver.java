@@ -4,6 +4,7 @@ import com.fauxnancials.resources.User;
 import com.fauxnancials.services.DocumentationDriver;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class InterfaceDriver {
@@ -12,7 +13,9 @@ public class InterfaceDriver {
         boolean valid;
         int choice;
         User currentUser;
+        int currentUserBalance;
         ArrayList<User> userList = new ArrayList<>(DocumentationDriver.CollectUsers());
+        HashMap<String, Integer> accountList=new HashMap<>(DocumentationDriver.CollectAccounts());
         System.out.println("WARNING: Improperly exiting program may cause a loss of data.");
         System.out.println("Always exit the program properly to avoid data loss.");
         System.out.println("");
@@ -39,6 +42,7 @@ public class InterfaceDriver {
             case 1: {
                 User newUser = (Menus.registerNew(userList));
                 userList.add(newUser);
+                accountList.put(newUser.getUsername(),0);
                 break;
             }
             case 2: {
@@ -48,7 +52,8 @@ public class InterfaceDriver {
                 System.out.println("Please enter your password.  Note that passwords ARE case sensitive.");
                 String pass=scanner.next();
                 currentUser=Menus.loginScreen(userList,user,pass);
-                Menus.browseAccount(currentUser,0);
+                currentUserBalance=accountList.get(currentUser.getUsername());
+                Menus.browseAccount(currentUser,currentUserBalance);
                 break;
             }
             case 3: {
