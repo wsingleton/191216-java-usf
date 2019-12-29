@@ -44,69 +44,81 @@ public class User {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public boolean setFirstName(String firstName) {
         if(firstName.equals("")) {
             System.out.println("Invalid First Name: No Input");
-            return;
+            return false;
         }
         if(firstName.length() < 2 || firstName.length() > 15) {
             System.out.println("Invalid First Name: Invalid Length");
-            return;
+            return false;
         }
         for(int i = 0; i < firstName.length(); i++) {
             if(!Character.isAlphabetic(firstName.charAt(i))) {
                 System.out.println("Invalid First Name: Cannot Contain Non-Alphabetical Characters");
-                return;
+                return false;
             }
         }
 
         this.firstName = firstName;
+        return true;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public boolean setLastName(String lastName) {
         if(lastName.equals("")) {
             System.out.println("Invalid Last Name: No Input");
-            return;
+            return false;
         }
         if(!(lastName.length() > 2 && lastName.length() < 20)) {
             System.out.println("Invalid Last Name: Invalid Length");
-            return;
+            return false;
         }
         for(int i = 0; i < lastName.length(); i++) {
             if(!Character.isAlphabetic(lastName.charAt(i)) && !(lastName.charAt(i) == '-')) {
                 System.out.println("Invalid Last Name: Cannot Contain Non-Alphabetical, Non-Hyphen Characters");
-                return;
+                return false;
             }
         }
         this.lastName = lastName;
+        return true;
     }
 
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public boolean setUserName(String userName) {
+        if(userName.equals("")) {
+            System.out.println("Invalid username: No Input");
+            return false;
+        }
+        if(!(userName.length() > 3 && userName.length() < 20)) {
+            System.out.println("Invalid username: Invalid Length");
+            return false;
+        }
         this.userName = userName;
+        return true;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public boolean setPassword(String password) {
         if(password.equals("")) {
             System.out.println("Invalid Password: No Input");
-            return;
+            return false;
         }
         if(password.length() < 8) {
             System.out.println("Invalid Password: Invalid Length");
-            return;
+            return false;
         }
         this.password = password;
+        return true;
     }
 
     public Role getRole() {
@@ -148,7 +160,7 @@ public class User {
     @Override
     public int hashCode() {
         int hash = Objects.hash(userName);
-        if(hash < 0) hash = hash*-1;
+        //if(hash < 0) hash = hash*-1;
         return hash;
     }
 

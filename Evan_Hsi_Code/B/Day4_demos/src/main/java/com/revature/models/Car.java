@@ -24,6 +24,10 @@ public class Car {
         this.vin = vin;
     }
 
+    public void kappa() {
+        System.out.println("help");
+    }
+
     public String getMake() {
         return make;
     }

@@ -43,6 +43,9 @@ public class Session {
         catch (IOException io) { System.out.println(io.getMessage()); }
         catch (Exception e) { System.err.println("Unexpected exception occurred"); }
 
+        //bank.printAllUsers();
+        //bank.printAllAccounts();
+
         Scanner interactive = new Scanner(new InputStreamReader(System.in));
 
         boolean success = false;
@@ -60,11 +63,15 @@ public class Session {
                 case 1:
                     System.out.println("Enter username: ");
                     userName = interactive.next();
+                    userId = Objects.hash(userName);
+                    //System.out.println(Objects.hash(userName));
                     if(bank.userContains(userName)) {
                         System.out.println("Enter password: ");
                         password = interactive.next();
-                        if(password.equals(bank.accountAt(Objects.hash(userName)))) {
+                        if(password.equals(bank.userAt(userId).getPassword())) {
                             success = true;
+                            System.out.println("Login Successful\nWelcome " + bank.userAt(userId).getFirstName() +
+                                    " " + bank.userAt((userId)).getLastName());
                         }
                         else { System.out.println("Invalid Password"); break; }
                     }
@@ -84,18 +91,32 @@ public class Session {
 
             switch(operation.toLowerCase()) {
                 case "deposit":
-                    System.out.println("Enter the index of the account into which you want to make a deposit");
-                    int index = interactive.nextInt();
-                    System.out.println("Enter the amount you would like to deposit");
-                    double amount = interactive.nextDouble();
-                    bank.makeDeposit(bank.userAt(userId).getAccount(index).getActId(), amount);
+                    if(bank.userAt(userId).getAccountsLength() != 0) {
+                        System.out.println("Enter the index of the account into which you want to make a deposit:");
+                        int index = interactive.nextInt();
+                        if(index < bank.userAt(userId).getAccountsLength() && index >= 0) {
+                            System.out.println("Enter the amount you would like to deposit:");
+                            double amount = interactive.nextDouble();
+                            bank.makeDeposit(bank.userAt(userId).getAccount(index).getActId(), amount);
+                        }
+                        else System.out.println("Account does not exist.");
+                    }
+                    else
+                        System.out.println("You do not have any accounts.");
                     break;
                 case "withdraw":
-                    System.out.println("Enter the index of the account from which you want to withdraw");
-                    int indexWithdraw = interactive.nextInt();
-                    System.out.println("Enter the amount you would like to withdraw");
-                    double amountWithdraw = interactive.nextDouble();
-                    bank.makeWithdrawal(bank.userAt(userId).getAccount(indexWithdraw).getActId(), amountWithdraw);
+                    if(bank.userAt(userId).getAccountsLength() != 0) {
+                        System.out.println("Enter the index of the account from which you want to withdraw");
+                        int indexWithdraw = interactive.nextInt();
+                        if(indexWithdraw < bank.userAt(userId).getAccountsLength() && indexWithdraw >= 0) {
+                            System.out.println("Enter the amount you would like to withdraw");
+                            double amountWithdraw = interactive.nextDouble();
+                            bank.makeWithdrawal(bank.userAt(userId).getAccount(indexWithdraw).getActId(), amountWithdraw);
+                        }
+                        else System.out.println("Account does not exist.");
+                    }
+                    else
+                        System.out.println("You do not have any accounts.");
                     break;
                 case "create":
                     bank.makeAcct(interactive, bank.userAt(userId), false);

@@ -16,7 +16,8 @@ public class Bank {
     }
 
     public boolean userContains(String userName) {
-        return userBase.contains(Objects.hash(userName));
+        //System.out.println(Objects.hash(userName));
+        return userBase.containsKey(Objects.hash(userName));
     }
 
     public Account accountAt(int id) {
@@ -99,16 +100,32 @@ public class Bank {
             user.setId(id);
         }
         if(!file) { System.out.println("First Name: "); }
-        user.setFirstName(scanner.next());
+        boolean fn = false;
+        while(!fn) {
+            fn = user.setFirstName(scanner.next());
+            if(!fn) System.out.println("First Name: ");
+        }
 
         if(!file) { System.out.println("Last Name: "); }
-        user.setLastName(scanner.next());
+        boolean ln = false;
+        while(!ln) {
+            ln = user.setLastName(scanner.next());
+            if(!ln) System.out.println("Last Name: ");
+        }
 
         if(!file) { System.out.println("Username: "); }
-        user.setUserName(scanner.next());
+        boolean un = false;
+        while(!un) {
+            un = user.setUserName(scanner.next());
+            if(!un) System.out.println("Username: ");
+        }
 
         if(!file) { System.out.println("Password: "); }
-        user.setPassword(scanner.next());
+        boolean pw = false;
+        while(!pw) {
+            pw = user.setPassword(scanner.next());
+            if(!pw) System.out.println("Password: ");
+        }
 
         if(file) {
             String roleString = scanner.next();
@@ -147,7 +164,7 @@ public class Bank {
 
     public double makeDeposit(int accountId, double depositAmount) {
         if(depositAmount < 1) {
-            System.out.print("Invalid deposit amount.");
+            System.out.println("Invalid deposit amount.");
             return 0;
         }
         acctBase.get(accountId).setBalance(acctBase.get(accountId).getBalance() + depositAmount);
@@ -171,6 +188,14 @@ public class Bank {
         for( int i = 0; i < userBase.get(userId).getAccountsLength(); i++) {
             System.out.println("Account " + i + ": " + userBase.get(userId).getAccount(i).serialString());
         }
+    }
+
+    public void printAllUsers() {
+        userBase.forEach((k,v) -> System.out.println(k + " / " + v.serialString()));
+    }
+
+    public void printAllAccounts() {
+        acctBase.forEach((k,v) -> System.out.println(k + " / " + v.serialString()));
     }
 
 }

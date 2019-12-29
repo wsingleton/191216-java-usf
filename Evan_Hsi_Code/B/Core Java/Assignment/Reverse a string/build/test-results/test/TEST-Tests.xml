@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-28T02:22:25" hostname="107-144-156-227.biz.spectrum.com" time="0.003">
+  <properties/>
+  <testcase name="testSolutionUsingStringWithCapitalizedLetter" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionUsingPalindrome" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionUsingNullString" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionUsingStringWithNewLines" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionUsingEmptyString" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionUsingSimpleString" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionUsingStringWithPunctuationAndSpaces" classname="Tests" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
