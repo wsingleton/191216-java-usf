@@ -10,9 +10,10 @@ public class Program {
                 "1. Enter 1 to sign up (new users) " + "\n" + "2. Enter 2 to log in (for existing users only)");
 
         // current user
-        String currentUser;
+        String logedUserId = null;
         Scanner read = new Scanner(System.in);
         String choice = read.nextLine();
+        int userId;
 
         String userChoice = choice.toLowerCase();
 //        System.out.println("you chose " + userChoice);
@@ -30,15 +31,14 @@ public class Program {
                 System.out.println("Enter your password");
                 String password = read.nextLine();
                 in.login(username, password);
-                currentUser = in.LoggedId;
+                String loggedId = in.LoggedId;
+                logedUserId = loggedId;
+
                 break;
-
-            case "withdraw":
-
-
             default:
                 System.out.println("Enter the appropriate option please");
         }
+        System.out.println(logedUserId);
 
 
     }

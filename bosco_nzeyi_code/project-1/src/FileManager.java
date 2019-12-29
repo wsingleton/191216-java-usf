@@ -18,9 +18,10 @@ public class FileManager {
         try {
             FileWriter write = new FileWriter(writeFile, true);
             BufferedWriter writer = new BufferedWriter(write);
-            writer.write(input + "\n");
-            System.out.println("Wrote to the file " + writeFile.getName());
-            System.out.println("Wrote the following to the file: " + "\n" + input);
+            writer.write("\n"+ input);
+            System.out.println("Input saved");
+//            System.out.println("Wrote to the file " + writeFile.getName());
+//            System.out.println("Wrote the following to the file: " + "\n" + input);
             writer.close();
 
         }catch (Exception e){
@@ -48,7 +49,7 @@ public class FileManager {
 //                System.out.println(lines);
                 lines = read.readLine();
             }
-            System.out.println("the length is " + allLines.size());
+//            System.out.println("the length is " + allLines.size());
             this.textonFile = allLines;
             for(String data: allLines){
                 System.out.println(data);
@@ -73,13 +74,12 @@ public class FileManager {
                 content.add(lines);
                 lines = read.readLine();
             }
-            // return content array when this method is called
 
         } catch (Exception e){
             e.printStackTrace();
             System.err.println("An error occurred while trying to read a file");
         }
-
+        // return content array when this method is called
         return content;
     }
 
