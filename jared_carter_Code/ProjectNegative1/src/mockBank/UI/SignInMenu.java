@@ -41,7 +41,7 @@ public class SignInMenu {
             }
         }
             while (option != 3) ;
-            System.out.println("Thank you for using Kannon's Bank.");
+
 
 
     }

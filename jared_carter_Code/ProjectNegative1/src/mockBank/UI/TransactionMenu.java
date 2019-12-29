@@ -43,8 +43,7 @@ public class TransactionMenu {
             }
 
         } while (option != 4);
-
-        System.out.println("Thank you for using Kannon's Bank.");
+        
     }
 
 }
