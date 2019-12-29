@@ -36,7 +36,7 @@ loops
 function methods
 
 PROGRAMMING PARADIGMS
-iperative
+imperative
 ->Procedural (C, Basic, Fortram)
 ->Object-Oriented (java, c#, c++, javascript)
 ->describes exactly how to perform a task

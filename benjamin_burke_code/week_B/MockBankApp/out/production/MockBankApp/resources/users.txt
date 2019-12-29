@@ -1,2 +1,2 @@
 
-4::passwordUser{username='benji', password='ben'}User{username='benjiman', password='benji'}
+User{username='k', password='k'}

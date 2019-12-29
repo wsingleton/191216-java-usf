@@ -2,6 +2,7 @@ package com.revature;
 
 
 import com.revature.models.Account;
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
@@ -131,15 +132,55 @@ public class App {
     }
 
     private static void deposit(Account a){
+        System.out.println("Amount: "+ a.getBalance()
+                            + "\nAmount to deposit?" + "\n$");
+
+        Scanner input = new Scanner(System.in);
+        double deposit = input.nextDouble();
+        double newBelance = a.getBalance() + deposit;
+        if (newBelance > 250000.00){
+            System.out.println("You reached the 250k limit.");
+        } else if (newBelance < a.getBalance()) {
+            System.out.println("You can't deposit negative amounts of money, withdrawl");
+        } else {
+            a.setBalance(newBelance);
+            DecimalFormat decimalFormat = new DecimalFormat("#.00");
+            System.out.println("You deposited $" + deposit + "." + "\n Your new balance is now: $"
+                    + decimalFormat.format(a.getBalance()));
+
+            //update the balance
+            service.updateBalance(a);
+        }
 
     }
 
     private static void withdrawl(Account a){
+        System.out.println("How much to withdrawl?");
 
+        Scanner input = new Scanner(System.in);
+
+        double withdrawlAmount = input.nextDouble();
+        double newBalance = a.getBalance() - withdrawlAmount;
+        if(newBalance< 0){
+            System.out.println("You don't have money!");
+        } else if (newBalance < 2 ) {
+            System.out.println("You need to have at least $2 in your account to stay open!");
+        } else {
+            a.setBalance(newBalance);
+            DecimalFormat decimalFormat = new DecimalFormat("#.00");
+            System.out.println("Amount: " + withdrawlAmount
+                                +decimalFormat.format(a.getBalance()) );
+            service.updateBalance(a);
+        }
     }
 
     private static void logOut(Account a){
-        
+        System.out.println("Logged Out of session");
+        service.updateBalance(a);
+
+        start();
     }
+
+
 
 }

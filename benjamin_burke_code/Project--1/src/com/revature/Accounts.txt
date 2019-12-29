@@ -1,1 +1,1 @@
-Account{username='bruce', password='bruce', balance=6.0}
+Account{username='i', password='i', balance=500.0}

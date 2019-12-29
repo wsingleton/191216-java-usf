@@ -7,7 +7,17 @@ public class Task {
 
     public String createAcronymFromPhrase(String phrase) {
 
-        // Provide your implementation here
+        String acronym = "";
+
+
+        if(phrase== null || phrase==""){
+            return "";
+        }
+        for (char c : phrase.toCharArray())
+            if (Character.isUpperCase(c))
+                acronym +=c;
+
+        return acronym;
 
     }
 

@@ -1,0 +1,3 @@
+HashMap vs Hashtable
+hashmap 1 null key as many as you like
+hashtable no null values

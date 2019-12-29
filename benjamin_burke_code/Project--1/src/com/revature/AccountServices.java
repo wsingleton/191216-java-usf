@@ -37,4 +37,17 @@ public class AccountServices {
         return getAllAccounts().stream().filter(s->s.getUsername().equalsIgnoreCase(username)).findFirst().get();
     }
 
+    void updateBalance(Account ac){
+        DAO dao = new DAO();
+        ArrayList<Account> temp = dao.readAccounts();
+
+        for (Account a : temp){
+            if(a.getUsername().equals(ac.getUsername())) {
+                a.setBalance(a.getBalance());
+            }
+        }
+        //dao needs update
+        dao.updateAccount(temp);
+    }
+
 }
