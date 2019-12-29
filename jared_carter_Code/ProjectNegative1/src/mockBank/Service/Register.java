@@ -1,11 +1,11 @@
-package mockBank.UI;
+package mockBank.Service;
 
 import java.util.Scanner;
 
-public class User {
+public class Register {
 
     Scanner scanner = new Scanner(System.in);
-    private void registerAccount() {
+    public void registerAccount() {
         String firstName, lastName, userName, password = " ";
         System.out.println("Please enter first name: ");
         firstName = scanner.nextLine();

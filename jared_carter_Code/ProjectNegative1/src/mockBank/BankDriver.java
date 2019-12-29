@@ -1,11 +1,11 @@
 package mockBank;
 
-import mockBank.UI.MainMenu;
+import mockBank.UI.SignInMenu;
 
 public class BankDriver {
     public static void main(){
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.loginMenu();
+        SignInMenu signInMenu = new SignInMenu();
+        signInMenu.loginMenu();
 
     }
 
