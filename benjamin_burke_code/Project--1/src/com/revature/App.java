@@ -3,6 +3,7 @@ package com.revature;
 
 import com.revature.models.Account;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class App {
@@ -104,7 +105,41 @@ public class App {
     }
     //once user successfuly logs in
     static void loggedIn(Account a) {
+        //the account information needs to be retrieved
+        String username = a.getUsername();
+        Double balance = a.getBalance();
 
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        System.out.println(" Hello " + username
+                            + ", you currently have : $"
+                            + decimalFormat.format(balance));
+
+        System.out.println("\n1: Deposit"
+                            + "\n2: Withdrawl"
+                            + "\n3: Log Out");
+
+        Scanner input = new Scanner(System.in);
+        int responst = 0;
+        responst = input.nextInt();
+
+        switch (responst){
+            case 1: deposit(a); break;
+            case 2: withdrawl(a); break;
+            case 3: logOut(a); break;
+        }
+        loggedIn(a);
+    }
+
+    private static void deposit(Account a){
+
+    }
+
+    private static void withdrawl(Account a){
+
+    }
+
+    private static void logOut(Account a){
+        
     }
 
 }
