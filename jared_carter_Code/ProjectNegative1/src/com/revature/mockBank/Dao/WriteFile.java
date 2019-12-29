@@ -3,18 +3,22 @@ package com.revature.mockBank.Dao;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class WriteFile {
 
     public static void main(String[] args) {
-        File writeFile = new File("src/Account.txt");
 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter((writeFile, true)){
+        try{
+            FileWriter fw = new FileWriter("src/com/revature/mockBank/Dao/Account.txt");
+            PrintWriter pw = new PrintWriter(fw);
+            User u = new User (" ",""," ", " ", 0);
 
-            User u = new User (,"","cd", "", "");
-            writer.write("\n" + .toFileString());
+            pw.println();
+
+            pw.close();
         } catch (Exception e){
-            e.printStackTrace
+            e.printStackTrace();
         }
 
     }
