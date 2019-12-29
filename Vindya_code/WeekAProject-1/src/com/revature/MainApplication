@@ -1,0 +1,25 @@
+import java.io.File;
+import java.util.Scanner;
+
+public class MainApplication {
+
+   public static void main(String[] args) {
+      Scanner input = new Scanner(System.in);
+      String user, pass;
+      System.out.println("Enter your your name");
+      user = input.nextLine();
+      System.out.println("Enter your password");
+      pass = input.nextLine();
+      if(user.equals("Vindya")&& (pass.equals("Victory"))) {
+         System.out.println("Welcome to your favorite bank");
+      }else{
+         System.out.println("Welcome back later");
+         System.exit(0);
+
+      }
+      File users = new File("src/resources/users.txt");
+      double balance;
+
+
+   }
+}

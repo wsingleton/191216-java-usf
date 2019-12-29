@@ -1,0 +1,33 @@
+package com.revature;
+
+public class BankAccount {
+
+    private double deposit;
+    private double withdrawal;
+    private double balance;
+    public  void main(String... args) {
+        balance = 250.00;
+        deposit = 100.00;
+        deposits(deposit,balance);
+    }
+
+    public void deposits(double amount, double balance){
+        balance = balance + amount;
+        this.balance=balance;
+        System.out.println("Deposit is successful and new balance available"+balance);
+    }
+    public double withdrawal(double amount, double balance){
+
+
+
+        if(amount<=balance) {
+            balance = balance - amount;
+
+        }
+        else {
+
+            System.out.println("Transaction is not successful");
+        }
+         return balance;
+    }
+}
