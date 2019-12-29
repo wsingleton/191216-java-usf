@@ -1,3 +1,7 @@
+package accounting;
+
+import users.UserLogIn;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -96,7 +100,7 @@ public class AccountManager {
                     // prevent overdraft
                     if(amount > currentBalance){
                         System.out.println("Insufficient balance. Enter a lesser amount that matches with your balance!" + "\n" +
-                                "Enter 1 to enter a valid amount, or press any keep to exit.");
+                                "Enter 1 to enter a valid amount, or press any key to exit.");
                         Integer cont = new Integer(read.nextLine());
                         if (cont.equals(1)){
                             System.out.println("Now enter a new amount to withdraw");

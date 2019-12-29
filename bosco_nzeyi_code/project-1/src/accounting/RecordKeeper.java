@@ -1,3 +1,7 @@
+package accounting;
+
+import accounting.FileManager;
+
 import java.util.ArrayList;
 
 public class RecordKeeper {

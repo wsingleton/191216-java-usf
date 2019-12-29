@@ -1,7 +1,7 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
+package users;
+
+import accounting.FileManager;
+
 import java.util.Scanner;
 
 public class SignUpUsers {
@@ -22,7 +22,7 @@ public class SignUpUsers {
         boolean passChecker = password.equals(password2);
 
         if (passChecker){
-            System.out.println("password match! Proceed ...");
+            System.out.println("password match! Proceeding ...");
             this.registerUser(firstName, lastName, username, password);
         } else {
             System.out.println("Password mismatch. enter 1 to try again or 0 to exit");
@@ -48,5 +48,7 @@ public class SignUpUsers {
 
         String userData = this.generateId() + "|" + firstName + "|" + lastName + "|" + username + "|" + password;
         FileManager.writeFile("users.txt", userData);
+        System.out.println("Successfully registered!");
+
     }
 }

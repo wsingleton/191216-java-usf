@@ -1,3 +1,5 @@
+package accounting;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -101,8 +103,8 @@ public class FileManager {
             }
 
             // set the id to 1 if the array is empty
-            id = allLines.size() + 1;
-            System.out.println("the new id is " + id + " which is the the current array size " + allLines.size() + " 1");
+            id = allLines.size() + 2;
+//            System.out.println("the new id is " + id + " which is the the current array size " + allLines.size() + " 2");
             reader.close();
         }catch (Exception e){
             e.printStackTrace();
