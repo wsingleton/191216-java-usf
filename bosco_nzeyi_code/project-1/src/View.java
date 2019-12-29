@@ -1,6 +1,5 @@
 /*
 This class act as the main user interface for clients to interact with the program.
-
 Objectives:
 - to sign up users;
 - to log in;
@@ -60,10 +59,8 @@ public class View {
 
         // global vars for user option
         String input = null;
-
         String username = null;
         String password = null;
-
 
         // New user? register. Registered user? login
         System.out.println("Welcome to MockBank!" + "\n" +
@@ -124,8 +121,5 @@ public class View {
         } else{
             System.out.println("Wrong selection. Try again!");
         }
-
     }
-
-
 }
