@@ -47,7 +47,7 @@ public class DAO {
         try(BufferedReader b = new BufferedReader((new FileReader((fileLocation))))){
             String line = null;
             while ((line=b.readLine()) !=null){
-                String[] data = line.split(" : ");
+                String[] data = line.split(",");
                 Account temp = new Account();
 
                 temp.setUsername(data[0]);

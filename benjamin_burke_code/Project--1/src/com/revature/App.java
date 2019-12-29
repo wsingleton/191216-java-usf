@@ -64,7 +64,7 @@ public class App {
             }
             else {
                 System.out.println("Your password is incorrect try again!");
-                logIn();
+                loggedIn(u);
             }
         }
 
@@ -101,7 +101,7 @@ public class App {
 
             Account Account = service.addAccount(username, password, balance);
           //need a login method
-          loggedIn(Account);
+          
         }
     }
     //once user successfuly logs in
