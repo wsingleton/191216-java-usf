@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class LoginMain {
 
     public static void main(String[] args) {
@@ -34,14 +33,21 @@ public class LoginMain {
         }
         // Checking username availability
         try {
+            int lineCount = 0;
+            String line = "";
+
             BufferedReader nameCheck = new BufferedReader(new FileReader(takeNames));
-        } catch (IOException e) {
-            System.out.println("An unexpected error occured");
+
+            while ((line = nameCheck.readLine()) != null) {
+                LineCount++;
+                int nameFound = line.indexOf(username);
+                if (nameFound > - 1) {
+                    System.out.println("This username is already taken");
+                    continue;
+                }
+            }
         }
 
-        while ((line = nameCheck.readLine()) != null) {
-
-        }
         /*ArrayList<String> savedNames = new ArrayList<>();
 
         System.out.println(savedNames);
@@ -55,12 +61,10 @@ public class LoginMain {
         savedNames.add(username);
 
          */
-
-
+        
         System.out.println("Please enter your desired password");
         String password = console.nextLine();
         System.out.println("Your username is: " + username + " and your password is: " + password);
-
 
     }
 }
