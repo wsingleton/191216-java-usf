@@ -14,6 +14,7 @@ public class DAO {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(fileLocation, true))){
 //            writer.write(a.toString());
             writer.write("\n" + a.toString());
+            writer.newLine();
         } catch (Exception e){
             e.printStackTrace();
 
