@@ -3,7 +3,7 @@ package com.revature.models;
 import java.util.Scanner;
 
 public class LoginDriver {
-    private User myLogin;
+    private UserB myLogin;
 
     public void Login(){
         UserB myLog = new UserB();
