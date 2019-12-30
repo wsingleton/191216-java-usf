@@ -36,6 +36,7 @@ public class TestClass {
         Double d = new Double(2.0);
         String message = "Depositing money" + account.getAccAmount();
         Assert.assertEquals(message, d, account.getAccAmount());
+
     }
 }
 

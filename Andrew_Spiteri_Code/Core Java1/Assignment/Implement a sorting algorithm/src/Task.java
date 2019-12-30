@@ -5,17 +5,20 @@ public class Task {
 
     public int[] sortNumbers(int[] numbersForSorting) {
 
-        int [] answer = new int[numbersForSorting.length];
-        answer[0] = numbersForSorting[0];
-        int holder = 0;
-        for(int i = 1; i < numbersForSorting.length; i++){
-            if (numbersForSorting[i] < answer[i-1]){
-                holder = answer[i-1];
-                answer[i-1] = numbersForSorting[i];
-                answer[i] = holder;
+        //handle the edge cases
+        if(numbersForSorting == null || numbersForSorting.length == 0){
+            return new int[0];
+        }
+        for(int i = 0; i < numbersForSorting.length - 1; i++){
+            for (int j = i + 1; j < numbersForSorting.length; j++){
+                if(numbersForSorting[i] > numbersForSorting[j]){
+                    int temp = numbersForSorting[j];
+                    numbersForSorting[j] = numbersForSorting[i];
+                    numbersForSorting[i] = temp;
+                }
             }
         }
-        return answer;
+        return numbersForSorting;
 
     }
 }

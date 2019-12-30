@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 147
-    length: 401
+    length: 575
     placeholder_text: /* Provide your implementation here */
     initial_state:
       length: 38
@@ -33,7 +33,7 @@ files:
 
               return arr;
     selected: true
-    status: Failed
+    status: Solved
   text: |-
     import java.util.Arrays;
     import java.util.stream.IntStream;
@@ -117,5 +117,5 @@ files:
 
     }
   learner_created: false
-status: Failed
+status: Solved
 record: -1

@@ -5,9 +5,9 @@ import models.User;
 
 import java.io.*;
 import java.lang.System;
-import java.util.Objects;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+
+import static com.revature.MockBankDriver.main;
 
 public class RegisterUser {
     public static User registerUser() throws IOException{
@@ -20,13 +20,29 @@ public class RegisterUser {
         String username =sc.next();
         System.out.print("Password: ");
         String password =sc.next();
+        File userFile = new File("resources\\users.txt");
+        File accountFile = new File("resources\\accounts.txt");
+        try(BufferedReader bReader = new BufferedReader(new FileReader(userFile))) {
+            for (String line; (line = bReader.readLine()) != null; ) {
+                String[] arr = line.split(";");
+                for (int i = 0; i < arr.length; i++) {
+                    String[] userArray = arr[i].split(",");
+                    if (userArray[1].equals(username)) {
+                        System.out.println("The username already exists.");
+                        main();
+                    }
+                }
+            }
+        }catch (StackOverflowError soe){
+            System.exit(0);
+        }catch (Exception e){
+            main();
+        }
 
         Integer newId = new Integer(Objects.hash(username));
         String idString = newId.toString();
         idString = idString.replace('-',' ');
         idString = idString.trim();
-        File userFile = new File("resources\\users.txt");
-        File accountFile = new File("resources\\accounts.txt");
         try(BufferedWriter userWriter = new BufferedWriter(new FileWriter(userFile,true))){
             User user = new User(idString,firstname, lastname, username, password, "MEMBER");
             userWriter.write(user.toFileString());

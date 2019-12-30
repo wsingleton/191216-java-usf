@@ -7,21 +7,27 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class MockBankDriver {
-          public static void main(String[] args) throws IOException {
+    public static void main(String... args) throws IOException {
 
         System.out.print("Would you like to register (enter 0) or login (enter 1): ");
         Scanner scanner = new Scanner(System.in);
         switch(scanner.next()){
             case "0":
-                System.out.println("Register user function");
+                System.out.println("Register user: ");
                 RegisterUser.registerUser();
                 break;
             case "1":
-                System.out.println("Login function");
+                System.out.println("Login: ");
                 Login.login();
                 break;
             default:
-
+                try {
+                    System.out.println("Incorrect input");
+                    main(" ");
+                }catch (StackOverflowError soe){
+                    System.out.println("Stack Overflow Error");
+                    System.exit(0);
+                }
                 break;
         }
     }
