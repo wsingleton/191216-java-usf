@@ -7,3 +7,5 @@
 9|Mary|Rose|rosemary|number1
 9|Dominic|Senga|sengad|123456
 10|Baaba|Mal|bmal|password
+11|fhgg|35353|Spacemvn|Dream
+12|Boss|Nzeyimana|nzibosco|mypass

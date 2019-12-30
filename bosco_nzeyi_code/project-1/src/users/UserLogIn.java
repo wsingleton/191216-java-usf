@@ -29,10 +29,7 @@ public class UserLogIn {
                 System.out.println("Welcome!" + fullName);
                 Scanner cont = new Scanner(System.in);
 //                System.out.println("Choose any of the option below to continue ");
-            } else {
-                System.out.println("Input mismatch. Please try again!");
             }
-            break;
         }
 
     }

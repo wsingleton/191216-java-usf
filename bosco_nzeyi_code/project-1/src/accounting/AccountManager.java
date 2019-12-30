@@ -47,84 +47,130 @@ public class AccountManager {
 
             Scanner read = new Scanner(System.in);
             System.out.println("Enter amount");
-            Integer amount  = new Integer(read.nextLine());
+            String amountInput = read.nextLine();
 
-            // if transaction type is deposit, the balance will be to add the amount, if withdrawal we will do the opposite.
-            switch (transactionType){
-                case "deposit":
-                    data = userId + " deposit " + date + " " + amount + " " + amount;
+//            int amount = 0;
 
-                    // now we write the transaction to the file.
-                    recorder.record(data);
-                    break;
-                // No withdraw allowed for the first transaction.
-                case "withdraw":
-                    System.out.println("Insufficient balance. First make a deposit before you withdraw!");
-                    break;
-                default:
-                    System.out.println("No operation selected");
+            if(amountInput != null){
+                try{
+                   Integer amount = Integer.parseInt(amountInput);
+                    if(amount < 0){
+                        System.out.println("Can't save negative amount. Try again later!");
+                    } else {
+
+
+                        // if transaction type is deposit, the balance will be to add the amount, if withdrawal we will do the opposite.
+                        switch (transactionType) {
+                            case "deposit":
+                                data = userId + " deposit " + date + " " + amount + " " + amount;
+
+                                // now we write the transaction to the file.
+                                recorder.record(data);
+                                break;
+                            // No withdraw allowed for the first transaction.
+                            case "withdraw":
+                                System.out.println("Insufficient balance. First make a deposit before you withdraw!");
+                                break;
+                            default:
+                                System.out.println("No operation selected");
+                        }
+                    }
+
+                } catch (Exception e){
+//                    e.printStackTrace();
+                    System.err.println("Invalid amount!");
+                }
+            } else {
+                System.out.println("invalid input!");
             }
+
         } else {
             /*
             if we have have data associated to the user, we will calculate the balance first so we can update it in the record.
              */
             Scanner read = new Scanner(System.in);
             System.out.println("Enter amount");
-            int amount  = new Integer(read.nextLine());
+            String amountInput = read.nextLine();
 
-            int lastIndex = userHistory.size() - 1;
-            String lastLine = userHistory.get(lastIndex).trim(); // to get the last line as it is the one with updated balance
-            // get the current balance
-            String [] linePieces = lastLine.split(" ");
-            int currentBalance = new Integer(linePieces[linePieces.length - 1]);
+            if(amountInput != null){
+                try{
+                   Integer amount = Integer.parseInt(amountInput);
+                   if(amount < 0){
+                       System.out.println("Can't save negative amount. Try again later!");
+                   } else {
 
-            // set the balance to currentBalance
-            balance = currentBalance;
+                       int lastIndex = userHistory.size() - 1;
+                       String lastLine = userHistory.get(lastIndex).trim(); // to get the last line as it is the one with updated balance
+                       // get the current balance
+                       String[] linePieces = lastLine.split(" ");
+                       int currentBalance = new Integer(linePieces[linePieces.length - 1]);
 
-            // if transaction type is deposit, the balance will be to add the amount, if withdrawal we will do the opposite.
-            switch (transactionType){
-                case "deposit":
-                    int updatedBalance = currentBalance + amount;
+                       // set the balance to currentBalance
+                       balance = currentBalance;
 
-                    // set balance to the updated balance
-                    balance = updatedBalance;
+                       // if transaction type is deposit, the balance will be to add the amount, if withdrawal we will do the opposite.
+                       switch (transactionType) {
+                           case "deposit":
+                               int updatedBalance = currentBalance + amount;
 
-                    data = userId + " " + transactionType + " " + date + " " + amount + " " + updatedBalance; // data to write to the file.
-                    // now we write the transaction to the file.
-                    recorder.record(data);
-                    break;
+                               // set balance to the updated balance
+                               balance = updatedBalance;
 
-                // To update the balance, we will deduct the amount withdrawn.
-                case "withdraw":
+                               data = userId + " " + transactionType + " " + date + " " + amount + " " + updatedBalance; // data to write to the file.
+                               // now we write the transaction to the file.
+                               recorder.record(data);
+                               break;
 
-                    // prevent overdraft
-                    if(amount > currentBalance){
-                        System.out.println("Insufficient balance. Enter a lesser amount that matches with your balance!" + "\n" +
-                                "Enter 1 to enter a valid amount, or press any key to exit.");
-                        Integer cont = new Integer(read.nextLine());
-                        if (cont.equals(1)){
-                            System.out.println("Now enter a new amount to withdraw");
-                            amount = new Integer(read.nextLine());
-                            if(amount < currentBalance){
-                                updatedBalance = currentBalance - amount;
+                           // To update the balance, we will deduct the amount withdrawn.
+                           case "withdraw":
 
-                                // set balance to the updated balance
-                                balance = updatedBalance;
+                               // prevent overdraft
+                               if (amount > currentBalance && !(amount < 0)) {
+                                   System.out.println("Insufficient balance. Enter a lesser amount that matches with your balance!" + "\n" +
+                                           "Enter 1 to enter a valid amount, or press any key to exit.");
+                                   Integer cont = new Integer(read.nextLine());
+                                   if (cont.equals(1)) {
+                                       System.out.println("Now enter a new amount to withdraw");
+                                       amount = new Integer(read.nextLine());
+                                       if (amount < currentBalance) {
+                                           updatedBalance = currentBalance - amount;
 
-                                data = userId + " " + transactionType + " " + date + " " + amount + " " + updatedBalance;
-                                // now we write the transaction to the file.
-                                recorder.record(data);
-                            } else {
-                                System.out.println("Invalid input. Thank you for banking with us! bye!");
-                            }
-                        } else {
-                            System.out.println("Thank you for banking with us! bye!");
-                        }
-                    }
-                    break;
-                default:
-                    System.out.println("No operation selected");
+                                           // set balance to the updated balance
+                                           balance = updatedBalance;
+
+                                           data = userId + " " + transactionType + " " + date + " " + amount + " " + updatedBalance;
+                                           // now we write the transaction to the file.
+                                           recorder.record(data);
+                                       } else {
+                                           System.out.println("Invalid input. Thank you for banking with us! bye!");
+                                       }
+                                   } else {
+                                       System.out.println("Thank you for banking with us! bye!");
+                                   }
+                               } else {
+                                   updatedBalance = currentBalance - amount;
+
+                                   // set balance to the updated balance
+                                   balance = updatedBalance;
+
+                                   data = userId + " " + transactionType + " " + date + " " + amount + " " + updatedBalance; // data to write to the file.
+                                   // now we write the transaction to the file.
+                                   recorder.record(data);
+                               }
+                               break;
+                           default:
+                               System.out.println("No operation selected");
+                       }
+                   }
+
+                } catch (Exception e){
+//                    e.printStackTrace();
+                    System.err.println("Invalid amount!");
+                }
+            } else{
+                System.out.println("invalid input!");
             }
+
         }
     }
 }
