@@ -26,6 +26,7 @@ public class Task {
                     // if the index is not
                     // the removal element index
                     anotherArray[k] = wordArray[j];
+                    k=k + 1;
 
                 }
 

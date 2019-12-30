@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="7" skipped="0" failures="4" errors="0" timestamp="2019-12-30T20:08:04" hostname="DESKTOP-5VVSC2K" time="0.015">
+<testsuite name="Tests" tests="7" skipped="0" failures="4" errors="0" timestamp="2019-12-30T21:19:39" hostname="DESKTOP-5VVSC2K" time="0.022">
   <properties/>
-  <testcase name="testSolutionWithValidArrayContainingSomeNulls" classname="Tests" time="0.007">
-    <failure message="java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 7" type="java.lang.ArrayIndexOutOfBoundsException">java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 7
-	at Task.filterPalindromes(Task.java:29)
+  <testcase name="testSolutionWithValidArrayContainingSomeNulls" classname="Tests" time="0.01">
+    <failure message="java.lang.ArrayIndexOutOfBoundsException: Index 8 out of bounds for length 8" type="java.lang.ArrayIndexOutOfBoundsException">java.lang.ArrayIndexOutOfBoundsException: Index 8 out of bounds for length 8
+	at Task.filterPalindromes(Task.java:28)
 	at Tests.testSolutionWithValidArrayContainingSomeNulls(Tests.java:112)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -22,9 +22,9 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithValidArrayContainingAllPalindromes" classname="Tests" time="0.001">
-    <failure message="java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4" type="java.lang.ArrayIndexOutOfBoundsException">java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4
-	at Task.filterPalindromes(Task.java:29)
+  <testcase name="testSolutionWithValidArrayContainingAllPalindromes" classname="Tests" time="0.005">
+    <failure message="java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5" type="java.lang.ArrayIndexOutOfBoundsException">java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5
+	at Task.filterPalindromes(Task.java:28)
 	at Tests.testSolutionWithValidArrayContainingAllPalindromes(Tests.java:72)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -44,8 +44,8 @@
 </failure>
   </testcase>
   <testcase name="testSolutionWithValidArrayContainingNumericPalindromes" classname="Tests" time="0.001">
-    <failure message="java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5" type="java.lang.ArrayIndexOutOfBoundsException">java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5
-	at Task.filterPalindromes(Task.java:29)
+    <failure message="java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6" type="java.lang.ArrayIndexOutOfBoundsException">java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6
+	at Task.filterPalindromes(Task.java:28)
 	at Tests.testSolutionWithValidArrayContainingNumericPalindromes(Tests.java:134)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -65,8 +65,8 @@
 </failure>
   </testcase>
   <testcase name="testSolutionWithValidArrayContainingSomePalindromes" classname="Tests" time="0.001">
-    <failure message="java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 7" type="java.lang.ArrayIndexOutOfBoundsException">java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 7
-	at Task.filterPalindromes(Task.java:29)
+    <failure message="java.lang.ArrayIndexOutOfBoundsException: Index 8 out of bounds for length 8" type="java.lang.ArrayIndexOutOfBoundsException">java.lang.ArrayIndexOutOfBoundsException: Index 8 out of bounds for length 8
+	at Task.filterPalindromes(Task.java:28)
 	at Tests.testSolutionWithValidArrayContainingSomePalindromes(Tests.java:49)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -87,7 +87,7 @@
   </testcase>
   <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.002"/>
   <testcase name="testSolutionWithValidArrayContainingNoPalindromes" classname="Tests" time="0.001"/>
-  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
