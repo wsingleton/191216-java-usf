@@ -1,0 +1,3 @@
+Tyler:Rubbert:trubbert:password:400.0
+John:Doe:jdoe:password:70.0
+Billy:Bob:bbob:password:40.0
