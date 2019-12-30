@@ -81,8 +81,9 @@ public class View {
                         System.out.println("Enter password");
                         password = reader.nextLine();
                         login.login(username, password);
-                        userId = new Integer(login.LoggedId);
-                        if(!new Integer(userId).equals(null)){
+
+                        if(login.LoggedId != null){
+                            userId = new Integer(login.LoggedId);
                             System.out.println("Chose one of the options below to continue: " + "\n" +
                                     "1 = Deposit," + "\n" + "2 = Withdraw, " + "\n" + "3 = Check balance," + "\n" +
                                     "4 = View account history, " + "\n" + "5 = exit");
@@ -90,7 +91,7 @@ public class View {
                             options(choice);
                         } else {
                             System.out.println("An error occurred while detecting user. Please try again");
-                        }
+                    }
                     } else {
                         System.out.println("Invalid option. Try again");
                     }
@@ -101,10 +102,11 @@ public class View {
                     System.out.println("Enter password");
                     password = reader.nextLine();
                     login.login(username, password);
-                    userId = new Integer(login.LoggedId);
-
+//                    Integer userId;
+                    if(login.LoggedId != null){
+                        userId = new Integer(login.LoggedId);
                     // log options when the user id is detected.
-                    if(!new Integer(userId).equals(null)){
+//                    if(userId != null){
                         System.out.println("Chose one of the options below to continue: " + "\n" +
                                 "1 = Deposit," + "\n" + "2 = Withdraw, " + "\n" + "3 = Check balance," + "\n" +
                                 "4 = View account history, " + "\n" + "5 = exit");

@@ -6,3 +6,4 @@
 8|boo|hey|heyboo|23
 9|Mary|Rose|rosemary|number1
 9|Dominic|Senga|sengad|123456
+10|Baaba|Mal|bmal|password
