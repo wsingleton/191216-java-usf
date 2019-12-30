@@ -3,8 +3,12 @@ import java.util.Stack;
 public class Task {
 
     public String reverse(String reverseMe) {
+        String a = "";
 
-        // Provide your implementation here
+        for (int i = reverseMe.length() -1; i >= 0 ; i -- ){
+            a = a + reverseMe.charAt(i);
+        }
+        return a;
 
     }
 

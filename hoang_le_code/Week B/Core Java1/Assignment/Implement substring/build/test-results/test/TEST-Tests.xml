@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="6" skipped="0" failures="0" errors="0" timestamp="2019-12-30T19:11:24" hostname="DESKTOP-5VVSC2K" time="0.316">
+  <properties/>
+  <testcase name="testSolutionWithValidStringAndValidBoundaries" classname="Tests" time="0.308"/>
+  <testcase name="testSolutionWithValidStringAndNegativeBoundaries" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithValidStringAndNegativeStart" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithNullStringAndValidBoundaries" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionWithEmptyStringAndValidBoundaries" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithValidStringAndEndLessThanStart" classname="Tests" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

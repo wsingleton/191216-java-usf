@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 193
-    length: 38
+    length: 15
     placeholder_text: /* Provide your implementation here */
     initial_state:
       length: 38
@@ -12,7 +12,7 @@ files:
     initialized_from_dependency: false
     possible_answer: '"Hello, world!"'
     selected: true
-    status: Unchecked
+    status: Solved
   text: |-
     public class Task {
 
@@ -65,5 +65,5 @@ files:
       }
     }
   learner_created: false
-status: Unchecked
+status: Solved
 record: -1
