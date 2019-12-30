@@ -7,6 +7,7 @@ public class UserB {
     private String username; //unique, b/t 5 to 20 char ??
     private String password; // same length
     private double balance; //initial set to 0.
+
     //private int type; // sv#-saving, ch#-checking, multi accts??
 
 
@@ -32,8 +33,20 @@ public class UserB {
         return username;
     }
 
+    //unique username // nested if
     public void setUsername(String username) {
-        this.username = username;
+        //need try catch block b/c ImputMismatchException when using lenght == 15
+       if(username.length() > 7 && username.length() < 15){
+           System.out.println("correct user length" + username.length());
+           //Compare to save entry in file
+           //
+           this.username = username;
+       }
+       else{
+           System.out.println("Invalid Username");
+           // retry x2, then cancel or just break.
+       }
+
     }
 
     public String getPassword() {
@@ -41,6 +54,8 @@ public class UserB {
     }
 
     public void setPassword(String password) {
+        // test condition for password criteria: lenght, number, chara,
+        // nested if
         this.password = password;
     }
 
@@ -49,14 +64,19 @@ public class UserB {
     }
 
     public void setBalance(double balance) {
-        this.balance = balance;
+        if(balance <= 0){
+        this.balance =  0;}
+        else{
+            this.balance = balance;
+        }
     }
 
     public String toFileString(){
         return id + ":" + username + ":" + password + ":" + balance;
     }
 
-  /*  public void validateUser(String u){
+
+/*  *//*  public void validateUser(String u){
         //test length of username. must be b/t 5 - 15 chara 
         //u = getUsername();
         if (u.length() > 4 || u.length() < 16){
