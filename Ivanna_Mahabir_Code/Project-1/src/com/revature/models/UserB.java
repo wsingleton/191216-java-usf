@@ -36,9 +36,16 @@ public class UserB {
 
     //unique username //
     public void setUsername(String username) {
-        if(validate(username)){this.username = username;}
-        else {
-            System.out.println(username + " Invalid");
+        try {
+            if (validate(username) == true) {
+                this.username = username;
+            } else {
+                System.out.println(username + " Invalid");
+                //System.exit(0);
+            }
+        }
+        catch(InputMismatchException e){
+            e.printStackTrace();
         }
     }
 
@@ -48,10 +55,16 @@ public class UserB {
 
 
     public void setPassword(String password) {
-        if(validate(password)){this.password = password;}
-        else {
-            System.out.println(password + " Invalid");
-
+        try {
+            if (validate(password) == true) {
+                this.password = password;
+            } else {
+                System.out.println(password + " Invalid");
+                System.exit(0);
+            }
+        }
+        catch (InputMismatchException e){
+            e.printStackTrace();
         }
     }
 
@@ -62,7 +75,7 @@ public class UserB {
     public void setBalance(double balance) {
         try{
         if(balance <= 0){
-            System.out.println(balance + " Insufficient funds");;}
+            System.out.println(balance + " Insufficient funds");}
         else{
             this.balance = balance;
         }}
@@ -91,7 +104,6 @@ public class UserB {
             for (int i = 0; i < arg.length(); i++) {
                 char ch = arg.charAt(i);
                 if (uCase(ch)) {
-                    //System.out.println("invalid");
                     if (nCase(ch))
                         return true;
                     //break;
@@ -102,8 +114,34 @@ public class UserB {
     }
 
     //validation for login of previous
-    // use comparator??
+    public boolean comparison(String uArg, String pArg) {
+        if (uArg.equals(getUsername()) && pArg.equals(getPassword())){
+            System.out.println("Welcome " + getUsername());
+            System.out.println("Your current available balance: " + balance);
+        //if username && pass are true
+    }
+            return false;
+    }
 
+    public double withdraw(double amt){
+        if (amt <= balance) {
+            return balance - amt;
+        }
+        else{
+            System.out.println("Invalid Withdrawl amount");
+            return balance;
+        }
+    }
+
+    public double deposit(double amt){
+        if (amt >= 0) {
+            return balance + amt;
+        }
+        else{
+            System.out.println("Invalid Deposit amount");
+            return balance;
+        }
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,6 @@
 package com.revature;
 
+import com.revature.models.ReadFile;
 import com.revature.models.UserB;
 
 // use an array to hold info?? output array separated by :
@@ -19,44 +20,51 @@ public class RegisterDriver {
 
     private UserB myUser;
 
-    public void ReadFile(String[] file){
-        File acctFile = new File("src/resources/account.txt");
-        System.out.println("Doest the file exist? " + acctFile.exists());
 
-        List<UserB> userBList = new ArrayList<>();
-        try{
-            BufferedReader reader = new BufferedReader(new FileReader(acctFile));
-            String line = reader.readLine();
-            while(line != null){
-                file = line.split(":");
-
-          }
-        }
-        catch(Exception e){
-            System.out.println("An exception was thrown");
-        }
-    }
 
     public void Register(){
         UserB myUser = new UserB();
         System.out.println("Enter your information to register");
         System.out.println("Username: Must be between 8 to 15 characters in length \n" +
                 "\t\t  Must include at least 1 Capital letter \n" +
-               // "\t\t  Must include at least 1 common letter \n" +
                 "\t\t  Must include at least 1 number");
-        System.out.println("Username: ");
         Scanner scanner = new Scanner(System.in);
         //myUser.setUsername(scanner.nextLine()); //test before set, if invalid reenter
         myUser.validate(scanner.nextLine());
-        System.out.println("Password: ");
+        System.out.println("Password: Must be between 8 to 15 characters in length \n" +
+                "\t\t  Must include at least 1 Capital letter \n" +
+                "\t\t  Must include at least 1 number");
         scanner = new Scanner(System.in);
-        myUser.setPassword(scanner.nextLine()); //test before set if invalid reenter
-        //InputMisMatch Exception
-        System.out.println("Initial Deposit/Balance: ");
-        scanner = new Scanner(System.in);
-        myUser.setBalance(scanner.nextDouble());
-        
+        myUser.validate(scanner.nextLine());
 
+        // Read file and compare
+        File acctFile = new File("src/resources/account.txt");
+        //System.out.println("Does the file exist? " + acctFile.exists());
+        List<UserB> userBList = new ArrayList<>();
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(acctFile));
+            String line = reader.readLine();
+            int i = 0;
+            while(line != null){
+                String[] userFields = line.split(":");
+                //should be reading file and putting data into list
+                userBList.add(i, new UserB(i, userFields[0],userFields[1], Double.parseDouble(userFields[2])));
+                //userBList.set() does not work getting IndexOutOfBounds
+                //userBList.set(i, (new UserB(i,userFields[0], userFields[1], Double.parseDouble(userFields[2]))));
+
+                if(myUser.comparison(userFields[0], userFields[1]) == true){
+                    System.out.println("Already registered");
+                    break;
+                }
+                ++i;
+            }
+            return;
+        }
+        catch(Exception e){
+            System.out.println("An exception was thrown register");
+            e.printStackTrace();
+        }
     }
+
 
 }

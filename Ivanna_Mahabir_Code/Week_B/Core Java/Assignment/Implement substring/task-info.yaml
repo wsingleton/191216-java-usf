@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 99
-    length: 35
+    length: 236
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -22,7 +22,7 @@ files:
               }
 
               return substrBuilder.toString();
-    selected: false
+    selected: true
     status: Unchecked
   text: |-
     public class Task {
