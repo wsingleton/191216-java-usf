@@ -57,12 +57,20 @@ public class Account {
         return Objects.hash(username, password, balance);
     }
 
+//    @Override
+//    public String toString() {
+//        return "Account{" +
+//                "username='" + username + '\'' +
+//                ", password='" + password + '\'' +
+//                ", balance=" + balance +
+//                '}';
+//    }
+
     @Override
     public String toString() {
-        return "Account{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", balance=" + balance +
-                '}';
+        return username + ',' +
+                 password + ',' +
+                balance
+                ;
     }
 }

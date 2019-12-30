@@ -12,7 +12,8 @@ public class DAO {
     void addAccount(Account a){
         //must write the account user to the text file
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(fileLocation, true))){
-            writer.write(a.toString());
+//            writer.write(a.toString());
+            writer.write("\n" + a.toString());
         } catch (IOException e){
             e.printStackTrace();
 

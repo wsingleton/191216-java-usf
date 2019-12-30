@@ -61,10 +61,11 @@ public class App {
             //Lets see if password is valid
             if(use.getPassword().equals(password)) {
                 System.out.println("Logged in test");
+                loggedIn(use);
             }
             else {
                 System.out.println("Your password is incorrect try again!");
-                loggedIn(u);
+                logIn();
             }
         }
 
@@ -101,7 +102,7 @@ public class App {
 
             Account Account = service.addAccount(username, password, balance);
           //need a login method
-          
+          loggedIn(Account);
         }
     }
     //once user successfuly logs in
@@ -128,7 +129,8 @@ public class App {
             case 2: withdrawl(a); break;
             case 3: logOut(a); break;
         }
-        loggedIn(a);
+//        loggedIn(a);
+        start();
     }
 
     private static void deposit(Account a){
@@ -178,7 +180,7 @@ public class App {
         System.out.println("Logged Out of session");
         service.updateBalance(a);
 
-        start();
+
     }
 
 
