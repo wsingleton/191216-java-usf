@@ -1,4 +1,4 @@
-package com.revature.mockBank.Service;
+package com.revature.mockBank;
 
 import java.util.Scanner;
 

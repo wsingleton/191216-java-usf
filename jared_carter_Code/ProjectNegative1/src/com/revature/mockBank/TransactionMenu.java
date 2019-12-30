@@ -1,6 +1,4 @@
-package com.revature.mockBank.UI;
-
-import com.revature.mockBank.Service.Account;
+package com.revature.mockBank;
 
 
 import java.util.Scanner;

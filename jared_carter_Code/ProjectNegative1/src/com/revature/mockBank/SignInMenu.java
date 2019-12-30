@@ -1,15 +1,21 @@
-package com.revature.mockBank.UI;
-
-import com.revature.mockBank.Service.Account;
+package com.revature.mockBank;
 
 import java.util.Scanner;
 
 
 
 public class SignInMenu {
+
+    Scanner scanner = new Scanner(System.in);
+    BankDriver bank = new BankDriver();
+
+    public static void main(String[] args) {
+        SignInMenu signInMenu = new SignInMenu();
+        signInMenu.loginMenu();
+    }
     public void loginMenu() {
         int option;
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("---------------------------");
         System.out.println("Hello Welcome to Kannon.");
         System.out.println("1: Login");

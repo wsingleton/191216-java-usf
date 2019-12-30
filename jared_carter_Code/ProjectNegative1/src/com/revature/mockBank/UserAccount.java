@@ -1,4 +1,4 @@
-package com.revature.mockBank.Dao;
+package com.revature.mockBank;
 
 import java.util.Objects;
 
