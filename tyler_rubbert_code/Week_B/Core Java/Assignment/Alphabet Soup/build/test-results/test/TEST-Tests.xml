@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="8" skipped="0" failures="3" errors="0" timestamp="2019-12-27T15:31:24" hostname="LAPTOP-BU1ED0LM" time="0.038">
+<testsuite name="Tests" tests="8" skipped="0" failures="3" errors="0" timestamp="2019-12-30T18:46:15" hostname="LAPTOP-BU1ED0LM" time="0.03">
   <properties/>
-  <testcase name="testSolutionUsingOnlyWhiteSpace" classname="Tests" time="0.011"/>
+  <testcase name="testSolutionUsingOnlyWhiteSpace" classname="Tests" time="0.01"/>
   <testcase name="testSolutionUsingNullPhrase" classname="Tests" time="0.001"/>
-  <testcase name="testSolutionUsingPhraseWithHyphenatedWord" classname="Tests" time="0.01">
+  <testcase name="testSolutionUsingPhraseWithHyphenatedWord" classname="Tests" time="0.006">
     <failure message="org.junit.ComparisonFailure: expected:&lt;C[MOS]&gt; but was:&lt;C[]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;C[MOS]&gt; but was:&lt;C[]&gt;
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
@@ -47,7 +47,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionUsingPhraseWithExcessWhiteSpace" classname="Tests" time="0.004">
+  <testcase name="testSolutionUsingPhraseWithExcessWhiteSpace" classname="Tests" time="0.003">
     <failure message="org.junit.ComparisonFailure: expected:&lt;T[QBFJOTLD]&gt; but was:&lt;T[]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;T[QBFJOTLD]&gt; but was:&lt;T[]&gt;
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at org.junit.Assert.assertEquals(Assert.java:144)
@@ -70,8 +70,8 @@
 </failure>
   </testcase>
   <testcase name="testSolutionUsingEmptyPhrase" classname="Tests" time="0.001"/>
-  <testcase name="testSolutionUsingSimplePhrase" classname="Tests" time="0.003"/>
-  <testcase name="testSolutionUsingPhraseWithPunctuation" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionUsingSimplePhrase" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionUsingPhraseWithPunctuation" classname="Tests" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

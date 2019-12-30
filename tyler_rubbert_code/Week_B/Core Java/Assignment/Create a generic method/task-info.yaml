@@ -34,7 +34,7 @@ files:
       for (T val: values) {
                   System.out.println(val);
               }
-    selected: false
+    selected: true
     status: Unchecked
   text: |-
     public class Task {

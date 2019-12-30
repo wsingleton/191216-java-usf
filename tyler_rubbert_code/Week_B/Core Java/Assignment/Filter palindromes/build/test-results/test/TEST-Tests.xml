@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="7" skipped="0" failures="6" errors="0" timestamp="2019-12-27T15:13:16" hostname="LAPTOP-BU1ED0LM" time="0.035">
+<testsuite name="Tests" tests="7" skipped="0" failures="6" errors="0" timestamp="2019-12-30T20:49:52" hostname="LAPTOP-BU1ED0LM" time="0.038">
   <properties/>
   <testcase name="testSolutionWithValidArrayContainingSomeNulls" classname="Tests" time="0.018">
     <failure message="java.lang.AssertionError: array lengths differed, expected.length=3 actual.length=7" type="java.lang.AssertionError">java.lang.AssertionError: array lengths differed, expected.length=3 actual.length=7
@@ -27,7 +27,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithValidArrayContainingAllPalindromes" classname="Tests" time="0.002">
+  <testcase name="testSolutionWithValidArrayContainingAllPalindromes" classname="Tests" time="0.003">
     <failure message="java.lang.AssertionError: array lengths differed, expected.length=5 actual.length=4" type="java.lang.AssertionError">java.lang.AssertionError: array lengths differed, expected.length=5 actual.length=4
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:76)
@@ -53,7 +53,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithValidArrayContainingNumericPalindromes" classname="Tests" time="0.002">
+  <testcase name="testSolutionWithValidArrayContainingNumericPalindromes" classname="Tests" time="0.004">
     <failure message="java.lang.AssertionError: array lengths differed, expected.length=3 actual.length=6" type="java.lang.AssertionError">java.lang.AssertionError: array lengths differed, expected.length=3 actual.length=6
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:76)
@@ -106,7 +106,7 @@
 </failure>
   </testcase>
   <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.001"/>
-  <testcase name="testSolutionWithValidArrayContainingNoPalindromes" classname="Tests" time="0.002">
+  <testcase name="testSolutionWithValidArrayContainingNoPalindromes" classname="Tests" time="0.003">
     <failure message="java.lang.AssertionError: array lengths differed, expected.length=0 actual.length=6" type="java.lang.AssertionError">java.lang.AssertionError: array lengths differed, expected.length=0 actual.length=6
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:76)
@@ -132,7 +132,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.001">
+  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.002">
     <failure message="java.lang.NullPointerException" type="java.lang.NullPointerException">java.lang.NullPointerException
 	at Task.filterPalindromes(Task.java:10)
 	at Tests.testSolutionWithNullArray(Tests.java:145)

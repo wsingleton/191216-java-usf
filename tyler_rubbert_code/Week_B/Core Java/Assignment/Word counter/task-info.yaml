@@ -3,8 +3,8 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 302
-    length: 45
+  - offset: 429
+    length: 0
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -35,7 +35,7 @@ files:
               return textArray;
     selected: true
     status: Unchecked
-  - offset: 434
+  - offset: 516
     length: 30
     placeholder_text: // Provide your implementation
     initial_state:

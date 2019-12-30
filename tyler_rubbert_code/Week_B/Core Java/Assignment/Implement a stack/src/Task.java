@@ -15,21 +15,34 @@ public class Task {
     }
 
     public void push(String newString) {
-        // Provide your implementation here
+        elements = Arrays.copyOf(elements, elements.length + 1);
+        elements[elements.length-1] = newString;
     }
 
     public String pop() {
 
-        // Provide your implementation here
+        if (currentElementPosition == 0){
+            throw new EmptyStackException();
+        }
+        String temp = elements[elements.length-1];
+        elements[elements.length - 1] = null;
+        elements = Arrays.copyOf(elements, elements.length -1);
+        return temp;
 
     }
 
     public String peek(){
-        // Provide your implementation here
+        return elements[elements.length-1];
     }
 
     public int size() {
-        // Provide your implementation here
+        int i = 0;
+        for (String s : elements) {
+            if (s != null) {
+                i++;
+            }
+        }
+        return i;
     }
 
 }

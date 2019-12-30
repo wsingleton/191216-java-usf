@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Map;
@@ -11,7 +8,19 @@ public class Task {
 
     public String[] extractTextFromFile(File file) {
 
-        BufferedReader reader = new BufferedReader();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
+
+            while(line != null) {
+
+            }
+
+
+        } catch (IOException e) {
+
+        }
+
 
     }
 
