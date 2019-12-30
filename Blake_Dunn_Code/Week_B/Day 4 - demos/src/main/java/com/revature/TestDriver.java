@@ -6,19 +6,11 @@ public class TestDriver {
 
     public static void main(String[] args) {
 
-        String[] testArray = {
-                "alice",
-                "racecar",
-                "Do geese see God?",
-                "Madam, I'm Adam.",
-                "not a palindrome",
-                "java",
-                "kayak",
-                "noon"
-        };
+        String phrase = "    The   quick brown fox  jumped over the lazy  dog    ";
 
-        Test.filterPalindromes(testArray);
+        phrase = phrase.trim().replaceAll("\\s+", " ");
 
+        System.out.println(phrase);
 
     }
 }

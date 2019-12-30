@@ -1,51 +1,46 @@
 package com.revature.util;
 
-import java.sql.SQLOutput;
-import java.util.Arrays;
+
+import java.util.ArrayList;
 
 public class Test {
 
-    public static String[] filterPalindromes(String[] wordArray) {
+    public String createAcronymFromPhrase(String phrase) {
 
-        if (wordArray == null || wordArray.length == 0) {
-            return new String[0];
-        }
+        if(phrase == null)
+            return new String("");
 
-        String[] copy = new String[0];
+        phrase = phrase.trim().replaceAll("\\s", " ");
 
-        for (int i = 0; i < wordArray.length ; i++){
-            if (isPalindrome(wordArray[i])){
-                copy = Arrays.copyOf(copy, copy.length + 1);
-                copy[copy.length - 1] = wordArray[i];
+        if (phrase.equals("") || phrase.length() == 0)
+            return new String("");
+
+
+        char[] charArray = phrase.toCharArray();
+
+        ArrayList<String> acronym = new ArrayList<>();
+
+        String string1 = Character.toString(charArray[0]);
+        acronym.add(string1);
+
+        for(int i = 1; i < charArray.length; i++) {
+            if(charArray[i] == ' ' || charArray[i] == '-') {
+                String string2 = Character.toString(charArray[i + 1]);
+                acronym.add(string2);
             }
         }
-        for (int i = 0; i < copy.length; i++){
-            System.out.println(copy[i]);
+
+        StringBuffer buffer = new StringBuffer();
+
+        for (String str : acronym) {
+            buffer.append(str);
         }
-        return copy;
 
+        String result = buffer.toString();
 
+        String result1 = result.toUpperCase();
+        return result1;
     }
 
-    public static boolean isPalindrome(String word) {
 
-        if (word == null) {
-            return false;
-        }
-
-        word = word.toLowerCase().replaceAll("\\W", "")
-                .replaceAll("\\s","");
-        int i = 0;
-        int j = word.length() - 1;
-
-        while (i < j) {
-
-            if (word.charAt(i) != word.charAt(j)){
-                return false;
-            }
-            i++;
-            j--;
-        }
-        return true;
-    }
 }

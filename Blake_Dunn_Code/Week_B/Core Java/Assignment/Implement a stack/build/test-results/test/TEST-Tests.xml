@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="6" skipped="0" failures="0" errors="0" timestamp="2019-12-29T07:29:43" hostname="DESKTOP-9VJVNCN" time="0.027">
+  <properties/>
+  <testcase name="testPeekWhenStackIsPopulated" classname="Tests" time="0.017"/>
+  <testcase name="testPush" classname="Tests" time="0.003"/>
+  <testcase name="testSize" classname="Tests" time="0.002"/>
+  <testcase name="testPopWhenStackIsEmpty" classname="Tests" time="0.001"/>
+  <testcase name="testPopWhenStackIsPopulated" classname="Tests" time="0.001"/>
+  <testcase name="testPeekWhenStackIsEmpty" classname="Tests" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

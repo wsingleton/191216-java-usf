@@ -7,6 +7,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static com.bank.dao.AccountDao.replaceBalance;
+import static com.bank.service.UserService.validateAmount;
 
 public class WithdrawScreen extends User {
 
@@ -24,18 +25,18 @@ public class WithdrawScreen extends User {
         try {
             amount = input.nextDouble();
         }catch (InputMismatchException e) {
-            System.out.println("Invalid value");
+            System.out.println("Invalid value, BRO! Put something else in!");
             withdraw(acct);
         }
 
         if(amount > bal || amount < 0) {
 
-            System.out.println("Sorry, no overdrafts allowed.");
+            System.out.println("You're broke as a joke, BRO!");
             System.out.println("Please try again");
             withdraw(acct);
         }
         else {
-
+            amount = validateAmount(amount);
             newBalance = bal - amount;
             acct.setBalance(newBalance);
             int oldAcct =  acct.getiD();

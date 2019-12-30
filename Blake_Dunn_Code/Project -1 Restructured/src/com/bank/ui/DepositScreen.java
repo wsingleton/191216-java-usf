@@ -7,6 +7,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static com.bank.dao.AccountDao.replaceBalance;
+import static com.bank.service.AccountService.validateAmount;
 
 public class DepositScreen extends User {
 
@@ -23,10 +24,11 @@ public class DepositScreen extends User {
         try {
             amount = input.nextDouble();
 
-            if(amount < 0){
+            if(amount < 0 || amount > 10000){
                 System.out.println("You're a dumbass, try again!!");
                 deposit(acct);
             }else {
+                amount = validateAmount(amount);
                 newBalance = bal + amount;
                 acct.setBalance(newBalance);
                 int oldAcct =  acct.getiD();

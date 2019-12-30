@@ -9,6 +9,8 @@ import static com.bank.dao.AccountDao.writeToAccount;
 import static com.bank.dao.UserDao.checkRegister;
 import static com.bank.dao.UserDao.writeToUser;
 import static com.bank.models.User.createId;
+import static com.bank.service.AccountService.validatePassword;
+import static com.bank.service.AccountService.validateUserName;
 import static com.bank.service.UserService.*;
 
 
