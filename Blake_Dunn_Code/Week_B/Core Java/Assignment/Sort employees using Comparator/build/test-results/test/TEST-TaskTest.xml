@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TaskTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2019-12-30T07:04:56" hostname="DESKTOP-9VJVNCN" time="0.017">
+  <properties/>
+  <testcase name="testSolutionWithEmptyEmployeeList" classname="TaskTest" time="0.002"/>
+  <testcase name="testSolutionWithNullEmployeeList" classname="TaskTest" time="0.003"/>
+  <testcase name="testSolutionWithPreSortedEmployees" classname="TaskTest" time="0.001"/>
+  <testcase name="testSolutionWithReversedEmployeeList" classname="TaskTest" time="0.002"/>
+  <testcase name="testSolutionWithRandomEmployeeList" classname="TaskTest" time="0.002"/>
+  <testcase name="testSolutionWithEmployeeListContainingSomeNulls" classname="TaskTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

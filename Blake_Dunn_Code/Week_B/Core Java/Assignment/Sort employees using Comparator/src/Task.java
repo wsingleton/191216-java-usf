@@ -6,13 +6,13 @@ public class Task {
 
     public List<Employee> sortEmployeesBySalary(List<Employee> employeesForSorting) {
 
-        List<Employee> employees = new ArrayList<>(employeesForSorting);
+        if (employeesForSorting == null || employeesForSorting.isEmpty()) {
+            return new ArrayList<>();
+        }
 
-        Collections.sort(employees);
+        Collections.sort(employeesForSorting, new EmployeeComparator());
 
-
-
-
+        return employeesForSorting;
     }
 
 }

@@ -7,11 +7,23 @@ public class Employee {
     private String lastName;
     private double salary;
 
+    public Employee(){
+        super();
+    }
+
     public Employee(int id, String firstName, String lastName, double salary) {
-        this.id = id;
+        if (id > 0) {
+            this.id = id;
+        }else {
+            id = 0;
+        }
         this.firstName = firstName;
         this.lastName = lastName;
-        this.salary = salary;
+        if (salary > 0){
+            this.salary = salary;
+        }else {
+            salary = 0;
+        }
     }
 
     public int getId() {
@@ -19,7 +31,14 @@ public class Employee {
     }
 
     public void setId(int id) {
-        this.id = id;
+        if (id > 0){
+            this.id = id;
+        }else{
+           setId(1);
+        }
+
+
+
     }
 
     public String getFirstName() {
@@ -43,7 +62,11 @@ public class Employee {
     }
 
     public void setSalary(double salary) {
-        this.salary = salary;
+        if (salary > 0) {
+            this.salary = salary;
+        }else{
+            salary = getSalary();
+        }
     }
 
     @Override
