@@ -4,7 +4,7 @@ import com.bank.services.UserValidation;
 
 import java.util.Objects;
 
- public class User {
+ public class User extends Account {
 
 
     private static int Id;
@@ -25,6 +25,10 @@ import java.util.Objects;
          this.password = pw;
      }
 
+     public User(int id,String Firstname){this.Id =id;this.firstName=Firstname;}
+
+     public User(String Username){this.userName=Username;}
+
     public User(String Firstname, String Lastname, String Username, String pw, Role Role){
         this.role = Role;
         this.firstName = Firstname;
@@ -34,8 +38,8 @@ import java.util.Objects;
         this.password = pw;
     }
 
-     public User( int id, String Firstname, String Lastname, String Username, String pw){
-
+     public User(int id, String Firstname, String Lastname, String Username, String pw){
+        this.Id = id;
          this.firstName = Firstname;
          this.lastName = Lastname;
          this.userName = Username;

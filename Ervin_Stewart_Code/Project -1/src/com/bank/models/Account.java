@@ -2,13 +2,21 @@ package com.bank.models;
 
 import java.util.Objects;
 
-public class Account extends User {
+public class Account {
     private int Id;
     private double balance;
     //private long ownerId;
     //private  Type type;
 
     public Account(){super();}
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "Id=" + Id +
+                ", balance=" + balance +
+                '}';
+    }
 
     public Account(int id, double balance){
         this.Id= id;

@@ -4,6 +4,8 @@ import com.bank.models.Account;
 import com.bank.models.User;
 import com.bank.ui.UI;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,11 +27,11 @@ public class UserValidation extends UI {
     }
 
     public static void isUserName(String username, User myUser){
-        int lenght =8;
+        int lenght =15;
         if (username.length() <= lenght) {
 
         } else {
-            System.out.println("username can only be up to 8 characters long. try again");
+            System.out.println("Username can only be up to 15 characters long. try again.");
             createUserName(username, myUser);
         }
     }
@@ -65,6 +67,9 @@ public class UserValidation extends UI {
         if(deposit<0){
             System.out.println("No negative deposits, try again.");
             deposit(user,account);
+        } else if(deposit>5000){
+            System.out.println("Deposits cannot exceed 5000$");
+            deposit(user,account);
         }
     }
 
@@ -73,6 +78,12 @@ public class UserValidation extends UI {
             System.out.println("Invalid withdrawal, try again.");
            withdrawBalance(user,account);
         }
+    }
+
+    public static double formatValue(double money){
+        BigDecimal bd = new BigDecimal(money).setScale(2, RoundingMode.DOWN);
+        double formatedMoney = bd.doubleValue();
+        return formatedMoney;
     }
 }
 

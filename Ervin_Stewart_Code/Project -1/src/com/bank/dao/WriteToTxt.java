@@ -41,7 +41,7 @@ public class WriteToTxt {
             String line = reader.readLine();
             while(line != null){
                 line = reader.readLine();
-                content += line + "\n";
+               content += line +"\n";
 
 
 //            try (BufferedWriter writer = new BufferedWriter(new FileWriter(accounts))){
