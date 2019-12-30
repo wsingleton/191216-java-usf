@@ -60,7 +60,7 @@ public class AccountDao {
                                 amount = Double.parseDouble(inp);
                             }
                             catch(Exception e){
-                                System.err.println("an unexcpected exception occurred");
+                                System.err.println("enter number only");
 
                             }
                             double a = account.getBalance() + amount;
@@ -83,7 +83,7 @@ public class AccountDao {
                                 amount = Double.parseDouble(inp);
                             }
                             catch(Exception e){
-                                System.err.println("an unexcpected exception occurred");
+                                System.err.println("enter number only");
 
                             }
                             if(account.getBalance() < amount){
