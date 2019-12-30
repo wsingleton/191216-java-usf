@@ -2,12 +2,11 @@ package com.fauxnancials.services;
 
 import com.fauxnancials.resources.User;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import static java.lang.Integer.parseInt;
 
@@ -54,5 +53,29 @@ public class DocumentationDriver {
             System.err.println(e.getMessage());
         }
         return accounts;
+    }
+    public static void updateUsers(ArrayList<User> userList) {
+        File userFile = new File("src/com/fauxnancials/resources/useraccts.txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(userFile))) {
+            for(User u : userList) {
+                writer.write(u.toFileString()+"\n");
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("An unexpected exception has occurred.");
+        }
+    }
+    public static void updateAccts(HashMap<String,Integer> acctList) {
+        File acctFile = new File("src/com/fauxnancials/resources/acctbalances.txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(acctFile))) {
+            for(Map.Entry<String,Integer> entry : acctList.entrySet()) {
+                writer.write(entry.getKey()+":"+entry.getValue()+"\n");
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("An unexpected exception has occurred.");
+        }
     }
 }

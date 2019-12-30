@@ -1,1 +1,4 @@
 default:0
+carl_sagan:250
+maryanning:5
+jblunt:7500

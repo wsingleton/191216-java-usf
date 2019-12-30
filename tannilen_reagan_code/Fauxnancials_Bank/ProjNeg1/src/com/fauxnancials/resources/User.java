@@ -45,4 +45,7 @@ public class User {
                 ", passHash: " + passHash +
                 '}';
     }
+    public String toFileString() {
+        return this.username+":"+this.passHash;
+    }
 }

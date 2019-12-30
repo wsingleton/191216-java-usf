@@ -1,6 +1,7 @@
 package com.fauxnancials;
 
 import com.fauxnancials.resources.User;
+import com.fauxnancials.services.DocumentationDriver;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class Menus {
                 System.out.println("I'm sorry, but username may not be blank.");
                 valid = false;
             } else {
+                username=username.toLowerCase();
                 if (usernames.contains(username)) {
                     System.out.println("I'm sorry, but that username is taken.  Please choose another.");
                     valid = false;
@@ -99,45 +101,7 @@ public class Menus {
             return null;
         }
     }
-
-    public static void browseAccount(User current, int balance) {
-        System.out.println("Welcome back, " + current.getUsername() + "!");
-        System.out.println("Your current account balance is $" + balance + ".00.");
-        System.out.println("");
-        do {
-            System.out.println("What would you like to do?");
-            System.out.println("a. Deposit funds");
-            System.out.println("b. Make a withdrawal");
-            System.out.println("c. Exit");
-            String ans = scanner.next();
-            char first = ans.charAt(0);
-            first = Character.toLowerCase(first);
-            switch (first) {
-                case 'a': {
-                    balance=makeDeposit(balance);
-                    valid = true;
-                    break;
-                }
-                case 'b': {
-                    balance=makeWithdrawal(balance);
-                    valid = true;
-                    break;
-                }
-                case 'c': {
-                    System.out.println("Goodbye!");
-                    valid = true;
-                    System.exit(0);
-                    break;
-                }
-                default: {
-                    System.out.println("I didn't catch that.  Please select a, b, or c.");
-                    valid = false;
-                }
-            }
-        } while (!valid);
-        browseAccount(current, balance);
-    }
-    private static int makeDeposit(int balance) {
+    static int makeDeposit(int balance) {
         System.out.println("Your current account balance is $" + balance + ".00.");
         System.out.println("Deposits may be made in whole dollar increments and should not exceed $2000.00.");
         System.out.println("For deposits larger than $2000.00, please visit your local branch office.");
@@ -180,7 +144,7 @@ public class Menus {
         } while (!valid);
         return balance;
     }
-    private static int makeWithdrawal(int balance) {
+    static int makeWithdrawal(int balance) {
         System.out.println("Your current account balance is $" + balance + ".00.");
         System.out.println("Withdrawals may be made in whole dollar increments.");
         do {
