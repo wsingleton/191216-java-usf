@@ -7,7 +7,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static com.bank.dao.AccountDao.replaceBalance;
-import static com.bank.service.UserService.validateAmount;
+import static com.bank.service.AccountService.validateAmount;
+
 
 public class WithdrawScreen extends User {
 
