@@ -9,8 +9,7 @@ import static com.bank.dao.AccountDao.writeToAccount;
 import static com.bank.dao.UserDao.checkRegister;
 import static com.bank.dao.UserDao.writeToUser;
 import static com.bank.models.User.createId;
-import static com.bank.service.AccountService.validatePassword;
-import static com.bank.service.AccountService.validateUserName;
+import static com.bank.service.AccountService.*;
 import static com.bank.service.UserService.*;
 
 
@@ -48,6 +47,7 @@ public class RegisterScreen {
         System.out.println("Thank you!");
         System.out.print("Please enter the amount you'd like to deposit: ");
         double bal = scanner.nextDouble();
+        bal = validateAmount(bal);
 
         Account newAcct = new Account(newId, bal);
         writeToAccount(newAcct);

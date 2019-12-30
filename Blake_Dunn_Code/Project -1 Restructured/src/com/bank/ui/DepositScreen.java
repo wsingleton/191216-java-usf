@@ -39,7 +39,7 @@ public class DepositScreen extends User {
                 replaceBalance(oldAcctNum, oldAcctBal, newAcctNum, newAcctBal);
             }
         }catch (InputMismatchException e) {
-            System.out.println("Invalid value");
+            System.out.println("C'mon man, shiiiiittttttt. Try again.");
             deposit(acct);
         }
         System.out.println("Your new balance is $" + newBalance);

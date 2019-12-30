@@ -3,15 +3,11 @@ package com.bank.service;
 import com.bank.models.Account;
 import com.bank.ui.RegisterScreen;
 
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static com.bank.ui.MainScreen.display;
 import static com.bank.ui.MainScreen.homeScreen;
-
 
 public class UserService {
 

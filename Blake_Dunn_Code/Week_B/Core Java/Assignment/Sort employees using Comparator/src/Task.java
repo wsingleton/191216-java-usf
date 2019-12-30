@@ -8,6 +8,10 @@ public class Task {
 
         List<Employee> employees = new ArrayList<>(employeesForSorting);
 
+        Collections.sort(employees);
+
+
+
 
     }
 
