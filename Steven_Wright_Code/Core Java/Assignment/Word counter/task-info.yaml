@@ -1,0 +1,196 @@
+type: edu
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 302
+    length: 35
+    placeholder_text: // Provide your implementation here
+    initial_state:
+      length: 35
+      offset: 302
+    initialized_from_dependency: false
+    possible_answer: |-
+      String[] textArray = new String[0];
+
+              if (file == null) return new String[0];
+
+              try (Scanner reader = new Scanner(new FileReader(file))) {
+
+                  while (reader.hasNext()) {
+                      String line = reader.next();
+                      textArray = Arrays.copyOf(textArray, textArray.length + 1);
+                      textArray[textArray.length - 1] = line;
+                  }
+
+              } catch (FileNotFoundException fnfe) {
+                  System.err.println("No file found with name: " + file.getName());
+                  return new String[0];
+              } catch (Exception e) {
+                  e.printStackTrace();
+                  System.err.println("An unexpected exception was thrown.");
+                  return new String[0];
+              }
+
+              return textArray;
+    selected: false
+    status: Unchecked
+  - offset: 424
+    length: 30
+    placeholder_text: // Provide your implementation
+    initial_state:
+      length: 30
+      offset: 424
+    initialized_from_dependency: false
+    possible_answer: |-
+      Map<String, Integer> wordCountMap = new Hashtable<>();
+
+              if (extractedText == null || extractedText.length == 0) {
+                  return wordCountMap;
+              }
+
+              for(String word: extractedText) {
+                  if (wordCountMap.containsKey(word)) {
+                      wordCountMap.put(word, wordCountMap.get(word) + 1);
+                  } else {
+                      wordCountMap.put(word, 1);
+                  }
+              }
+
+              return wordCountMap;
+    selected: false
+    status: Unchecked
+  text: |
+    import java.io.BufferedReader;
+    import java.io.File;
+    import java.io.FileNotFoundException;
+    import java.io.FileReader;
+    import java.util.Arrays;
+    import java.util.Hashtable;
+    import java.util.Map;
+    import java.util.Scanner;
+
+    public class Task {
+
+        public String[] extractTextFromFile(File file) {
+
+            // Provide your implementation here
+
+        }
+
+        public Map<String, Integer> countWords(String[] extractedText) {
+
+            // Provide your implementation
+
+        }
+
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |
+    import org.junit.*;
+    import org.junit.rules.ExpectedException;
+    import org.junit.rules.Timeout;
+
+    import java.io.File;
+    import java.util.Map;
+
+    import static org.junit.Assert.*;
+
+    public class Tests {
+
+      private Task sut;
+
+      @Rule
+      public ExpectedException expectedException = ExpectedException.none();
+
+      @Rule
+      public Timeout globalTimeout = Timeout.seconds(3);
+
+      @Before
+      public void setUp() {
+        sut = new Task();
+      }
+
+      @After
+      public void tearDown() {
+        sut = null;
+      }
+
+      @Test
+      public void testExtractTextWithExistingFileContainingText() {
+        String[] expectedResult = new String[] {
+          "the", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog"
+        };
+
+        String[] actualResult = sut.extractTextFromFile(new File("resources/has-text.txt"));
+        assertArrayEquals(expectedResult, actualResult);
+      }
+
+      @Test
+      public void testExtractTextWithExistingEmptyFile() {
+        String[] actualResult = sut.extractTextFromFile(new File("resources/empty.txt"));
+        assertEquals(0L, actualResult.length);
+      }
+
+      @Test
+      public void testExtractTextWithNullFile() {
+        String[] actualResult = sut.extractTextFromFile(null);
+        assertEquals(0L, actualResult.length);
+      }
+
+      @Test
+      public void testExtractTextWithMissingFile() {
+        String[] actualResult = sut.extractTextFromFile(new File("resources/missing.txt"));
+        assertEquals(0L, actualResult.length);
+      }
+
+      @Test
+      public void testCountWordsWithValidStringArray() {
+        Map<String, Integer> actualResult = sut.countWords(new String[] {
+          "a", "b", "c", "d", "a", "b", "c", "d", "aa", "bb", "cc",
+          "aaa", "bbb", "A", "B", "C", "D", "A", "B", "CC", "DDD"
+        });
+
+        assertEquals(2, (long) actualResult.get("a"));
+        assertEquals(2, (long) actualResult.get("b"));
+        assertEquals(2, (long) actualResult.get("c"));
+        assertEquals(2, (long) actualResult.get("d"));
+        assertEquals(1, (long) actualResult.get("aa"));
+        assertEquals(1, (long) actualResult.get("bb"));
+        assertEquals(1, (long) actualResult.get("cc"));
+        assertEquals(1, (long) actualResult.get("aaa"));
+        assertEquals(1, (long) actualResult.get("bbb"));
+        assertEquals(2, (long) actualResult.get("A"));
+        assertEquals(2, (long) actualResult.get("B"));
+        assertEquals(1, (long) actualResult.get("C"));
+        assertEquals(1, (long) actualResult.get("D"));
+        assertEquals(1, (long) actualResult.get("CC"));
+        assertEquals(1, (long) actualResult.get("DDD"));
+
+      }
+
+      @Test
+      public void testCountWordsWithEmptyStringArray() {
+        Map<String, Integer> actualResult = sut.countWords(new String[0]);
+        assertTrue(actualResult.isEmpty());
+      }
+
+      @Test
+      public void testCountWordsWithNullStringArray() {
+        Map<String, Integer> actualResult = sut.countWords(null);
+        assertTrue(actualResult.isEmpty());
+      }
+
+    }
+  learner_created: false
+- name: resources/has-text.txt
+  visible: false
+  text: the quick brown fox jumped over the lazy dog
+  learner_created: false
+- name: resources/empty.txt
+  visible: false
+  learner_created: false
+status: Unchecked
+record: -1
