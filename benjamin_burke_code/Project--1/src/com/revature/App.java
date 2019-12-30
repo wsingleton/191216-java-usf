@@ -117,14 +117,14 @@ public class App {
                             + decimalFormat.format(balance));
 
         System.out.println("\n1: Deposit"
-                            + "\n2: Withdrawl"
+                            + "\n2: Withdraw"
                             + "\n3: Log Out");
 
         Scanner input = new Scanner(System.in);
-        int responst = 0;
-        responst = input.nextInt();
+        int response = 0;
+        response = input.nextInt();
 
-        switch (responst){
+        switch (response){
             case 1: deposit(a); break;
             case 2: withdrawl(a); break;
             case 3: logOut(a); break;
