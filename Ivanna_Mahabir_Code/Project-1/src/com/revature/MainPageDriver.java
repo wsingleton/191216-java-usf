@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class MainPageDriver {
     public static void main(String[] args){
-
+        mainPage:
         System.out.println("Welcome to C Bank!");
         System.out.println("New user enter 1, returning user enter 2 (to exit enter -1): ");
         //reads input from the user

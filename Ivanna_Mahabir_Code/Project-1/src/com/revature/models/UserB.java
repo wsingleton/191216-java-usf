@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import java.util.InputMismatchException;
 import java.util.Objects;
 
 public class UserB {
@@ -33,30 +34,25 @@ public class UserB {
         return username;
     }
 
-    //unique username // nested if
+    //unique username //
     public void setUsername(String username) {
-        //need try catch block b/c ImputMismatchException when using lenght == 15
-       if(username.length() > 7 && username.length() < 15){
-           System.out.println("correct user length" + username.length());
-           //Compare to save entry in file
-           //
-           this.username = username;
-       }
-       else{
-           System.out.println("Invalid Username");
-           // retry x2, then cancel or just break.
-       }
-
+        if(validate(username)){this.username = username;}
+        else {
+            System.out.println(username + " Invalid");
+        }
     }
 
     public String getPassword() {
         return password;
     }
 
+
     public void setPassword(String password) {
-        // test condition for password criteria: lenght, number, chara,
-        // nested if
-        this.password = password;
+        if(validate(password)){this.password = password;}
+        else {
+            System.out.println(password + " Invalid");
+
+        }
     }
 
     public double getBalance() {
@@ -64,30 +60,50 @@ public class UserB {
     }
 
     public void setBalance(double balance) {
+        try{
         if(balance <= 0){
-        this.balance =  0;}
+            System.out.println(balance + " Insufficient funds");;}
         else{
             this.balance = balance;
+        }}
+        catch(InputMismatchException e) {
+            System.out.println("Invalid Input");
+            e.printStackTrace();
         }
+
     }
 
     public String toFileString(){
         return id + ":" + username + ":" + password + ":" + balance;
     }
 
+    public static boolean uCase(char ch){
+        ch = Character.toUpperCase(ch);
+        return (ch >= 'A' && ch <= 'Z');
+    }
+    public static boolean nCase(char ch){
+        return (ch >= '0' && ch <=9);
+    }
 
-/*  *//*  public void validateUser(String u){
-        //test length of username. must be b/t 5 - 15 chara 
-        //u = getUsername();
-        if (u.length() > 4 || u.length() < 16){
-            System.out.println("Correct length of username");
-            setUsername(u);
-            this.username = u;
+   //Validation for new entry
+    public boolean validate(String arg) {
+        if (arg.length() >= 8 && arg.length() <= 15) {
+            for (int i = 0; i < arg.length(); i++) {
+                char ch = arg.charAt(i);
+                if (uCase(ch)) {
+                    //System.out.println("invalid");
+                    if (nCase(ch))
+                        return true;
+                    //break;
+                }
+            }
         }
-        else{
-            System.out.println("Invalid entry");
-        }
-    }*/
+        return false;
+    }
+
+    //validation for login of previous
+    // use comparator??
+
 
     @Override
     public boolean equals(Object o) {
