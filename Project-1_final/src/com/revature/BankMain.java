@@ -127,7 +127,6 @@ public class BankMain {
 
                                 double newBalance = u.getBalance() + amount;
                                 u.setBalance(newBalance);
-                                System.out.println(usernamesAndPasswords.get(index).getPassword());
                                 usernamesAndPasswords.remove(index);
                                 usernamesAndPasswords.add(index, u);
 
@@ -164,7 +163,6 @@ public class BankMain {
                                 }
 
                                 u.setBalance(newBalanceSub);
-                                System.out.println(usernamesAndPasswords.get(index).getPassword());
                                 usernamesAndPasswords.remove(index);
                                 usernamesAndPasswords.add(index, u);
 
