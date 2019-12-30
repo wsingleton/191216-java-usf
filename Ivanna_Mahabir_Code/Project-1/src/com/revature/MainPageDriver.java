@@ -1,6 +1,7 @@
 package com.revature;
 
 import com.revature.RegisterDriver.*;
+import com.revature.models.LoginDriver;
 import com.revature.models.UserB;
 //import com.revature.models.ReadInput;
 //import com.revature.models.UserB.*;
@@ -35,7 +36,8 @@ public class MainPageDriver {
                 break;
             case 2:
                 System.out.println("Please login");
-                //login
+                LoginDriver myLogin = new LoginDriver();
+                myLogin.Login();
                 break;
             case -1:
                 return;
