@@ -16,8 +16,9 @@ public class Task {
 
     public void push(String newString) {
 
-        if (currentElementPosition == elements.length)
+        if (currentElementPosition == elements.length){
             elements = Arrays.copyOf(elements, elements.length + 1);
+        }
         elements[currentElementPosition++] = newString;
 
     }

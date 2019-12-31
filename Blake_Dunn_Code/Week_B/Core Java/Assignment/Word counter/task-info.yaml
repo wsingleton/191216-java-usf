@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 213
-    length: 656
+    length: 655
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -35,7 +35,7 @@ files:
               return textArray;
     selected: true
     status: Solved
-  - offset: 948
+  - offset: 947
     length: 422
     placeholder_text: // Provide your implementation
     initial_state:

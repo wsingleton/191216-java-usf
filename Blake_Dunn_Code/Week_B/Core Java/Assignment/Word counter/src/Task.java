@@ -15,7 +15,6 @@ public class Task {
 
         try (Scanner reader = new Scanner(new FileReader(file))) {
 
-
             while (reader.hasNext()) {
                 String line = reader.next();
                 token = Arrays.copyOf(token, token.length + 1);

@@ -18,8 +18,12 @@ public class Task {
          */
         for (int value : arr) {
 
-            if (value < minMax[0]) minMax[0] = value;
-            if (value > minMax[1]) minMax[1] = value;
+            if (value < minMax[0]) {
+                minMax[0] = value;
+            }
+            if (value > minMax[1]) {
+                minMax[1] = value;
+            }
         }
 
         return minMax;

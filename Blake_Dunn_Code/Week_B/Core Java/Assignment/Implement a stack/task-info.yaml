@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 353
-    length: 181
+    length: 192
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -15,7 +15,7 @@ files:
               elements[currentElementPosition++] = newString;
     selected: true
     status: Solved
-  - offset: 568
+  - offset: 579
     length: 206
     placeholder_text: // Provide your implementation here
     initial_state:
@@ -29,7 +29,7 @@ files:
               return value;
     selected: true
     status: Solved
-  - offset: 818
+  - offset: 829
     length: 122
     placeholder_text: // Provide your implementation here
     initial_state:
@@ -41,7 +41,7 @@ files:
               return elements[currentElementPosition - 1];
     selected: true
     status: Solved
-  - offset: 981
+  - offset: 992
     length: 24
     placeholder_text: // Provide your implementation here
     initial_state:
