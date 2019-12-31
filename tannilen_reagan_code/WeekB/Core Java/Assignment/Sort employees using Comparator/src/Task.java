@@ -1,13 +1,17 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EmptyStackException;
 import java.util.List;
 
 public class Task {
 
     public List<Employee> sortEmployeesBySalary(List<Employee> employeesForSorting) {
 
-        // Provide your implementation here
-
+        if (employeesForSorting==null || employeesForSorting.size()==0) {
+            return new ArrayList<>();
+        }
+        Collections.sort(employeesForSorting, new EmployeeComparator());
+        return employeesForSorting;
     }
 
 }
