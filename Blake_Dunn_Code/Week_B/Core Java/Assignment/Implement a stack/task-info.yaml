@@ -16,7 +16,7 @@ files:
     selected: true
     status: Solved
   - offset: 579
-    length: 206
+    length: 208
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -29,7 +29,7 @@ files:
               return value;
     selected: true
     status: Solved
-  - offset: 829
+  - offset: 831
     length: 122
     placeholder_text: // Provide your implementation here
     initial_state:
@@ -41,7 +41,7 @@ files:
               return elements[currentElementPosition - 1];
     selected: true
     status: Solved
-  - offset: 992
+  - offset: 994
     length: 24
     placeholder_text: // Provide your implementation here
     initial_state:

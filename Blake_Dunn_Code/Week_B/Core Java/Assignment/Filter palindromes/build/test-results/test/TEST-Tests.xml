@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-29T19:41:27" hostname="DESKTOP-9VJVNCN" time="0.044">
+<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-31T03:05:46" hostname="DESKTOP-9VJVNCN" time="0.031">
   <properties/>
-  <testcase name="testSolutionWithValidArrayContainingSomeNulls" classname="Tests" time="0.025"/>
-  <testcase name="testSolutionWithValidArrayContainingAllPalindromes" classname="Tests" time="0.002"/>
-  <testcase name="testSolutionWithValidArrayContainingNumericPalindromes" classname="Tests" time="0.002"/>
-  <testcase name="testSolutionWithValidArrayContainingSomePalindromes" classname="Tests" time="0.003"/>
-  <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.002"/>
-  <testcase name="testSolutionWithValidArrayContainingNoPalindromes" classname="Tests" time="0.004"/>
-  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionWithValidArrayContainingSomeNulls" classname="Tests" time="0.017"/>
+  <testcase name="testSolutionWithValidArrayContainingAllPalindromes" classname="Tests" time="0.004"/>
+  <testcase name="testSolutionWithValidArrayContainingNumericPalindromes" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithValidArrayContainingSomePalindromes" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithValidArrayContainingNoPalindromes" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

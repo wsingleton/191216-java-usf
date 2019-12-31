@@ -8,7 +8,6 @@ public class Task {
         if (wordArray == null || wordArray.length == 0) {
             return new String[0];
         }
-
         String[] copy = new String[0];
 
         for (int i = 0; i < wordArray.length; i++){
@@ -18,7 +17,6 @@ public class Task {
             }
         }
         return copy;
-
     }
 
     public boolean isPalindrome(String word) {

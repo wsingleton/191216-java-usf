@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-12-29T06:04:55" hostname="DESKTOP-9VJVNCN" time="0.028">
+<testsuite name="Tests" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-12-31T04:25:31" hostname="DESKTOP-9VJVNCN" time="0.047">
   <properties/>
-  <testcase name="testSolutionWithStrings" classname="Tests" time="0.024"/>
-  <testcase name="testSolutionWithIntegers" classname="Tests" time="0.003"/>
-  <testcase name="ensureNoOverloading" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithStrings" classname="Tests" time="0.034"/>
+  <testcase name="testSolutionWithIntegers" classname="Tests" time="0.009"/>
+  <testcase name="ensureNoOverloading" classname="Tests" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

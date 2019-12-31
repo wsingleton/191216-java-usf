@@ -5,7 +5,7 @@ public class Task {
         if (str == null || str.length() == 0)
             return new String("");
 
-        str = str.replaceAll("\\s","");
+        str = str.replaceAll("\\s+","");
 
         return str;
 

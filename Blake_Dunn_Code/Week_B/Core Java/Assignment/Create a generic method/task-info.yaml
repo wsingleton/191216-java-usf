@@ -14,7 +14,7 @@ files:
     selected: false
     status: Solved
   - offset: 55
-    length: 11
+    length: 9
     placeholder_text: ""
     initial_state:
       length: 0
@@ -23,8 +23,8 @@ files:
     possible_answer: T... values
     selected: true
     status: Solved
-  - offset: 71
-    length: 77
+  - offset: 69
+    length: 89
     placeholder_text: /* Provide your implementation */
     initial_state:
       length: 33

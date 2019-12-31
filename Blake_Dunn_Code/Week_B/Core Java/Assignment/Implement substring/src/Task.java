@@ -6,7 +6,7 @@ public class Task {
             return new String("");
         }
 
-        StringBuilder newString = new StringBuilder("");
+        StringBuilder pooString = new StringBuilder("");
 
         if (start < 0 || end < 0){
             return new String("");
@@ -18,10 +18,10 @@ public class Task {
 
             for (int i = 0; i < end; i++){
                 if (i >= start)
-                    newString.append(mainString.charAt(i));
+                    pooString.append(mainString.charAt(i));
             }
         }
-        return newString.toString();
+        return pooString.toString();
 
     }
 }

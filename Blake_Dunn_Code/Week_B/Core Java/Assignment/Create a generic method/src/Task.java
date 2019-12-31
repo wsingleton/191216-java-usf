@@ -1,9 +1,9 @@
 public class Task<T> {
 
-    public void genericPrinter(T... string) {
+    public void genericPrinter(T... poop) {
 
-        for (T str : string) {
-            System.out.println(str);
+        for (T poopyPants : poop) {
+            System.out.println(poopyPants);
         }
     }
 

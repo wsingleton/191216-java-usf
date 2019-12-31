@@ -10,13 +10,13 @@ public class Task {
 
         for (int i = 0; i < values.length; i++) {
 
-            if ((values[i] % 3) == 0 && (values[i] % 5) == 0) {
+            if (values[i] % 3 == 0 && values[i] % 5 == 0) {
                 fizzBuzzString[i] = "fizzbuzz";
             }
-            else if ((values[i] % 3) == 0) {
+            else if (values[i] % 3 == 0) {
                 fizzBuzzString[i] = "fizz";
             }
-            else if ((values[i] % 5) == 0) {
+            else if (values[i] % 5 == 0) {
                 fizzBuzzString[i] = "buzz";
             }
             else {

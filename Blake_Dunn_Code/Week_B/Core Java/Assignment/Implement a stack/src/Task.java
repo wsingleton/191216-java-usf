@@ -26,9 +26,9 @@ public class Task {
     public String pop() {
 
         if (currentElementPosition == 0) throw new EmptyStackException();
-        String pop = elements[currentElementPosition - 1];
+        String poop = elements[currentElementPosition - 1];
         elements[currentElementPosition - 1] = null;
-        return pop;
+        return poop;
 
     }
 

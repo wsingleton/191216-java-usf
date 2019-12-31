@@ -40,7 +40,6 @@ public class Task {
             return map;
         }
 
-
         for (String s : extractedText) {
             if (!map.containsKey(s)) {
                 map.put(s, 1);
