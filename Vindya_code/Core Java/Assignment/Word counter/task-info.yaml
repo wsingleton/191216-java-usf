@@ -34,7 +34,7 @@ files:
 
               return textArray;
     selected: false
-    status: Unchecked
+    status: Failed
   - offset: 424
     length: 30
     placeholder_text: // Provide your implementation
@@ -59,7 +59,7 @@ files:
 
               return wordCountMap;
     selected: false
-    status: Unchecked
+    status: Failed
   text: |
     import java.io.BufferedReader;
     import java.io.File;
@@ -192,5 +192,5 @@ files:
 - name: resources/empty.txt
   visible: false
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

@@ -6,7 +6,7 @@ public class Task {
 
     public double calculateInterest(double principal, double time, double rate, double freq) {
 
-        // Provide your implementation here
+        return Math.pow(principal*(1 + (rate/freq)),(freq*time));
 
     }
 

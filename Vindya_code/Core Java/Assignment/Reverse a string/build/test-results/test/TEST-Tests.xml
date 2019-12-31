@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-31T01:22:53" hostname="LAPTOP-F0S6CQ8O" time="0.062">
+  <properties/>
+  <testcase name="testSolutionUsingStringWithCapitalizedLetter" classname="Tests" time="0.016"/>
+  <testcase name="testSolutionUsingPalindrome" classname="Tests" time="0.009"/>
+  <testcase name="testSolutionUsingNullString" classname="Tests" time="0.003"/>
+  <testcase name="testSolutionUsingStringWithNewLines" classname="Tests" time="0.025"/>
+  <testcase name="testSolutionUsingEmptyString" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionUsingSimpleString" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionUsingStringWithPunctuationAndSpaces" classname="Tests" time="0.003"/>
+  <system-out><![CDATA[namen
+nemen
+nemen
+neman
+nemaR
+racecar
+racecar
+racecar
+racecar
+racecar
+racecar
+racecar
+6bc
+123
+def
+456
+65c
+123
+def
+456
+654
+123
+def
+456
+654
+123
+def
+456
+654
+f23
+def
+456
+654
+fe3
+def
+456
+654
+fed
+def
+456
+654
+fed
+def
+456
+654
+fed
+3ef
+456
+654
+fed
+32f
+456
+654
+fed
+321
+456
+654
+fed
+321
+456
+654
+fed
+321
+c56
+654
+fed
+321
+cb6
+654
+fed
+321
+cba
+tobot
+tobot
+tobot
+tobot
+tobor
+!'m hungry!
+!ym hungry!
+!yr hungry!
+!yrghungry!
+!yrgnungry!
+!yrgnungry!
+!yrgnuhgry!
+!yrgnuh ry!
+!yrgnuh my!
+!yrgnuh m'!
+!yrgnuh m'I
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

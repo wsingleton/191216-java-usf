@@ -7,5 +7,28 @@ public class Task {
 
         /* Provide your implementation here */
 
+        for (int i = 0; i <= numbersForSorting.length - 1; i++){
+            for(int j=i+1; j <= numbersForSorting.length -1; j++){
+
+                if (numbersForSorting[j]<numbersForSorting[i]){
+                    int dummyV = numbersForSorting[j];
+                    numbersForSorting[j] = numbersForSorting[i];
+                    numbersForSorting[i] = dummyV;
+                }
+            }
+        }
+
+        return numbersForSorting;
     }
 }
+
+
+
+
+
+
+
+
+
+
+

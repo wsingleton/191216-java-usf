@@ -1,5 +1,6 @@
-import java.util.Arrays;
-import java.util.EmptyStackException;
+import jdk.internal.org.objectweb.asm.commons.GeneratorAdapter;
+
+import java.util.Stack;
 
 public class Task {
 
@@ -14,22 +15,26 @@ public class Task {
         elements = new String[initialSize];
     }
 
-    public void push(String newString) {
+    public Integer push(String newString) {
+
+
+        Stack<String> Stack = new Stack<String>();
+
+
+
+            return null;
+
+
+
+
         // Provide your implementation here
-    }
 
-    public String pop() {
 
+        public
+        }
         // Provide your implementation here
 
     }
-
-    public String peek(){
-        // Provide your implementation here
-    }
-
-    public int size() {
-        // Provide your implementation here
-    }
-
 }
+
+

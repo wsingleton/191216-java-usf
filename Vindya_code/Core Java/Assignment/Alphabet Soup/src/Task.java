@@ -1,14 +1,16 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class Task {
 
-    public String createAcronymFromPhrase(String phrase) {
+    private String phrase;
 
-        // Provide your implementation here
+    public <Acronyms> String createAcronymFromPhrase(String phrase) {
 
-    }
 
+        Acronyms String = createAcronymFromPhrase(String phrase) {
+            this.phrase = phrase;
+
+        }
+
+
+
+}
 }

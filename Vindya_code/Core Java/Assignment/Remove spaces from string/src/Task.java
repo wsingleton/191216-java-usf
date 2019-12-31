@@ -2,8 +2,9 @@ public class Task {
 
     public String collapseWhiteSpace(String str) {
 
-        // Provide your implementation here
-
+        if (str == null || str.trim().equals("")) return "";
+        str = str.replaceAll(" ", "");
+        return str;
     }
 
 }
