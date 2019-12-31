@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-30T20:27:22" hostname="USF-Guest-Wifi-48-140.laptops.usf.edu" time="0.022">
+  <properties/>
+  <testcase name="testCountWordsWithEmptyStringArray" classname="Tests" time="0.003"/>
+  <testcase name="testExtractTextWithExistingFileContainingText" classname="Tests" time="0.014"/>
+  <testcase name="testCountWordsWithValidStringArray" classname="Tests" time="0.001"/>
+  <testcase name="testExtractTextWithNullFile" classname="Tests" time="0.0"/>
+  <testcase name="testExtractTextWithMissingFile" classname="Tests" time="0.003"/>
+  <testcase name="testCountWordsWithNullStringArray" classname="Tests" time="0.0"/>
+  <testcase name="testExtractTextWithExistingEmptyFile" classname="Tests" time="0.001"/>
+  <system-out><![CDATA[resources/missing.txt (No such file or directory)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -50,6 +51,7 @@ public class Session {
 
         boolean success = false;
         while(!success) {
+            bank.printAllUsers();
             System.out.println("Enter: \n0 to register a new user\n1 to log in");
             int mode = interactive.nextInt();
             switch (mode) {
@@ -57,14 +59,13 @@ public class Session {
                     int id = bank.makeUser(interactive, false);
                     if( id != -1) {
                         success = true;
-                        userId = id;
+                        id = userId;
                     }
                     break;
                 case 1:
                     System.out.println("Enter username: ");
                     userName = interactive.next();
                     userId = Objects.hash(userName);
-                    //System.out.println(Objects.hash(userName));
                     if(bank.userContains(userName)) {
                         System.out.println("Enter password: ");
                         password = interactive.next();
@@ -88,15 +89,24 @@ public class Session {
             System.out.println("Enter:\nDeposit to deposit into an account\nWithdraw to make a withdrawal\n" +
                     "Create to make new account\nExit to log off");
             operation = interactive.next();
-
             switch(operation.toLowerCase()) {
                 case "deposit":
                     if(bank.userAt(userId).getAccountsLength() != 0) {
                         System.out.println("Enter the index of the account into which you want to make a deposit:");
-                        int index = interactive.nextInt();
+                        int index = 0;
+                        try { index = interactive.nextInt(); }
+                        catch (InputMismatchException ime) {
+                            System.out.println("Not a valid Index");
+                            break;
+                        }
                         if(index < bank.userAt(userId).getAccountsLength() && index >= 0) {
                             System.out.println("Enter the amount you would like to deposit:");
-                            double amount = interactive.nextDouble();
+                            double amount = 0;
+                            try { amount = interactive.nextDouble(); }
+                            catch (InputMismatchException ime) {
+                                System.out.println("Not a number");
+                                break;
+                            }
                             bank.makeDeposit(bank.userAt(userId).getAccount(index).getActId(), amount);
                         }
                         else System.out.println("Account does not exist.");
@@ -107,10 +117,20 @@ public class Session {
                 case "withdraw":
                     if(bank.userAt(userId).getAccountsLength() != 0) {
                         System.out.println("Enter the index of the account from which you want to withdraw");
-                        int indexWithdraw = interactive.nextInt();
+                        int indexWithdraw = 0;
+                        try { indexWithdraw = interactive.nextInt(); }
+                        catch (InputMismatchException ime) {
+                            System.out.println("Not a valid Index");
+                            break;
+                        }
                         if(indexWithdraw < bank.userAt(userId).getAccountsLength() && indexWithdraw >= 0) {
                             System.out.println("Enter the amount you would like to withdraw");
-                            double amountWithdraw = interactive.nextDouble();
+                            double amountWithdraw;
+                            try { amountWithdraw = interactive.nextDouble(); }
+                            catch (InputMismatchException ime) {
+                                System.out.println("Not a number");
+                                break;
+                            }
                             bank.makeWithdrawal(bank.userAt(userId).getAccount(indexWithdraw).getActId(), amountWithdraw);
                         }
                         else System.out.println("Account does not exist.");

@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="8" skipped="0" failures="0" errors="0" timestamp="2019-12-28T03:17:32" hostname="107-144-156-227.biz.spectrum.com" time="0.006">
+<testsuite name="Tests" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-30T21:47:33" hostname="USF-Guest-Wifi-48-140.laptops.usf.edu" time="0.002">
   <properties/>
-  <testcase name="testSolutionUsingOnlyWhiteSpace" classname="Tests" time="0.003"/>
-  <testcase name="testSolutionUsingNullPhrase" classname="Tests" time="0.001"/>
-  <testcase name="testSolutionUsingPhraseWithHyphenatedWord" classname="Tests" time="0.0"/>
-  <testcase name="testSolutionUsingPhraseWithAcronym" classname="Tests" time="0.0"/>
-  <testcase name="testSolutionUsingPhraseWithExcessWhiteSpace" classname="Tests" time="0.0"/>
-  <testcase name="testSolutionUsingEmptyPhrase" classname="Tests" time="0.0"/>
-  <testcase name="testSolutionUsingSimplePhrase" classname="Tests" time="0.001"/>
-  <testcase name="testSolutionUsingPhraseWithPunctuation" classname="Tests" time="0.0"/>
-  <system-out><![CDATA[here
-]]></system-out>
+  <testcase name="testSolutionUsingPhraseWithExcessWhiteSpace" classname="Tests" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

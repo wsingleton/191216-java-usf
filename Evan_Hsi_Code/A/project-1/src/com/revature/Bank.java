@@ -1,6 +1,7 @@
 package com.revature;
 
 import javax.net.ssl.SSLEngineResult;
+import java.math.BigDecimal;
 import java.util.*;
 import java.io.*;
 
@@ -63,17 +64,23 @@ public class Bank {
         if(file) {
             account.setBalance(scanner.nextDouble());
         }
-        if(!file) { System.out.print("Select Account Type (CHECKING/SAVINGS)"); }
-        String typeString = scanner.next();
-        switch (typeString) {
-            case "CHECKING":
-                account.setType(Type.CHECKING);
-                break;
-            case "SAVINGS":
-                account.setType(Type.SAVINGS);
-                break;
-            default:
-                break;
+        boolean type = false;
+        while(!type) {
+            if(!file) { System.out.print("Select Account Type (CHECKING/SAVINGS)"); }
+            String typeString = scanner.next();
+            switch (typeString) {
+                case "CHECKING":
+                    account.setType(Type.CHECKING);
+                    type = true;
+                    break;
+                case "SAVINGS":
+                    account.setType(Type.SAVINGS);
+                    type = true;
+                    break;
+                default:
+                    System.out.println("Please enter a valid account type.");
+                    break;
+            }
         }
         if(file) {
             account.setOwnerID(scanner.nextInt());
@@ -148,18 +155,19 @@ public class Bank {
         }
         else { user.setRole(Role.MEMBER); }
 
+
         if(!file) {
             id = user.hashCode();
             user.setId(id);
         }
-
-        if(userBase.contains(id)) {
+        if(userBase.containsKey(id)) {
             System.out.println("Username already exists");
             return -1;
         }
-
-        userBase.put(id, user);
-        return id;
+        else {
+            userBase.put(id, user);
+            return id;
+        }
     }
 
     public double makeDeposit(int accountId, double depositAmount) {
@@ -167,6 +175,8 @@ public class Bank {
             System.out.println("Invalid deposit amount.");
             return 0;
         }
+        BigDecimal screen = BigDecimal.valueOf(depositAmount);
+        depositAmount = screen.setScale(2, BigDecimal.ROUND_HALF_DOWN).doubleValue();
         acctBase.get(accountId).setBalance(acctBase.get(accountId).getBalance() + depositAmount);
         return acctBase.get(accountId).getBalance();
     }
@@ -180,6 +190,8 @@ public class Bank {
             System.out.println("Insufficient Funds");
             return acctBase.get(accountId).getBalance();
         }
+        BigDecimal screen = BigDecimal.valueOf(withdrawalAmount);
+        withdrawalAmount = screen.setScale(2, BigDecimal.ROUND_HALF_DOWN).doubleValue();
         acctBase.get(accountId).setBalance(acctBase.get(accountId).getBalance() - withdrawalAmount);
         return acctBase.get(accountId).getBalance();
     }
