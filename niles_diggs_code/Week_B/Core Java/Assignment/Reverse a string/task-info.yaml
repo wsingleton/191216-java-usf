@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 129
-    length: 104
+    length: 272
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -34,7 +34,7 @@ files:
               // Return the reversed string
               return String.copyValueOf(stringChars);
     selected: true
-    status: Failed
+    status: Solved
   text: |-
     import java.util.Stack;
 
@@ -121,5 +121,5 @@ files:
 
     }
   learner_created: false
-status: Failed
+status: Solved
 record: -1

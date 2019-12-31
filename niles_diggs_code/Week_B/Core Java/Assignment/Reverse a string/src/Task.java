@@ -5,7 +5,14 @@ public class Task {
 
     public String reverse(String reverseMe) {
 
-        for (int i = 1; i < reverseMe.length(); i++) {
-            reverseMe.substring(reverseMe.length() - i );
+        // need to reverse any input in the string
+        if (reverseMe.length() == 0) {
+            return "";
+        }
+        String m = "";
+        for (int i = reverseMe.length() -1; i >= 0 ; i--) {
+            m = m + reverseMe.charAt(i);
+        }
+        return m;
     }
 }

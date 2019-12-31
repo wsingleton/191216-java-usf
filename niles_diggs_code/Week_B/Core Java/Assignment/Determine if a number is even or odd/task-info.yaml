@@ -4,15 +4,15 @@ files:
   visible: true
   placeholders:
   - offset: 72
-    length: 35
+    length: 101
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
       offset: 72
     initialized_from_dependency: false
     possible_answer: 'return (value % 2 == 0) ? "even" : "odd";'
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Solved
   text: |-
     public class Task {
 
@@ -88,5 +88,5 @@ files:
 
     }
   learner_created: false
-status: Unchecked
+status: Solved
 record: -1

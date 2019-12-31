@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 99
-    length: 35
+    length: 480
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -22,8 +22,8 @@ files:
               }
 
               return substrBuilder.toString();
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Solved
   text: |-
     public class Task {
 
@@ -112,5 +112,5 @@ files:
 
     }
   learner_created: false
-status: Unchecked
+status: Solved
 record: -1

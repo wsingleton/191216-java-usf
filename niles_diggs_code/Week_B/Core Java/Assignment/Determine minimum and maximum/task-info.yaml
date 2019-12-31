@@ -3,8 +3,8 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 105
-    length: 38
+  - offset: 166
+    length: 127
     placeholder_text: /* Provide your implementation here */
     initial_state:
       length: 38
@@ -23,8 +23,8 @@ files:
               }
 
               return minMax;
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Solved
   text: |-
     import java.util.Arrays;
 
@@ -105,5 +105,5 @@ files:
 
     }
   learner_created: false
-status: Unchecked
+status: Solved
 record: -1

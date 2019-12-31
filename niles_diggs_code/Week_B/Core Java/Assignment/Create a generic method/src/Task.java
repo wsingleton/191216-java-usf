@@ -1,7 +1,10 @@
-public class Task {
+public class Task<Gen> {
 
-    public void genericPrinter() {
-        /* Provide your implementation */
+    public void genericPrinter(Gen...arrayAlpha) {
+        for (Gen types: arrayAlpha
+             ) {
+            System.out.println(types);
+        }
     }
 
 }

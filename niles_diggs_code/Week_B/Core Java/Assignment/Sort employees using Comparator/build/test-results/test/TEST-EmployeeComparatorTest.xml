@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="EmployeeComparatorTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-31T12:50:00" hostname="DESKTOP-50FTO6E" time="0.011">
+  <properties/>
+  <testcase name="testCompareWithFirstArgNull" classname="EmployeeComparatorTest" time="0.006"/>
+  <testcase name="testCompareWithValidEmployeesFirstArgSalaryIsLess" classname="EmployeeComparatorTest" time="0.001"/>
+  <testcase name="testCompareWithNullEmployees" classname="EmployeeComparatorTest" time="0.001"/>
+  <testcase name="testIfComparatorIsImplemented" classname="EmployeeComparatorTest" time="0.001"/>
+  <testcase name="testCompareWithValidEmployeesFirstArgSalaryIsGreater" classname="EmployeeComparatorTest" time="0.001"/>
+  <testcase name="testCompareWithValidEmployeesSameSalaryFirstArgLastNameAlphabeticallyFirst" classname="EmployeeComparatorTest" time="0.001"/>
+  <testcase name="testCompareWithSecondArgNull" classname="EmployeeComparatorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
