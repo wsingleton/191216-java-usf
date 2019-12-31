@@ -3,8 +3,8 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 426
-    length: 40
+  - offset: 482
+    length: 57
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -14,9 +14,9 @@ files:
       if(currentElementPosition == elements.length) elements = Arrays.copyOf(elements, elements.length + 1);
               elements[currentElementPosition++] = newString;
     selected: true
-    status: Failed
-  - offset: 606
-    length: 173
+    status: Solved
+  - offset: 679
+    length: 187
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -28,9 +28,9 @@ files:
               elements[currentElementPosition - 1] = null;
               return value;
     selected: true
-    status: Failed
-  - offset: 822
-    length: 35
+    status: Solved
+  - offset: 1007
+    length: 42
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -40,9 +40,9 @@ files:
       if(currentElementPosition == 0) throw new EmptyStackException();
               return elements[currentElementPosition - 1];
     selected: true
-    status: Failed
-  - offset: 916
-    length: 119
+    status: Solved
+  - offset: 1108
+    length: 23
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -50,7 +50,7 @@ files:
     initialized_from_dependency: false
     possible_answer: return elements.length;
     selected: true
-    status: Failed
+    status: Solved
   text: |-
     import java.util.Arrays;
     import java.util.EmptyStackException;
@@ -167,5 +167,5 @@ files:
 
     }
   learner_created: false
-status: Failed
+status: Solved
 record: -1

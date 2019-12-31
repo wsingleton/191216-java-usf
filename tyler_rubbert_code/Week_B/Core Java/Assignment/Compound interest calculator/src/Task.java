@@ -10,8 +10,10 @@ public class Task {
             return 0;
         }
 
-        double ans = principal * (1 + rate / freq ) * ((freq * time) * (1 + rate / freq));
-        return ans;
+        DecimalFormat formatter = new DecimalFormat("0.00");
+
+        double ans = principal * Math.pow(1 + rate/freq,freq * time);
+        return Double.parseDouble(formatter.format(ans));
 
     }
 

@@ -1,73 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="6" skipped="0" failures="3" errors="0" timestamp="2019-12-30T16:35:25" hostname="LAPTOP-BU1ED0LM" time="0.026">
+<testsuite name="Tests" tests="6" skipped="0" failures="0" errors="0" timestamp="2019-12-31T05:54:24" hostname="LAPTOP-BU1ED0LM" time="0.018">
   <properties/>
   <testcase name="testPeekWhenStackIsPopulated" classname="Tests" time="0.008"/>
-  <testcase name="testPush" classname="Tests" time="0.001"/>
-  <testcase name="testSize" classname="Tests" time="0.007">
-    <failure message="java.lang.AssertionError: expected:&lt;10&gt; but was:&lt;0&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;10&gt; but was:&lt;0&gt;
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:645)
-	at org.junit.Assert.assertEquals(Assert.java:631)
-	at Tests.testSize(Tests.java:25)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-</failure>
-  </testcase>
+  <testcase name="testPush" classname="Tests" time="0.0"/>
+  <testcase name="testSize" classname="Tests" time="0.001"/>
   <testcase name="testPopWhenStackIsEmpty" classname="Tests" time="0.001"/>
-  <testcase name="testPopWhenStackIsPopulated" classname="Tests" time="0.002">
-    <failure message="java.util.EmptyStackException" type="java.util.EmptyStackException">java.util.EmptyStackException
-	at Task.pop(Task.java:25)
-	at Tests.testPopWhenStackIsPopulated(Tests.java:46)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-</failure>
-  </testcase>
-  <testcase name="testPeekWhenStackIsEmpty" classname="Tests" time="0.002">
-    <failure message="java.lang.Exception: Unexpected exception, expected&lt;java.util.EmptyStackException&gt; but was&lt;java.lang.ArrayIndexOutOfBoundsException&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;java.util.EmptyStackException&gt; but was&lt;java.lang.ArrayIndexOutOfBoundsException&gt;
-	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:28)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 0
-	at Task.peek(Task.java:35)
-	at Tests.testPeekWhenStackIsEmpty(Tests.java:72)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19)
-	... 5 more
-</failure>
-  </testcase>
+  <testcase name="testPopWhenStackIsPopulated" classname="Tests" time="0.001"/>
+  <testcase name="testPeekWhenStackIsEmpty" classname="Tests" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

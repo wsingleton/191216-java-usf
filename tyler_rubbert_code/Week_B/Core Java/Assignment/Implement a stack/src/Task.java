@@ -15,8 +15,10 @@ public class Task {
     }
 
     public void push(String newString) {
+        if (currentElementPosition == elements.length){
         elements = Arrays.copyOf(elements, elements.length + 1);
-        elements[elements.length-1] = newString;
+        elements[currentElementPosition++] = newString;
+        }
     }
 
     public String pop() {
@@ -24,25 +26,23 @@ public class Task {
         if (currentElementPosition == 0){
             throw new EmptyStackException();
         }
-        String temp = elements[elements.length-1];
-        elements[elements.length - 1] = null;
-        elements = Arrays.copyOf(elements, elements.length -1);
+        String temp = elements[currentElementPosition-1];
+        elements[currentElementPosition-1] = null;
+       // elements = Arrays.copyOf(elements, elements.length -1);
         return temp;
 
     }
 
     public String peek(){
-        return elements[elements.length-1];
+        if (currentElementPosition == 0) {
+            throw new EmptyStackException();
+        }
+        return elements[currentElementPosition-1];
     }
 
     public int size() {
         int i = 0;
-        for (String s : elements) {
-            if (s != null) {
-                i++;
-            }
-        }
-        return i;
+        return elements.length;
     }
 
 }
