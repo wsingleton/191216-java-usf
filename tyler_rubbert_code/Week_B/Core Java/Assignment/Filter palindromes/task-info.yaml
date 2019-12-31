@@ -3,7 +3,7 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 221
+  - offset: 325
     length: 391
     placeholder_text: /* Provide your implementation here */
     initial_state:
@@ -22,7 +22,7 @@ files:
               return Arrays.copyOf(_palindromes, _palindromes.length, String[].class);
     selected: true
     status: Failed
-  - offset: 814
+  - offset: 937
     length: 231
     placeholder_text: /* Provide your implementation here */
     initial_state:

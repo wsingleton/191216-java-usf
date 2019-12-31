@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="7" skipped="0" failures="6" errors="0" timestamp="2019-12-30T20:49:52" hostname="LAPTOP-BU1ED0LM" time="0.038">
+<testsuite name="Tests" tests="7" skipped="0" failures="5" errors="0" timestamp="2019-12-31T06:14:47" hostname="LAPTOP-BU1ED0LM" time="0.047">
   <properties/>
-  <testcase name="testSolutionWithValidArrayContainingSomeNulls" classname="Tests" time="0.018">
+  <testcase name="testSolutionWithValidArrayContainingSomeNulls" classname="Tests" time="0.025">
     <failure message="java.lang.AssertionError: array lengths differed, expected.length=3 actual.length=7" type="java.lang.AssertionError">java.lang.AssertionError: array lengths differed, expected.length=3 actual.length=7
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:76)
@@ -27,7 +27,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithValidArrayContainingAllPalindromes" classname="Tests" time="0.003">
+  <testcase name="testSolutionWithValidArrayContainingAllPalindromes" classname="Tests" time="0.008">
     <failure message="java.lang.AssertionError: array lengths differed, expected.length=5 actual.length=4" type="java.lang.AssertionError">java.lang.AssertionError: array lengths differed, expected.length=5 actual.length=4
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:76)
@@ -53,7 +53,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithValidArrayContainingNumericPalindromes" classname="Tests" time="0.004">
+  <testcase name="testSolutionWithValidArrayContainingNumericPalindromes" classname="Tests" time="0.003">
     <failure message="java.lang.AssertionError: array lengths differed, expected.length=3 actual.length=6" type="java.lang.AssertionError">java.lang.AssertionError: array lengths differed, expected.length=3 actual.length=6
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:76)
@@ -106,7 +106,7 @@
 </failure>
   </testcase>
   <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.001"/>
-  <testcase name="testSolutionWithValidArrayContainingNoPalindromes" classname="Tests" time="0.003">
+  <testcase name="testSolutionWithValidArrayContainingNoPalindromes" classname="Tests" time="0.002">
     <failure message="java.lang.AssertionError: array lengths differed, expected.length=0 actual.length=6" type="java.lang.AssertionError">java.lang.AssertionError: array lengths differed, expected.length=0 actual.length=6
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:76)
@@ -132,27 +132,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.002">
-    <failure message="java.lang.NullPointerException" type="java.lang.NullPointerException">java.lang.NullPointerException
-	at Task.filterPalindromes(Task.java:10)
-	at Tests.testSolutionWithNullArray(Tests.java:145)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-</failure>
-  </testcase>
+  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

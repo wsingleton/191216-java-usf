@@ -7,11 +7,15 @@ public class Employee {
     private String lastName;
     private double salary;
 
+    public Employee(){
+        super();
+    }
+
     public Employee(int id, String firstName, String lastName, double salary) {
-        this.id = id;
+        setId(id);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.salary = salary;
+        setSalary(salary);
     }
 
     public int getId() {
@@ -19,6 +23,9 @@ public class Employee {
     }
 
     public void setId(int id) {
+        if (id < 0) {
+            return;
+        }
         this.id = id;
     }
 
@@ -43,6 +50,9 @@ public class Employee {
     }
 
     public void setSalary(double salary) {
+        if (salary < 0) {
+            return;
+        }
         this.salary = salary;
     }
 
