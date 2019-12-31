@@ -6,14 +6,31 @@ import java.util.stream.Collectors;
 public class Task {
 
     public String createAcronymFromPhrase(String phrase) {
+        System.out.println(phrase);
+        String empty="";
         if (phrase == null) {
-            return "";
+            System.out.println("Phrase is null.  Returning empty string.");
+            return empty;
         }
-        if (phrase.trim()=="") {
-            return "";
+        else if (phrase=="") {
+            System.out.println("Phrase empty.  Returning empty string.");
+            return empty;
+        }
+        else if (phrase.replaceAll("\\s", "").length()==0) {
+            System.out.println("Phrase trims to empty.  Returning empty string.");
+            return empty;
         }
         else {
-            String restring = phrase.replace(' ', '-');
+            System.out.println("Phrase valid.  Restringing.");
+            String restring = phrase;
+            while (restring.contains("  ")) {
+                restring = restring.replace("  ", " ");
+                System.out.println("Removing excess white space.");
+            }
+            restring=restring.trim();
+            System.out.println(restring);
+            restring=restring.replace(" ", "-");
+            System.out.println(restring);
             ArrayList<String> wordCapture = new ArrayList<>();
             String[] words = restring.split("-");
             for (int i = 0; i < words.length; i++) {
@@ -36,6 +53,7 @@ public class Task {
                 solution = solution + (wordCapture.get(i).charAt(0));
             }
             String acronym = solution.toUpperCase();
+            System.out.println(acronym);
             return acronym;
         }
     }

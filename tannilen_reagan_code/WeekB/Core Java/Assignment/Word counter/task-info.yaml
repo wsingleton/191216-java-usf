@@ -33,7 +33,7 @@ files:
               }
 
               return textArray;
-    selected: false
+    selected: true
     status: Unchecked
   - offset: 424
     length: 30

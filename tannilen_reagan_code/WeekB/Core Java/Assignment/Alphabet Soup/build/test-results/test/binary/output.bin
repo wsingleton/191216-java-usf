@@ -1,0 +1,33 @@
+                 
+1Phrase trims to empty.  Returning empty string.
+null
+*Phrase is null.  Returning empty string.
+)Complementary metal-oxide semiconductor
+Phrase valid.  Restringing.
+)Complementary metal-oxide semiconductor
+)Complementary-metal-oxide-semiconductor
+CMOS
+YAML Ain't Markup Language
+Phrase valid.  Restringing.
+YAML Ain't Markup Language
+YAML-Ain't-Markup-Language
+YAML
+:    The   quick brown fox  jumped over the lazy  dog    
+Phrase valid.  Restringing.
+Removing excess white space.
+Removing excess white space.
+.The quick brown fox jumped over the lazy dog
+.The-quick-brown-fox-jumped-over-the-lazy-dog
+TQBFJOTLD
+
+(Phrase empty.  Returning empty string.
+Simple Object Access Protocol
+Phrase valid.  Restringing.
+Simple Object Access Protocol
+Simple-Object-Access-Protocol
+SOAP
+	First In, First Out
+	Phrase valid.  Restringing.
+	First In, First Out
+	First-In,-First-Out
+	FIFO
