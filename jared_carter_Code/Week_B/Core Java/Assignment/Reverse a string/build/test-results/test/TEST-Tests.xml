@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-27T02:36:27" hostname="DESKTOP-8OB65G6" time="0.01">
+<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-30T15:03:30" hostname="DESKTOP-8OB65G6" time="0.01">
   <properties/>
-  <testcase name="testSolutionUsingStringWithCapitalizedLetter" classname="Tests" time="0.004"/>
-  <testcase name="testSolutionUsingPalindrome" classname="Tests" time="0.001"/>
-  <testcase name="testSolutionUsingNullString" classname="Tests" time="0.0"/>
-  <testcase name="testSolutionUsingStringWithNewLines" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionUsingStringWithCapitalizedLetter" classname="Tests" time="0.005"/>
+  <testcase name="testSolutionUsingPalindrome" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionUsingNullString" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionUsingStringWithNewLines" classname="Tests" time="0.001"/>
   <testcase name="testSolutionUsingEmptyString" classname="Tests" time="0.0"/>
   <testcase name="testSolutionUsingSimpleString" classname="Tests" time="0.0"/>
-  <testcase name="testSolutionUsingStringWithPunctuationAndSpaces" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionUsingStringWithPunctuationAndSpaces" classname="Tests" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

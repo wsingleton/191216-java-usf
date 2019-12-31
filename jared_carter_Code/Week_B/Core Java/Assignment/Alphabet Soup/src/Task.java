@@ -7,29 +7,38 @@ public class Task {
 
     public String createAcronymFromPhrase(String phrase) {
 
+
         if (phrase == null) return "";
         phrase = phrase.trim();
         if (phrase.equals("")) return "";
-        List<String> phraseWordsList = new ArrayList<>(Arrays.asList(phrase.split(" ")));
-        return phraseWordsList.stream()
-                .map(word -> {
-                    String a = "";
-
-                    word = word.trim();
-                    if (word.equals("")) {
-                        return a;
-                    } else if (word.contains("-")) {
-                        for (String part : word.split("-")) a += part.charAt(0);
+        List<String> wordList = new ArrayList<>(Arrays.asList(phrase.split(" ")));
+        return wordList.stream()
+                .map(letters -> {
+                    String space = "";
+                    letters = letters.trim();
+                    if (letters.equals("")) {
+                        return space;
+                    } else if (letters.contains("-")) {
+                        for (String part : letters.split("-")) space += part.charAt(0);
                     } else {
-                        a += word.charAt(0);
-
+                        space += letters.charAt(0);
                     }
-                    return a.toUpperCase();
-
-                })
-                .collect(Collectors.joining());
-
+                    return space.toUpperCase();
+                }).collect(Collectors.joining());
 
     }
+
+    /*
+        Scanner scanner = new Scanner(System.in);
+
+        String firstWord = in.next();
+        String secondWord = in.next();
+        String thirdWord = in.next();
+
+        String acr = firstWord.substring(0,1)+secondWord.substring(0,1)+thirdWord.substring;
+
+     */
+
 }
+
 

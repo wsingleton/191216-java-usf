@@ -35,7 +35,7 @@ public class Menu {
                 System.out.println("Please select a number: ");
 
             }
-            System.out.println("/n");
+            System.out.println("****************************");
 
             switch (option) {
                 case 1:
@@ -70,7 +70,7 @@ public class Menu {
 
     private void viewBalance() {
 
-        System.out.println("Your current balance is "+ balance);
+        System.out.println("Your current balance is $ "+ balance);
         loginMenu();
     }
 
@@ -85,7 +85,7 @@ public class Menu {
             } catch (Exception e) {
                 System.out.println("Please enter a number: ");
             }
-            if (withdraw < balance) {
+            if (withdraw < balance +1) {
                 balance = balance - withdraw;
                 valid = true;
             } else {

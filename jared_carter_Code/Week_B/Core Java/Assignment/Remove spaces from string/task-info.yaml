@@ -3,8 +3,8 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 81
-    length: 35
+  - offset: 73
+    length: 115
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -13,8 +13,8 @@ files:
     possible_answer: |-
       if (str == null || str.trim().equals("")) return "";
               return str.replaceAll(" ", "");
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Solved
   text: |-
     public class Task {
 
@@ -97,5 +97,5 @@ files:
 
     }
   learner_created: false
-status: Unchecked
+status: Solved
 record: -1

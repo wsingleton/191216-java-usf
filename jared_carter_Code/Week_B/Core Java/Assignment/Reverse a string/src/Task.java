@@ -11,15 +11,27 @@ public class Task {
         }
 
         char[] reversingChar = reverseMe.toCharArray();
-        Stack<Character> stackOfCharacter = new Stack<>();
-        for (char a : reversingChar) stackOfCharacter.push(a);
+        Stack<Character> letter = new Stack<>();
+        for (char a : reversingChar) letter.push(a);
 
         int i = 0;
-        while (!stackOfCharacter.isEmpty()) {
-            reversingChar[i++] = stackOfCharacter.pop();
+        while (!letter.isEmpty()) {
+            reversingChar[i++] = letter.pop();
         }
     return String.copyValueOf(reversingChar);
     }
+/*
+
+    String str = " "
+
+    int length = str.length();
+    String reverse = "";
+
+    for(int i =length; i >=0; i--){
+        reverse = reverse + str.charAt(i);
+    }
+
+     */
 
 
 

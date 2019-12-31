@@ -3,8 +3,8 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 218
-    length: 35
+  - offset: 210
+    length: 460
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -14,8 +14,8 @@ files:
       if (principal < 0 || time < 0 || rate < 0 || freq < 0) return 0;
               BigDecimal bigDecimal = BigDecimal.valueOf(principal * Math.pow(1 + (rate / freq), freq * time));
               return bigDecimal.setScale(2, RoundingMode.HALF_UP).doubleValue();
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Solved
   text: |-
     import java.math.BigDecimal;
     import java.math.RoundingMode;
@@ -87,5 +87,5 @@ files:
 
     }
   learner_created: false
-status: Unchecked
+status: Solved
 record: -1

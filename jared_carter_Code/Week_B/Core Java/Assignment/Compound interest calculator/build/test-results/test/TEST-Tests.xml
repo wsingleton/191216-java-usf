@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-12-31T03:44:19" hostname="DESKTOP-8OB65G6" time="0.01">
+  <properties/>
+  <testcase name="testSolutionWithNegativeFrequency" classname="Tests" time="0.005"/>
+  <testcase name="testSolutionWithValidValues" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionWithNegativeRate" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionWithNegativeTime" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionWithNegativePrincipal" classname="Tests" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
