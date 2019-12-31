@@ -15,7 +15,7 @@ files:
               Collections.sort(employeesForSorting, new EmployeeComparator());
               return employeesForSorting;
     selected: false
-    status: Unchecked
+    status: Failed
   text: |
     import java.util.ArrayList;
     import java.util.Collections;
@@ -118,7 +118,7 @@ files:
                       '}';
           }
     selected: false
-    status: Unchecked
+    status: Failed
   text: |+
     import java.util.Objects;
 
@@ -141,7 +141,7 @@ files:
     initialized_from_dependency: false
     possible_answer: implements Comparator<Employee>
     selected: false
-    status: Unchecked
+    status: Failed
   - offset: 95
     length: 39
     placeholder_text: // A method implementation will go here
@@ -166,7 +166,7 @@ files:
 
           }
     selected: false
-    status: Unchecked
+    status: Failed
   text: |
     import java.util.Comparator;
 
@@ -451,5 +451,5 @@ files:
 - name: assets/employee-uml.png
   visible: true
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1
