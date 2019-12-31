@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="EmployeeTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-12-31T04:48:22" hostname="LAPTOP-RT3C5B55" time="0.008">
+  <properties/>
+  <testcase name="testToEnsureThatEmployeeCannotBeInstantiatedWithNegativeId" classname="EmployeeTest" time="0.001"/>
+  <testcase name="testToEnsureThatEmployeeCannotBeInstantiatedWithNegativeSalary" classname="EmployeeTest" time="0.001"/>
+  <testcase name="testIfEmployeeIsProperPojo" classname="EmployeeTest" time="0.001"/>
+  <testcase name="testToEnsureThatSalaryCannotBeSetToNegativeNumber" classname="EmployeeTest" time="0.0"/>
+  <testcase name="testToEnsureThatIdCannotBeSetToNegativeNumber" classname="EmployeeTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-31T05:32:06" hostname="LAPTOP-RT3C5B55" time="0.055">
+  <properties/>
+  <testcase name="testCountWordsWithEmptyStringArray" classname="Tests" time="0.005"/>
+  <testcase name="testExtractTextWithExistingFileContainingText" classname="Tests" time="0.036"/>
+  <testcase name="testCountWordsWithValidStringArray" classname="Tests" time="0.002"/>
+  <testcase name="testExtractTextWithNullFile" classname="Tests" time="0.001"/>
+  <testcase name="testExtractTextWithMissingFile" classname="Tests" time="0.007"/>
+  <testcase name="testCountWordsWithNullStringArray" classname="Tests" time="0.001"/>
+  <testcase name="testExtractTextWithExistingEmptyFile" classname="Tests" time="0.001"/>
+  <system-out><![CDATA[File does not exist
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

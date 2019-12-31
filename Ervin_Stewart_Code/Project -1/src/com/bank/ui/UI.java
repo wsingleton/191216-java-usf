@@ -216,7 +216,7 @@ public class UI extends User {
 
     public static void viewBalance(User User, Account Account){
         double balance=0;
-        System.out.println(Account);
+       // System.out.println(Account);
         System.out.println("The balance is: \n" + getUserAccountBalance(User));
         Scanner input = new Scanner(System.in);
         System.out.println("Press 1 to return to the main console");
@@ -242,7 +242,7 @@ public class UI extends User {
 
     public static void withdrawBalance(User user, Account account){
         System.out.println("The balance is: \n" + account.getBalance());
-        System.out.println(account);
+       // System.out.println(account);
         System.out.println("How much would you like to withdraw today?");
         Scanner input = new Scanner(System.in);
 

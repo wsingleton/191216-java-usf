@@ -7,11 +7,11 @@ import java.util.Objects;
  public class User extends Account {
 
 
-    private static int Id;
-    private static String firstName;
-    private static String lastName;
-    private static String userName;
-    private static String password;
+    private  int Id;
+    private  String firstName;
+    private  String lastName;
+    private  String userName;
+    private  String password;
     private  Role role;
 
     public User() {
@@ -60,12 +60,12 @@ import java.util.Objects;
      public static void generateId( User newUser){
 
          int x = (int)(Math.random()*((99999999-0)+1))+0;
-         setId(x);
+         newUser.setId(x);
 
      }
 
 
-     public static void setId(int id) { Id = id;}
+     public  void setId(int id) { this.Id = id;}
 
      public String getFirstName() {
          return firstName;

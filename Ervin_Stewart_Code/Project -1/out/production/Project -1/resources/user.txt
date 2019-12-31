@@ -6,3 +6,6 @@
 33319070:John:Stewart:GLantern7:Willpower%:null
 31089612:Guy:Gardner:RLantern7:Ragepower%:null
 89095823:Colby:Brian:i<3whitewomen:!lovemywife:null
+98917487:Brian:Kuznetz:FoolBoyB:adamFool@:null
+99791487:Wezley:Singleton:wsingleton:password!:null
+34234915:Wezley:Singleton:wsingleton1:password!:null
