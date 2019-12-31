@@ -2,7 +2,16 @@ public class Task {
 
     public boolean isPrime(int value) {
 
-        return (value % 2 != 0 && value % 3 != 0 && value % 5 != 0) ? true : false;
+        if(value <= 1){
+            return false;
+        } else {
+            for(int i = 2; i <= value/2; i++){
+                if(value % i == 0){
+                    return false;
+                }
+            }
+            return true;
+        }
 
     }
 }

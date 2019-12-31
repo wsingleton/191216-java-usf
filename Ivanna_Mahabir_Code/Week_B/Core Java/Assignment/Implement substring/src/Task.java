@@ -1,16 +1,15 @@
+import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 public class Task {
 
-    public String substring(String mainString, int start, int end) {
+    public String substring(String mainString, int start, int end) throws FileNotFoundException {
 
-        mainString = "For this challenge: implement a substring method.";
-        start = 2;
-        end = 8;
+        StringBuilder str = new StringBuilder("");
 
-        for(int i = start; i <= end; i++){
-            char ch = mainString.charAt(i);
-            System.out.println(ch);
 
-        }
 
     }
 }

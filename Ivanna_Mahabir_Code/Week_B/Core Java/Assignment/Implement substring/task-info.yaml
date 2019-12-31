@@ -3,8 +3,8 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 99
-    length: 236
+  - offset: 247
+    length: 44
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -23,7 +23,7 @@ files:
 
               return substrBuilder.toString();
     selected: true
-    status: Unchecked
+    status: Failed
   text: |-
     public class Task {
 
@@ -112,5 +112,5 @@ files:
 
     }
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1
