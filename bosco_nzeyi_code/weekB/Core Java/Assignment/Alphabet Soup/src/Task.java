@@ -7,7 +7,27 @@ public class Task {
 
     public String createAcronymFromPhrase(String phrase) {
 
-        // Provide your implementation here
+        if (phrase == null) {
+            return new String("");
+
+        }
+        String toAcronym = phrase.trim().replaceAll("\\s+", " ")
+                .replaceAll("-", " ");
+    if(toAcronym.equals("") || toAcronym.length() == 0){
+        return new String("");
+    }
+        String[] str = toAcronym.split(" ");
+
+        String acronym = "";
+        // trim the phrase to avoid empty spaces on both ends
+//        String [] toAcronym = phrase.split(" ");
+        for(int i = 0; i<str.length; i++){
+            acronym = acronym + str[i].charAt(0);
+        }
+
+
+
+        return acronym.toUpperCase();
 
     }
 

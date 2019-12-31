@@ -1,6 +1,13 @@
 public class Task {
 
     public String isEvenOrOdd(int value) {
-        // Provide your implementation here
+        String numCheck = "";
+        if(value%2 == 0){
+            numCheck = "even";
+            return numCheck;
+        } else {
+            numCheck = "odd";
+            return numCheck;
+        }
     }
 }

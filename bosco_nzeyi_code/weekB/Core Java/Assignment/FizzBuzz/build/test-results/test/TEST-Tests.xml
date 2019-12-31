@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-12-31T04:16:38" hostname="107-144-156-227.biz.spectrum.com" time="0.014">
+  <properties/>
+  <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.012"/>
+  <testcase name="testSolutionWithValidArray" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

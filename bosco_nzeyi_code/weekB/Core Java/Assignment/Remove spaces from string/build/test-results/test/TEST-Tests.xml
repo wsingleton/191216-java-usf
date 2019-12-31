@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="6" skipped="0" failures="0" errors="0" timestamp="2019-12-31T04:23:16" hostname="107-144-156-227.biz.spectrum.com" time="0.032">
+  <properties/>
+  <testcase name="testSolutionWithEmptyString" classname="Tests" time="0.011"/>
+  <testcase name="testSolutionWithNullString" classname="Tests" time="0.003"/>
+  <testcase name="testSolutionWithValidStringContainingExcessiveSpaces" classname="Tests" time="0.008"/>
+  <testcase name="testSolutionWithValidStringContainingNoSpaces" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithValidStringContainingSpaces" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithValidStringContainingOnlySpaces" classname="Tests" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

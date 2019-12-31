@@ -4,27 +4,27 @@ files:
   visible: true
   placeholders:
   - offset: 17
-    length: 0
+    length: 3
     placeholder_text: ""
     initial_state:
       length: 0
       offset: 17
     initialized_from_dependency: false
     possible_answer: <T>
-    selected: false
-    status: Unchecked
-  - offset: 52
-    length: 0
+    selected: true
+    status: Solved
+  - offset: 55
+    length: 11
     placeholder_text: ""
     initial_state:
       length: 0
       offset: 52
     initialized_from_dependency: false
     possible_answer: T... values
-    selected: false
-    status: Unchecked
-  - offset: 64
-    length: 33
+    selected: true
+    status: Solved
+  - offset: 78
+    length: 62
     placeholder_text: /* Provide your implementation */
     initial_state:
       length: 33
@@ -34,8 +34,8 @@ files:
       for (T val: values) {
                   System.out.println(val);
               }
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Solved
   text: |-
     public class Task {
 
@@ -115,5 +115,5 @@ files:
 
     }
   learner_created: false
-status: Unchecked
+status: Solved
 record: -1
