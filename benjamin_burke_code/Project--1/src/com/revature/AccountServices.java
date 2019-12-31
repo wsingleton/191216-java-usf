@@ -2,7 +2,13 @@ package com.revature;
 
 import com.revature.models.Account;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class AccountServices {
     //create the array list to hold all the accounts to be added
@@ -27,10 +33,39 @@ public class AccountServices {
         dao.addAccount(a);
         return a;
     }
-
-    boolean exists(String username){
+    boolean userExists(String username){
         ArrayList<Account> accounts = getAllAccounts();
         return accounts.stream().anyMatch(s->s.getUsername().equalsIgnoreCase(username));
+    }
+
+    boolean exists(String username, String pass){
+        List<Account> accountList = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/com/revature/Accounts.txt"));
+            String userLine = reader.readLine();
+
+            while (userLine !=null && userLine!= " "){
+                String[] userFields = userLine.split(":");
+                Account a = new Account(userFields[0],userFields[1],(Double.parseDouble(userFields[2])));
+                accountList.add(a);
+                userLine = reader.readLine();
+            }
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("An unexpected error occured");
+        }
+
+        boolean a= false;
+        for (Account u : accountList){
+            if(username.equals(u.getUsername()) && pass.equals(u.getPassword())){
+                a=  true;
+            }
+            else {
+                a= false;
+            }
+        }
+        return a;
     }
 
     Account getByUsername(String username){
@@ -48,6 +83,64 @@ public class AccountServices {
         }
         //dao needs update
         dao.updateAccount(temp);
+    }
+
+
+    public void deposit(String username, String pass){
+        List<Account> accountList = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/com/revature/Accounts.txt"));
+            String userLine = reader.readLine();
+
+            while (userLine !=null && userLine!= " "){
+                String[] userFields = userLine.split(":");
+                Account a = new Account(userFields[0],userFields[1],(Double.parseDouble(userFields[2])));
+                accountList.add(a);
+                userLine = reader.readLine();
+            }
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("An unexpected error occured");
+        }
+
+        int  index = 0 ;
+        for (Account u : accountList){
+            if(username.equals(u.getUsername()) && pass.equals(u.getPassword())){
+                System.out.println("your balance is : "+ u.getBalance());
+                System.out.println(" choose deposit or withdraw  ");
+                Scanner sc = new Scanner(System.in);
+                String choose = sc.nextLine();
+                switch (choose){
+                    case "deposit":
+                        Double amount = 0.0;
+                        System.out.println("enter amount : ");
+                        amount = sc.nextDouble();
+                        Double newbalance = u.getBalance() + amount;
+                        u.setBalance(newbalance);
+                        System.out.println(" your new balance is :  "+ u.getBalance());
+                        accountList.remove(index);
+                        accountList.add(index,u);
+                        try(BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/revature/Accounts.txt"))){
+                            for(Account k : accountList){
+                                String add = k.getUsername()+":"+k.getPassword()+":"+k.getBalance();
+                                writer.write(add);
+                                writer.newLine();
+                            }
+                        } catch (Exception e){
+                            e.printStackTrace();
+
+                        }
+                        break;
+                }
+
+
+            }
+            else {
+
+            }
+            index = index + 1;
+        }
     }
 
 }

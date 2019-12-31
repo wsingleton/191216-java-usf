@@ -10,15 +10,15 @@ public class Task {
         //create a new array of strings to hold
         String[] newArr = new String[values.length];
 
-        for(int i =1; i<values.length; i++){
-            if ((i % 5==0) && (i %3==0))
-                System.out.println("fizzbuzz");
-            else if (i % 5==0)
-                System.out.println("buzz");
-            else if (i % 3==0)
-                System.out.println("fizz");
+        for(int i =0; i<values.length; i++){
+            if (values[i] % 15==0)
+                newArr[i] ="fizzbuzz";
+            else if (values[i] % 5==0)
+                newArr[i] = "buzz";
+            else if (values[i] %3 ==0)
+                newArr[i]="fizz";
             else
-                System.out.println("Not divisible by 3 or 5.");
+                newArr[i]=String.valueOf(values[i]);
         }
         return newArr;
 

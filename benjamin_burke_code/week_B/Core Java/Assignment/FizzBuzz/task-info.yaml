@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 66
-    length: 686
+    length: 658
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -26,7 +26,7 @@ files:
 
               return stringArr;
     selected: true
-    status: Failed
+    status: Solved
   text: |-
     public class Task {
 
@@ -95,5 +95,5 @@ files:
 
     }
   learner_created: false
-status: Failed
+status: Solved
 record: -1

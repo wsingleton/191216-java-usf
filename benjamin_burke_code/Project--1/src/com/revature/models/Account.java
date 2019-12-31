@@ -68,9 +68,9 @@ public class Account {
 
     @Override
     public String toString() {
-        return username + ':' +
-                 password + ':' +
-                balance
+        return username + ":" +
+                 password + ":" +
+                balance +"\n"
                 ;
     }
 }

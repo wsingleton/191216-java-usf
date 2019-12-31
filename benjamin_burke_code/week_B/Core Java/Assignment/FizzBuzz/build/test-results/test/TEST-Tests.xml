@@ -1,54 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="3" skipped="0" failures="1" errors="0" timestamp="2019-12-29T18:42:27" hostname="MSI" time="0.016">
+<testsuite name="Tests" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-12-30T21:25:36" hostname="MSI" time="0.008">
   <properties/>
-  <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.007"/>
-  <testcase name="testSolutionWithValidArray" classname="Tests" time="0.008">
-    <failure message="arrays first differed at element [0]; expected:&lt;1&gt; but was:&lt;null&gt;" type="org.junit.internal.ArrayComparisonFailure">arrays first differed at element [0]; expected:&lt;1&gt; but was:&lt;null&gt;
-	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:55)
-	at org.junit.Assert.internalArrayEquals(Assert.java:532)
-	at org.junit.Assert.assertArrayEquals(Assert.java:283)
-	at org.junit.Assert.assertArrayEquals(Assert.java:298)
-	at Tests.testSolutionWithValidArray(Tests.java:39)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.lang.AssertionError: expected:&lt;1&gt; but was:&lt;null&gt;
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.junit.Assert.assertEquals(Assert.java:144)
-	at org.junit.internal.ExactComparisonCriteria.assertElementsEqual(ExactComparisonCriteria.java:8)
-	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:53)
-	... 19 more
-</failure>
-  </testcase>
+  <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.006"/>
+  <testcase name="testSolutionWithValidArray" classname="Tests" time="0.001"/>
   <testcase name="testSolutionWithNullArray" classname="Tests" time="0.001"/>
-  <system-out><![CDATA[Not divisible by 3 or 5.
-Not divisible by 3 or 5.
-fizz
-Not divisible by 3 or 5.
-buzz
-fizz
-Not divisible by 3 or 5.
-Not divisible by 3 or 5.
-fizz
-buzz
-Not divisible by 3 or 5.
-fizz
-Not divisible by 3 or 5.
-Not divisible by 3 or 5.
-]]></system-out>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

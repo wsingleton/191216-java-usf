@@ -1,0 +1,3 @@
+Account{username='i', password='i', balance=500.0}
+username='i', password='i', balance=500.0
+split ,
