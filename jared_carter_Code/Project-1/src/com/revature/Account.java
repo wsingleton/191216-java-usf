@@ -1,15 +1,21 @@
 package com.revature;
 
+import java.util.Objects;
+
 public class Account {
     /*Attempting to make the account number by adding to a static variable with an initial value given val.
     then increase that number by 1 after every variable is make.
     */
     private double balance;
     private int accountNumber;
-    private static int accounts = 1017;
+    private String password;
+    private String username;
 
-    Account(){
-        accountNumber = accounts ++;
+    Account(String username, String password, int accountNumber, double balance) {
+        this.balance = balance;
+        this.username = username;
+        this.password = password;
+        this.accountNumber = accountNumber;
     }
 
     public double getBalance() {
@@ -24,9 +30,13 @@ public class Account {
         return accountNumber;
     }
 
+    public String accountSerialize() {
+        return username + " " + password + " " + accountNumber + " " + balance;
+    }
 
-
-
+    public int hash() {
+        return Objects.hashCode(username);
+    }
 
 
 }
