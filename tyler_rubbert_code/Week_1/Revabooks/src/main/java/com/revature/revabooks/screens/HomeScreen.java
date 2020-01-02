@@ -1,68 +1,51 @@
 package com.revature.revabooks.screens;
 
+import com.revature.revabooks.AppDriver;
+
 import java.util.Objects;
+
+import static com.revature.revabooks.AppDriver.*;
 
 public class HomeScreen extends Screen {
 
-    private String name = "HomeScreen";
-    private String route = "/home";
-
-    public HomeScreen(String name, String route) {
-        this.name = name;
-        this.route = route;
-    }
-
-    public HomeScreen(String name, String route, String name1, String route1) {
-        super(name, route);
-        this.name = name1;
-        this.route = route1;
+    public HomeScreen() {
+        super("HomeScreen","/home");
+        System.out.println("[Log] - Instantiating" + super.getName());
     }
 
     @Override
     public void render() {
-        super.render();
+        System.out.println("Welcome to Revabooks! \n");
+        System.out.println("1) Login");
+        System.out.println("2) Register");
+        System.out.println("3) Exit Application");
+
+        try {
+
+            System.out.print("> ");
+            String userSelection = console.readLine();
+
+            switch (userSelection) {
+
+                case "1":
+                    router.navigate("/login");
+                    break;
+                case "2":
+                    router.navigate("/register");
+                    break;
+                case "3":
+                    System.out.println("Exiting application...");
+                    appRunning = false;
+                    break;
+                default:
+                    System.out.println("[LOG] - Invalid selection!");
+            }
+
+        } catch (Exception e) {
+            System.err.println("[ERROR] - " + e.getMessage());
+            System.out.println("[LOG] - Shutting down application");
+            appRunning = false;
+        }
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String getRoute() {
-        return route;
-    }
-
-    @Override
-    public void setRoute(String route) {
-        this.route = route;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        HomeScreen that = (HomeScreen) o;
-        return Objects.equals(name, that.name) &&
-                Objects.equals(route, that.route);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), name, route);
-    }
-
-    @Override
-    public String toString() {
-        return "HomeScreen{" +
-                "name='" + name + '\'' +
-                ", route='" + route + '\'' +
-                '}';
-    }
 }

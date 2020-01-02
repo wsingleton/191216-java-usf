@@ -1,17 +1,18 @@
 package com.revature.revabooks.repos;
 
+import java.util.Optional;
 import java.util.Set;
 
 public interface CrudRepository<T> {
 
-    public T save(T t);
+    void save(T newObj);
 
-    public Set<T> findAll();
+    Set<T> findAll();
 
-    public T findById(Integer id);
+    Optional<T> findById(Integer id);
 
-    public boolean Update(T t);
+    Boolean Update(T updatedObj);
 
-    public boolean deleteById(Integer id);
+    Boolean deleteById(Integer id);
 
 }

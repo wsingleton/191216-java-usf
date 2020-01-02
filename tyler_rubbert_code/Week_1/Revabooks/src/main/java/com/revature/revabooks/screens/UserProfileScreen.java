@@ -2,13 +2,16 @@ package com.revature.revabooks.screens;
 
 import com.revature.revabooks.services.UserService;
 
-public class UserProfileScreen {
+public class UserProfileScreen extends Screen {
 
-    private String name = "UserProfileScreen";
-    private String route = "/profile";
-    private UserService userService;
+    public UserProfileScreen() {
+        super("UserProfileScreen","/profile");
+        System.out.println("[Log] - Instantiating" + super.getName());
+    }
 
-    public void render(){
+
+    @Override
+    public void render() {
 
     }
 

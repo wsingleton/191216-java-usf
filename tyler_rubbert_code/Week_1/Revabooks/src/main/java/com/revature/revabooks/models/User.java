@@ -3,7 +3,7 @@ package com.revature.revabooks.models;
 import java.util.Objects;
 
 public class User {
-    private int id;
+    private Integer id;
     private String firstName;
     private String lastName;
     private String username;
@@ -14,7 +14,14 @@ public class User {
         super();
     }
 
-    public User(int id, String firstName, String lastName, String username, String password, Role role) {
+    public User(String firstName, String lastName, String username, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(Integer id, String firstName, String lastName, String username, String password, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,11 +30,11 @@ public class User {
         this.role = role;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -9,10 +9,10 @@ public class Book {
     private String isbn;
     private String title;
     private Author author;
-    private List<Genre> genre;
+    private Genre genre;
     private Integer stockCount;
 
-    public Book(Integer id, String isbn, String title, Author author, List<Genre> genre, Integer stockCount) {
+    public Book(Integer id, String isbn, String title, Author author, Genre genre, Integer stockCount) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
@@ -53,11 +53,11 @@ public class Book {
         this.author = author;
     }
 
-    public List<Genre> getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(List<Genre> genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 

@@ -1,59 +1,52 @@
 package com.revature.revabooks.screens;
 
+import com.revature.revabooks.exceptions.InvalidRequestException;
 import com.revature.revabooks.services.UserService;
+
+import javax.security.sasl.AuthenticationException;
+
+import static com.revature.revabooks.AppDriver.*;
 
 public class LoginScreen extends Screen{
 
-    private String name = "LoginScreen";
-    private String route = "/login";
     private UserService userService;
 
-    public LoginScreen() {
-        super();
-    }
-
-    public LoginScreen(String name, String route, UserService userService) {
-        super(name, route);
+    public LoginScreen(UserService userService) {
+        super("LoginScreen","/login");
+        System.out.println("[Log] - Instantiating" + super.getName());
         this.userService = userService;
     }
 
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public void setName(String name) {
-        super.setName(name);
-    }
-
-    @Override
-    public String getRoute() {
-        return super.getRoute();
-    }
-
-    @Override
-    public void setRoute(String route) {
-        super.setRoute(route);
-    }
 
     @Override
     public void render() {
-        super.render();
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        return super.equals(o);
-    }
+        String username;
+        String password;
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
+        try {
+            System.out.println("\n\n\n\n\n\n\n\n\n+-----------------------------------+");
+            System.out.println("Please provide your login credentials");
+            System.out.println("Username: ");
+            username = console.readLine();
+            System.out.println("Password: ");
+            password = console.readLine();
 
-    @Override
-    public String toString() {
-        return super.toString();
+            userService.authenticate(username, password);
+
+            if (currentUser != null) {
+                System.out.println("[LOG] - Login successful, navigating to dashboard...");
+                router.navigate("/dashboard");
+            }
+
+
+        } catch (InvalidRequestException | AuthenticationException e) {
+            System.out.println("[LOG] - Invalid login credentials provided!");
+
+        } catch (Exception e) {
+            System.err.println("[ERROR] - An unexpected exception occured");
+            System.out.println("[LOG] - Shutting down application");
+            appRunning = false;
+        }
     }
 }
