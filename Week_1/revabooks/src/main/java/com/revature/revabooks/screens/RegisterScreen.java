@@ -9,7 +9,7 @@ public class RegisterScreen extends Screen {
 
     @Override
     public void render() {
-
+        System.out.println("register works!");
     }
 
 }

@@ -9,22 +9,22 @@ public class Book {
     private String isbn;
     private String title;
     private Author author;
-    private Set<Genre> genres;
+    private Genre genre;
     private Integer stockCount;
 
-    public Book(String isbn, String title, Author author, Set<Genre> genres) {
+    public Book(String isbn, String title, Author author, Genre genre) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
-        this.genres = genres;
+        this.genre = genre;
     }
 
-    public Book(Integer id, String isbn, String title, Author author, Set<Genre> genres, Integer stockCount) {
+    public Book(Integer id, String isbn, String title, Author author, Genre genre, Integer stockCount) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
         this.author = author;
-        this.genres = genres;
+        this.genre = genre;
         this.stockCount = stockCount;
     }
 
@@ -60,12 +60,12 @@ public class Book {
         this.author = author;
     }
 
-    public Set<Genre> getGenres() {
-        return genres;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setGenres(Set<Genre> genres) {
-        this.genres = genres;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     public Integer getStockCount() {
@@ -85,13 +85,13 @@ public class Book {
                 Objects.equals(isbn, book.isbn) &&
                 Objects.equals(title, book.title) &&
                 Objects.equals(author, book.author) &&
-                genres == book.genres &&
+                genre == book.genre &&
                 Objects.equals(stockCount, book.stockCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isbn, title, author, genres, stockCount);
+        return Objects.hash(id, isbn, title, author, genre, stockCount);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class Book {
                 ", isbn='" + isbn + '\'' +
                 ", title='" + title + '\'' +
                 ", author=" + author +
-                ", genre=" + genres +
+                ", genre=" + genre +
                 ", stockCount=" + stockCount +
                 '}';
     }
