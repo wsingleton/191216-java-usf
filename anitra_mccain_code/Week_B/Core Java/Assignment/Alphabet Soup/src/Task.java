@@ -11,10 +11,11 @@ public class Task {
 //How do you get the first letter of every word?
 
         String inputString = phrase;
-        System.out.println(inputString);
+//        System.out.println(inputString);
         Stack<Character> STACK = new Stack<Character>();
         String[] splitThisString = inputString.split(" ");
-        String acronym = "If you see this it did not work";
+        String acronym = "";
+
 
         for (String a: splitThisString) {
 //            System.out.println(a);
@@ -23,10 +24,11 @@ public class Task {
         }
 
         for (Character character : STACK) {
-            String result = character.toString();
-            System.out.println(result);
+            acronym = acronym + character.toString();
 
         }
+
+        System.out.println(acronym);
 
 
 

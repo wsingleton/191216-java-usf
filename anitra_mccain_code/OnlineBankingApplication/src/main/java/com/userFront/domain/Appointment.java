@@ -1,16 +1,26 @@
 package com.userFront.domain;
 
+import javax.persistence.*;
+
+
 import java.util.Date;
 
+//This class will be ran as an entity. When hibernate starts to run this entity will persist
+@Entity
 public class Appointment {
+
+	@Id //Indicates primary ID
+	@GeneratedValue(strategy = GenerationType.AUTO) //Generates a value
 	private Long id;
 	private Date date;
 	private String location;
 	private String description;
 	private boolean confirmed;
-	
+
+	@ManyToOne //Referring to relationship between appointments to User
+	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	//Auto generate accessors and modifiers
 
 	public Long getId() {
@@ -60,6 +70,16 @@ public class Appointment {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Appointment{" +
+				"id=" + id +
+				", date=" + date +
+				", location='" + location + '\'' +
+				", description='" + description + '\'' +
+				", confirmed=" + confirmed +
+				", user=" + user +
+				'}';
+	}
 }

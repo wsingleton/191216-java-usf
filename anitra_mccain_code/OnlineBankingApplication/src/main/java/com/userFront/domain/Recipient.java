@@ -1,13 +1,25 @@
 package com.userFront.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+
+@Entity
 public class Recipient {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
 	private String email;
 	private String phone;
 	private String accountNumber;
 	private String description;
-	
+
+	//Anticipates many recipients mapped to one user
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User user;
 
 	//Auto generate accessors and modifiers
