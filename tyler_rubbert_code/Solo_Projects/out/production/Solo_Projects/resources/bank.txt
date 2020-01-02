@@ -1,3 +1,6 @@
-Tyler:Rubbert:trubbert:password:400.0
+Tyler:Rubbert:trubbert:password:147.95
 John:Doe:jdoe:password:70.0
 Billy:Bob:bbob:password:40.0
+Sam:Hill:shill:asdfjkl:45.45
+Default:Name:dname:qwerty:600.0
+Wezley:Singleton:wsingleton:password:1099.9999999
