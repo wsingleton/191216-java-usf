@@ -1,5 +1,9 @@
 package com.revature;
 
+import com.revature.ui.Login;
+import com.revature.ui.UI;
+import sun.rmi.runtime.Log;
+
 import javax.jws.soap.SOAPBinding;
 import java.io.*;
 import java.util.ArrayList;
@@ -11,19 +15,20 @@ public class BankMain {
 
     public static void main(String[] args) {
 
-        // Make a file to store the user info
-        File takeNames = new File("src/stored/usernames_passwords.txt");
-
         //Prompt register or login
-        System.out.println("Enter 'Register' to create a new account or 'Login' sign into an existing account");
+         UI.choseYourDestiny();
+         Login.loginInfo();
+
+
+        /* System.out.println("Enter 'Register' to create a new account or 'Login' sign into an existing account");
         Scanner entry = new Scanner(System.in);
         String path = entry.nextLine();
         while (path.equals("") || (!path.equals("Login") && !path.equals("Register"))) { //user input control
             System.out.println("Please enter either 'Register' or 'Login'");
             entry = new Scanner(System.in);
-            path = entry.nextLine();
-        }
-
+            path = entry.nextLine(); */
+    }
+/*
         //What the user does from here
         if (path.equals("Register")) {
 
@@ -50,9 +55,9 @@ public class BankMain {
                 while ((line = nameCheck.readLine()) != null) {
                     lineCount++;
                     int nameFound = line.indexOf(username);
-                    if (nameFound > 0) {
-                        System.out.println("This username is already taken. You will be brought back to the register.");
-                        System.exit(0);
+                    System.out.println(nameFound);
+                    if (nameFound > -1) {
+                        System.out.println("This username is already taken. Please try again");
                     }
                 }
 
@@ -94,7 +99,6 @@ public class BankMain {
                 System.out.println(registeredUName + ":" + registeredPassword);
 
                 String line = nameAndPasswordCheck.readLine();
-
                 List<UserInfo> usernamesAndPasswords = new ArrayList<>();
 
                 while (line != null) {
@@ -214,6 +218,6 @@ public class BankMain {
         }
 
 
-    }
+    } */
 
 }
