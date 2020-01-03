@@ -3,25 +3,23 @@ package com.bank.ui;
 import com.bank.models.Account;
 import com.bank.models.User;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 import static com.bank.service.UserService.validateHomeScreenInput;
 import static com.bank.service.UserService.validateUserInput;
+import static com.bank.ui.BalanceScreen.checkBalance;
+import static com.bank.ui.DepositScreen.deposit;
+import static com.bank.ui.LoginScreen.login;
+import static com.bank.ui.RegisterScreen.register;
+import static com.bank.ui.WithdrawScreen.withdraw;
+
 
 public class MainScreen extends User {
 
-    public static void homeScreen() {
+    public static int homeScreen() {
 
         System.out.println("Welcome to Faux Bank");
         int number = validateHomeScreenInput();
 
-        if (number == 0){
-            LoginScreen.login();
-        }
-        else
-            RegisterScreen.register();
-
+        return number;
     }
 
     public static void display(Account acct) {
@@ -29,13 +27,13 @@ public class MainScreen extends User {
             int number = validateUserInput(acct);
 
             if (number == 0){
-                BalanceScreen.checkBalance(acct);
+                checkBalance(acct);
             }
             else if(number == 1){
-                DepositScreen.deposit(acct);
+                deposit(acct);
             }
             else{
-                WithdrawScreen.withdraw(acct);
+                withdraw(acct);
             }
     }
 }

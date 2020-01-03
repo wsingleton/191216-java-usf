@@ -5,31 +5,28 @@ import com.bank.models.User;
 
 import java.io.*;
 
-import static com.bank.ui.LoginScreen.login;
 import static com.bank.ui.MainScreen.display;
-import static com.bank.ui.RegisterScreen.register;
+import static com.bank.ui.MainScreen.homeScreen;
 
 public class UserDao {
 
-    public static void checkRegister (String userName, String password) {
+    public static void checkRegister (String userName) {
 
         File userFile = new File("src/resources/users.txt");
 
         try {
-
             BufferedReader reader = new BufferedReader(new FileReader(userFile));
             String line = reader.readLine();
 
             while (line != null) {
                 line = reader.readLine();
                 String[] token = line.split(":");
-                if (token[1].equals(userName) && token[2].equals(password)) {
-                    System.out.println("Sorry, that login is already taken.");
+                if (token[1].equals(userName)) {
+                    System.out.println("Sorry, that username is already taken.");
                     System.out.println("");
-                    register();
+                    homeScreen();
                 }
             }
-
             reader.close();
 
         }catch (NullPointerException np){
@@ -49,7 +46,6 @@ public class UserDao {
         File acctFile = new File("src/resources/account.txt");
 
         try {
-
             BufferedReader reader = new BufferedReader(new FileReader(userFile));
             BufferedReader reader2 = new BufferedReader(new FileReader(acctFile));
             String line = reader.readLine();
@@ -78,16 +74,14 @@ public class UserDao {
             reader2.close();
 
         }catch (NullPointerException np){
-            System.err.println("Username and password do not match. Try again, bitch!" + "\n");
-            login();
+            System.out.println("Username and password do not match. Try again." + "\n");
+            homeScreen();
         }catch (IOException ioe) {
-            System.err.println("Exception thrown while reading file.");
+            System.out.println("Exception thrown while reading file.");
         }catch (Exception e) {
             e.printStackTrace();
-            System.err.println("An unexpected exception occurred.");
+            System.out.println("An unexpected exception occurred.");
         }
-
-
     }
 
     public static void writeToUser(User newUser) {

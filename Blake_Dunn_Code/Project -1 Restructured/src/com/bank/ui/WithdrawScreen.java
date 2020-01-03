@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 import static com.bank.dao.AccountDao.replaceBalance;
 import static com.bank.service.AccountService.validateAmount;
+import static com.bank.service.UserService.newTransaction;
+import static com.bank.ui.MainScreen.display;
 
 
 public class WithdrawScreen extends User {
@@ -27,14 +29,14 @@ public class WithdrawScreen extends User {
             amount = input.nextDouble();
         }catch (InputMismatchException e) {
             System.out.println("Invalid value, BRO! Put something else in!");
-            withdraw(acct);
+            display(acct);
         }
 
         if(amount > bal || amount < 0) {
 
             System.out.println("You're broke as a joke, BRO!");
             System.out.println("Please try again");
-            withdraw(acct);
+            display(acct);
         }
         else {
             amount = validateAmount(amount);
@@ -51,8 +53,7 @@ public class WithdrawScreen extends User {
 
         System.out.println("Your new balance is $" + newBalance);
         System.out.println("Would you like to perform another transaction?");
-        System.out.print("1 = Yes, 0 = No: ");
-
-        DepositScreen.newTransaction(acct, input);
+        System.out.print("0 = Exit, 1 = Yes, 2 = Logout: ");
+        newTransaction(acct, input);
     }
 }

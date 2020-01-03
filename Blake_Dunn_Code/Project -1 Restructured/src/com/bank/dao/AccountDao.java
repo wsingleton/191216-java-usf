@@ -3,6 +3,7 @@ package com.bank.dao;
 import com.bank.models.Account;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class AccountDao {
 
@@ -18,7 +19,6 @@ public class AccountDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public static void replaceBalance(String oldAcctNum, String oldAcctBal, String newAcctNum, String newAcctBal) {
@@ -26,13 +26,10 @@ public class AccountDao {
         File acctFile = new File("src/resources/account.txt");
         String fullContent = "\n";
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(acctFile));
+        try(Scanner reader = new Scanner(new FileReader(acctFile));) {
 
-            String line = reader.readLine();
-
-            while (line != null) {
-                line = reader.readLine();
+            while (reader.hasNext()){
+                String line = reader.next();
                 fullContent += line + "\n";
             }
 
@@ -45,8 +42,6 @@ public class AccountDao {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            reader.close();
-
         }catch (NullPointerException np1) {
 
         } catch (IOException ioe) {
@@ -54,7 +49,5 @@ public class AccountDao {
         }catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 }

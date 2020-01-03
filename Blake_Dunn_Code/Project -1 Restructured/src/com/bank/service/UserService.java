@@ -1,7 +1,6 @@
 package com.bank.service;
 
 import com.bank.models.Account;
-import com.bank.ui.RegisterScreen;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -11,6 +10,8 @@ import static com.bank.ui.MainScreen.homeScreen;
 
 public class UserService {
 
+    public static int i = 0;
+
     public static void validateNames(String input) {
 
         // Using regex to evaluate to check that the string input is only alphabets
@@ -18,7 +19,7 @@ public class UserService {
 
         } else {
             System.out.println("Invalid, that is not a name. Try again.");
-            RegisterScreen.register();
+            homeScreen();
         }
     }
 
@@ -38,14 +39,12 @@ public class UserService {
             else if (number == 1){
                 return number;
             }
-            else{
-                System.out.println("Error: Please press 0 or 1");
-                homeScreen();
-            }
 
         }catch (InputMismatchException ime) {
             System.out.println("You must press 0 or 1, try again!");
             homeScreen();
+        }catch (Exception e) {
+            e.printStackTrace();
         }
         return number;
     }
@@ -73,13 +72,43 @@ public class UserService {
                 return number;
             }
             else{
-                System.out.println("Error: Please try again");
-                System.out.println("");
-                display(acct);
+                i++;
+                System.out.println(i);
+                if (i < 3) {
+                    System.out.println("Error: Please try again");
+                    System.out.println("");
+                    validateUserInput(acct);
+                }else if (i == 3) {
+                    homeScreen();
+                }
             }
         }catch(InputMismatchException ime){
-            display(acct);
+            i++;
+            if (i < 3)
+            validateUserInput(acct);
+            else if (i == 3 )
+                homeScreen();
         }
         return number;
+    }
+
+    public static void newTransaction(Account acct, Scanner input) {
+        int num = 0;
+        try{
+            num = input.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid value");
+            // Update balance in account file method
+            System.exit(0);
+        }
+        if(num == 1) {
+            display(acct);
+        }
+        else if (num == 2){
+            homeScreen();
+        }
+        else {
+            System.exit(num);
+        }
     }
 }

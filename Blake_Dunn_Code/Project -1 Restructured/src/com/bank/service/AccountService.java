@@ -7,6 +7,8 @@ import java.math.RoundingMode;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.bank.ui.MainScreen.homeScreen;
+
 public class AccountService {
 
     public static double validateAmount (double input) {
@@ -17,16 +19,17 @@ public class AccountService {
     }
 
     public static void validateUserName(String input) {
+
         int l = 15;
         int s = 7;
 
         if(input.length() <= s) {
             System.out.println("Username is too short. Try again.");
-            RegisterScreen.register();
+            homeScreen();
         }
         else if(input.length() >= l) {
             System.out.println("Username is too long. Try again.");
-            RegisterScreen.register();
+            homeScreen();
         }
     }
 
@@ -40,16 +43,16 @@ public class AccountService {
         }
         else {
             System.out.println("Please include a special character.");
-            RegisterScreen.register();
+            homeScreen();
         }
 
         if(input.length() <= s) {
             System.out.println("Password is too short. Try again.");
-            RegisterScreen.register();
+            homeScreen();
         }
         else if(input.length() >= l) {
             System.out.println("Password is too long. Try again.");
-            RegisterScreen.register();
+            homeScreen();
         }
     }
 }

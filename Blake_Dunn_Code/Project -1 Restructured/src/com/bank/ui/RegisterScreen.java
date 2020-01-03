@@ -11,6 +11,7 @@ import static com.bank.dao.UserDao.writeToUser;
 import static com.bank.models.User.createId;
 import static com.bank.service.AccountService.*;
 import static com.bank.service.UserService.*;
+import static com.bank.ui.MainScreen.display;
 
 
 public class RegisterScreen {
@@ -35,7 +36,7 @@ public class RegisterScreen {
         String ln = scanner.next();
         validateNames(ln);
         System.out.println("");
-        checkRegister(un, pw);
+        checkRegister(un);
 
         int newId = createId();
 
@@ -52,7 +53,7 @@ public class RegisterScreen {
         Account newAcct = new Account(newId, bal);
         writeToAccount(newAcct);
 
-        MainScreen.display(newAcct);
+        display(newAcct);
 
     }
 }

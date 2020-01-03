@@ -19,6 +19,5 @@ public class LoginScreen {
         String pw = scanner.next();
 
         checkLogin(un, pw);
-
     }
 }

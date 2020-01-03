@@ -14,7 +14,13 @@ public class Account extends User {
     public Account(int id, double b) {
 
         this.iD = id;
+
+        if (b > 0){
         this.balance = b;
+        }
+        else {
+            balance = 0;
+        }
 
     }
 

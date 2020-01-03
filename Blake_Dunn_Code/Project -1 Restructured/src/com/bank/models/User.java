@@ -42,10 +42,6 @@ public class User {
         return x;
     }
 
-    public static void register() {
-
-    }
-
     public String toFileStringUser() {
         return iD + ":" + userName + ":" + password + ":"
                 + firstName + ":" + lastName;
