@@ -1,9 +1,8 @@
 package com.revature.revabooks.screens;
 
+import com.revature.revabooks.exceptions.AuthenticationException;
 import com.revature.revabooks.exceptions.InvalidRequestException;
 import com.revature.revabooks.services.UserService;
-
-import javax.security.sasl.AuthenticationException;
 
 import static com.revature.revabooks.AppDriver.*;
 
@@ -39,11 +38,9 @@ public class LoginScreen extends Screen {
                 router.navigate("/dashboard");
             }
 
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
+        } catch (InvalidRequestException | AuthenticationException e) {
             System.out.println("[LOG] - Invalid login credentials provided!");
         } catch (Exception e) {
-            e.printStackTrace();
             System.err.println("[ERROR] - An unexpected exception occurred");
             System.out.println("[LOG] - Shutting down application");
             appRunning = false;
