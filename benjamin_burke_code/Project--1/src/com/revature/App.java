@@ -50,21 +50,25 @@ public class App {
             System.out.println("login success");
         }
         else {
-            System.out.println(" wrong username or password");
+            System.out.println(" logged in");
         }
-        service.deposit(username,pass);
+        service.action(username,pass);
 
     }
     static void signUp(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter your username: ");
         String username = scan.nextLine();
-        if (service.userExists(username)){
-            System.out.println("username exists");
-            signUp();
-        } else {
-            System.out.println(username + "Enter a password");
-        }
+        System.out.println("Enter password");
+        String pass =scan.nextLine();
+        //need to add an exist method for username
+
+
+
+        service.addAccount(username, pass, 0.0);
+//        loggedIn(Account );
+        System.out.println("You are signed up now log in!");
+        logIn();
 
     }
     //once user successfuly logs in

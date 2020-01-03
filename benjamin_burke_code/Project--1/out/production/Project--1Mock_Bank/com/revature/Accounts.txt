@@ -1,4 +1,4 @@
-i:i:500.0
+i:i:3500.0
 s:s:5000.0
 r:r:49.0
 q:q:30.0
@@ -6,4 +6,15 @@ t:t:600.0
 a:a:900.0
 z:z:200.0
 h:h:700.0
-le:le:600.0
+le:le:1260.0
+bob:bob:5000000.0
+yeezy:yeezy:400.0
+boo:boo:0.0
+dre:dre:50000.0
+em:em:0.0
+le123:le321:0.0
+asdsadas:asdasdsad:0.0
+benji:benji:49999.0
+fatJoe:leanback:370000.0
+lil jon:yeahh:100.0
+wsingleton:password:1.0000000000331966E-4

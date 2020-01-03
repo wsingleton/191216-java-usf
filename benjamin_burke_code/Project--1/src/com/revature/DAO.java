@@ -13,36 +13,13 @@ public class DAO {
         //must write the account user to the text file
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(fileLocation, true))){
 //            writer.write(a.toString());
-            writer.write("\n" + a.toString());
+            writer.write(a.toString());
             writer.newLine();
         } catch (Exception e){
             e.printStackTrace();
 
         }
     }
-//    ArrayList<Account> readAccounts(){
-//        ArrayList<Account> accountsList= new ArrayList<>();
-//        BufferedReader br = null;
-//        try {
-//            br = new BufferedReader(new FileReader(fileLocation));
-//        } catch (FileNotFoundException e){
-//            e.printStackTrace();
-//        }
-//        String line = null;
-//        try {
-//            while((line = br.readLine()) !=null){
-//                String[] data = line.split(":");
-//                Account temp = new Account();
-//                temp.setUsername(data[0]);
-//                temp.setPassword(data[1]);
-//                temp.setBalance(Double.parseDouble(data[2]));
-//                accountsList.add(temp);
-//            }
-//        } catch (NumberFormatException | IOException e){
-//            e.getStackTrace();
-//        }
-//        return accountsList;
-//    }
 
     public ArrayList<Account> readAccounts(){
         ArrayList<Account> Accounts = new ArrayList<Account>();

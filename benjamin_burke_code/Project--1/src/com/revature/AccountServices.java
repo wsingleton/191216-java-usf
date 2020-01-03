@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.revature.App.start;
+
 public class AccountServices {
     //create the array list to hold all the accounts to be added
     static ArrayList<Account>accounts;
@@ -36,6 +38,11 @@ public class AccountServices {
     boolean userExists(String username){
         ArrayList<Account> accounts = getAllAccounts();
         return accounts.stream().anyMatch(s->s.getUsername().equalsIgnoreCase(username));
+    }
+
+    boolean passwordExists(String password){
+        ArrayList<Account> accounts = getAllAccounts();
+        return accounts.stream().anyMatch(s->s.getPassword().equalsIgnoreCase(password));
     }
 
     boolean exists(String username, String pass){
@@ -86,7 +93,7 @@ public class AccountServices {
     }
 
 
-    public void deposit(String username, String pass){
+    public void action(String username, String pass){
         List<Account> accountList = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader("src/com/revature/Accounts.txt"));
@@ -103,24 +110,49 @@ public class AccountServices {
             e.printStackTrace();
             System.err.println("An unexpected error occured");
         }
-
         int  index = 0 ;
         for (Account u : accountList){
             if(username.equals(u.getUsername()) && pass.equals(u.getPassword())){
+                //might need to code out?
                 System.out.println("your balance is : "+ u.getBalance());
-                System.out.println(" choose deposit or withdraw  ");
+                System.out.println(" choose deposit or withdraw  or logout ");
                 Scanner sc = new Scanner(System.in);
                 String choose = sc.nextLine();
                 switch (choose){
                     case "deposit":
-                        Double amount = 0.0;
+                        Double amount = 0.00;
                         System.out.println("enter amount : ");
                         amount = sc.nextDouble();
                         Double newbalance = u.getBalance() + amount;
                         u.setBalance(newbalance);
                         System.out.println(" your new balance is :  "+ u.getBalance());
+                        //action(username, pass);
                         accountList.remove(index);
                         accountList.add(index,u);
+                        try{
+
+                            BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/revature/Accounts.txt"));
+                            for(Account k : accountList){
+                                String add = k.getUsername()+":"+k.getPassword()+":"+k.getBalance();
+                                writer.write(add);
+                                writer.newLine();
+                            }
+                            writer.close();
+                        } catch (Exception e){
+                            e.printStackTrace();
+
+                        }
+                        action(username, pass);
+                        break;
+                    case "withdraw":
+                        Double withdraw = 0.0;
+                        System.out.println("enter an amount: ");
+                        withdraw = sc.nextDouble();
+                        Double withdrawBalance = u.getBalance() - withdraw;
+                        u.setBalance((withdrawBalance));
+                        System.out.println("Your new balance is: " + u.getBalance());
+                        accountList.remove(index);
+                        accountList.add(index, u);
                         try(BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/revature/Accounts.txt"))){
                             for(Account k : accountList){
                                 String add = k.getUsername()+":"+k.getPassword()+":"+k.getBalance();
@@ -131,16 +163,17 @@ public class AccountServices {
                             e.printStackTrace();
 
                         }
+                        action(username, pass);
                         break;
+                    case "logout":
+
+                        System.out.println("Goodbye!");
+                        start();
                 }
-
-
             }
             else {
-
             }
             index = index + 1;
         }
     }
-
 }

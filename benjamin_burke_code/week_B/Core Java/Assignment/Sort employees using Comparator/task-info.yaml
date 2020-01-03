@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 198
-    length: 35
+    length: 20
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -14,8 +14,8 @@ files:
       if (employeesForSorting == null || employeesForSorting.isEmpty()) return new ArrayList<>();
               Collections.sort(employeesForSorting, new EmployeeComparator());
               return employeesForSorting;
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Failed
   text: |
     import java.util.ArrayList;
     import java.util.Collections;
@@ -118,7 +118,7 @@ files:
                       '}';
           }
     selected: true
-    status: Unchecked
+    status: Failed
   text: |+
     import java.util.Objects;
 
@@ -133,16 +133,16 @@ files:
   visible: true
   placeholders:
   - offset: 62
-    length: 25
+    length: 31
     placeholder_text: /* Something goes here */
     initial_state:
       length: 25
       offset: 62
     initialized_from_dependency: false
     possible_answer: implements Comparator<Employee>
-    selected: false
-    status: Unchecked
-  - offset: 95
+    selected: true
+    status: Failed
+  - offset: 101
     length: 39
     placeholder_text: // A method implementation will go here
     initial_state:
@@ -165,8 +165,8 @@ files:
               return -1;
 
           }
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Failed
   text: |
     import java.util.Comparator;
 
@@ -451,5 +451,5 @@ files:
 - name: assets/employee-uml.png
   visible: true
   learner_created: false
-status: Unchecked
+status: Failed
 record: -1

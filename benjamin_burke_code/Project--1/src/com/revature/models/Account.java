@@ -70,7 +70,7 @@ public class Account {
     public String toString() {
         return username + ":" +
                  password + ":" +
-                balance +"\n"
+                balance
                 ;
     }
 }

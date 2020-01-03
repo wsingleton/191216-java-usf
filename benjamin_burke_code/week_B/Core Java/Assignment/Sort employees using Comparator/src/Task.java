@@ -6,7 +6,7 @@ public class Task {
 
     public List<Employee> sortEmployeesBySalary(List<Employee> employeesForSorting) {
 
-        // Provide your implementation here
+        public int compare()
 
     }
 
