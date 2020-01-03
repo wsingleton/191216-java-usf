@@ -8,17 +8,17 @@ public class Menu {
 
     private Hashtable<String, Account> acctBase = new Hashtable<>();
     String token = "";
-    {/*
+    {
         int key = 0;
         acctBase.put("Icemane", new Account("Icemane", "password", 0));
         acctBase.put("jcarter", new Account("jcarter", "kannon", 0));
-*/
+
     }
 
     {
         Deserialize fill = new Deserialize();
         fill.fillMap(acctBase);
-        acctBase.forEach((k,v) -> System.out.println(v.accountSerialize()));
+
     }
 
     // setting initial balance to 0.
