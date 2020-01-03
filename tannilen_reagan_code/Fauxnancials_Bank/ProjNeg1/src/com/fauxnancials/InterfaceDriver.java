@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class InterfaceDriver {
     static ArrayList<User> userList = new ArrayList<>(DocumentationDriver.CollectUsers());
-    static HashMap<String, Integer> accountList=new HashMap<>(DocumentationDriver.CollectAccounts());
+    static HashMap<String, Integer> accountList=new HashMap<>(DocumentationDriver.collectAccounts());
     public static void main(String[] args) {
         Scanner scanner=new Scanner(System.in);
         boolean valid;

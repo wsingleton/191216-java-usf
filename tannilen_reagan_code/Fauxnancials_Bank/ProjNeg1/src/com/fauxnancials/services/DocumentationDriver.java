@@ -32,7 +32,7 @@ public class DocumentationDriver {
         }
         return usersList;
     }
-    public static HashMap<String, Integer> CollectAccounts() {
+    public static HashMap<String, Integer> collectAccounts() {
         HashMap<String, Integer> accounts = new HashMap<>();
         File balanceAccts = new File("src/com/fauxnancials/resources/acctbalances.txt");
         try (BufferedReader reader = new BufferedReader(new FileReader(balanceAccts))) {
