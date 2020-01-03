@@ -7,6 +7,12 @@ import java.util.Scanner;
 public class Menu {
 
     private Hashtable<Integer, Account> acctBase = new Hashtable<>();
+    {
+        int key = 0;
+        acctBase.put(key, new Account("Icemane", "password", key, 0)); key++;
+        acctBase.put(key, new Account("jcarter", "kannon", key, 0)); key++;
+
+    }
 
     // setting initial balance to 0.
    double  balance = 0;
@@ -45,6 +51,8 @@ public class Menu {
 
                 case 3:
                     System.out.println("Thank you for using Kannon's Bank.");
+                    Serialize serialize = new Serialize();
+                    serialize.writeMap(acctBase);
                     System.exit(0);
                 default:
                     System.out.println("Invalid entry, please try again");
@@ -92,6 +100,9 @@ public class Menu {
 
                 case 4:
                     System.out.println("Thank you for using Kannon's Bank.");
+
+                    Serialize serialize = new Serialize();
+                    serialize.writeMap(acctBase);
                     System.exit(0);
                 default:
                     System.out.println("Invalid entry, please try again");

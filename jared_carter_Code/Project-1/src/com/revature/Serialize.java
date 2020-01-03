@@ -5,30 +5,23 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Serialize {
-    public static void writeMap(Hashtable map) {
+    public void writeMap(Hashtable<Integer, Account> map) {
 
-        String filename = "user.txt";
-        PrintWriter writer = null;
-        Scanner scanner = null;
+        String filename = "C:\\Users\\Jared\\repos\\191216-java-usf\\jared_carter_Code\\Project-1\\src\\users";
+        FileWriter fw = null;
 
         try {
-            FileWriter fw = new FileWriter(filename, true);
-            writer = new PrintWriter(fw);
+            fw = new FileWriter(filename);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        accountSer
-        while (scanner.hasNextLine()) {
-
-            line = scanner.nextLine();
-            writer.println(line);
-
-        }
-        scanner.close();
+        PrintWriter writer = new PrintWriter(fw);
+        map.forEach((k,v) -> writer.println(v.accountSerialize()));
         writer.close();
     }
 }

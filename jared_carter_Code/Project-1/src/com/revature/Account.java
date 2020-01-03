@@ -18,6 +18,10 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
+    public Account() {
+
+    }
+
     public String getPassword() {
         return password;
     }
