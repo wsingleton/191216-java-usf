@@ -6,17 +6,25 @@ import java.util.Scanner;
 
 public class Menu {
 
-    private Hashtable<Integer, Account> acctBase = new Hashtable<>();
-    {
+    private Hashtable<String, Account> acctBase = new Hashtable<>();
+    String token = "";
+    {/*
         int key = 0;
-        acctBase.put(key, new Account("Icemane", "password", key, 0)); key++;
-        acctBase.put(key, new Account("jcarter", "kannon", key, 0)); key++;
+        acctBase.put("Icemane", new Account("Icemane", "password", 0));
+        acctBase.put("jcarter", new Account("jcarter", "kannon", 0));
+*/
+    }
 
+    {
+        Deserialize fill = new Deserialize();
+        fill.fillMap(acctBase);
+        acctBase.forEach((k,v) -> System.out.println(v.accountSerialize()));
     }
 
     // setting initial balance to 0.
    double  balance = 0;
    int option = 0;
+   boolean success = false;
    // Will be using Scanner a lot so making instantiating in the class scope. So everyone has access to it.
     Scanner scanner = new Scanner(System.in);
     public void loginMenu(){
@@ -37,7 +45,7 @@ public class Menu {
 
             catch(Exception e){
                 System.out.println("Please select a number: ");
-
+                System.exit(0);
             }
             System.out.println("****************************");
 
@@ -47,6 +55,7 @@ public class Menu {
 
                     break;
                 case 2:
+
                     signIn();
                     break;
                 case 3:
@@ -54,11 +63,13 @@ public class Menu {
                     Serialize serialize = new Serialize();
                     serialize.writeMap(acctBase);
                     System.exit(0);
+                    break;
                 default:
                     System.out.println("Invalid entry, please try again");
             }
         }
-        while (option != 3) ;
+        while (false) ;
+        System.out.println("Invalid username or password.");
     }
 
 
@@ -79,28 +90,25 @@ public class Menu {
 
             System.out.println("Enter an option");
             try {
-                option = Integer.parseInt(scanner.nextLine());
+                String dummy = scanner.next();
+                option = Integer.parseInt(dummy);
             }
-
             catch(Exception e){
                 System.out.println("Please select a number: ");
-
             }
             System.out.println("****************************");
 
             switch (option) {
                 case 1:
-                    withdraw() ;
+                    deposit();
 
                     break;
                 case 2:
-                  deposit();
-
+                  withdraw();
                     break;
                 case 3:
-
                     viewBalance();
-
+                    break;
                 case 4:
                     System.out.println("Thank you for using Kannon's Bank.");
 
@@ -130,12 +138,14 @@ public class Menu {
         System.out.println("Please enter withdraw amount: ");
         while (!valid) {
             try {
-                withdraw = Double.parseDouble(scanner.nextLine());
+                String dummy = scanner.next();
+                withdraw = Double.parseDouble(dummy);
             } catch (Exception e) {
                 System.out.println("Please enter a number: ");
             }
-            if (withdraw < balance +1) {
+            if (withdraw < balance + 1) {
                 balance = balance - withdraw;
+                acctBase.get(token).setBalance(balance);
                 valid = true;
             } else {
                 //So they do not get stuck in infinite loop if they have zero dollars.
@@ -155,12 +165,14 @@ public class Menu {
         System.out.println("Please enter deposit amount: ");
         while (!valid) {
             try {
-                deposit = Double.parseDouble(scanner.nextLine());
+                String dummy = scanner.next();
+                deposit = Double.parseDouble(dummy);
             } catch (Exception e) {
                 System.out.println("Please enter a number: ");
             }
             if (deposit > 0) {
                 balance = deposit + balance;
+                acctBase.get(token).setBalance(balance);
                 valid = true;
             } else {
 
@@ -184,7 +196,8 @@ public class Menu {
             while (!valid) {
                 System.out.println("Please enter an initial deposit: ");
                 try {
-                    balance = Double.parseDouble(scanner.nextLine());
+                    String dummy = scanner.next();
+                    balance = Double.parseDouble(dummy);
                 } catch (Exception e) {
                     System.out.println("Please enter a number: ");
 
@@ -197,16 +210,27 @@ public class Menu {
                 }
 
             }
+
+            acctBase.put(userName,new Account(userName,password,balance) );
+            token = userName;
             transactionMenu();
 
 
-            //Account account = new Checking(balance);
 
         }
 
-    private void signIn() {
+    public void signIn() {
+        System.out.println("Enter Username: ");
+        String username = scanner.next();
+        System.out.println("Enter Password: ");
+        String password = scanner.next();
 
+        if (acctBase.containsKey(username) && acctBase.get(username).getPassword().equals(password)) {
+            success = true;
+            token = username;
+            balance = acctBase.get(username).getBalance();
+            transactionMenu();
+        }
     }
-
-    }
+}
 

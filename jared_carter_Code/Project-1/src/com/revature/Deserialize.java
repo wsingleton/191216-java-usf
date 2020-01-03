@@ -6,11 +6,32 @@ import java.util.Scanner;
 
 public class Deserialize {
 
+    public void fillMap(Hashtable map) {
 
+        String file_name = "C:\\Users\\Jared\\repos\\191216-java-usf\\jared_carter_Code\\Project-1\\src\\users";
+        File file = new File(file_name);
+        Scanner scanner = null;
+        Double balance;
+        String username;
+        String password;
+        try {
+            scanner = new Scanner(file);
+            while(scanner.hasNext()) {
 
-    public static void fillMap(Hashtable map) {
+                username = scanner.next();
+                password = scanner.next();
+                int dump = scanner.nextInt();
+                balance = scanner.nextDouble();
+                Account act = new Account(username, password, balance);
+                map.put(username, act);
+            }
 
-        int accountNumber = 0;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+       /* int accountNumber = 0;
         String username = "";
         String password = "";
         double balance = 0;
@@ -33,6 +54,6 @@ public class Deserialize {
         }
         catch(Exception e) {
             System.out.println("Exception");
-        }
+        }*/
     }
 }

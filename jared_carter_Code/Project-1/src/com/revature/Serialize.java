@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Serialize {
-    public void writeMap(Hashtable<Integer, Account> map) {
+    public void writeMap(Hashtable<String, Account> map) {
 
         String filename = "C:\\Users\\Jared\\repos\\191216-java-usf\\jared_carter_Code\\Project-1\\src\\users";
         FileWriter fw = null;
