@@ -131,8 +131,16 @@ public class AccountManager {
                                    Integer cont = new Integer(read.nextLine());
                                    if (cont.equals(1)) {
                                        System.out.println("Now enter a new amount to withdraw");
-                                       amount = new Integer(read.nextLine());
-                                       if (amount < currentBalance) {
+                                       String money = read.nextLine();
+                                       try{
+                                           amount = new Integer(money);
+                                       } catch(Exception e){
+                                           System.err.println("Invalid amount");
+                                           System.out.println("Try again next time");
+                                           break;
+                                       }
+//                                       amount = new Integer(read.nextLine());
+                                       if (amount < currentBalance && !(amount < 0)) {
                                            updatedBalance = currentBalance - amount;
 
                                            // set balance to the updated balance

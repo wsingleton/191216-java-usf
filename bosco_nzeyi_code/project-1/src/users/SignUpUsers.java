@@ -3,6 +3,7 @@ package users;
 import accounting.FileManager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -38,7 +39,21 @@ public class SignUpUsers {
         System.out.println("Enter your last name");
         String lastName = read.nextLine().trim();
         System.out.println("Enter username");
-        String username = read.nextLine().trim();
+        String usernameProp = read.nextLine().trim();
+        String username ="";
+
+        if((usernameChecker(usernameProp))){
+            username = usernameProp;
+        } else{
+            System.out.println("Username unavailable. Enter a different username");
+            usernameProp = read.nextLine();
+            if(usernameChecker(usernameProp)){
+                username = usernameProp;
+            } else{
+                System.out.println("Username not valid. Try again next time");
+                System.exit(0);
+            }
+        }
         System.out.println("Enter password. Should be less than 9 characters");
         String password = read.nextLine().trim();
         System.out.println("confirm password");
@@ -75,5 +90,26 @@ public class SignUpUsers {
         FileManager.writeFile("users.txt", userData);
         System.out.println("Successfully registered!");
 
+    }
+
+    // check whether a passed username currently exist and ask users to choose a different username
+
+    public boolean usernameChecker(String username){
+
+        // iterate of all users and checking whether the username already exists
+        boolean usernameExist = false;
+        ArrayList<String> lines = FileManager.readerTool("users.txt");
+        for(String line: lines){
+            String userInfo = line;
+            String[] userInfoArray = userInfo.split("|");
+            for (String word: userInfoArray){
+                if(word.contains(username)){
+                    usernameExist = true;
+                } else {
+                    usernameExist = false;
+                }
+            }
+        }
+        return usernameExist;
     }
 }

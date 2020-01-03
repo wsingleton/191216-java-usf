@@ -121,8 +121,5 @@ files:
 
     }
   learner_created: false
-- name: src/Test.java
-  visible: true
-  learner_created: true
 status: Solved
 record: -1
