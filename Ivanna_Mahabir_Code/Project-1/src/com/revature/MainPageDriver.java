@@ -40,7 +40,7 @@ public class MainPageDriver {
 
                     case -1:
                         System.out.println("Goodbye");
-                        return;
+                        break;
 
                     default:
                         System.out.println("Invalid Entry");

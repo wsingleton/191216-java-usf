@@ -4,7 +4,10 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.revature.models.WriteFile.writeFil;
+
 public class Display {
+
 
     public static void disPla(List<UserB> disPl, String user) {
         try {
@@ -20,7 +23,7 @@ public class Display {
             System.out.println("Select Transaction: Get Balance enter 1, Deposit enter 2, Withdraw enter 3, to Exit enter -1: ");
             Scanner scanner = new Scanner(System.in);
 
-            Integer option = scanner.nextInt(); //if non-int is entered InputMismatchException
+            Integer option = scanner.nextInt();
             if (option > 4 || option < -2 || option == 0) {
                 System.out.println("Invalid Entry");
                 return;
@@ -29,7 +32,7 @@ public class Display {
                 switch (option) {
                     case 1:
                         System.out.println("Your Current Balance: ");
-                        System.out.println("Username: " + user + "\nBalance: " + mon);
+                        System.out.println("Username: " + user + "\nBalance: " + mon + "\n");
                         disPla(disPl, user);
                         break;
                     case 2:
@@ -38,8 +41,13 @@ public class Display {
                         System.out.println("Current Balance: " + mon);
                         if (bal >= 0) {
                             mon += bal;
-                           disPl.get(dex).setBalance(mon);
+                            disPl.get(dex).setBalance(mon);
+
+                           /// write deposit to file
                             System.out.println("New Balance: " + mon);
+                            writeFil(disPl);
+                            disPla(disPl, user);
+                            System.out.println("\n\n");
 
                         } else {
                             System.out.println("Invalid Deposit");
@@ -53,18 +61,23 @@ public class Display {
                         System.out.println("\nEnter Withdrawal Amount greater than 0: ");
                         Double wit = scanner.nextDouble();
                         Double newWit = disPl.get(dex).getBalance();
-                        if (wit > 0) {
+                        if (wit > -1 && wit <= newWit ) {
                             newWit -= wit;
                             disPl.get(dex).setBalance(newWit);
                             System.out.println("New Balance: " + newWit);
+                            writeFil(disPl);
+                            disPla(disPl, user);
+                            System.out.println("\n\n");
+
                         } else {
                             System.out.println("Invalid Withdrawal");
                             disPla(disPl, user);
                         }
-                        //break; //fall through ends program
+                        break;
+
                     case -1:
-                        System.out.println("Goodbye");
-                        return;
+                        break;
+                       // return to main menu;
 
                     default:
                         System.out.println("Invalid Entry");
@@ -75,6 +88,7 @@ public class Display {
         }
         catch (InputMismatchException e){
             System.out.println("Invalid Input");
+
             e.printStackTrace();
             return;
         }

@@ -1,6 +1,5 @@
 package com.revature.revabooks.services;
 
-
 import com.revature.revabooks.exceptions.AuthenticatironException;
 import com.revature.revabooks.exceptions.InvalidRequestException;
 import com.revature.revabooks.exceptions.ResourcePersistenceException;
@@ -16,6 +15,7 @@ public class UserService {
 
     private UserRepository userRepo;
 
+
     public UserService(UserRepository repo){
         this.userRepo = repo;
     }
@@ -29,10 +29,21 @@ public class UserService {
     }
 
     public User getUserById(Integer id){
+/*        if (id == currentUser.getId() || id.equals(currentUser.getId())){
+            return currentUser;
+        }*/
         return null;
     }
 
     public User getUserByUsername(String username){
+
+        //unique username
+        //if given username == in-memory username get User
+        /*if(username == currentUser.getUserName() || username.equals(currentUser.getUserName())){
+            return currentUser
+        }*/
+
+
         return null;
     }
 

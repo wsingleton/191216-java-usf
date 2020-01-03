@@ -1,5 +1,6 @@
 package com.revature;
 
+import com.revature.models.LoginDriver;
 import com.revature.models.UserB;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import static com.revature.models.WriteFile.writeFil;
 public class RegisterDriver {
 
     private UserB myUser = new UserB();
+    private MainPageDriver home = new MainPageDriver();
 
     public void Register(List<UserB> myReg){
 
@@ -39,7 +41,7 @@ public class RegisterDriver {
             try {
                 for(UserB u : myReg){
                     if(u.getUsername().equals(user)) { //compares new username to file
-                        System.out.println("Invalid Entry"); // if username exists, exits program
+                        System.out.println("Invalid Entry"); //
                         return;
                     }
                 }
@@ -49,8 +51,11 @@ public class RegisterDriver {
                 myUser.setBalance(initBal);
                 myReg.add(myUser);
                 writeFil(myReg);
+                LoginDriver.Login(myReg); // forwards to login
+
             }
             catch (Exception e){
+                //retrun to main
                 System.out.println("invalid user name");
                 e.printStackTrace();
             }

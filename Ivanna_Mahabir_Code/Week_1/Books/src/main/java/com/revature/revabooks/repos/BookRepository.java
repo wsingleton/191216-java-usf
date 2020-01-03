@@ -3,8 +3,6 @@ package com.revature.revabooks.repos;
 import com.revature.revabooks.models.Author;
 import com.revature.revabooks.models.Book;
 import com.revature.revabooks.models.Genre;
-import com.revature.revabooks.models.User;
-
 
 import java.util.*;
 
@@ -15,6 +13,7 @@ public class BookRepository implements CrudRepository<Book> {
 
     {
         key = 1;
+        bookDb = new HashMap<>();
         bookDb.put(key, new Book(key, "2019-2012", "Optical Electronics", new Author("S","Murshid"), Genre.ADVENTURE, 5)); key++;
         bookDb.put(key, new Book(key,"2010-2012", "CXC Past Papers", new Author("Asha","Maharaj"), Genre.FANTASY, 9)); key++;
         bookDb.put(key, new Book(key, "1995-1998", "It", new Author("Steven","King"), Genre.HORROR, 1)); key++;
