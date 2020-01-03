@@ -11,41 +11,38 @@ public class Task {
             return new String[0];
         }
 
+        String[] palindromes = new String[0];
+
         int counter = 0;
-        for (int i = 0; i < wordArray.length - 1; i++) {
+        for (int i = 0; i < wordArray.length; i++) {
             if (isPalindrome(wordArray[i]) == true) {
-                counter ++;
-                for (int j = i; j < wordArray.length; j++) {
-                    wordArray[i] = wordArray[i+1];
+                if (wordArray[i] != null && !wordArray[i].equals("")) {
+                    palindromes = Arrays.copyOf(palindromes, ++counter);
+                    palindromes[counter - 1] = wordArray[i];
                 }
-                wordArray = Arrays.copyOf(wordArray, wordArray.length-counter);
             }
 
         }
-        return wordArray;
+        if (palindromes.length > 0) {
+            return palindromes;
+        }
+        else return new String[0];
     }
 
     public boolean isPalindrome(String word) {
 
-        if (word == null || word.equals("")) {
+        if (word == null || word.equals("")){
             return false;
         }
-        String clone = word.replaceAll("[^a-zA-Z]","").toLowerCase();
+
+        StringBuffer clone = new StringBuffer(word.replaceAll("[^a-zA-Z0-9]+","").toLowerCase());
+        clone = clone.reverse();
+        if (clone.toString().equals(word.replaceAll("[^a-zA-Z0-9^]+","").toLowerCase())) return true;
+        else return false;
 
 
 
 
-        String s = "";
-        for (int i = clone.length()-1; i >= 0;i-- ){
-            s = s + clone.charAt(i);
-        }
-        if (s.equals(word)) {
-            return true;
-        }
-
-        else {
-            return false;
-        }
 
     }
 

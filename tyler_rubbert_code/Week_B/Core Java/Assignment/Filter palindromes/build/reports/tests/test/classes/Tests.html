@@ -29,7 +29,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">5</div>
+<div class="counter">0</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.043s</div>
+<div class="counter">0.040s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox failures" id="successRate">
-<div class="percent">28%</div>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,166 +61,10 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Failed tests</a>
-</li>
-<li>
-<a href="#tab1">Tests</a>
+<a href="#tab0">Tests</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
-<h2>Failed tests</h2>
-<div class="test">
-<a name="testSolutionWithValidArrayContainingAllPalindromes"></a>
-<h3 class="failures">testSolutionWithValidArrayContainingAllPalindromes</h3>
-<span class="code">
-<pre>java.lang.AssertionError: array lengths differed, expected.length=5 actual.length=4
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:76)
-	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:37)
-	at org.junit.Assert.internalArrayEquals(Assert.java:532)
-	at org.junit.Assert.assertArrayEquals(Assert.java:283)
-	at org.junit.Assert.assertArrayEquals(Assert.java:298)
-	at Tests.testSolutionWithValidArrayContainingAllPalindromes(Tests.java:72)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testSolutionWithValidArrayContainingNoPalindromes"></a>
-<h3 class="failures">testSolutionWithValidArrayContainingNoPalindromes</h3>
-<span class="code">
-<pre>java.lang.AssertionError: array lengths differed, expected.length=0 actual.length=6
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:76)
-	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:37)
-	at org.junit.Assert.internalArrayEquals(Assert.java:532)
-	at org.junit.Assert.assertArrayEquals(Assert.java:283)
-	at org.junit.Assert.assertArrayEquals(Assert.java:298)
-	at Tests.testSolutionWithValidArrayContainingNoPalindromes(Tests.java:88)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testSolutionWithValidArrayContainingNumericPalindromes"></a>
-<h3 class="failures">testSolutionWithValidArrayContainingNumericPalindromes</h3>
-<span class="code">
-<pre>java.lang.AssertionError: array lengths differed, expected.length=3 actual.length=6
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:76)
-	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:37)
-	at org.junit.Assert.internalArrayEquals(Assert.java:532)
-	at org.junit.Assert.assertArrayEquals(Assert.java:283)
-	at org.junit.Assert.assertArrayEquals(Assert.java:298)
-	at Tests.testSolutionWithValidArrayContainingNumericPalindromes(Tests.java:134)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testSolutionWithValidArrayContainingSomeNulls"></a>
-<h3 class="failures">testSolutionWithValidArrayContainingSomeNulls</h3>
-<span class="code">
-<pre>java.lang.AssertionError: array lengths differed, expected.length=3 actual.length=7
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:76)
-	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:37)
-	at org.junit.Assert.internalArrayEquals(Assert.java:532)
-	at org.junit.Assert.assertArrayEquals(Assert.java:283)
-	at org.junit.Assert.assertArrayEquals(Assert.java:298)
-	at Tests.testSolutionWithValidArrayContainingSomeNulls(Tests.java:112)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testSolutionWithValidArrayContainingSomePalindromes"></a>
-<h3 class="failures">testSolutionWithValidArrayContainingSomePalindromes</h3>
-<span class="code">
-<pre>java.lang.AssertionError: array lengths differed, expected.length=5 actual.length=7
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:76)
-	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:37)
-	at org.junit.Assert.internalArrayEquals(Assert.java:532)
-	at org.junit.Assert.assertArrayEquals(Assert.java:283)
-	at org.junit.Assert.assertArrayEquals(Assert.java:298)
-	at Tests.testSolutionWithValidArrayContainingSomePalindromes(Tests.java:49)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
-	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-</pre>
-</span>
-</div>
-</div>
-<div id="tab1" class="tab">
 <h2>Tests</h2>
 <table>
 <thead>
@@ -232,7 +76,7 @@
 </thead>
 <tr>
 <td class="success">testSolutionWithEmptyArray</td>
-<td class="success">0.001s</td>
+<td class="success">0.007s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -241,29 +85,29 @@
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testSolutionWithValidArrayContainingAllPalindromes</td>
-<td class="failures">0.008s</td>
-<td class="failures">failed</td>
+<td class="success">testSolutionWithValidArrayContainingAllPalindromes</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testSolutionWithValidArrayContainingNoPalindromes</td>
-<td class="failures">0.002s</td>
-<td class="failures">failed</td>
+<td class="success">testSolutionWithValidArrayContainingNoPalindromes</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testSolutionWithValidArrayContainingNumericPalindromes</td>
-<td class="failures">0.003s</td>
-<td class="failures">failed</td>
+<td class="success">testSolutionWithValidArrayContainingNumericPalindromes</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testSolutionWithValidArrayContainingSomeNulls</td>
-<td class="failures">0.025s</td>
-<td class="failures">failed</td>
+<td class="success">testSolutionWithValidArrayContainingSomeNulls</td>
+<td class="success">0.016s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testSolutionWithValidArrayContainingSomePalindromes</td>
-<td class="failures">0.003s</td>
-<td class="failures">failed</td>
+<td class="success">testSolutionWithValidArrayContainingSomePalindromes</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
 </tr>
 </table>
 </div>
@@ -275,7 +119,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 5.2.1</a> at Dec 31, 2019, 1:14:47 AM</p>
+<a href="http://www.gradle.org">Gradle 5.2.1</a> at Jan 3, 2020, 9:47:43 AM</p>
 </div>
 </div>
 </body>
