@@ -1,53 +1,60 @@
 package com.revature;
 
-import com.revature.RegisterDriver.*;
 import com.revature.models.LoginDriver;
+import com.revature.models.ReadFile;
 import com.revature.models.UserB;
-//import com.revature.models.ReadInput;
-//import com.revature.models.UserB.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MainPageDriver {
-    public static void main(String[] args){
+    static ArrayList<UserB> ulist = new ArrayList<>(ReadFile.ReadFile());
 
-        //Main Page Display Start
-        System.out.println("Welcome to C Bank!");
-        System.out.println("New user enter 1, returning user enter 2 (to exit enter -1): ");
-        //reads input from the user
-        Scanner scanner = new Scanner(System.in);
-        Integer option = scanner.nextInt();
-
-       // Integer opt = new ReadInput(); 
-
-        //test or validate input using if or switch statement
-        //a while loop with a nested if statement??
-        switch(option){
-            case 1:
-                System.out.println("Welcome New User");
-                RegisterDriver myRegister = new RegisterDriver();
-                myRegister.Register();
-
-                break;
-            case 2:
-                System.out.println("Please login");
-                LoginDriver myLogin = new LoginDriver();
-                myLogin.Login();
-                break;
-            case -1:
-                return;
-
-            default:
+    public static void main(String[] args) {
+        try {
+            //Main Page Display Start
+            System.out.println("Welcome to C Bank!");
+            System.out.println("New user enter 1, returning user enter 2 (to exit enter -1): ");
+            //reads input from the user
+            Scanner scanner = new Scanner(System.in);
+            Integer option = scanner.nextInt(); //if non-int is entered InputMismatchException - needs to handle
+            if (option > 3 || option < -2 || option == 0) {
                 System.out.println("Invalid Entry");
+                return;
+            } else {
+                // Integer opt = new ReadInput();
 
+                //test or validate input using if or switch statement
+                //a while loop with a nested if statement??
+                switch (option) {
+                    case 1:
+                        System.out.println("Welcome New User");
+                        RegisterDriver myRegister = new RegisterDriver();
+                        myRegister.Register(ulist);
+
+                        break;
+                    case 2:
+                        System.out.println("Please login");
+                        LoginDriver myLogin = new LoginDriver();
+                        myLogin.Login(ulist);
+                        break;
+
+                    case -1:
+                        System.out.println("Goodbye");
+                        return;
+
+                    default:
+                        System.out.println("Invalid Entry");
+                        return;
+
+                }
+            }
         }
-
-
-
+            catch(InputMismatchException e){
+                System.out.println("Invalid Input");
+                e.printStackTrace();
+                return;
+            }
     }
 }

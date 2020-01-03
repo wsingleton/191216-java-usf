@@ -2,9 +2,9 @@ package com.revature.models;
 
 import java.util.InputMismatchException;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class UserB {
-    private int id; // use to link accts?? acctId - generated automatically
     private String username; //unique, b/t 5 to 20 char ??
     private String password; // same length
     private double balance; //initial set to 0.
@@ -15,19 +15,10 @@ public class UserB {
     public UserB() {
     }
 
-    public UserB(int id, String username, String password, double balance) {
-        this.id = id;
+    public UserB( String username, String password, double balance) {
         this.username = username;
         this.password = password;
         this.balance = balance;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -36,17 +27,7 @@ public class UserB {
 
     //unique username //
     public void setUsername(String username) {
-        try {
-            if (validate(username) == true) {
-                this.username = username;
-            } else {
-                System.out.println(username + " Invalid");
-                //System.exit(0);
-            }
-        }
-        catch(InputMismatchException e){
-            e.printStackTrace();
-        }
+        this.username = username;
     }
 
     public String getPassword() {
@@ -55,17 +36,7 @@ public class UserB {
 
 
     public void setPassword(String password) {
-        try {
-            if (validate(password) == true) {
-                this.password = password;
-            } else {
-                System.out.println(password + " Invalid");
-                System.exit(0);
-            }
-        }
-        catch (InputMismatchException e){
-            e.printStackTrace();
-        }
+        this.password = password;
     }
 
     public double getBalance() {
@@ -87,43 +58,39 @@ public class UserB {
     }
 
     public String toFileString(){
-        return id + ":" + username + ":" + password + ":" + balance;
+        return username + ":" + password + ":" + balance;
     }
 
     public static boolean uCase(char ch){
         ch = Character.toUpperCase(ch);
-        return (ch >= 'A' && ch <= 'Z');
+        return ch >= 'A' && ch <= 'Z';
     }
-    public static boolean nCase(char ch){
-        return (ch >= '0' && ch <=9);
+    public static boolean nCase(String passwor){
+        return Pattern.compile("[0-9]").matcher(passwor).find();
     }
 
    //Validation for new entry
-    public boolean validate(String arg) {
+
+    public static boolean validate(String arg) {
         if (arg.length() >= 8 && arg.length() <= 15) {
+            System.out.println("length acceptable");
             for (int i = 0; i < arg.length(); i++) {
                 char ch = arg.charAt(i);
                 if (uCase(ch)) {
-                    if (nCase(ch))
+                    System.out.println("corrct char");
+                    if (nCase(arg)) {
+                        System.out.println("correct num"); // test
                         return true;
+                    }
                     //break;
                 }
             }
         }
+        System.out.println("Invalid Input");
         return false;
     }
 
-    //validation for login of previous
-    public boolean comparison(String uArg, String pArg) {
-        if (uArg.equals(getUsername()) && pArg.equals(getPassword())){
-            System.out.println("Welcome " + getUsername());
-            System.out.println("Your current available balance: " + balance);
-        //if username && pass are true
-    }
-            return false;
-    }
-
-    public double withdraw(double amt){
+/*    public double withdraw(double amt){
         if (amt <= balance) {
             return balance - amt;
         }
@@ -141,31 +108,29 @@ public class UserB {
             System.out.println("Invalid Deposit amount");
             return balance;
         }
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserB userB = (UserB) o;
-        return id == userB.id &&
-                Double.compare(userB.balance, balance) == 0 &&
+        return Double.compare(userB.balance, balance) == 0 &&
                 Objects.equals(username, userB.username) &&
                 Objects.equals(password, userB.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, balance);
+        return Objects.hash(username, password, balance);
     }
 
     @Override
     public String toString() {
         return "UserB{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
+                "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", balance=" + balance +
                 '}';
     }
-}
+}// end of UserB class
