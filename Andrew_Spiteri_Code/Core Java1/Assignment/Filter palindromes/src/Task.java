@@ -29,7 +29,7 @@ public class Task {
         char[] charArray = word.toCharArray();
         LinkedList<Character> charList = new LinkedList<>();
         for(char c: charArray){
-            if(c > 96 && c < 123){
+            if(c > 96 && c < 123 || c > 47 && c < 58){
                 charList.add(c);
             }
         }

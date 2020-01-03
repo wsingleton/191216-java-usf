@@ -1,0 +1,32 @@
+package com.revature.screens;
+
+import com.revature.util.ScreenRouter;
+
+import java.util.Scanner;
+
+import static com.revature.MockBankDriver.router;
+
+public class HomeScreen extends Screen {
+    public HomeScreen() {
+        super("HomeScreen", "/home");
+        System.out.println("[LOG] + Instantiating "+ super.getName());
+    }
+
+    @Override
+    public void render() {
+        System.out.print("Would you like to register (enter 0) or login (enter 1): ");
+        Scanner scanner = new Scanner(System.in);
+        switch(scanner.next()){
+            case "0":
+                router.navigate("/register");
+                break;
+            case "1":
+                router.navigate("/login");
+                break;
+            default:
+                System.out.println("Invalid input!");
+                router.navigate("/home");
+                break;
+        }
+    }
+}
