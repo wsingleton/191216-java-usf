@@ -5,3 +5,5 @@ kad:le:op:po
 hass:dasd:ba:ab
 ben:aladin:ha:hahaha
 Ben:Burke:bburke:ben
+hoang:le:thele:lethe
+Wezley:Singleton:wsingleton:password

@@ -37,7 +37,7 @@ public class AccountDao {
         for(int i = 0 ; i < accountList.size();i++){
             Account account = accountList.get(i);
             if(userName.equals(account.getUserName())){
-                System.out.println(" your account balance is : " + account.getBalance());
+                System.out.println(" your account balance is : " + account.getBalance() + "usd");
                 Scanner sn = new Scanner(System.in);
 
                 String input = "";
@@ -68,9 +68,9 @@ public class AccountDao {
                             account.setBalance(a);
                             accountList.remove(i);
                             accountList.add(i,account);
-                            System.out.println(" you deposited : " + amount);
+                            System.out.println(" you deposited : " + amount +"usd");
                             saveBalance(accountList);
-                            System.out.println("your balance right now is : " + accountList.get(i).getBalance());
+                            System.out.println("your balance right now is : " + accountList.get(i).getBalance()+"usd");
                             break;
                         }
                         case "2":{
@@ -95,9 +95,9 @@ public class AccountDao {
                                 account.setBalance(a);
                                 accountList.remove(i);
                                 accountList.add(i,account);
-                                System.out.println(" you withdraw : " + amount);
+                                System.out.println(" you withdraw : " + amount+"usd");
                                 saveBalance(accountList);
-                                System.out.println("your balance right now is : " + accountList.get(i).getBalance());
+                                System.out.println("your balance right now is : " + accountList.get(i).getBalance()+"usd");
                             }
 
 
@@ -108,7 +108,7 @@ public class AccountDao {
                             input = "3";
                             break;
                         default:
-                            System.out.println("you choosed wrong option");
+                            System.out.println("you chosed wrong option");
                             break;
                     }
 

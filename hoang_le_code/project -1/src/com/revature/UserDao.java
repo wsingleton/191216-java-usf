@@ -15,14 +15,37 @@ public class UserDao {
         this.myUser= myUser;
     }
 
-    public void saveInfo()throws IOException{
+    public void saveInfo()throws IOException {
+        List<Account> accountList = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/com/revature/resources/account.txt"));
+            String accountLine = reader.readLine();
+            while (accountLine != null) {
+                String[] accountFiles = accountLine.split(":");
+                Account u = new Account(accountFiles[0], Double.parseDouble(accountFiles[1]));
+                accountList.add(u);
+                accountLine = reader.readLine();
+            }
+        } catch (Exception e) {
+            System.err.println("an unexcpected exception occurred");
+        }
+
+        for (int i = 0; i < accountList.size(); i++) {
+            Account account = accountList.get(i);
+            if (myUser.getUserName().equals(account.getUserName())) {
+                System.out.println(" this username was used, please chose another one");
+                return;
+
+            }
+
+        }
 
         try {
 
 
             BufferedWriter writer = new BufferedWriter(new FileWriter("src/com/revature/resources/user.txt", true)  );
             String save = myUser.getFirstName() + ":" + myUser.getLastName()+":"+myUser.getUserName() + ":"
-                        + myUser.getPassword();
+                    + myUser.getPassword();
             writer.write(save);
             writer.newLine();
             writer.close();
@@ -46,8 +69,6 @@ public class UserDao {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-
 
     }
 

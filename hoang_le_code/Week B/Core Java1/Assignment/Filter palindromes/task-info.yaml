@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 152
-    length: 923
+    length: 900
     placeholder_text: /* Provide your implementation here */
     initial_state:
       length: 38
@@ -22,7 +22,7 @@ files:
               return Arrays.copyOf(_palindromes, _palindromes.length, String[].class);
     selected: true
     status: Failed
-  - offset: 1140
+  - offset: 1117
     length: 259
     placeholder_text: /* Provide your implementation here */
     initial_state:

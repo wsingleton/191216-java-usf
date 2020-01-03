@@ -5,3 +5,5 @@ op:201.0
 ba:0.0
 ha:0.0
 bburke:270.0
+thele:123023.0
+wsingleton:1.000000082740371E-7

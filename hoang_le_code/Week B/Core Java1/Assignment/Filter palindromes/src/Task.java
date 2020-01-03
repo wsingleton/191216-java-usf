@@ -16,7 +16,7 @@ public class Task {
 
                 // Copy the elements except the index
                 // from original array to the other array
-                for (int j = 0, k = 0; k < wordArray.length; j++) {
+                for (int j = 0, k = 0; k < wordArray.length; j++, k++) {
                     // if the index is
                     // the removal element index
                     if (j == i) {
@@ -26,7 +26,7 @@ public class Task {
                     // if the index is not
                     // the removal element index
                     anotherArray[k] = wordArray[j];
-                    k=k + 1;
+
 
                 }
 
