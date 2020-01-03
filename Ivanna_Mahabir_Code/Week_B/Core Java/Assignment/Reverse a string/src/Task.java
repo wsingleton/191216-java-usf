@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Stack;
 
 public class Task {
@@ -9,16 +10,18 @@ public class Task {
         }
         Stack<Character> stack = new Stack<>();
         char[] str = reverseMe.toCharArray();
+        String rev = "";
 
-        for(int i = 0; i<reverseMe.length(); i++){
+        for(int i = 0; i<str.length; i++){
             stack.push(str[i]);
         }
-        int j = 0;
-        while(!stack.isEmpty()){
-            str[j++] = stack.pop();
+
+        for(int j = 0; j < str.length; j++){
+            char temp = stack.pop();
+            rev += temp;
         }
 
-        return String.copyValueOf(str);
+        return rev;
 
     }
 

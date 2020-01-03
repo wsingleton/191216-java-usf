@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="6" skipped="0" failures="1" errors="0" timestamp="2020-01-03T07:03:40" hostname="DESKTOP-J7I54DS" time="0.373">
+  <properties/>
+  <testcase name="testSolutionWithValidStringAndValidBoundaries" classname="Tests" time="0.362">
+    <failure message="org.junit.ComparisonFailure: expected:&lt;test[]&gt; but was:&lt;test[ ]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;test[]&gt; but was:&lt;test[ ]&gt;
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at Tests.testSolutionWithValidStringAndValidBoundaries(Tests.java:36)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</failure>
+  </testcase>
+  <testcase name="testSolutionWithValidStringAndNegativeBoundaries" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithValidStringAndNegativeStart" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionWithNullStringAndValidBoundaries" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionWithEmptyStringAndValidBoundaries" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionWithValidStringAndEndLessThanStart" classname="Tests" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

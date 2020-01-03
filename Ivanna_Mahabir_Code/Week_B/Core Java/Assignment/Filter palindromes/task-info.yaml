@@ -3,8 +3,8 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 152
-    length: 38
+  - offset: 184
+    length: 353
     placeholder_text: /* Provide your implementation here */
     initial_state:
       length: 38
@@ -20,9 +20,9 @@ files:
                       .toArray();
 
               return Arrays.copyOf(_palindromes, _palindromes.length, String[].class);
-    selected: false
+    selected: true
     status: Unchecked
-  - offset: 255
+  - offset: 602
     length: 38
     placeholder_text: /* Provide your implementation here */
     initial_state:
@@ -34,7 +34,7 @@ files:
               StringBuilder reversedWord = new StringBuilder(sanitizedWord).reverse();
 
               return sanitizedWord.equals(reversedWord.toString());
-    selected: false
+    selected: true
     status: Unchecked
   text: |-
     import java.util.Arrays;

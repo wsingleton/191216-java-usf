@@ -1,25 +1,24 @@
 import java.io.*;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Task {
 
     public String[] extractTextFromFile(File file) throws IOException {
 
-        if(file.exists() == false){
-            return null;
-        }
+        if(!file.exists()){return null;}
+
+       String[] stringList = new String[0];
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line = reader.readLine();
 
+
         while(line != null){
-            line = reader.readLine();
             String[] wordArray = line.split("\\s");
-            return wordArray;
+
+            line = reader.readLine();
         }
+        return stringList;
     }
 
     public Map<String, Integer> countWords(String[] extractedText) {

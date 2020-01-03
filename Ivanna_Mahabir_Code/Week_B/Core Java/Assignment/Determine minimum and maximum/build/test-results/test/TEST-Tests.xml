@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="5" skipped="0" failures="3" errors="0" timestamp="2019-12-31T01:25:44" hostname="DESKTOP-J7I54DS" time="0.02">
+<testsuite name="Tests" tests="5" skipped="0" failures="3" errors="0" timestamp="2020-01-03T07:28:44" hostname="DESKTOP-J7I54DS" time="0.018">
   <properties/>
   <testcase name="testSolutionWithValidArrayOfRandomNumbers" classname="Tests" time="0.008">
     <failure message="java.lang.NullPointerException" type="java.lang.NullPointerException">java.lang.NullPointerException
@@ -22,8 +22,8 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.003"/>
-  <testcase name="testSolutionWithValidArrayContainingOneNumber" classname="Tests" time="0.003">
+  <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.005"/>
+  <testcase name="testSolutionWithValidArrayContainingOneNumber" classname="Tests" time="0.002">
     <failure message="java.lang.AssertionError: expected:&lt;2&gt; but was:&lt;0&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;2&gt; but was:&lt;0&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)
@@ -68,7 +68,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

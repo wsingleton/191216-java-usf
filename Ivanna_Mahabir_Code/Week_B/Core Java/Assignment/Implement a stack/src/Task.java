@@ -16,29 +16,22 @@ public class Task {
 
     public void push(String newString) {
         if (currentElementPosition == elements.length) elements = Arrays.copyOf(elements, elements.length +1);
-            elements[++currentElementPosition] = newString;
+            elements[currentElementPosition++] = newString;
     }
 
     public String pop() {
 
-        if(currentElementPosition < 0){
-            return " ";
-        }
-        else{
-            String newString = elements[currentElementPosition--];
+        if(currentElementPosition == 0) throw new EmptyStackException();
+            String newString = elements[currentElementPosition-1];
+            elements[currentElementPosition-1] = null;
             return newString;
-        }
 
     }
 
     public String peek(){
-        if(currentElementPosition < 0){
-            return " ";
-        }
-        else{
-            String newString = elements[currentElementPosition];
+        if(currentElementPosition == 0) throw new EmptyStackException();
+            String newString = elements[currentElementPosition -1];
             return newString;
-        }
     }
 
     public int size() {

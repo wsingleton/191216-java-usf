@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class EmployeeComparator /* Something goes here */ {
+public class EmployeeComparator extends Employee {
 
     // A method implementation will go here
 

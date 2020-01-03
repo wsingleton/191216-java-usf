@@ -14,9 +14,9 @@ files:
       if(currentElementPosition == elements.length) elements = Arrays.copyOf(elements, elements.length + 1);
               elements[currentElementPosition++] = newString;
     selected: true
-    status: Failed
+    status: Solved
   - offset: 566
-    length: 186
+    length: 216
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -28,9 +28,9 @@ files:
               elements[currentElementPosition - 1] = null;
               return value;
     selected: true
-    status: Failed
-  - offset: 795
-    length: 184
+    status: Solved
+  - offset: 825
+    length: 162
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -40,8 +40,8 @@ files:
       if(currentElementPosition == 0) throw new EmptyStackException();
               return elements[currentElementPosition - 1];
     selected: true
-    status: Failed
-  - offset: 1019
+    status: Solved
+  - offset: 1027
     length: 23
     placeholder_text: // Provide your implementation here
     initial_state:
@@ -50,7 +50,7 @@ files:
     initialized_from_dependency: false
     possible_answer: return elements.length;
     selected: false
-    status: Failed
+    status: Solved
   text: |-
     import java.util.Arrays;
     import java.util.EmptyStackException;
@@ -167,5 +167,5 @@ files:
 
     }
   learner_created: false
-status: Failed
+status: Solved
 record: -1

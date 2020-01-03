@@ -3,8 +3,8 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 247
-    length: 44
+  - offset: 100
+    length: 313
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35

@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 253
-    length: 105
+    length: 281
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -15,7 +15,7 @@ files:
               BigDecimal bigDecimal = BigDecimal.valueOf(principal * Math.pow(1 + (rate / freq), freq * time));
               return bigDecimal.setScale(2, RoundingMode.HALF_UP).doubleValue();
     selected: true
-    status: Failed
+    status: Solved
   text: |-
     import java.math.BigDecimal;
     import java.math.RoundingMode;
@@ -87,5 +87,5 @@ files:
 
     }
   learner_created: false
-status: Failed
+status: Solved
 record: -1

@@ -14,7 +14,7 @@ files:
       if (employeesForSorting == null || employeesForSorting.isEmpty()) return new ArrayList<>();
               Collections.sort(employeesForSorting, new EmployeeComparator());
               return employeesForSorting;
-    selected: false
+    selected: true
     status: Unchecked
   text: |
     import java.util.ArrayList;
@@ -35,7 +35,7 @@ files:
   visible: true
   placeholders:
   - offset: 56
-    length: 35
+    length: 1831
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -117,7 +117,7 @@ files:
                       ", salary=" + salary +
                       '}';
           }
-    selected: false
+    selected: true
     status: Unchecked
   text: |+
     import java.util.Objects;
@@ -132,17 +132,17 @@ files:
 - name: src/EmployeeComparator.java
   visible: true
   placeholders:
-  - offset: 62
-    length: 25
+  - offset: 79
+    length: 0
     placeholder_text: /* Something goes here */
     initial_state:
       length: 25
       offset: 62
     initialized_from_dependency: false
     possible_answer: implements Comparator<Employee>
-    selected: false
+    selected: true
     status: Unchecked
-  - offset: 95
+  - offset: 86
     length: 39
     placeholder_text: // A method implementation will go here
     initial_state:
@@ -165,7 +165,7 @@ files:
               return -1;
 
           }
-    selected: false
+    selected: true
     status: Unchecked
   text: |
     import java.util.Comparator;

@@ -61,7 +61,7 @@ public class Display {
                             System.out.println("Invalid Withdrawal");
                             disPla(disPl, user);
                         }
-                        break;
+                        //break; //fall through ends program
                     case -1:
                         System.out.println("Goodbye");
                         return;
