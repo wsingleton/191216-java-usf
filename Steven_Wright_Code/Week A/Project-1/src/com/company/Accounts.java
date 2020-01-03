@@ -45,7 +45,7 @@ public class Accounts {
 
     @Override
     public String toString() {
-        return balance + "," + username +";";
+        return balance + "," + username +";\n";
     }
 
 

@@ -1,0 +1,91 @@
+type: edu
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 218
+    length: 246
+    placeholder_text: // Provide your implementation here
+    initial_state:
+      length: 35
+      offset: 218
+    initialized_from_dependency: false
+    possible_answer: |-
+      if (principal < 0 || time < 0 || rate < 0 || freq < 0) return 0;
+              BigDecimal bigDecimal = BigDecimal.valueOf(principal * Math.pow(1 + (rate / freq), freq * time));
+              return bigDecimal.setScale(2, RoundingMode.HALF_UP).doubleValue();
+    selected: true
+    status: Solved
+  text: |-
+    import java.math.BigDecimal;
+    import java.math.RoundingMode;
+    import java.text.DecimalFormat;
+
+    public class Task {
+
+        public double calculateInterest(double principal, double time, double rate, double freq) {
+
+            // Provide your implementation here
+
+        }
+
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |-
+    import org.junit.*;
+    import org.junit.rules.ExpectedException;
+    import org.junit.rules.Timeout;
+
+    import static org.junit.Assert.assertEquals;
+
+    public class Tests {
+
+      private Task sut;
+
+      @Rule
+      public ExpectedException expectedException = ExpectedException.none();
+
+      @Rule
+      public Timeout globalTimeout = Timeout.seconds(3);
+
+      @Before
+      public void setUp() {
+        sut = new Task();
+      }
+
+      @After
+      public void tearDown() {
+        sut = null;
+      }
+
+      @Test
+      public void testSolutionWithValidValues() {
+        assertEquals(1161.62, sut.calculateInterest(1000, 5, 0.03, 12), 0);
+      }
+
+      @Test
+      public void testSolutionWithNegativePrincipal() {
+        assertEquals(0, sut.calculateInterest(-1000, 5, 0.03, 12), 0);
+      }
+
+      @Test
+      public void testSolutionWithNegativeRate() {
+        assertEquals(0, sut.calculateInterest(1000, 5, -0.03, 12), 0);
+      }
+
+      @Test
+      public void testSolutionWithNegativeTime() {
+        assertEquals(0, sut.calculateInterest(1000, -5, 0.03, 12), 0);
+      }
+
+      @Test
+      public void testSolutionWithNegativeFrequency() {
+        assertEquals(0, sut.calculateInterest(1000, 5, 0.03, -12), 0);
+      }
+
+    }
+  learner_created: false
+status: Solved
+record: -1

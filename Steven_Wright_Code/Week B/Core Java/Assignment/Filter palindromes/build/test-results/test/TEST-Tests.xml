@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-31T06:31:19" hostname="DESKTOP-A4GF959" time="0.018">
+  <properties/>
+  <testcase name="testSolutionWithValidArrayContainingSomeNulls" classname="Tests" time="0.009"/>
+  <testcase name="testSolutionWithValidArrayContainingAllPalindromes" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithValidArrayContainingNumericPalindromes" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithValidArrayContainingSomePalindromes" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithValidArrayContainingNoPalindromes" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

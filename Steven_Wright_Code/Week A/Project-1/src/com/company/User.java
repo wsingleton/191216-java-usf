@@ -18,6 +18,9 @@ public class User {
 
     }
 
+    public User(int i, String swright, String p4ssw0rd) {
+    }
+
 
     public String getPassword() {
         return password;

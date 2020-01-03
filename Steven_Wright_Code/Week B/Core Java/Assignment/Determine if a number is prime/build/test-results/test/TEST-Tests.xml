@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="6" skipped="0" failures="0" errors="0" timestamp="2019-12-31T06:29:15" hostname="DESKTOP-A4GF959" time="0.011">
+  <properties/>
+  <testcase name="testSolutionWithCarmichaelNumber" classname="Tests" time="0.005"/>
+  <testcase name="testSolutionWithNegativeNumber" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionWithOne" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionWithPrimeNumber" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithCompositeNumber" classname="Tests" time="0.001"/>
+  <testcase name="testSolutionWithZero" classname="Tests" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
