@@ -7,27 +7,28 @@ import com.revature.revabooks.screens.*;
 import com.revature.revabooks.services.BookService;
 import com.revature.revabooks.services.UserService;
 import com.revature.revabooks.util.ScreenRouter;
-import javafx.beans.binding.When;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 
 public class AppDriver {
-    public static BufferedReader console;
 
+    public static BufferedReader console;
     public static User currentUser;
     public static ScreenRouter router;
     public static boolean appRunning;
 
     static {
-        System.out.println("[Log] - Initializing application .....");
+        System.out.println("[LOG] - Initializing application...");
+
         appRunning = true;
         console = new BufferedReader(new InputStreamReader(System.in));
+
         final UserRepository userRepo = new UserRepository();
         final BookRepository bookRepo = new BookRepository();
+
         final UserService userService = new UserService(userRepo);
-       // final BookService bookService = new BookService(bookRepo);
+//        final BookService bookService = new BookService(bookRepo);
 
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
@@ -37,15 +38,14 @@ public class AppDriver {
                 .addScreen(new UserProfileScreen())
                 .addScreen(new SearchBooksScreen());
 
-        System.out.println("[Log] - Application initialization complete. ");
-
+        System.out.println("[LOG] - Application initialization complete.");
     }
-    public static void main(String args[]){
-        while(appRunning){
+
+    public static void main(String[] args) {
+
+        while (appRunning) {
             router.navigate("/home");
         }
 
     }
-
-
 }

@@ -1,5 +1,7 @@
 package com.revature.revabooks.screens;
 
+import com.revature.revabooks.AppDriver;
+
 public class DashboardScreen extends Screen {
 
     public DashboardScreen() {
@@ -9,7 +11,8 @@ public class DashboardScreen extends Screen {
 
     @Override
     public void render() {
-
+        System.out.println("dashboard works!");
+        System.out.println(AppDriver.currentUser);
     }
 
 }

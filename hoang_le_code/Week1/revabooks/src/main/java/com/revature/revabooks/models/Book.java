@@ -12,19 +12,19 @@ public class Book {
     private Genre genre;
     private Integer stockCount;
 
-    public Book(String isbn, String title, Author author, Genre genres) {
+    public Book(String isbn, String title, Author author, Genre genre) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
-        this.genre = genres;
+        this.genre = genre;
     }
 
-    public Book(Integer id, String isbn, String title, Author author, Genre genres, Integer stockCount) {
+    public Book(Integer id, String isbn, String title, Author author, Genre genre, Integer stockCount) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
         this.author = author;
-        this.genre = genres;
+        this.genre = genre;
         this.stockCount = stockCount;
     }
 
@@ -64,8 +64,8 @@ public class Book {
         return genre;
     }
 
-    public void setGenre(Genre genres) {
-        this.genre = genres;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     public Integer getStockCount() {
@@ -105,4 +105,5 @@ public class Book {
                 ", stockCount=" + stockCount +
                 '}';
     }
+
 }

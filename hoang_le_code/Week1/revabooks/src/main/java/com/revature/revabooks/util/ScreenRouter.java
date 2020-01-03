@@ -1,3 +1,4 @@
+
 package com.revature.revabooks.util;
 
 import com.revature.revabooks.exceptions.ScreenNotFoundException;
@@ -10,25 +11,31 @@ public class ScreenRouter {
 
     private Set<Screen> screens = new HashSet<>();
 
-    private Set<Screen> getScreens(){
+    public Set<Screen> getScreens() {
         return screens;
     }
 
-    public ScreenRouter addScreen(Screen screen){
-        System.out.println("[Log] - loading  " + screen.getName() + "into router");
+    public ScreenRouter addScreen(Screen screen) {
+        System.out.println("[LOG] - Loading " + screen.getName() + " into router");
         screens.add(screen);
         return this;
     }
 
-    public void navigate(String route){
+    public void navigate(String route) {
 
-        //see logic below this for functional implementation using jaca 8 stream API( with lambdas)
-    //    for(Screen screen : screens){
-    //        if(screen.getRoute().equals(route)){
-     //           screen.render();
-    //        }
-     //   }
+        // See logic below this for functional implementation using Java 8 Stream API (with lambdas)
+//        for (Screen screen : screens) {
+//            if (screen.getRoute().equals(route)) {
+//                screen.render();
+//            }
+//        }
 
-        screens.stream().filter(screen -> screen.getRoute().equals(route)).findFirst().orElseThrow(ScreenNotFoundException :: new).render();
+        screens.stream()
+                .filter(screen -> screen.getRoute().equals(route))
+                .findFirst().orElseThrow(ScreenNotFoundException::new)
+                .render();
+
     }
+
+
 }

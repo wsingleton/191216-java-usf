@@ -1,12 +1,17 @@
 package com.revature.revabooks.repos;
+
 import com.revature.revabooks.models.Author;
 import com.revature.revabooks.models.Book;
 import com.revature.revabooks.models.Genre;
 import com.revature.revabooks.models.User;
+
 import java.util.*;
+
 public class BookRepository implements CrudRepository<Book> {
+
     private Integer key;
     private HashMap<Integer, Book> bookDb;
+
     {
         key = 1;
         bookDb = new HashMap<>();
@@ -24,81 +29,117 @@ public class BookRepository implements CrudRepository<Book> {
         bookDb.put(key, new Book(key, "978-1593278052", "Learn Java the Easy Way", new Author("Bryson", "Payne"), Genre.TECHNICAL, 10)); key++;
         bookDb.put(key, new Book(key, "978-1501161827", "Dark Tower III: The Wastelands", new Author("Stephen", "King"), Genre.SPIRITUAL, 18)); key++;
     }
+
     public Set<Book> findBooksByGenre(Genre genre) {
+
         HashSet<Book> books = new HashSet<>();
+
         for (Map.Entry<Integer, Book> entry : bookDb.entrySet()) {
             if (entry.getValue().getGenre().equals(genre)) {
                 books.add(entry.getValue());
             }
         }
+
         return books;
+
     }
+
     public Set<Book> findBooksByAuthor(Author author) {
+
         HashSet<Book> books = new HashSet<>();
+
         for (Map.Entry<Integer, Book> entry : bookDb.entrySet()) {
             if (entry.getValue().getAuthor().equals(author)) {
                 books.add(entry.getValue());
             }
         }
+
         return books;
+
     }
+
     public Set<Book> findBooksByAuthorLastName(String authorLastName) {
+
         HashSet<Book> books = new HashSet<>();
+
         for (Map.Entry<Integer, Book> entry : bookDb.entrySet()) {
             if (entry.getValue().getAuthor().getLastName().equals(authorLastName)) {
                 books.add(entry.getValue());
             }
         }
+
         return books;
     }
+
     public Set<Book> findBooksByTitle(String title) {
+
         HashSet<Book> books = new HashSet<>();
+
         for (Map.Entry<Integer, Book> entry : bookDb.entrySet()) {
             if (entry.getValue().getTitle().equals(title)) {
                 books.add(entry.getValue());
             }
         }
+
         return books;
     }
+
     public Optional<Book> findBookByIsbn(String isbn) {
+
         for (Map.Entry<Integer, Book> entry : bookDb.entrySet()) {
             if (entry.getValue().getIsbn().equals(isbn)) {
                 return Optional.of(entry.getValue());
             }
         }
+
         return Optional.empty();
     }
+
     @Override
     public void save(Book newObj) {
         newObj.setId(key);
         bookDb.put(key, newObj);
         key++;
     }
+
     @Override
     public Set<Book> findAll() {
+
         HashSet<Book> books = new HashSet<>();
+
         for (Map.Entry<Integer, Book> entry : bookDb.entrySet()) {
             books.add(entry.getValue());
         }
+
         return books;
+
     }
+
     @Override
     public Optional<Book> findById(Integer id) {
+
         for (Map.Entry<Integer, Book> entry : bookDb.entrySet()) {
             if (entry.getValue().getId().equals(id)) {
                 return Optional.of(entry.getValue());
             }
         }
+
         return Optional.empty();
+
     }
+
     @Override
     public Boolean update(Book updatedObj) {
+
         if (bookDb.get(updatedObj.getId()) == null) return false;
         bookDb.put(updatedObj.getId(), updatedObj);
         return true;
+
     }
+
     @Override
     public Boolean deleteById(Integer id) {
         return (bookDb.remove(id) != null);
     }
+
 }
