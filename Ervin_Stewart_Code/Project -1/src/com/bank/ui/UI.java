@@ -50,7 +50,7 @@ public class UI extends User {
         System.out.println("To view balance enter 1\n" +
                 "To make a deposit enter 2\n" +
                 "To make a withdrawal enter 3");
-        System.out.println("To exit enter 0");
+        System.out.println("To exit logout 0");
        // System.out.println(Account);
         //System.out.println(User);
         Scanner input = new Scanner(System.in);
@@ -66,8 +66,8 @@ public class UI extends User {
                 //System.out.println("You can now make a withdrawal");
                 withdrawBalance(User, Account);
             case 0:
-                System.out.println("Program exiting...");
-               System.exit(0);
+                System.out.println("Logging out...");
+               loginScreen();
             default:
                 System.out.println("Not a valid input");
 
@@ -198,14 +198,14 @@ public class UI extends User {
         replaceBalance(oldID, oldbalance,newID,currentBalance);
         System.out.println("Press 1 to return to the main console");
 
-        System.out.println("Press 0 to exit");
+        System.out.println("Press 0 to log out");
         UserNumInput = input.nextInt();
         switch (UserNumInput){
 
 
             case 0:
-                System.out.println("Program exiting...");
-                System.exit(0);
+                System.out.println("Logging out...");
+                loginScreen();
             case 1:
                 userConsole(User, Account);
             default:
@@ -217,18 +217,18 @@ public class UI extends User {
     public static void viewBalance(User User, Account Account){
         double balance=0;
        // System.out.println(Account);
-        System.out.println("The balance is: \n" + getUserAccountBalance(User));
+        System.out.println("The balance is: \n" + Account.getBalance());//getUserAccountBalance(User)
         Scanner input = new Scanner(System.in);
         System.out.println("Press 1 to return to the main console");
 
-        System.out.println("Press 0 to exit");
+        System.out.println("Press 0 log out");
         UserNumInput = input.nextInt();
         switch (UserNumInput){
 
 
             case 0:
-                System.out.println("Program exiting...");
-                System.exit(0);
+                System.out.println("Logging out...");
+                loginScreen();
             case 1:
                 userConsole(User, Account);
             default:
