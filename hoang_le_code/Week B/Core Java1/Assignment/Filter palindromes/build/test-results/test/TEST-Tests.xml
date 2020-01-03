@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="7" skipped="0" failures="4" errors="0" timestamp="2019-12-31T15:30:47" hostname="DESKTOP-5VVSC2K" time="0.026">
+<testsuite name="Tests" tests="7" skipped="0" failures="4" errors="0" timestamp="2020-01-03T16:11:23" hostname="DESKTOP-5VVSC2K" time="0.047">
   <properties/>
-  <testcase name="testSolutionWithValidArrayContainingSomeNulls" classname="Tests" time="0.016">
+  <testcase name="testSolutionWithValidArrayContainingSomeNulls" classname="Tests" time="0.021">
     <failure message="java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 7" type="java.lang.ArrayIndexOutOfBoundsException">java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 7
 	at Task.filterPalindromes(Task.java:28)
 	at Tests.testSolutionWithValidArrayContainingSomeNulls(Tests.java:112)
@@ -22,7 +22,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithValidArrayContainingAllPalindromes" classname="Tests" time="0.001">
+  <testcase name="testSolutionWithValidArrayContainingAllPalindromes" classname="Tests" time="0.008">
     <failure message="java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4" type="java.lang.ArrayIndexOutOfBoundsException">java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4
 	at Task.filterPalindromes(Task.java:28)
 	at Tests.testSolutionWithValidArrayContainingAllPalindromes(Tests.java:72)
@@ -43,7 +43,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithValidArrayContainingNumericPalindromes" classname="Tests" time="0.002">
+  <testcase name="testSolutionWithValidArrayContainingNumericPalindromes" classname="Tests" time="0.005">
     <failure message="java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5" type="java.lang.ArrayIndexOutOfBoundsException">java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5
 	at Task.filterPalindromes(Task.java:28)
 	at Tests.testSolutionWithValidArrayContainingNumericPalindromes(Tests.java:134)
@@ -64,7 +64,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithValidArrayContainingSomePalindromes" classname="Tests" time="0.001">
+  <testcase name="testSolutionWithValidArrayContainingSomePalindromes" classname="Tests" time="0.003">
     <failure message="java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 7" type="java.lang.ArrayIndexOutOfBoundsException">java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 7
 	at Task.filterPalindromes(Task.java:28)
 	at Tests.testSolutionWithValidArrayContainingSomePalindromes(Tests.java:49)
@@ -85,9 +85,9 @@
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.002"/>
-  <testcase name="testSolutionWithValidArrayContainingNoPalindromes" classname="Tests" time="0.0"/>
-  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.0"/>
+  <testcase name="testSolutionWithEmptyArray" classname="Tests" time="0.003"/>
+  <testcase name="testSolutionWithValidArrayContainingNoPalindromes" classname="Tests" time="0.003"/>
+  <testcase name="testSolutionWithNullArray" classname="Tests" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
