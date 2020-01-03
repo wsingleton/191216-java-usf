@@ -47,8 +47,8 @@ public class Menu {
 
                     break;
                 case 2:
-                    register();
-
+                    signIn();
+                    break;
                 case 3:
                     System.out.println("Thank you for using Kannon's Bank.");
                     Serialize serialize = new Serialize();
@@ -60,6 +60,8 @@ public class Menu {
         }
         while (option != 3) ;
     }
+
+
 
     public void transactionMenu() {
 
@@ -88,7 +90,7 @@ public class Menu {
 
             switch (option) {
                 case 1:
-                    viewBalance();
+                    withdraw() ;
 
                     break;
                 case 2:
@@ -96,7 +98,8 @@ public class Menu {
 
                     break;
                 case 3:
-                    withdraw();
+
+                    viewBalance();
 
                 case 4:
                     System.out.println("Thank you for using Kannon's Bank.");
@@ -117,7 +120,7 @@ public class Menu {
     private void viewBalance() {
 
         System.out.println("Your current balance is $ "+ balance);
-        loginMenu();
+        transactionMenu();
     }
 
     private void withdraw() {
@@ -137,7 +140,7 @@ public class Menu {
             } else {
                 //So they do not get stuck in infinite loop if they have zero dollars.
                 System.out.println("You do not have enough to withdraw: ");
-                loginMenu();
+                transactionMenu();
             }
 
 
@@ -163,7 +166,7 @@ public class Menu {
 
                 System.out.println("Please deposit amount greater than zero.");
                 //May get stuck in infinite loop if do not have any more to deposit.
-                loginMenu();
+                transactionMenu();
             }
 
 
@@ -201,8 +204,7 @@ public class Menu {
 
         }
 
-    private void register() {
-
+    private void signIn() {
 
     }
 
