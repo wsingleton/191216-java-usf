@@ -39,6 +39,7 @@ public class AppDriver {
               .addScreen(new SearchBooksScreen());
 
         System.out.println("[LOG] - Application initialization complete.");
+
     }
 
     public static void main(String[] args) {
