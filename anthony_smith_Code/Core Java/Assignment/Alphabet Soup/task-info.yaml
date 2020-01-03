@@ -1,0 +1,154 @@
+type: edu
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 248
+    length: 649
+    placeholder_text: // Provide your implementation here
+    initial_state:
+      length: 35
+      offset: 202
+    initialized_from_dependency: false
+    possible_answer: |-
+      // Cover null base case; return empty string if provided phrase is null
+              if (phrase == null) return "";
+
+              // Trim the left and right sides of the phrase string in case there is whitespace included
+              phrase = phrase.trim();
+
+              // After trimming if the phrase is an empty string, return an empty string
+              if (phrase.equals("")) return "";
+
+              // Create a list of phrase words; start with all words separated by spaces
+              List<String> phraseWordsList = new ArrayList<>(Arrays.asList(phrase.split(" ")));
+
+              // Stream the words in the list so operations can be performed on them and return the resulting acronym
+              return phraseWordsList.stream()
+
+                      // Map each word to a uppercase string representing part of the acronym
+                      .map(word -> {
+
+                          String a = "";
+
+                          // Check for hyphenated words and empty strings
+                          word = word.trim();
+                          if (word.equals("")) {
+                              return a;
+                          } else if (word.contains("-")) {
+                              for (String part : word.split("-")) a += part.charAt(0);
+                          } else {
+                              a += word.charAt(0);
+                          }
+
+                          return a.toUpperCase();
+                      })
+
+                      // collect the resulting strings and join them into a single one
+                      .collect(Collectors.joining());
+    selected: true
+    status: Solved
+  text: |-
+    import java.util.ArrayList;
+    import java.util.Arrays;
+    import java.util.List;
+    import java.util.stream.Collectors;
+
+    public class Task {
+
+        public String createAcronymFromPhrase(String phrase) {
+
+            // Provide your implementation here
+
+        }
+
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |-
+    import org.junit.*;
+    import org.junit.rules.ExpectedException;
+    import org.junit.rules.Timeout;
+
+    import static org.junit.Assert.assertEquals;
+
+    public class Tests {
+
+      private Task sut;
+
+      @Rule
+      public ExpectedException expectedException = ExpectedException.none();
+
+      @Rule
+      public Timeout globalTimeout = Timeout.seconds(3);
+
+      @Before
+      public void setUp() {
+        sut = new Task();
+      }
+
+      @After
+      public void tearDown() {
+        sut = null;
+      }
+
+      @Test
+      public void testSolutionUsingSimplePhrase() {
+        final String phrase = "Simple Object Access Protocol";
+        final String expected = "SOAP";
+        assertEquals(expected, sut.createAcronymFromPhrase(phrase));
+      }
+
+      @Test
+      public void testSolutionUsingPhraseWithPunctuation() {
+        final String phrase = "First In, First Out";
+        final String expected = "FIFO";
+        assertEquals(expected, sut.createAcronymFromPhrase(phrase));
+      }
+
+      @Test
+      public void testSolutionUsingPhraseWithAcronym() {
+        final String phrase = "YAML Ain't Markup Language";
+        final String expected = "YAML";
+        assertEquals(expected, sut.createAcronymFromPhrase(phrase));
+      }
+
+      @Test
+      public void testSolutionUsingPhraseWithHyphenatedWord() {
+        final String phrase = "Complementary metal-oxide semiconductor";
+        final String expected = "CMOS";
+        assertEquals(expected, sut.createAcronymFromPhrase(phrase));
+      }
+
+      @Test
+      public void testSolutionUsingEmptyPhrase() {
+        final String phrase = "";
+        final String expected = "";
+        assertEquals(expected, sut.createAcronymFromPhrase(phrase));
+      }
+
+      @Test
+      public void testSolutionUsingNullPhrase() {
+        final String expected = "";
+        assertEquals(expected, sut.createAcronymFromPhrase(null));
+      }
+
+      @Test
+      public void testSolutionUsingOnlyWhiteSpace() {
+        final String phrase = "                 ";
+        final String expected = "";
+        assertEquals(expected, sut.createAcronymFromPhrase(phrase));
+      }
+
+      @Test
+      public void testSolutionUsingPhraseWithExcessWhiteSpace() {
+        final String phrase = "    The   quick brown fox  jumped over the lazy  dog    ";
+        final String expected = "TQBFJOTLD";
+        assertEquals(expected, sut.createAcronymFromPhrase(phrase));
+      }
+
+    }
+  learner_created: false
+status: Solved
+record: -1

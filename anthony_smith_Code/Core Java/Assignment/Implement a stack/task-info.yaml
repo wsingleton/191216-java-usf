@@ -1,0 +1,171 @@
+type: edu
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 361
+    length: 157
+    placeholder_text: // Provide your implementation here
+    initial_state:
+      length: 35
+      offset: 361
+    initialized_from_dependency: false
+    possible_answer: |-
+      if(currentElementPosition == elements.length) elements = Arrays.copyOf(elements, elements.length + 1);
+              elements[currentElementPosition++] = newString;
+    selected: true
+    status: Solved
+  - offset: 561
+    length: 198
+    placeholder_text: // Provide your implementation here
+    initial_state:
+      length: 35
+      offset: 439
+    initialized_from_dependency: false
+    possible_answer: |-
+      if(currentElementPosition == 0) throw new EmptyStackException();
+              String value = elements[currentElementPosition - 1];
+              elements[currentElementPosition - 1] = null;
+              return value;
+    selected: true
+    status: Solved
+  - offset: 794
+    length: 2
+    placeholder_text: // Provide your implementation here
+    initial_state:
+      length: 35
+      offset: 517
+    initialized_from_dependency: false
+    possible_answer: |-
+      if(currentElementPosition == 0) throw new EmptyStackException();
+              return elements[currentElementPosition - 1];
+    selected: true
+    status: Solved
+  - offset: 938
+    length: 32
+    placeholder_text: // Provide your implementation here
+    initial_state:
+      length: 35
+      offset: 592
+    initialized_from_dependency: false
+    possible_answer: return elements.length;
+    selected: true
+    status: Solved
+  text: |-
+    import java.util.Arrays;
+    import java.util.EmptyStackException;
+
+    public class Task {
+
+        protected int currentElementPosition = 0;
+        protected String[] elements;
+
+        public Task() {
+            elements = new String[0];
+        }
+
+        public Task(int initialSize) {
+            elements = new String[initialSize];
+        }
+
+        public void push(String newString) {
+            // Provide your implementation here
+        }
+
+        public String pop() {
+
+            // Provide your implementation here
+
+        }
+
+        public String peek(){
+            // Provide your implementation here
+        }
+
+        public int size() {
+            // Provide your implementation here
+        }
+
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |-
+    import org.junit.*;
+    import org.junit.rules.ExpectedException;
+    import org.junit.rules.Timeout;
+
+    import java.util.Arrays;
+    import java.util.EmptyStackException;
+
+    import static org.junit.Assert.*;
+
+    public class Tests {
+
+      private Task sut;
+
+      @Rule
+      public Timeout globalTimeout = Timeout.seconds(3);
+
+      @After
+      public void tearDown() {
+        sut = null;
+      }
+
+      @Test
+      public void testSize() {
+        sut = new Task(10);
+        assertEquals(sut.elements.length, sut.size());
+      }
+
+      @Test
+      public void testPush() {
+        sut = new Task();
+        sut.push("test-1");
+        sut.push("test-2");
+        sut.push("test-3");
+        assertEquals(0, Arrays.binarySearch(sut.elements, "test-1"));
+        assertEquals(1, Arrays.binarySearch(sut.elements, "test-2"));
+        assertEquals(2, Arrays.binarySearch(sut.elements, "test-3"));
+      }
+
+      @Test
+      public void testPopWhenStackIsPopulated() {
+        sut = new Task();
+        sut.push("test-1");
+        sut.push("test-2");
+        sut.push("test-3");
+        String expectedResult = "test-3";
+        String actualResult = sut.pop();
+        assertEquals(expectedResult, actualResult);
+        assertNull(sut.elements[2]);
+      }
+
+      @Test
+      public void testPeekWhenStackIsPopulated() {
+        sut = new Task();
+        sut.push("test-1");
+        sut.push("test-2");
+        sut.push("test-3");
+        String expectedResult = "test-3";
+        String actualResult = sut.peek();
+        assertEquals(expectedResult, actualResult);
+        assertEquals(expectedResult, sut.elements[2]);
+      }
+
+      @Test(expected = EmptyStackException.class)
+      public void testPopWhenStackIsEmpty() {
+        sut = new Task();
+        sut.pop();
+      }
+
+      @Test(expected = EmptyStackException.class)
+      public void testPeekWhenStackIsEmpty() {
+        sut = new Task();
+        sut.peek();
+      }
+
+    }
+  learner_created: false
+status: Solved
+record: -1

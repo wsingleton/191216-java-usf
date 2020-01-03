@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-31T05:49:18" hostname="107-144-156-227.biz.spectrum.com" time="0.058">
+  <properties/>
+  <testcase name="testCountWordsWithEmptyStringArray" classname="Tests" time="0.004"/>
+  <testcase name="testExtractTextWithExistingFileContainingText" classname="Tests" time="0.027"/>
+  <testcase name="testCountWordsWithValidStringArray" classname="Tests" time="0.002"/>
+  <testcase name="testExtractTextWithNullFile" classname="Tests" time="0.004"/>
+  <testcase name="testExtractTextWithMissingFile" classname="Tests" time="0.009"/>
+  <testcase name="testCountWordsWithNullStringArray" classname="Tests" time="0.0"/>
+  <testcase name="testExtractTextWithExistingEmptyFile" classname="Tests" time="0.006"/>
+  <system-out><![CDATA[resources/missing.txt (No such file or directory)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,212 @@
+type: edu
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 180
+    length: 626
+    placeholder_text: /* Provide your implementation here */
+    initial_state:
+      length: 38
+      offset: 152
+    initialized_from_dependency: false
+    possible_answer: |-
+      if (wordArray == null || wordArray.length == 0) {
+                  return new String[0];
+              }
+
+              Object[] _palindromes = Arrays.stream(wordArray)
+                      .filter(word -> word != null && isPalindrome(word))
+                      .toArray();
+
+              return Arrays.copyOf(_palindromes, _palindromes.length, String[].class);
+    selected: true
+    status: Solved
+  - offset: 871
+    length: 38
+    placeholder_text: /* Provide your implementation here */
+    initial_state:
+      length: 38
+      offset: 255
+    initialized_from_dependency: false
+    possible_answer: |-
+      String sanitizedWord = word.toLowerCase().replaceAll("\\W", "");
+              StringBuilder reversedWord = new StringBuilder(sanitizedWord).reverse();
+
+              return sanitizedWord.equals(reversedWord.toString());
+    selected: false
+    status: Solved
+  text: |-
+    import java.util.Arrays;
+    import java.util.stream.Collectors;
+
+    public class Task {
+
+        public String[] filterPalindromes(String[] wordArray) {
+
+            /* Provide your implementation here */
+
+        }
+
+        public boolean isPalindrome(String word) {
+
+            /* Provide your implementation here */
+
+        }
+
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |
+    import org.junit.*;
+    import org.junit.rules.ExpectedException;
+    import org.junit.rules.Timeout;
+
+    import static org.junit.Assert.assertArrayEquals;
+
+    public class Tests {
+
+      private Task sut;
+
+      @Rule
+      public ExpectedException expectedException = ExpectedException.none();
+
+      @Rule
+      public Timeout globalTimeout = Timeout.seconds(3);
+
+      @Before
+      public void setUp() {
+        sut = new Task();
+      }
+
+      @After
+      public void tearDown() {
+        sut = null;
+      }
+
+      @Test
+      public void testSolutionWithValidArrayContainingSomePalindromes() {
+
+        String[] testArray = {
+                "alice",
+                "racecar",
+                "Do geese see God?",
+                "Madam, I'm Adam.",
+                "not a palindrome",
+                "java",
+                "kayak",
+                "noon"
+        };
+
+        String[] expectedResult = {
+                "racecar",
+                "Do geese see God?",
+                "Madam, I'm Adam.",
+                "kayak",
+                "noon"
+        };
+
+        assertArrayEquals(expectedResult, sut.filterPalindromes(testArray));
+
+      }
+
+      @Test
+      public void testSolutionWithValidArrayContainingAllPalindromes() {
+
+        String[] testArray = {
+                "racecar",
+                "Do geese see God?",
+                "Madam, I'm Adam.",
+                "kayak",
+                "noon"
+        };
+
+        String[] expectedResult = {
+                "racecar",
+                "Do geese see God?",
+                "Madam, I'm Adam.",
+                "kayak",
+                "noon"
+        };
+
+        assertArrayEquals(expectedResult, sut.filterPalindromes(testArray));
+
+      }
+
+      @Test
+      public void testSolutionWithValidArrayContainingNoPalindromes() {
+
+        String[] testArray = {
+                "alice",
+                "not a palindrome",
+                "java",
+                "blah",
+                "test",
+                "nope"
+        };
+
+        assertArrayEquals(new String[0], sut.filterPalindromes(testArray));
+
+      }
+
+      @Test
+      public void testSolutionWithValidArrayContainingSomeNulls() {
+
+        String[] testArray = {
+                "alice",
+                "racecar",
+                "Do geese see God?",
+                null,
+                "not a palindrome",
+                null,
+                "kayak",
+                "null"
+        };
+
+        String[] expectedResult = {
+                "racecar",
+                "Do geese see God?",
+                "kayak",
+        };
+
+        assertArrayEquals(expectedResult, sut.filterPalindromes(testArray));
+
+      }
+
+      @Test
+      public void testSolutionWithValidArrayContainingNumericPalindromes() {
+
+        String[] testArray = {
+                "alice",
+                "11 00 11",
+                "not a palindrome",
+                "1234567",
+                "p4ssw0rd dr0wss4p",
+                "xP123 321Px"
+        };
+
+        String[] expectedResult = {
+                "11 00 11",
+                "p4ssw0rd dr0wss4p",
+                "xP123 321Px"
+        };
+
+        assertArrayEquals(expectedResult, sut.filterPalindromes(testArray));
+
+      }
+
+      @Test
+      public void testSolutionWithEmptyArray() {
+        assertArrayEquals(new String[0], sut.filterPalindromes(new String[0]));
+      }
+
+      @Test
+      public void testSolutionWithNullArray() {
+        assertArrayEquals(new String[0], sut.filterPalindromes(null));
+      }
+
+    }
+  learner_created: false
+status: Solved
+record: -1
