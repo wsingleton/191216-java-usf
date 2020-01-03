@@ -1,4 +1,4 @@
-WinxClub5:Bloomix16:0
-kuroshitsuJ1:Phantomhive13:350
-Nightwish31:GothMetalBand5:250
-3Daysgrace:Ihate3verthingaboutU:56
+WinxClub5:Bloomix16:0.0
+kuroshitsuJ1:Phantomhive13:350.0
+Nightwish31:GothMetalBand5:250.0
+3Daysgrace:Ihate3verthingaboutU:56.0

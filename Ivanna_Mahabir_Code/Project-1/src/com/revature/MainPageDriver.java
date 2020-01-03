@@ -16,17 +16,15 @@ public class MainPageDriver {
             //Main Page Display Start
             System.out.println("Welcome to C Bank!");
             System.out.println("New user enter 1, returning user enter 2 (to exit enter -1): ");
+
             //reads input from the user
             Scanner scanner = new Scanner(System.in);
-            Integer option = scanner.nextInt(); //if non-int is entered InputMismatchException - needs to handle
+            Integer option = scanner.nextInt(); //if non-int is entered InputMismatchException
             if (option > 3 || option < -2 || option == 0) {
                 System.out.println("Invalid Entry");
                 return;
             } else {
-                // Integer opt = new ReadInput();
 
-                //test or validate input using if or switch statement
-                //a while loop with a nested if statement??
                 switch (option) {
                     case 1:
                         System.out.println("Welcome New User");
@@ -51,10 +49,10 @@ public class MainPageDriver {
                 }
             }
         }
-            catch(InputMismatchException e){
-                System.out.println("Invalid Input");
-                e.printStackTrace();
-                return;
-            }
+        catch(InputMismatchException e){
+            System.out.println("Invalid Input");
+            e.printStackTrace();
+            return;
+        }
     }
 }

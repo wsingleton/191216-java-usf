@@ -2,15 +2,10 @@ package com.revature;
 
 import com.revature.models.UserB;
 
-// use an array to hold info?? output array separated by :
-//Create a temporary object and compare to stored data
-// if input is the same as stored data display invalid entry
-
 import java.util.List;
 import java.util.Scanner;
 
 import static com.revature.models.WriteFile.writeFil;
-
 
 public class RegisterDriver {
 
@@ -24,9 +19,9 @@ public class RegisterDriver {
                 "\t\t  Must include at least 1 number");
         Scanner scanner = new Scanner(System.in);
         String user = scanner.nextLine();
-        boolean usernameValid = UserB.validate(user);
+        boolean usernameValid = UserB.validate(user); //test if username conditions are met
        if (usernameValid == true){
-           myUser.setUsername(user);
+           myUser.setUsername(user); //if met, store username
         } else{return;}
 
         System.out.println("Password: Must be between 8 to 15 characters in length \n" +
@@ -34,24 +29,25 @@ public class RegisterDriver {
                 "\t\t  Must include at least 1 number");
         scanner = new Scanner(System.in);
         String pass = scanner.nextLine();
-        boolean passValid = UserB.validate(pass);
+        boolean passValid = UserB.validate(pass); // test if password conditions are met
         if(passValid != true){
             return;
             }
         else {
-            System.out.println(" pass accept");
-            myUser.setPassword(pass);
+            myUser.setPassword(pass); //if met, store password
 
             try {
                 for(UserB u : myReg){
-                    if(u.getUsername().equals(user)) {
-                        System.out.println("Invalid entry");
+                    if(u.getUsername().equals(user)) { //compares new username to file
+                        System.out.println("Invalid Entry"); // if username exists, exits program
                         return;
                     }
                 }
-                System.out.println("write file");
-                myReg.add(myUser);
                 //create new user and write file
+                System.out.println("Enter Initial Deposit: ");
+                Double initBal = scanner.nextDouble();
+                myUser.setBalance(initBal);
+                myReg.add(myUser);
                 writeFil(myReg);
             }
             catch (Exception e){

@@ -19,19 +19,17 @@ public class ReadFile {
             String line = reader.readLine();
 
             while (line != null) {
-                String[] userFields = line.split(":");
-                //should be reading file and putting data into list
+                String[] userFields = line.split(":"); //Parse data
 
+                //Reading file and putting data into list
                 UserB u = new UserB(userFields[0], userFields[1], Double.parseDouble(userFields[2]));
                 userBList.add(u);
                 line = reader.readLine();
-                //System.out.println("in the while loop"); // testing ----------------------------
-
             }
-            System.out.println("file completed");
             return userBList;
+
         } catch (Exception e) {
-            System.out.println("An exception was thrown here movies");
+            System.out.println("An exception was thrown");
             e.printStackTrace();
             return userBList;
         }

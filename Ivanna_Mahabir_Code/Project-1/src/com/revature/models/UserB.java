@@ -11,7 +11,6 @@ public class UserB {
 
     //private int type; // sv#-saving, ch#-checking, multi accts??
 
-
     public UserB() {
     }
 
@@ -45,8 +44,11 @@ public class UserB {
 
     public void setBalance(double balance) {
         try{
-        if(balance <= 0){
-            System.out.println(balance + " Insufficient funds");}
+        if(balance < 0){
+            System.out.println("Balance: " + balance + " is invalid");
+            System.out.println("Setting Initial Balance to 0");
+            setBalance(0);
+        }
         else{
             this.balance = balance;
         }}
@@ -61,25 +63,24 @@ public class UserB {
         return username + ":" + password + ":" + balance;
     }
 
+    //test for a Capital Letter
     public static boolean uCase(char ch){
         ch = Character.toUpperCase(ch);
         return ch >= 'A' && ch <= 'Z';
     }
+
+    //test for a number
     public static boolean nCase(String passwor){
         return Pattern.compile("[0-9]").matcher(passwor).find();
     }
 
-   //Validation for new entry
-
+   //Validation for username and password
     public static boolean validate(String arg) {
         if (arg.length() >= 8 && arg.length() <= 15) {
-            System.out.println("length acceptable");
             for (int i = 0; i < arg.length(); i++) {
                 char ch = arg.charAt(i);
                 if (uCase(ch)) {
-                    System.out.println("corrct char");
                     if (nCase(arg)) {
-                        System.out.println("correct num"); // test
                         return true;
                     }
                     //break;
@@ -89,26 +90,6 @@ public class UserB {
         System.out.println("Invalid Input");
         return false;
     }
-
-/*    public double withdraw(double amt){
-        if (amt <= balance) {
-            return balance - amt;
-        }
-        else{
-            System.out.println("Invalid Withdrawl amount");
-            return balance;
-        }
-    }
-
-    public double deposit(double amt){
-        if (amt >= 0) {
-            return balance + amt;
-        }
-        else{
-            System.out.println("Invalid Deposit amount");
-            return balance;
-        }
-    }*/
 
     @Override
     public boolean equals(Object o) {
