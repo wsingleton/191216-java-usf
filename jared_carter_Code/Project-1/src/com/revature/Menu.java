@@ -1,26 +1,24 @@
 package com.revature;
 
 import java.sql.SQLOutput;
+import java.util.Hashtable;
 import java.util.Scanner;
 
 public class Menu {
+
+    private Hashtable<Integer, Account> acctBase = new Hashtable<>();
+
     // setting initial balance to 0.
    double  balance = 0;
+   int option = 0;
    // Will be using Scanner a lot so making instantiating in the class scope. So everyone has access to it.
     Scanner scanner = new Scanner(System.in);
-
-    public void loginMenu() {
-
-        int option = 0;
-
+    public void loginMenu(){
         System.out.println("---------------------------");
         System.out.println("Kannon's Bank.");
         System.out.println("1: Make an account");
-        System.out.println("2: Make a deposit");
-        System.out.println("3: Make a withdraw");
-        System.out.println("4: View balance");
-        System.out.println("5: Exit");
-
+        System.out.println("2: Sign in");
+        System.out.println("3: Exit");
         System.out.println("---------------------------");
 
         do {
@@ -39,7 +37,50 @@ public class Menu {
 
             switch (option) {
                 case 1:
-                   makingNewAccount();
+                    makingNewAccount();
+
+                    break;
+                case 2:
+                    register();
+
+                case 3:
+                    System.out.println("Thank you for using Kannon's Bank.");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid entry, please try again");
+            }
+        }
+        while (option != 3) ;
+    }
+
+    public void transactionMenu() {
+
+
+
+        System.out.println("---------------------------");
+        System.out.println("1: Make a deposit");
+        System.out.println("2: Make a withdraw");
+        System.out.println("3: View balance");
+        System.out.println("4: Exit");
+        System.out.println("---------------------------");
+
+        do {
+
+
+            System.out.println("Enter an option");
+            try {
+                option = Integer.parseInt(scanner.nextLine());
+            }
+
+            catch(Exception e){
+                System.out.println("Please select a number: ");
+
+            }
+            System.out.println("****************************");
+
+            switch (option) {
+                case 1:
+                    viewBalance();
 
                     break;
                 case 2:
@@ -50,22 +91,16 @@ public class Menu {
                     withdraw();
 
                 case 4:
-                    viewBalance();
-
-                    break;
-                case 5:
                     System.out.println("Thank you for using Kannon's Bank.");
                     System.exit(0);
                 default:
                     System.out.println("Invalid entry, please try again");
             }
         }
-        while (option != 5) ;
-
+        while (option != 4) ;
 
 
     }
-
 
 
     private void viewBalance() {
@@ -96,7 +131,7 @@ public class Menu {
 
 
         }
-        loginMenu();
+        transactionMenu();
     }
 
 
@@ -122,7 +157,7 @@ public class Menu {
 
 
         }
-        loginMenu();
+        transactionMenu();
     }
         private void makingNewAccount(){
             String userName, password, accountNumber;
@@ -148,11 +183,17 @@ public class Menu {
                 }
 
             }
-            loginMenu();
+            transactionMenu();
+
 
             //Account account = new Checking(balance);
 
         }
+
+    private void register() {
+
+
+    }
 
     }
 
