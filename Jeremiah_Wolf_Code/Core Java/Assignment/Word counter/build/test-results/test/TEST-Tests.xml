@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-31T01:42:59" hostname="MSI" time="0.042">
+  <properties/>
+  <testcase name="testCountWordsWithEmptyStringArray" classname="Tests" time="0.005"/>
+  <testcase name="testExtractTextWithExistingFileContainingText" classname="Tests" time="0.028"/>
+  <testcase name="testCountWordsWithValidStringArray" classname="Tests" time="0.001"/>
+  <testcase name="testExtractTextWithNullFile" classname="Tests" time="0.001"/>
+  <testcase name="testExtractTextWithMissingFile" classname="Tests" time="0.004"/>
+  <testcase name="testCountWordsWithNullStringArray" classname="Tests" time="0.001"/>
+  <testcase name="testExtractTextWithExistingEmptyFile" classname="Tests" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[No file found with name: missing.txt
+]]></system-err>
+</testsuite>

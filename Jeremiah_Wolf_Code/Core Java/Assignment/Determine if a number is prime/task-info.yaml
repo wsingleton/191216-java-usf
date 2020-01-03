@@ -3,8 +3,8 @@ files:
 - name: src/Task.java
   visible: true
   placeholders:
-  - offset: 70
-    length: 35
+  - offset: 209
+    length: 10
     placeholder_text: // Provide your implementation here
     initial_state:
       length: 35
@@ -19,7 +19,7 @@ files:
 
               return true;
     selected: false
-    status: Unchecked
+    status: Solved
   text: |-
     public class Task {
 
@@ -91,5 +91,5 @@ files:
 
     }
   learner_created: false
-status: Unchecked
+status: Solved
 record: -1

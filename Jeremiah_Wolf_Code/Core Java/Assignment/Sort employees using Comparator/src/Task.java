@@ -6,7 +6,9 @@ public class Task {
 
     public List<Employee> sortEmployeesBySalary(List<Employee> employeesForSorting) {
 
-        // Provide your implementation here
+        if (employeesForSorting == null || employeesForSorting.isEmpty()) return new ArrayList<>();
+        Collections.sort(employeesForSorting, new EmployeeComparator());
+        return employeesForSorting;
 
     }
 

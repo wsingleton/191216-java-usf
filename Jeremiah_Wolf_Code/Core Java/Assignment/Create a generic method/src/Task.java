@@ -1,7 +1,8 @@
-public class Task {
+public class Task<T> {
 
-    public void genericPrinter() {
-        /* Provide your implementation */
+    public void genericPrinter(T... values) {
+        for (T val: values) {
+            System.out.println(val);
+        }
     }
-
 }
