@@ -35,16 +35,16 @@ public class UserService {
         return null;
     }
 
-    public void authenticate (String username, String pw) {
+    public void authenticate (String username, String password) {
 
         if (username == null || username.trim().equals("")
-            || pw == null || pw.trim().equals(""))
+            || password == null || password.trim().equals(""))
         {
             throw new InvalidRequestException();
         }
 
-//        userRepo.findUserByCredentials(username, pw).orElseThrow(() -> new AuthenticationException());
-        currentUser = userRepo.findUserByCredentials(username, pw).orElseThrow(AuthenticationException::new);
+//        userRepo.findUserByCredentials(username, password).orElseThrow(() -> new AuthenticationException());
+        currentUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
     }
 
     public void register(User user) {

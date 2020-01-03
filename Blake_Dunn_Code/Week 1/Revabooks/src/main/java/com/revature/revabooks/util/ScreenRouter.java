@@ -29,6 +29,8 @@ public class ScreenRouter {
 //            }
 //        }
 
+
+        // filter is a for loop with an if statement inside of it
         screens.stream().filter(screen -> screen.getRoute().equals(route))
                 .findFirst().orElseThrow(ScreenNotFoundException::new)
                 .render();
