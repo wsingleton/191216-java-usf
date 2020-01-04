@@ -51,7 +51,7 @@ public class Session {
 
         boolean success = false;
         while(!success) {
-            bank.printAllUsers();
+            //bank.printAllUsers();
             System.out.println("Enter: \n0 to register a new user\n1 to log in");
             int mode = interactive.nextInt();
             switch (mode) {

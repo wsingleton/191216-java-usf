@@ -160,7 +160,7 @@ public class Bank {
             id = user.hashCode();
             user.setId(id);
         }
-        if(userBase.containsKey(id)) {
+         if(userBase.containsKey(id)) {
             System.out.println("Username already exists");
             return -1;
         }
