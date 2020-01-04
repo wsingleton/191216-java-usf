@@ -1,0 +1,36 @@
+Java Threads
+---------------------
+
+In the context of Java, a thread is a single line / path of execution within an application.
+
+* Examples of basic threads in Java:
+
+    JVM garbage collector (daemon)
+    The "main" thread
+
+- A daemon thread is one that operates in the background of an application.
+- All threads receive their own stacks but share a common heap.
+- All threads in Java are subtypes od direct instances of the "java.lang.Thread" class.
+- All java threads have a priority (0-10) with 0 being lowest and 10 being the highest.
+ By default their priority is 5.
+- A resource (variable, method, etc) that is only accessible by one thread @ a time is "Synchronized":
+eg. of Synchronised: Operating methodology of the Console / terminal.
+
+- States of a Java thread:
+* NEW
+* RUNNABLE
+* WAITING
+* TIMED WAITING
+* BLOCKED
+* TERMINATED
+
+Difference between Parallel and Concurrent?
+
+Semaphore? Help our method / program share Synchronised resources. see Philosophers dining problem. Semaphore help control
+access to common resources by multiple processes in a concurrent system.
+
+Reflection???
+
+Java Frameworks and what they do???
+
+

@@ -1,0 +1,25 @@
+Maven Lifecylce Phases + their commands
+
+- mvn clean (not an actual part of the maven lifecycle):
+    removes files from the project;s working directory (usually the target folder in the project);
+
+- mvn validate:
+    validates that the project structure is correct & all necessary info is present.
+
+- mvn compile:
+    compile the source code of the project.
+
+- mvn test:
+    runs the unit test present in the project.
+
+- mvn package:
+    takes compiled code and packages it into s distributable format (i.e jar var).
+
+- mvn verify:
+    runs any integration test present in the project.
+
+- mvn install:
+     Install the project JAR file into the local maven repository (~/m2)
+
+- mvn deploy:
+    adds the project JAR file to the remote / central maven repository for other developers to use.
