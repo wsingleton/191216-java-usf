@@ -47,11 +47,11 @@ public class AccountService {
         }
 
         if(input.length() <= s) {
-            System.out.println("Password is too short. Try again.");
+            System.out.println("Password is too short. Must be at least 8 characters.");
             homeScreen();
         }
         else if(input.length() >= l) {
-            System.out.println("Password is too long. Try again.");
+            System.out.println("Password is too long. Must be less than 15 characters.");
             homeScreen();
         }
     }
