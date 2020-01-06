@@ -4,6 +4,7 @@ import com.revature.revabooks.models.User;
 import com.revature.revabooks.repos.BookRepository;
 import com.revature.revabooks.repos.UserRepository;
 import com.revature.revabooks.screens.*;
+import com.revature.revabooks.services.BookService;
 import com.revature.revabooks.services.UserService;
 import com.revature.revabooks.util.ScreenRouter;
 

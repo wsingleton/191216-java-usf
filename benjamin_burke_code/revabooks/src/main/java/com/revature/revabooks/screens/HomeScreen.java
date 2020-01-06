@@ -24,7 +24,7 @@ public class HomeScreen extends Screen{
 
             switch (userSelection){
                 case "1":
-                    router.navigate("/logIn");
+                    router.navigate("/login");
                     break;
                 case "2":
                     router.navigate("/register");

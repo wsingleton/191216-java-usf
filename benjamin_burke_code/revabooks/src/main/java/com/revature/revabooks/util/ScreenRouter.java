@@ -29,11 +29,11 @@ public class ScreenRouter {
         //         }
         // }
 
-        for (Screen screen : screens) {
-            if (screen.getRoute().equals(route)) {
-                screen.render();
-            }
-        }
+//        for (Screen screen : screens) {
+//            if (screen.getRoute().equals(route)) {
+//                screen.render();
+//            }
+//        }
         screens.stream().filter(screen -> screen.getRoute().equals(route))
                 .findFirst().orElseThrow(ScreenNotFoundException::new)
                 .render();

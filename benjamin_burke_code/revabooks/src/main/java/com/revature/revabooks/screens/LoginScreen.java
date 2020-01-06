@@ -13,7 +13,7 @@ public class LoginScreen extends Screen {
     private UserService userService;
 
     public LoginScreen(UserService userService){
-        super("LoginScreen","/logIn");
+        super("LoginScreen","/login");
         System.out.println("[LOG] - Instantiating" + super.getName());
         this.userService = userService;
     }
@@ -38,20 +38,14 @@ public class LoginScreen extends Screen {
                 System.out.println("[LOG] - Login successful, navigating to dashboard...");
                 router.navigate("/dashboard");
             }
-
-//        }
-//        catch (AuthenticationException e){
-//
-//            System.out.println("[LOG]-invalid");
-//
-        } catch (AuthenticationException | InvalidRequestException e ){
-            System.out.println("[Log] - Invalid Log In credentials");
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("[ERROR] - An unexpected exception occured");
-            System.out.println("[LOG] - shutting down application");
+        } catch (InvalidRequestException | AuthenticationException e) {
+            System.out.println("[LOG] - Invalid login credentials provided!");
+        } catch (Exception e) {
+            System.err.println("[ERROR] - An unexpected exception occurred");
+            System.out.println("[LOG] - Shutting down application");
             appRunning = false;
         }
+
     }
+
 }

@@ -1,0 +1,10 @@
+mvn clean (Not actually part of the "phase")-removes files from the working
+	directory(usually the "target folder in the project folder")
+
+mvn validate - Makes sure the file structure is correct, all necessary info is there
+
+mvm compile -coding the project-->compiles the source code of the project
+
+mvn test - runs the unit tests present in the project
+ 
+mvn package - takes the packagesand compiled code into distrubutable format->jar file
