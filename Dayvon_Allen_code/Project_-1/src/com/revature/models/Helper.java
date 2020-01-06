@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +63,6 @@ public class Helper {
 
         }
         catch (Exception e) {
-            System.err.println("An unexpected exception");
         }
         return false;
     }
@@ -90,13 +90,13 @@ public class Helper {
 
         }
         catch (Exception e) {
-            System.err.println("An unexpected exception");
         }
         return false;
     }
 
     public static String showBalance(String username){
         File userText = new File("src/com/revature/resources/users.txt");
+        double value;
         try {
             BufferedReader reader = new BufferedReader((new FileReader(userText)));
             String line = reader.readLine();
@@ -111,13 +111,13 @@ public class Helper {
             for (String s : lines) {
                 if(s != null)
                     if(s.split(" ")[0].equals(username)){
-                        return s.split(" ")[2];
+                        value = Double.parseDouble(s.split(" ")[2]);
+                        return Double.toString(value);
                     }
             }
 
         }
         catch (Exception e) {
-            System.err.println("An unexpected exception");
         }
         return "";
     }
@@ -153,7 +153,6 @@ public class Helper {
             writer.write(modified);
         }
         catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

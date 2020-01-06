@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TaskTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2019-12-29T16:26:01" hostname="107-144-156-227.biz.spectrum.com" time="0.008">
+<testsuite name="TaskTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2019-12-30T17:59:51" hostname="107-144-156-227.biz.spectrum.com" time="0.031">
   <properties/>
-  <testcase name="testSolutionWithEmptyEmployeeList" classname="TaskTest" time="0.0"/>
+  <testcase name="testSolutionWithEmptyEmployeeList" classname="TaskTest" time="0.011"/>
   <testcase name="testSolutionWithNullEmployeeList" classname="TaskTest" time="0.001"/>
-  <testcase name="testSolutionWithPreSortedEmployees" classname="TaskTest" time="0.001"/>
+  <testcase name="testSolutionWithPreSortedEmployees" classname="TaskTest" time="0.011"/>
   <testcase name="testSolutionWithReversedEmployeeList" classname="TaskTest" time="0.002"/>
   <testcase name="testSolutionWithRandomEmployeeList" classname="TaskTest" time="0.001"/>
   <testcase name="testSolutionWithEmployeeListContainingSomeNulls" classname="TaskTest" time="0.001"/>

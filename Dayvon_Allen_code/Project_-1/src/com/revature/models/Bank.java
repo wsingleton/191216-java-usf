@@ -103,7 +103,7 @@ public class Bank {
                                                 while (exitInput != "q"){
                                                     System.out.println("+----------------------------------+");
                                                     System.out.println("Please enter withdraw amount(Type q or Q to return to customer portal press 3 to close the application)");
-                                                    System.out.print("Input(Must be a whole number): ");
+                                                    System.out.print("Input: ");
                                                     exitInput = scanner2.nextLine();
                                                     exitInput = exitInput.toLowerCase();
                                                     withdrawAmount = exitInput;
@@ -117,19 +117,19 @@ public class Bank {
                                                         break;
                                                     }
                                                     //makes sure that the input can only be numbers
-                                                    else if(!exitInput.matches("\\d+")){
-                                                        System.out.println("Must contain only digits!");
+                                                    else if(!exitInput.matches("^[1-9]\\d*(\\.\\d+)?$")){
+                                                        System.out.println("Must contain only digits and decimals!");
                                                         continue ;
                                                     }
                                                     //Checks if you have enough money to withdraw
-                                                    else if(Integer.parseInt(Helper.showBalance(username)) < Integer.parseInt(withdrawAmount)){
+                                                    else if(Double.parseDouble(Helper.showBalance(username)) < Double.parseDouble(withdrawAmount)){
                                                         System.out.println("Insufficient funds");
                                                         continue ;
                                                     }
                                                     //subtract the withdraw amount from your balance
-                                                    else if(Integer.parseInt(Helper.showBalance(username)) >= Integer.parseInt(withdrawAmount)){
-                                                        int newBalanceCalcu = Integer.parseInt(Helper.showBalance(username)) - Integer.parseInt(withdrawAmount);
-                                                        String newBalance = Integer.toString(newBalanceCalcu);
+                                                    else if(Double.parseDouble(Helper.showBalance(username)) >= Double.parseDouble(withdrawAmount)){
+                                                        double newBalanceCalcu = Double.parseDouble(Helper.showBalance(username)) - Double.parseDouble(withdrawAmount);
+                                                        String newBalance = Double.toString(newBalanceCalcu);
                                                         Helper.transactionHelper(username,password, Helper.showBalance(username),newBalance);
                                                         //prints new balance
                                                         System.out.println("Your new balance is $" + Helper.showBalance(username));
@@ -141,7 +141,7 @@ public class Bank {
                                                 while (exitInput != "q"){
                                                     System.out.println("+----------------------------------+");
                                                     System.out.println("Please enter deposit amount(Type q or Q to return to customer portal press 3 to close the application)");
-                                                    System.out.print("Input(Must be a whole number): ");
+                                                    System.out.print("Input: ");
                                                     exitInput = scanner2.nextLine();
                                                     exitInput = exitInput.toLowerCase();
                                                     //uses user input for the deposit amount
@@ -156,14 +156,14 @@ public class Bank {
                                                         break;
                                                     }
                                                     //makes sure only digits can be input
-                                                    else if(!exitInput.matches("\\d+")){
-                                                        System.out.println("Must contain only digits!");
+                                                    else if(!exitInput.matches("^[1-9]\\d*(\\.\\d+)?$")){
+                                                        System.out.println("Must contain only digits and decimals!");
                                                         //continues to the next iteration
                                                         continue ;
                                                     }
                                                     //adds the deposit amount to the balance
-                                                        int newBalanceCalcu = Integer.parseInt(Helper.showBalance(username)) + Integer.parseInt(depositAmount);
-                                                        String newBalance = Integer.toString(newBalanceCalcu);
+                                                        double newBalanceCalcu = Double.parseDouble(Helper.showBalance(username)) + Double.parseDouble(depositAmount);
+                                                        String newBalance = Double.toString(newBalanceCalcu);
                                                         Helper.transactionHelper(username,password, Helper.showBalance(username),newBalance);
                                                         //prints the new balance
                                                         System.out.println("Your new balance is $" + Helper.showBalance(username));
@@ -193,7 +193,13 @@ public class Bank {
                     Scanner scanner1 = new Scanner(System.in);
                     registerInput = scanner1.nextLine();
                     //strips whitespace
-                    username = registerInput.replaceAll("//s", "").toLowerCase();;
+                    username = registerInput.replaceAll("//s", "").toLowerCase();
+                    if(username.equals("")){
+                        System.out.println("---------------------------------");
+                        System.out.println("Please enter a valid username!");
+                        System.out.println("---------------------------------\n\n\n");
+                        continue ;
+                    }
                     //converts input to lowercase to check if the user wants to quit(user might type Q instead of q)
                     registerInput = registerInput.toLowerCase();
                     if(registerInput.intern() != "q") {
@@ -201,6 +207,12 @@ public class Bank {
                         //captures input for password
                         registerInput = scanner1.nextLine();
                         password = registerInput.replaceAll("//s", "");;
+                        if(password.equals("")){
+                            System.out.println("---------------------------------");
+                            System.out.println("Please enter a valid password!");
+                            System.out.println("---------------------------------\n\n\n");
+                            continue ;
+                        }
                         //converts input to lowercase to check if the user wants to quit(user might type Q instead of q)
                         registerInput = registerInput.toLowerCase();
                     }
