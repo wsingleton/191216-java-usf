@@ -6,27 +6,41 @@ public class Task {
 
     public String[] filterPalindromes(String[] wordArray) {
 
-        String str = wordArray.toString();
+        String wordLine = wordArray.toString();
+        int size = wordLine.length();
 
-        if(str == null || str.equals("")){
-            return "";
+        if(wordArray == null || wordArray.length == 0){
+            return new String[0];
         }
-        str = str.replaceAll("\\s", "");
-         for(int i = 0; i<= str.length(); i++){
-             char start = str.charAt(i);
-             char end = str.charAt(str.length()-1);
-             if(start == end) {
 
-             }
-         }
+
+       for(int i = 0; i <= size; i++){
+           for(int j= i+1; j < size-1; j++) {
+               if (isPalindrome(wordLine));
+                   return wordArray;
+           }
+
+       }
+
+
+        return wordArray;
 
 
     }
 
     public boolean isPalindrome(String word) {
 
-        /* Provide your implementation here */
+        int i = 0, j = word.length() - 1;
+        String modWord = word.toLowerCase().replaceAll("\\s","");
 
+        while (i < j) {
+            if (modWord.charAt(i) != modWord.charAt(j)){
+            return false;
+            }
+            ++i;
+            --j;
+        }
+        return false;
     }
 
 }

@@ -10,8 +10,8 @@ public class Task {
             return str.toString();
         }
 
-           for(int i = start; i<= end; i++){
-               str.append(mainString.charAt(i));
+           for(int i = 0; i< end; i++){
+               if(i>= start) str.append(mainString.charAt(i));
            }
 
        return str.toString();

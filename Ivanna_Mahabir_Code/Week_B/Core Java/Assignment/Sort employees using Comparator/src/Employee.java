@@ -5,17 +5,17 @@ public class Employee {
     private int id;
     private String firstName;
     private String lastName;
-    double salary;
-
-    public Employee(int id, String firstName, String lastName, double salary) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.salary = salary;
-    }
+    private double salary;
 
     public Employee() {
         super();
+    }
+
+    public Employee(int id, String firstName, String lastName, double salary) {
+        setId(id);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        setSalary(salary);
     }
 
     public int getId() {
@@ -23,7 +23,7 @@ public class Employee {
     }
 
     public void setId(int id) {
-        if(id < 0){System.out.println("Invalid Input");}
+        if(id < 0) return;
         this.id = id;
     }
 
@@ -48,9 +48,9 @@ public class Employee {
     }
 
     public void setSalary(double salary) {
-        if(salary >= 0){
+        if(salary > 0){
             this.salary = salary;
-        }
+        }else return;
 
     }
 

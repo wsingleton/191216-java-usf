@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class Tests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class Tests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/default-package.html">default-package</a> &gt; Tests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">8</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">6</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">20.129s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox failures" id="successRate">
+<div class="percent">25%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Failed tests</a>
+</li>
+<li>
+<a href="#tab1">Tests</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="testSolutionUsingOnlyWhiteSpace"></a>
+<h3 class="failures">testSolutionUsingOnlyWhiteSpace</h3>
+<span class="code">
+<pre>org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds
+	at java.base@11.0.4/java.util.regex.Pattern.compile(Pattern.java:1753)
+	at java.base@11.0.4/java.util.regex.Pattern.&lt;init&gt;(Pattern.java:1427)
+	at java.base@11.0.4/java.util.regex.Pattern.compile(Pattern.java:1068)
+	at java.base@11.0.4/java.lang.String.split(String.java:2317)
+	at java.base@11.0.4/java.lang.String.split(String.java:2364)
+	at app//Task.createAcronymFromPhrase(Task.java:17)
+	at app//Tests.testSolutionUsingOnlyWhiteSpace(Tests.java:72)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.4/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.4/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at app//org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at app//org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at app//org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at app//org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at app//org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at app//org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base@11.0.4/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@11.0.4/java.lang.Thread.run(Thread.java:834)
+</pre>
+</span>
+</div>
+<div class="test">
+<a name="testSolutionUsingPhraseWithAcronym"></a>
+<h3 class="failures">testSolutionUsingPhraseWithAcronym</h3>
+<span class="code">
+<pre>org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds
+	at java.base@11.0.4/java.lang.Integer.formatUnsignedInt(Integer.java:385)
+	at java.base@11.0.4/java.lang.Integer.toUnsignedString0(Integer.java:344)
+	at java.base@11.0.4/java.lang.Integer.toHexString(Integer.java:262)
+	at java.base@11.0.4/java.lang.Object.toString(Object.java:246)
+	at app//Task.createAcronymFromPhrase(Task.java:18)
+	at app//Tests.testSolutionUsingPhraseWithAcronym(Tests.java:45)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.4/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.4/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at app//org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at app//org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at app//org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at app//org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at app//org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at app//org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base@11.0.4/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@11.0.4/java.lang.Thread.run(Thread.java:834)
+</pre>
+</span>
+</div>
+<div class="test">
+<a name="testSolutionUsingPhraseWithExcessWhiteSpace"></a>
+<h3 class="failures">testSolutionUsingPhraseWithExcessWhiteSpace</h3>
+<span class="code">
+<pre>org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds
+	at java.base@11.0.4/java.lang.Object.hashCode(Native Method)
+	at java.base@11.0.4/java.lang.Object.toString(Object.java:246)
+	at app//Task.createAcronymFromPhrase(Task.java:18)
+	at app//Tests.testSolutionUsingPhraseWithExcessWhiteSpace(Tests.java:79)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.4/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.4/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at app//org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at app//org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at app//org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at app//org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at app//org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at app//org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base@11.0.4/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@11.0.4/java.lang.Thread.run(Thread.java:834)
+</pre>
+</span>
+</div>
+<div class="test">
+<a name="testSolutionUsingPhraseWithHyphenatedWord"></a>
+<h3 class="failures">testSolutionUsingPhraseWithHyphenatedWord</h3>
+<span class="code">
+<pre>org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds
+	at java.base@11.0.4/java.lang.String.split(String.java:2364)
+	at app//Task.createAcronymFromPhrase(Task.java:17)
+	at app//Tests.testSolutionUsingPhraseWithHyphenatedWord(Tests.java:52)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.4/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.4/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at app//org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at app//org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at app//org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at app//org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at app//org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at app//org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base@11.0.4/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@11.0.4/java.lang.Thread.run(Thread.java:834)
+</pre>
+</span>
+</div>
+<div class="test">
+<a name="testSolutionUsingPhraseWithPunctuation"></a>
+<h3 class="failures">testSolutionUsingPhraseWithPunctuation</h3>
+<span class="code">
+<pre>org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds
+	at java.base@11.0.4/java.util.regex.Pattern.newCharProperty(Pattern.java:2920)
+	at java.base@11.0.4/java.util.regex.Pattern.escape(Pattern.java:2561)
+	at java.base@11.0.4/java.util.regex.Pattern.atom(Pattern.java:2273)
+	at java.base@11.0.4/java.util.regex.Pattern.sequence(Pattern.java:2146)
+	at java.base@11.0.4/java.util.regex.Pattern.expr(Pattern.java:2056)
+	at java.base@11.0.4/java.util.regex.Pattern.compile(Pattern.java:1778)
+	at java.base@11.0.4/java.util.regex.Pattern.&lt;init&gt;(Pattern.java:1427)
+	at java.base@11.0.4/java.util.regex.Pattern.compile(Pattern.java:1068)
+	at java.base@11.0.4/java.lang.String.split(String.java:2317)
+	at java.base@11.0.4/java.lang.String.split(String.java:2364)
+	at app//Task.createAcronymFromPhrase(Task.java:17)
+	at app//Tests.testSolutionUsingPhraseWithPunctuation(Tests.java:38)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.4/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.4/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at app//org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at app//org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at app//org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at app//org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at app//org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at app//org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base@11.0.4/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@11.0.4/java.lang.Thread.run(Thread.java:834)
+</pre>
+</span>
+</div>
+<div class="test">
+<a name="testSolutionUsingSimplePhrase"></a>
+<h3 class="failures">testSolutionUsingSimplePhrase</h3>
+<span class="code">
+<pre>org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds
+	at java.base@11.0.4/java.util.regex.Pattern.compile(Pattern.java:1767)
+	at java.base@11.0.4/java.util.regex.Pattern.&lt;init&gt;(Pattern.java:1427)
+	at java.base@11.0.4/java.util.regex.Pattern.compile(Pattern.java:1068)
+	at java.base@11.0.4/java.lang.String.split(String.java:2317)
+	at java.base@11.0.4/java.lang.String.split(String.java:2364)
+	at app//Task.createAcronymFromPhrase(Task.java:17)
+	at app//Tests.testSolutionUsingSimplePhrase(Tests.java:31)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.4/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.4/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at app//org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at app//org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at app//org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at app//org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at app//org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at app//org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base@11.0.4/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@11.0.4/java.lang.Thread.run(Thread.java:834)
+</pre>
+</span>
+</div>
+</div>
+<div id="tab1" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">testSolutionUsingEmptyPhrase</td>
+<td class="success">0.300s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testSolutionUsingNullPhrase</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="failures">testSolutionUsingOnlyWhiteSpace</td>
+<td class="failures">3.008s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="failures">testSolutionUsingPhraseWithAcronym</td>
+<td class="failures">3.195s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="failures">testSolutionUsingPhraseWithExcessWhiteSpace</td>
+<td class="failures">3.161s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="failures">testSolutionUsingPhraseWithHyphenatedWord</td>
+<td class="failures">3.123s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="failures">testSolutionUsingPhraseWithPunctuation</td>
+<td class="failures">3.893s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="failures">testSolutionUsingSimplePhrase</td>
+<td class="failures">3.447s</td>
+<td class="failures">failed</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 5.2.1</a> at Jan 5, 2020, 6:52:57 PM</p>
+</div>
+</div>
+</body>
+</html>

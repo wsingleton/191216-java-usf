@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="8" skipped="0" failures="6" errors="0" timestamp="2020-01-05T23:52:02" hostname="DESKTOP-J7I54DS" time="20.13">
+  <properties/>
+  <testcase name="testSolutionUsingOnlyWhiteSpace" classname="Tests" time="3.008">
+    <failure message="org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds" type="org.junit.runners.model.TestTimedOutException">org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds
+	at java.base@11.0.4/java.util.regex.Pattern.compile(Pattern.java:1753)
+	at java.base@11.0.4/java.util.regex.Pattern.&lt;init&gt;(Pattern.java:1427)
+	at java.base@11.0.4/java.util.regex.Pattern.compile(Pattern.java:1068)
+	at java.base@11.0.4/java.lang.String.split(String.java:2317)
+	at java.base@11.0.4/java.lang.String.split(String.java:2364)
+	at app//Task.createAcronymFromPhrase(Task.java:17)
+	at app//Tests.testSolutionUsingOnlyWhiteSpace(Tests.java:72)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.4/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.4/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at app//org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at app//org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at app//org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at app//org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at app//org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at app//org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base@11.0.4/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@11.0.4/java.lang.Thread.run(Thread.java:834)
+</failure>
+  </testcase>
+  <testcase name="testSolutionUsingNullPhrase" classname="Tests" time="0.002"/>
+  <testcase name="testSolutionUsingPhraseWithHyphenatedWord" classname="Tests" time="3.123">
+    <failure message="org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds" type="org.junit.runners.model.TestTimedOutException">org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds
+	at java.base@11.0.4/java.lang.String.split(String.java:2364)
+	at app//Task.createAcronymFromPhrase(Task.java:17)
+	at app//Tests.testSolutionUsingPhraseWithHyphenatedWord(Tests.java:52)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.4/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.4/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at app//org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at app//org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at app//org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at app//org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at app//org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at app//org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base@11.0.4/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@11.0.4/java.lang.Thread.run(Thread.java:834)
+</failure>
+  </testcase>
+  <testcase name="testSolutionUsingPhraseWithAcronym" classname="Tests" time="3.195">
+    <failure message="org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds" type="org.junit.runners.model.TestTimedOutException">org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds
+	at java.base@11.0.4/java.lang.Integer.formatUnsignedInt(Integer.java:385)
+	at java.base@11.0.4/java.lang.Integer.toUnsignedString0(Integer.java:344)
+	at java.base@11.0.4/java.lang.Integer.toHexString(Integer.java:262)
+	at java.base@11.0.4/java.lang.Object.toString(Object.java:246)
+	at app//Task.createAcronymFromPhrase(Task.java:18)
+	at app//Tests.testSolutionUsingPhraseWithAcronym(Tests.java:45)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.4/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.4/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at app//org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at app//org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at app//org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at app//org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at app//org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at app//org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base@11.0.4/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@11.0.4/java.lang.Thread.run(Thread.java:834)
+</failure>
+  </testcase>
+  <testcase name="testSolutionUsingPhraseWithExcessWhiteSpace" classname="Tests" time="3.161">
+    <failure message="org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds" type="org.junit.runners.model.TestTimedOutException">org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds
+	at java.base@11.0.4/java.lang.Object.hashCode(Native Method)
+	at java.base@11.0.4/java.lang.Object.toString(Object.java:246)
+	at app//Task.createAcronymFromPhrase(Task.java:18)
+	at app//Tests.testSolutionUsingPhraseWithExcessWhiteSpace(Tests.java:79)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.4/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.4/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at app//org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at app//org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at app//org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at app//org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at app//org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at app//org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base@11.0.4/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@11.0.4/java.lang.Thread.run(Thread.java:834)
+</failure>
+  </testcase>
+  <testcase name="testSolutionUsingEmptyPhrase" classname="Tests" time="0.3"/>
+  <testcase name="testSolutionUsingSimplePhrase" classname="Tests" time="3.447">
+    <failure message="org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds" type="org.junit.runners.model.TestTimedOutException">org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds
+	at java.base@11.0.4/java.util.regex.Pattern.compile(Pattern.java:1767)
+	at java.base@11.0.4/java.util.regex.Pattern.&lt;init&gt;(Pattern.java:1427)
+	at java.base@11.0.4/java.util.regex.Pattern.compile(Pattern.java:1068)
+	at java.base@11.0.4/java.lang.String.split(String.java:2317)
+	at java.base@11.0.4/java.lang.String.split(String.java:2364)
+	at app//Task.createAcronymFromPhrase(Task.java:17)
+	at app//Tests.testSolutionUsingSimplePhrase(Tests.java:31)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.4/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.4/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at app//org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at app//org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at app//org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at app//org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at app//org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at app//org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base@11.0.4/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@11.0.4/java.lang.Thread.run(Thread.java:834)
+</failure>
+  </testcase>
+  <testcase name="testSolutionUsingPhraseWithPunctuation" classname="Tests" time="3.893">
+    <failure message="org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds" type="org.junit.runners.model.TestTimedOutException">org.junit.runners.model.TestTimedOutException: test timed out after 3 seconds
+	at java.base@11.0.4/java.util.regex.Pattern.newCharProperty(Pattern.java:2920)
+	at java.base@11.0.4/java.util.regex.Pattern.escape(Pattern.java:2561)
+	at java.base@11.0.4/java.util.regex.Pattern.atom(Pattern.java:2273)
+	at java.base@11.0.4/java.util.regex.Pattern.sequence(Pattern.java:2146)
+	at java.base@11.0.4/java.util.regex.Pattern.expr(Pattern.java:2056)
+	at java.base@11.0.4/java.util.regex.Pattern.compile(Pattern.java:1778)
+	at java.base@11.0.4/java.util.regex.Pattern.&lt;init&gt;(Pattern.java:1427)
+	at java.base@11.0.4/java.util.regex.Pattern.compile(Pattern.java:1068)
+	at java.base@11.0.4/java.lang.String.split(String.java:2317)
+	at java.base@11.0.4/java.lang.String.split(String.java:2364)
+	at app//Task.createAcronymFromPhrase(Task.java:17)
+	at app//Tests.testSolutionUsingPhraseWithPunctuation(Tests.java:38)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.4/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.4/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.4/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at app//org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at app//org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at app//org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at app//org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at app//org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at app//org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at app//org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base@11.0.4/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@11.0.4/java.lang.Thread.run(Thread.java:834)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
