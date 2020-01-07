@@ -48,7 +48,7 @@ This class will be used to perform all account related transactions such as:
         Double validAmount = null;
         try{
 
-            if(amount != 0 && !(amount < 0)){
+            if(!amount.isNaN() && !(amount < 0)){
                 // limit decimal points to 2.
 //                validAmount = df.format(amount);
                 validAmount = amount;

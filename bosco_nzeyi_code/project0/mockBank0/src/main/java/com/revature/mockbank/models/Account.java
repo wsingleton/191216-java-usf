@@ -1,5 +1,7 @@
 package com.revature.mockbank.models;
 
+import com.revature.mockbank.exceptions.InvalidRequestException;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -47,6 +49,7 @@ public class Account {
     public void setBalance(Double amount, String transactionType) {
         if(transactionType.equals("deposit")) this.balance = balance + amount;
         if (transactionType.equals("withdraw")) this.balance = balance + amount;
+        else throw new InvalidRequestException();
     }
 
     public ArrayList<String> getAccountHistory() {
