@@ -4,6 +4,8 @@ import com.revature.mockbank.exceptions.InvalidRequestException;
 import com.revature.mockbank.models.Account;
 import com.revature.mockbank.models.User;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +23,7 @@ This class will be used to perform all account related transactions such as:
 
     public User currentUser; // this will be created as a static instance of the login screen to get the current user.
     public Account account;
-    DecimalFormat df = new DecimalFormat("##0.00");
+//    DecimalFormat df = new DecimalFormat("##0.00");
     public String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 
 
@@ -39,24 +41,24 @@ This class will be used to perform all account related transactions such as:
 
         Double amountToWithdraw = validatedAmount(amount);
         account.setBalance(amountToWithdraw, "withdraw");
-        account.setAccountHistory(date + "Withdrawal " + "$" + amountToWithdraw + "Balance: " + "$" + account.getBalance());
-
+        account.setAccountHistory( "UserId="+ currentUser.getId() + " " + date + "Withdrawal " + "$" +
+                amountToWithdraw + "Balance: " + "$" + account.getBalance());
     }
 
     // method to validate and format amount deposited or withdrawn
     public Double validatedAmount (Double amount){
-        Double validAmount = null;
+        if(amount.isNaN() || amount < 0) return 0.0;
+//            throw new InvalidRequestException(
+//        Double validAmount = null;
         try{
-
-            if(!amount.isNaN() && !(amount < 0)){
                 // limit decimal points to 2.
-//                validAmount = df.format(amount);
-                validAmount = amount;
-            }
+                BigDecimal toTwoDecimal = BigDecimal.valueOf(amount);
+                amount = toTwoDecimal.setScale(2, RoundingMode.DOWN).doubleValue();
+//                validAmount = amount;
         } catch (Exception e){
             throw new InvalidRequestException();
         }
-        return validAmount;
+        return amount;
     }
 
 
