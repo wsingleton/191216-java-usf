@@ -6,6 +6,19 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class ConnectionFactory {
+    private static ConnectionFactory connectionFactory = new ConnectionFactory();
+    private static Connection con;
+
+    private ConnectionFactory(){
+        super();
+        con = createConnection();
+    }
+
+    public static Connection getCon(){ return con; }
+
+    public static ConnectionFactory getInstance(){
+        return connectionFactory;
+    }
 
     public static Connection createConnection(){
         try {

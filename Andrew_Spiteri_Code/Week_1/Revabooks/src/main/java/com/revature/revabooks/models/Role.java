@@ -6,8 +6,9 @@ public enum Role {
     BASIC_MEMBER("BASIC_MEMBER");
 
     private String roleName;
+    //private Integer score;
 
-    private Role(String roleName){
+    Role(String roleName){
         this.roleName = roleName;
     }
 

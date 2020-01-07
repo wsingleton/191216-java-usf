@@ -14,7 +14,7 @@ public class HomeScreen extends Screen {
 
     @Override
     public void render() {
-        System.out.print("Would you like to register (enter 0) or login (enter 1): ");
+        System.out.print("Would you like to register (enter 0), login (enter 1), admin (enter 2), or exit (enter 3): ");
         Scanner scanner = new Scanner(System.in);
         switch(scanner.next()){
             case "0":

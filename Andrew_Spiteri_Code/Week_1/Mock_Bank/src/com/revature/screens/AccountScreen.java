@@ -90,10 +90,16 @@ public class AccountScreen extends Screen {
                         break;
                     case "3":
                         System.out.println("Wait while we check your credit score!");
-
+                        Integer creditScore =  UserService.checkCreditScore(autoAccount.getId());
+                        System.out.println("Your credit score is: " + creditScore);
                         try {
-                            Double withdrawal = scanner.nextDouble();
-                            as.withdrawal(savingsAccount, withdrawal);
+                            if(creditScore >= 650){
+                                System.out.print("How much would you like to borrow: ");
+                                Double borrowAmount = scanner.nextDouble();
+                                as.deposit(autoAccount, borrowAmount);
+                            }else{
+                                System.out.println("Your credit score isn't good enough to take out a loan.");
+                            }
                             router.navigate("/account");
                         } catch (Exception e) {
                             System.err.println("Invalid value!");

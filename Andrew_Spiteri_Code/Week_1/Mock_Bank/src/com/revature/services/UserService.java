@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.models.AccountType;
+import com.revature.models.CreditScore;
 import com.revature.models.Role;
 import com.revature.models.User;
 import com.revature.repositories.AccountRepository;
@@ -9,11 +10,13 @@ import com.revature.repositories.UserRepository;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Random;
 
 import static com.revature.MockBankDriver.*;
 
 public class UserService {
     UserRepository userRepository;
+
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -24,7 +27,11 @@ public class UserService {
         AccountRepository accountRepository = new AccountRepository();
         AccountService accountService = new AccountService(accountRepository);
         Integer userId = Objects.hashCode(username);
-        User user = new User(userId, firstname, lastname, username, password, Role.MEMBER);
+        Random rand = new Random();
+        CreditScore tuScore = CreditScore.TRANSUNION, expScore = CreditScore.EXPERIAN;
+        tuScore.setScore(rand.nextInt(850-300)+300);
+        expScore.setScore(rand.nextInt(850-300)+300);
+        User user = new User(userId, firstname, lastname, username, password, Role.MEMBER, tuScore, expScore);
         Boolean bool = userRepository.save(user);
         accountService.registerAccount(userId);
         if (bool){
@@ -48,10 +55,10 @@ public class UserService {
         }
     }
 
-    public Integer checkCreditScore(Integer id){
-        UserRepository userRepository = new UserRepository();
-
-        return 0;
+    //TODO Finish checkCreditScore method in UserService
+    public static Integer checkCreditScore(Integer id){
+        Integer creditScore = UserRepository.creditScore(id);
+        return creditScore;
     }
 
 }

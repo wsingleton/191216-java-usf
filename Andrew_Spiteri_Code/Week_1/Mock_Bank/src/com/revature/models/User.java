@@ -6,6 +6,7 @@ public class User {
     private String username, password, firstName, lastName;
     private Integer id;
     private Role role;
+    private CreditScore tu, exp;
 
 
     public User(String fn, String ln, String username, String pw, Role role) {
@@ -21,7 +22,15 @@ public class User {
     public User(Integer id, String fn, String ln, String un, String pw, Role role) {
         this(fn, ln, un, pw, role ); // constructor chaining
         this.id = id;
+
     }
+
+    public User(Integer id, String fn, String ln, String un, String pw, Role role, CreditScore tu, CreditScore exp) {
+        this(id, fn, ln, un, pw, role ); // constructor chaining
+        this.tu = tu;
+        this.exp = exp;
+    }
+
     private void setUsername(String username){
         this.username = username;
     }
@@ -57,6 +66,8 @@ public class User {
     public Role getRole() {
         return role;
     }
+    public CreditScore getTu(){return tu;}
+    public CreditScore getExp(){return exp;}
 
     public String toFileString(){
         return id + "," + username + "," + hashCode() + "," + firstName + "," + lastName + "," + role + ";";

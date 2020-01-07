@@ -30,7 +30,7 @@ public class AppDriver {
 
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
-                .addScreen(new RegisterScreen())
+                .addScreen(new RegisterScreen(userService))
                 .addScreen(new LoginScreen(userService))
                 .addScreen(new DashboardScreen())
                 .addScreen(new UserProfileScreen())
@@ -40,6 +40,8 @@ public class AppDriver {
     }
 
     public static void main(String[] args) {
-        System.out.println("works");
+        while(appRunning) {
+            router.navigate("/home");
+        }
     }
 }

@@ -4,10 +4,7 @@ import com.revature.models.Account;
 import com.revature.models.User;
 import com.revature.repositories.AccountRepository;
 import com.revature.repositories.UserRepository;
-import com.revature.screens.AccountScreen;
-import com.revature.screens.HomeScreen;
-import com.revature.screens.LoginScreen;
-import com.revature.screens.RegisterScreen;
+import com.revature.screens.*;
 import com.revature.services.AccountService;
 import com.revature.services.UserService;
 import com.revature.util.ScreenRouter;
@@ -39,7 +36,9 @@ public class MockBankDriver {
         router.addScreen(new HomeScreen())
                 .addScreen(new RegisterScreen(userService))
                 .addScreen(new LoginScreen(userService))
-                .addScreen(new AccountScreen(userService));
+                .addScreen(new AccountScreen(userService))
+        .addScreen(new AdminScreen(userService));
+
 
         System.out.println("[LOG] - Application initializing complete.");
     }

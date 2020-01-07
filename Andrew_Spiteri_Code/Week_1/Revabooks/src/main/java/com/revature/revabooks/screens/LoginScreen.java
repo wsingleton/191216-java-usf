@@ -2,8 +2,7 @@ package com.revature.revabooks.screens;
 
 import com.revature.revabooks.exceptions.InvalidRequestException;
 import com.revature.revabooks.services.UserService;
-
-import javax.security.sasl.AuthenticationException;
+import  com.revature.revabooks.exceptions.AuthenticationException;
 
 import static com.revature.revabooks.AppDriver.*;
 
