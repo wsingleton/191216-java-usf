@@ -1,14 +1,13 @@
-package com.revature.revabooks.services;
+package com.liberationbank.services;
 
-import com.revature.revabooks.exceptions.AuthenticationException;
-import com.revature.revabooks.exceptions.InvalidRequestException;
-import com.revature.revabooks.exceptions.ResourcePersistenceException;
-import com.revature.revabooks.models.Role;
-import com.revature.revabooks.models.User;
-import com.revature.revabooks.repos.UserRepository;
+import com.liberationbank.exceptions.AuthenticationException;
+import com.liberationbank.exceptions.InvalidRequestException;
+import com.liberationbank.exceptions.ResourcePersistenceException;
+import com.liberationbank.models.Role;
+import com.liberationbank.models.User;
+import com.liberationbank.repos.UserRepository;
 
-import  static com.revature.revabooks.AppDriver.currentUser;
-import java.util.Set;
+import  static com.liberationbank.AppDriver.currentUser;
 
 public class UserService {
     private UserRepository userRepo;
@@ -30,11 +29,15 @@ public class UserService {
     }
 
     public void register(User newUser){
+        System.out.println("register " + newUser);
         if (!isUserValid(newUser)) throw new InvalidRequestException();
+        System.out.println("user is valid");
         if ( userRepo.findByUserName(newUser.getUserName()).isPresent()){
+
             throw new ResourcePersistenceException("Username is already in use!");
         }
         newUser.setRole(Role.BASIC_MEMBER);
+        System.out.println(newUser);
         userRepo.save(newUser);
         currentUser = newUser;
     }

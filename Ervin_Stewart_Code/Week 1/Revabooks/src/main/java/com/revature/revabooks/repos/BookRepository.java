@@ -27,7 +27,7 @@ public class BookRepository implements CrudRepository<Book> {
 
     }
 
-    public Set<Book> findBooksByGenre(Genre genre){
+       public Set<Book> findBooksByGenre(Genre genre){
         HashSet<Book> books = new HashSet<>();
         //example of a lambda expression
         bookDb.forEach((key, value) -> {
