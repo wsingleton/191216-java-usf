@@ -20,6 +20,19 @@ public class Account {
         this.accountType = accountType;
     }
 
+    public static Integer createAccountNumber() {
+        return (Integer) (int) (Math.random() * ((9999999) + 1));
+    }
+
+    public Account createNewAccount(Integer id) {
+
+        Account newAccount = new Account(id, 0.0);
+        Integer acctNum = createAccountNumber();
+        newAccount.setAccountNumber(acctNum);
+        newAccount.setAccountType(AccountType.CHECKING);
+        return newAccount;
+    }
+
     public Integer getId() {
         return Id;
     }

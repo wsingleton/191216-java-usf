@@ -2,8 +2,7 @@ package com.revature.fauxbank.screens;
 
 import com.revature.fauxbank.services.AccountService;
 
-import static com.revature.fauxbank.BankDriver.console;
-import static com.revature.fauxbank.BankDriver.currentAccount;
+import static com.revature.fauxbank.BankDriver.*;
 
 public class DepositScreen extends Screen {
 
@@ -29,6 +28,10 @@ public class DepositScreen extends Screen {
             String amount = console.readLine();
             Double deposit = accountService.validateDeposit(amount);
 
+            if (deposit == 0) {
+                router.navigate("/dashboard");
+            }
+
            balance += deposit;
            currentAccount.setBalance(balance);
 
@@ -36,7 +39,7 @@ public class DepositScreen extends Screen {
             System.err.println("[ERROR] - " + e.getMessage());
         }
 
-        accountService.newTransaction();
+        router.navigate("/transition");
 
     }
 }

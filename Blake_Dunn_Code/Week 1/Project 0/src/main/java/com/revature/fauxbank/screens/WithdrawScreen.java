@@ -2,8 +2,7 @@ package com.revature.fauxbank.screens;
 
 import com.revature.fauxbank.services.AccountService;
 
-import static com.revature.fauxbank.BankDriver.console;
-import static com.revature.fauxbank.BankDriver.currentAccount;
+import static com.revature.fauxbank.BankDriver.*;
 
 public class WithdrawScreen extends Screen {
 
@@ -30,6 +29,10 @@ public class WithdrawScreen extends Screen {
             String amount = console.readLine();
             Double withdraw = accountService.validateWithdraw(amount);
 
+            if (withdraw == 0) {
+                router.navigate("/dashboard");
+            }
+
             balance -= withdraw;
             currentAccount.setBalance(balance);
 
@@ -37,7 +40,7 @@ public class WithdrawScreen extends Screen {
             System.err.println("[ERROR] - " + e.getMessage());
         }
 
-        accountService.newTransaction();
+        router.navigate("/transition");
 
     }
 }

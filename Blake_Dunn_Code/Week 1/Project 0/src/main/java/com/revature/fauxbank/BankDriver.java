@@ -39,7 +39,8 @@ public class BankDriver {
                 .addScreen(new DashboardScreen())
                 .addScreen(new BalanceScreen(accountService))
                 .addScreen(new DepositScreen(accountService))
-                .addScreen(new WithdrawScreen(accountService));
+                .addScreen(new WithdrawScreen(accountService))
+                .addScreen(new TransitionScreen());
 
 
         System.out.println("[LOG] - Application intializing complete.");

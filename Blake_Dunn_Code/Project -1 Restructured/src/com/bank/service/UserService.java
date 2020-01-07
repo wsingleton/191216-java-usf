@@ -10,7 +10,7 @@ import static com.bank.ui.MainScreen.homeScreen;
 
 public class UserService {
 
-    public static int i = 0;
+//    public static int i = 0;
 
     public static void validateNames(String input) {
 
@@ -71,22 +71,22 @@ public class UserService {
             else if(number == 2){
                 return number;
             }
-            else{
-                i++;
-                System.out.println(i);
-                if (i < 3) {
-                    System.out.println("Error: Please try again");
-                    System.out.println("");
-                    validateUserInput(acct);
-                }else if (i == 3) {
-                    homeScreen();
-                }
-            }
+//            else{
+//                i++;
+//                System.out.println(i);
+//                if (i < 3) {
+//                    System.out.println("Error: Please try again");
+//                    System.out.println("");
+//                    validateUserInput(acct);
+//                }else if (i == 3) {
+//                    homeScreen();
+//                }
+//            }
         }catch(InputMismatchException ime){
-            i++;
-            if (i < 3)
-            validateUserInput(acct);
-            else if (i == 3 )
+//            i++;
+//            if (i < 3)
+//            validateUserInput(acct);
+//            else if (i == 3 )
                 homeScreen();
         }
         return number;

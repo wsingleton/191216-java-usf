@@ -24,7 +24,7 @@ public class BalanceScreen extends Screen {
         System.out.println("");
         System.out.println("Your Balance: $" + balance);
 
-        accountService.newTransaction();
+        router.navigate("/transition");
 
     }
 }

@@ -24,6 +24,10 @@ public class User {
         this.role = role;
     }
 
+    public static Integer createId() {
+        return (Integer) (int) (Math.random() * ((99999999) + 1));
+    }
+
 
     public Integer getId() {
         return Id;

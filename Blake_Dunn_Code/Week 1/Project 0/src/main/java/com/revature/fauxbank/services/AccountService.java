@@ -22,72 +22,41 @@ public class AccountService {
 
     public Double validateDeposit(String amount) {
 
-        if (amount == null || amount.equals("")) {
-            throw new InvalidAmountException();
+        if (amount == null || amount.equals("") || amount.matches("^[a-zA-Z]*$")) {
+            System.out.println("Try again!");
+            return 0.0;
         }
 
         Double deposit = Double.valueOf(amount);
 
         if (deposit < 0 || deposit > 10000) {
             System.out.println("Try again!");
-//            router.navigate("/dashboard");
+            return 0.0;
         }
-        return deposit = validateAmount(deposit);
+
+        return convertAmount(deposit);
     }
 
     public Double validateWithdraw(String amount) {
 
-        if (amount == null || amount.equals("")) {
-            throw new InvalidAmountException();
+        if (amount == null || amount.equals("") || amount.matches("^[a-zA-Z]*$")) {
+            System.out.println("Try again!");
+            return 0.0;
         }
 
         Double withdraw = Double.valueOf(amount);
 
         if (withdraw > currentAccount.getBalance() || withdraw < 0) {
             System.out.println("Try again!");
-            router.navigate("/dashboard");
+            return 0.0;
         }
-        return withdraw = validateAmount(withdraw);
+        return convertAmount(withdraw);
     }
 
-    public Double validateAmount (Double amount) {
+    public Double convertAmount (Double amount) {
 
         BigDecimal bigDecimal = BigDecimal.valueOf(amount);
         return bigDecimal.setScale(2, RoundingMode.DOWN).doubleValue();
 
     }
-
-    public void newTransaction() {
-
-        System.out.println("Would you like to perform another transaction?");
-        System.out.println("1) Yes");
-        System.out.println("2) Logout");
-        System.out.println("3) Exit Application");
-
-        try {
-            System.out.print("> ");
-            String input = console.readLine();
-
-            switch (input) {
-
-                case "1":
-                    router.navigate("/dashboard");
-                    break;
-                case "2":
-                    router.navigate("/home");
-                    break;
-                case "3":
-                    System.out.println("Exiting application...");
-                    appRunning = false;
-                    break;
-                default:
-                    System.out.println("[LOG] - Invalid selection");
-                    router.navigate("/home");
-            }
-
-        }catch(Exception e) {
-            System.err.println("[ERROR] - " + e.getMessage());
-        }
-    }
-
 }

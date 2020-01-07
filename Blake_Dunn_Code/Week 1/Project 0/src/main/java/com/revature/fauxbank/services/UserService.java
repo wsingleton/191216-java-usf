@@ -9,23 +9,20 @@ import java.util.regex.Pattern;
 
 import static com.revature.fauxbank.BankDriver.currentAccount;
 import static com.revature.fauxbank.BankDriver.currentUser;
+import static com.revature.fauxbank.models.User.createId;
 
 public class UserService {
 
     private UserRepository userRepo;
     private AccountRepository accountRepo;
 
+    public UserService() {
+
+    }
+
     public UserService(UserRepository uRepo, AccountRepository aRepo) {
         this.userRepo = uRepo;
         this.accountRepo = aRepo;
-    }
-
-    public static Integer createId() {
-        return (Integer) (int) (Math.random() * ((99999999) + 1));
-    }
-
-    public static Integer createAccountNumber() {
-        return (Integer) (int) (Math.random() * ((9999999) + 1));
     }
 
     public void authenticate (String username, String password) {
@@ -54,17 +51,7 @@ public class UserService {
         user.setId(id);
         userRepo.save(user);
         currentUser = user;
-        createNewAccount(id);
-    }
-
-    public void createNewAccount(Integer id) {
-
-        Account newAccount = new Account(id, 0.0);
-        Integer acctNum = createAccountNumber();
-        newAccount.setAccountNumber(acctNum);
-        newAccount.setAccountType(AccountType.CHECKING);
-        accountRepo.save(newAccount);
-        currentAccount = newAccount;
+        accountRepo.save(currentAccount.createNewAccount(id));
     }
 
     public boolean isUserValid(User user) {
