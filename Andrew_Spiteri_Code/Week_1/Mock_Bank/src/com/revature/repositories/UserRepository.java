@@ -15,6 +15,21 @@ public class UserRepository implements CrudRepository<User>{
 
     @Override
     public Boolean save(User user) {
+        //todo figure out permissions needed for new users
+        //todo figure out how to create a junction table
+        /*
+CREATE USER chinook
+IDENTIFIED BY p4ssw0rd
+DEFAULT TABLESPACE users
+TEMPORARY TABLESPACE temp
+QUOTA 10M ON users;
+
+GRANT connect to chinook;
+GRANT resource to chinook;
+GRANT create session TO chinook;
+GRANT create table TO chinook;
+GRANT create view TO chinook;
+         */
         try {
             Connection con = createConnection();
             Statement statement = con.createStatement();
@@ -30,7 +45,6 @@ public class UserRepository implements CrudRepository<User>{
                 }
             }else{
                 System.out.println("The username you chose is taken.");
-                //TODO navigate to home screen
                 router.navigate("/home");
 
             }

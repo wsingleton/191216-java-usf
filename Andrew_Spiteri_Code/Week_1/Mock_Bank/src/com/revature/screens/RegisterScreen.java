@@ -19,21 +19,55 @@ public class RegisterScreen extends Screen {
     @Override
     public void render() {
         System.out.println("Welcome to the Registration Screen");
+        System.out.println("Are you creating a joint account (0) for yes and (1) for no?");
         Scanner sc = new Scanner(System.in);
-        System.out.print("First name: ");
-        String firstname =sc.next();
-        System.out.print("Last name: ");
-        String lastname =sc.next();
-        System.out.print("Username: ");
-        String username =sc.next();
-        System.out.print("Password: ");
-        String password =sc.next();
-        try{
-            UserService.registerUser(firstname, lastname, username, password);
-        }catch (IOException ioe){
-            System.out.println("Invalid input.");
-            router.navigate("/register");
+        if(sc.next().equals("1")){
+            try {
+                System.out.print("User 1 First name: ");
+                String firstname = sc.next();
+                System.out.print("User 1 Last name: ");
+                String lastname = sc.next();
+                System.out.print(" User 1 Username: ");
+                String username = sc.next();
+                System.out.print("User 1 Password: ");
+                String password = sc.next();
+
+                UserService.registerUser(firstname, lastname, username, password);
+
+                System.out.print("User 2 First name: ");
+                firstname = sc.next();
+                System.out.print("User 2 Last name: ");
+                lastname = sc.next();
+                System.out.print(" User 2 Username: ");
+                username = sc.next();
+                System.out.print("User 2 Password: ");
+                password = sc.next();
+
+                UserService.registerUser(firstname, lastname, username, password);
+            }catch (Exception e){
+                System.out.println("Invalid input.");
+                router.navigate("/register");
+            }
+        }else if(sc.next().equals("2")) {
+            try {
+                System.out.print("First name: ");
+                String firstname = sc.next();
+                System.out.print("Last name: ");
+                String lastname = sc.next();
+                System.out.print("Username: ");
+                String username = sc.next();
+                System.out.print("Password: ");
+                String password = sc.next();
+
+                UserService.registerUser(firstname, lastname, username, password);
+            } catch (Exception e) {
+                System.out.println("Invalid input.");
+                router.navigate("/register");
+            }
         }
+
+
+
 
 
     }

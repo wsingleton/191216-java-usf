@@ -15,6 +15,7 @@ public class AccountRepository implements CrudRepository<Account> {
 
     @Override
     public Boolean save(Account account) {
+        //TODO INSERT into table joint accounts
         try {
             Connection con = createConnection();
             Statement statement = con.createStatement();
