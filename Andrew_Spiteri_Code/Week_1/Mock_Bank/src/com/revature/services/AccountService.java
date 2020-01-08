@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 
+import static com.revature.MockBankDriver.currentUser;
 import static com.revature.MockBankDriver.router;
 
 public class AccountService {
@@ -60,16 +61,33 @@ public class AccountService {
         ar.update(account, amount);
     }
 
-    public void makePayment(Account account, Double amount){
+    public Boolean makePayment(Account account, Double amount){
         AccountRepository ar = new AccountRepository();
         if(amount < 0.01){
             System.out.println("Enter a positive number!");
             router.navigate("/account");
         }else if(account.getAccAmount() - amount < 0){
-            System.out.println("You cannot overdraw your account!");
+            System.out.println("You should pay more than you owe!");
             router.navigate("/account");
         }
-        ar.update(account, -amount);
+        if(ar.update(account, -amount)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Boolean createAccount(Account account, Double loanAmount){
+        Random rand = new Random();
+        account.setAccountAmount(loanAmount);
+        account.setAccountNo(rand.nextInt(1000000));
+        account.setId(currentUser.getID());
+
+        if(accountRepository.save(account)){
+            return true;
+        }else {
+            return false;
+        }
     }
 
 

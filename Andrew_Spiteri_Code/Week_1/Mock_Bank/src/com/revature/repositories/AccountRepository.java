@@ -19,7 +19,7 @@ public class AccountRepository implements CrudRepository<Account> {
             Connection con = createConnection();
             Statement statement = con.createStatement();
             String sql = "Insert into ACCOUNT values (" + account.getAccountNo() + ","
-                    + account.getId() +","+account.getAccAmount()+",'"+account.getAccountType().getId()+"')";
+                    + account.getId() +","+account.getAccAmount()+",'"+account.getAccountType().name()+"')";
             int num = statement.executeUpdate(sql);
             statement.close();
             if(num == 1){
@@ -43,7 +43,6 @@ public class AccountRepository implements CrudRepository<Account> {
                     Integer accountNo = rs.getInt("ACCOUNTNO");
                     Integer idNo = rs.getInt("ID");
                     Double amount = rs.getDouble("AMOUNT");
-                    //TODO CORRECT changes made to AccountType enum
                     AccountType type = AccountType.valueOf(rs.getString("TYPE"));
                     Account account = new Account(accountNo,idNo,amount,type);
                     accountSet.add(account);
