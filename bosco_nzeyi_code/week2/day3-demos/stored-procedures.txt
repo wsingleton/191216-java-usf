@@ -1,0 +1,44 @@
+
+STORED PROCEDURES VS STORED FUNCTIONS
+-------------------------------------
+
+STORED PROCEDURES
+---------------
+- used to perform a task
+- may or may not return a value
+- error handling is possible
+- DML + DDL operations are supported. 
+- can be used to fire off triggers
+- can call / make stored functions
+- cannot be used within SLECT, WHERE, or HAVING CLAUSES. 
+- Cn have in, out, and/ or IN / OUT procedures. 
+
+STORED FUNCTIONS
+----------------
+
+- Used to compute a value
+- Must have a return value
+- Error handling is not possible 
+- DDL + DML ops are not supported. 
+- Cannot fire off triggers
+- cannot be used independently
+- can be used within SELECT, WHERE, & HAVING CLAUSES. 
+- Only uses IN parameters. 
+
+Parameter types
+----------------
+
+IN = Input
+OUT = Output
+IN/OUT = Input / Output
+
+PL/SQL = Procedural Language extension of SQL
+---------------------------------------------
+Advantages: 
+	- Block structures
+	- Procedural language constraints (loops, conditionals, exception handling)
+	- better performance. 
+
+
+
+

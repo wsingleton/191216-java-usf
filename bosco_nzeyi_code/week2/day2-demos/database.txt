@@ -1,0 +1,22 @@
+
+ORACLE DATABASE
+-------------------
+
+format for column naming: column name, data type, and constraint.
+
+Properties of a database transaction
+------------------------------------- 
+
+A - Atomicity (all or none)
+C - Consistency (maintain ref integrity)
+I - Isolation (degrees to which multiple threads are separated)
+D - Durability (ensures all data committed persists). 
+
+KEYWORDS TO KNOW
+---------
+
+DROP
+TRUNCATE
+DELETE
+COMMIT
+ROLLBACK
