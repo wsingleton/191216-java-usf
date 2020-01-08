@@ -88,10 +88,7 @@ INSERT INTO products VALUES (3, 'Insulin', 25.00, DATE '2018-05-31');
 INSERT INTO products VALUES (4, 'Acetaminophen', 5.00, DATE '2019-01-31');
 INSERT INTO products VALUES (5, 'Amoxicillin', 8.00, DATE '2018-07-31');
 
-
 COMMIT;
-
-
 
 --delete vs truncate
 
