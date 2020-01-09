@@ -2,98 +2,76 @@ package com.revature.revabooks.repos;
 
 import com.revature.revabooks.models.Role;
 import com.revature.revabooks.models.User;
+import com.revature.revabooks.util.ConnectionFactory;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 public class UserRepository implements CrudRepository<User> {
 
-    private Integer key;
-    private HashMap<Integer, User> userDB;
 
-
-    {
-        key = 1;
-        userDB = new HashMap<>();
-        userDB.put(key, new User(key,"Wezley", "Singleton", "wsingleton", "p4ssw0rd", Role.ADMIN)); key++;
-        userDB.put(key, new User(key,"Steve", "Kelsey", "skelsey", "testpassw0rd", Role.MANAGER)); key++;
-        userDB.put(key, new User(key,"Blake", "Kruppa", "bkruppa", "password", Role.PREMIUM_MEMBER)); key++;
-        userDB.put(key, new User(key,"Robert", "Connell", "rconnell", "javascript", Role.BASIC_MEMBER)); key++;
-        userDB.put(key, new User(key,"Trevin", "Chester", "tchester", "humans", Role.ADMIN)); key++;
-    }
 
     public Set<User> findUsersByRole(Role role){
-        HashSet<User> users = new HashSet<>();
-
-        userDB.forEach((key, value) -> {
-            if (value.getRole().equals(role)){
-                users.add(value);
-            }
-        });
-
-        return users;
+        return null;
     }
 
     @Override
     public void save(User newObj) {
-        newObj.setId(key);
-        userDB.put(key++, newObj);
+
     }
 
     @Override
     public Set<User> findAll() {
 
-        HashSet<User> users = new HashSet<>();
-        for (Map.Entry<Integer, User> entry : userDB.entrySet()){
-            users.add(entry.getValue());
+        Set<User> users = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()){
+            String sql = "SELECT * FROM rbs_app.users";
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                User temp = new User();
+                temp.setId(rs.getInt("user_id"));
+                temp.setUsername(rs.getString("username"));
+                temp.setPassword(rs.getString("password"));
+                temp.setFirstName(rs.getString("first_name"));
+                temp.setLastName(rs.getString("last_name"));
+                temp.setRole(Role.BASIC_MEMBER);
+                users.add(temp);
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
         }
 
         return users;
     }
 
     public Optional<User> findUserByUsername(String username){
-        for (Map.Entry<Integer, User> entry: userDB.entrySet()) {
-            if(entry.getValue().getUsername().equals(username)){
-                return Optional.of(entry.getValue());
-            }
-        }
-        //avoids returning null, wrapper class
-        return Optional.empty();
+        return null;
     }
 
     public Optional<User> findUserByCredentials(String username, String password){
-        for (Map.Entry<Integer, User> entry: userDB.entrySet()) {
-            if(entry.getValue().getUsername().equals(username) && entry.getValue().getPassword().equals(password)) {
-                return Optional.of(entry.getValue());
-            }
-        }
-        //avoids returning null, wrapper class
-        return Optional.empty();
+        return null;
     }
 
     @Override
     public Optional<User> findById(Integer id) {
-
-        for (Map.Entry<Integer, User> entry: userDB.entrySet()) {
-            if(entry.getValue().getId().equals(id)){
-                return Optional.of(entry.getValue());
-            }
-        }
-        //avoids returning null, wrapper class
-        return Optional.empty();
+        return null;
     }
 
     @Override
     public Boolean update(User updatedObj) {
-
-        if(userDB.get(updatedObj.getId()) == null) {
-            return false;
-        }
-        userDB.put(updatedObj.getId(), updatedObj);
-        return true;
+      return false;
     }
 
     @Override
     public Boolean deleteById(Integer id) {
-        return userDB.remove(id) != null;
+        return false;
     }
 }

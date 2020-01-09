@@ -51,7 +51,7 @@ public class RegisterScreen extends Screen {
             System.err.println("Registration unsuccessful, invalid values provided or username is taken");
         }
         catch (Exception e){
-            System.err.println("[ERROR] - An unexpected error occured");
+            System.err.println("[ERROR] - An unexpected error occurred");
             System.err.println("[LOG] - Shutting down application");
             AppDriver.appRunning = false;
         }
