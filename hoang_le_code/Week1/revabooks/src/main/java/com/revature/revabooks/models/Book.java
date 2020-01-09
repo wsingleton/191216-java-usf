@@ -11,6 +11,11 @@ public class Book {
     private Author author;
     private Genre genre;
     private Integer stockCount;
+    private Double price;
+
+    public Book(){
+        super();
+    }
 
     public Book(String isbn, String title, Author author, Genre genre) {
         this.isbn = isbn;
@@ -26,6 +31,24 @@ public class Book {
         this.author = author;
         this.genre = genre;
         this.stockCount = stockCount;
+    }
+
+    public Book(Integer id, String isbn, String title, Author author, Genre genre, Integer stockCount, Double price) {
+        this.id = id;
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.stockCount = stockCount;
+        this.price = price;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Integer getId() {
@@ -86,12 +109,13 @@ public class Book {
                 Objects.equals(title, book.title) &&
                 Objects.equals(author, book.author) &&
                 genre == book.genre &&
-                Objects.equals(stockCount, book.stockCount);
+                Objects.equals(stockCount, book.stockCount) &&
+                Objects.equals(price, book.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isbn, title, author, genre, stockCount);
+        return Objects.hash(id, isbn, title, author, genre, stockCount, price);
     }
 
     @Override
@@ -103,7 +127,7 @@ public class Book {
                 ", author=" + author +
                 ", genre=" + genre +
                 ", stockCount=" + stockCount +
+                ", price=" + price +
                 '}';
     }
-
 }

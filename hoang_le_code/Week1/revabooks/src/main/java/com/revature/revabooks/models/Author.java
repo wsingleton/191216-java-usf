@@ -12,6 +12,11 @@ public class Author {
         this.lastName = lastName;
     }
 
+    public Author(String author_fn) {
+        this.firstName = author_fn;
+
+    }
+
     public String getFirstName() {
         return firstName;
     }
