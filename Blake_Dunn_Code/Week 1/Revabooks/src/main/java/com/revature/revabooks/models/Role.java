@@ -15,4 +15,24 @@ public enum Role {
     public String toString() {
         return roleName;
     }
+
+    public static Role getRoleById(int id) {
+
+        Role role = null;
+
+        switch(id) {
+            case 1:
+                role = Role.ADMIN;
+                break;
+            case 2:
+                role = Role.MANAGER;
+                break;
+            case 3:
+                role = Role.PREMIUM_MEMBER;
+                break;
+            default:
+                role = Role.BASIC_MEMBER;
+        }
+        return role;
+    }
 }

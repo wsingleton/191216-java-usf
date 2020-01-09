@@ -2,101 +2,147 @@ package com.revature.revabooks.repos;
 
 import com.revature.revabooks.models.Role;
 import com.revature.revabooks.models.User;
+import com.revature.revabooks.util.ConnectionFactory;
 
+import java.sql.*;
 import java.util.*;
 
 public class UserRepository implements CrudRepository<User> {
 
-    private Integer key;
-    private HashMap<Integer, User> userDb;
 
-    {
-        key = 1;
-        userDb = new HashMap<>();
-        userDb.put(key, new User(key, "Blake", "Dunn", "bdunn", "p4ssw0rd", Role.ADMIN)); key ++;
-        userDb.put(key, new User(key, "Ervin", "Stewart", "estewart", "gayyyyyyy", Role.MANAGER)); key ++;
-        userDb.put(key, new User(key, "Corbin", "Dunn", "cdunn", "brother", Role.PREMIUM_MEMBER)); key ++;
-        userDb.put(key, new User(key, "Robert", "Connell", "rconnell", "password", Role.BASIC_MEMBER)); key ++;
-        userDb.put(key, new User(key, "Trevin", "Chester", "tchester", "humans", Role.ADMIN)); key ++;
-    }
 
     // A lambda expression is the inline implementation of a functional interface's one abstract method
 
     public Set<User> findUsersByRole(Role role) {
 
-        HashSet<User> users = new HashSet<>();
-        userDb.forEach((key, value) -> {
-            if (value.getRole().equals(role)) {
-                users.add(value);
-            }
-        });
-        return users;
+       return null;
     }
 
     public Optional<User> findUserByUserName(String username) {
 
-        for (Map.Entry<Integer, User> entry : userDb.entrySet()) {
-            if (entry.getValue().getUserName().equals(username)) {
-                return Optional.of(entry.getValue());
-            }
+        Optional<User> _user = Optional.empty();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM rbs_app.users WHERE username = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            Set<User> set = mapResultSet(rs);
+            if (!set.isEmpty()) _user = set.stream().findFirst();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
         }
-        return Optional.empty();
+
+        return _user;
 
     }
 
     public Optional<User> findUserByCredentials(String username, String password) {
 
-        for (Map.Entry<Integer, User> entry : userDb.entrySet()) {
-            if (entry.getValue().getUserName().equals(username) &&
-                    entry.getValue().getPassword().equals(password)) {
-                return Optional.of(entry.getValue());
-            }
+        Optional<User> _user = Optional.empty();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM rbs_app.users WHERE username = ? AND password = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            ResultSet rs = pstmt.executeQuery();
+            Set<User> set = mapResultSet(rs);
+            if (!set.isEmpty()) _user = set.stream().findFirst();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
         }
-        return Optional.empty();
+
+        return _user;
 
     }
 
 
     @Override
     public void save(User newObject) {
-        newObject.setId(key);
-        userDb.put(key++, newObject);
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "INSERT INTO rbs_app.users VALUES (0, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
+            pstmt.setString (1, newObject.getUserName());
+            pstmt.setString(2, newObject.getPassword());
+            pstmt.setString(3, newObject.getFirstName());
+            pstmt.setString(4, newObject.getLastName());
+            pstmt.setInt(5, newObject.getRole().ordinal() +1);
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted != 0) {
+                ResultSet rs = pstmt.getGeneratedKeys();
+
+                while(rs.next()) {
+                    newObject.setId(rs.getInt(1));
+                }
+             }
+
+        } catch(SQLIntegrityConstraintViolationException e) {
+            e.printStackTrace();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public Set<User> findAll() {
 
-        HashSet<User> users = new HashSet<>();
+       Set<User> users = new HashSet<>();
 
-        for (Map.Entry<Integer, User> entry : userDb.entrySet()) {
-            users.add(entry.getValue());
-        }
+       try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-        return users;
+           String sql = "SELECT * FROM rbs_app.users";
+           Statement stmt = conn.createStatement(); // STATEMENT should never be used with user provided input
+           ResultSet rs = stmt.executeQuery(sql);
+           users = mapResultSet(rs);
+
+       }catch (SQLException e) {
+           e.printStackTrace();
+       }
+       return users;
     }
 
     @Override
     public Optional<User> findById(Integer id) {
 
-        for (Map.Entry<Integer, User> entry : userDb.entrySet()) {
-            if (entry.getValue().getId().equals(id)) {
-                return Optional.of(entry.getValue());
-            }
-        }
-
-        return Optional.empty();
+        return null;
     }
 
     @Override
     public Boolean update(User updateObj) {
 
-        if (userDb.get(updateObj.getId()) == null) return false;
-        userDb.put(updateObj.getId(), updateObj);
-        return true;
+         return false;
+
     }
 
     @Override
     public Boolean deleteById(Integer id) {
-        return (userDb.remove(id) != null);
+        return false;
+    }
+
+    private Set<User> mapResultSet(ResultSet rs) throws SQLException {
+        Set<User> users = new HashSet<>();
+        while (rs.next()) {
+            User temp = new User();
+            temp.setId(rs.getInt("user_id"));
+            temp.setUserName(rs.getString("username"));
+            temp.setPassword(rs.getString("password"));
+            temp.setFirstName(rs.getString("first_name"));
+            temp.setLastName(rs.getString("last_name"));
+            temp.setRole(Role.getRoleById(rs.getInt("role_id"))); // will come back to this
+            users.add(temp);
+        }
+        return users;
     }
 }

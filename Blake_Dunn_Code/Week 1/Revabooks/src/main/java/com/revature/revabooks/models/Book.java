@@ -10,22 +10,21 @@ public class Book {
     private String title;
     private Author author;
     private Genre genres;
+    private Double price;
     private Integer stockCount;
 
-    public Book(String isbn, String title, Author author, Genre genres) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.genres = genres;
-    }
-
-    public Book(Integer id, String isbn, String title, Author author, Genre genres, Integer stockCount) {
+    public Book(Integer id, String isbn, String title, Author author, Genre genres, Double price, Integer stockCount) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.genres = genres;
+        this.price = price;
         this.stockCount = stockCount;
+    }
+
+    public Book() {
+        super();
     }
 
     public Integer getId() {
@@ -68,6 +67,14 @@ public class Book {
         this.genres = genres;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     public Integer getStockCount() {
         return stockCount;
     }
@@ -81,17 +88,18 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id == book.id &&
-                stockCount == book.stockCount &&
+        return Objects.equals(id, book.id) &&
                 Objects.equals(isbn, book.isbn) &&
                 Objects.equals(title, book.title) &&
                 Objects.equals(author, book.author) &&
-                Objects.equals(genres, book.genres);
+                genres == book.genres &&
+                Objects.equals(price, book.price) &&
+                Objects.equals(stockCount, book.stockCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isbn, title, author, genres, stockCount);
+        return Objects.hash(id, isbn, title, author, genres, price, stockCount);
     }
 
     @Override
@@ -101,7 +109,8 @@ public class Book {
                 ", isbn='" + isbn + '\'' +
                 ", title='" + title + '\'' +
                 ", author=" + author +
-                ", genre=" + genres +
+                ", genres=" + genres +
+                ", price=" + price +
                 ", stockCount=" + stockCount +
                 '}';
     }
