@@ -5,20 +5,26 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Book {
-private Integer id;
-private String isbn;
-private String title;
-private Author author;
-private Genre genres;
-private Integer stockCount;
+    private Integer id;
+    private String isbn;
+    private String title;
+    private Author author;
+    private Genre genres;
+    private Integer stockCount;
+    private Double price;
 
-    public Book(Integer id, String isbn, String title, Author author, Genre genres, Integer stockCount) {
+    public Book(){
+        super();
+    }
+
+    public Book(Integer id, String isbn, String title, Author author, Genre genres, Integer stockCount, Double price) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.genres = genres;
         this.stockCount = stockCount;
+        this.price = price;
     }
 
     public Integer getId() {
@@ -69,22 +75,31 @@ private Integer stockCount;
         this.stockCount = stockCount;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id == book.id &&
-                stockCount == book.stockCount &&
+        return Objects.equals(id, book.id) &&
                 Objects.equals(isbn, book.isbn) &&
                 Objects.equals(title, book.title) &&
                 Objects.equals(author, book.author) &&
-                Objects.equals(genres, book.genres);
+                genres == book.genres &&
+                Objects.equals(stockCount, book.stockCount) &&
+                Objects.equals(price, book.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isbn, title, author, genres, stockCount);
+        return Objects.hash(id, isbn, title, author, genres, stockCount, price);
     }
 
     @Override
@@ -94,8 +109,9 @@ private Integer stockCount;
                 ", isbn='" + isbn + '\'' +
                 ", title='" + title + '\'' +
                 ", author=" + author +
-                ", genre=" + genres +
+                ", genres=" + genres +
                 ", stockCount=" + stockCount +
+                ", price=" + price +
                 '}';
     }
 }

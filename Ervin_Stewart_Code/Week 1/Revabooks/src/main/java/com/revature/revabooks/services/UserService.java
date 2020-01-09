@@ -25,7 +25,7 @@ public class UserService {
                 || pw == null || pw.trim().equals("")){
             throw new InvalidRequestException();
         }
-        currentUser = userRepo.findByCredentials(username,pw).orElseThrow(() -> new AuthenticationException());
+        currentUser = userRepo.findUserByCredentials(username,pw).orElseThrow(() -> new AuthenticationException());
         //  currentUser = userRepo.findByCredentials(username,pw).orElseThrow(AuthenticationException::new);
     }
 

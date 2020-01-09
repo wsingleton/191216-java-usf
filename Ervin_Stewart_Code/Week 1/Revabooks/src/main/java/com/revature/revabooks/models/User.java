@@ -11,6 +11,10 @@ public class User {
     private Role role;
 
 
+    public User(){
+     super();
+ }
+
 
     public User(String firstName, String lastName, String userName, String password) {
         this.firstName = firstName;

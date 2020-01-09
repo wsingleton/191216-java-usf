@@ -1,4 +1,4 @@
-package com.liberationbank;
+package com.liberationbank.servicestest;
 
 import com.liberationbank.services.AccountService;
 import org.junit.After;
