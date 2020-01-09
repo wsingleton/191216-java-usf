@@ -1,14 +1,14 @@
 package menus;
 
 public abstract class Menu {
-    private String address;
     private String name;
-    protected Menu(String address, String name) {
-        this.address=address;
+    private String route;
+    protected Menu(String name, String route) {
         this.name=name;
+        this.route=route;
     }
-    public String getAddress() {
-        return address;
+    public String getRoute() {
+        return route;
     }
     public String getName() {
         return name;

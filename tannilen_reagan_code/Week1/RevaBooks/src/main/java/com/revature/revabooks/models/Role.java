@@ -9,6 +9,24 @@ public enum Role {
         this.roleName = roleName;
     }
 
+    public static Role getRoleById(int i) {
+        Role role=null;
+        switch (i) {
+            case 1:
+                role=Role.ADMIN;
+                break;
+            case 2:
+                role=Role.MANAGER;
+                break;
+            case 3:
+                role=Role.PREMIUM_MEMBER;
+                break;
+            default:
+                role=Role.BASIC_MEMBER;
+        }
+        return role;
+    }
+
     @Override
     public String toString() {
         return roleName;

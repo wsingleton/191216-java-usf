@@ -3,83 +3,69 @@ package com.revature.revabooks.repos;
 import com.revature.revabooks.models.Author;
 import com.revature.revabooks.models.Book;
 import com.revature.revabooks.models.Genre;
+import com.revature.revabooks.util.ConnectionFactory;
+import oracle.jdbc.OracleTypes;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 public class BookRepository implements CrudRepository<Book> {
-    private Integer key;
-    private HashMap<Integer, Book> bookDB;
-    {
-        key=1;
-        bookDB=new HashMap<>();
-        bookDB.put(key, new Book(key, "123-12-12345-12-1", "Sample", new Author("John", "Doe"), Genre.GUIDE, 0));key++;
-        bookDB.put(key, new Book(key, "222-22-22222-22-2", "The Demon Haunted World", new Author("Carl", "Sagan"), Genre.NONFICTION, 3));key++;
-        bookDB.put(key, new Book(key, "987-65-43210-12-3", "The Moon is a Harsh Mistress", new Author("Robert", "Heinlein"), Genre.SCIENCE_FICTION, 13));key++;
-        bookDB.put(key, new Book(key, "000-00-00000-00-0", "Magic's Pawn", new Author("Mercedes", "Lackey"), Genre.FANTASY, 9));key++;
-        bookDB.put(key, new Book(key, "555-55-55555-55-5", "Sonnets and Poems", new Author("William", "Shakespeare"), Genre.POETRY, 2));key++;
-    }
     public Set<Book> findBooksByGenre(Genre genre) {
-        HashSet<Book> bookList=new HashSet<>();
-        bookDB.forEach((k, v) -> {
-            if (v.getGenre().equals(genre)) {bookList.add(v);}
-        });
-        return bookList;
+        Set<Book> books = new HashSet<>();
+        return books;
     }
     public Set<Book> findBooksByAuthor(String authorLastName) {
-        HashSet<Book> bookList=new HashSet<>();
-        bookDB.forEach((k, v) -> {
-            if (v.getAuthor().getLastName().equals(authorLastName)) {bookList.add(v);}
-        });
-        return bookList;
+        Set<Book> books = new HashSet<>();
+        return books;
     }
     public Set<Book> findBooksByTitle(String title) {
-        HashSet<Book> bookList=new HashSet<>();
-        bookDB.forEach((k, v) -> {
-            if (v.getTitle().contains(title)) {bookList.add(v);}
-        });
-        return bookList;
+        Set<Book> books = new HashSet<>();
+        return books;
     }
     public Optional<Book> findBookByISBN(String isbn) {
-        for(Map.Entry<Integer, Book> entry : bookDB.entrySet()) {
-            if (entry.getValue().getIsbn().equals(isbn)) {
-                return Optional.of(entry.getValue());
-            }
-        }
         return Optional.empty();
     }
     @Override
     public void save(Book book) {
-        book.setId(key);
-        bookDB.put(key, book);
-        key++;
     }
     @Override
     public Set<Book> findAll() {
-        HashSet<Book> books=new HashSet<>();
-        for(Map.Entry<Integer,Book> entry : bookDB.entrySet()) {
-            books.add(entry.getValue());
+        Set<Book> books = new HashSet<>();
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+            String sql="{CALL revabooks_app.get_all_books(?)}";
+            CallableStatement cstmt=conn.prepareCall(sql);
+            cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            cstmt.execute();
+            ResultSet rs = (ResultSet) cstmt.getObject(1);
+            while (rs.next()) {
+                Book temp=new Book();
+                temp.setId(rs.getInt("book_id"));
+                temp.setIsbn(rs.getString("isbn"));
+                temp.setTitle(rs.getString("title"));
+                temp.setAuthor(new Author(rs.getString("author_given"), rs.getString("author_family")));
+                temp.setGenre(Genre.getGenreById(rs.getInt("genre_id")));
+                temp.setPrice(rs.getDouble("price"));
+                temp.setStockCount(rs.getInt("stock"));
+                books.add(temp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return books;
     }
     @Override
     public Optional<Book> findByID(Integer id) {
-        for(Map.Entry<Integer, Book> entry : bookDB.entrySet()) {
-            if (entry.getValue().getId().equals(id)) {
-                return Optional.of(entry.getValue());
-            }
-        }
         return Optional.empty();
     }
     @Override
     public boolean update(Book book) {
-        if (bookDB.get(book.getId())==null) {
-            return false;
-        }
-        bookDB.put(book.getId(), book);
-        return true;
+        return false;
     }
     @Override
     public boolean deleteByID(Integer id) {
-        return (bookDB.remove(id))!=null;
+        return false;
     }
 }

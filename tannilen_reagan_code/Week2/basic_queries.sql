@@ -1,0 +1,15 @@
+select * from products;
+select prod_name, price from products;
+select emp_id, emp_given, emp_family, salary, (salary*1.2) as projected_raise from employees;
+select emp_given, emp_family from employees where emp_id>10;
+select * from products where exp_date > '07-JAN-2020';
+select distinct dept_id from employees;
+select distinct emp_given from employees;
+select distinct emp_family from employees;
+select prod_name, price from products order by price;
+select * from employees order by birthday asc;
+select * from products order by price desc;
+select * from products order by prod_name;
+select * from employees order by dept_id desc, emp_family;
+select systimestamp from dual;
+select dept_id,min(salary),max(salary) from employees group by dept_id having min(salary)<2000 or max(salary)>4000 order by dept_id desc;
