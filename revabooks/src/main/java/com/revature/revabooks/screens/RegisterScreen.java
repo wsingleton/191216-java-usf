@@ -49,6 +49,7 @@ public class RegisterScreen extends Screen {
         } catch (InvalidRequestException | ResourcePersistenceException e) {
             System.err.println("Registration unsuccessful, invalid values provided or username is taken");
         } catch (Exception e) {
+            e.printStackTrace();
             System.err.println("[ERROR] - An unexpected exception occurred");
             System.out.println("[LOG] - Shutting down application");
             appRunning = false;
