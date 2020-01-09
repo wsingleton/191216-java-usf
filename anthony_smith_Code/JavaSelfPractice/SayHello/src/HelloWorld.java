@@ -1,46 +1,11 @@
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.Objects;
 
-
-
-public class HelloWorld {
-
-
-    Scanner keyboard = new Scanner(System.in);
-
-    ArrayList<Character> charList = new ArrayList<Character>();
-
-    System.out.println("please enter 3 words");
-    String phrase = keyboard.nextLine();
-    String[] acro  = phrase.split(" ");
-
-    for(int i=0; i < acro.length; i++){
-        System.out.print(acro[i].charAt(0));
-        charList.add(acro[i].charAt(0));
-    }
-
-    charList.toString();
-}
-
-
-
-
+class HelloWorld {
     public static void main(String[] args) {
 
-
+        int index = 1;
+        String[] strArr = new String[5];
+        String myStr = strArr[index];
+        System.out.println(myStr);
+    }
 }
-
-
-
-//        public static String createAcronymFromPhrase(String phrase) {
-//
-//
-//            String s  = phrase;
-//            char c[] = s.toCharArray();
-//            System.out.println("the first character of the phrase is " + s.charAt(0));
-//
-//
-//            return phrase;
-//
-//
-//        }

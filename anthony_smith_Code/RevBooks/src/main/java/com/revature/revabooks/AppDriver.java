@@ -5,6 +5,7 @@ import com.revature.revabooks.repos.BookRepository;
 import com.revature.revabooks.repos.UserRepository;
 import com.revature.revabooks.screens.Screen;
 import com.revature.revabooks.services.UserService;
+import com.revature.revabooks.util.ScreenRouter;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,7 +21,7 @@ public class AppDriver {
         System.out.println("[LOG] - Initalizing application...");
 
         appRunning = true;
-        console= new BufferedReader((new InputStreamReader(System.in));
+        console= new BufferedReader((new InputStreamReader(System.in)));
 
         final UserRepository userRepo = new UserRepository();
         final BookRepository bookRepo = new BookRepository();

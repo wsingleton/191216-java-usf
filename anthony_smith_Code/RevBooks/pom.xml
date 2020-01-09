@@ -25,4 +25,17 @@
         <maven.complier.source>1.8</maven.complier.source>
         <maven.comolier.target>1.8</maven.comolier.target>
     </properties>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>12.2.0.1</version>
+        </dependency>
+
+    </dependencies>
+
+
 </project>

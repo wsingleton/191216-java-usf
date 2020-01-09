@@ -2,7 +2,8 @@ package com.revature.revabooks.exceptions;
 
 public class AuthenticationException extends RuntimeException {
 
-    public AuthenticationException(){
+    public AuthenticationException() {
         super("Authentication failed!");
     }
+
 }

@@ -1,9 +1,9 @@
 package com.revature.revabooks.screens;
 
-public class UserProfileScreen extends Screen {
+public class SearchBooksScreen extends Screen {
 
-    public UserProfileScreen() {
-        super("UserProfileScreen", "/profile");
+    public SearchBooksScreen() {
+        super("SearchBooksScreen", "/search");
         System.out.println("[LOG] - Instantiating " + super.getName());
     }
 
