@@ -53,6 +53,7 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.setString(3, user.getGivenName());
             pstmt.setString(4, user.getFamilyName());
             pstmt.setInt(5, user.getUserType().ordinal()+1);
+            //Project hangs here.  Not sure why.  Look into this.
             int rowsInserted=pstmt.executeUpdate();
             if (rowsInserted!=0) {
                 ResultSet rs=pstmt.getGeneratedKeys();
@@ -61,8 +62,8 @@ public class UserRepository implements CrudRepository<User> {
                 }
             }
         }
-        catch (SQLIntegrityConstraintViolationException sqe) {
-            sqe.printStackTrace();
+        catch (SQLIntegrityConstraintViolationException e) {
+            e.printStackTrace();
         }
         catch (SQLException e) {
             e.printStackTrace();
