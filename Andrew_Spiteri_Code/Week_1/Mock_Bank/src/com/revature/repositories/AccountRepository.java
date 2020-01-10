@@ -2,12 +2,11 @@ package com.revature.repositories;
 
 import com.revature.models.Account;
 import com.revature.models.AccountType;
+import com.revature.services.AccountService;
+
 import static com.revature.util.ConnectionFactory.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,13 +16,36 @@ public class AccountRepository implements CrudRepository<Account> {
     public Boolean save(Account account) {
         //TODO INSERT into table joint accounts
         try {
-            Connection con = createConnection();
-            Statement statement = con.createStatement();
-            String sql = "Insert into ACCOUNT values (" + account.getAccountNo() + ","
-                    + account.getId() +","+account.getAccAmount()+",'"+account.getAccountType().name()+"')";
-            int num = statement.executeUpdate(sql);
-            statement.close();
-            if(num == 1){
+            if(AccountService.savingsAccount.getAccountType().equals(AccountType.SAVINGS) && AccountService.checkingAccount.getAccountType().equals(AccountType.CHECKING)){
+                //String sql = "Insert into USER_ACCOUNT values (" + account.getId() +","+ account.getAccountNo() + ")";
+                String sql = "Insert into USER_ACCOUNT values (?,?)";
+                PreparedStatement ps = getCon().prepareStatement(sql);
+                ps.setInt(1,account.getId());
+                ps.setInt(2,account.getAccountNo());
+                int num = ps.executeUpdate();
+                ps.close();
+                if(num == 1){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            String sql = "Insert into ACCOUNT values ( ?,?,?)";
+            PreparedStatement ps = getCon().prepareStatement(sql);
+//          String sql = "Insert into ACCOUNT values (" + account.getAccountNo() +
+//                    ","+account.getAccAmount()+",'"+account.getAccountType().name()+"')";
+            ps.setInt(1, account.getAccountNo());
+            ps.setDouble(2,account.getAccAmount());
+            ps.setString(3,account.getAccountType().name());
+            int num = ps.executeUpdate();
+            //sql = "Insert into USER_ACCOUNT values (" + account.getId() +","+ account.getAccountNo() + ")";
+            sql = "Insert into USER_ACCOUNT values (?,?)";
+            ps = getCon().prepareStatement(sql);
+            ps.setInt(1,account.getId());
+            ps.setInt(2,account.getAccountNo());
+            num += ps.executeUpdate();
+            ps.close();
+            if(num == 2){
                 return true;
             }
         } catch (Exception e) {
@@ -33,38 +55,42 @@ public class AccountRepository implements CrudRepository<Account> {
     }
 
     public Set<Account> findById(Integer id) {
-        Connection con = createConnection();
+        Set<Account> accountSet = new HashSet<>();
         try{
-            Statement st = con.createStatement();
-            String sql = "SELECT * FROM ACCOUNT WHERE ID =" + id;
-            ResultSet rs = st.executeQuery(sql);
+            String sql = "SELECT * FROM ACCOUNT JOIN USER_ACCOUNT ON ACCOUNT.ACCOUNTNO = USER_ACCOUNT.ACCOUNT_NO WHERE USER_ACCOUNT.USER_ID = ?";
+            PreparedStatement ps = getCon().prepareStatement(sql);
+
+            ps.setInt(1,id);
+            //sql = "SELECT * FROM ACCOUNT JOIN USER_ACCOUNT ON ACCOUNT.ACCOUNTNO = USER_ACCOUNT.ACCOUNT_NO WHERE USER_ACCOUNT.USER_ID =" + id;
+            ResultSet rs = ps.executeQuery();
             if(rs.isBeforeFirst()) {
-                Set<Account> accountSet = new HashSet<>();
+
                 while (rs.next()) {
                     Integer accountNo = rs.getInt("ACCOUNTNO");
-                    Integer idNo = rs.getInt("ID");
+                    Integer idNo = rs.getInt("USER_ID");
                     Double amount = rs.getDouble("AMOUNT");
                     AccountType type = AccountType.valueOf(rs.getString("TYPE"));
                     Account account = new Account(accountNo,idNo,amount,type);
                     accountSet.add(account);
                 }
-                return accountSet;
             }
         }catch (SQLException sqlE){
             sqlE.getSQLState();
         }
-        return new HashSet<>();
+        return accountSet;
     }
 
 
     public boolean update(Account account, Double amount) {
-        Connection con = createConnection();
         Double newAmount = account.getAccAmount() + amount;
         try {
-            Statement st = con.createStatement();
-            String sql = "UPDATE ACCOUNT set AMOUNT="+ newAmount + " WHERE ACCOUNTNO =" + account.getAccountNo();
-            int num = st.executeUpdate(sql);
-            if(num == 1){
+            String sql = "UPDATE ACCOUNT set AMOUNT=? WHERE ACCOUNTNO =?";
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setDouble(1,newAmount);
+            ps.setInt(2,account.getAccountNo());
+            //sql = "UPDATE ACCOUNT set AMOUNT="+ newAmount + " WHERE ACCOUNTNO =" + account.getAccountNo();
+            int rowsInserted = ps.executeUpdate();
+            if(rowsInserted == 1){
                 return true;
             }
         }catch (SQLException sqlE){

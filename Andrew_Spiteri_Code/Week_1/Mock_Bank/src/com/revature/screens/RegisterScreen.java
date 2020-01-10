@@ -1,5 +1,6 @@
 package com.revature.screens;
 
+import com.revature.services.AccountService;
 import com.revature.services.UserService;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ public class RegisterScreen extends Screen {
 
     public RegisterScreen(UserService userService) {
         super("RegisterScreen", "/register");
-        System.out.println("[LOG] + Instantiating "+ super.getName());
+        //System.out.println("[LOG] + Instantiating "+ super.getName());
         this.userService = userService;
     }
 
@@ -21,7 +22,8 @@ public class RegisterScreen extends Screen {
         System.out.println("Welcome to the Registration Screen");
         System.out.println("Are you creating a joint account (0) for yes and (1) for no?");
         Scanner sc = new Scanner(System.in);
-        if(sc.next().equals("1")){
+        String holder = sc.next();
+        if(holder.equals("0")){
             try {
                 System.out.print("User 1 First name: ");
                 String firstname = sc.next();
@@ -32,8 +34,14 @@ public class RegisterScreen extends Screen {
                 System.out.print("User 1 Password: ");
                 String password = sc.next();
 
-                UserService.registerUser(firstname, lastname, username, password);
+                Boolean createUser = UserService.registerUser(firstname, lastname, username, password, true);
 
+                if (!createUser){
+                    System.out.println("Error creating accounts!");
+                    AccountService.checkingAccount = null;
+                    AccountService.savingsAccount = null;
+                    router.navigate("/home");
+                }
                 System.out.print("User 2 First name: ");
                 firstname = sc.next();
                 System.out.print("User 2 Last name: ");
@@ -43,12 +51,14 @@ public class RegisterScreen extends Screen {
                 System.out.print("User 2 Password: ");
                 password = sc.next();
 
-                UserService.registerUser(firstname, lastname, username, password);
+                UserService.registerUser(firstname, lastname, username, password, false);
             }catch (Exception e){
                 System.out.println("Invalid input.");
-                router.navigate("/register");
+                AccountService.checkingAccount = null;
+                AccountService.savingsAccount = null;
+                router.navigate("/home");
             }
-        }else if(sc.next().equals("2")) {
+        }else if(holder.equals("1")) {
             try {
                 System.out.print("First name: ");
                 String firstname = sc.next();
@@ -59,11 +69,16 @@ public class RegisterScreen extends Screen {
                 System.out.print("Password: ");
                 String password = sc.next();
 
-                UserService.registerUser(firstname, lastname, username, password);
+                UserService.registerUser(firstname, lastname, username, password, false);
             } catch (Exception e) {
                 System.out.println("Invalid input.");
-                router.navigate("/register");
+                AccountService.checkingAccount = null;
+                AccountService.savingsAccount = null;
+                router.navigate("/home");
             }
+        }else{
+            System.out.println("Invalid input.");
+            router.navigate("/home");
         }
 
 

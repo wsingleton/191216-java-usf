@@ -20,7 +20,7 @@ public class AccountScreen extends Screen {
 
     public AccountScreen(UserService userService) {
         super("AccountScreen", "/account");
-        System.out.println("[LOG] - Instantiating "+super.getName());
+        //System.out.println("[LOG] - Instantiating "+super.getName());
         this.userService = userService;
     }
 
@@ -63,7 +63,7 @@ public class AccountScreen extends Screen {
 
             System.out.println("Savings (1), Checking (2), Take out Auto Loan! (3), Take out a Mortgage! (4), or Exit (5)");
             String holder = scanner.next();
-            if (holder.equals("1")) {
+        if (holder.equals("1")) {
                 System.out.println("The amount you have deposited in savings is: " + df.format(savingsAmount));
                 System.out.println("Would you like deposit (1), withdraw (2), or go to you account page (3)");
                 switch (scanner.next()) {

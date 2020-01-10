@@ -12,9 +12,9 @@ import static com.revature.util.ConnectionFactory.*;
 public class AdminCrud {
 
     public static Boolean createAccountTypeTable(){
-        Connection con = createConnection();
+
         try {
-            Statement st = con.createStatement();
+            Statement st = getCon().createStatement();
             String sql = "INSERT INTO ACCOUNT_TYPE VALUES (1," + AccountType.SAVINGS.name() +")";
             int x = st.executeUpdate(sql);
             if(x >= 1){

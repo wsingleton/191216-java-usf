@@ -10,7 +10,7 @@ public class AdminScreen extends Screen {
 
     public AdminScreen(UserService userService) {
         super("AdminScreen", "/admin");
-        System.out.println("[LOG] + Instantiating "+ super.getName());
+        //System.out.println("[LOG] + Instantiating "+ super.getName());
         this.userService = userService;
     }
 

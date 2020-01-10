@@ -18,11 +18,12 @@ public class UserService {
     UserRepository userRepository;
 
 
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public static void registerUser(String firstname, String lastname, String username, String password) throws IOException {
+    public static Boolean registerUser(String firstname, String lastname, String username, String password, Boolean jointAccount) throws IOException {
         UserRepository userRepository = new UserRepository();
         AccountRepository accountRepository = new AccountRepository();
         AccountService accountService = new AccountService(accountRepository);
@@ -30,14 +31,23 @@ public class UserService {
         Random rand = new Random();
         CreditScore tuScore = CreditScore.TRANSUNION, expScore = CreditScore.EXPERIAN;
         tuScore.setScore(rand.nextInt(850-300)+300);
-        expScore.setScore(rand.nextInt(850-300)+300);
+        expScore.setScore(rand.nextInt(tuScore.getScore() - 10)+10);
         User user = new User(userId, firstname, lastname, username, password, Role.MEMBER, tuScore, expScore);
         Boolean bool = userRepository.save(user);
-        accountService.registerAccount(userId);
+        AccountService.registerAccount(userId, jointAccount);
+        if(jointAccount && bool){
+            System.out.println("User successfully registered!");
+            return true;
+        }
         if (bool){
             System.out.println("User successfully registered!");
             router.navigate("/login");
+        }else{
+            System.out.println("Error creating user!");
+            router.navigate("/home");
         }
+        return false;
+
     }
 
     public void login(String username, String password){

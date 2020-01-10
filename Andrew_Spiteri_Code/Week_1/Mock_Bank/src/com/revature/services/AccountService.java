@@ -13,25 +13,49 @@ import static com.revature.MockBankDriver.router;
 
 public class AccountService {
     AccountRepository accountRepository;
+    public static Account savingsAccount = new Account(AccountType.TEMP);
+    public static Account checkingAccount = new Account(AccountType.TEMP);
 
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
-    public void registerAccount(Integer userID){
+    public static void registerAccount(Integer userID, Boolean jointAccount){
         AccountRepository ar = new AccountRepository();
         Random rand = new Random();
         int num = 0;
-        Integer savingsAccountNo = rand.nextInt(1000000);
-        Account savingsAccount = new Account(savingsAccountNo,userID,0.0, AccountType.SAVINGS);
-        if(!ar.save(savingsAccount)){
-            System.out.println("Savings account not created!");
+        if(savingsAccount.getAccountType().equals(AccountType.SAVINGS)){
+            Account savingsAccount = new Account(AccountService.savingsAccount.getAccountNo(), userID, 0.0, AccountType.SAVINGS);
+            if(!ar.save(savingsAccount)){
+                System.out.println("Savings account not created!");
+            }
+        }else {
+            Integer savingsAccountNo = rand.nextInt(1000000);
+            Account savingsAccount = new Account(savingsAccountNo, userID, 0.0, AccountType.SAVINGS);
+            if(!ar.save(savingsAccount)){
+                System.out.println("Savings account not created!");
+            }
+            if(jointAccount){
+                AccountService.savingsAccount = savingsAccount;
+            }
         }
-        Integer checkingAccountNo = rand.nextInt(1000000);
-        Account checkingAccount = new Account(checkingAccountNo,userID,0.0, AccountType.CHECKING);
-        if(!ar.save(checkingAccount)){
-            System.out.println("Checking account not created!");
+
+        if(checkingAccount.getAccountType().equals(AccountType.CHECKING)){
+            Account checkingAccount = new Account(AccountService.checkingAccount.getAccountNo(), userID, 0.0, AccountType.CHECKING);
+            if(!ar.save(checkingAccount)){
+                System.out.println("Savings account not created!");
+            }
+        }else {
+            Integer checkingAccountNo = rand.nextInt(1000000);
+            Account checkingAccount = new Account(checkingAccountNo, userID, 0.0, AccountType.CHECKING);
+            if (!ar.save(checkingAccount)) {
+                System.out.println("Checking account not created!");
+            }
+            if(jointAccount){
+                AccountService.checkingAccount = checkingAccount;
+            }
         }
+
     }
 
     public Set<Account> getAccAmount(Integer id){

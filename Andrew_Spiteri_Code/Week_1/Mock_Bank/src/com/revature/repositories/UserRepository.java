@@ -31,8 +31,7 @@ GRANT create table TO chinook;
 GRANT create view TO chinook;
          */
         try {
-            Connection con = createConnection();
-            Statement statement = con.createStatement();
+            Statement statement = getCon().createStatement();
             String sql = "SELECT ID FROM USERS WHERE ID="+ user.getID();
             ResultSet rs = statement.executeQuery(sql);
             if(!rs.isBeforeFirst()){
@@ -55,11 +54,13 @@ GRANT create view TO chinook;
     }
     //TODO Optional is a way of avoiding returning nulls, no NullPointerException
     public User findById(Integer id) {
+        User user = new User();
         try {
-            Connection con= createConnection();
-            Statement statement = con.createStatement();
-            String sql = "SELECT * FROM USERS WHERE ID ="+  id;
-            ResultSet rs = statement.executeQuery(sql);
+            String sql = "SELECT * FROM USERS WHERE ID = ?";
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            //String sql = "SELECT * FROM USERS WHERE ID ="+  id;
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Integer idNo = rs.getInt("ID");
                 String fname =rs.getString("FNAME");
@@ -67,13 +68,12 @@ GRANT create view TO chinook;
                 String uname =rs.getString("USERNAME");
                 String pw =rs.getString("PASSWORD");
                 Role role = Role.valueOf(rs.getString("ROLE"));
-                User user = new User(idNo,fname,lname,uname,pw,role);
-                return user;
+                user = new User(idNo,fname,lname,uname,pw,role);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return user;
     }
 
     public boolean update(User user) {
@@ -83,9 +83,8 @@ GRANT create view TO chinook;
 
     @Override
     public boolean deleteById(Integer id) {
-        Connection con = createConnection();
         try {
-            Statement st = con.createStatement();
+            Statement st = getCon().createStatement();
             String sql = "DELETE FROM ACCOUNT WHERE ID = " + id;
             int num = st.executeUpdate(sql);
             sql = "DELETE FROM USERS WHERE ID = " + id;
@@ -101,11 +100,10 @@ GRANT create view TO chinook;
 
     //TODO finish credit score method in UserRepository
     public static Integer creditScore(Integer id){
-        Connection con = createConnection();
         Random rand = new Random();
         Integer tu, exp, cs;
         try{
-            Statement st = con.createStatement();
+            Statement st = getCon().createStatement();
             String sql = "SELECT TRANSUNION, EXPERIAN FROM USERS WHERE ID = " + id;
             ResultSet rs = st.executeQuery(sql);
             if(rs.isBeforeFirst()){

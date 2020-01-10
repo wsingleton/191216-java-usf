@@ -3,18 +3,21 @@ package com.revature.revabooks.models;
 import java.util.*;
 
 public class Book {
-    private Integer id, stockCount;
+    private Integer id, stockCount, price;
     private String isbn, title;
     private Author author;
     Genre genre;
 
-    public Book(Integer id, Integer stockCount, String isbn, String title, Author author, Genre genre) {
+    public Book(){}
+
+    public Book(Integer id, Integer stockCount, String isbn, String title, Author author, Genre genre, Integer price) {
         this.id = id;
         this.stockCount = stockCount;
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.genre = genre;
+        this.price = price;
     }
     public Book(Integer id, String isbn, String title, Author author, Genre genre) {
         this.id = id;
@@ -23,6 +26,12 @@ public class Book {
         this.title = title;
         this.author = author;
         this.genre = genre;
+    }
+
+    public Integer getPrice(){return price;}
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     public Integer getId() {
@@ -65,11 +74,11 @@ public class Book {
         this.author = author;
     }
 
-    public Genre getGenres() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenres(Set<Genre> genres) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 

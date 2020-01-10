@@ -8,6 +8,7 @@ public class User {
     private Role role;
     private CreditScore tu, exp;
 
+    public User(){}
 
     public User(String fn, String ln, String username, String pw, Role role) {
         // a call to the super class's constructor is implicitly here if it not provided

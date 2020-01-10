@@ -17,6 +17,10 @@ public class Account {
 
     Random random = new Random();
 
+    public Account(AccountType type){
+        this.accountType = type;
+    }
+
     public Account(Integer id, AccountType type){
         this.id = id;
         this.accountType = type;

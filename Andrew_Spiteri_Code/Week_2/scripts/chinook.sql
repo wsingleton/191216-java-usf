@@ -1,3 +1,5 @@
+--2.0 SQL Queries
+--2.1 SELECT
 --Task – Select all records from the Employee table. 
 SELECT * 
 FROM employee;
@@ -13,6 +15,7 @@ FROM employee
 WHERE firstname = 'Andrew'
 AND reportsto IS NULL;
 
+--2.2 ORDER BY
 --Task – Select all albums in album table and sort result set in descending order
 SELECT * 
 FROM ALBUM
@@ -23,6 +26,7 @@ SELECT firstname
 FROM customer
 ORDER BY firstname;
 
+--2.3 INSERT INTO
 --Task – Insert two new records into Genre table
 INSERT  
 INTO genre
@@ -48,6 +52,7 @@ VALUES (61, 'Amanda', 'Ratliffe', 'Underwood Industries', '990 Whatchamacallit A
 SELECT *
 FROM dual;
 
+--2.4 UPDATE
 --Task – Update Aaron Mitchell in Customer table to Robert Walter
 UPDATE customer
 set firstname= 'Robert', lastname = 'Walter'
@@ -59,11 +64,13 @@ UPDATE artist
 set name= 'CCR'
 where name = 'Creedence Clearwater Revival';
 
+--2.5 LIKE
 --Task – Select all invoices with a billing address like “T”
 SELECT *
 from invoice
 where billingaddress like 'T';
 
+--2.6 BETWEEN
 --Task – Select all invoices that have a total between 15 and 50
 SELECT *
 FROM invoice
@@ -74,16 +81,32 @@ SELECT *
 FROM employee
 WHERE hiredate BETWEEN '01-JUN-03' AND '01-MAR-04';
 
+--2.7 DELETE
 --TODO finish statement
 --Task – Delete a record in Customer table where the name is Robert Walter (There may be constraints that rely on this, find out how to resolve them).
-SELECT *
-FROM invoiceline
-full outer join invoice
-on invoice.invoiceid = invoiceline.invoiceid
-full outer join customer
-on customer.customerid = invoice.customerid
-where customer.lastname = 'Walter' AND customer.firstname = 'Robert';
+ALTER TABLE invoiceline
+DROP CONSTRAINT FK_INVOICELINEINVOICEID;
 
+ALTER TABLE invoiceline
+ADD CONSTRAINT FK_INVOICELINEINVOICEID
+FOREIGN KEY(invoiceid)
+REFERENCES invoice(invoiceid)
+ON DELETE CASCADE;
+
+ALTER TABLE invoice
+DROP CONSTRAINT FK_INVOICECUSTOMERID;
+
+ALTER TABLE invoice
+ADD CONSTRAINT FK_INVOICECUSTOMERID
+FOREIGN KEY(customerid)
+REFERENCES customer(customerid)
+ON DELETE CASCADE;
+
+DELETE FROM customer
+WHERE firstname = 'Robert' AND lastname = 'Walter';
+
+--3.0 SQL Functions
+--3.1 System Defined Functions
 --Task – Create a function that returns the current time.
 SELECT SYSTIMESTAMP(9) FROM DUAL;
 
@@ -91,6 +114,7 @@ SELECT SYSTIMESTAMP(9) FROM DUAL;
 SELECT LENGTH(name)
 FROM mediatype;
 
+--3.2 System Defined Aggregate Functions
 --Task –Create a function that returns the average total of all invoices
 SELECT AVG(total) as avg
 FROM invoice;
@@ -98,4 +122,165 @@ FROM invoice;
 --Task – Create a function that returns the most expensive track
 SELECT MAX(unitprice)
 FROM track;
+
+--3.3 User Defined Scalar functions
+--Task – Create a function that returns the average price of invoice-line items in the invoice-line table
+CREATE OR REPLACE FUNCTION apInvoiceLine
+    RETURN NUMBER
+    AS avg_price NUMBER;
+    
+BEGIN
+    SELECT AVG(unitprice)
+    INTO avg_price
+    FROM invoiceline;
+    
+    RETURN avg_price;
+END;
+/
+
+SET SERVEROUTPUT ON;
+
+DECLARE 
+    avgPrice NUMBER;
+BEGIN
+    avgPrice := apInvoiceLine();
+    DBMS_OUTPUT.PUT_LINE('The avg price in the Invoice Line table is ' || avgPrice);
+END;
+/
+
+--3.4 User Defined Table Valued Functions
+--Task – Create a function that returns all employees who are born after 1968.
+CREATE OR REPLACE FUNCTION after_1968
+    RETURN SYS_REFCURSOR
+    IS my_cursor SYS_REFCURSOR;
+        
+BEGIN
+    OPEN my_cursor FOR
+    SELECT firstname, lastname, birthdate 
+    FROM employee
+    WHERE birthdate > DATE '1968-12-31';
+            
+    RETURN my_cursor;
+END;
+/
+
+DECLARE
+    v_cursor    SYS_REFCURSOR;
+    v_fn        employee.firstname%TYPE;
+    v_ln        employee.lastname%TYPE;
+    v_bd        employee.birthdate%TYPE;
+BEGIN
+    v_cursor := after_1968();
+    LOOP
+        FETCH v_cursor
+        INTO v_fn, v_ln, v_bd;
+        EXIT WHEN v_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(v_fn || ' ' || v_ln || ' was born on ' || v_bd);
+    END LOOP;
+    CLOSE v_cursor;
+END;
+/
+
+--4.0 Stored Procedures
+--4.1 Basic Stored Procedure
+--Task – Create a stored procedure that selects the first and last names of all the employees.
+CREATE OR REPLACE PROCEDURE first_and_last (my_cursor OUT SYS_REFCURSOR)
+    IS
+BEGIN
+    OPEN my_cursor FOR
+    SELECT firstname, lastname
+    FROM employee;
+END;
+/
+
+DECLARE
+    v_cursor    SYS_REFCURSOR;
+    v_fn        employee.firstname%TYPE;
+    v_ln        employee.lastname%TYPE;
+BEGIN
+    first_and_last(v_cursor);
+    LOOP
+    FETCH v_cursor
+    INTO v_fn, v_ln;
+    EXIT WHEN v_cursor%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE(v_fn || ' ' || v_ln);
+    END LOOP;
+    CLOSE v_cursor;
+END;
+/
+
+--4.2 Stored Procedure Input Parameters
+--Task – Create a stored procedure that updates the personal information of an employee.
+CREATE OR REPLACE PROCEDURE update_phone 
+    (phone_number IN VARCHAR2, empid IN NUMBER)
+    AS
+BEGIN
+    UPDATE employee 
+    SET phone = phone_number
+    WHERE employeeid = empid;
+END;
+/
+
+EXECUTE update_phone('810-657-9007', 1);
+
+SELECT phone FROM employee WHERE employeeid = 1;
+
+--Task – Create a stored procedure that returns the managers of an employee
+CREATE OR REPLACE PROCEDURE emp_managers 
+    (empid IN employee.employeeid%TYPE,
+    fn OUT employee.firstname%TYPE, ln OUT employee.lastname%TYPE)
+    AS
+BEGIN
+    SELECT e2.firstname, e2.lastname
+    INTO fn, ln
+    from employee e1
+    join employee e2
+    on e2.employeeid = e1.reportsto
+    where empid = e1.employeeid;
+END;
+/
+
+DECLARE
+    fn      employee.firstname%TYPE;
+    ln      employee.lastname%TYPE;
+BEGIN
+    emp_managers(5, fn, ln);
+    DBMS_OUTPUT.PUT_LINE(fn || ' ' || ln);
+END;
+/
+
+--4.3 Stored Procedure Output Parameters
+--Task – Create a stored procedure that returns the name and company of a customer.
+CREATE OR REPLACE PROCEDURE cust_name_comp
+    (
+        c_cursor OUT SYS_REFCURSOR
+    )
+    AS
+BEGIN
+    OPEN c_cursor FOR
+    SELECT firstname, lastname, company
+    FROM customer;
+END;
+/
+
+DECLARE
+    fn  customer.firstname%TYPE;
+    ln  customer.lastname%TYPE;
+    comp customer.company%TYPE;
+    c_cursor SYS_REFCURSOR;
+BEGIN
+    cust_name_comp(c_cursor);
+    LOOP
+        FETCH c_cursor
+        INTO fn, ln, comp;
+        EXIT WHEN c_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('Company: ' || comp || ', Name: ' || fn || ' ' || ln);
+    END LOOP;
+    CLOSE c_cursor;
+END;
+/
+
+--5.0 Transactions
+--Task – Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely 
+--on this, find out how to resolve them)...poiij
 

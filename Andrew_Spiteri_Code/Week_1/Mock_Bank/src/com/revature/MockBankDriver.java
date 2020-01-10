@@ -22,7 +22,7 @@ public class MockBankDriver {
     public static Set<Account> accountSet;
 
     static {
-        System.out.println("[LOG] - Initializing application...");
+
         appRunning = true;
         console = new Scanner(System.in);
 
@@ -40,7 +40,7 @@ public class MockBankDriver {
         .addScreen(new AdminScreen(userService));
 
 
-        System.out.println("[LOG] - Application initializing complete.");
+
     }
 
     public static void main(String... args) throws IOException {
