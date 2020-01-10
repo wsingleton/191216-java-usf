@@ -1,0 +1,1 @@
+SELECT * FROM rbs_app.users;

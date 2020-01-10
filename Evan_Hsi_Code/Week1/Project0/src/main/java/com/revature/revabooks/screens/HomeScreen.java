@@ -19,7 +19,7 @@ public class HomeScreen extends Screen {
         try {
 
             System.out.print("> ");
-            String userSelection = consoLe.readLine();
+            String userSelection = console.readLine();
 
             switch(userSelection) {
                 case "1":

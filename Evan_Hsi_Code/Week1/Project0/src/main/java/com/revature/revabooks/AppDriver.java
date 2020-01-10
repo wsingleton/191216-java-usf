@@ -12,7 +12,7 @@ import java.io.*;
 
 public class AppDriver {
 
-    public static BufferedReader consoLe;
+    public static BufferedReader console;
     public static ScreenRouter router;
     public static boolean appRunning;
     public static User currentUser;
@@ -21,7 +21,7 @@ public class AppDriver {
         System.out.println("[LOG] - Initializing application...");
 
         appRunning = true;
-        consoLe = new BufferedReader(new InputStreamReader(System.in));
+        console = new BufferedReader(new InputStreamReader(System.in));
 
         final UserRepository userRepo = new UserRepository();
         final BookRepository bookRepo = new BookRepository();

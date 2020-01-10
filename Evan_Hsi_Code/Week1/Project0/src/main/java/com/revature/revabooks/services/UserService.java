@@ -23,7 +23,7 @@ public class UserService {
 
     public void authenticate(String username, String password) {
 
-        System.out.println("userv authenticate");
+        //System.out.println("userv authenticate");
 
         if (username == null || username.trim().equals("")
             || password == null || password.trim().equals(""))

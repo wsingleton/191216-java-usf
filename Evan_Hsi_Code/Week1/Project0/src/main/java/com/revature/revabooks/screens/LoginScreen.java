@@ -31,14 +31,11 @@ public class LoginScreen extends Screen {
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
             System.out.println("Please provide your login credentials");
             System.out.println("Username: ");
-            username = consoLe.readLine();
+            username = console.readLine();
             System.out.println("Password: ");
-            password = consoLe.readLine();
-            System.out.println("preKappa");
+            password = console.readLine();
 
             userv.authenticate(username, password);
-
-            System.out.println("kappa");
 
             if (currentUser != null) {
                 System.out.println("[LOG] - Login successful, navigating to dashboard...");
