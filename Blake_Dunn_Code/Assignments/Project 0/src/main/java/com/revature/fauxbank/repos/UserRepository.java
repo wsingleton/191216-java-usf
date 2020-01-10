@@ -1,10 +1,14 @@
 package com.revature.fauxbank.repos;
 
+import com.revature.fauxbank.models.Account;
 import com.revature.fauxbank.models.User;
 import com.revature.fauxbank.util.ConnectionFactory;
 
 import java.sql.*;
 import java.util.*;
+
+import static com.revature.fauxbank.BankDriver.currentAccount;
+import static com.revature.fauxbank.BankDriver.currentUser;
 
 public class UserRepository implements CrudRepository<User> {
 
@@ -87,23 +91,6 @@ public class UserRepository implements CrudRepository<User> {
     }
 
     @Override
-    public Set<User> findAll() {
-        Set<User> users = new HashSet<>();
-
-        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = "SELECT * FROM users";
-            Statement stmt = conn.createStatement(); // STATEMENT should never be used with user provided input
-            ResultSet rs = stmt.executeQuery(sql);
-            users = mapResultSet(rs);
-
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return users;
-    }
-
-    @Override
     public Optional findById(Integer id) {
 
         return null;
@@ -119,6 +106,27 @@ public class UserRepository implements CrudRepository<User> {
     @Override
     public Boolean deleteById(Integer id) {
         return null;
+    }
+
+    public void updateCompositeKey() {
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "INSERT INTO users_accounts VALUES (?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, currentUser.getId());
+            pstmt.setInt(2, currentAccount.getId());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted == 0) {
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private Set<User> mapResultSet(ResultSet rs) throws SQLException {

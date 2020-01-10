@@ -16,6 +16,11 @@ public class Account {
         this.balance = balance;
     }
 
+    public Account(Integer id, Double balance) {
+        Id = id;
+        this.balance = balance;
+    }
+
     public Account(Integer id, Double balance, AccountType accountType) {
         this.balance = balance;
         this.Id = id;

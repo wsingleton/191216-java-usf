@@ -34,6 +34,7 @@ public class HomeScreen extends Screen {
                     break;
                 default:
                     System.out.println("[LOG] - Invalid selection");
+                    appRunning = false;
             }
 
         }catch(Exception e) {

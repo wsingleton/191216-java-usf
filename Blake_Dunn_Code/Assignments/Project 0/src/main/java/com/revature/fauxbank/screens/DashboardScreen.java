@@ -34,7 +34,7 @@ public class DashboardScreen extends Screen {
                     router.navigate("/withdraw");
                     break;
                 case "4":
-                    router.navigate("Exiting the application...");
+                    System.out.println("Exiting the application...");
                     appRunning = false;
                     break;
                 default:

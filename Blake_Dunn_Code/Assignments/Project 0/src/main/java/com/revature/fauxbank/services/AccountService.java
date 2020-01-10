@@ -20,7 +20,9 @@ public class AccountService {
         this.acctRepo = repo;
     }
 
-    public void validateDeposit(Double balance, String amount) {
+    public void validateDeposit(String amount) {
+
+        Double balance = currentAccount.getBalance();
 
         if (amount == null || amount.equals("") || amount.matches("^[a-zA-Z]*$")) {
             System.out.println("Try again!");
@@ -29,13 +31,14 @@ public class AccountService {
 
         Double deposit = Double.valueOf(amount);
 
-        if (deposit <= 0 || deposit > 10000) {
+        if (deposit < 0 || deposit > 10000) {
             System.out.println("Try again!");
             router.navigate("/dashboard");
         }
         Double updatedDeposit = convertAmount(deposit);
 
         balance += updatedDeposit;
+
         currentAccount.setBalance(balance);
 
         acctRepo.update(currentAccount);
@@ -50,7 +53,7 @@ public class AccountService {
 
         Double withdraw = Double.valueOf(amount);
 
-        if (withdraw > currentAccount.getBalance() || withdraw <= 0) {
+        if (withdraw > balance || withdraw < 0) {
             System.out.println("Try again!");
             router.navigate("/dashboard");
         }

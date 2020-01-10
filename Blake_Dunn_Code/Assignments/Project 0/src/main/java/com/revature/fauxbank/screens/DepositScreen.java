@@ -27,7 +27,7 @@ public class DepositScreen extends Screen {
         try{
 
             String amount = console.readLine();
-            accountService.validateDeposit(balance, amount);
+            accountService.validateDeposit(amount);
 
         }catch (Exception e) {
             System.err.println("[ERROR] - " + e.getMessage());

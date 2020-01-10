@@ -35,13 +35,12 @@ public class UserService {
 
         currentUser = userRepo.findUserByCredentials(username, password)
                 .orElseThrow(AuthenticationException::new);
-        Integer userId = currentUser.getId();
-        Optional<Account> _acct = acctRepo.findById(userId);
+
+        Optional<Account> _acct = acctRepo.findById(currentUser.getId());
 
         if (_acct.isPresent()) {
             currentAccount = _acct.get();
         }
-
     }
 
     public void register(User user) {
@@ -57,6 +56,8 @@ public class UserService {
         Account newAccount = new Account(0.0);
         newAccount.setAccountType(AccountType.CHECKING);
         currentAccount = acctRepo.save(newAccount);
+
+        userRepo.updateCompositeKey();
     }
 
     public boolean isUserValid(User user) {

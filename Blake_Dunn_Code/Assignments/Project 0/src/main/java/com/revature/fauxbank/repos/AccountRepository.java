@@ -53,7 +53,13 @@ public class AccountRepository implements CrudRepository<Account> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM accounts WHERE user_id = ?";
+            String sql = "SELECT a.acct_id, a.balance " +
+                            "FROM accounts a " +
+                            "JOIN users_accounts b " +
+                            "ON a.acct_id = b.acct_id " +
+                            "JOIN users u " +
+                            "ON u.user_id = b.user_id " +
+                            "WHERE u.user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -64,7 +70,6 @@ public class AccountRepository implements CrudRepository<Account> {
             e.printStackTrace();
         }
         return _acct;
-
     }
 
     @Override
@@ -87,6 +92,11 @@ public class AccountRepository implements CrudRepository<Account> {
         }
         return true;
 
+    }
+
+    @Override
+    public Boolean deleteById(Integer id) {
+        return null;
     }
 
     private Set<Account> mapResultSet(ResultSet rs) throws SQLException {
