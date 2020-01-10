@@ -44,10 +44,10 @@ public class AppDriver {
     }
 
     public static void main (String[] args){
-
-        while (appRunning) {
-            router.navigate("/home");
-        }
+//
+//        while (appRunning) {
+//            router.navigate("/home");
+//        }
         Connection con = ConnectionFactory.getInstance().getConnection();
      if(con != null){
          System.out.println("Connection established! You are good to go");

@@ -64,6 +64,29 @@ BEGIN
    -- DBMS_OUTPUT.PUT_LINE('The max ID in the artist table is ' || maxId);
 END;
 /
+
+---- CURSOR FROM TUTORIALS POINT
+SELECT *
+FROM employee;
+
+DECLARE
+    fname employee.firstname%TYPE;
+    lname employee.lastname%TYPE;
+    CURSOR my_cursor IS
+    SELECT firstname, lastname 
+    FROM employee
+    WHERE employeeid < 5;
+BEGIN
+    OPEN my_cursor;
+    LOOP
+        FETCH my_cursor INTO fname, lname;
+        EXIT WHEN my_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(fname || ' ' || lname);
+    END LOOP;
+    CLOSE my_cursor;
+END;
+/
+
  ----------------------------------------------------
  
  -- CREATING SEQUENCES
