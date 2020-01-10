@@ -4,32 +4,55 @@ package com.revature.mockbank;
 Main method class to initiate the application
  */
 
-import com.revature.mockbank.models.AccountType;
-import com.revature.mockbank.models.Role;
 import com.revature.mockbank.models.User;
 import com.revature.mockbank.repositories.UserRepo;
+import com.revature.mockbank.screens.*;
+import com.revature.mockbank.services.UserService;
+import com.revature.mockbank.util.ConnectionFactory;
+import com.revature.mockbank.util.ScreenRouter;
 
-import java.util.Optional;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class AppDriver {
 
+    public static BufferedReader console;
+    public static User currentUser;
+    public static ScreenRouter router;
+    public static boolean appRunning;
+
+    static {
+        System.out.println("Initializing application ........");
+        appRunning = true;
+        console = new BufferedReader(new InputStreamReader(System.in));
+        final UserRepo userRepo = new UserRepo();
+        // bank repo and other db models will go here
+
+        final UserService userService = new UserService();
+        // account services and other models will go here
+
+        router = new ScreenRouter();
+        // screens will be added from here
+        router.addScreen(new HomeScreen())
+                .addScreen(new RegisterScreen()) // add user service as a parameter for register
+                .addScreen(new LoginScreen())
+                .addScreen(new DashboardScreen())
+                .addScreen(new UserProfileScreen())
+                .addScreen(new DepositScreen());
+    }
+
     public static void main (String[] args){
-        System.out.println("mockBank app initializing .............");
-        System.out.println(Role.CLIENT);
-        System.out.println(AccountType.CHECKING);
 
-        // create a user for testing purpose.
-        User u = new User(1, "Bosco", "Nzeyi", "nebo", "passcode", Role.CLIENT);
-        // put the user into the user repo
-        UserRepo repo = new UserRepo();
-        repo.save(u);
-//        Set<User> s = repo.findAll();
-//        for(User i: s){
-//            System.out.println(i);
-//        }
-        Optional get = repo.findById(3);
-        System.out.println(get);
-
-
+        while (appRunning) {
+            router.navigate("/home");
+        }
+        Connection con = ConnectionFactory.getInstance().getConnection();
+     if(con != null){
+         System.out.println("Connection established! You are good to go");
+     } else{
+         System.out.println("Ni za nduru! ");
+     }
     }
 }
