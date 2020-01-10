@@ -4,12 +4,15 @@ import java.util.Objects;
 
 public class User {
     private Integer id;
-    private Integer ownerId;
     private String firstName;
     private String lastName;
     private String userName;
     private String password;
     private Role role;
+
+    public User(){
+        super();
+    }
 
     public User(String firstName, String lastName, String userName, String password) {
         this.firstName = firstName;
@@ -18,9 +21,9 @@ public class User {
         this.password = password;
     }
 
-    public User(Integer id, Integer OwnerId, String firstName, String lastName, String userName, String password, Role role) {
+    public User(Integer id, String firstName, String lastName, String userName, String password, Role role) {
         this.id = id;
-        this.ownerId = OwnerId;
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -28,13 +31,7 @@ public class User {
         this.role = role;
     }
 
-    public Integer getOwnerId() {
-        return ownerId;
-    }
 
-    public void setOwnerId(Integer ownerId) {
-        this.ownerId = ownerId;
-    }
 
     public Integer getId() {
         return id;
@@ -90,7 +87,6 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return Objects.equals(id, user.id) &&
-                Objects.equals(ownerId, user.ownerId) &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(userName, user.userName) &&
@@ -100,14 +96,13 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ownerId, firstName, lastName, userName, password, role);
+        return Objects.hash(id, firstName, lastName, userName, password, role);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", ownerId=" + ownerId +'\''+
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +

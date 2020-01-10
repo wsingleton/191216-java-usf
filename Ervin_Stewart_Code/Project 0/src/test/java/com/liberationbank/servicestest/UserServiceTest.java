@@ -1,6 +1,7 @@
 package com.liberationbank.servicestest;
 
-import com.liberationbank.services.AccountService;
+import com.liberationbank.models.User;
+import com.liberationbank.services.UserService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -9,9 +10,11 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.Timeout;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-public class AccountServiceTest {
-    private AccountService sut;
+public class UserServiceTest {
+
+    private UserService sut;
     /*
     JUnit rules is a component that intercepts test method calls and allows us to do something before a test method has
      run - typically adding additional constraints to the test case.
@@ -24,7 +27,7 @@ public class AccountServiceTest {
 
     @Before
     public void setUp(){
-        sut = new AccountService();
+        sut = new UserService();
     }
     @After
     public void tearDown(){
@@ -32,20 +35,18 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void testValidateWithdrawal(){
-        String message = "if a negative number is input, return false";
-        double testWithdrawalValue = 500;
-        double testBalanceValue = 5000;
-        boolean actualResult = sut.validateWithdrawBalance(testWithdrawalValue, testBalanceValue);
+    public void testIsUserValidForTrue(){
+        String message = "if all inputs are entered correctly, return true";
+        User testUser = new User();
+        boolean actualResult = sut.isUserValid(testUser);
         assertTrue(message, actualResult);
     }
 
     @Test
-    public void testValidateWithdrawalForNegativeWithdrawal(){
-        String message = "if a negative number is input, return false";
-        double testWithdrawalValue = -5;
-        double testBalanceValue = 5000;
-        boolean actualResult = sut.validateWithdrawBalance(testWithdrawalValue, testBalanceValue);
+    public void testIsUserValidForFalse(){
+        String message = "if a single input is invalid, return false";
+         User testUser = new User();
+        boolean actualResult = sut.isUserValid(testUser);
         assertFalse(message, actualResult);
     }
 
@@ -101,6 +102,4 @@ public class AccountServiceTest {
         double actualResult = sut.sanitizeValue(testArray);
         assertEquals(message,expectedResult,actualResult, expectedResult);
     }
-
-
 }
