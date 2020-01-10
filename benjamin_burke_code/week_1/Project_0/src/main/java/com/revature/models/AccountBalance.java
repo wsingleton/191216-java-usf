@@ -11,17 +11,18 @@ public class AccountBalance {
     private AccountType accountType;
 
     //do i need to add the id too?
-    public AccountBalance(Integer id, Double balance, Integer accountNumber){
+    public AccountBalance(Integer id, Double balance){
         Id = id;
         this.balance = balance;
     }
 
     public AccountBalance(Integer id, Integer accountNumber, Double balance, AccountType accountType) {
-        this(id, balance, accountNumber);
+        this(id, balance);
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.accountType = accountType;
     }
+
 
     public Integer getId() {
         return Id;
