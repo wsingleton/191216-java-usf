@@ -10,24 +10,40 @@ public class Book {
     private String title;
     private Author author;
     private Genre genres;
+    private Double price;
     private Integer stockCount;
 
-    public Book(String isbn, String title, Author author, Genre genres) {
+    public Book(){
+        super();
+    }
+
+    public Book(String isbn, String title, Author author, Genre genres, Double price, Integer stockCount) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.genres = genres;
+        this.price = price;
+        this.stockCount = stockCount;
     }
 
-    public Book(Integer id, String isbn, String title, Author author, Genre genres, Integer stockCount) {
+    public Book(Integer id, String isbn, String title, Author author, Genre genres, Double price, Integer stockCount) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.genres = genres;
+        this.price = price;
         this.stockCount = stockCount;
     }
 
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
     public Integer getId() {
         return id;
@@ -78,6 +94,19 @@ public class Book {
     }
 
     @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", author=" + author +
+                ", genres=" + genres +
+                ", price=" + price +
+                ", stockCount=" + stockCount +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -95,15 +124,4 @@ public class Book {
         return Objects.hash(id, isbn, title, author, genres, stockCount);
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", isbn='" + isbn + '\'' +
-                ", title='" + title + '\'' +
-                ", author=" + author +
-                ", genre=" + genres +
-                ", stockCounterInteger=" + stockCount +
-                '}';
-    }
 }
