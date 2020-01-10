@@ -32,6 +32,7 @@ public class RegisterMenu extends Menu {
             System.out.println("Please select a username.");
             System.out.print("> ");
             user=AppDriver.console.readLine();
+            user=user.toLowerCase();
             System.out.println("Please input a secure password.");
             System.out.print("> ");
             pass=AppDriver.console.readLine();

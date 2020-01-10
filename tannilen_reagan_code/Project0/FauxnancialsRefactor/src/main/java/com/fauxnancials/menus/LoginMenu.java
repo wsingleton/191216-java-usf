@@ -24,6 +24,7 @@ public class LoginMenu extends Menu {
             System.out.println("Username:");
             System.out.print("> ");
             username= AppDriver.console.readLine();
+            username=username.toLowerCase();
             System.out.println("Password:");
             System.out.print("> ");
             password=AppDriver.console.readLine();
