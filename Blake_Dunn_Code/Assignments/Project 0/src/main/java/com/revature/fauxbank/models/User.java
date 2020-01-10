@@ -9,7 +9,10 @@ public class User {
     private String lastName;
     private String userName;
     private String password;
-    private Role role;
+
+    public User() {
+        super();
+    }
 
     public User(String firstName, String lastName, String userName, String password) {
         this.firstName = firstName;
@@ -18,16 +21,13 @@ public class User {
         this.password = password;
     }
 
-    public User(Integer id, String firstName, String lastName, String userName, String password, Role role) {
-        this(firstName, lastName, userName, password);
+    public User(Integer id, String firstName, String lastName, String userName, String password) {
         Id = id;
-        this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
     }
-
-    public static Integer createId() {
-        return (Integer) (int) (Math.random() * ((99999999) + 1));
-    }
-
 
     public Integer getId() {
         return Id;
@@ -69,14 +69,6 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,13 +78,12 @@ public class User {
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(userName, user.userName) &&
-                Objects.equals(password, user.password) &&
-                role == user.role;
+                Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, firstName, lastName, userName, password, role);
+        return Objects.hash(Id, firstName, lastName, userName, password);
     }
 
     @Override
@@ -103,7 +94,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", role=" + role +
                 '}';
     }
 }

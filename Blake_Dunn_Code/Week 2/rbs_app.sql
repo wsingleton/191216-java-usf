@@ -230,3 +230,9 @@ END;
 /
 
 COMMIT;
+
+SELECT * FROM book_genres;
+
+INSERT INTO book_genres VALUES (0, 'OTHER');
+
+UPDATE book_genres SET genre_id = 17 WHERE genre_id = 33;

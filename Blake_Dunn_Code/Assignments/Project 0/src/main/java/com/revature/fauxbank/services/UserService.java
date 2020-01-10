@@ -9,12 +9,11 @@ import java.util.regex.Pattern;
 
 import static com.revature.fauxbank.BankDriver.currentAccount;
 import static com.revature.fauxbank.BankDriver.currentUser;
-import static com.revature.fauxbank.models.User.createId;
 
 public class UserService {
 
     private UserRepository userRepo;
-    private AccountRepository accountRepo;
+    private AccountRepository acctRepo;
 
     public UserService() {
 
@@ -22,7 +21,7 @@ public class UserService {
 
     public UserService(UserRepository uRepo, AccountRepository aRepo) {
         this.userRepo = uRepo;
-        this.accountRepo = aRepo;
+        this.acctRepo = aRepo;
     }
 
     public void authenticate (String username, String password) {
@@ -35,6 +34,8 @@ public class UserService {
 
         currentUser = userRepo.findUserByCredentials(username, password)
                 .orElseThrow(AuthenticationException::new);
+        Integer userId = currentUser.getId();
+        currentAccount = (Account) acctRepo.findById(userId);
 
     }
 
@@ -46,12 +47,11 @@ public class UserService {
             throw new ResourcePersistenceException("Username is already in use!");
         }
 
-        Integer id = createId();
-        user.setRole(Role.MEMBER);
-        user.setId(id);
-        userRepo.save(user);
+        user = userRepo.save(user);
         currentUser = user;
-        accountRepo.save(currentAccount.createNewAccount(id));
+        Account newAccount = new Account(0.0);
+        newAccount.setAccountType(AccountType.CHECKING);
+        currentAccount = acctRepo.save(newAccount);
     }
 
     public boolean isUserValid(User user) {

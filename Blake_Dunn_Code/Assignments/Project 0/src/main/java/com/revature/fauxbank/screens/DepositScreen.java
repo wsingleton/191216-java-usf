@@ -25,21 +25,13 @@ public class DepositScreen extends Screen {
         System.out.print("> ");
 
         try{
+
             String amount = console.readLine();
-            Double deposit = accountService.validateDeposit(amount);
-
-            if (deposit == 0) {
-                router.navigate("/dashboard");
-            }
-
-           balance += deposit;
-           currentAccount.setBalance(balance);
+            accountService.validateDeposit(balance, amount);
 
         }catch (Exception e) {
             System.err.println("[ERROR] - " + e.getMessage());
         }
-
         router.navigate("/transition");
-
     }
 }

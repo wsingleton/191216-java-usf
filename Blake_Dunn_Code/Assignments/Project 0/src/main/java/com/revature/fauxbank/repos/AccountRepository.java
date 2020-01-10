@@ -2,10 +2,10 @@ package com.revature.fauxbank.repos;
 
 import com.revature.fauxbank.models.Account;
 import com.revature.fauxbank.models.User;
+import com.revature.fauxbank.util.ConnectionFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.sql.*;
+import java.util.*;
 
 public class AccountRepository implements CrudRepository<Account> {
 
@@ -14,41 +14,91 @@ public class AccountRepository implements CrudRepository<Account> {
 
     public Optional findByAccountNumber(Integer accountNumber) {
 
-        for (Map.Entry<Integer, Account> entry : acctDb.entrySet()) {
-            if (entry.getValue().getAccountNumber().equals(accountNumber)) {
-                return Optional.of(entry.getValue());
-            }
-        }
-
-        return Optional.empty();
+        return null;
     }
 
     @Override
-    public void save(Account newAccount) {
+    public Account save(Account newAccount) {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-        newAccount.setId(key);
-        acctDb.put(key++, newAccount);
+            String sql = "INSERT INTO accounts VALUES (0, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"acct_id"});
+            pstmt.setDouble (1, newAccount.getBalance());
+            pstmt.setInt(2, newAccount.getAccountType().ordinal() +1);
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted != 0) {
+                ResultSet rs = pstmt.getGeneratedKeys();
+
+                while(rs.next()) {
+                    newAccount.setId(rs.getInt(1));
+                }
+            }
+
+        } catch(SQLIntegrityConstraintViolationException e) {
+            e.printStackTrace();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return newAccount;
 
     }
 
     @Override
     public Optional<Account> findById(Integer id) {
 
-        for (Map.Entry<Integer, Account> entry : acctDb.entrySet()) {
-            if (entry.getValue().getId().equals(id)) {
-                return Optional.of(entry.getValue());
-            }
-        }
+        Optional<Account> _acct = Optional.empty();
 
-        return Optional.empty();
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM accounts WHERE user_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            Set<Account> set = mapResultSet(rs);
+            if (!set.isEmpty()) _acct = set.stream().findFirst();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return _acct;
+
     }
 
     @Override
-    public Boolean update(Account updateObj) {
+    public Boolean update(Account updateAcct) {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-        if (acctDb.get(updateObj.getId()) == null) return false;
-        acctDb.put(updateObj.getId(), updateObj);
+            String sql = "UPDATE accounts SET balance = ? WHERE acct_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setDouble (1, updateAcct.getBalance());
+            pstmt.setInt(2, updateAcct.getId());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted == 0) return false;
+
+        } catch(SQLIntegrityConstraintViolationException e) {
+            e.printStackTrace();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
         return true;
 
     }
+
+    private Set<Account> mapResultSet(ResultSet rs) throws SQLException {
+        Set<Account> accounts = new HashSet<>();
+        while (rs.next()) {
+            Account temp = new Account();
+            temp.setId(rs.getInt("acct_id"));
+            temp.setBalance(rs.getDouble("balance"));
+
+            accounts.add(temp);
+        }
+        return accounts;
+    }
+
 }

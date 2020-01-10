@@ -219,14 +219,31 @@ FROM DUAL;
 
 -- Task – Create a function that returns the average price of invoice-line items in the invoice-line table
 CREATE OR REPLACE FUNCTION average_price
-    RETURN NUMBER
-    AS avg_price NUMBER(10,2);
+    RETURN SYS_REFCURSOR
+    AS my_cursor SYS_REFCURSOR;
 BEGIN
-    SELECT AVG(unitprice)
-    INTO avg_price
-    FROM invoiceline;
+    OPEN my_cursor FOR
+    SELECT invoicelineid, AVG(unitprice)
+    FROM invoiceline
+    GROUP BY invoicelineid;
     
-    RETURN avg_price;
+    RETURN my_cursor;
+END;
+/
+
+DECLARE
+    v_cursor    sys_REFCURSOR;
+    v_ilid      invoiceline.invoicelineid%TYPE;
+    v_up        invoiceline.unitprice%TYPE;
+BEGIN
+    v_cursor := average_price; 
+    LOOP
+        FETCH v_cursor
+        INTO v_ilid, v_up;
+        EXIT WHEN v_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('InvoiceLineID = ' || v_ilid || ' Avg Price = ' || v_up);
+    END LOOP;
+    CLOSE v_cursor;
 END;
 /
 
@@ -422,7 +439,28 @@ VALUES ('Buhlakay', 'Aaron', 'buhlakay@chinook.com');
 -- 6.2 BEFORE
 
 -- Task – Create a before trigger that restricts the deletion of any invoice that is priced over 50 dollars.
+CREATE OR REPLACE TRIGGER invoice_greater_than_trig
+BEFORE DELETE ON invoice
+FOR EACH ROW
 
+DECLARE
+inv_total NUMBER;
+
+BEGIN    
+    IF (inv_total > 50) THEN
+        RAISE_APPLICATION_ERROR (-20000, inv_total || 
+        ' is greater than $50 for this invoice. Cannot delete this item');
+    END IF;
+END;
+/
+
+SELECT MAX(customerid)
+FROM invoice;
+
+INSERT INTO invoice (invoiceid, customerid, invoicedate, total)
+VALUES (413, 60, DATE '2019-12-25', 60);
+
+EXEC delete_invoice(200);
 
 -- 7.1 INNER
 

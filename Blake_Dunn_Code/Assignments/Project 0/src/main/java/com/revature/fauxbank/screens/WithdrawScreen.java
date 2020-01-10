@@ -27,14 +27,7 @@ public class WithdrawScreen extends Screen {
 
         try{
             String amount = console.readLine();
-            Double withdraw = accountService.validateWithdraw(amount);
-
-            if (withdraw == 0) {
-                router.navigate("/dashboard");
-            }
-
-            balance -= withdraw;
-            currentAccount.setBalance(balance);
+            accountService.validateWithdraw(balance, amount);
 
         }catch (Exception e) {
             System.err.println("[ERROR] - " + e.getMessage());

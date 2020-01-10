@@ -8,22 +8,20 @@ public class Account {
     private Double balance;
     private AccountType accountType;
 
-    public Account(Integer id, Double balance) {
-        Id = id;
+    public Account() {
+        super();
+    }
+
+    public Account(Double balance) {
         this.balance = balance;
     }
 
     public Account(Integer id, Double balance, AccountType accountType) {
-        this(id, balance);
+        this.balance = balance;
+        this.Id = id;
         this.accountType = accountType;
     }
 
-    public Account createNewAccount(Integer id) {
-
-        Account newAccount = new Account(id, 0.0);
-        newAccount.setAccountType(AccountType.CHECKING);
-        return newAccount;
-    }
 
     public Integer getId() {
         return Id;

@@ -20,37 +20,46 @@ public class AccountService {
         this.acctRepo = repo;
     }
 
-    public Double validateDeposit(String amount) {
+    public void validateDeposit(Double balance, String amount) {
 
         if (amount == null || amount.equals("") || amount.matches("^[a-zA-Z]*$")) {
             System.out.println("Try again!");
-            return 0.0;
+            router.navigate("/dashboard");
         }
 
         Double deposit = Double.valueOf(amount);
 
-        if (deposit < 0 || deposit > 10000) {
+        if (deposit <= 0 || deposit > 10000) {
             System.out.println("Try again!");
-            return 0.0;
+            router.navigate("/dashboard");
         }
+        Double updatedDeposit = convertAmount(deposit);
 
-        return convertAmount(deposit);
+        balance += updatedDeposit;
+        currentAccount.setBalance(balance);
+
+        acctRepo.update(currentAccount);
     }
 
-    public Double validateWithdraw(String amount) {
+    public void validateWithdraw(Double balance, String amount) {
 
         if (amount == null || amount.equals("") || amount.matches("^[a-zA-Z]*$")) {
             System.out.println("Try again!");
-            return 0.0;
+            router.navigate("/dashboard");
         }
 
         Double withdraw = Double.valueOf(amount);
 
-        if (withdraw > currentAccount.getBalance() || withdraw < 0) {
+        if (withdraw > currentAccount.getBalance() || withdraw <= 0) {
             System.out.println("Try again!");
-            return 0.0;
+            router.navigate("/dashboard");
         }
-        return convertAmount(withdraw);
+        Double updatedWithdraw = convertAmount(withdraw);
+
+        balance -= updatedWithdraw;
+        currentAccount.setBalance(balance);
+
+        acctRepo.update(currentAccount);
     }
 
     public Double convertAmount (Double amount) {
