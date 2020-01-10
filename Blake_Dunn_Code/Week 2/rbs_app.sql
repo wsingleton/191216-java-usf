@@ -1,5 +1,5 @@
 /*
-    Creat in this order:
+    Create in this order:
     
         1) USER_ROLES
         2) USERS

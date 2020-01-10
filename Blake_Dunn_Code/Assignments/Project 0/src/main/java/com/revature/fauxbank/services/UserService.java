@@ -4,6 +4,7 @@ import com.revature.fauxbank.exceptions.*;
 import com.revature.fauxbank.models.*;
 import com.revature.fauxbank.repos.*;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,7 +36,11 @@ public class UserService {
         currentUser = userRepo.findUserByCredentials(username, password)
                 .orElseThrow(AuthenticationException::new);
         Integer userId = currentUser.getId();
-        currentAccount = (Account) acctRepo.findById(userId);
+        Optional<Account> _acct = acctRepo.findById(userId);
+
+        if (_acct.isPresent()) {
+            currentAccount = _acct.get();
+        }
 
     }
 
