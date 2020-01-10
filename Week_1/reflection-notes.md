@@ -1,6 +1,6 @@
 # Reflection
 
-The Java Reflection API, gives Java classes the ability to perform dynamic introspection, or the ability to look inside classes that are already loaded.
+The Java Reflection API, gives Java classes the ability to perform dynamic reflection, or the ability to look inside classes that are already loaded.
 	
 Fundamentally, the Reflection API consists of two components: objects that represent the various parts of a class file, and a means for extracting those objects in a safe and secure way. The latter is very important, as Java provides many security safeguards, and it would not make sense to provide a set of classes that invalidated those safeguards.
 	
