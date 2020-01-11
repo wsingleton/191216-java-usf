@@ -3,8 +3,6 @@ package com.revature.revabooks.repos;
 import com.revature.revabooks.models.Author;
 import com.revature.revabooks.models.Book;
 import com.revature.revabooks.models.Genre;
-import com.revature.revabooks.models.User;
-import com.revature.revabooks.util.ConnectionFactory;
 import oracle.jdbc.OracleTypes;
 
 import java.sql.CallableStatement;
@@ -12,6 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+
+import static com.revature.revabooks.AppDriver.currentSession;
 
 public class BookRepository implements CrudRepository<Book> {
 
@@ -59,9 +59,10 @@ public class BookRepository implements CrudRepository<Book> {
     @Override
     public Set<Book> findAll() {
 
+        Connection conn = currentSession.getConnection();
         HashSet<Book> books = new HashSet<>();
 
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+        try {
 
             String sql = "{CALL rbs_app.get_all_books(?)}";
             CallableStatement cstmt = conn.prepareCall(sql);

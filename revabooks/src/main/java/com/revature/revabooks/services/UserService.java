@@ -6,8 +6,10 @@ import com.revature.revabooks.exceptions.ResourcePersistenceException;
 import com.revature.revabooks.models.Role;
 import com.revature.revabooks.models.User;
 import com.revature.revabooks.repos.UserRepository;
+import com.revature.revabooks.util.ConnectionFactory;
+import com.revature.revabooks.util.UserSession;
 
-import static com.revature.revabooks.AppDriver.currentUser;
+import static com.revature.revabooks.AppDriver.currentSession;
 
 public class UserService {
 
@@ -27,21 +29,19 @@ public class UserService {
 
         newUser.setRole(Role.BASIC_MEMBER);
         userRepo.save(newUser);
-        currentUser = newUser;
+        currentSession = new UserSession(newUser, ConnectionFactory.getInstance().getConnection());
 
     }
 
     public void authenticate(String username, String password) {
 
-        if (username == null || username.trim().equals("")
-            || password == null || password.trim().equals(""))
-        {
+        if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
             throw new InvalidRequestException();
         }
 
+        User authUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+        currentSession = new UserSession(authUser, ConnectionFactory.getInstance().getConnection());
 
-//        userRepo.findUserByCredentials(username, password).orElseThrow(() -> new AuthenticationException());
-        currentUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
     }
 
     public boolean isUserValid(User user) {
@@ -52,4 +52,5 @@ public class UserService {
         if (user.getPassword() == null || user.getPassword().trim().equals("")) return false;
         return true;
     }
+
 }

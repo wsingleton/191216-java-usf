@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import static com.revature.revabooks.AppDriver.currentSession;
+
 public class UserRepository implements CrudRepository<User> {
 
     public Set<User> findUsersByRole(Role role) {
@@ -97,9 +99,10 @@ public class UserRepository implements CrudRepository<User> {
     @Override
     public Set<User> findAll() {
 
+        Connection conn = currentSession.getConnection();
         Set<User> users = new HashSet<>();
 
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+        try {
 
             String sql = "SELECT * FROM rbs_app.users";
             Statement stmt = conn.createStatement();

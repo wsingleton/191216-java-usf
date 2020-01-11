@@ -33,7 +33,7 @@ public class LoginScreen extends Screen {
 
             userService.authenticate(username, password);
 
-            if (currentUser != null) {
+            if (currentSession != null) {
                 System.out.println("[LOG] - Login successful, navigating to dashboard...");
                 router.navigate("/dashboard");
             }

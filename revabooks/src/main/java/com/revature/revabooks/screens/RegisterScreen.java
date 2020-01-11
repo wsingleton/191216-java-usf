@@ -41,7 +41,7 @@ public class RegisterScreen extends Screen {
             User newUser = new User(firstName, lastName, username, password);
             userService.register(newUser);
 
-            if (currentUser != null) {
+            if (currentSession != null) {
                 System.out.println("[LOG] - New user created! Navigating to dashboard...");
                 router.navigate("/dashboard");
             }

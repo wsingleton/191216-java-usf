@@ -3,10 +3,12 @@ package com.revature.revabooks;
 import com.revature.revabooks.models.User;
 import com.revature.revabooks.repos.BookRepository;
 import com.revature.revabooks.repos.UserRepository;
+import com.revature.revabooks.repos.WishlistRepository;
 import com.revature.revabooks.screens.*;
 import com.revature.revabooks.services.BookService;
 import com.revature.revabooks.services.UserService;
 import com.revature.revabooks.util.ScreenRouter;
+import com.revature.revabooks.util.UserSession;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,7 +16,7 @@ import java.io.InputStreamReader;
 public class AppDriver {
 
     public static BufferedReader console;
-    public static User currentUser;
+    public static UserSession currentSession;
     public static ScreenRouter router;
     public static boolean appRunning;
 
@@ -26,9 +28,10 @@ public class AppDriver {
 
         final UserRepository userRepo = new UserRepository();
         final BookRepository bookRepo = new BookRepository();
+        final WishlistRepository wishlistRepo = new WishlistRepository();
 
         final UserService userService = new UserService(userRepo);
-//        final BookService bookService = new BookService(bookRepo);
+        final BookService bookService = new BookService(bookRepo, wishlistRepo);
 
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
@@ -36,7 +39,7 @@ public class AppDriver {
               .addScreen(new LoginScreen(userService))
               .addScreen(new DashboardScreen())
               .addScreen(new UserProfileScreen())
-              .addScreen(new SearchBooksScreen());
+              .addScreen(new SearchBooksScreen(bookService));
 
         System.out.println("[LOG] - Application initialization complete.");
 
