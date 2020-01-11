@@ -15,52 +15,65 @@ public class UserRepository implements CrudRepository<User> {
 
     public Set<User> findUsersByRole(Role role) {
 
-        return null;
+        Set<User> users = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM rbs_app.users WHERE role_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, role.ordinal());
+
+            ResultSet rs = pstmt.executeQuery();
+            users = mapResultSet(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
 
     }
 
     public Optional<User> findUserByUsername(String username) {
 
-        Optional<User> _user = Optional.empty();
+        Optional<User> user = Optional.empty();
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM rbs_app.users WHERE username = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
+
             ResultSet rs = pstmt.executeQuery();
-            Set<User> set = mapResultSet(rs);
-            if (!set.isEmpty()) _user = set.stream().findFirst();
+            user = mapResultSet(rs).stream().findFirst();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return _user;
+        return user;
 
     }
 
     public Optional<User> findUserByCredentials(String username, String password) {
 
-        Optional<User> _user = Optional.empty();
+        Optional<User> user = Optional.empty();
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM rbs_app.users WHERE username = ? AND password = ?";
-
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
             pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
-            Set<User> set = mapResultSet(rs);
-            if (!set.isEmpty()) _user = set.stream().findFirst();
+            user = mapResultSet(rs).stream().findFirst();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return _user;
+        return user;
 
     }
 
@@ -89,8 +102,6 @@ public class UserRepository implements CrudRepository<User> {
 
             }
 
-        } catch (SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -120,21 +131,81 @@ public class UserRepository implements CrudRepository<User> {
     @Override
     public Optional<User> findById(Integer id) {
 
-        return null;
+        Connection conn = currentSession.getConnection();
+        Optional<User> user = Optional.empty();
+
+        try {
+
+            String sql = "SELECT * FROM rbs_app.users WHERE user_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+            user = mapResultSet(rs).stream().findFirst();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
 
     }
 
     @Override
     public Boolean update(User updatedObj) {
 
-        return false;
+        Connection conn = currentSession.getConnection();
+        Boolean updateSuccessful = false;
+
+        try {
+
+            String sql = "UPDATE rbs_app.users SET username = ?, password = ?, first_name = ?, last_name = ? " +
+                         "WHERE user_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, updatedObj.getUsername());
+            pstmt.setString(2, updatedObj.getPassword());
+            pstmt.setString(3, updatedObj.getFirstName());
+            pstmt.setString(4, updatedObj.getLastName());
+            pstmt.setInt(5, updatedObj.getId());
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                updateSuccessful = true;
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return updateSuccessful;
 
     }
 
     @Override
     public Boolean deleteById(Integer id) {
 
-        return false;
+        Connection conn = currentSession.getConnection();
+        Boolean deleteSuccessful = false;
+
+        try {
+
+            String sql = "DELETE FROM rbs_app.users WHERE user_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            int rowsDeleted = pstmt.executeUpdate();
+
+            if (rowsDeleted > 0) {
+                deleteSuccessful = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return deleteSuccessful;
 
     }
 
