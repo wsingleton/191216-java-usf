@@ -27,39 +27,30 @@ public class BookService {
 
     public Book getBookById(int id) {
 
-        if (!isCurrentUserAdminOrManager()) {
-            throw new AuthorizationException();
-        }
-
-        if (id < 1) {
-            throw new InvalidRequestException();
-        }
-
+        if (!currentSession.isAdminOrManager()) throw new AuthorizationException();
+        if (id < 1) throw new InvalidRequestException();
         return bookRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
 
     }
 
     public Book getBookByIsbn(String isbn) {
 
-        if(isbn.trim().equals("") || isbn.length() < 10 || isbn.length() > 14) {
-            throw new InvalidRequestException();
-        }
-
+        if(isbn.trim().equals("") || isbn.length() < 10 || isbn.length() > 14) throw new InvalidRequestException();
         return bookRepo.findBookByIsbn(isbn).orElseThrow(ResourceNotFoundException::new);
     }
 
     public Set<Book> getBooksByTitle(String title) {
 
-        if(title.trim().equals("")) {
-            throw new InvalidRequestException();
-        }
-
+        if(title.trim().equals("")) throw new InvalidRequestException();
         return bookRepo.findBooksByTitle(title);
+
     }
 
     public Set<Book> getBooksByAuthor(Author author) {
+
         if(author == null || author.getFirstName().equals("") || author.getLastName().equals("")) return null;
         return bookRepo.findBooksByAuthor(author);
+
     }
 
     public Set<Book> getBooksByGenre(String genreStr) {
@@ -77,38 +68,41 @@ public class BookService {
 
     public void addBook(Book newBook) {
 
-        if (!isCurrentUserAdminOrManager()) {
-            throw new AuthorizationException();
-        }
-
-        if (!isBookValid(newBook)) {
-            throw new InvalidRequestException();
-        }
-
+        if (!currentSession.isAdminOrManager()) throw new AuthorizationException();
+        if (!isBookValid(newBook)) throw new InvalidRequestException();
         bookRepo.save(newBook);
 
     }
 
     public boolean updateBook(Book updatedBook) {
 
-        if (!isCurrentUserAdminOrManager()) {
-            throw new AuthorizationException();
-        }
-
-        if (!isBookValid(updatedBook)) {
-            throw new InvalidRequestException();
-        }
-
+        if (!currentSession.isAdminOrManager()) throw new AuthorizationException();
+        if (!isBookValid(updatedBook)) throw new InvalidRequestException();
         return bookRepo.update(updatedBook);
+
+    }
+
+    public boolean changeStockCount(int bookId, int delta) {
+
+        Book book = bookRepo.findById(bookId).orElseThrow(ResourceNotFoundException::new);
+
+        if (!currentSession.isAdminOrManager() && delta > 0) throw new AuthorizationException();
+
+        if ((book.getStockCount() + delta) < 0) {
+            throw new InvalidRequestException("Not enough inventory to fulfill request!");
+        }
+
+        book.setStockCount(book.getStockCount() + delta);
+        return bookRepo.update(book);
+
+
     }
 
     public boolean deleteBook(int id) {
 
-        if (!isCurrentUserAdminOrManager()) {
-            throw new AuthorizationException();
-        }
-
+        if (!currentSession.isAdminOrManager()) throw new AuthorizationException();
         return bookRepo.deleteById(id);
+
     }
 
     public boolean addBookToWishList(Book book) {
@@ -121,11 +115,6 @@ public class BookService {
     private boolean isBookValid(Book updatedBook) {
         return !updatedBook.getIsbn().equals("") && !updatedBook.getTitle().equals("") && !updatedBook.getAuthor().equals("")
                 && !updatedBook.getGenre().equals("") && updatedBook.getStockCount() > 0;
-    }
-
-    private boolean isCurrentUserAdminOrManager() {
-        Role currentUserRole = currentSession.getSessionUser().getRole();
-        return (currentUserRole.equals(Role.ADMIN) || currentUserRole.equals(Role.MANAGER));
     }
 
 }
