@@ -1,13 +1,14 @@
 package com.revature.revabooks.services;
 
-import com.revature.revabooks.exceptions.AuthenticationException;
-import com.revature.revabooks.exceptions.InvalidRequestException;
-import com.revature.revabooks.exceptions.ResourcePersistenceException;
+import com.revature.revabooks.exceptions.*;
 import com.revature.revabooks.models.Role;
 import com.revature.revabooks.models.User;
 import com.revature.revabooks.repos.UserRepository;
 import com.revature.revabooks.util.ConnectionFactory;
 import com.revature.revabooks.util.UserSession;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.revature.revabooks.AppDriver.currentSession;
 
@@ -16,6 +17,7 @@ public class UserService {
     private UserRepository userRepo;
 
     public UserService(UserRepository repo) {
+        super();
         this.userRepo = repo;
     }
 
@@ -29,7 +31,100 @@ public class UserService {
 
         newUser.setRole(Role.BASIC_MEMBER);
         userRepo.save(newUser);
-        currentSession = new UserSession(newUser, ConnectionFactory.getInstance().getConnection());
+        currentSession = new UserSession(newUser, ConnectionFactory.getInstance().getConnection(newUser));
+
+    }
+
+    public Set<User> getAllUsers() {
+
+        Set<User> users;
+
+        if (!isCurrentUserAdminOrManager()) {
+            throw new AuthorizationException();
+        }
+
+        users = userRepo.findAll();
+
+        if (users.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+
+        return users;
+
+    }
+
+    public Set<User> getUsersByRole(Role role) {
+
+        Set<User> users;
+
+        if (role == null) {
+            throw new InvalidRequestException();
+        }
+
+        if (!isCurrentUserAdminOrManager()) {
+            throw new AuthorizationException();
+        }
+
+        users = userRepo.findUsersByRole(role);
+
+        if (users.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+
+        return users;
+
+    }
+
+    public User getUserByUsername(String username) {
+
+        if (username == null || username.trim().equals("")) {
+            throw new InvalidRequestException();
+        }
+
+        if (!isCurrentUserAdminOrManager()) {
+            throw new AuthorizationException();
+        }
+
+        return userRepo.findUserByUsername(username).orElseThrow(ResourceNotFoundException::new);
+
+
+    }
+
+    public SortedSet<User> sortUsers(String sortCriterion, Set<User> usersForSorting) {
+
+        SortedSet<User> users = new TreeSet<>(usersForSorting);
+
+        switch (sortCriterion.toLowerCase()) {
+            case "username":
+                users = users.stream()
+                        .collect(Collectors.toCollection(() -> {
+                            return new TreeSet<>(Comparator.comparing(User::getUsername, String::compareTo));
+                        }));
+                break;
+            case "first":
+                users = users.stream()
+                        .collect(Collectors.toCollection(() -> {
+                            return new TreeSet<>(Comparator.comparing(User::getFirstName, String::compareTo));
+                        }));
+                break;
+            case "last":
+                users = users.stream()
+                        .collect(Collectors.toCollection(() -> {
+                            return new TreeSet<>(Comparator.comparing(User::getLastName, String::compareTo));
+                        }));
+                break;
+            case "role":
+                users = users.stream()
+                        .collect(Collectors.toCollection(() -> {
+                            return new TreeSet<>(Comparator.comparing(User::getRole, Enum::compareTo));
+                        }));
+                break;
+            default:
+                throw new InvalidRequestException();
+
+        }
+
+        return users;
 
     }
 
@@ -40,17 +135,45 @@ public class UserService {
         }
 
         User authUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
-        currentSession = new UserSession(authUser, ConnectionFactory.getInstance().getConnection());
+        currentSession = new UserSession(authUser, ConnectionFactory.getInstance().getConnection(authUser));
 
     }
 
-    public boolean isUserValid(User user) {
+    public Boolean updateProfile(User updatedUser) {
+
+        Boolean profileUpdated;
+
+        if (currentSession.getSessionUser().getId().equals(updatedUser.getId()) || !isCurrentUserAdminOrManager()) {
+            throw new AuthorizationException();
+        }
+
+        if (!isUserValid(updatedUser)) {
+            throw new InvalidRequestException();
+        }
+
+        Optional<User> persistedUser = userRepo.findUserByUsername(updatedUser.getUsername());
+        if (persistedUser.isPresent() && persistedUser.get().getId().equals(updatedUser.getId())) {
+            throw new ResourcePersistenceException("That username is taken by someone else!");
+        }
+
+        profileUpdated = userRepo.update(updatedUser);
+
+        return profileUpdated;
+
+    }
+
+    public Boolean isUserValid(User user) {
         if (user == null) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;
         if (user.getLastName() == null || user.getLastName().trim().equals("")) return false;
         if (user.getUsername() == null || user.getUsername().trim().equals("")) return false;
         if (user.getPassword() == null || user.getPassword().trim().equals("")) return false;
         return true;
+    }
+
+    private boolean isCurrentUserAdminOrManager() {
+        Role currentUserRole = currentSession.getSessionUser().getRole();
+        return (currentUserRole.equals(Role.ADMIN) || currentUserRole.equals(Role.MANAGER));
     }
 
 }
