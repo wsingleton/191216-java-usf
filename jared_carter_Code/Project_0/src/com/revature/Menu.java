@@ -8,24 +8,15 @@ public class Menu {
 
     private Hashtable<String, Account> acctBase = new Hashtable<>();
     String token = "";
-    {
-        int key = 0;
-        acctBase.put("Icemane", new Account("Icemane", "password", 0));
-        acctBase.put("jcarter", new Account("jcarter", "kannon", 0));
 
-    }
 
-    {
-        Deserialize fill = new Deserialize();
-        fill.fillMap(acctBase);
 
-    }
 
-    // setting initial balance to 0.
+
    double  balance = 0;
    int option = 0;
    boolean success = false;
-   // Will be using Scanner a lot so making instantiating in the class scope. So everyone has access to it.
+
     Scanner scanner = new Scanner(System.in);
     public void loginMenu(){
         System.out.println("---------------------------");
@@ -60,8 +51,7 @@ public class Menu {
                     break;
                 case 3:
                     System.out.println("Thank you for using Kannon's Bank.");
-                    Serialize serialize = new Serialize();
-                    serialize.writeMap(acctBase);
+
                     System.exit(0);
                     break;
                 default:
@@ -112,8 +102,7 @@ public class Menu {
                 case 4:
                     System.out.println("Thank you for using Kannon's Bank.");
 
-                    Serialize serialize = new Serialize();
-                    serialize.writeMap(acctBase);
+
                     System.exit(0);
                 default:
                     System.out.println("Invalid entry, please try again");
@@ -148,7 +137,7 @@ public class Menu {
                 acctBase.get(token).setBalance(balance);
                 valid = true;
             } else {
-                //So they do not get stuck in infinite loop if they have zero dollars.
+
                 System.out.println("You do not have enough to withdraw: ");
                 transactionMenu();
             }
@@ -177,7 +166,7 @@ public class Menu {
             } else {
 
                 System.out.println("Please deposit amount greater than zero.");
-                //May get stuck in infinite loop if do not have any more to deposit.
+
                 transactionMenu();
             }
 

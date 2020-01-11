@@ -3,9 +3,7 @@ package com.revature;
 import java.util.Objects;
 
 public class Account {
-    /*Attempting to make the account number by adding to a static variable with an initial value given val.
-    then increase that number by 1 after every variable is make.
-    */
+
     private double balance;
     private int accountNumber;
     private String password;
