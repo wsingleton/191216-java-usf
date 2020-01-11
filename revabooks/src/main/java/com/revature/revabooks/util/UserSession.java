@@ -1,8 +1,11 @@
 package com.revature.revabooks.util;
 
+import com.revature.revabooks.models.Role;
 import com.revature.revabooks.models.User;
 
 import java.sql.Connection;
+
+import static com.revature.revabooks.AppDriver.currentSession;
 
 public class UserSession {
 
@@ -33,6 +36,11 @@ public class UserSession {
 
     public void setConnection(Connection connection) {
         this.connection = connection;
+    }
+
+    public boolean isAdminOrManager() {
+        Role currentUserRole = currentSession.getSessionUser().getRole();
+        return (currentUserRole.equals(Role.ADMIN) || currentUserRole.equals(Role.MANAGER));
     }
 
 }
