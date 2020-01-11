@@ -194,7 +194,8 @@ public class BookRepository implements CrudRepository<Book> {
         try {
 
             String sql = "UPDATE books SET isbn = ?, title = ?, author_fn = ?, " +
-                         "author_ln = ?, genre_id = ?, price = ?, stock_count = ?";
+                         "author_ln = ?, genre_id = ?, price = ?, stock_count = ? " +
+                         "WHERE book_id = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, updatedObj.getIsbn());
@@ -204,6 +205,7 @@ public class BookRepository implements CrudRepository<Book> {
             pstmt.setInt(5, updatedObj.getGenre().ordinal());
             pstmt.setDouble(6, updatedObj.getPrice());
             pstmt.setInt(7, updatedObj.getStockCount());
+            pstmt.setInt(8, updatedObj.getId());
 
             int rowsUpdated = pstmt.executeUpdate();
 
