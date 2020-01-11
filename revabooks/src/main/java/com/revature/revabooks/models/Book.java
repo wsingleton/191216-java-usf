@@ -40,56 +40,63 @@ public class Book {
         return id;
     }
 
-    public void setId(Integer id) {
+    public Book setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
+    public Book setIsbn(String isbn) {
         this.isbn = isbn;
+        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Book setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public Book setAuthor(Author author) {
         this.author = author;
+        return this;
     }
 
     public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public Book setGenre(Genre genre) {
         this.genre = genre;
+        return this;
     }
 
     public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public Book setPrice(Double price) {
         this.price = price;
+        return this;
     }
 
     public Integer getStockCount() {
         return stockCount;
     }
 
-    public void setStockCount(Integer stockCount) {
+    public Book setStockCount(Integer stockCount) {
         this.stockCount = stockCount;
+        return this;
     }
 
     @Override
