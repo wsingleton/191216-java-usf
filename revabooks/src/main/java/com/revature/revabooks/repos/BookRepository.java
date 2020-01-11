@@ -19,7 +19,7 @@ public class BookRepository implements CrudRepository<Book> {
 
         try {
 
-            String sql = "SELECT * FROM books WHERE genre_id = ?";
+            String sql = "SELECT * FROM rbs_app.books WHERE genre_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, genre.ordinal());
             books = mapResultSet(pstmt.executeQuery());
@@ -41,7 +41,7 @@ public class BookRepository implements CrudRepository<Book> {
 
         try {
 
-            String sql = "SELECT * FROM books WHERE author_fn = ? AND author_ln = ?";
+            String sql = "SELECT * FROM rbs_app.books WHERE author_fn = ? AND author_ln = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, author.getFirstName());
             pstmt.setString(2, author.getLastName());
@@ -64,7 +64,7 @@ public class BookRepository implements CrudRepository<Book> {
 
         try {
 
-            String sql = "SELECT * FROM books WHERE author_ln = ?";
+            String sql = "SELECT * FROM rbs_app.books WHERE author_ln = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, authorLastName);
             books = mapResultSet(pstmt.executeQuery());
@@ -86,7 +86,7 @@ public class BookRepository implements CrudRepository<Book> {
 
         try {
 
-            String sql = "SELECT * FROM books WHERE title = ?";
+            String sql = "SELECT * FROM rbs_app.books WHERE title = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, title);
             books = mapResultSet(pstmt.executeQuery());
@@ -112,7 +112,7 @@ public class BookRepository implements CrudRepository<Book> {
 
         try {
 
-            String sql = "INSERT INTO books VALUES (0, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO rbs_app.books VALUES (0, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"book_id"});
             pstmt.setString(1, newObj.getIsbn());
             pstmt.setString(2, newObj.getTitle());
@@ -171,7 +171,7 @@ public class BookRepository implements CrudRepository<Book> {
 
         try {
 
-            String sql = "SELECT * FROM books WHERE book_id = ?";
+            String sql = "SELECT * FROM rbs_app.books WHERE book_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             book = mapResultSet(pstmt.executeQuery()).stream().findFirst();
@@ -193,7 +193,7 @@ public class BookRepository implements CrudRepository<Book> {
 
         try {
 
-            String sql = "UPDATE books SET isbn = ?, title = ?, author_fn = ?, " +
+            String sql = "UPDATE rbs_app.books SET isbn = ?, title = ?, author_fn = ?, " +
                          "author_ln = ?, genre_id = ?, price = ?, stock_count = ? " +
                          "WHERE book_id = ?";
 
@@ -229,7 +229,7 @@ public class BookRepository implements CrudRepository<Book> {
 
         try {
 
-            String sql = "DELETE FROM books WHERE book_id = ?";
+            String sql = "DELETE FROM rbs_app.books WHERE book_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
 
