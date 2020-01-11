@@ -1,4 +1,4 @@
-package com.revature;
+package bank;
 
 public class BankDriver {
     public static void main(String[] args) {

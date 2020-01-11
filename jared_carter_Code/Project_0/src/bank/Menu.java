@@ -1,6 +1,5 @@
-package com.revature;
+package bank;
 
-import java.sql.SQLOutput;
 import java.util.Hashtable;
 import java.util.Scanner;
 
@@ -20,7 +19,7 @@ public class Menu {
     Scanner scanner = new Scanner(System.in);
     public void loginMenu(){
         System.out.println("---------------------------");
-        System.out.println("Kannon's Bank.");
+        System.out.println("Bank.");
         System.out.println("1: Make an account");
         System.out.println("2: Sign in");
         System.out.println("3: Exit");
@@ -50,7 +49,7 @@ public class Menu {
                     signIn();
                     break;
                 case 3:
-                    System.out.println("Thank you for using Kannon's Bank.");
+                    System.out.println("Thank you for using Bank.");
 
                     System.exit(0);
                     break;
@@ -100,7 +99,7 @@ public class Menu {
                     viewBalance();
                     break;
                 case 4:
-                    System.out.println("Thank you for using Kannon's Bank.");
+                    System.out.println("Thank you for using Bank.");
 
 
                     System.exit(0);
