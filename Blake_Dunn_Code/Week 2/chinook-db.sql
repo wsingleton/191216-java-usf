@@ -352,27 +352,35 @@ EXEC get_employee_manager(2);
 
 --Task – Create a stored procedure that returns the name and company of a customer.
 -- NEED TO STILL FIX THIS SOMEHOW
-CREATE OR REPLACE PROCEDURE get_customer_name_company(c_id IN customer.customerid%TYPE, my_cursor OUT SYS_REFCURSOR)
-IS
+CREATE OR REPLACE PROCEDURE get_customer_name_company(
+cid IN NUMBER, 
+fn OUT VARCHAR2,
+ln OUT VARCHAR2,
+cn OUT VARCHAR2)
+AS
 BEGIN
-    OPEN my_cursor FOR
-    SELECT firstname, company
-    FROM customer;
+    SELECT firstname, lastname, company
+    INTO fn, ln, cn
+    FROM customer
+    WHERE customerid = cid;
 END;
 /
 
+EXEC get_customer_name_company(5);
+
 DECLARE 
-    c_name          customer.firstname%TYPE;
+    c_fn            customer.firstname%TYPE;
+    c_ln            customer.lastname&TYPE;
     c_company       customer.company%TYPE;
     c_cursor        SYS_REFCURSOR;
 BEGIN
-    get_customer_name_company(5, c_cursor);
+    get_customer_name_company(5);
     
     LOOP
         FETCH c_cursor
         INTO c_name, c_company;
         EXIT WHEN c_cursor%NOTFOUND;
-        DBMS_OUTPUT.PUT_LINE('Customer name: ' || c_name || ', Company: ' || c_company);
+        DBMS_OUTPUT.PUT_LINE('Customer first name: ' || c_name || ', Company: ' || c_company);
     END LOOP;
 END;
 /

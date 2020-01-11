@@ -32,14 +32,15 @@ public class AccountService {
         Double deposit = Double.valueOf(amount);
 
         if (deposit < 0 || deposit > 10000) {
+            deposit = 0.0;
             System.out.println("Try again!");
             router.navigate("/dashboard");
         }
         Double updatedDeposit = convertAmount(deposit);
 
         balance += updatedDeposit;
-
-        currentAccount.setBalance(balance);
+        Double bal = convertAmount(balance);
+        currentAccount.setBalance(bal);
 
         acctRepo.update(currentAccount);
     }
@@ -54,13 +55,15 @@ public class AccountService {
         Double withdraw = Double.valueOf(amount);
 
         if (withdraw > balance || withdraw < 0) {
+            withdraw = 0.0;
             System.out.println("Try again!");
             router.navigate("/dashboard");
         }
         Double updatedWithdraw = convertAmount(withdraw);
 
         balance -= updatedWithdraw;
-        currentAccount.setBalance(balance);
+        Double bal = convertAmount(balance);
+        currentAccount.setBalance(bal);
 
         acctRepo.update(currentAccount);
     }
