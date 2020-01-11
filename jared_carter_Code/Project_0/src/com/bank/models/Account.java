@@ -1,4 +1,4 @@
-package bank;
+package com.bank.models;
 
 import java.util.Objects;
 
@@ -9,7 +9,7 @@ public class Account {
     private String password;
     private String username;
 
-    Account(String username, String password, double balance) {
+   public Account(String username, String password, double balance) {
         this.balance = balance;
         this.username = username;
         this.password = password;
