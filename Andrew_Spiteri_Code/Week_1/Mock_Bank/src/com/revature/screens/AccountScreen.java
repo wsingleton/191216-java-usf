@@ -10,6 +10,7 @@ import com.revature.services.UserService;
 import static com.revature.MockBankDriver.*;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
@@ -65,7 +66,7 @@ public class AccountScreen extends Screen {
             String holder = scanner.next();
         if (holder.equals("1")) {
                 System.out.println("The amount you have deposited in savings is: " + df.format(savingsAmount));
-                System.out.println("Would you like deposit (1), withdraw (2), or go to you account page (3)");
+                System.out.println("Would you like to deposit (1), withdraw (2), or go to you account page (3)");
                 switch (scanner.next()) {
                     case "1":
                         System.out.println("How much would you like to deposit?");
@@ -93,7 +94,7 @@ public class AccountScreen extends Screen {
                         router.navigate("/account");
                         break;
                     default:
-                        System.err.println("Invalid input.");
+                        System.err.println("Invalid input. 1");
                         router.navigate("/account");
                         break;
                 }
@@ -127,53 +128,92 @@ public class AccountScreen extends Screen {
                         router.navigate("/account");
                         break;
                     default:
-                        System.err.println("Invalid input.");
+                        System.err.println("Invalid input. 2");
                         router.navigate("/account");
                         break;
                 }
             }else if(holder.equals("3")){
                 System.out.println("Wait while we check your credit score!");
-                Integer creditScore =  UserService.checkCreditScore(currentUser.getID());
-                System.out.println("Your credit score is: " + creditScore);
+                ArrayList<Integer> creditScore =  UserService.checkCreditScore(currentUser.getID());
                 try {
-                    if(creditScore >= 650){
-                        System.out.println("You are approved!");
-                        System.out.print("How much would you like to borrow: ");
-                        Double borrowAmount = scanner.nextDouble();
-                        autoAccount.setAccountType(AccountType.AUTOLOAN);
-                        if(as.createAccount(autoAccount, borrowAmount)){
-                            System.out.println("You have successfully taken out your loan!");
-                        }else{
-                            System.out.println("Error processing transaction! Try again later.");
-                            router.navigate("/account");
+                    if(creditScore.size() < 2) {
+                        System.out.println("Your credit score is: " + creditScore.get(0));
+                        if (creditScore.get(0) >= 650) {
+                            System.out.println("You are approved!");
+                            System.out.print("How much would you like to borrow: ");
+                            Double borrowAmount = scanner.nextDouble();
+                            autoAccount.setAccountType(AccountType.AUTOLOAN);
+                            if (as.createAccount(autoAccount, borrowAmount, false)) {
+                                System.out.println("You have successfully taken out your loan!");
+                            } else {
+                                System.out.println("Error processing transaction! Try again later.");
+                                router.navigate("/account");
+                            }
+                        } else {
+                            System.out.println("Your credit score isn't good enough to take out a loan.");
                         }
                     }else{
-                        System.out.println("Your credit score isn't good enough to take out a loan.");
+                        System.out.println("Your credit scores are: " + creditScore.get(0) + " and " + creditScore.get(1));
+                        if (creditScore.get(0) >= 650 && creditScore.get(1) >= 650) {
+                            System.out.println("You are approved!");
+                            System.out.print("How much would you like to borrow: ");
+                            Double borrowAmount = scanner.nextDouble();
+                            autoAccount.setAccountType(AccountType.AUTOLOAN);
+                            if (as.createAccount(autoAccount, borrowAmount, true)) {
+                                System.out.println("You have successfully taken out your loan!");
+                            } else {
+                                System.out.println("Error processing transaction! Try again later.");
+                                router.navigate("/account");
+                            }
+                        } else {
+                            System.out.println("Your credit score isn't good enough to take out a loan.");
+                        }
                     }
                     router.navigate("/account");
                 } catch (Exception e) {
                     System.err.println("Invalid value!");
+                    e.printStackTrace();
                     router.navigate("/account");
                 }
             }else if(holder.equals("4")){
                 System.out.println("Wait while we check your credit score!");
-                Integer creditScore =  UserService.checkCreditScore(currentUser.getID());
-                System.out.println("Your credit score is: " + creditScore);
+                ArrayList<Integer> creditScore =  UserService.checkCreditScore(currentUser.getID());
+
                 try {
-                    if(creditScore >= 650){
-                        System.out.println("You are approved!");
-                        System.out.print("How much would you like to borrow: ");
-                        Double borrowAmount = scanner.nextDouble();
-                        mortgageAccount.setAccountType(AccountType.MORTGAGE);
-                        if(as.createAccount(mortgageAccount, borrowAmount)){
-                            System.out.println("You have successfully taken out your loan!");
-                            router.navigate("/account");
-                        }else{
-                            System.out.println("Error processing transaction! Try again later.");
-                            router.navigate("/account");
+                    if (creditScore.size() < 2) {
+                        System.out.println("Your credit score is: " + creditScore.get(0));
+                        if (creditScore.get(0) >= 650) {
+                            System.out.println("You are approved!");
+                            System.out.print("How much would you like to borrow: ");
+                            Double borrowAmount = scanner.nextDouble();
+                            mortgageAccount.setAccountType(AccountType.MORTGAGE);
+                            if (as.createAccount(mortgageAccount, borrowAmount, false)) {
+                                System.out.println("You have successfully taken out your loan!");
+                                router.navigate("/account");
+                            } else {
+                                System.out.println("Error processing transaction! Try again later.");
+                                router.navigate("/account");
+                            }
+                        } else {
+                            System.out.println("Your credit score isn't good enough to take out a loan.");
                         }
                     }else{
-                        System.out.println("Your credit score isn't good enough to take out a loan.");
+                        System.out.println("Your credit scores are: " + creditScore.get(0) + " and " + creditScore.get(1));
+                        if (creditScore.get(0) >= 650 && creditScore.get(1) >= 650) {
+                            System.out.println("You are approved!");
+                            System.out.print("How much would you like to borrow: ");
+                            Double borrowAmount = scanner.nextDouble();
+                            mortgageAccount.setAccountType(AccountType.MORTGAGE);
+                            if (as.createAccount(mortgageAccount, borrowAmount, true)) {
+                                System.out.println("You have successfully taken out your loan!");
+                                router.navigate("/account");
+                            } else {
+                                System.out.println("Error processing transaction! Try again later.");
+                                router.navigate("/account");
+                            }
+                        } else {
+                            System.out.println("Your credit score isn't good enough to take out a loan.");
+                        }
                     }
                     router.navigate("/account");
                 } catch (Exception e) {
@@ -183,7 +223,7 @@ public class AccountScreen extends Screen {
             }else if(holder.equals("5")){
                 System.exit(0);
             }else{
-                System.out.println("Invalid input!");
+                System.out.println("Invalid input! 3");
                 router.navigate("/account");
             }
         }else if(autoAccount.getAccountType().equals(AccountType.AUTOLOAN) && mortgageAccount.getAccountType().equals(AccountType.TEMP)){
@@ -224,7 +264,7 @@ public class AccountScreen extends Screen {
                         router.navigate("/account");
                         break;
                     default:
-                        System.err.println("Invalid input.");
+                        System.err.println("Invalid input. 4");
                         router.navigate("/account");
                         break;
                 }
@@ -258,7 +298,7 @@ public class AccountScreen extends Screen {
                         router.navigate("/account");
                         break;
                     default:
-                        System.err.println("Invalid input.");
+                        System.err.println("Invalid input. 5");
                         router.navigate("/account");
                         break;
                 }
@@ -279,7 +319,7 @@ public class AccountScreen extends Screen {
                                 router.navigate("/account");
                             }
                         }catch (Exception e){
-                            System.out.println("Invalid input!");
+                            System.out.println("Invalid input! 6");
                             router.navigate("/account");
                         }
                         break;
@@ -287,29 +327,49 @@ public class AccountScreen extends Screen {
                         router.navigate("/account");
                         break;
                     default:
-                        System.out.println("Invalid input!");
+                        System.out.println("Invalid input 7!");
                         router.navigate("/account");
                         break;
                 }
             }else if(holder.equals("4")){
                 System.out.println("Wait while we check your credit score!");
-                Integer creditScore =  UserService.checkCreditScore(currentUser.getID());
-                System.out.println("Your credit score is: " + creditScore);
+                ArrayList<Integer> creditScore =  UserService.checkCreditScore(currentUser.getID());
+
                 try {
-                    if(creditScore >= 650){
-                        System.out.println("You are approved!");
-                        System.out.print("How much would you like to borrow: ");
-                        Double borrowAmount = scanner.nextDouble();
-                        mortgageAccount.setAccountType(AccountType.MORTGAGE);
-                        if(as.createAccount(mortgageAccount, borrowAmount)){
-                            System.out.println("You have successfully taken out your loan!");
-                            router.navigate("/account");
-                        }else{
-                            System.out.println("Error processing transaction! Try again later.");
-                            router.navigate("/account");
+                    if(creditScore.size() < 2) {
+                        System.out.println("Your credit score is: " + creditScore.get(0));
+                        if (creditScore.get(0) >= 650) {
+                            System.out.println("You are approved!");
+                            System.out.print("How much would you like to borrow: ");
+                            Double borrowAmount = scanner.nextDouble();
+                            mortgageAccount.setAccountType(AccountType.MORTGAGE);
+                            if (as.createAccount(mortgageAccount, borrowAmount, false)) {
+                                System.out.println("You have successfully taken out your loan!");
+                                router.navigate("/account");
+                            } else {
+                                System.out.println("Error processing transaction! Try again later.");
+                                router.navigate("/account");
+                            }
+                        } else {
+                            System.out.println("Your credit score isn't good enough to take out a loan.");
                         }
                     }else{
-                        System.out.println("Your credit score isn't good enough to take out a loan.");
+                        System.out.println("Your credit scores are: " + creditScore.get(0) + " and " + creditScore.get(1));
+                        if(creditScore.get(0) >= 650 && creditScore.get(1) >= 650){
+                            System.out.println("You are approved!");
+                            System.out.print("How much would you like to borrow: ");
+                            Double borrowAmount = scanner.nextDouble();
+                            mortgageAccount.setAccountType(AccountType.MORTGAGE);
+                            if (as.createAccount(mortgageAccount, borrowAmount, true)) {
+                                System.out.println("You have successfully taken out your loan!");
+                                router.navigate("/account");
+                            } else {
+                                System.out.println("Error processing transaction! Try again later.");
+                                router.navigate("/account");
+                            }
+                        }else {
+                            System.out.println("Your credit score isn't good enough to take out a loan.");
+                        }
                     }
                     router.navigate("/account");
                 } catch (Exception e) {
@@ -319,7 +379,7 @@ public class AccountScreen extends Screen {
             }else if (holder.equals("5")){
                 System.exit(0);
             }else{
-                System.out.println("Invalid input!");
+                System.out.println("Invalid input! 8");
                 router.navigate("/account");
             }
         }else if(autoAccount.getAccountType().equals(AccountType.TEMP) && mortgageAccount.getAccountType().equals(AccountType.MORTGAGE)){
@@ -360,7 +420,7 @@ public class AccountScreen extends Screen {
                         router.navigate("/account");
                         break;
                     default:
-                        System.err.println("Invalid input.");
+                        System.err.println("Invalid input. 9");
                         router.navigate("/account");
                         break;
                 }
@@ -394,7 +454,7 @@ public class AccountScreen extends Screen {
                         router.navigate("/account");
                         break;
                     default:
-                        System.err.println("Invalid input.");
+                        System.err.println("Invalid input. 10");
                         router.navigate("/account");
                         break;
                 }
@@ -415,7 +475,7 @@ public class AccountScreen extends Screen {
                                 router.navigate("/account");
                             }
                         }catch (Exception e){
-                            System.out.println("Invalid Input!");
+                            System.out.println("Invalid Input! 11");
                             router.navigate("/account");
                         }
                         break;
@@ -423,28 +483,47 @@ public class AccountScreen extends Screen {
                         router.navigate("/account");
                         break;
                     default:
-                        System.out.println("Invalid input!");
+                        System.out.println("Invalid input! 12");
                         router.navigate("/account");
                         break;
                 }
             }else if(holder.equals("4")){
                 System.out.println("Wait while we check your credit score!");
-                Integer creditScore =  UserService.checkCreditScore(currentUser.getID());
-                System.out.println("Your credit score is: " + creditScore);
+                ArrayList<Integer> creditScore =  UserService.checkCreditScore(currentUser.getID());
+
                 try {
-                    if(creditScore >= 650){
-                        System.out.println("You are approved!");
-                        System.out.print("How much would you like to borrow: ");
-                        Double borrowAmount = scanner.nextDouble();
-                        autoAccount.setAccountType(AccountType.AUTOLOAN);
-                        if(as.createAccount(autoAccount, borrowAmount)){
-                            System.out.println("You have successfully taken out your loan!");
-                        }else{
-                            System.out.println("Error processing transaction! Try again later.");
-                            router.navigate("/account");
+                    if(creditScore.size() <2) {
+                        System.out.println("Your credit score is: " + creditScore.get(0));
+                        if (creditScore.get(0) >= 650) {
+                            System.out.println("You are approved!");
+                            System.out.print("How much would you like to borrow: ");
+                            Double borrowAmount = scanner.nextDouble();
+                            autoAccount.setAccountType(AccountType.AUTOLOAN);
+                            if (as.createAccount(autoAccount, borrowAmount, false)) {
+                                System.out.println("You have successfully taken out your loan!");
+                            } else {
+                                System.out.println("Error processing transaction! Try again later.");
+                                router.navigate("/account");
+                            }
+                        } else {
+                            System.out.println("Your credit score isn't good enough to take out a loan.");
                         }
                     }else{
-                        System.out.println("Your credit score isn't good enough to take out a loan.");
+                        System.out.println("Your credit scores are: " + creditScore.get(0) + " and " + creditScore.get(1));
+                        if (creditScore.get(0) >= 650 && creditScore.get(1) >= 650) {
+                            System.out.println("You are approved!");
+                            System.out.print("How much would you like to borrow: ");
+                            Double borrowAmount = scanner.nextDouble();
+                            autoAccount.setAccountType(AccountType.AUTOLOAN);
+                            if (as.createAccount(autoAccount, borrowAmount, true)) {
+                                System.out.println("You have successfully taken out your loan!");
+                            } else {
+                                System.out.println("Error processing transaction! Try again later.");
+                                router.navigate("/account");
+                            }
+                        } else {
+                            System.out.println("Your credit score isn't good enough to take out a loan.");
+                        }
                     }
                     router.navigate("/account");
                 } catch (Exception e) {
@@ -454,7 +533,7 @@ public class AccountScreen extends Screen {
             }else if (holder.equals("5")){
                 System.exit(0);
             }else{
-                System.out.println("Invalid input!");
+                System.out.println("Invalid input! 13");
                 router.navigate("/account");
             }
         }else if(autoAccount.getAccountType().equals(AccountType.AUTOLOAN) && mortgageAccount.getAccountType().equals(AccountType.MORTGAGE)){
@@ -496,7 +575,7 @@ public class AccountScreen extends Screen {
                         router.navigate("/account");
                         break;
                     default:
-                        System.err.println("Invalid input.");
+                        System.err.println("Invalid input. 14");
                         router.navigate("/account");
                         break;
                 }
@@ -530,7 +609,7 @@ public class AccountScreen extends Screen {
                         router.navigate("/account");
                         break;
                     default:
-                        System.err.println("Invalid input.");
+                        System.err.println("Invalid input. 15");
                         router.navigate("/account");
                         break;
                 }
@@ -551,7 +630,7 @@ public class AccountScreen extends Screen {
                                 router.navigate("/account");
                             }
                         }catch (Exception e){
-                            System.out.println("Invalid Input!");
+                            System.out.println("Invalid Input! 16");
                             router.navigate("/account");
                         }
                         break;
@@ -559,7 +638,7 @@ public class AccountScreen extends Screen {
                         router.navigate("/account");
                         break;
                     default:
-                        System.out.println("Invalid input!");
+                        System.out.println("Invalid input! 17");
                         router.navigate("/account");
                         break;
                 }
@@ -580,7 +659,7 @@ public class AccountScreen extends Screen {
                                 router.navigate("/account");
                             }
                         }catch (Exception e){
-                            System.out.println("Invalid input!");
+                            System.out.println("Invalid input! 18");
                             router.navigate("/account");
                         }
                         break;
@@ -588,14 +667,14 @@ public class AccountScreen extends Screen {
                         router.navigate("/account");
                         break;
                     default:
-                        System.out.println("Invalid input!");
+                        System.out.println("Invalid input! 19");
                         router.navigate("/account");
                         break;
                 }
             }else if (holder.equals("5")){
                 System.exit(0);
             }else{
-                System.out.println("Invalid input!");
+                System.out.println("Invalid input! 20");
                 router.navigate("/account");
             }
         }

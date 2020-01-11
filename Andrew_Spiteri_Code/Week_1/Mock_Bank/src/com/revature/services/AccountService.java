@@ -101,13 +101,12 @@ public class AccountService {
         }
     }
 
-    public Boolean createAccount(Account account, Double loanAmount){
+    public Boolean createAccount(Account account, Double loanAmount, Boolean isJoint){
         Random rand = new Random();
         account.setAccountAmount(loanAmount);
         account.setAccountNo(rand.nextInt(1000000));
         account.setId(currentUser.getID());
-
-        if(accountRepository.save(account)){
+        if(accountRepository.save(account, isJoint)){
             return true;
         }else {
             return false;

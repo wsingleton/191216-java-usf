@@ -24,6 +24,9 @@ public class HomeScreen extends Screen {
             case "1":
                 router.navigate("/login");
                 break;
+            case "2":
+                router.navigate("/admin");
+                break;
             case "3":
                 System.exit(0);
                 break;

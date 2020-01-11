@@ -1,5 +1,7 @@
 package com.revature.screens;
 
+import com.revature.models.Role;
+import com.revature.models.User;
 import com.revature.services.AccountService;
 import com.revature.services.UserService;
 
@@ -33,15 +35,8 @@ public class RegisterScreen extends Screen {
                 String username = sc.next();
                 System.out.print("User 1 Password: ");
                 String password = sc.next();
+                User user1 = new User(firstname, lastname, username, password, Role.MEMBER);
 
-                Boolean createUser = UserService.registerUser(firstname, lastname, username, password, true);
-
-                if (!createUser){
-                    System.out.println("Error creating accounts!");
-                    AccountService.checkingAccount = null;
-                    AccountService.savingsAccount = null;
-                    router.navigate("/home");
-                }
                 System.out.print("User 2 First name: ");
                 firstname = sc.next();
                 System.out.print("User 2 Last name: ");
@@ -50,10 +45,18 @@ public class RegisterScreen extends Screen {
                 username = sc.next();
                 System.out.print("User 2 Password: ");
                 password = sc.next();
+                User user2 = new User(firstname, lastname, username, password, Role.MEMBER);
+                Boolean createUser = UserService.registerUser(true, user1, user2);
 
-                UserService.registerUser(firstname, lastname, username, password, false);
+                if (!createUser){
+                    System.out.println("Error creating accounts!");
+                    AccountService.checkingAccount = null;
+                    AccountService.savingsAccount = null;
+                    router.navigate("/home");
+                }
             }catch (Exception e){
-                System.out.println("Invalid input.");
+                System.out.println("Invalid input. Register Screen");
+                e.printStackTrace();
                 AccountService.checkingAccount = null;
                 AccountService.savingsAccount = null;
                 router.navigate("/home");
@@ -68,8 +71,8 @@ public class RegisterScreen extends Screen {
                 String username = sc.next();
                 System.out.print("Password: ");
                 String password = sc.next();
-
-                UserService.registerUser(firstname, lastname, username, password, false);
+                User user = new User(firstname, lastname, username, password,Role.MEMBER);
+                UserService.registerUser( false, user);
             } catch (Exception e) {
                 System.out.println("Invalid input.");
                 AccountService.checkingAccount = null;

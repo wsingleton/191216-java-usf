@@ -9,8 +9,7 @@ import com.revature.repositories.UserRepository;
 
 
 import java.io.IOException;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 import static com.revature.MockBankDriver.*;
 
@@ -23,31 +22,40 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public static Boolean registerUser(String firstname, String lastname, String username, String password, Boolean jointAccount) throws IOException {
+    public static Boolean registerUser( Boolean jointAccount, User... users) throws IOException {
         UserRepository userRepository = new UserRepository();
         AccountRepository accountRepository = new AccountRepository();
         AccountService accountService = new AccountService(accountRepository);
-        Integer userId = Objects.hashCode(username);
         Random rand = new Random();
-        CreditScore tuScore = CreditScore.TRANSUNION, expScore = CreditScore.EXPERIAN;
-        tuScore.setScore(rand.nextInt(850-300)+300);
-        expScore.setScore(rand.nextInt(tuScore.getScore() - 10)+10);
-        User user = new User(userId, firstname, lastname, username, password, Role.MEMBER, tuScore, expScore);
-        Boolean bool = userRepository.save(user);
-        AccountService.registerAccount(userId, jointAccount);
-        if(jointAccount && bool){
-            System.out.println("User successfully registered!");
-            return true;
+
+        Set<User> userSet = new HashSet<>();
+        Integer isJoint;
+        if(jointAccount){
+            isJoint =1;
+        }else {
+            isJoint = 0;
         }
-        if (bool){
+        for(int i = 0; i < users.length; i++) {
+            Integer userId = Objects.hashCode(users[i].getUserName());
+            CreditScore tuScore = CreditScore.TRANSUNION, expScore = CreditScore.EXPERIAN;
+            tuScore.setScore(rand.nextInt(850 - 300) + 300);
+            expScore.setScore(rand.nextInt(10) + tuScore.getScore());
+            User user = new User(userId, users[i].getFirstName(), users[i].getLastName(), users[i].getUserName(), users[i].getPassword(), Role.MEMBER, tuScore.getScore(), expScore.getScore());
+            userSet.add(user);
+        }
+        Boolean bool = userRepository.save(userSet, isJoint);
+        for (User u:
+             userSet) {
+            AccountService.registerAccount(u.getID(), jointAccount);
+        }
+        if (bool) {
             System.out.println("User successfully registered!");
             router.navigate("/login");
-        }else{
+        } else {
             System.out.println("Error creating user!");
             router.navigate("/home");
         }
         return false;
-
     }
 
     public void login(String username, String password){
@@ -66,9 +74,8 @@ public class UserService {
     }
 
     //TODO Finish checkCreditScore method in UserService
-    public static Integer checkCreditScore(Integer id){
-        Integer creditScore = UserRepository.creditScore(id);
-        return creditScore;
+    public static ArrayList<Integer> checkCreditScore(Integer id){
+        return UserRepository.creditScore(id);
     }
 
 }

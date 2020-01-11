@@ -10,14 +10,18 @@ import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AccountRepository implements CrudRepository<Account> {
+public class AccountRepository{
 
-    @Override
+    public Boolean save(Account account, Boolean isJoint){
+
+        return false;
+    }
+
     public Boolean save(Account account) {
         //TODO INSERT into table joint accounts
         try {
-            if(AccountService.savingsAccount.getAccountType().equals(AccountType.SAVINGS) && AccountService.checkingAccount.getAccountType().equals(AccountType.CHECKING)){
-                //String sql = "Insert into USER_ACCOUNT values (" + account.getId() +","+ account.getAccountNo() + ")";
+            if(account.getAccountType().equals(AccountType.AUTOLOAN) || account.getAccountType().equals(AccountType.MORTGAGE)){
+
                 String sql = "Insert into USER_ACCOUNT values (?,?)";
                 PreparedStatement ps = getCon().prepareStatement(sql);
                 ps.setInt(1,account.getId());
@@ -32,13 +36,10 @@ public class AccountRepository implements CrudRepository<Account> {
             }
             String sql = "Insert into ACCOUNT values ( ?,?,?)";
             PreparedStatement ps = getCon().prepareStatement(sql);
-//          String sql = "Insert into ACCOUNT values (" + account.getAccountNo() +
-//                    ","+account.getAccAmount()+",'"+account.getAccountType().name()+"')";
             ps.setInt(1, account.getAccountNo());
             ps.setDouble(2,account.getAccAmount());
             ps.setString(3,account.getAccountType().name());
             int num = ps.executeUpdate();
-            //sql = "Insert into USER_ACCOUNT values (" + account.getId() +","+ account.getAccountNo() + ")";
             sql = "Insert into USER_ACCOUNT values (?,?)";
             ps = getCon().prepareStatement(sql);
             ps.setInt(1,account.getId());
@@ -100,7 +101,7 @@ public class AccountRepository implements CrudRepository<Account> {
         return false;
     }
 
-    @Override
+
     public boolean deleteById(Integer id) {
         return false;
     }

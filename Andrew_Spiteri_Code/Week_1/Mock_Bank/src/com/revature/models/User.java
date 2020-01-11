@@ -6,7 +6,8 @@ public class User {
     private String username, password, firstName, lastName;
     private Integer id;
     private Role role;
-    private CreditScore tu, exp;
+    private Integer tu, exp;
+    private Boolean isjoint;
 
     public User(){}
 
@@ -26,7 +27,7 @@ public class User {
 
     }
 
-    public User(Integer id, String fn, String ln, String un, String pw, Role role, CreditScore tu, CreditScore exp) {
+    public User(Integer id, String fn, String ln, String un, String pw, Role role, Integer tu, Integer exp) {
         this(id, fn, ln, un, pw, role ); // constructor chaining
         this.tu = tu;
         this.exp = exp;
@@ -67,8 +68,8 @@ public class User {
     public Role getRole() {
         return role;
     }
-    public CreditScore getTu(){return tu;}
-    public CreditScore getExp(){return exp;}
+    public Integer getTu(){return tu;}
+    public Integer getExp(){return exp;}
 
     public String toFileString(){
         return id + "," + username + "," + hashCode() + "," + firstName + "," + lastName + "," + role + ";";
@@ -100,6 +101,8 @@ public class User {
                 "," + username +
                 "," + password +
                 "," + role +
+                "," + tu +
+                "," + exp +
                 ';';
     }
 }
