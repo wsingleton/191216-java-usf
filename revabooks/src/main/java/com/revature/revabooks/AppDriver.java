@@ -38,7 +38,7 @@ public class AppDriver {
               .addScreen(new RegisterScreen(userService))
               .addScreen(new LoginScreen(userService))
               .addScreen(new DashboardScreen())
-              .addScreen(new UserProfileScreen())
+              .addScreen(new UserProfileScreen(userService))
               .addScreen(new SearchBooksScreen(bookService));
 
         System.out.println("[LOG] - Application initialization complete.");
