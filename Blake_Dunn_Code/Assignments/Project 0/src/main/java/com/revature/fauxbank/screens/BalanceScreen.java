@@ -11,7 +11,6 @@ public class BalanceScreen extends Screen {
 
     public BalanceScreen(AccountService accountService) {
         super("BalanceScreen", "/balance");
-        System.out.println("[LOG] - Instantiating " + super.getName());
         this.accountService = accountService;
     }
 
@@ -20,7 +19,7 @@ public class BalanceScreen extends Screen {
 
         Double balance = currentAccount.getBalance();
 
-        System.out.println("\n\n\n\n\n\n\n\n\n+------------------+\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("");
         System.out.println("Your Balance: $" + balance);
 

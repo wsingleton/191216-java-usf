@@ -10,7 +10,6 @@ public class DepositScreen extends Screen {
 
     public DepositScreen(AccountService accountService) {
         super("DepositScreen", "/deposit");
-        System.out.println("[LOG] - Instantiating " + super.getName());
         this.accountService = accountService;
     }
 
@@ -19,7 +18,7 @@ public class DepositScreen extends Screen {
 
         Double balance = currentAccount.getBalance();
 
-        System.out.println("\n\n\n\n\n\n\n\n\n+------------------+\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("Your Account Balance: $" + balance);
         System.out.println("How much would you like to deposit? (Must be less than 10000)");
         System.out.print("> ");

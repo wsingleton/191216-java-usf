@@ -186,7 +186,7 @@ END;
 -- Task – Create a function that returns the average total of all invoices
 CREATE OR REPLACE FUNCTION average_total
     RETURN NUMBER
-    AS avg_total NUMBER(10, 2);
+    AS avg_total NUMBER(10,2);
 BEGIN
     SELECT AVG(total)
     INTO avg_total
@@ -218,18 +218,41 @@ FROM DUAL;
 -- 3.3 User Defined Scalar Functions
 
 -- Task – Create a function that returns the average price of invoice-line items in the invoice-line table
+
+-- This function returns the average unit price among all the invoice lines in the table.
+CREATE OR REPLACE FUNCTION avg_unit_price
+    RETURN NUMBER
+    AS average_price NUMBER(10,2);
+BEGIN
+    SELECT AVG(unitprice)
+    INTO average_price
+    FROM invoiceline;
+    
+    RETURN average_price;
+END;
+/
+
+SELECT avg_unit_price
+FROM dual;
+-- This function does an average for each invoice id within the table
 CREATE OR REPLACE FUNCTION average_price
     RETURN SYS_REFCURSOR
     AS my_cursor SYS_REFCURSOR;
 BEGIN
     OPEN my_cursor FOR
-    SELECT invoicelineid, AVG(unitprice)
+    SELECT invoiceid, AVG(unitprice)
     FROM invoiceline
-    GROUP BY invoicelineid;
+    GROUP BY invoiceid;
     
     RETURN my_cursor;
 END;
 /
+
+SELECT average_price()
+FROM dual;
+
+SELECT * 
+FROM invoiceline;
 
 DECLARE
     v_cursor    sys_REFCURSOR;
@@ -351,7 +374,6 @@ EXEC get_employee_manager(2);
 --4.3 Stored Procedure Output Parameters
 
 --Task – Create a stored procedure that returns the name and company of a customer.
--- NEED TO STILL FIX THIS SOMEHOW
 CREATE OR REPLACE PROCEDURE get_customer_name_company(
 cid IN NUMBER, 
 fn OUT VARCHAR2,
@@ -366,22 +388,15 @@ BEGIN
 END;
 /
 
-EXEC get_customer_name_company(5);
-
 DECLARE 
-    c_fn            customer.firstname%TYPE;
-    c_ln            customer.lastname&TYPE;
-    c_company       customer.company%TYPE;
-    c_cursor        SYS_REFCURSOR;
-BEGIN
-    get_customer_name_company(5);
-    
-    LOOP
-        FETCH c_cursor
-        INTO c_name, c_company;
-        EXIT WHEN c_cursor%NOTFOUND;
-        DBMS_OUTPUT.PUT_LINE('Customer first name: ' || c_name || ', Company: ' || c_company);
-    END LOOP;
+
+fn VARCHAR2(30);
+ln VARCHAR2(30);
+co VARCHAR2(30);
+
+BEGIN 
+get_customer_name_company(5, fn, ln, co);
+DBMS_OUTPUT.PUT_LINE('First name: ' || fn || ' Last name: ' || ln || ' Company: ' || co);
 END;
 /
 
@@ -409,94 +424,153 @@ INCREMENT BY 1
 START WITH 62;
 /
 
-CREATE OR REPLACE TRIGGER customer_insert_trig
-BEFORE INSERT ON customer
-FOR EACH ROW
-
-BEGIN
-    SELECT customer_pk_seq.NEXTVAL
-    INTO :new.customerid
-    FROM dual;
-END;
-/
-
 CREATE OR REPLACE PROCEDURE insert_new_customer (c_fn IN customer.firstname%TYPE, c_ln IN customer.lastname%TYPE, c_em IN customer.email%TYPE)
 IS 
 BEGIN
-    INSERT INTO customer (firstname, lastname, email)
-    VALUES (c_fn, c_ln, c_em); 
+    INSERT INTO customer (customerid, firstname, lastname, email)
+    VALUES (customer_pk_seq.NEXTVAL, c_fn, c_ln, c_em); 
     
     COMMIT;
 END;
 /
 
-EXEC insert_new_customer('Kobe', 'Bryant', 'kobe@chinook.com');
-
+EXEC insert_new_customer('Ko', 'Bryn', 'ko@chinook.com');
+select * from customer;
 -- 6.1 AFTER/FOR
 
 -- Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.
+CREATE OR REPLACE TRIGGER display_new_employee_id_trig
+AFTER INSERT ON employee
+FOR EACH ROW
 
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('New employee number: ' || :new.employeeid);
+END;
+/
 
-INSERT INTO customer (firstname, lastname, email)
-VALUES ('Buhlakay', 'Aaron', 'buhlakay@chinook.com');
+CREATE SEQUENCE employee_pk_seq
+MINVALUE 1
+MAXVALUE 999999999
+INCREMENT BY 1
+START WITH 62;
+/
+
+CREATE OR REPLACE TRIGGER employee_insert_trig
+BEFORE INSERT ON employee
+FOR EACH ROW
+
+BEGIN
+    SELECT employee_pk_seq.NEXTVAL
+    INTO :new.employeeid
+    FROM dual;
+END;
+/
+
+INSERT INTO employee (firstname, lastname)
+VALUES ('Buhlakay', 'Aaron');
 -- Task – Create an after update trigger on the album table that fires after a row is inserted in the table
+CREATE OR REPLACE TRIGGER album_name_update
+AFTER UPDATE ON album
+FOR EACH ROW
+
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('You just changed the ID from ' || :old.albumid || ' to ' || :new.albumid);
+END;
+/
+Select max(albumid)
+from album;
 
 
+update album a
+set a.albumid = 348
+where a.albumid = 347
+join track t
+udpate track t
+set t.albumid
+where 
 -- Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
+CREATE OR REPLACE TRIGGER customer_confirmation_message
+AFTER DELETE ON customer
+FOR EACH ROW
 
+BEGIN
+    DBMS_OUTPUT.PUT_LINE(' You just deleted ' || :old.firstname || ' ' || :old.lastname ||' from customer DB.');
+END;
+/
+
+DELETE FROM customer 
+WHERE customerid = 62;
 -- 6.2 BEFORE
 
 -- Task – Create a before trigger that restricts the deletion of any invoice that is priced over 50 dollars.
+
 CREATE OR REPLACE TRIGGER invoice_greater_than_trig
 BEFORE DELETE ON invoice
 FOR EACH ROW
 
-DECLARE
-inv_total NUMBER;
-
-BEGIN    
-    IF (inv_total > 50) THEN
-        RAISE_APPLICATION_ERROR (-20000, inv_total || 
+BEGIN 
+    IF (:old.total > 50) THEN
+        RAISE_APPLICATION_ERROR (-20000, :old.total || 
         ' is greater than $50 for this invoice. Cannot delete this item');
     END IF;
 END;
 /
 
-SELECT MAX(customerid)
+DELETE from invoice Where invoiceid = 222;
+
+SELECT invoiceid, total
 FROM invoice;
+--WHERE invoiceid = 413;
 
 INSERT INTO invoice (invoiceid, customerid, invoicedate, total)
 VALUES (413, 60, DATE '2019-12-25', 60);
 
-EXEC delete_invoice(200);
+
+EXEC delete_invoice(413);
 
 -- 7.1 INNER
 
 -- Task – Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId.
-
+SELECT c.firstname, c.lastname, i.invoiceid
+FROM customer c
+INNER JOIN invoice i
+ON c.customerid = i.customerid;
 
 -- 7.2 OUTER
 
 -- Task – Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, last name, invoiceId, and total.
-
+SELECT c.customerid, c.firstname, c.lastname, i.invoiceid, i.total
+FROM customer c
+FULL JOIN invoice i
+ON c.customerid = i.customerid;
 
 -- 7.3 RIGHT
 
 -- Task – Create a right join that joins album and artist specifying artist name and title.
-
+SELECT a.name, b.title
+FROM artist a
+RIGHT JOIN album b
+ON a.artistid = b.artistid;
 
 -- 7.4 CROSS
 
 -- Task – Create a cross join that joins album and artist and sorts by artist name in ascending order.
+SELECT a.name, b.title
+FROM artist a
+CROSS JOIN album b
+ORDER BY a.name;
 
 
 -- 7.5 SELF
 
 -- Task – Perform a self-join on the employee table, joining on the reports to column.
-
+SELECT a.reportsto AS reportsto1, b.reportsto AS reportsto2
+FROM employee a, employee b
+WHERE a.reportsto <> b.reportsto;
 
 -- 8.1 Indexes
 
 -- Task – Create an index on of table of your choice
-
+CREATE INDEX employee_lastname
+ON employee(lastname);
 

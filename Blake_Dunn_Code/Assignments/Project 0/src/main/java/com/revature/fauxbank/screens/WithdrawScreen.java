@@ -11,7 +11,6 @@ public class WithdrawScreen extends Screen {
 
     public WithdrawScreen(AccountService accountService) {
         super("WithdrawScreen", "/withdraw");
-        System.out.println("[LOG] - Instantiating " + super.getName());
         this.accountService = accountService;
     }
 
@@ -20,7 +19,7 @@ public class WithdrawScreen extends Screen {
 
         Double balance = currentAccount.getBalance();
 
-        System.out.println("\n\n\n\n\n\n\n\n\n+------------------+\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("Your Account Balance: $" + balance);
         System.out.println("How much would you like to withdraw?");
         System.out.print("> ");

@@ -12,7 +12,6 @@ public class LoginScreen extends Screen {
 
     public LoginScreen(UserService userService) {
         super("LoginScreen", "/login");
-        System.out.println("[LOG] - Instantiating " + super.getName());
         this.userService = userService;
     }
 
@@ -24,7 +23,7 @@ public class LoginScreen extends Screen {
 
         try {
 
-            System.out.println("\n\n\n\n\n\n\n\n\n+------------------+\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.println("Please provide your login credentials");
             System.out.print("Username: ");
             username = console.readLine();

@@ -41,9 +41,7 @@ public class AccountRepository implements CrudRepository<Account> {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
         return newAccount;
-
     }
 
     @Override
@@ -76,12 +74,12 @@ public class AccountRepository implements CrudRepository<Account> {
     public Boolean update(Account updateAcct) {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE accounts SET balance = ? WHERE acct_id = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setDouble (1, updateAcct.getBalance());
-            pstmt.setInt(2, updateAcct.getId());
+            String sql = "{call update_acct(?, ?)}";
+            CallableStatement cstmt = conn.prepareCall(sql);
+            cstmt.setDouble (1, updateAcct.getBalance());
+            cstmt.setInt(2, updateAcct.getId());
 
-            int rowsInserted = pstmt.executeUpdate();
+            int rowsInserted = cstmt.executeUpdate();
 
             if (rowsInserted == 0) return false;
 
@@ -92,11 +90,6 @@ public class AccountRepository implements CrudRepository<Account> {
         }
         return true;
 
-    }
-
-    @Override
-    public Boolean deleteById(Integer id) {
-        return null;
     }
 
     private Set<Account> mapResultSet(ResultSet rs) throws SQLException {

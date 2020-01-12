@@ -7,7 +7,6 @@ public class TransitionScreen extends Screen {
 
     public TransitionScreen() {
         super("TransitionScreen", "/transition");
-        System.out.println("[LOG] - Instantiating " + super.getName());
     }
 
     @Override
@@ -41,6 +40,7 @@ public class TransitionScreen extends Screen {
 
         }catch(Exception e) {
             System.err.println("[ERROR] - " + e.getMessage());
+            appRunning = false;
         }
     }
 }

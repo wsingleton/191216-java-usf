@@ -13,7 +13,6 @@ public class RegisterScreen extends Screen {
 
     public RegisterScreen(UserService userService) {
         super("RegisterScreen", "/register");
-        System.out.println("[LOG] - Instantiating " + super.getName());
         this.userService = userService;
     }
 
@@ -27,7 +26,7 @@ public class RegisterScreen extends Screen {
 
         try{
 
-            System.out.println("\n\n\n\n\n\n\n\n\n+------------------+\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.println("Sign up for a new account");
             System.out.print("First name: " );
             firstName = console.readLine();
@@ -43,7 +42,6 @@ public class RegisterScreen extends Screen {
             userService.register(newUser);
 
             if (currentUser != null && currentAccount != null) {
-                System.out.println("[LOG] - New user created! Navigating to dashboard.");
                 router.navigate("/dashboard");
             }
 

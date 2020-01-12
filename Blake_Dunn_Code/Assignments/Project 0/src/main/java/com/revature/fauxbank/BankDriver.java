@@ -21,7 +21,6 @@ public class BankDriver {
     public static boolean appRunning;
 
     static {
-        System.out.println("[LOG] - Initializing application...");
 
         appRunning = true;
         console = new BufferedReader(new InputStreamReader(System.in));
@@ -42,8 +41,6 @@ public class BankDriver {
                 .addScreen(new WithdrawScreen(accountService))
                 .addScreen(new TransitionScreen());
 
-
-        System.out.println("[LOG] - Application intializing complete.");
     }
 
     public static void main(String[] args) {

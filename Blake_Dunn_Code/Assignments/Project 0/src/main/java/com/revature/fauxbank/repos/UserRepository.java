@@ -91,7 +91,7 @@ public class UserRepository implements CrudRepository<User> {
     }
 
     @Override
-    public Optional findById(Integer id) {
+    public Optional<User> findById(Integer id) {
 
         return null;
     }
@@ -103,11 +103,6 @@ public class UserRepository implements CrudRepository<User> {
 
     }
 
-    @Override
-    public Boolean deleteById(Integer id) {
-        return null;
-    }
-
     public void updateCompositeKey() {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -116,12 +111,7 @@ public class UserRepository implements CrudRepository<User> {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, currentUser.getId());
             pstmt.setInt(2, currentAccount.getId());
-
-            int rowsInserted = pstmt.executeUpdate();
-
-            if (rowsInserted == 0) {
-
-            }
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
