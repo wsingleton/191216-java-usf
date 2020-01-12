@@ -46,6 +46,7 @@ public class UserServiceTest {
     public void testIsUserValidForFalse(){
         String message = "if a single input is invalid, return false";
          User testUser = new User();
+
         boolean actualResult = sut.isUserValid(testUser);
         assertFalse(message, actualResult);
     }
