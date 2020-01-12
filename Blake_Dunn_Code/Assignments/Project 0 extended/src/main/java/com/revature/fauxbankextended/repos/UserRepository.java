@@ -1,15 +1,16 @@
-package com.revature.fauxbank.repos;
+package com.revature.fauxbankextended.repos;
 
-import com.revature.fauxbank.exceptions.AuthenticationException;
-import com.revature.fauxbank.models.Account;
-import com.revature.fauxbank.models.User;
-import com.revature.fauxbank.util.ConnectionFactory;
+import com.revature.fauxbankextended.exceptions.AuthenticationException;
+import com.revature.fauxbankextended.models.User;
+import com.revature.fauxbankextended.util.ConnectionFactory;
 
 import java.sql.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
-import static com.revature.fauxbank.BankDriver.currentAccount;
-import static com.revature.fauxbank.BankDriver.currentUser;
+import static com.revature.fauxbankextended.BankDriver.*;
 
 public class UserRepository implements CrudRepository<User> {
 

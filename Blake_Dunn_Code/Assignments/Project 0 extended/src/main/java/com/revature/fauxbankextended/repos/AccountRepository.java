@@ -1,15 +1,16 @@
-package com.revature.fauxbank.repos;
+package com.revature.fauxbankextended.repos;
 
-import com.revature.fauxbank.exceptions.ResourceNotFoundException;
-import com.revature.fauxbank.models.Account;
-import com.revature.fauxbank.models.User;
-import com.revature.fauxbank.util.ConnectionFactory;
+import com.revature.fauxbankextended.exceptions.ResourceNotFoundException;
+import com.revature.fauxbankextended.models.Account;
+import com.revature.fauxbankextended.util.ConnectionFactory;
 
 import java.sql.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
-import static com.revature.fauxbank.BankDriver.currentAccount;
-import static com.revature.fauxbank.BankDriver.currentUser;
+import static com.revature.fauxbankextended.BankDriver.currentUser;
 
 public class AccountRepository implements CrudRepository<Account> {
 
@@ -56,12 +57,12 @@ public class AccountRepository implements CrudRepository<Account> {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "SELECT a.acct_id, a.balance " +
-                            "FROM accounts a " +
-                            "JOIN users_accounts b " +
-                            "ON a.acct_id = b.acct_id " +
-                            "JOIN users u " +
-                            "ON u.user_id = b.user_id " +
-                            "WHERE u.user_id = ?";
+                    "FROM accounts a " +
+                    "JOIN users_accounts b " +
+                    "ON a.acct_id = b.acct_id " +
+                    "JOIN users u " +
+                    "ON u.user_id = b.user_id " +
+                    "WHERE u.user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -100,7 +101,7 @@ public class AccountRepository implements CrudRepository<Account> {
         Optional<Account> _acct = findById(currentUser.getId());
 
         if (_acct.isPresent()) {
-             acct = _acct.get();
+            acct = _acct.get();
         }
         else {
             throw new ResourceNotFoundException();

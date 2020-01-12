@@ -1,6 +1,6 @@
-package com.revature.fauxbank.screens;
+package com.revature.fauxbankextended.screens;
 
-import static com.revature.fauxbank.BankDriver.*;
+import static com.revature.fauxbankextended.BankDriver.*;
 
 public class DashboardScreen extends Screen {
 

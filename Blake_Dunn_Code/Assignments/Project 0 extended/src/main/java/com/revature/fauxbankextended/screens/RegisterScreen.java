@@ -1,11 +1,11 @@
-package com.revature.fauxbank.screens;
+package com.revature.fauxbankextended.screens;
 
-import com.revature.fauxbank.exceptions.InvalidRequestException;
-import com.revature.fauxbank.exceptions.ResourcePersistenceException;
-import com.revature.fauxbank.models.User;
-import com.revature.fauxbank.services.UserService;
+import com.revature.fauxbankextended.exceptions.InvalidRequestException;
+import com.revature.fauxbankextended.exceptions.ResourcePersistenceException;
+import com.revature.fauxbankextended.models.User;
+import com.revature.fauxbankextended.services.UserService;
 
-import static com.revature.fauxbank.BankDriver.*;
+import static com.revature.fauxbankextended.BankDriver.*;
 
 public class RegisterScreen extends Screen {
 

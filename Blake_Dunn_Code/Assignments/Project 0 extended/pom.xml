@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.revature</groupId>
-    <artifactId>project 0</artifactId>
+    <artifactId>project 0 extended</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -36,6 +36,5 @@
         </dependency>
 
     </dependencies>
-
 
 </project>

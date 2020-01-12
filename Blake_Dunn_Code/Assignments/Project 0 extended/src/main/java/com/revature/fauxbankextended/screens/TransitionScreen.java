@@ -1,18 +1,19 @@
-package com.revature.fauxbank.screens;
+package com.revature.fauxbankextended.screens;
 
-import static com.revature.fauxbank.BankDriver.*;
+import static com.revature.fauxbankextended.BankDriver.*;
 
-public class HomeScreen extends Screen {
+public class TransitionScreen extends Screen {
 
-    public HomeScreen() {
-        super("HomeScreen", "/home");
+    public TransitionScreen() {
+        super("TransitionScreen", "/transition");
     }
 
     @Override
-    public void render() {
-        System.out.println("Welcome to Faux Bank!\n");
-        System.out.println("1) Login");
-        System.out.println("2) Register");
+    public void render(){
+
+        System.out.println("Would you like to perform another transaction?");
+        System.out.println("1) Yes");
+        System.out.println("2) Logout");
         System.out.println("3) Exit Application");
 
         try {
@@ -22,23 +23,22 @@ public class HomeScreen extends Screen {
             switch (input) {
 
                 case "1":
-                    router.navigate("/login");
+                    router.navigate("/dashboard");
                     break;
                 case "2":
-                    router.navigate("/register");
+                    router.navigate("/home");
                     break;
                 case "3":
                     System.out.println("Exiting application...");
                     appRunning = false;
                     break;
                 default:
-                    System.out.println("Invalid selection");
-                    appRunning = false;
+                    System.out.println("[LOG] - Invalid selection");
+                    router.navigate("/home");
             }
 
         }catch(Exception e) {
             System.err.println("[ERROR] - " + e.getMessage());
-            System.out.println("[LOG] - Shutting down application");
             appRunning = false;
         }
     }

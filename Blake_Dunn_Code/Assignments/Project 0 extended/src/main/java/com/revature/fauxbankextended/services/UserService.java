@@ -1,14 +1,14 @@
-package com.revature.fauxbank.services;
+package com.revature.fauxbankextended.services;
 
-import com.revature.fauxbank.exceptions.*;
-import com.revature.fauxbank.models.*;
-import com.revature.fauxbank.repos.*;
+import com.revature.fauxbankextended.exceptions.InvalidRequestException;
+import com.revature.fauxbankextended.exceptions.ResourcePersistenceException;
+import com.revature.fauxbankextended.models.*;
+import com.revature.fauxbankextended.repos.*;
 
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.revature.fauxbank.BankDriver.*;
+import static com.revature.fauxbankextended.BankDriver.*;
 
 public class UserService {
 
@@ -27,7 +27,7 @@ public class UserService {
     public void authenticate (String username, String password) {
 
         if (username == null || username.trim().equals("")
-            || password == null || password.trim().equals("")) throw new InvalidRequestException();
+                || password == null || password.trim().equals("")) throw new InvalidRequestException();
 
         currentUser = userRepo.getUser(username, password);
         currentAccount = acctRepo.getAccount();
