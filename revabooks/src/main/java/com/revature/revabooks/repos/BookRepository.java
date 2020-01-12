@@ -8,13 +8,13 @@ import oracle.jdbc.OracleTypes;
 import java.sql.*;
 import java.util.*;
 
-import static com.revature.revabooks.AppDriver.currentSession;
+import static com.revature.revabooks.AppDriver.app;
 
 public class BookRepository implements CrudRepository<Book> {
 
     public Set<Book> findBooksByGenre(Genre genre) {
 
-        Connection conn = currentSession.getConnection();
+        Connection conn = app.getCurrentSession().getConnection();
         Set<Book> books = new HashSet<>();
 
         try {
@@ -36,7 +36,7 @@ public class BookRepository implements CrudRepository<Book> {
 
     public Set<Book> findBooksByAuthor(Author author) {
 
-        Connection conn = currentSession.getConnection();
+        Connection conn = app.getCurrentSession().getConnection();
         Set<Book> books = new HashSet<>();
 
         try {
@@ -59,7 +59,7 @@ public class BookRepository implements CrudRepository<Book> {
 
     public Set<Book> findBooksByAuthorLastName(String authorLastName) {
 
-        Connection conn = currentSession.getConnection();
+        Connection conn = app.getCurrentSession().getConnection();
         Set<Book> books = new HashSet<>();
 
         try {
@@ -81,7 +81,7 @@ public class BookRepository implements CrudRepository<Book> {
 
     public Set<Book> findBooksByTitle(String title) {
 
-        Connection conn = currentSession.getConnection();
+        Connection conn = app.getCurrentSession().getConnection();
         Set<Book> books = new HashSet<>();
 
         try {
@@ -102,13 +102,28 @@ public class BookRepository implements CrudRepository<Book> {
     }
 
     public Optional<Book> findBookByIsbn(String isbn) {
-        return Optional.empty();
+        Connection conn = app.getCurrentSession().getConnection();
+        Optional<Book> book = Optional.empty();
+
+        try {
+
+            String sql = "SELECT * FROM rbs_app.books WHERE isbn = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, isbn);
+            book = mapResultSet(pstmt.executeQuery()).stream().findFirst();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return book;
     }
 
     @Override
     public void save(Book newObj) {
 
-        Connection conn = currentSession.getConnection();
+        Connection conn = app.getCurrentSession().getConnection();
 
         try {
 
@@ -143,7 +158,7 @@ public class BookRepository implements CrudRepository<Book> {
     @Override
     public Set<Book> findAll() {
 
-        Connection conn = currentSession.getConnection();
+        Connection conn = app.getCurrentSession().getConnection();
         Set<Book> books = new HashSet<>();
 
         try {
@@ -166,7 +181,7 @@ public class BookRepository implements CrudRepository<Book> {
     @Override
     public Optional<Book> findById(Integer id) {
 
-        Connection conn = currentSession.getConnection();
+        Connection conn = app.getCurrentSession().getConnection();
         Optional<Book> book = Optional.empty();
 
         try {
@@ -188,8 +203,8 @@ public class BookRepository implements CrudRepository<Book> {
     @Override
     public Boolean update(Book updatedObj) {
 
-        Connection conn = currentSession.getConnection();
-        Boolean updateSuccessful = false;
+        Connection conn = app.getCurrentSession().getConnection();
+        boolean updateSuccessful = false;
 
         try {
 
@@ -224,8 +239,8 @@ public class BookRepository implements CrudRepository<Book> {
     @Override
     public Boolean deleteById(Integer id) {
 
-        Connection conn = currentSession.getConnection();
-        Boolean deleteSuccessful = false;
+        Connection conn = app.getCurrentSession().getConnection();
+        boolean deleteSuccessful = false;
 
         try {
 
