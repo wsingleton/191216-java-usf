@@ -9,7 +9,7 @@ import com.revature.revabooks.repos.WishlistRepository;
 
 import java.util.Set;
 
-import static com.revature.revabooks.AppDriver.currentSession;
+import static com.revature.revabooks.AppDriver.app;
 
 public class BookService {
 
@@ -27,7 +27,7 @@ public class BookService {
 
     public Book getBookById(int id) {
 
-        if (!currentSession.isAdminOrManager()) throw new AuthorizationException();
+        if (!app.getCurrentSession().isAdminOrManager()) throw new AuthorizationException();
         if (id < 1) throw new InvalidRequestException();
         return bookRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
 
@@ -68,7 +68,7 @@ public class BookService {
 
     public void addBook(Book newBook) {
 
-        if (!currentSession.isAdminOrManager()) throw new AuthorizationException();
+        if (!app.getCurrentSession().isAdminOrManager()) throw new AuthorizationException();
         if (!isBookValid(newBook)) throw new InvalidRequestException();
         bookRepo.save(newBook);
 
@@ -76,7 +76,7 @@ public class BookService {
 
     public boolean updateBook(Book updatedBook) {
 
-        if (!currentSession.isAdminOrManager()) throw new AuthorizationException();
+        if (!app.getCurrentSession().isAdminOrManager()) throw new AuthorizationException();
         if (!isBookValid(updatedBook)) throw new InvalidRequestException();
         return bookRepo.update(updatedBook);
 
@@ -86,7 +86,7 @@ public class BookService {
 
         Book book = bookRepo.findById(bookId).orElseThrow(ResourceNotFoundException::new);
 
-        if (!currentSession.isAdminOrManager() && delta > 0) throw new AuthorizationException();
+        if (!app.getCurrentSession().isAdminOrManager() && delta > 0) throw new AuthorizationException();
 
         if ((book.getStockCount() + delta) < 0) {
             throw new InvalidRequestException("Not enough inventory to fulfill request!");
@@ -100,7 +100,7 @@ public class BookService {
 
     public boolean deleteBook(int id) {
 
-        if (!currentSession.isAdminOrManager()) throw new AuthorizationException();
+        if (!app.getCurrentSession().isAdminOrManager()) throw new AuthorizationException();
         return bookRepo.deleteById(id);
 
     }

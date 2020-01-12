@@ -10,7 +10,7 @@ import com.revature.revabooks.util.UserSession;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.revature.revabooks.AppDriver.currentSession;
+import static com.revature.revabooks.AppDriver.app;
 
 public class UserService {
 
@@ -31,7 +31,7 @@ public class UserService {
 
         newUser.setRole(Role.BASIC_MEMBER);
         userRepo.save(newUser);
-        currentSession = new UserSession(newUser, ConnectionFactory.getInstance().getConnection(newUser));
+        app.setCurrentSession(new UserSession(newUser, ConnectionFactory.getInstance().getConnection(newUser)));
 
     }
 
@@ -135,7 +135,7 @@ public class UserService {
         }
 
         User authUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
-        currentSession = new UserSession(authUser, ConnectionFactory.getInstance().getConnection(authUser));
+        app.setCurrentSession(new UserSession(authUser, ConnectionFactory.getInstance().getConnection(authUser)));
 
     }
 
@@ -143,7 +143,7 @@ public class UserService {
 
         Boolean profileUpdated;
 
-        boolean updatingSelf = (currentSession.getSessionUser().getId().equals(updatedUser.getId()));
+        boolean updatingSelf = (app.getCurrentSession().getSessionUser().getId().equals(updatedUser.getId()));
 
         if (!updatingSelf && !isCurrentUserAdminOrManager()) {
             throw new AuthorizationException();
@@ -160,7 +160,7 @@ public class UserService {
 
         profileUpdated = userRepo.update(updatedUser);
 
-        if (updatingSelf) currentSession.setSessionUser(updatedUser);
+        if (updatingSelf) app.getCurrentSession().setSessionUser(updatedUser);
 
         return profileUpdated;
 
@@ -176,7 +176,7 @@ public class UserService {
     }
 
     private boolean isCurrentUserAdminOrManager() {
-        Role currentUserRole = currentSession.getSessionUser().getRole();
+        Role currentUserRole = app.getCurrentSession().getSessionUser().getRole();
         return (currentUserRole.equals(Role.ADMIN) || currentUserRole.equals(Role.MANAGER));
     }
 
