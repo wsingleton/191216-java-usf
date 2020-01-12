@@ -16,6 +16,8 @@ monthly_budget NUMBER(8,2)
 
 );
 
+SELECT emp_fn FROM depart ments INNER JOIN employees ON (employees.department_id = departments.dept_id);
+
 CREATE TABLE employees (
 emp_id NUMBER(5),
 emp_fn VARCHAR2(50),

@@ -95,6 +95,8 @@ REFERENCES accounts (account_id)
 
 );
 
-COMMIT;
+--COMMIT;
+
+--SELECT * FROM users_accounts;
 
 
