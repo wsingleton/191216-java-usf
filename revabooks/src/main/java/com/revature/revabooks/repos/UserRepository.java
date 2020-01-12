@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.revature.revabooks.AppDriver.currentSession;
+import static com.revature.revabooks.AppDriver.app;
 
 public class UserRepository implements CrudRepository<User> {
 
@@ -110,7 +110,7 @@ public class UserRepository implements CrudRepository<User> {
     @Override
     public Set<User> findAll() {
 
-        Connection conn = currentSession.getConnection();
+        Connection conn = app.getCurrentSession().getConnection();
         Set<User> users = new HashSet<>();
 
         try {
@@ -131,7 +131,7 @@ public class UserRepository implements CrudRepository<User> {
     @Override
     public Optional<User> findById(Integer id) {
 
-        Connection conn = currentSession.getConnection();
+        Connection conn = app.getCurrentSession().getConnection();
         Optional<User> user = Optional.empty();
 
         try {
@@ -154,7 +154,7 @@ public class UserRepository implements CrudRepository<User> {
     @Override
     public Boolean update(User updatedObj) {
 
-        Connection conn = currentSession.getConnection();
+        Connection conn = app.getCurrentSession().getConnection();
         Boolean updateSuccessful = false;
 
         try {
@@ -186,7 +186,7 @@ public class UserRepository implements CrudRepository<User> {
     @Override
     public Boolean deleteById(Integer id) {
 
-        Connection conn = currentSession.getConnection();
+        Connection conn = app.getCurrentSession().getConnection();
         Boolean deleteSuccessful = false;
 
         try {

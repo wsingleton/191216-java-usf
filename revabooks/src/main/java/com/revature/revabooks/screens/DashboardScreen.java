@@ -14,7 +14,7 @@ public class DashboardScreen extends Screen {
 
         String userSelection;
         boolean loopMenu = true;
-        System.out.println("Rendering " + currentSession.getSessionUser().getFirstName() + "'s Dashboard...");
+        System.out.println("Rendering " + app.getCurrentSession().getSessionUser().getFirstName() + "'s Dashboard...");
 
         while (loopMenu) {
 
@@ -29,11 +29,11 @@ public class DashboardScreen extends Screen {
             try {
 
                 System.out.print("Selection: ");
-                userSelection = console.readLine();
+                userSelection = app.getConsole().readLine();
 
                 switch (userSelection) {
                     case "1":
-                        router.navigate("/search");
+                        app.getRouter().navigate("/search");
                         break;
                     case "2":
                         System.err.println("FavoritesScreen under construction...");
@@ -45,12 +45,12 @@ public class DashboardScreen extends Screen {
                         System.err.println("ShoppingCartScreen under construction...");
                         break;
                     case "5":
-                        router.navigate("/profile");
+                        app.getRouter().navigate("/profile");
                         break;
                     case "6":
-                        System.out.println(currentSession.getSessionUser().getUsername() + " signing out...");
+                        System.out.println(app.getCurrentSession().getSessionUser().getUsername() + " signing out...");
                         loopMenu = false;
-                        currentSession = null;
+                        app.invalidateCurrentSession();
                         break;
                     default:
                         System.out.println("Invalid Selection!");
@@ -59,7 +59,7 @@ public class DashboardScreen extends Screen {
             } catch (Exception e) {
                 System.err.println("[ERROR] - " + e.getMessage());
                 System.out.println("[LOG] - Shutting down application");
-                appRunning = false;
+                app.setAppRunning(false);
             }
 
         }

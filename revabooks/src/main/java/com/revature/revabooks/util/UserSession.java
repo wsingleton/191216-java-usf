@@ -5,8 +5,6 @@ import com.revature.revabooks.models.User;
 
 import java.sql.Connection;
 
-import static com.revature.revabooks.AppDriver.currentSession;
-
 public class UserSession {
 
     private User sessionUser;
@@ -39,7 +37,7 @@ public class UserSession {
     }
 
     public boolean isAdminOrManager() {
-        Role currentUserRole = currentSession.getSessionUser().getRole();
+        Role currentUserRole = this.getSessionUser().getRole();
         return (currentUserRole.equals(Role.ADMIN) || currentUserRole.equals(Role.MANAGER));
     }
 

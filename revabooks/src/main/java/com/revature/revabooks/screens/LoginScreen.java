@@ -27,15 +27,15 @@ public class LoginScreen extends Screen {
             System.out.println("\n\n\n\n\n\n\n\n\n+-----------------------+\n");
             System.out.println("Please provide your login credentials");
             System.out.print("Username: ");
-            username = console.readLine();
+            username = app.getConsole().readLine();
             System.out.print("Password: ");
-            password = console.readLine();
+            password = app.getConsole().readLine();
 
             userService.authenticate(username, password);
 
-            if (currentSession != null) {
+            if (app.isSessionValid()) {
                 System.out.println("[LOG] - Login successful, navigating to dashboard...");
-                router.navigate("/dashboard");
+                app.getRouter().navigate("/dashboard");
             }
 
         } catch (InvalidRequestException | AuthenticationException e) {
@@ -43,7 +43,7 @@ public class LoginScreen extends Screen {
         } catch (Exception e) {
             System.err.println("[ERROR] - An unexpected exception occurred");
             System.out.println("[LOG] - Shutting down application");
-            appRunning = false;
+            app.setAppRunning(false);
         }
 
     }

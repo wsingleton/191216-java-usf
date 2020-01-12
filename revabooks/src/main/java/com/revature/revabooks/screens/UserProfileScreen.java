@@ -29,7 +29,7 @@ public class UserProfileScreen extends Screen {
             String userSelection;
 
             System.out.println("\n\n+---------------------------------+\n");
-            System.out.println(currentSession.getSessionUser());
+            System.out.println(app.getCurrentSession().getSessionUser());
             System.out.println("\n1) Change password");
             System.out.println("2) Edit first name");
             System.out.println("3) Edit last name");
@@ -39,7 +39,7 @@ public class UserProfileScreen extends Screen {
 
                 // Get user's menu selection
                 System.out.print("Selection: ");
-                userSelection = console.readLine();
+                userSelection = app.getConsole().readLine();
 
                 switch (userSelection) {
                     case "1":
@@ -54,6 +54,7 @@ public class UserProfileScreen extends Screen {
                     case "4":
                         System.out.println("Returning to dashboard...");
                         loopMenu = false;
+                        break;
                     default:
                         System.out.println("Invalid selection!");
                         loopMenu = false;
@@ -62,7 +63,7 @@ public class UserProfileScreen extends Screen {
                 System.err.println("[ERROR] - " + e.getMessage());
                 System.out.println("[LOG] - Shutting down application");
                 loopMenu = false;
-                appRunning = false;
+                app.setAppRunning(false);
             }
         }
     }
@@ -73,24 +74,28 @@ public class UserProfileScreen extends Screen {
         String newInfo;
 
         System.out.print("Current password: ");
-        currentPassword = console.readLine();
+        currentPassword = app.getConsole().readLine();
 
-        if (!currentSession.getSessionUser().getPassword().equals(currentPassword)) {
+        if (!app.getCurrentSession().getSessionUser().getPassword().equals(currentPassword)) {
             System.out.println("Invalid password, returning to Edit Profile screen");
             return;
         }
 
         System.out.print("New " + selection + ": ");
-        newInfo = console.readLine();
+        newInfo = app.getConsole().readLine();
 
-        User updatedUser = new User(currentSession.getSessionUser());
+        User updatedUser = new User(app.getCurrentSession().getSessionUser());
 
-        if (selection.equals("password")) {
-            updatedUser.setPassword(newInfo);
-        } else if (selection.equals("first name")) {
-            updatedUser.setFirstName(newInfo);
-        } else if (selection.equals("last name")) {
-            updatedUser.setLastName(newInfo);
+        switch (selection) {
+            case "password":
+                updatedUser.setPassword(newInfo);
+                break;
+            case "first name":
+                updatedUser.setFirstName(newInfo);
+                break;
+            case "last name":
+                updatedUser.setLastName(newInfo);
+                break;
         }
 
         try {

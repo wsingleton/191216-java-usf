@@ -43,13 +43,13 @@ public class SearchBooksScreen extends Screen {
 
                 // Get user's menu selection
                 System.out.print("Selection: ");
-                userSelection = console.readLine();
+                userSelection = app.getConsole().readLine();
 
                 switch (userSelection) {
                     case "1":
 
                         System.out.print("Enter a title to search for: ");
-                        String bookTitle = console.readLine();
+                        String bookTitle = app.getConsole().readLine();
 
                         matchingBooks = bookService.getBooksByTitle(bookTitle);
                         if (matchingBooks != null) showBooks(matchingBooks);
@@ -58,9 +58,9 @@ public class SearchBooksScreen extends Screen {
                     case "2":
 
                         System.out.print("Enter first name of the author you are searching for: ");
-                        String authorFirstName = console.readLine();
+                        String authorFirstName = app.getConsole().readLine();
                         System.out.print("Enter last name of the author you are searching for: ");
-                        String authorLastName = console.readLine();
+                        String authorLastName = app.getConsole().readLine();
 
                         Author author = new Author(authorFirstName, authorLastName);
                         matchingBooks = bookService.getBooksByAuthor(author);
@@ -70,7 +70,7 @@ public class SearchBooksScreen extends Screen {
                     case "3":
 
                         System.out.print("Enter a genre to search for: ");
-                        String bookGenre = console.readLine();
+                        String bookGenre = app.getConsole().readLine();
 
                         matchingBooks = bookService.getBooksByGenre(bookGenre);
                         if (matchingBooks != null) showBooks(matchingBooks);
@@ -79,7 +79,7 @@ public class SearchBooksScreen extends Screen {
                     case "4":
 
                         System.out.print("Enter an ISBN to search for: ");
-                        String bookIsbn = console.readLine();
+                        String bookIsbn = app.getConsole().readLine();
 
                         matchingBook = bookService.getBookByIsbn(bookIsbn);
                         if (matchingBook != null) matchingBooks.add(matchingBook);
@@ -103,7 +103,7 @@ public class SearchBooksScreen extends Screen {
                 System.err.println("[ERROR] - " + e.getMessage());
                 System.out.println("[LOG] - Shutting down application");
                 loopMenu = false;
-                appRunning = false;
+                app.setAppRunning(false);
             }
         }
     }
