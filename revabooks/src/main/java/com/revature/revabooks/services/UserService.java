@@ -143,7 +143,9 @@ public class UserService {
 
         Boolean profileUpdated;
 
-        if (currentSession.getSessionUser().getId().equals(updatedUser.getId()) || !isCurrentUserAdminOrManager()) {
+        boolean updatingSelf = (currentSession.getSessionUser().getId().equals(updatedUser.getId()));
+
+        if (!updatingSelf && !isCurrentUserAdminOrManager()) {
             throw new AuthorizationException();
         }
 
@@ -152,11 +154,13 @@ public class UserService {
         }
 
         Optional<User> persistedUser = userRepo.findUserByUsername(updatedUser.getUsername());
-        if (persistedUser.isPresent() && persistedUser.get().getId().equals(updatedUser.getId())) {
+        if (persistedUser.isPresent() && !persistedUser.get().getId().equals(updatedUser.getId())) {
             throw new ResourcePersistenceException("That username is taken by someone else!");
         }
 
         profileUpdated = userRepo.update(updatedUser);
+
+        if (updatingSelf) currentSession.setSessionUser(updatedUser);
 
         return profileUpdated;
 
