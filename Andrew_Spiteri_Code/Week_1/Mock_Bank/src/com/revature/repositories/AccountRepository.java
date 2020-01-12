@@ -2,8 +2,10 @@ package com.revature.repositories;
 
 import com.revature.models.Account;
 import com.revature.models.AccountType;
+import com.revature.models.User;
 import com.revature.services.AccountService;
 
+import static com.revature.MockBankDriver.router;
 import static com.revature.util.ConnectionFactory.*;
 
 import java.sql.*;
@@ -13,15 +15,69 @@ import java.util.Set;
 public class AccountRepository{
 
     public Boolean save(Account account, Boolean isJoint){
+        if(isJoint){
+            try {
+                String sql = "Insert into ACCOUNT values ( ?,?,?)";
+                PreparedStatement ps = getCon().prepareStatement(sql);
+                ps.setInt(1, account.getAccountNo());
+                ps.setDouble(2,account.getAccAmount());
+                ps.setString(3,account.getAccountType().name());
+                Integer rowsReturned = ps.executeUpdate();
 
+                Set<Integer> users = new HashSet<>();
+                sql = "SELECT joint_id FROM isjoint WHERE user_id = ?";
+                ps = getCon().prepareStatement(sql);
+                ps.setInt(1, account.getId());
+                ResultSet rs = ps.executeQuery();
+                int joint_id = 0;
+                while (rs.next()) {
+                    joint_id = rs.getInt(1);
+                }
+                sql = "SELECT user_id FROM isjoint WHERE joint_id = ?";
+                ps = getCon().prepareStatement(sql);
+                ps.setInt(1,joint_id);
+                rs = ps.executeQuery();
+                while (rs.next()){
+                    users.add(rs.getInt(1));
+                }
+
+                Integer[] userArray = new Integer[users.size()];
+                userArray = users.toArray(userArray);
+
+                sql = "INSERT ALL";
+                for (Integer u :
+                        users) {
+                    sql += " INTO user_account VALUES (?,?) ";
+                }
+                sql += " SELECT * FROM dual";
+                ps = getCon().prepareStatement(sql);
+                for (int i = 0, j = 1; j < users.size() * 2; i++) {
+                    ps.setInt(j, userArray[i]);
+                    j++;
+                    ps.setInt(j, account.getAccountNo());
+                    j++;
+                }
+                rowsReturned += ps.executeUpdate();
+                if(rowsReturned == 3){
+                    return true;
+                }
+            }catch (SQLException e){
+                System.out.println("Error code 300");
+                router.navigate("/account");
+            }
+        }else{
+            if(save(account)){
+                return true;
+            }
+        }
         return false;
     }
 
     public Boolean save(Account account) {
         //TODO INSERT into table joint accounts
         try {
-            if(account.getAccountType().equals(AccountType.AUTOLOAN) || account.getAccountType().equals(AccountType.MORTGAGE)){
-
+            if(AccountService.savingsAccount.getAccountType().equals(AccountType.SAVINGS) && AccountService.checkingAccount.getAccountType().equals(AccountType.CHECKING)){
+                //String sql = "Insert into USER_ACCOUNT values (" + account.getId() +","+ account.getAccountNo() + ")";
                 String sql = "Insert into USER_ACCOUNT values (?,?)";
                 PreparedStatement ps = getCon().prepareStatement(sql);
                 ps.setInt(1,account.getId());

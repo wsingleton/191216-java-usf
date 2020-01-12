@@ -41,7 +41,7 @@ GRANT create view TO chinook;
                 ResultSet rs = ps.executeQuery();
                 if (!rs.isBeforeFirst()) {
                 }else{
-                    System.out.println("The username you chose is taken.");
+                    System.out.println("The username, " + u.getUserName() + ", you chose is taken.");
                     router.navigate("/home");
                 }
             }

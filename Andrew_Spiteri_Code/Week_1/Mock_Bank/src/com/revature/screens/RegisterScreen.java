@@ -31,7 +31,7 @@ public class RegisterScreen extends Screen {
                 String firstname = sc.next();
                 System.out.print("User 1 Last name: ");
                 String lastname = sc.next();
-                System.out.print(" User 1 Username: ");
+                System.out.print("User 1 Username: ");
                 String username = sc.next();
                 System.out.print("User 1 Password: ");
                 String password = sc.next();
@@ -41,7 +41,7 @@ public class RegisterScreen extends Screen {
                 firstname = sc.next();
                 System.out.print("User 2 Last name: ");
                 lastname = sc.next();
-                System.out.print(" User 2 Username: ");
+                System.out.print("User 2 Username: ");
                 username = sc.next();
                 System.out.print("User 2 Password: ");
                 password = sc.next();
