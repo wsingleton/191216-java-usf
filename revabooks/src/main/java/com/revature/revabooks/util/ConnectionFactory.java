@@ -1,5 +1,6 @@
 package com.revature.revabooks.util;
 
+import com.revature.revabooks.models.Role;
 import com.revature.revabooks.models.User;
 
 import java.io.FileNotFoundException;
@@ -33,21 +34,21 @@ public class ConnectionFactory {
 
     public Connection getConnection(User sessionUser) {
 
-        String userRole = sessionUser.getRole().toString();
+        Role userRole = sessionUser.getRole();
         Connection conn = null;
 
         try {
             switch(userRole) {
-                case "ADMIN":
-                case "MANAGER":
+                case ADMIN:
+                case MANAGER:
                     conn = DriverManager.getConnection(
                             props.getProperty("url"),
                             props.getProperty("admin-usr"),
                             props.getProperty("admin-pw")
                     );
                     break;
-                case "PREMIUM_MEMBER":
-                case "BASIC_MEMBER":
+                case PREMIUM_MEMBER:
+                case BASIC_MEMBER:
                     conn = DriverManager.getConnection(
                             props.getProperty("url"),
                             props.getProperty("usr"),
