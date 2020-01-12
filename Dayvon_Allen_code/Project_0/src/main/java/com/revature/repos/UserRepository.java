@@ -15,7 +15,7 @@ public class UserRepository implements BankActionRepository<User> {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             Account acct = new Account();
-            acct.setBalance(250.0);
+            acct.setBalance(0.0);
 
             String sql = "INSERT INTO bank_app.users VALUES (?,?,?)";
             String sql1 = "INSERT INTO bank_app.accounts VALUES (?,?)";

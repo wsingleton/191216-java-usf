@@ -1,9 +1,5 @@
 package com.revature.screens;
-import com.revature.models.Account;
 import com.revature.repos.AccountRepository;
-
-import java.util.Optional;
-
 import static com.revature.BankDriver.*;
 
 public class BalanceScreen extends Screen {

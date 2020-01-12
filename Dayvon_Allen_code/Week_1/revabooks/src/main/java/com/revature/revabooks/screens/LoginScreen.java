@@ -30,7 +30,7 @@ public class LoginScreen extends Screen {
             System.out.print("Password: ");
             password = console.nextLine();
 
-            userService.authenticate(username, password);
+            userService.authenticate(username.replaceAll("[^A-Za-z0-9]+", ""), password);
 
             if(currentUser != null){
                 System.out.println("[LOG] - login successful navigating to dashboard.");

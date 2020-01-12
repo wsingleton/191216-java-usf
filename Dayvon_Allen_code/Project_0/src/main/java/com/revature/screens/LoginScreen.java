@@ -28,7 +28,7 @@ public class LoginScreen extends Screen {
             System.out.print("Password: ");
             password = console.nextLine();
 
-            userService.authenticate(username.toLowerCase(), password);
+            userService.authenticate(username.toLowerCase().replaceAll("[^A-Za-z0-9]+", ""), password);
 
             if(currentUser != null){
                 router.navigate("/customer");

@@ -44,6 +44,9 @@ public class UserService {
         if(user.getPassword() == null || user.getPassword().trim().equals("")){
             return false;
         }
+        if(user.getUsername().matches("[^A-Za-z0-9]+")){
+            return false;
+        }
         return true;
     }
 }
