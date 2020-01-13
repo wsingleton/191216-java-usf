@@ -97,18 +97,27 @@ public class RegisterScreen extends Screen {
 
 
 
+            if( balance <= 0){
+                System.err.println("please enter an positive number");
+                System.out.println(" Going back to Register screen ");
+                router.navigate("/register");
+            }
+            else {
+                User newUser = new User(firstName,lastName,username,password);
+                userService.register(newUser);
 
-            User newUser = new User(firstName,lastName,username,password);
-            userService.register(newUser);
-
-            int newId = currentUser.getId();
+                int newId = currentUser.getId();
 
 
-            Accounts newAcc = new Accounts(accountType,balance);
+                Accounts newAcc = new Accounts(accountType,balance);
 
 
-            AccountService accountService = new AccountService();
-            accountService.register(newAcc,newId);
+                AccountService accountService = new AccountService();
+                accountService.register(newAcc,newId);
+
+            }
+
+
 
             if(currentUser != null){
                 System.out.println("[log] - new user created! navigateing to dashboard...'");
