@@ -39,11 +39,6 @@ public class UserRepository implements BankActionRepository<User> {
         }
     }
 
-    @Override
-    public Boolean update(User updatedObj) {
-        return null;
-    }
-
     public Optional<User> findUserByUsername(String username){
         Optional<User> _user = Optional.empty();
 

@@ -1,7 +1,6 @@
 package com.revature.repos;
 
 import com.revature.models.Account;
-import com.revature.models.User;
 import com.revature.util.ConnectionFactory;
 
 import java.sql.Connection;

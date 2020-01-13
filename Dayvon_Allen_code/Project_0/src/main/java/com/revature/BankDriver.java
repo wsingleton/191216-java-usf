@@ -4,10 +4,8 @@ import com.revature.models.User;
 import com.revature.repos.UserRepository;
 import com.revature.screens.*;
 import com.revature.services.UserService;
-import com.revature.util.ConnectionFactory;
 import com.revature.util.ScreenRouter;
 
-import java.sql.Connection;
 import java.util.Scanner;
 
 public class BankDriver {

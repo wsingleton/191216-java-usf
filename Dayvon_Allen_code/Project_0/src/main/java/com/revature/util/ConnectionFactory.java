@@ -18,8 +18,6 @@ public class ConnectionFactory {
         }catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public static  ConnectionFactory getInstance() {
@@ -27,9 +25,7 @@ public class ConnectionFactory {
     }
 
     public Connection getConnection(){
-
         Connection conn = null;
-
         try{
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DriverManager.getConnection(props.getProperty("url"),
@@ -41,5 +37,4 @@ public class ConnectionFactory {
 
         return conn;
     }
-
 }
