@@ -65,6 +65,7 @@ DROP SEQUENCE joint_pk_seq;/
 CREATE SEQUENCE joint_pk_seq MINVALUE 1 MAXVALUE 9999999 INCREMENT BY 1 START WITH 1;/
 
 DROP TRIGGER joint_pk_trigger;
+DROP TRIGGER joint_user_pk_trigger;
 
 CREATE OR REPLACE TRIGGER joint_pk_trigger
 AFTER INSERT ON users

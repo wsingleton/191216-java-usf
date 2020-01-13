@@ -283,4 +283,91 @@ END;
 --5.0 Transactions
 --Task – Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely 
 --on this, find out how to resolve them)...poiij
+CREATE OR REPLACE PROCEDURE deleteInvoice(p_invoiceId IN NUMBER)
+IS
+BEGIN
+DELETE FROM invoice WHERE invoiceid = p_invoiceId;
+END;
+/
 
+EXECUTE deleteinvoice(1);
+
+--Task – Create a transaction nested within a stored procedure that inserts a new record in the Customer table
+CREATE OR REPLACE PROCEDURE create_customer
+IS
+BEGIN
+INSERT INTO customer VALUES (5000, 'Andrew', 'Spiteri', 'Best Industries', '333 Long Way', 'Tampa', 'FL', 'USA', '33612', '810-336-7158', '810-336-7159', 'ecclesy@gmail.com', 1);
+END;
+/
+
+execute create_customer();
+
+--6.0 Triggers
+--6.1 After/For
+--Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.
+DROP SEQUENCE PK_EMPLOYEE_SEQ;
+CREATE SEQUENCE pk_employee_genre_seq MINVALUE 1 MAXVALUE 9999999 INCREMENT BY 1 START WITH 27;/
+
+CREATE OR REPLACE TRIGGER pk_employee_trigger
+AFTER INSERT ON employee
+FOR EACH ROW
+BEGIN
+    INSERT INTO genre VALUES (PK_EMPLOYEE_GENRE_SEQ.nextval, :new.lastname);
+END;
+/ 
+
+--Task – Create an after update trigger on the album table that fires after a row is inserted in the table
+CREATE OR REPLACE TRIGGER genre_album_trigger
+AFTER UPDATE ON album
+FOR EACH ROW
+BEGIN
+    INSERT INTO genre VALUES (PK_EMPLOYEE_GENRE_SEQ.nextval, :new.title);
+END;
+/ 
+
+--Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
+CREATE OR REPLACE TRIGGER del_genre_customer_trigger
+AFTER DELETE ON customer
+FOR EACH ROW
+BEGIN
+    INSERT INTO genre VALUES (PK_EMPLOYEE_GENRE_SEQ.nextval, :old.lastname);
+END;
+/ 
+
+--6.2 BEFORE
+--Task – Create a before trigger that restricts the deletion of any invoice that is priced over 50 dollars.
+CREATE OR REPLACE TRIGGER del_invoice_trigger
+INSTEAD OF DELETE 
+ON invoice
+FOR EACH ROW
+BEGIN
+    INSERT INTO genre VALUES (PK_EMPLOYEE_GENRE_SEQ.nextval, :old.lastname);
+END;
+/
+
+--7.0 JOINs
+--7.1 INNER
+--Task – Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId.
+SELECT c.firstname, c.lastname, i.invoiceid FROM customer c JOIN invoice i USING (customerid);
+
+--7.2 OUTER
+--Task – Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, last name, invoiceId, and total.
+--SELECT c.customerid, c.firstname, c.lastname, i.invoiceid, i.total FROM customer c OUTER JOIN invoice i USING (customerid);
+
+--7.3 RIGHT
+--Task – Create a right join that joins album and artist specifying artist name and title.
+SELECT artist.name, album.title FROM artist RIGHT JOIN album USING (artistid);
+
+--7.4 CROSS
+--Task – Create a cross join that joins album and artist and sorts by artist name in ascending order.
+--SELECT artist.name, album.title FROM artist CROSS JOIN album USING (artistid) ORDER BY artist.name;
+
+--7.5 SELF
+--Task – Perform a self-join on the employee table, joining on the reports to column.
+SELECT e.firstname, e.lastname, e.reportsto, em.firstname, em.lastname FROM employee e JOIN employee em ON em.employeeid = e.reportsto;
+
+--8.0 INDEXes
+--8.1 INDEXes
+--Task – Create an index on of table of your choice
+--CREATE UNIQUE INDEX emp_unique_index ON employee(employeeid)
+--    TABLESPACE 
