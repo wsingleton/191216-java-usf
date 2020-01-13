@@ -7,8 +7,8 @@ SET SERVEROUTPUT ON;
 --method signature (method name, return type, variables to be returned)
 CREATE OR REPLACE FUNCTION get_max_id
     RETURN NUMBER
-        AS max_id NUMBER;
-        
+    AS max_id NUMBER;
+
 BEGIN
     SELECT MAX(artistid)
     INTO max_id
@@ -25,7 +25,6 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('The max id in the artist table is ' || maxId);
 END;
 /
-
 --drops table
 DROP FUNCTION get_max_id;
 

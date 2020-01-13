@@ -95,7 +95,7 @@ public class AccountRepository {
         }
     }
 
-    //a method that uses statement
+    //a method that uses a statement
     public Set<Account> findAllAccounts() {
 
         Set<Account> accounts = new HashSet<>();

@@ -79,7 +79,7 @@ public class UserRepository implements BankActionRepository<User> {
         return _user;
     }
 
-    //a method that uses the callable method
+    //a method that uses the callable statement
     public Set<User> findAllUsers() {
         HashSet<User> users = new HashSet<>();
 
