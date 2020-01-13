@@ -19,19 +19,19 @@ public class HomeScreen extends Screen {
         try {
 
             System.out.print("> ");
-            String userSelection = app.getConsole().readLine();
+            String userSelection = app().getConsole().readLine();
 
             switch (userSelection) {
 
                 case "1":
-                    app.getRouter().navigate("/login");
+                    app().getRouter().navigate("/login");
                     break;
                 case "2":
-                    app.getRouter().navigate("/register");
+                    app().getRouter().navigate("/register");
                     break;
                 case "3":
                     System.out.println("Exiting application...");
-                    app.setAppRunning(false);
+                    app().setAppRunning(false);
                     break;
                 default:
                     System.out.println("[LOG] - Invalid selection!");
@@ -40,7 +40,7 @@ public class HomeScreen extends Screen {
         } catch (Exception e) {
             System.err.println("[ERROR] - " + e.getMessage());
             System.out.println("[LOG] - Shutting down application");
-            app.setAppRunning(false);
+            app().setAppRunning(false);
         }
     }
 

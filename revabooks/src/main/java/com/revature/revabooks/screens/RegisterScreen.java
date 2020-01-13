@@ -30,20 +30,20 @@ public class RegisterScreen extends Screen {
             System.out.println("\n\n\n\n\n\n\n\n\n+-----------------------+\n");
             System.out.println("Sign up for a new account");
             System.out.print("First name: ");
-            firstName = app.getConsole().readLine();
+            firstName = app().getConsole().readLine();
             System.out.println("Last name: ");
-            lastName = app.getConsole().readLine();
+            lastName = app().getConsole().readLine();
             System.out.println("Username: ");
-            username = app.getConsole().readLine();
+            username = app().getConsole().readLine();
             System.out.println("Password: ");
-            password = app.getConsole().readLine();
+            password = app().getConsole().readLine();
 
             User newUser = new User(firstName, lastName, username, password);
             userService.register(newUser);
 
-            if (app.isSessionValid()) {
+            if (app().isSessionValid()) {
                 System.out.println("[LOG] - New user created! Navigating to dashboard...");
-                app.getRouter().navigate("/dashboard");
+                app().getRouter().navigate("/dashboard");
             }
 
         } catch (InvalidRequestException | ResourcePersistenceException e) {
@@ -52,7 +52,7 @@ public class RegisterScreen extends Screen {
             e.printStackTrace();
             System.err.println("[ERROR] - An unexpected exception occurred");
             System.out.println("[LOG] - Shutting down application");
-            app.setAppRunning(false);
+            app().setAppRunning(false);
         }
 
     }

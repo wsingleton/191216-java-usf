@@ -31,7 +31,7 @@ public class UserService {
 
         newUser.setRole(Role.BASIC_MEMBER);
         userRepo.save(newUser);
-        app.setCurrentSession(new UserSession(newUser, ConnectionFactory.getInstance().getConnection(newUser)));
+        app().setCurrentSession(new UserSession(newUser, ConnectionFactory.getInstance().getConnection(newUser)));
 
     }
 
@@ -39,7 +39,7 @@ public class UserService {
 
         Set<User> users;
 
-        if (!isCurrentUserAdminOrManager()) {
+        if (!app().getCurrentSession().isAdminOrManager()) {
             throw new AuthorizationException();
         }
 
@@ -61,7 +61,7 @@ public class UserService {
             throw new InvalidRequestException();
         }
 
-        if (!isCurrentUserAdminOrManager()) {
+        if (!app().getCurrentSession().isAdminOrManager()) {
             throw new AuthorizationException();
         }
 
@@ -81,7 +81,7 @@ public class UserService {
             throw new InvalidRequestException();
         }
 
-        if (!isCurrentUserAdminOrManager()) {
+        if (!app().getCurrentSession().isAdminOrManager()) {
             throw new AuthorizationException();
         }
 
@@ -135,7 +135,7 @@ public class UserService {
         }
 
         User authUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
-        app.setCurrentSession(new UserSession(authUser, ConnectionFactory.getInstance().getConnection(authUser)));
+        app().setCurrentSession(new UserSession(authUser, ConnectionFactory.getInstance().getConnection(authUser)));
 
     }
 
@@ -143,9 +143,9 @@ public class UserService {
 
         Boolean profileUpdated;
 
-        boolean updatingSelf = (app.getCurrentSession().getSessionUser().getId().equals(updatedUser.getId()));
+        boolean updatingSelf = (app().getCurrentSession().getSessionUser().getId().equals(updatedUser.getId()));
 
-        if (!updatingSelf && !isCurrentUserAdminOrManager()) {
+        if (!updatingSelf && !app().getCurrentSession().isAdminOrManager()) {
             throw new AuthorizationException();
         }
 
@@ -160,7 +160,7 @@ public class UserService {
 
         profileUpdated = userRepo.update(updatedUser);
 
-        if (updatingSelf) app.getCurrentSession().setSessionUser(updatedUser);
+        if (updatingSelf) app().getCurrentSession().setSessionUser(updatedUser);
 
         return profileUpdated;
 
@@ -173,11 +173,6 @@ public class UserService {
         if (user.getUsername() == null || user.getUsername().trim().equals("")) return false;
         if (user.getPassword() == null || user.getPassword().trim().equals("")) return false;
         return true;
-    }
-
-    private boolean isCurrentUserAdminOrManager() {
-        Role currentUserRole = app.getCurrentSession().getSessionUser().getRole();
-        return (currentUserRole.equals(Role.ADMIN) || currentUserRole.equals(Role.MANAGER));
     }
 
 }

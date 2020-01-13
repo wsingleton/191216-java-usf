@@ -29,7 +29,7 @@ public class UserProfileScreen extends Screen {
             String userSelection;
 
             System.out.println("\n\n+---------------------------------+\n");
-            System.out.println(app.getCurrentSession().getSessionUser());
+            System.out.println(app().getCurrentSession().getSessionUser());
             System.out.println("\n1) Change password");
             System.out.println("2) Edit first name");
             System.out.println("3) Edit last name");
@@ -39,7 +39,7 @@ public class UserProfileScreen extends Screen {
 
                 // Get user's menu selection
                 System.out.print("Selection: ");
-                userSelection = app.getConsole().readLine();
+                userSelection = app().getConsole().readLine();
 
                 switch (userSelection) {
                     case "1":
@@ -63,7 +63,7 @@ public class UserProfileScreen extends Screen {
                 System.err.println("[ERROR] - " + e.getMessage());
                 System.out.println("[LOG] - Shutting down application");
                 loopMenu = false;
-                app.setAppRunning(false);
+                app().setAppRunning(false);
             }
         }
     }
@@ -74,17 +74,17 @@ public class UserProfileScreen extends Screen {
         String newInfo;
 
         System.out.print("Current password: ");
-        currentPassword = app.getConsole().readLine();
+        currentPassword = app().getConsole().readLine();
 
-        if (!app.getCurrentSession().getSessionUser().getPassword().equals(currentPassword)) {
+        if (!app().getCurrentSession().getSessionUser().getPassword().equals(currentPassword)) {
             System.out.println("Invalid password, returning to Edit Profile screen");
             return;
         }
 
         System.out.print("New " + selection + ": ");
-        newInfo = app.getConsole().readLine();
+        newInfo = app().getConsole().readLine();
 
-        User updatedUser = new User(app.getCurrentSession().getSessionUser());
+        User updatedUser = new User(app().getCurrentSession().getSessionUser());
 
         switch (selection) {
             case "password":

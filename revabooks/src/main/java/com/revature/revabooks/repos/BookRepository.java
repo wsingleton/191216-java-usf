@@ -14,7 +14,7 @@ public class BookRepository implements CrudRepository<Book> {
 
     public Set<Book> findBooksByGenre(Genre genre) {
 
-        Connection conn = app.getCurrentSession().getConnection();
+        Connection conn = app().getCurrentSession().getConnection();
         Set<Book> books = new HashSet<>();
 
         try {
@@ -36,7 +36,7 @@ public class BookRepository implements CrudRepository<Book> {
 
     public Set<Book> findBooksByAuthor(Author author) {
 
-        Connection conn = app.getCurrentSession().getConnection();
+        Connection conn = app().getCurrentSession().getConnection();
         Set<Book> books = new HashSet<>();
 
         try {
@@ -59,7 +59,7 @@ public class BookRepository implements CrudRepository<Book> {
 
     public Set<Book> findBooksByAuthorLastName(String authorLastName) {
 
-        Connection conn = app.getCurrentSession().getConnection();
+        Connection conn = app().getCurrentSession().getConnection();
         Set<Book> books = new HashSet<>();
 
         try {
@@ -81,7 +81,7 @@ public class BookRepository implements CrudRepository<Book> {
 
     public Set<Book> findBooksByTitle(String title) {
 
-        Connection conn = app.getCurrentSession().getConnection();
+        Connection conn = app().getCurrentSession().getConnection();
         Set<Book> books = new HashSet<>();
 
         try {
@@ -102,7 +102,7 @@ public class BookRepository implements CrudRepository<Book> {
     }
 
     public Optional<Book> findBookByIsbn(String isbn) {
-        Connection conn = app.getCurrentSession().getConnection();
+        Connection conn = app().getCurrentSession().getConnection();
         Optional<Book> book = Optional.empty();
 
         try {
@@ -123,7 +123,7 @@ public class BookRepository implements CrudRepository<Book> {
     @Override
     public void save(Book newObj) {
 
-        Connection conn = app.getCurrentSession().getConnection();
+        Connection conn = app().getCurrentSession().getConnection();
 
         try {
 
@@ -158,7 +158,7 @@ public class BookRepository implements CrudRepository<Book> {
     @Override
     public Set<Book> findAll() {
 
-        Connection conn = app.getCurrentSession().getConnection();
+        Connection conn = app().getCurrentSession().getConnection();
         Set<Book> books = new HashSet<>();
 
         try {
@@ -181,7 +181,7 @@ public class BookRepository implements CrudRepository<Book> {
     @Override
     public Optional<Book> findById(Integer id) {
 
-        Connection conn = app.getCurrentSession().getConnection();
+        Connection conn = app().getCurrentSession().getConnection();
         Optional<Book> book = Optional.empty();
 
         try {
@@ -203,7 +203,7 @@ public class BookRepository implements CrudRepository<Book> {
     @Override
     public Boolean update(Book updatedObj) {
 
-        Connection conn = app.getCurrentSession().getConnection();
+        Connection conn = app().getCurrentSession().getConnection();
         boolean updateSuccessful = false;
 
         try {
@@ -239,7 +239,7 @@ public class BookRepository implements CrudRepository<Book> {
     @Override
     public Boolean deleteById(Integer id) {
 
-        Connection conn = app.getCurrentSession().getConnection();
+        Connection conn = app().getCurrentSession().getConnection();
         boolean deleteSuccessful = false;
 
         try {

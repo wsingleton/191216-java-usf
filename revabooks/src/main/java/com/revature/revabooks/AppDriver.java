@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
 
 public class AppDriver {
 
-    public static AppState app = new AppState();
+    private static AppState app = new AppState();
 
     public static void main(String[] args) {
 
@@ -24,5 +24,9 @@ public class AppDriver {
             app.getRouter().navigate("/home");
         }
 
+    }
+
+    public static AppState app() {
+        return app;
     }
 }

@@ -5,9 +5,7 @@ import com.revature.revabooks.models.Author;
 import com.revature.revabooks.models.Book;
 import com.revature.revabooks.services.BookService;
 
-import java.io.IOException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static com.revature.revabooks.AppDriver.*;
@@ -43,13 +41,13 @@ public class SearchBooksScreen extends Screen {
 
                 // Get user's menu selection
                 System.out.print("Selection: ");
-                userSelection = app.getConsole().readLine();
+                userSelection = app().getConsole().readLine();
 
                 switch (userSelection) {
                     case "1":
 
                         System.out.print("Enter a title to search for: ");
-                        String bookTitle = app.getConsole().readLine();
+                        String bookTitle = app().getConsole().readLine();
 
                         matchingBooks = bookService.getBooksByTitle(bookTitle);
                         if (matchingBooks != null) showBooks(matchingBooks);
@@ -58,9 +56,9 @@ public class SearchBooksScreen extends Screen {
                     case "2":
 
                         System.out.print("Enter first name of the author you are searching for: ");
-                        String authorFirstName = app.getConsole().readLine();
+                        String authorFirstName = app().getConsole().readLine();
                         System.out.print("Enter last name of the author you are searching for: ");
-                        String authorLastName = app.getConsole().readLine();
+                        String authorLastName = app().getConsole().readLine();
 
                         Author author = new Author(authorFirstName, authorLastName);
                         matchingBooks = bookService.getBooksByAuthor(author);
@@ -70,7 +68,7 @@ public class SearchBooksScreen extends Screen {
                     case "3":
 
                         System.out.print("Enter a genre to search for: ");
-                        String bookGenre = app.getConsole().readLine();
+                        String bookGenre = app().getConsole().readLine();
 
                         matchingBooks = bookService.getBooksByGenre(bookGenre);
                         if (matchingBooks != null) showBooks(matchingBooks);
@@ -79,7 +77,7 @@ public class SearchBooksScreen extends Screen {
                     case "4":
 
                         System.out.print("Enter an ISBN to search for: ");
-                        String bookIsbn = app.getConsole().readLine();
+                        String bookIsbn = app().getConsole().readLine();
 
                         matchingBook = bookService.getBookByIsbn(bookIsbn);
                         if (matchingBook != null) matchingBooks.add(matchingBook);
@@ -103,7 +101,7 @@ public class SearchBooksScreen extends Screen {
                 System.err.println("[ERROR] - " + e.getMessage());
                 System.out.println("[LOG] - Shutting down application");
                 loopMenu = false;
-                app.setAppRunning(false);
+                app().setAppRunning(false);
             }
         }
     }
