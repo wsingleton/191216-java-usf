@@ -413,12 +413,9 @@ BEGIN
     LOOP
        FETCH V_cursor
        INTO e_fn, e_ln;
---       SELECT firstname INTO b_fn FROM employee WHERE reportsto = (SELECT employeeid FROM employee) AND  firstname = e_fn;
 SELECT reportsto INTO e_rt FROM employee WHERE firstname = e_fn;
---SELECT firstname INTO b_fn FROM employee WHERE employeeid = e_rt;
         b_fn := e_rt;
 
---        SELECT lastname INTO b_ln FROM employee WHERE e._fn = employeeid;
        EXIT WHEN v_cursor%NOTFOUND;
 
        DBMS_OUTPUT.PUT_LINE('Employee Name: ' 
