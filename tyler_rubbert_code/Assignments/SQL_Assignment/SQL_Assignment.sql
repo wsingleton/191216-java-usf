@@ -39,3 +39,34 @@ INSERT INTO employee VALUES (10, 'Dirt', 'Joe', 'IT Staff', 6, '04-MAY-69', '19-
     '2345 That Ave', 'Lethbridge', 'AB', 'Canada', 'T1K 2L2', '+1 (403) 428-1234', '+1 (403) 428-9876', 'joe@chinookcorp.com');
     
 -- 2.3 Insert 2 new records into Customer table
+INSERT INTO customer VALUES (60, 'Tyler', 'Rubbert', 'Revature', 'Place', 'Fargo','ND', 'USA', '58104', '7015000599', '5555555555', 'tyler.rubbert@email.com', 3);
+INSERT INTO customer VALUES (61, 'Greg', 'Greggerson', '', 'Other Place', 'Fargo', 'ND', 'USA', '58103', '1234567890', '0987654321','ggreg@email.com', 4);
+
+COMMIT;
+
+-- 2.4 Update Aaron Mitchell in Customer table to Robert Walter
+UPDATE customer
+SET firstname = 'Robert', lastname = 'Walter'
+WHERE firstname = 'Aaron' AND lastname = 'Mitchell';
+
+-- 2.4 Update name of artist "Creedence Clearwater Revival" to "CCR"
+UPDATE artist
+SET name = 'CCR'
+WHERE name = 'Creedence Clearwater Revival';
+
+-- 2.5 Select all invoices with a billing address like "T"
+SELECT *
+FROM invoice
+WHERE billingaddress LIKE '%T%';
+
+-- 2.6 Select all invoices that have a total between 15 and 50
+SELECT *
+FROM invoice 
+WHERE total BETWEEN 15 AND 50;
+
+-- 2.6 Select all employees hired between 1st of June 2003 and 1st of March 2004
+SELECT * 
+FROM employee 
+WHERE hiredate BETWEEN '01-JUN-03' AND '01-MAR-04';
+
+-- 2.7 Delete a record in Customer table where the name is Robert Walter
