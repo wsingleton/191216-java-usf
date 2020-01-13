@@ -39,8 +39,9 @@ public class AppState {
                 .addScreen(new TransitionScreen())
                 .addScreen(new AccountInfoScreen())
                 .addScreen(new AddNewAccountScreen())
-                .addScreen(new TransactionScreen())
-                .addScreen(new TransferMoneyScreen());
+                .addScreen(new TransactionHistoryScreen())
+                .addScreen(new TransferMoneyScreen())
+                .addScreen(new SwitchAccountsScreen());
     }
 
     public BufferedReader getConsole() {
