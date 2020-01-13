@@ -147,8 +147,6 @@ WHERE hiredate BETWEEN TO_DATE('03-06-01', 'YY-MM-DD') AND TO_DATE('04-03-01', '
     Delete
 */
 
-
-
 --Delete a record in Customer table where the name is Robert Walter (There may be constraints that rely on this, find out how to resolve them).
 ALTER TABLE invoiceline
 DROP CONSTRAINT  FK_INVOICELINEINVOICEID;
@@ -209,3 +207,442 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('The length of the mediatype table is ' || mediatype);
 END;
 /
+
+/*
+    3.2 System Defined Aggregate Functions
+*/
+
+--Task –Create a function that returns the average total of all invoices
+CREATE OR REPLACE FUNCTION get_avg
+    RETURN NUMBER
+    AS avgTotal NUMBER;
+
+BEGIN
+    SELECT AVG(total)
+    INTO avgTotal
+    FROM invoice;
+    
+    RETURN avgTotal;
+END;
+/
+
+DECLARE
+    avgTotal NUMBER;
+BEGIN
+    avgTotal := get_avg();
+    DBMS_OUTPUT.PUT_LINE('The average of all of the total costs is $' || avgTotal);
+END;
+/
+
+--Task – Create a function that returns the most expensive tracks
+CREATE OR REPLACE FUNCTION most_expensive_tracks
+    RETURN SYS_REFCURSOR
+    IS my_cursor SYS_REFCURSOR;
+
+BEGIN
+    OPEN my_cursor FOR
+    SELECT name, unitprice
+    FROM track
+    GROUP BY name, unitprice
+    HAVING  unitprice = (SELECT MAX(unitprice) FROM track);
+    RETURN my_cursor;
+END;
+/
+
+
+DECLARE
+    v_cursor  SYS_REFCURSOR;
+    v_n     track.name%TYPE;
+    v_price      track.unitprice%TYPE;
+    
+BEGIN
+    V_cursor := most_expensive_tracks();
+    
+    DBMS_OUTPUT.PUT_LINE('Most Expensive albums:' );
+
+    LOOP
+       FETCH v_cursor
+       INTO v_n, v_price;
+       EXIT WHEN v_cursor%NOTFOUND;
+       DBMS_OUTPUT.PUT_LINE(v_n || ' costs $' || v_price );
+       END LOOP;
+       CLOSE v_cursor;
+END;
+/
+
+
+/*
+    3.3 User Defined Scalar Functions
+*/
+
+--Task – Create a function that returns the average price of invoice-line items in the invoice-line table
+
+CREATE OR REPLACE FUNCTION get_avg
+    RETURN NUMBER
+    AS avgPrice NUMBER;
+
+BEGIN
+    SELECT AVG(unitprice)
+    INTO avgPrice
+    FROM invoiceline;
+    
+    RETURN avgPrice;
+END;
+/
+
+DECLARE
+    avgPrice NUMBER;
+BEGIN
+    avgPrice := get_avg();
+    DBMS_OUTPUT.PUT_LINE('The average price of all of the invoices is $' || avgPrice);
+END;
+/
+
+/*
+3.4 User Defined Table Valued Functions
+*/
+
+--Task – Create a function that returns all employees who are born after 1968.
+CREATE OR REPLACE FUNCTION after_1968
+    RETURN SYS_REFCURSOR
+    IS my_cursor SYS_REFCURSOR;
+    
+BEGIN
+
+    OPEN my_cursor FOR
+    SELECT firstname, lastname, birthdate
+    FROM employee
+    WHERE birthdate BETWEEN DATE'1968-12-31' AND DATE'2019-12-31';
+    
+    RETURN my_cursor;
+    
+END;
+/
+
+DECLARE
+    v_cursor    SYS_REFCURSOR;
+    v_fn        employee.firstname%TYPE;
+    v_ln        employee.lastname%TYPE;
+    v_bd        employee.birthdate%TYPE;
+BEGIN
+    v_cursor := after_1968();
+    
+    LOOP
+        FETCH v_cursor
+        INTO v_fn, v_ln, v_bd;
+        EXIT WHEN v_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(v_fn || ' ' || v_ln || ' was born on ' || v_bd);
+    END LOOP;
+    CLOSE v_cursor;
+END;
+/
+
+/*
+    4.1 Basic Stored Procedure
+*/
+
+-- Task – Create a stored procedure that selects the first and last names of all the employees.
+CREATE OR REPLACE PROCEDURE get_employees_name(my_cursor OUT SYS_REFCURSOR)
+IS 
+BEGIN
+OPEN my_cursor FOR
+SELECT firstname, lastname
+FROM employee
+ORDER BY firstname;
+END;
+/
+
+DECLARE
+    e_fn     employee.firstname%TYPE;
+    e_ln   employee.lastname%TYPE;
+    v_cursor SYS_REFCURSOR;
+BEGIN
+    get_employees_name(v_cursor);
+    
+    LOOP
+       FETCH V_cursor
+       INTO e_fn, e_ln;
+       EXIT WHEN v_cursor%NOTFOUND;
+       DBMS_OUTPUT.PUT_LINE('Employee First Name: ' || e_fn || ' , Last Name: ' || e_ln);
+       END LOOP;
+       
+       CLOSE v_cursor;
+END;
+/
+
+/*
+    4.2 Stored Procedure Input Parameters
+*/
+
+-- Task – Create a stored procedure that updates the personal information of an employee.
+
+CREATE OR REPLACE PROCEDURE updateEmployee(
+	   employee_fn IN employee.firstname%TYPE,
+       employee_newfn IN employee.firstname%TYPE
+	   )
+IS
+BEGIN
+  UPDATE employee SET firstname = employee_newfn WHERE employee_fn  = firstname;
+END;
+/
+BEGIN
+   updateEmployee('Jimmy', 'Holly');
+END;
+
+--Task – Create a stored procedure that returns the managers of an employee
+
+CREATE OR REPLACE PROCEDURE get_employees_Manager(my_cursor OUT SYS_REFCURSOR)
+IS 
+BEGIN
+OPEN my_cursor FOR
+SELECT firstname, lastname, reportsto
+FROM employee
+ORDER BY firstname;
+END;
+/
+
+DECLARE
+    e_fn     employee.firstname%TYPE;
+    e_ln   employee.lastname%TYPE;
+    e_rt   employee.reportsto%TYPE;
+    b_fn  employee.firstname%TYPE;
+    v_cursor SYS_REFCURSOR;
+BEGIN
+    get_employees_name(v_cursor);
+    
+    LOOP
+       FETCH V_cursor
+       INTO e_fn, e_ln;
+--       SELECT firstname INTO b_fn FROM employee WHERE reportsto = (SELECT employeeid FROM employee) AND  firstname = e_fn;
+SELECT reportsto INTO e_rt FROM employee WHERE firstname = e_fn;
+--SELECT firstname INTO b_fn FROM employee WHERE employeeid = e_rt;
+        b_fn := e_rt;
+
+--        SELECT lastname INTO b_ln FROM employee WHERE e._fn = employeeid;
+       EXIT WHEN v_cursor%NOTFOUND;
+
+       DBMS_OUTPUT.PUT_LINE('Employee Name: ' 
+       || e_fn 
+       || ' '
+       || e_ln 
+       || '; ' 
+       || 'Boss ID: '
+       || b_fn 
+       );
+       END LOOP;
+       CLOSE v_cursor;
+END;
+/
+
+/*
+    4.3 Stored Procedure Output Parameters
+*/
+
+--Task – Create a stored procedure that returns the name and company of a customer.
+CREATE OR REPLACE PROCEDURE get_all_customer_comapanies(my_cursor OUT SYS_REFCURSOR)
+IS 
+BEGIN
+OPEN my_cursor FOR
+SELECT firstname, lastname,company
+FROM customer
+ORDER BY firstname;
+END;
+/
+
+DECLARE
+    a_fn    customer.firstname%TYPE;
+    a_ln   customer.lastname%TYPE;
+    a_com   customer.company%TYPE;
+    v_cursor SYS_REFCURSOR;
+BEGIN
+    get_all_customer_comapanies(v_cursor);
+    
+    LOOP
+       FETCH V_cursor
+       INTO a_fn, a_ln, a_com;
+       EXIT WHEN v_cursor%NOTFOUND;
+       DBMS_OUTPUT.PUT_LINE('Customer name: ' || a_fn || ' ' || a_ln || '; Company name: ' || a_com);
+       END LOOP;
+       
+       CLOSE v_cursor;
+END;
+/
+
+
+/*
+    5.0 Transactions
+*/
+
+--Task – Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely on this, find out how to resolve them)...poiij
+CREATE OR REPLACE PROCEDURE deleteInvoice(
+	   invoice_id IN invoice.invoiceid%TYPE
+	   )
+IS
+BEGIN
+  DELETE FROM invoice WHERE invoiceid = invoice_id;
+END;
+/
+BEGIN
+   deleteInvoice(111);
+   COMMIT;
+END;
+
+--Task – Create a transaction nested within a stored procedure that inserts a new record in the Customer table
+CREATE OR REPLACE PROCEDURE insertRecord(
+	   customer_id IN customer.customerid%TYPE,
+       customer_fn IN customer.firstname%TYPE,
+       customer_ln IN customer.lastname%TYPE,
+       customer_com IN customer.company%TYPE,
+       customer_address IN customer.address%TYPE,
+       customer_ct IN customer.city%TYPE,
+       customer_st IN customer.state%TYPE,
+       customer_coun IN customer.country%TYPE,
+       customer_pc IN customer.postalcode%TYPE,
+       customer_pn IN customer.phone%TYPE,
+       customer_fx IN customer.fax%TYPE,
+       customer_email IN customer.email%TYPE,
+       customer_sp IN customer.supportrepid%TYPE
+	   )
+IS
+BEGIN
+  INSERT INTO customer VALUES(customer_id,
+  customer_fn,
+  customer_ln, 
+  customer_com, 
+  customer_address,
+  customer_ct,
+  customer_st,
+  customer_coun,
+  customer_pc,
+  customer_pn,
+  customer_fx,
+  customer_email,
+  customer_sp);
+END;
+/
+BEGIN
+   insertRecord(1500, 'Jack','Cage','Amazon', '102 S. 5th St.','Tucson','AZ', 'USA', '30239','321-456-0987','321-607-1289','jcage@amazon.com',5);
+   COMMIT;
+END;
+
+--SELECT * FROM customer WHERE firstname = 'Jack' AND lastname = 'Cage';
+
+
+/*
+    Triggers
+    6.1 after/before
+*/
+
+--Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE TRIGGER employee_insert_trigger
+AFTER INSERT ON employee
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Employee Inserted successfully!');
+END;
+/
+
+INSERT INTO employee VALUES (12,
+'Powell', 
+'Harold', 
+'IT staff', 
+6, 
+TO_DATE('45-10-04', 'YY-MM-DD'),
+TO_DATE('93-12-05', 'YY-MM-DD'),
+'150 King st',
+'Los Angeles', 
+'CA',
+'USA', 
+'90043', 
+'1 (323) 756-8334', 
+'1 (310) 903-7832', 
+'haroldP@chinookcorp.com' );
+
+--Task – Create an after update trigger on the album table that fires after a row is updated in the table
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE TRIGGER album_update_trigger
+AFTER UPDATE ON album
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Album updated successfully!');
+END;
+/
+
+UPDATE album
+SET title = 'Fake Name'
+WHERE title = 'Duos II';
+
+--Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE TRIGGER customer_delete_trigger
+AFTER DELETE ON customer
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Customer deleted successfully!');
+END;
+/
+
+DELETE FROM customer
+WHERE firstname = 'Larry' AND lastname = 'Sparks';
+
+--Task – Create a before trigger that restricts the deletion of any invoice that is priced over 20 dollars.
+CREATE OR REPLACE TRIGGER invoice_delete_trigger
+BEFORE DELETE ON invoice
+  FOR EACH ROW 
+
+BEGIN
+    IF (:old.total > 20) THEN
+      RAISE_APPLICATION_ERROR(-20000,
+        'The total is over $20 and cannot be deleted, invoice total is: ' || :old.total);
+    END IF;
+END;
+/
+
+DELETE FROM invoice
+WHERE invoiceid = 194;
+
+/*
+    7.0 Joins
+*/
+
+--Task – Create an inner join that joins customers and invoice and specifies the name of the customer and the invoiceId.
+SELECT firstname, lastname, invoiceid
+FROM customer
+JOIN invoice
+ON customer.customerid = invoice.customerid;
+
+--Task – Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, last name, invoiceId, and total.
+SELECT customer.customerid, customer.firstname, customer.lastname, invoice.invoiceid, invoice.total
+FROM customer
+FULL OUTER JOIN invoice
+ON customer.customerid = invoice.customerid
+ORDER BY customerid;
+
+--Task – Create a right join that joins album and artist specifying artist name and title.
+SELECT artist.name, album.title
+FROM artist
+RIGHT OUTER JOIN album 
+ON album.artistid = artist.artistid
+ORDER BY name;
+
+--Task – Create a cross join that joins album and artist and sorts by artist name in ascending order.
+SELECT *
+FROM artist 
+CROSS JOIN album
+ORDER BY artist.name ASC;
+
+--Task – Perform a self-join on the employee table, joining on the reports to column.
+SELECT *
+FROM employee e1
+INNER JOIN employee e2 
+ON e1.reportsto = e2.reportsto; 
+
+/*
+    8.0 indexes
+*/
+
+--Task – Create an index on of table of your choice
+CREATE INDEX test_index
+ON employee(firstname);
+
