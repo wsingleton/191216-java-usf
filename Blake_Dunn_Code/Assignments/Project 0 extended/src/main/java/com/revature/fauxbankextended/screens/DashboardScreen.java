@@ -19,26 +19,26 @@ public class DashboardScreen extends Screen {
 
         try {
             System.out.print("> ");
-            String input = console.readLine();
+            String input = app().getConsole().readLine();
 
             switch (input) {
 
                 case "1":
-                    router.navigate("/balance");
+                    app().getRouter().navigate("/balance");
                     break;
                 case "2":
-                    router.navigate("/deposit");
+                    app().getRouter().navigate("/deposit");
                     break;
                 case "3":
-                    router.navigate("/withdraw");
+                    app().getRouter().navigate("/withdraw");
                     break;
                 case "4":
                     System.out.println("Exiting the application...");
-                    appRunning = false;
+                    app().setAppRunning(false);
                     break;
                 default:
                     System.out.println("Invalid selection");
-                    router.navigate("/dashboard");
+                    app().getRouter().navigate("/dashboard");
             }
 
         }catch(Exception e) {

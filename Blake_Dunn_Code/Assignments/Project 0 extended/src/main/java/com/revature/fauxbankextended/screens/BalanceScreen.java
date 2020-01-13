@@ -16,13 +16,13 @@ public class BalanceScreen extends Screen {
     @Override
     public void render() {
 
-        Double balance = currentAccount.getBalance();
+        Double balance = app().getCurrentSession().getSessionAccount().getBalance();
 
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("");
         System.out.println("Your Balance: $" + balance);
 
-        router.navigate("/transition");
+        app().getRouter().navigate("/transition");
 
     }
 }

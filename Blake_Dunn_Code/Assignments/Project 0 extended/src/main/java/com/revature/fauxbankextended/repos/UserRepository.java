@@ -1,6 +1,7 @@
 package com.revature.fauxbankextended.repos;
 
 import com.revature.fauxbankextended.exceptions.AuthenticationException;
+import com.revature.fauxbankextended.models.Account;
 import com.revature.fauxbankextended.models.User;
 import com.revature.fauxbankextended.util.ConnectionFactory;
 
@@ -116,14 +117,14 @@ public class UserRepository implements CrudRepository<User> {
 
     }
 
-    public void updateCompositeKey() {
+    public void updateCompositeKey(User user, Account account) {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "INSERT INTO users_accounts VALUES (?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, currentUser.getId());
-            pstmt.setInt(2, currentAccount.getId());
+            pstmt.setInt(1, user.getId());
+            pstmt.setInt(2, account.getId());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

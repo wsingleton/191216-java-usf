@@ -4,6 +4,8 @@ import com.revature.fauxbankextended.exceptions.InvalidRequestException;
 import com.revature.fauxbankextended.exceptions.ResourcePersistenceException;
 import com.revature.fauxbankextended.models.*;
 import com.revature.fauxbankextended.repos.*;
+import com.revature.fauxbankextended.util.ConnectionFactory;
+import com.revature.fauxbankextended.util.UserSession;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,11 +31,12 @@ public class UserService {
         if (username == null || username.trim().equals("")
                 || password == null || password.trim().equals("")) throw new InvalidRequestException();
 
-        currentUser = userRepo.getUser(username, password);
-        currentAccount = acctRepo.getAccount();
+        User user = userRepo.getUser(username, password);
+        Account acct = acctRepo.getAccount(user);
+        app().setCurrentSession(new UserSession(user, acct, ConnectionFactory.getInstance().getConnection()));
     }
 
-    public void register(User user) {
+    public User register(User user) {
 
         if (!isUserValid(user)) throw new InvalidRequestException();
 
@@ -41,12 +44,12 @@ public class UserService {
             throw new ResourcePersistenceException("Username is already in use!");
         }
 
-        currentUser = userRepo.save(user);
+        User newUser = userRepo.save(user);
 
-
+        return newUser;
     }
 
-    public void setNewAccount(String type) {
+    public void setNewAccount(User user, String type) {
         Account newAccount = new Account(0.0);
 
         switch(type){
@@ -58,11 +61,12 @@ public class UserService {
                 break;
             default:
                 System.out.println("Invalid selection");
-                appRunning = false;
+                app().setAppRunning(false);
         }
 
-        currentAccount = acctRepo.save(newAccount);
-        userRepo.updateCompositeKey();
+        Account acct = acctRepo.save(newAccount);
+        userRepo.updateCompositeKey(user, acct);
+        app().setCurrentSession(new UserSession(user, acct, ConnectionFactory.getInstance().getConnection()));
     }
 
     public boolean isUserValid(User user) {

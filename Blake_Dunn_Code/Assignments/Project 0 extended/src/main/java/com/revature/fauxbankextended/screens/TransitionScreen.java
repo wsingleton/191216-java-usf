@@ -18,28 +18,28 @@ public class TransitionScreen extends Screen {
 
         try {
             System.out.print("> ");
-            String input = console.readLine();
+            String input = app().getConsole().readLine();
 
             switch (input) {
 
                 case "1":
-                    router.navigate("/dashboard");
+                    app().getRouter().navigate("/dashboard");
                     break;
                 case "2":
-                    router.navigate("/home");
+                    app().getRouter().navigate("/home");
                     break;
                 case "3":
                     System.out.println("Exiting application...");
-                    appRunning = false;
+                    app().setAppRunning(false);
                     break;
                 default:
                     System.out.println("[LOG] - Invalid selection");
-                    router.navigate("/home");
+                    app().getRouter().navigate("/home");
             }
 
         }catch(Exception e) {
             System.err.println("[ERROR] - " + e.getMessage());
-            appRunning = false;
+            app().setAppRunning(false);
         }
     }
 }

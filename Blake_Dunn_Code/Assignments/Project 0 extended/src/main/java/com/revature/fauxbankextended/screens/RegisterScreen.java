@@ -30,27 +30,27 @@ public class RegisterScreen extends Screen {
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.println("Sign up for a new account");
             System.out.print("First name: " );
-            firstName = console.readLine();
+            firstName = app().getConsole().readLine();
             System.out.print("Last name: ");
-            lastName = console.readLine();
+            lastName = app().getConsole().readLine();
             System.out.print("Username (Must be between 8-14 characters): ");
-            userName = console.readLine();
+            userName = app().getConsole().readLine();
             System.out.println("Password must contain special character and be between 8-14 characters.");
             System.out.print("Password: ");
-            password = console.readLine();
+            password = app().getConsole().readLine();
 
             User newUser = new User(firstName, lastName, userName, password);
-            userService.register(newUser);
+            User user = userService.register(newUser);
 
             System.out.println("Please choose an account type.");
             System.out.println("1) Checking Account");
             System.out.println("2) Savings Account");
             System.out.print("> ");
-            type = console.readLine();
-            userService.setNewAccount(type);
+            type = app().getConsole().readLine();
+            userService.setNewAccount(user, type);
 
-            if (currentUser != null && currentAccount != null) {
-                router.navigate("/dashboard");
+            if (app().getCurrentSession() != null) {
+                app().getRouter().navigate("/dashboard");
             }
 
         }catch (InvalidRequestException | ResourcePersistenceException e) {
@@ -58,7 +58,7 @@ public class RegisterScreen extends Screen {
         }catch (Exception e) {
             System.err.println("[ERROR] - An unexpected exception occurred");
             System.out.println("[LOG] - Shutting down application");
-            appRunning = false;
+            app().setAppRunning(false);
         }
 
     }

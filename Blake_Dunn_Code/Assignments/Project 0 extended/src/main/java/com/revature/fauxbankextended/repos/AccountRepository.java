@@ -2,6 +2,7 @@ package com.revature.fauxbankextended.repos;
 
 import com.revature.fauxbankextended.exceptions.ResourceNotFoundException;
 import com.revature.fauxbankextended.models.Account;
+import com.revature.fauxbankextended.models.User;
 import com.revature.fauxbankextended.util.ConnectionFactory;
 
 import java.sql.*;
@@ -10,7 +11,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.revature.fauxbankextended.BankDriver.currentUser;
 
 public class AccountRepository implements CrudRepository<Account> {
 
@@ -96,9 +96,9 @@ public class AccountRepository implements CrudRepository<Account> {
         return true;
     }
 
-    public Account getAccount() {
+    public Account getAccount(User user) {
         Account acct = new Account();
-        Optional<Account> _acct = findById(currentUser.getId());
+        Optional<Account> _acct = findById(user.getId());
 
         if (_acct.isPresent()) {
             acct = _acct.get();

@@ -17,29 +17,29 @@ public class HomeScreen extends Screen {
 
         try {
             System.out.print("> ");
-            String input = console.readLine();
+            String input = app().getConsole().readLine();
 
             switch (input) {
 
                 case "1":
-                    router.navigate("/login");
+                    app().getRouter().navigate("/login");
                     break;
                 case "2":
-                    router.navigate("/register");
+                    app().getRouter().navigate("/register");
                     break;
                 case "3":
                     System.out.println("Exiting application...");
-                    appRunning = false;
+                    app().setAppRunning(false);
                     break;
                 default:
                     System.out.println("Invalid selection");
-                    appRunning = false;
+                    app().setAppRunning(false);
             }
 
         }catch(Exception e) {
             System.err.println("[ERROR] - " + e.getMessage());
             System.out.println("[LOG] - Shutting down application");
-            appRunning = false;
+            app().setAppRunning(false);
         }
     }
 }

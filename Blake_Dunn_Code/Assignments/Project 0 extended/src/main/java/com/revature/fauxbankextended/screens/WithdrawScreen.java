@@ -17,7 +17,7 @@ public class WithdrawScreen extends Screen {
     @Override
     public void render() {
 
-        Double balance = currentAccount.getBalance();
+        Double balance = app().getCurrentSession().getSessionAccount().getBalance();
 
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("Your Account Balance: $" + balance);
@@ -25,14 +25,14 @@ public class WithdrawScreen extends Screen {
         System.out.print("> ");
 
         try{
-            String amount = console.readLine();
+            String amount = app().getConsole().readLine();
             accountService.validateWithdraw(balance, amount);
 
         }catch (Exception e) {
             System.err.println("[ERROR] - " + e.getMessage());
         }
 
-        router.navigate("/transition");
+        app().getRouter().navigate("/transition");
 
     }
 }
