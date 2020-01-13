@@ -7,6 +7,9 @@
     6) Transactions
 */
 
+-- +-------------------------------------------------------------------+
+
+
 CREATE TABLE users (
     user_id         NUMBER(5) CONSTRAINT pk_users PRIMARY KEY,
     username        VARCHAR2(25) UNIQUE NOT NULL,
@@ -60,7 +63,7 @@ CREATE TABLE transactions (
     acct_id             NUMBER(5),
     trans_type_id       NUMBER(10),
     amount              NUMBER(10,2),
-    trans_date          DATE,
+    trans_date          TIMESTAMP,
     
     CONSTRAINT pk_transactions
     PRIMARY KEY (trans_id),
@@ -92,7 +95,7 @@ BEGIN
 END;
 /
 
-CREATE SEQUENCE account_pk_seq
+CREATE SEQUENCE accounts_pk_seq
 MINVALUE 1
 MAXVALUE 999999999
 INCREMENT BY 1
@@ -104,7 +107,7 @@ BEFORE INSERT ON accounts
 FOR EACH ROW
 
 BEGIN
-    SELECT account_pk_seq.NEXTVAL
+    SELECT accounts_pk_seq.NEXTVAL
     INTO :new.acct_id
     FROM dual;
 END;
@@ -163,3 +166,45 @@ BEGIN
     FROM dual;
 END;
 /
+
+-- +-------------------------------------------------------------+
+
+INSERT INTO account_types VALUES (0, 'CHECKING');
+INSERT INTO account_types VALUES (0, 'SAVINGS');
+
+
+INSERT INTO transaction_types VALUES (0, 'DEPOSIT');
+INSERT INTO transaction_types VALUES (0, 'WITHDRAW');
+INSERT INTO transaction_types VALUES (0, 'TRANSFER');
+
+
+INSERT INTO users VALUES (0, 'buhlakay9', 'k!llinit', 'Blake', 'Dunn');
+INSERT INTO users VALUES (0, 'spacemvn69', 'fly!inhigh', 'Ervin', 'Stewart');
+INSERT INTO users VALUES (0, 'bossco96', 'str8ball!n', 'Bosco', 'Nzeyimana');
+INSERT INTO users VALUES (0, 'nilesbarkley', 'n!ghtowl', 'Niles', 'Diggs');
+INSERT INTO users VALUES (0, 'bigbenji123', 'wh@tsupbro', 'Ben', 'Burke');
+INSERT INTO users VALUES (0, 'hellatight', 'notfromnorc@l', 'Jared', 'Carter');
+INSERT INTO users VALUES (0, 'bigballer', 'l@kers4life', 'Kobe', 'Bryant');
+INSERT INTO users VALUES (0, 'laxbro99', 'f!owbucket', 'Corbin', 'Dunn');
+
+
+INSERT INTO accounts VALUES (0, 1, 5000);
+INSERT INTO accounts VALUES (0, 1, 2576.45);
+INSERT INTO accounts VALUES (0, 1, 10000);
+INSERT INTO accounts VALUES(0, 1, 3500);
+INSERT INTO accounts VALUES (0, 1, 4098);
+INSERT INTO accounts VALUES(0, 1, 63524);
+INSERT INTO accounts VALUES(0, 1, 73643);
+INSERT INTO accounts VALUES (0, 1, 500);
+
+
+INSERT INTO users_accounts VALUES (1,1);
+INSERT INTO users_accounts VALUES (2,2);
+INSERT INTO users_accounts VALUES (3,3);
+INSERT INTO users_accounts VALUES (4,4);
+INSERT INTO users_accounts VALUES (5,5);
+INSERT INTO users_accounts VALUES (6,6);
+INSERT INTO users_accounts VALUES (7,7);
+INSERT INTO users_accounts VALUES (8,8);
+
+COMMIT;
