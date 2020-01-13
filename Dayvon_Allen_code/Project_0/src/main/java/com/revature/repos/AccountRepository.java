@@ -2,11 +2,9 @@ package com.revature.repos;
 
 import com.revature.models.Account;
 import com.revature.util.ConnectionFactory;
+import oracle.jdbc.OracleTypes;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -97,7 +95,26 @@ public class AccountRepository {
         }
     }
 
+    //a method that uses statement
+    public Set<Account> findAllAccounts() {
 
+        Set<Account> accounts = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()){
+            String sql = "SELECT * FROM bank_app.accounts";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            accounts = mapResultSet(rs);
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return accounts;
+    }
+
+
+    //maps through result set(places the account into a set).
     private Set<Account> mapResultSet(ResultSet rs) throws SQLException {
         Set<Account> account = new HashSet<>();
         while (rs.next()) {

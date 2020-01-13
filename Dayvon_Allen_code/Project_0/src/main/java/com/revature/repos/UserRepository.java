@@ -3,6 +3,7 @@ package com.revature.repos;
 import com.revature.models.Account;
 import com.revature.models.User;
 import com.revature.util.ConnectionFactory;
+import oracle.jdbc.OracleTypes;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -78,6 +79,28 @@ public class UserRepository implements BankActionRepository<User> {
         return _user;
     }
 
+    //a method that uses the callable method
+    public Set<User> findAllUsers() {
+        HashSet<User> users = new HashSet<>();
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+            String sql = "{CALL bank_app.get_all_users(?)}";
+            CallableStatement cstmt = conn.prepareCall(sql);
+            cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            cstmt.execute();
+            ResultSet rs = (ResultSet) cstmt.getObject(1);
+
+            while (rs.next()){
+                User temp = new User();
+                users.add(temp);
+            }
+        }
+        catch(SQLException e){
+        }
+        return users;
+    }
+
+    //maps through result set(places the account into a set).
     private Set<User> mapResultSet(ResultSet rs) throws SQLException {
         Set<User> users = new HashSet<>();
         while (rs.next()) {
