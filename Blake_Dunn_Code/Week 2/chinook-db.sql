@@ -564,9 +564,10 @@ ORDER BY a.name;
 -- 7.5 SELF
 
 -- Task – Perform a self-join on the employee table, joining on the reports to column.
-SELECT a.reportsto AS reportsto1, b.reportsto AS reportsto2
-FROM employee a, employee b
-WHERE a.reportsto <> b.reportsto;
+SELECT a.firstname AS FIRSTNAME, a.lastname AS LASTNAME, b.reportsto AS MANAGERID
+FROM employee a
+JOIN employee b
+ON a.employeeid = b.employeeid;
 
 -- 8.1 Indexes
 
