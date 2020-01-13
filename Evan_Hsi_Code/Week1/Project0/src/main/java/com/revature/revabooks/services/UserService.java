@@ -34,6 +34,7 @@ public class UserService {
     }
 
     public void register(User user) {
+
         if(!isUserValid(user)) throw new InvalidRequestException();
 
         if(userRepo.findUserByUserName(user.getUsername()).isPresent())

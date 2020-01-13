@@ -1,7 +1,7 @@
-package com.revature.revabooks.util;
+package com.revature.bankapp.util;
 
-import com.revature.revabooks.exceptions.ScreenNotFoundException;
-import com.revature.revabooks.screens.Screen;
+import com.revature.bankapp.exceptions.ScreenNotFoundException;
+import com.revature.bankapp.screens.Screen;
 
 import java.util.HashSet;
 import java.util.Set;

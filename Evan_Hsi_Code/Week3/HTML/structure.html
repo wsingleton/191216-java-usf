@@ -1,0 +1,95 @@
+<!--
+    This is an HTML comment;
+    it can be multi-line.
+-->
+
+<!-- 
+    The DOCTYPE directive should be the very first 
+    non-comment line declared within our HTML documents 
+    (even before the <html> tag).
+
+    It is not technically a tag, but a directive, or an
+    instruction to web browser about what version the 
+    page is written.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+            <head>
+
+                Contains information about the page, rather than
+                the content shown (aka metadata). We can include 
+                some information such as:
+
+                    - <style>   : used to apply internal CSS styling to the webpage
+                    - <link>    : used to link other resources to this document (external CSS)
+                    - <script>  : used to write inline JS, which can make our webpage more dynamic/interactive
+                    - <meta>    : used to provide search engine robots extra info about our page
+                    - <title>   : determines the text on the tab in browser
+        -->
+        <title>HTML Basics: Structure</title>
+    </head>
+    <body>
+        <!--
+
+            <Body>
+
+                Contains information/content that will be displayed to the user, when rendered by the web browser
+
+        -->
+
+        <!--
+
+            HTML tags/elements
+
+                Used to indicate how content should be displayed. Usually will require an opening and a closing tag.
+                Those that do not require lsing tags are known as "self-closing" tags.
+
+                <p>     : paragraph
+                <h#>    : heading 1-6
+                <div>   : division/divider; used to group related elements together
+                <img>   : image (self-closing)
+                <a>     : anchor/hyperlink; used to create links to other webpages or to sections within the current page
+                <br>    : line break (self-closing)
+                <hr>    : horizontal rule (self-closing)
+                <form>  : Similar to a div, but will encapsulate form elements/members
+                <input> : Create a field for user input of some sort. (self-closing)
+
+            
+            Attributes
+
+                HTML elements can have attributes, which provide additional information about the contents of an 
+                element. They appear within the opening tags of an HTML element, and are amde of two parts: a
+                name/key, and a value. The name and the value are separated by an equals sign and the value 
+                of the attribute is encapsulated within double quotes.
+
+
+        -->
+        <h1>This is the main heading</h1>
+        <p>
+            This text might be used to introduce the rest of the page if the page is long enough.
+
+
+
+
+
+            we can make use of subheadings to further
+            organize our web page's content.
+        </p>
+        <h2>this is a sub-heading</h2>
+        <p>
+            I can't think of anything more rewarding than being able to express yourself to others
+            through painting. This is truly an almighty mountain. Youc an create beautiful things
+            - but you ahve to see them in your mind first. Work that paint. You can't have light
+            without dark. You can't know happiness unless you've known sorrow.
+        </p>
+        <h3>This is even smaller than the other headings...maybe to create nested content</h3>
+        <p>
+            4 &gt; 5
+        </p>
+        <p>Sanford &amp; Son</p>
+        <p>Here is some text.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here is more text</p>
+
+    </body>
+</html>

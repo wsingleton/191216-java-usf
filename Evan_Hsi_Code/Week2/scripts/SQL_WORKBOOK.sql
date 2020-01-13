@@ -391,14 +391,17 @@ INSERT INTO employee (employeeid, firstname, lastname) VALUES(11, 'Conrad', 'Dia
 DELETE FROM employee WHERE employeeid = 11;
 
 
-CREATE OR REPLACE TRIGGER afterUpdateAlbum AFTER INSERT ON album
+CREATE OR REPLACE TRIGGER afterUpdateAlbum AFTER UPDATE ON album
 
 BEGIN
 
-    DBMS_OUTPUT.PUT_LINE('UPDATE trigger??');
+    DBMS_OUTPUT.PUT_LINE('UPDATE trigger');
 
 END;
 /
+
+UPDATE album SET name = 'updateTrigger' WHERE name = 'Audioslave';
+UPDATE album SET name = 'Audioslave' WHERE name = 'updateTrigger';
 
 CREATE OR REPLACE TRIGGER afterDeleteCustomer AFTER DELETE ON customer
 
@@ -446,7 +449,6 @@ COMMIT;
 
 SELECT firstname, lastname, invoiceid FROM customer
 JOIN invoice
---ON c.customerid = i.customerid;
 USING (customerid);
 
 -- 7.2 +===========================================================
