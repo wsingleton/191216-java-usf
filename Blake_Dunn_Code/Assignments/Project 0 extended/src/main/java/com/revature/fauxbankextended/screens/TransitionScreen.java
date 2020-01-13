@@ -26,6 +26,7 @@ public class TransitionScreen extends Screen {
                     app().getRouter().navigate("/dashboard");
                     break;
                 case "2":
+                    app().invalidateCurrentSession();
                     app().getRouter().navigate("/home");
                     break;
                 case "3":
@@ -34,6 +35,7 @@ public class TransitionScreen extends Screen {
                     break;
                 default:
                     System.out.println("[LOG] - Invalid selection");
+                    app().invalidateCurrentSession();
                     app().getRouter().navigate("/home");
             }
 
