@@ -41,19 +41,30 @@ public class DashMenu extends Menu {
             String userSelection = AppDriver.console.readLine();
             switch (userSelection) {
                 case "1":
+                    System.out.println("Loading account overview...");
+                    AppDriver.router.navigate("/accounts");
                     break;
                 case "2":
+                    System.out.println("Redirecting to deposits...");
+                    AppDriver.router.navigate("/deposits");
                     break;
                 case "3":
+                    System.out.println("Redirecting to withdrawals...");
+                    AppDriver.router.navigate("/withdrawals");
                     break;
                 case "4":
+                    System.out.println("Redirecting to balance transfers...");
+                    AppDriver.router.navigate("/transfers");
                     break;
                 case "5":
+                    System.out.println("Redirecting to Account Services...");
+                    AppDriver.router.navigate("/new_accts");
                     break;
                 case "x":
                 case "X":
                     System.out.println("Logging out...");
                     AppDriver.currentUser = null;
+                    System.out.println("Logout successful.");
                     System.out.println("Returning to main menu...");
                     AppDriver.router.navigate("/home");
                     break;

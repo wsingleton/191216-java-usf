@@ -5,6 +5,7 @@ import com.fauxnancials.models.User;
 import com.fauxnancials.repos.AccountRepository;
 import com.fauxnancials.repos.TransactionRepository;
 import com.fauxnancials.repos.UserRepository;
+import com.fauxnancials.services.AcctService;
 import com.fauxnancials.services.UserService;
 import com.fauxnancials.util.NavRouter;
 
@@ -27,11 +28,17 @@ public class AppDriver {
         final AccountRepository acctRepo=new AccountRepository();
         final TransactionRepository transRepo=new TransactionRepository();
         final UserService userService=new UserService(userRepo);
+        final AcctService acctService=new AcctService(acctRepo);
         router=new NavRouter();
         router.addMenu(new HomeMenu())
                 .addMenu(new LoginMenu(userService))
                 .addMenu(new RegisterMenu(userService))
-                .addMenu(new DashMenu());
+                .addMenu(new DashMenu())
+                .addMenu(new AccountsMenu(acctService))
+                .addMenu(new DepositsMenu(acctService))
+                .addMenu(new WithdrawalsMenu(acctService))
+                .addMenu(new TransfersMenu(acctService))
+                .addMenu(new AcctServicesMenu(acctService));
     }
     public static void main(String[] args) {
         boolean shown=false;
