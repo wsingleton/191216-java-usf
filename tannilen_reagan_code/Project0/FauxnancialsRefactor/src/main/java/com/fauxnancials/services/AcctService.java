@@ -34,6 +34,7 @@ public class AcctService {
         temp.setAcctType(AcctType.getAcctTypeById(acctType));
         temp.setBalance(0.0);
         temp.setUserID(AppDriver.currentUser.getUserID());
+        System.out.println(temp.toString());
         acctRepo.save(temp);
         populateAccounts();
     }

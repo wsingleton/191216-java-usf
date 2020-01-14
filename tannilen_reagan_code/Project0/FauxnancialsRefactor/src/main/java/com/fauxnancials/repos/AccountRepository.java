@@ -1,5 +1,6 @@
 package com.fauxnancials.repos;
 
+import com.fauxnancials.AppDriver;
 import com.fauxnancials.models.Acct;
 import com.fauxnancials.models.AcctType;
 import com.fauxnancials.util.ConnectionFactory;
@@ -27,11 +28,11 @@ public class AccountRepository implements CrudRepository<Acct> {
     @Override
     public void save(Acct acct) {
         try (Connection conn=ConnectionFactory.getInstance().getConnection()) {
-            String sql="insert into fauxnancials_admin.accts values (0, ?, ?, ?)";
+            String sql="insert into fauxnancials_admin.accounts values (0, ?, ?, ?)";
             PreparedStatement pstmt=conn.prepareStatement(sql);
             pstmt.setInt(1, AcctType.getTypeIDByType(acct.getAcctType()));
             pstmt.setDouble(2,acct.getBalance());
-            pstmt.setInt(3,acct.getUserID());
+            pstmt.setInt(3, acct.getUserID());
             int rowsInserted=pstmt.executeUpdate();
         }
         catch (SQLIntegrityConstraintViolationException e) {

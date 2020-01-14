@@ -59,12 +59,14 @@ public class Acct {
     public int hashCode() {
         return Objects.hash(acctID, acctType, balance);
     }
+
     @Override
     public String toString() {
         return "Acct{" +
                 "acctID=" + acctID +
                 ", acctType=" + acctType +
                 ", balance=" + balance +
+                ", userID=" + userID +
                 '}';
     }
     public String acctShow() {

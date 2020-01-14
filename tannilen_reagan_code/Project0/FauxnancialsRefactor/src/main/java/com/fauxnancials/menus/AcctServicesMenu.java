@@ -24,10 +24,12 @@ public class AcctServicesMenu extends Menu {
             String userSelection = AppDriver.console.readLine();
             switch (userSelection) {
                 case "1":
-                    System.out.println("Checking creation not yet implemented.");
+                    acctService.createNewAcct(1);
+                    System.out.println("New checking account created.");
                     break;
                 case "2":
-                    System.out.println("Savings creation not yet implemented.");
+                    acctService.createNewAcct(2);
+                    System.out.println("New savings account created.");
                     break;
                 case "x":
                 case "X":
