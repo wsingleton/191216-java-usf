@@ -70,3 +70,152 @@ FROM employee
 WHERE hiredate BETWEEN '01-JUN-03' AND '01-MAR-04';
 
 -- 2.7 Delete a record in Customer table where the name is Robert Walter
+SELECT *
+FROM customer 
+WHERE firstname = 'Robert' AND lastname = 'Walter';
+
+SELECT *
+FROM invoice
+WHERE customerid = 32;
+
+-- DELETE FROM RESULTS
+DELETE FROM invoiceline
+WHERE invoiceid = 245 OR invoiceid = 268 OR 
+    invoiceid = 290 OR invoiceid = 342 OR 
+    invoiceid = 50 OR invoiceid = 61 OR invoiceid = 116;
+    
+DELETE FROM invoice
+WHERE customerid = 32;
+
+DELETE FROM customer
+WHERE firstname = 'Robert' AND lastname = 'Walter';
+
+-- 3.1 Create a function that returns the current time.
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE FUNCTION current_time
+RETURN TIMESTAMP AS time TIMESTAMP;
+BEGIN
+    SELECT current_timestamp
+    INTO time
+    FROM dual;
+    RETURN time;
+END;
+/
+
+DECLARE 
+    time TIMESTAMP;
+BEGIN
+    time := current_time();
+    DBMS_OUTPUT.PUT_LINE(time);
+END;
+/
+
+-- 3.1 Create a function that returns the length of a mediatype from the mediatype table
+CREATE OR REPLACE FUNCTION get_media_length
+   RETURN NUMBER AS media_length NUMBER;
+BEGIN
+    SELECT LENGTH(name) 
+    INTO media_length
+    FROM mediatype
+    WHERE mediatypeid = 1;
+    RETURN media_length;
+END;
+/
+
+DECLARE 
+    media_length NUMBER;
+BEGIN
+    media_length := get_media_length();
+    DBMS_OUTPUT.PUT_LINE('Media type length is ' || media_length);
+END;
+/
+
+-- 3.2 Create a function that returns the average total of all invoices
+CREATE OR REPLACE FUNCTION ave_of_invoices
+    RETURN NUMBER AS ave_num NUMBER;
+BEGIN 
+    SELECT AVG(total)
+    INTO ave_num
+    FROM invoice;
+    RETURN ave_num;
+END;
+/
+
+DECLARE
+    ave_num NUMBER;
+BEGIN
+    ave_num := ave_of_invoices;
+    DBMS_OUTPUT.PUT_LINE('The average total of the invoices is ' || ave_num);
+END;
+/
+
+
+-- 3.2  Create a function that returns the most expensive track
+CREATE OR REPLACE FUNCTION most_expensive_track
+    RETURN NUMBER AS price NUMBER;
+BEGIN
+    SELECT MAX(unitprice)
+    INTO price
+    FROM track;
+    RETURN price;
+END;
+/
+
+DECLARE
+    price NUMBER;
+BEGIN
+    price := most_expensive_track();
+    DBMS_OUTPUT.PUT_LINE('The most expensive track costs $' || price);
+END;
+/
+
+-- 3.3 Create a function that returns the average price of invoice-line items in the invoice-line table
+CREATE OR REPLACE FUNCTION average_price
+    RETURN NUMBER AS avg_price NUMBER;
+BEGIN 
+    SELECT AVG(unitprice)
+    INTO avg_price
+    FROM invoiceline;
+    RETURN avg_price;
+END;
+/
+
+DECLARE
+    avg_price NUMBER;
+BEGIN
+    avg_price := average_price();
+    DBMS_OUTPUT.PUT_LINE('The the average price is $' || avg_price);
+END;
+/
+
+-- 3.4 Create a function that returns all employees who are born after 1968.
+CREATE OR REPLACE FUNCTION after_1968
+    RETURN SYS_REFCURSOR IS my_cursor SYS_REFCURSOR;
+BEGIN 
+    OPEN my_cursor FOR 
+    SELECT firstname, lastname, birthdate
+    FROM employee
+    WHERE birthdate > '12-dec-68';
+    RETURN my_cursor;
+END;
+/
+
+DECLARE
+    v_cursor    SYS_REFCURSOR;
+    v_fn        employee.firstname%TYPE;
+    v_ln        employee.lastname%TYPE;
+    v_bd        employee.birthdate%TYPE;
+BEGIN
+    v_cursor := after_1968();
+    LOOP
+        FETCH v_cursor INTO v_fn, v_ln, v_bd;
+        EXIT WHEN v_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(v_fn || ' ' || v_ln || ' ' || v_bd);
+    END LOOP;
+    CLOSE v_cursor;
+END;
+/
+
+-- 4.0 Create a stored procedure that selects the first and last names of all the employees.
+
