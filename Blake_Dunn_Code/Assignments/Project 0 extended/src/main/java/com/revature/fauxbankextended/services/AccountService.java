@@ -43,7 +43,7 @@ public class AccountService {
         app().getCurrentSession().getSessionAccount().setBalance(bal);
         acctRepo.update(app().getCurrentSession().getSessionAccount());
         Transaction newTransaction = new Transaction(app().getCurrentSession().getSessionUser().getId(),
-                app().getCurrentSession().getSessionAccount().getId(), deposit, TransactionType.DEPOSIT);
+                app().getCurrentSession().getSessionAccount().getId(), updatedDeposit, TransactionType.DEPOSIT);
         transRepo.save(newTransaction);
 
         return true;
@@ -70,7 +70,7 @@ public class AccountService {
         app().getCurrentSession().getSessionAccount().setBalance(bal);
         acctRepo.update(app().getCurrentSession().getSessionAccount());
         Transaction newTransaction = new Transaction(app().getCurrentSession().getSessionUser().getId(),
-                app().getCurrentSession().getSessionAccount().getId(), withdraw, TransactionType.WITHDRAW);
+                app().getCurrentSession().getSessionAccount().getId(), updatedWithdraw, TransactionType.WITHDRAW);
         transRepo.save(newTransaction);
 
         return true;

@@ -35,7 +35,7 @@ public class DashboardScreen extends Screen {
                     app().getRouter().navigate("/withdraw");
                     break;
                 case "4":
-                    app().getRouter().navigate("/info");
+                    app().getRouter().navigate("/profile");
                     break;
                 case "5":
                     app().invalidateCurrentSession();

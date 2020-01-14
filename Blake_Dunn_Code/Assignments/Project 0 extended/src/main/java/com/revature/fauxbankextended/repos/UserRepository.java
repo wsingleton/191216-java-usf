@@ -15,9 +15,6 @@ import static com.revature.fauxbankextended.BankDriver.*;
 
 public class UserRepository implements CrudRepository<User> {
 
-    private Integer key;
-    private HashMap<Integer, User> userDb;
-
     public Optional<User> findUserByCredentials(String username, String password) {
 
         Optional<User> _user = Optional.empty();
@@ -68,7 +65,6 @@ public class UserRepository implements CrudRepository<User> {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
         return _user;
     }
 
@@ -93,7 +89,6 @@ public class UserRepository implements CrudRepository<User> {
                     newUser.setId(rs.getInt(1));
                 }
             }
-
         } catch(SQLIntegrityConstraintViolationException e) {
             e.printStackTrace();
         }catch (SQLException e) {
@@ -121,7 +116,6 @@ public class UserRepository implements CrudRepository<User> {
         Connection conn = app().getCurrentSession().getConnection();
 
         try {
-
             String sql = "INSERT INTO users_accounts VALUES (?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, user.getId());

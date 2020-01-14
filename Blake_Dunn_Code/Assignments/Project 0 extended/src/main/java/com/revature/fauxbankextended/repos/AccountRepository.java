@@ -2,6 +2,7 @@ package com.revature.fauxbankextended.repos;
 
 import com.revature.fauxbankextended.exceptions.ResourceNotFoundException;
 import com.revature.fauxbankextended.models.Account;
+import com.revature.fauxbankextended.models.AccountType;
 import com.revature.fauxbankextended.models.User;
 import com.revature.fauxbankextended.util.ConnectionFactory;
 
@@ -44,10 +45,10 @@ public class AccountRepository implements CrudRepository<Account> {
         return accounts;
     }
 
-    public Account getAccount(User user) {
-
+    public Account getAccount(User user, Integer inputId) {
+        Set<Account> accounts = findAccountsById(user.getId());
         Account acct = new Account();
-        Optional<Account> _acct = findById(user.getId());
+        Optional<Account> _acct = accounts.stream().filter(a -> a.getId().equals(inputId)).findFirst();  //findById(user.getId());
 
         if (_acct.isPresent()) {
             acct = _acct.get();
@@ -92,7 +93,7 @@ public class AccountRepository implements CrudRepository<Account> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT a.acct_id, a.balance " +
+            String sql = "SELECT a.acct_id, a.balance, a.type_id " +
                     "FROM accounts a " +
                     "JOIN users_accounts b " +
                     "ON a.acct_id = b.acct_id " +
@@ -138,6 +139,7 @@ public class AccountRepository implements CrudRepository<Account> {
         while (rs.next()) {
             Account temp = new Account();
             temp.setId(rs.getInt("acct_id"));
+            temp.setAccountType(AccountType.getAccountTypeById(rs.getInt("type_id")));
             temp.setBalance(rs.getDouble("balance"));
 
             accounts.add(temp);

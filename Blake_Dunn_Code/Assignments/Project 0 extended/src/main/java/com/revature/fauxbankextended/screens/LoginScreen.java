@@ -2,6 +2,7 @@ package com.revature.fauxbankextended.screens;
 
 import com.revature.fauxbankextended.exceptions.AuthenticationException;
 import com.revature.fauxbankextended.exceptions.InvalidRequestException;
+import com.revature.fauxbankextended.models.User;
 import com.revature.fauxbankextended.services.UserService;
 
 import static com.revature.fauxbankextended.BankDriver.*;
@@ -30,7 +31,8 @@ public class LoginScreen extends Screen {
             System.out.print("Password: ");
             password = app().getConsole().readLine();
 
-            userService.authenticate(username, password);
+            User user = userService.authenticate(username, password);
+            userService.chooseAccount(user);
 
             if (app().isSessionValid()) {
                 System.out.println("[LOG - Login successful, navigating to dashboard...");

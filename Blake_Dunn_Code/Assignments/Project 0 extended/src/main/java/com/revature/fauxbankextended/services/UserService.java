@@ -8,6 +8,7 @@ import com.revature.fauxbankextended.util.ConnectionFactory;
 import com.revature.fauxbankextended.util.UserSession;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,16 +31,37 @@ public class UserService {
         this.transRepo = transRepo;
     }
 
-    public void authenticate (String username, String password) {
+    public User authenticate (String username, String password) {
 
         if (username == null || username.trim().equals("")
                 || password == null || password.trim().equals("")) throw new InvalidRequestException();
 
         User user = userRepo.getUser(username, password);
-        Account acct = acctRepo.getAccount(user);
+        return user;
+}
+
+    public void chooseAccount(User user) {
+        Set<Account> accounts= acctRepo.findAccountsById(user.getId());
+        Account acct = new Account();
+        System.out.println("Your current accounts:");
+        for(Account a : accounts) {
+            System.out.println(a);
+        }
+        System.out.println("\n\nPlease choose an account.");
+
+        try {
+            System.out.println("Enter the account number ");
+            System.out.print("> ");
+            String choice = app().getConsole().readLine();
+            Integer acctNum = Integer.parseInt(choice);
+            acct = acctRepo.getAccount(user, acctNum);
+        }catch(Exception e) {
+            System.err.println("[ERROR] - " + e.getMessage());
+        }
 
         app().setCurrentSession(new UserSession(user, acct, ConnectionFactory.getInstance().getConnection()));
-}
+
+    }
 
     public User register(User user) {
 
@@ -72,6 +94,20 @@ public class UserService {
         Account acct = acctRepo.save(newAccount);
         userRepo.updateCompositeKey(user, acct);
         app().setCurrentSession(new UserSession(user, acct, ConnectionFactory.getInstance().getConnection()));
+    }
+
+    public User setJointAccount(String username) {
+        User addToAccount = new User();
+        Optional<User> _user = userRepo.findUserByUserName(username);
+
+        if (_user.isPresent()) {
+            addToAccount = _user.get();
+        }
+
+        userRepo.updateCompositeKey(addToAccount, app().getCurrentSession().getSessionAccount());
+
+        return addToAccount;
+
     }
 
     public boolean isUserValid(User user) {

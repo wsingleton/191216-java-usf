@@ -1,6 +1,7 @@
 package com.revature.fauxbankextended.util;
 
 import com.revature.fauxbankextended.repos.AccountRepository;
+import com.revature.fauxbankextended.repos.TransactionRepository;
 import com.revature.fauxbankextended.repos.UserRepository;
 import com.revature.fauxbankextended.screens.*;
 import com.revature.fauxbankextended.services.AccountService;
@@ -24,9 +25,10 @@ public class AppState {
 
         final UserRepository userRepo = new UserRepository();
         final AccountRepository acctRepo = new AccountRepository();
+        final TransactionRepository transRepo = new TransactionRepository();
 
-        final UserService userService = new UserService(userRepo, acctRepo);
-        final AccountService accountService = new AccountService(acctRepo);
+        final UserService userService = new UserService(userRepo, acctRepo, transRepo);
+        final AccountService accountService = new AccountService(acctRepo, transRepo);
 
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
@@ -37,11 +39,12 @@ public class AppState {
                 .addScreen(new DepositScreen(accountService))
                 .addScreen(new WithdrawScreen(accountService))
                 .addScreen(new TransitionScreen())
-                .addScreen(new AccountInfoScreen())
-                .addScreen(new AddNewAccountScreen())
-                .addScreen(new TransactionHistoryScreen())
+                .addScreen(new UserProfileScreen())
+                .addScreen(new AddNewAccountScreen(userService))
+                .addScreen(new TransactionHistoryScreen(userService))
                 .addScreen(new TransferMoneyScreen())
-                .addScreen(new SwitchAccountsScreen());
+                .addScreen(new SwitchAccountsScreen())
+                .addScreen(new JointAccountScreen(userService));
     }
 
     public BufferedReader getConsole() {
