@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <main>
+        <form action="https://example.com" method="GET">
+            <fieldset>
+                <legend>Your Details</legend>
+                <label for="username">
+                    Name:
+                    <input type="text" name="username">
+                </label>
+                <br><br>
+                <label for="userEmail">
+                    Email:
+                    <input 
+                    type="email" 
+                    name="userEmail" 
+                    size="30" 
+                    maxlength="255" 
+                    placeholder="jdoe@gmail.com">
+                </label>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>Your Review</legend>
+                <p>
+                    <label for="hear-about">How di you hear about us?</label>
+                    <select name="reffered" id="hear-about">
+                        <option value="google">Please make a value</option>
+                        <option value="advert">Ad</option>
+                        <option value="friend">Friend</option>
+                        <option value="other">Other</option>
+                    </select>
+                </p>
+                <p>
+                    Would you visit again?
+                    <br>
+                    <label for="">
+                        Yes
+                        <input type="radio"name="radio" value="yes">
+                    </label>
+                    <label for="">
+                        No
+                        <input type="radio"name="radio" value="no">
+
+                    </label>
+                    <label for="">
+                        Maybe
+                        <input type="radio"name="radio" value="maybe">
+
+                    </label>
+                </p>
+                <label for="">
+                    Sign me up for email updates
+                    <input type="checkbox" name="subscribe" checked>
+                </label>
+                <br><br>
+                <label for="">
+                    Please provide comments <br>
+                    <textarea name="comments" id="" cols="30" rows="10"></textarea>
+                </label>
+            </fieldset>
+            <br>
+            <input type="submit" value="Submit Review">
+        </form>
+    </main>
+
+</body>
+
+</html>
