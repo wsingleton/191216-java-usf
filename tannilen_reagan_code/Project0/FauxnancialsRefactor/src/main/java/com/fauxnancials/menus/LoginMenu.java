@@ -40,8 +40,8 @@ public class LoginMenu extends Menu {
             System.out.println(ANSI_RED + "Invalid login credentials provided." + ANSI_RESET);
         }
         catch (Exception ex) {
-            System.err.println("[ERROR] - An unexpected exception has occurred.");
-            System.err.println("[LOG] - Exiting application.");
+            System.err.println(ANSI_RED + "An unexpected exception has occurred.");
+            System.err.println("Exiting application." + ANSI_RESET);
             AppDriver.appRunning=false;
         }
     }

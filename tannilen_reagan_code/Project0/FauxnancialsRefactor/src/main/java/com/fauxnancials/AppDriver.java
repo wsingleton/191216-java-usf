@@ -1,8 +1,6 @@
 package com.fauxnancials;
 
-import com.fauxnancials.menus.HomeMenu;
-import com.fauxnancials.menus.LoginMenu;
-import com.fauxnancials.menus.RegisterMenu;
+import com.fauxnancials.menus.*;
 import com.fauxnancials.models.User;
 import com.fauxnancials.repos.AccountRepository;
 import com.fauxnancials.repos.TransactionRepository;
@@ -32,7 +30,8 @@ public class AppDriver {
         router=new NavRouter();
         router.addMenu(new HomeMenu())
                 .addMenu(new LoginMenu(userService))
-                .addMenu(new RegisterMenu(userService));
+                .addMenu(new RegisterMenu(userService))
+                .addMenu(new DashMenu());
     }
     public static void main(String[] args) {
         boolean shown=false;
