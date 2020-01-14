@@ -1,7 +1,7 @@
 package com.revature.mockbank.models;
 
 public enum Role {
-    ADMIN("Admin"), CLIENT("Client");
+    ADMIN("Admin"), CUSTOMER("Customer");
 
     private String roleName;
 

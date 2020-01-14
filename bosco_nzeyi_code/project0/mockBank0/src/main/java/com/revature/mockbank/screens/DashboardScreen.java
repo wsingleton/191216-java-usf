@@ -43,12 +43,27 @@ public class DashboardScreen extends Screen {
             switch (userSelection) {
 
                 case "1":
-                    router.navigate("/login");
+                    router.navigate("/createAccount");
                     break;
                 case "2":
-                    router.navigate("/register");
+                    router.navigate("/deposit");
                     break;
                 case "3":
+                    router.navigate("/withdraw");
+                    break;
+                case "4":
+                    router.navigate("/accountHistory");
+                    break;
+                case "5":
+                    router.navigate("/transfer");
+                    break;
+                case "6":
+                    router.navigate("/switch");
+                    break;
+                case "7":
+                    router.navigate("/balance");
+                    break;
+                case "8":
                     System.out.println("Exiting application...");
                     appRunning = false;
                     break;

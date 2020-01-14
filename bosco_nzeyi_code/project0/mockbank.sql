@@ -186,8 +186,9 @@ SELECT EXTRACT(SECOND FROM activity_date) "second" FROM activities ;
 
 COMMIT;
 
-SELECT * FROM accounts;
-
+SELECT * FROM users;
+SELECT SYSDATE FROM DUAL;
+DELETE FROM users;
 -- UPDATING BALANCES ON SAVINGS ACCOUNTS AND CALCULATING COMPOUND INTEREST EARNED
     --
     --
@@ -198,7 +199,8 @@ SELECT * FROM accounts;
 INSERT INTO users_accounts
 VALUES(1, 1);
 INSERT INTO users_accounts
-VALUES(1, 2);  
+VALUES(1, 2);
+COMMIT;
 
 
 
