@@ -117,7 +117,7 @@ public class UserRepository implements CrudRepository<User> {
 
     }
 
-    public void updateCompositeKey(User user, Account account) {
+    public Boolean updateCompositeKey(User user, Account account) {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -130,6 +130,7 @@ public class UserRepository implements CrudRepository<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return true;
     }
 
     private Set<User> mapResultSet(ResultSet rs) throws SQLException {

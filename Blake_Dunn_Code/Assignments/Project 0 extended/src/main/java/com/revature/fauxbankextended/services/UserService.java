@@ -33,8 +33,9 @@ public class UserService {
 
         User user = userRepo.getUser(username, password);
         Account acct = acctRepo.getAccount(user);
+
         app().setCurrentSession(new UserSession(user, acct, ConnectionFactory.getInstance().getConnection()));
-    }
+}
 
     public User register(User user) {
 

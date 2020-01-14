@@ -11,21 +11,17 @@ public class AccountService {
 
     private AccountRepository acctRepo;
 
-    public AccountService() {
-
-    }
-
     public AccountService(AccountRepository repo) {
         this.acctRepo = repo;
     }
 
-    public void validateDeposit(String amount) {
+    public boolean validateDeposit(String amount) {
 
         Double balance = app().getCurrentSession().getSessionAccount().getBalance();
 
         if (amount == null || amount.equals("") || amount.matches("^[a-zA-Z]*$")) {
             System.out.println("Try again!");
-            app().getRouter().navigate("/dashboard");
+            return false;
         }
 
         Double deposit = Double.valueOf(amount);
@@ -33,22 +29,23 @@ public class AccountService {
         if (deposit < 0 || deposit > 10000) {
             deposit = 0.0;
             System.out.println("Try again!");
-            app().getRouter().navigate("/dashboard");
+            return false;
         }
         Double updatedDeposit = convertAmount(deposit);
 
         balance += updatedDeposit;
         Double bal = convertAmount(balance);
         app().getCurrentSession().getSessionAccount().setBalance(bal);
-
         acctRepo.update(app().getCurrentSession().getSessionAccount());
+
+        return true;
     }
 
-    public void validateWithdraw(Double balance, String amount) {
+    public boolean validateWithdraw(Double balance, String amount) {
 
         if (amount == null || amount.equals("") || amount.matches("^[a-zA-Z]*$")) {
             System.out.println("Try again!");
-            app().getRouter().navigate("/dashboard");
+            return false;
         }
 
         Double withdraw = Double.valueOf(amount);
@@ -56,7 +53,7 @@ public class AccountService {
         if (withdraw > balance || withdraw < 0) {
             withdraw = 0.0;
             System.out.println("Try again!");
-            app().getRouter().navigate("/dashboard");
+            return false;
         }
         Double updatedWithdraw = convertAmount(withdraw);
 
@@ -65,6 +62,7 @@ public class AccountService {
         app().getCurrentSession().getSessionAccount().setBalance(bal);
 
         acctRepo.update(app().getCurrentSession().getSessionAccount());
+        return true;
     }
 
     public Double convertAmount (Double amount) {

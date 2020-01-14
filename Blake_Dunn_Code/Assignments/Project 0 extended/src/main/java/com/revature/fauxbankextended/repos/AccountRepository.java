@@ -17,9 +17,43 @@ public class AccountRepository implements CrudRepository<Account> {
     private Integer key;
     private HashMap<Integer, Account> acctDb;
 
-    public Optional findByAccountNumber(Integer accountNumber) {
+    public Set<Account> findAccountsById(Integer id) {
 
-        return null;
+        Set<Account> accounts = new HashSet<>();
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT a.acct_id, a.balance " +
+                    "FROM accounts a " +
+                    "JOIN users_accounts b " +
+                    "ON a.acct_id = b.acct_id " +
+                    "JOIN users u " +
+                    "ON u.user_id = b.user_id " +
+                    "WHERE u.user_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            accounts = mapResultSet(rs);
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return accounts;
+    }
+
+    public Account getAccount(User user) {
+
+        Account acct = new Account();
+        Optional<Account> _acct = findById(user.getId());
+
+        if (_acct.isPresent()) {
+            acct = _acct.get();
+        }
+        else {
+            throw new ResourceNotFoundException();
+        }
+        return acct;
     }
 
     @Override
@@ -94,19 +128,6 @@ public class AccountRepository implements CrudRepository<Account> {
             e.printStackTrace();
         }
         return true;
-    }
-
-    public Account getAccount(User user) {
-        Account acct = new Account();
-        Optional<Account> _acct = findById(user.getId());
-
-        if (_acct.isPresent()) {
-            acct = _acct.get();
-        }
-        else {
-            throw new ResourceNotFoundException();
-        }
-        return acct;
     }
 
     private Set<Account> mapResultSet(ResultSet rs) throws SQLException {
