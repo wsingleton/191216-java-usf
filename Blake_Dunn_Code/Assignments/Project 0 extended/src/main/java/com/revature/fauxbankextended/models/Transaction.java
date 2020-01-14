@@ -15,6 +15,13 @@ public class Transaction {
         super();
     }
 
+    public Transaction(Integer userId, Integer acctId, Double amount, TransactionType type) {
+        this.userId = userId;
+        this.acctId = acctId;
+        this.amount = amount;
+        this.type = type;
+    }
+
     public Transaction(Integer transId, Integer userId, Integer acctId, Double amount, TransactionType type) {
         this.transId = transId;
         this.userId = userId;

@@ -1,6 +1,9 @@
 package com.revature.fauxbankextended.services;
 
+import com.revature.fauxbankextended.models.Transaction;
+import com.revature.fauxbankextended.models.TransactionType;
 import com.revature.fauxbankextended.repos.AccountRepository;
+import com.revature.fauxbankextended.repos.TransactionRepository;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -10,9 +13,11 @@ import static com.revature.fauxbankextended.BankDriver.*;
 public class AccountService {
 
     private AccountRepository acctRepo;
+    private TransactionRepository transRepo;
 
-    public AccountService(AccountRepository repo) {
+    public AccountService(AccountRepository repo, TransactionRepository transRepo) {
         this.acctRepo = repo;
+        this.transRepo = transRepo;
     }
 
     public boolean validateDeposit(String amount) {
@@ -37,6 +42,9 @@ public class AccountService {
         Double bal = convertAmount(balance);
         app().getCurrentSession().getSessionAccount().setBalance(bal);
         acctRepo.update(app().getCurrentSession().getSessionAccount());
+        Transaction newTransaction = new Transaction(app().getCurrentSession().getSessionUser().getId(),
+                app().getCurrentSession().getSessionAccount().getId(), deposit, TransactionType.DEPOSIT);
+        transRepo.save(newTransaction);
 
         return true;
     }
@@ -60,8 +68,11 @@ public class AccountService {
         balance -= updatedWithdraw;
         Double bal = convertAmount(balance);
         app().getCurrentSession().getSessionAccount().setBalance(bal);
-
         acctRepo.update(app().getCurrentSession().getSessionAccount());
+        Transaction newTransaction = new Transaction(app().getCurrentSession().getSessionUser().getId(),
+                app().getCurrentSession().getSessionAccount().getId(), withdraw, TransactionType.WITHDRAW);
+        transRepo.save(newTransaction);
+
         return true;
     }
 

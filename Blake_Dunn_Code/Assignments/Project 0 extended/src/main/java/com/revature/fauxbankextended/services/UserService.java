@@ -7,6 +7,8 @@ import com.revature.fauxbankextended.repos.*;
 import com.revature.fauxbankextended.util.ConnectionFactory;
 import com.revature.fauxbankextended.util.UserSession;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,14 +18,16 @@ public class UserService {
 
     private UserRepository userRepo;
     private AccountRepository acctRepo;
+    private TransactionRepository transRepo;
 
     public UserService() {
 
     }
 
-    public UserService(UserRepository uRepo, AccountRepository aRepo) {
+    public UserService(UserRepository uRepo, AccountRepository aRepo, TransactionRepository transRepo) {
         this.userRepo = uRepo;
         this.acctRepo = aRepo;
+        this.transRepo = transRepo;
     }
 
     public void authenticate (String username, String password) {
@@ -94,5 +98,17 @@ public class UserService {
             return false;
         }
         return true;
+    }
+
+    public void viewCurrentAcctTransactionHistory() {
+        Set<Transaction> history = transRepo.getCurrentAccountTransactionsHistory();
+
+        for(Transaction t : history) {
+            System.out.print("User ID: " + t.getAcctId());
+            System.out.print("  Account ID: " + t.getAcctId());
+            System.out.print("  Transaction: " + t.getType());
+            System.out.print("  Transaction Amount: " + t.getAmount());
+            System.out.print("  Transaction Date: " + t.getDate());
+        }
     }
 }

@@ -13,13 +13,15 @@ import static com.revature.fauxbankextended.BankDriver.app;
 
 public class TransactionRepository implements CrudRepository<Transaction> {
 
-    public Set<Transaction> viewCurrentAccountTransactions() {
+    public Set<Transaction> getCurrentAccountTransactionsHistory() {
         Connection conn = app().getCurrentSession().getConnection();
 
         Set<Transaction> transHistory = new HashSet<>();
 
         try{
-            String sql = "SELECT * FROM transactions WHERE user_id = ? AND acct_id = ?";
+            String sql = "SELECT user_id, acct_id, trans_type_id, amount, " +
+                    "TO_CHAR(trans_date, 'MM/DD/YY HH24:MM:SS') " +
+                    " FROM transactions WHERE user_id = ? AND acct_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, app().getCurrentSession().getSessionUser().getId());
             pstmt.setInt(2, app().getCurrentSession().getSessionAccount().getId());
@@ -39,8 +41,8 @@ public class TransactionRepository implements CrudRepository<Transaction> {
 
             String sql = "INSERT INTO transactions VALUES (0, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"trans_id"});
-            pstmt.setInt(1, app().getCurrentSession().getSessionUser().getId());
-            pstmt.setInt(2, app().getCurrentSession().getSessionAccount().getId());
+            pstmt.setInt(1, newTrans.getUserId());
+            pstmt.setInt(2, newTrans.getAcctId());
             pstmt.setInt(3, newTrans.getType().ordinal() +1);
             pstmt.setDouble(4, newTrans.getAmount());
 
