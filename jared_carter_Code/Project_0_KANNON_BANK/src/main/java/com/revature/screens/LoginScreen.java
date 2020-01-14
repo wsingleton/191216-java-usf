@@ -1,11 +1,11 @@
-package com.banking.screens;
+package com.revature.screens;
 
-import com.banking.pojos.User;
+import com.revature.pojos.User;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class Login {
+public class LoginScreen {
     public static void loginScreen() {
 
         //Creating a new account

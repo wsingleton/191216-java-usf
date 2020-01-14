@@ -1,9 +1,9 @@
-package com.banking.repo;
+package com.revature.repo;
 
 import java.util.List;
 
-import com.banking.dao.BankAccountsDao;
-import com.banking.pojos.Accounts_Bank;
+import com.revature.dao.BankAccountsDao;
+import com.revature.pojos.Accounts_Bank;
 
 public class BankAccountRepo {
 

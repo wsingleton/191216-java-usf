@@ -1,8 +1,8 @@
-package com.banking.screens;
+package com.revature.screens;
 
 import java.util.Scanner;
 
-public class SignOut {
+public class SignOutScreen {
 
     public static void signOut(int id) {
 

@@ -1,18 +1,16 @@
-package com.banking.service;
+package com.revature.service;
 
-import com.banking.pojos.Accounts_Bank;
+import com.revature.pojos.Accounts_Bank;
 
 import java.util.Scanner;
 
-public class Withdraw {
-
-    public static void withdraw(int id) {
+public class Deposit {
+    public static void deposit(int id) {
 
         double balance = 0;
-        double withdraw = 0;
+        double deposit= 0;
         boolean valid = false;
 
-        //Create a temporary account to grab current user info
         Accounts_Bank temp = null;
 
         Scanner scanner = new Scanner(System.in);
@@ -22,18 +20,18 @@ public class Withdraw {
 
         balance = temp.getBalance();
 
-        System.out.println("Please enter withdraw amount: ");
+        System.out.println("Please enter deposit amount: ");
         while(!valid) {
             try {
                 String dummy = scanner.next();
-                withdraw = Double.parseDouble(dummy);
+                deposit = Double.parseDouble(dummy);
 
             } catch(Exception e){
                 System.out.println("Please enter a number: ");
             }
             //Make sure withdrawal is not greater than the current balance
-            if (withdraw < balance + 1) {
-                balance -= withdraw;
+            if (deposit > 0) {
+                balance += deposit;
 
                 Accounts_Bank updateUser = new Accounts_Bank(temp.getAccountOwner(), balance);
 
@@ -44,7 +42,7 @@ public class Withdraw {
                 valid = true;
             } else {
 
-                System.out.println("Sorry, you do not enough to withdraw.");
+                System.out.println("Please deposit amount greater than 0.");
                 SignOut(id);
 
 
@@ -53,6 +51,8 @@ public class Withdraw {
 
         }
         SignOut(id);
-    }
 
+
+
+    }
 }

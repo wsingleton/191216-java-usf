@@ -1,8 +1,8 @@
-package com.banking.screens;
+package com.revature.screens;
 
 import java.util.Scanner;
 
-public class MainMenu {
+public class MainMenuScreen {
     public static void mainMenu{
     int option;
     Scanner scanner = new Scanner(System.in);

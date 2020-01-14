@@ -1,4 +1,4 @@
-package com.banking.dao;
+package com.revature.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.banking.pojos.User;
-import com.banking.util.ConnectionFactory;
+import com.revature.pojos.User;
+import com.revature.util.ConnectionFactory;
 
 import oracle.jdbc.OracleTypes;
 

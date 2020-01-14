@@ -1,4 +1,4 @@
-package com.banking.dao;
+package com.revature.dao;
 
 import java.io.Serializable;
 import java.util.List;

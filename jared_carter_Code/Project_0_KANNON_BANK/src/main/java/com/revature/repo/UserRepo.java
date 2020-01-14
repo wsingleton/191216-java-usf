@@ -1,15 +1,15 @@
-package com.banking.repo;
+package com.revature.repo;
 
 import java.util.List;
 
-import com.banking.dao.UserDao;
-import com.banking.pojos.User;
+import com.revature.dao.UserDao;
+import com.revature.pojos.User;
 
 public class UserRepo {
 
     static UserDao user = new UserDao();
 
-    public List<User> retriveAllUsers() {
+    public List<User> findAllUsers() {
 
         return user.findAll();
 

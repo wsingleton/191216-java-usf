@@ -1,4 +1,4 @@
-package com.banking.dao;
+package com.revature.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.banking.pojos.Accounts_Bank;
-import com.banking.util.ConnectionFactory;
+import com.revature.pojos.Accounts_Bank;
+import com.revature.util.ConnectionFactory;
 
 public class BankAccountsDao implements Dao<Accounts_Bank, Integer> {
 

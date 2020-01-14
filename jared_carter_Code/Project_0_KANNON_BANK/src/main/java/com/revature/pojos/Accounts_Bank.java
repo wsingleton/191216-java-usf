@@ -1,4 +1,4 @@
-package com.banking.pojos;
+package com.revature.pojos;
 
 public class Accounts_Bank {
 

@@ -1,11 +1,13 @@
-package com.banking.screens;
+package com.revature.screens;
 
-import com.banking.pojos.Accounts_Bank;
-import com.banking.pojos.User;
+import com.revature.pojos.Accounts_Bank;
+import com.revature.pojos.User;
+import com.revature.repo.BankAccountRepo;
 
 import java.util.Scanner;
 
-public class AccountTransaction {
+public class AccountTransactionScreen {
+
     public static void accountTransaction(User user) {
 
         Double balance;
@@ -27,6 +29,7 @@ public class AccountTransaction {
 
         //add bank account info to Bank
 
+        BankAccountRepo bankAccountRepo = new BankAccountRepo();
         bankAccountRepo.saveAccountBank(account_Bank);
 
         System.out.println("1. Make a transaction");
@@ -48,7 +51,9 @@ public class AccountTransaction {
             switch (option) {
 
                 case 1:
-                    ExistingUserScreen(user.getId());
+                    ExistingUserScreen existingUserScreen1 = new ExistingUserScreen();
+
+                    existingUserScreen1.existingUserScreen(user.getId());
                     break;
                 case 2:
                     accountTransaction(user);

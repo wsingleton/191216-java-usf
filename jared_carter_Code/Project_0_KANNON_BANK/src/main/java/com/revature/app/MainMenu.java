@@ -1,7 +1,7 @@
-package com.banking.app;
+package com.revature.app;
 
-import com.banking.repo.BankAccountRepo;
-import com.banking.repo.UserRepo;
+import com.revature.repo.BankAccountRepo;
+import com.revature.repo.UserRepo;
 
 public class MainMenu {
 

@@ -1,11 +1,12 @@
-package com.banking.screens;
+package com.revature.screens;
 
-import com.banking.pojos.User;
+import com.revature.pojos.User;
+import com.revature.repo.UserRepo;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class CreateAccount {
+public class CreateAccountScreen {
     public static void createAccount() {
 
         //User fields
@@ -38,7 +39,9 @@ public class CreateAccount {
 
         //Check DB if username exists
         //get list of users
-        List<User> users = userRepo.retriveAllUsers();
+        UserRepo userRepo = new UserRepo();
+
+        List<User> users = userRepo.findAllUsers();
         boolean usernameCheck = false;
 
         for(User u : users) {
@@ -57,7 +60,8 @@ public class CreateAccount {
 
             userRepo.saveUser(newUser);
             System.out.println("You have created an account.");
-            accountTransaction(newUser);
+            AccountTransactionScreen accountTransactionScreen = new AccountTransactionScreen();
+            accountTransactionScreen.accountTransaction(newUser);
         }
 
     }
