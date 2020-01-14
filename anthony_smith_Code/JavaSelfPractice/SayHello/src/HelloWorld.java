@@ -1,11 +1,22 @@
-import java.util.Objects;
 
-class HelloWorld {
-    public static void main(String[] args) {
 
-        int index = 1;
-        String[] strArr = new String[5];
-        String myStr = strArr[index];
-        System.out.println(myStr);
+public class HelloWorld{
+    int x = 5;
+    int getX(){ return x; }
+
+    public static void main(String args[]) throws Exception{
+        HelloWorld tc = new HelloWorld();
+        tc.looper();
+        System.out.println(tc.x);
+    }
+
+    public void looper(){
+        int x = 0;
+        while( (x = getX()) != 0 ){
+            for(int m = 10; m>=0; m--){
+                x = m;
+            }
+        }
+
     }
 }
