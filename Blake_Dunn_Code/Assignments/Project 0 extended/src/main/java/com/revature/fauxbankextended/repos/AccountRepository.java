@@ -11,6 +11,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import static com.revature.fauxbankextended.BankDriver.app;
+
 
 public class AccountRepository implements CrudRepository<Account> {
 
@@ -111,7 +113,8 @@ public class AccountRepository implements CrudRepository<Account> {
 
     @Override
     public Boolean update(Account updateAcct) {
-        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+        Connection conn = app().getCurrentSession().getConnection();
+        try {
 
             String sql = "{call update_acct(?, ?)}";
             CallableStatement cstmt = conn.prepareCall(sql);

@@ -118,8 +118,9 @@ public class UserRepository implements CrudRepository<User> {
     }
 
     public Boolean updateCompositeKey(User user, Account account) {
+        Connection conn = app().getCurrentSession().getConnection();
 
-        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+        try {
 
             String sql = "INSERT INTO users_accounts VALUES (?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
