@@ -33,7 +33,7 @@ public class AppDriver {
         router.addMenu(new HomeMenu())
                 .addMenu(new LoginMenu(userService))
                 .addMenu(new RegisterMenu(userService))
-                .addMenu(new DashMenu())
+                .addMenu(new DashMenu(acctService))
                 .addMenu(new AccountsMenu(acctService))
                 .addMenu(new DepositsMenu(acctService))
                 .addMenu(new WithdrawalsMenu(acctService))

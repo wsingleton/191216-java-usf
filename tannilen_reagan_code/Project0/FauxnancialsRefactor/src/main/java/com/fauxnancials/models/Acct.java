@@ -50,4 +50,7 @@ public class Acct {
                 ", balance=" + balance +
                 '}';
     }
+    public String acctShow() {
+        return ("Account #" + acctID + "(" + acctType.toString() + "\n" + "Current Balance: $" + balance);
+    }
 }

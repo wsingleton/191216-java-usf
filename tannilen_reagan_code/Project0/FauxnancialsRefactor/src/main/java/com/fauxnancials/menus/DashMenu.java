@@ -1,6 +1,8 @@
 package com.fauxnancials.menus;
 
 import com.fauxnancials.AppDriver;
+import com.fauxnancials.repos.AccountRepository;
+import com.fauxnancials.services.AcctService;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -9,11 +11,14 @@ import static com.fauxnancials.util.AnsiColours.ANSI_RED;
 import static com.fauxnancials.util.AnsiColours.ANSI_RESET;
 
 public class DashMenu extends Menu {
-    public DashMenu() {
+    AcctService acctService;
+    public DashMenu(AcctService acctService) {
         super("Dashboard", "/dashboard");
+        this.acctService=acctService;
     }
     @Override
     public void render() {
+        acctService.populateAccounts();
         LocalTime time = LocalTime.now();
         LocalTime noon = LocalTime.parse("12:00:00");
         LocalTime evening = LocalTime.parse("18:00:00");
