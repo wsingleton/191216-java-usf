@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Basics: Iframes & Media Tags</title>
+</head>
+<body>
+    <main>
+        <h1>Iframes</h1>
+        <p>
+            An iframe is like a little window that has been place into your
+            webpage. The term "iframe" is an abbreviation for "inline frame".
+        </p>
+
+        <p>
+            One common use of iframes is to embed Google Maps into the webpage.
+            The content of the iframe can be to any HTML page (which can be 
+            located either externally or locally on our machine/web server)
+        </p>
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3520.89100668458!2d-82.41207364943331!3d28.05835238256275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2c7c764e4ebc1%3A0xedc5c495b64e7545!2sBusiness%20Administration%20Building%2C%2012212%20USF%20Maple%20Drive%2C%20Tampa%2C%20FL%2033620!5e0!3m2!1sen!2sus!4v1579020910250!5m2!1sen!2sus" 
+            width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="">
+        </iframe>
+
+        <br/><br/><br/>
+
+        <p>
+            Another common use of iframes is to embed videos into a page.
+            Youtube provides excellent support for getting the iframe info
+            regarding any video you wish to embed into your webpage.
+        </p>
+
+        <iframe src="https://www.youtube-nocookie.com/embed/t2ByLmLnYJ8" width="560" height="315" 
+            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    
+        <hr/>
+
+        <p>
+            Using iframes works just fine when we have an externally hosted video. However,
+            if I have my own video content that is located on the web server as this document,
+            then we will use the HTML5 &lt;video&gt; tag to accomplish this.
+        </p>
+
+        <video src="assets/videos/tropic-trees.mp4" width="560" controls loop></video>
+    </main>
+
+</body>
+</html>

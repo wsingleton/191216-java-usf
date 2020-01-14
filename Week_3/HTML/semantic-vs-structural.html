@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>HTML Basics: Semantic vs Structrual Markup</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    
+    <h1>Structural Markup</h1>
+
+    <p>
+        The elements that are used to present the content itself, 
+        with no extra or inferred meaning.
+    </p>
+
+    <!--
+        Structural Markup tags (not all-inclusive)
+        <h#>        headings
+        <p>         paragraphs
+        <b>         bold
+        <i>         italic
+        <sup>       superscript
+        <sub>       subscript
+        <br>        line break
+        <ol>        ordered lists
+        <ul>        unordered lists
+        <li>        list items
+    -->
+
+    <h1>Semantic Markup</h1>
+    <p>
+        Provides extra information about the content enclosed. Such
+        as, where to place emphasis, or if something is being quoted,
+        or the meaning of an acronym.
+    </p>
+
+    <!--
+        Semantic Markup (not all-inclusive)
+            <strong>        used to indicate important content
+            <em>            used to indicate where emphasis should be placed
+            <blockquote>    used for longer quotations (more than a few sentences)
+            <q>             used for shorter quotations
+            <abbr>          used for abbreviations
+            <cite>          used for citations
+            <dfn>           used for the definition of a word
+            <address>       used to contain details about the author of a webpage
+            <del>           typically used with <ins> to indicate deleted text
+            <ins>           typically used with <del> to indicate newly inserted text
+            <s>             strike-through text, used to indicate that content is no longer accurate/relevant, but still displayed
+            <article>       semantic variant of <div> tag
+            <section>       semantic variant of <div> tag
+            <main>          semantic variant of <div> tag
+    -->
+
+    <div>
+        We start with a vision in our heart, and we put it on canvas. 
+        Steve <em>wants</em> reflections, so let's give him reflections.
+        Trees get lonely too, so we'll give him a little friend. There
+        comes a nice little <del>fluffer</del> <ins>cloud</ins>. Only
+        think about&nbsp;one thing at a time. Don't get <strong>greedy</strong>.
+
+        <p>What is <abbr title="Hypertext Markup Language">HTML</abbr>?</p>
+
+        <p>But what about <abbr title="Cascading Stylesheets">CSS</abbr></p>
+    </div>
+
+    <div>
+        <p>
+            From the Academy Award winning movie, <cite>Forrest Gump</cite>,
+            the famous quote from Tom Hanks' character:
+
+            <blockquote>
+                Mama always said, <q>Life is like a box of chocolates.
+                You never know what you're gonna get.</q>
+            </blockquote>
+        </p>
+
+        <address>
+            <p>
+                <a href="mailto:psherman@example.com">Email Me!</a>
+            </p>
+            <p>
+                42 Wallaby Way, Sydney, Australia
+            </p>
+        </address>
+            
+    </div>
+
+</body>
+</html>
