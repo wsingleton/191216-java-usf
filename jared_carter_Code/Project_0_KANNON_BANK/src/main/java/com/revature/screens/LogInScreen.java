@@ -1,12 +1,14 @@
 package com.revature.screens;
 
 import com.revature.pojos.User;
+import com.revature.repo.UserRepo;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class LoginScreen {
-    public static void loginScreen() {
+public class LogInScreen {
+
+    public static void logIn() {
 
         //Creating a new account
         //set user inputs
@@ -25,7 +27,7 @@ public class LoginScreen {
         if (username.equals("") || username.isEmpty()) {
 
             System.out.println("Invalid username.");
-            loginScreen();
+            logIn();
 
         }
 
@@ -36,18 +38,20 @@ public class LoginScreen {
         if (password.equals("") || password.isEmpty()) {
 
             System.out.println("Invalid password.");
-            loginScreen();
+            logIn();
 
         }
-
-        List<User> users = userRepo.retriveAllUsers();
+        UserRepo userRepo = new UserRepo();
+        List<User> users = userRepo.findAllUsers();
 
         for (User u : users) {
 
             if(u.getUsername().equals(username) && u.getPassword().equals(password)) {
-
                 checkUser = true;
-                ExistingUserScreen(u.getId());
+
+                ExistingUserScreen existingUserScreen1 = new ExistingUserScreen();
+
+                existingUserScreen1.existingUserScreen(u.getId());
                 break;
 
             }
@@ -56,7 +60,7 @@ public class LoginScreen {
         if (!checkUser) {
 
             System.out.println("The username or password is invalid, please try again.");
-            loginScreen();
+            logIn();
         }
 
 

@@ -5,6 +5,7 @@ import com.revature.pojos.User;
 import com.revature.repo.BankAccountRepo;
 import com.revature.repo.UserRepo;
 import com.revature.service.Deposit;
+import com.revature.service.Withdraw;
 
 import java.util.Scanner;
 
@@ -37,23 +38,24 @@ public class ExistingUserScreen {
             switch(option) {
 
                 case 1:
-                    Deposit deposit1 = new Deposit();
-                   deposit1.deposit(id);
+
+                   Deposit.deposit(id);
                     break;
                 case 2:
 
-                    withdraw(id);
+                    Withdraw.withdraw(id);
                     break;
                 case 3:
                     System.out.println("Thank you for using Kannon Bank.");
-                    System.exit(0);;
+                    System.exit(0);
                     break;
+
                 default:
                     System.out.println("Not a valid choice");
                     break;
 
             }
 
-        }while(option != 4);
+        }while(option != 3);
     }
 }

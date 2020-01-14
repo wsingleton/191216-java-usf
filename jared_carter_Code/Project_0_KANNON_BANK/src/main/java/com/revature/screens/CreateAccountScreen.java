@@ -60,8 +60,7 @@ public class CreateAccountScreen {
 
             userRepo.saveUser(newUser);
             System.out.println("You have created an account.");
-            AccountTransactionScreen accountTransactionScreen = new AccountTransactionScreen();
-            accountTransactionScreen.accountTransaction(newUser);
+            AccountTransactionScreen.accountTransaction(newUser);
         }
 
     }

@@ -51,9 +51,8 @@ public class AccountTransactionScreen {
             switch (option) {
 
                 case 1:
-                    ExistingUserScreen existingUserScreen1 = new ExistingUserScreen();
 
-                    existingUserScreen1.existingUserScreen(user.getId());
+                    ExistingUserScreen.existingUserScreen(user.getId());
                     break;
                 case 2:
                     accountTransaction(user);
