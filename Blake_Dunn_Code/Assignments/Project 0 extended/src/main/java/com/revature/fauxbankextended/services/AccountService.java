@@ -1,5 +1,6 @@
 package com.revature.fauxbankextended.services;
 
+import com.revature.fauxbankextended.exceptions.ResourceNotFoundException;
 import com.revature.fauxbankextended.models.Account;
 import com.revature.fauxbankextended.models.Transaction;
 import com.revature.fauxbankextended.models.TransactionType;
@@ -11,6 +12,7 @@ import com.revature.fauxbankextended.util.UserSession;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Optional;
 import java.util.Set;
 
 import static com.revature.fauxbankextended.BankDriver.*;
@@ -110,8 +112,91 @@ public class AccountService {
         app().setCurrentSession(new UserSession(user, acct, ConnectionFactory.getInstance().getConnection()));
     }
 
-    public void transferMoney () {
+    public boolean transferMoney () {
 
-        acctRepo.findAccountsById(app().getCurrentSession().getSessionUser().getId());
+        Set<Account> accounts = acctRepo.findAccountsById(app().getCurrentSession().getSessionUser().getId());
+        Account acct1 = new Account();
+        Account acct2 = new Account();
+        System.out.println("Your current accounts:");
+        for(Account a : accounts) {
+            System.out.println(a);
+        }
+
+        System.out.println("Which account do you want to transfer money to?");
+        System.out.print("Enter account number: ");
+        try{
+            String option1 = app().getConsole().readLine();
+            Integer choice1 = Integer.parseInt(option1);
+
+            if (option1 == null || option1.equals("") || option1.matches("^[a-zA-Z]*$")) {
+                System.out.println("Try again!");
+                return false;
+            }
+            Optional<Account> _acct1 = accounts.stream().filter(a -> a.getId().equals(choice1)).findFirst();
+
+            if (_acct1.isPresent()) {
+                acct1 = _acct1.get();
+            }
+            else {
+                throw new ResourceNotFoundException();
+            }
+
+            System.out.println("Enter the account you'd like to transfer from.");
+            System.out.print("> ");
+            String option2 = app().getConsole().readLine();
+
+            if (option2 == null || option2.equals("") || option2.matches("^[a-zA-Z]*$")) {
+                System.out.println("Try again!");
+                return false;
+            }
+            Integer choice2 = Integer.parseInt(option2);
+            Optional<Account> _acct2 = accounts.stream().filter(a -> a.getId().equals(choice2)).findFirst();
+
+            if (_acct2.isPresent()) {
+                acct2 = _acct2.get();
+            }
+            else {
+                throw new ResourceNotFoundException();
+            }
+
+            Double acct1Balance = acct1.getBalance();
+            Double acct2Balance = acct2.getBalance();
+
+            System.out.println("How much would you like to transfer?");
+            System.out.print("> ");
+            String amount = app().getConsole().readLine();
+
+            if (amount == null || amount.equals("") || amount.matches("^[a-zA-Z]*$")) {
+                System.out.println("Try again!");
+                return false;
+            }
+            Double transferAmount = Double.parseDouble(amount);
+
+            if (transferAmount >= acct2.getBalance() || transferAmount < 0) {
+                return false;
+            }
+            Double updatedTransfer = convertAmount(transferAmount);
+
+            acct1Balance += updatedTransfer;
+            acct2Balance -= updatedTransfer;
+
+            acct1.setBalance(acct1Balance);
+            acct2.setBalance(acct2Balance);
+
+            acctRepo.update(acct1);
+            acctRepo.update(acct2);
+
+            Transaction newTransaction = new Transaction(app().getCurrentSession().getSessionUser().getId(),
+                    acct1.getId(), updatedTransfer, TransactionType.TRANSFER);
+            Transaction newTransaction1 = new Transaction(app().getCurrentSession().getSessionUser().getId(),
+                    acct2.getId(), updatedTransfer, TransactionType.TRANSFER);
+            transRepo.save(newTransaction);
+            transRepo.save(newTransaction1);
+
+        }catch(Exception e) {
+            System.err.println("[ERROR] - " + e.getMessage());
+        }
+
+        return true;
     }
 }

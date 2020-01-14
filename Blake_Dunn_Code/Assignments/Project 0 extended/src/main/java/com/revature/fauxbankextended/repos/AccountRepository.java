@@ -48,7 +48,7 @@ public class AccountRepository implements CrudRepository<Account> {
     public Account getAccount(User user, Integer inputId) {
         Set<Account> accounts = findAccountsById(user.getId());
         Account acct = new Account();
-        Optional<Account> _acct = accounts.stream().filter(a -> a.getId().equals(inputId)).findFirst();  //findById(user.getId());
+        Optional<Account> _acct = accounts.stream().filter(a -> a.getId().equals(inputId)).findFirst();
 
         if (_acct.isPresent()) {
             acct = _acct.get();

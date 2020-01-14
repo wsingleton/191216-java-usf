@@ -33,7 +33,7 @@ public class AppState {
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
                 .addScreen(new RegisterScreen(userService))
-                .addScreen(new LoginScreen(userService))
+                .addScreen(new LoginScreen(userService, accountService))
                 .addScreen(new DashboardScreen())
                 .addScreen(new BalanceScreen(accountService))
                 .addScreen(new DepositScreen(accountService))
@@ -42,8 +42,8 @@ public class AppState {
                 .addScreen(new UserProfileScreen())
                 .addScreen(new AddNewAccountScreen(userService))
                 .addScreen(new TransactionHistoryScreen(userService))
-                .addScreen(new TransferMoneyScreen())
-                .addScreen(new SwitchAccountsScreen(userService))
+                .addScreen(new TransferMoneyScreen(accountService))
+                .addScreen(new SwitchAccountsScreen(accountService))
                 .addScreen(new JointAccountScreen(userService));
     }
 
