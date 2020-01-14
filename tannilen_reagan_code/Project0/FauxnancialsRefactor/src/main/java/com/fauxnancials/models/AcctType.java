@@ -23,6 +23,23 @@ public enum AcctType {
         }
         return type;
     }
+    public static int getTypeIDByType(AcctType type) {
+        int i;
+        switch (type) {
+            case CHECKING:
+                i=1;
+                break;
+            case SAVINGS:
+                i=2;
+                break;
+            case CD:
+                i=3;
+                break;
+            default:
+                i=3;
+        }
+        return i;
+    }
 
     @Override
     public String toString() {

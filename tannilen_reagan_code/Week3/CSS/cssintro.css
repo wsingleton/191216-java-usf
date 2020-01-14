@@ -1,0 +1,19 @@
+body {background: slategrey;}
+main {
+    margin: auto; margin-top: 5rem; margin-bottom: 5rem; max-width:70%; border-radius:10rem; border: 3px double darkslategrey;background: lightgrey; padding: 5rem;
+}
+h2 {
+    color: darkslategrey; font-family: 'Nova Cut', cursive; font-weight:bold; letter-spacing: 1em; text-align:center;text-shadow: whitesmoke 2px 2px 2px; margin-bottom:2rem;
+}
+h2:hover {
+    letter-spacing: 1.5em; transition: 2s;
+}
+p {
+    color: dimgrey; font-family: 'Cormorant', sans-serif; text-align: justify; font-size:.9em;
+}
+p > b {
+    color: darkslategrey;
+}
+a { color: slateblue; text-decoration: none;}
+a:hover {color: black; letter-spacing:.2em;transition:1s;}
+a:visited { color:darkslateblue;}

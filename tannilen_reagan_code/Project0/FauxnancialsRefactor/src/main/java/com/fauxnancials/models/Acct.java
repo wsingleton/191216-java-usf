@@ -6,10 +6,20 @@ public class Acct {
     private int acctID;
     private AcctType acctType;
     private double balance;
-    public Acct(int acctID, AcctType acctType, double balance) {
+    private int userID;
+    public Acct(int acctID, AcctType acctType, double balance, int userID) {
         this.acctID = acctID;
         this.acctType = acctType;
         this.balance = balance;
+        this.userID=userID;
+    }
+    public Acct(AcctType acctType, double balance, int userID) {
+        this.acctType=acctType;
+        this.balance=balance;
+        this.userID=userID;
+    }
+    public Acct() {
+        super();
     }
     public int getAcctID() {
         return acctID;
@@ -28,6 +38,13 @@ public class Acct {
     }
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
     @Override
     public boolean equals(Object o) {

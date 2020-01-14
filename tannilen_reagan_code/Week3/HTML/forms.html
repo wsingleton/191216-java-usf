@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML BASICS: Forms</title>
+</head>
+<body>
+    <main>
+        <form action="http://www.example.com" method="GET">
+            <fieldset>
+                <legend>Details</legend>
+                <label>Name: <input type="text" name="username" maxlength="25" required/></label>
+                <br/><br/>
+                <label>E-Mail: <input type="email" name="useremail" size="25" maxlength="100" placeholder="Enter e-mail address" required/></label>
+                <br/><br/> 
+            </fieldset>
+            <fieldset>
+                <legend>Feedback</legend>
+                <p>
+                    <label for="hear-about">How did you hear about us?</label>
+                    <select name="referred" id="hear-about">
+                        <option value="">Please make a selection</option>
+                        <option value="google">Google search</option>
+                        <option value="social media">Social media</option>
+                        <option value="wom">Word of mouth</option>
+                        <option value="other">Other</option>
+                    </select>
+                </p>
+                    <label>
+                        Sign up for our newsletter!
+                        <input type="checkbox" name="subscribe" checked="checked"/>
+                    </label>
+                    <label>
+                        Please provide any additional comments:<br/>
+                        <textarea name="comments" cols="150" rows="25">comments and concerns</textarea>
+                    </label>
+            </fieldset>
+            <br/>
+            <input type="submit" value="Submit Review"/>
+        </form>
+    </main>
+</body>
+</html>
