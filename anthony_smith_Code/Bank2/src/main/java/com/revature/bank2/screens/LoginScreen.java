@@ -1,10 +1,6 @@
 package com.revature.bank2.screens;
 
 
-import com.revature.bank2.util.UserService;
-
-import java.util.Scanner;
-
 public class LoginScreen extends Screen {
 
     private UserService userService;

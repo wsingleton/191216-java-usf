@@ -1,5 +1,6 @@
 package com.revature.bank2.util;
 
+import com.revature.bank2.models.User;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -33,7 +34,7 @@ public class ConnectionFactory {
 
 
 
-    public Connection getConnection(){
+    public Connection getConnection(User sessionUser){
 
         Connection conn = null;
 
