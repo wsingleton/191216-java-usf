@@ -12,7 +12,7 @@ public class HomeScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("Welcome to Revabooks!\n");
+        System.out.println("\n Welcome to MockBank!\n");
         System.out.println("1) Login");
         System.out.println("2) Register");
         System.out.println("3) Exit Application");
@@ -35,7 +35,7 @@ public class HomeScreen extends Screen {
                     appRunning = false;
                     break;
                 default:
-                    System.out.println("[LOG] - Invalid selection!");
+                    System.out.println("[LOG] - INVALID SELECTION! Try again");
             }
 
         } catch (Exception e) {

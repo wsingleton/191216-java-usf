@@ -1,13 +1,15 @@
 /*
 db details for mock BANK application
 */
+SET SERVEROUTPUT ON;
 
 -- TABLE FOR USERS
 CREATE TABLE users(
- user_id NUMBER NOT NULL,
+ user_id NUMBER,
  first_name VARCHAR2(50) NOT NULL,
  last_name VARCHAR2(50) NOT NULL,
  username VARCHAR2(10) UNIQUE NOT NULL,
+ address VARCHAR2(100),
  password VARCHAR2(10) NOT NULL,
  role VARCHAR2(50) DEFAULT 'Customer',
  CONSTRAINT pk_users
@@ -17,6 +19,7 @@ CREATE TABLE users(
 --DROP TABLE users;
 --DROP TABLE accounts;
 --DROP TABLE activities;
+--DROP TABLE users_accounts;
 
 -- TABLE TO HOLD ACCOUNTS
 /*
@@ -27,15 +30,14 @@ accounts table rules
 Account access can be Personal or Shared.
 */
 CREATE TABLE accounts(
-account_id NUMBER NOT NULL,
-account_type VARCHAR2(25) NOT NULL,
-account_access VARCHAR2(25) DEFAULT 'personal',
+account_id NUMBER,
+account_type VARCHAR2(25) DEFAULT 'Checking' NOT NULL,
+account_access VARCHAR2(25) DEFAULT 'Personal',
 date_opened DATE,
 current_balance NUMBER(30,2) DEFAULT 0,
 
 CONSTRAINT pk_accounts
 PRIMARY KEY (account_id)
-
 );
 
 -- TABLE TO RECORD ACCOUNT ACCOUNT HISTORY
@@ -60,11 +62,13 @@ PRIMARY KEY (activity_id),
 
 CONSTRAINT fk_users
 FOREIGN KEY (user_id)
-REFERENCES users (user_id),
+REFERENCES users (user_id)
+ON DELETE CASCADE,
 
 CONSTRAINT fk_accounts_table
 FOREIGN KEY (account_id)
 REFERENCES accounts (account_id)
+ON DELETE CASCADE
 
 );
 
@@ -82,21 +86,121 @@ CREATE TABLE users_accounts(
 user_id NUMBER,
 account_id NUMBER,
 
-CONSTRAINT pk_users_accounts
-PRIMARY KEY (user_id, account_id),
-
 CONSTRAINT fk_users_accounts_users
 FOREIGN KEY (user_id)
-REFERENCES users (user_id),
+REFERENCES users (user_id)
+ON DELETE CASCADE,
 
 CONSTRAINT fk_users_accounts_accounts
 FOREIGN KEY (account_id)
 REFERENCES accounts (account_id)
+ON DELETE CASCADE
 
 );
 
 --COMMIT;
 
---SELECT * FROM users_accounts;
+-- SEQUENCE TO CREATE PRIMARY KEYS
+ --- Seq 1: Sequence to create user ids
+CREATE SEQUENCE userid_factory
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1
+MAXVALUE 999999999999999
+CYCLE;
+/
+
+ --- Seq 2: Sequence to create account ids
+CREATE SEQUENCE accountid_factory
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1
+MAXVALUE 999999999999999
+CYCLE;
+/
+
+ --- Seq 3: Sequence to create activities ids
+CREATE SEQUENCE activityid_factory
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1
+MAXVALUE 999999999999999
+CYCLE;
+/
+
+-- TRIGGERS TO AUTOMATE SEQS WHEN NEW ROWS ARE INSERTED IN TABLES
+    -- Trigger for user ids
+CREATE OR REPLACE TRIGGER create_userid_trig
+BEFORE INSERT
+ON users
+FOR EACH ROW
+
+BEGIN
+    SELECT userid_factory.NEXTVAL
+    INTO: new.user_id
+    FROM dual;
+END;
+/
+    -- Trigger for account ids
+CREATE OR REPLACE TRIGGER create_accountid_trig
+BEFORE INSERT
+ON accounts
+FOR EACH ROW
+
+BEGIN
+    SELECT accountid_factory.NEXTVAL
+    INTO: new.account_id
+    FROM dual;
+END;
+/
+    -- Trigger for activity ids
+CREATE OR REPLACE TRIGGER create_activityid_trig
+BEFORE INSERT
+ON activities
+FOR EACH ROW
+
+BEGIN
+    SELECT activityid_factory.NEXTVAL
+    INTO: new.activity_id
+    FROM dual;
+END;
+/
+
+INSERT INTO activities(activity_id, user_id, account_id, transaction_details, amount)
+VALUES(0, 1, 1, 'Deposit', 100);
+
+-- Removes address column from the table
+ALTER TABLE users
+DROP COLUMN address;
+
+-- Set sysdate as default input for date-opened column in accounts table
+ALTER TABLE accounts
+MODIFY date_opened DATE DEFAULT SYSDATE;
+
+-- Set localtimestamp as default input for activity_date column in activitiess table
+ALTER TABLE activities
+MODIFY activity_date TIMESTAMP DEFAULT LOCALTIMESTAMP;
+
+-- selecting a specific time element form a column that has date as input type
+SELECT EXTRACT(SECOND FROM activity_date) "second" FROM activities ;
+
+COMMIT;
+
+SELECT * FROM accounts;
+
+-- UPDATING BALANCES ON SAVINGS ACCOUNTS AND CALCULATING COMPOUND INTEREST EARNED
+    --
+    --
+    --
+    --
+    
+-- INSERTING PRELIMINARY DATA IN THE USERS_ACCOUNTS TABLE (COMPOSITE KEY TABLE)
+INSERT INTO users_accounts
+VALUES(1, 1);
+INSERT INTO users_accounts
+VALUES(1, 2);  
+
+
+
 
 

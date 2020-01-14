@@ -12,6 +12,12 @@ public class User {
     private String password;
     private Role role;
 
+    // non parameterized constructor for user
+
+
+    public User() {
+        super();
+    }
 
     // constructor to set a user
     public User(Integer id, String firstName, String lastName, String username, String password, Role role) {

@@ -30,14 +30,14 @@ public class AppDriver {
         final UserRepo userRepo = new UserRepo();
         // bank repo and other db models will go here
 
-        final UserService userService = new UserService();
+        final UserService userService = new UserService(userRepo);
         // account services and other models will go here
 
         router = new ScreenRouter();
         // screens will be added from here
         router.addScreen(new HomeScreen())
-                .addScreen(new RegisterScreen()) // add user service as a parameter for register
-                .addScreen(new LoginScreen())
+                .addScreen(new RegisterScreen(userService)) // add user service as a parameter for register
+                .addScreen(new LoginScreen(userService))
                 .addScreen(new DashboardScreen())
                 .addScreen(new UserProfileScreen())
                 .addScreen(new DepositScreen());
@@ -45,14 +45,14 @@ public class AppDriver {
 
     public static void main (String[] args){
 //
-//        while (appRunning) {
-//            router.navigate("/home");
-//        }
-        Connection con = ConnectionFactory.getInstance().getConnection();
-     if(con != null){
-         System.out.println("Connection established! You are good to go");
-     } else{
-         System.out.println("Ni za nduru! ");
-     }
+        while (appRunning) {
+            router.navigate("/home");
+        }
+//        Connection con = ConnectionFactory.getInstance().getConnection();
+//     if(con != null){
+//         System.out.println("Connection established! You are good to go");
+//     } else{
+//         System.out.println("Ni za nduru! ");
+//     }
     }
 }
