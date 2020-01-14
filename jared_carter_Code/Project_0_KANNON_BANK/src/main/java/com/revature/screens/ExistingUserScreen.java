@@ -5,6 +5,7 @@ import com.revature.pojos.User;
 import com.revature.repo.BankAccountRepo;
 import com.revature.repo.UserRepo;
 import com.revature.service.Deposit;
+import com.revature.service.ViewBalance;
 import com.revature.service.Withdraw;
 
 import java.util.Scanner;
@@ -24,7 +25,8 @@ public class ExistingUserScreen {
         System.out.println("Hello " + currentUser.getFirstName() + "your balance is ");
         System.out.println("1. Make a deposit");
         System.out.println("2. Make a withdrawal");
-        System.out.println("3. Sign out");
+        System.out.println("3. View balance");
+        System.out.println("4. Sign out");
 
         do{
             System.out.println("Enter an option");
@@ -45,7 +47,12 @@ public class ExistingUserScreen {
 
                     Withdraw.withdraw(id);
                     break;
+
                 case 3:
+                    ViewBalance.viewBalance(id);
+                    break;
+
+                case 4:
                     System.out.println("Thank you for using Kannon Bank.");
 
                     break;
@@ -56,7 +63,7 @@ public class ExistingUserScreen {
 
             }
 
-        }while(option != 3 );
+        }while(option != 4);
         System.exit(0);
     }
 }
