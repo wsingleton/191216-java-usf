@@ -11,7 +11,7 @@ import java.util.List;
 import com.revature.pojos.User;
 import com.revature.util.ConnectionFactory;
 
-import oracle.jdbc.OracleTypes;
+//import oracle.jdbc.OracleTypes;
 
 public class UserDao implements Dao<User, Integer>{
 
@@ -26,7 +26,7 @@ public class UserDao implements Dao<User, Integer>{
 
             CallableStatement cs = conn.prepareCall(sql);
 
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            //cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.execute();
 
             ResultSet rs = (ResultSet) cs.getObject(1);

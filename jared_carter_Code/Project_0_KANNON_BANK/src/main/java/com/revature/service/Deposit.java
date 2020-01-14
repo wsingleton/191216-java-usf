@@ -1,6 +1,8 @@
 package com.revature.service;
 
 import com.revature.pojos.Accounts_Bank;
+import com.revature.repo.BankAccountRepo;
+import com.revature.screens.SignOutScreen;
 
 import java.util.Scanner;
 
@@ -16,6 +18,7 @@ public class Deposit {
         Scanner scanner = new Scanner(System.in);
 
         //find account associated with id
+        BankAccountRepo bankAccountRepo = new BankAccountRepo();
         temp = bankAccountRepo.findAccountBank(id);
 
         balance = temp.getBalance();
@@ -43,14 +46,15 @@ public class Deposit {
             } else {
 
                 System.out.println("Please deposit amount greater than 0.");
-                SignOut(id);
+                SignOutScreen.signOut(id);
+
 
 
             }
 
 
         }
-        SignOut(id);
+        SignOutScreen.signOut(id);
 
 
 

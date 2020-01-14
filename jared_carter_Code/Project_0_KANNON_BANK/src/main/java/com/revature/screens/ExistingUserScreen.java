@@ -21,7 +21,7 @@ public class ExistingUserScreen {
         BankAccountRepo bankAccountRepo = new BankAccountRepo();
         Accounts_Bank accounts_bank = bankAccountRepo.findAccountBank(currentUser.getId());
 
-        System.out.println("Hello " + currentUser.getFirstName() + ".");
+        System.out.println("Hello " + currentUser.getFirstName() + "your balance is ");
         System.out.println("1. Make a deposit");
         System.out.println("2. Make a withdrawal");
         System.out.println("3. Sign out");
@@ -32,7 +32,7 @@ public class ExistingUserScreen {
                 String dummy = scanner.next();
                 option = Integer.parseInt(dummy);
             } catch (Exception e) {
-                System.out.println("Please select a number: ");
+                System.out.println("Please enter 1, 2 or 3");
             }
 
             switch(option) {
@@ -47,15 +47,16 @@ public class ExistingUserScreen {
                     break;
                 case 3:
                     System.out.println("Thank you for using Kannon Bank.");
-                    System.exit(0);
+
                     break;
 
                 default:
-                    System.out.println("Not a valid choice");
+                   // System.out.println("Please enter 1, 2 or 3");
                     break;
 
             }
 
-        }while(option != 3);
+        }while(option != 3 );
+        System.exit(0);
     }
 }

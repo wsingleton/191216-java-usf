@@ -10,7 +10,7 @@ public class AccountTransactionScreen {
 
     public static void accountTransaction(User user) {
 
-        Double balance;
+        double balance;
         int option = 0;
         int ownerAccount = user.getId();
 
@@ -45,7 +45,7 @@ public class AccountTransactionScreen {
                 option = Integer.parseInt(dummy);
             }
             catch(Exception e){
-                System.out.println("Please select a number: ");
+                System.out.println("Please enter 1, 2 or 3 ");
             }
 
             switch (option) {
@@ -59,17 +59,18 @@ public class AccountTransactionScreen {
                     break;
                 case 3:
                     System.out.println("Thank you for using Kannon Bank.");
-                    System.exit(0);
+
                     break;
 
                 default:
-                    System.out.println("Invalid option.");
-                    accountTransaction(user);
+                    //System.out.println("");
+                    //accountTransaction(user);
                     break;
 
 
             }
 
-        }while(option !=4);
+        } while(option != 3 );
+        System.exit(0);
     }
 }

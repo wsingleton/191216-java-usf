@@ -49,9 +49,9 @@ public class LogInScreen {
             if(u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 checkUser = true;
 
-                ExistingUserScreen existingUserScreen1 = new ExistingUserScreen();
 
-                existingUserScreen1.existingUserScreen(u.getId());
+
+                ExistingUserScreen.existingUserScreen(u.getId());
                 break;
 
             }

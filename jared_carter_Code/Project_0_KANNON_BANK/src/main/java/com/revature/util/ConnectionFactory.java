@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
-    private static ConnectionFactory cf = null;
+    private static ConnectionFactory connFactory = null;
 
     private ConnectionFactory() {
 
@@ -19,8 +19,8 @@ public class ConnectionFactory {
 
     public static synchronized ConnectionFactory getInstance() {
 
-        if(cf == null) cf = new ConnectionFactory();
-        return cf;
+        if(connFactory == null) connFactory = new ConnectionFactory();
+        return connFactory;
 
     }
 

@@ -11,8 +11,6 @@ public class SignOutScreen {
 
         int option = 0;
 
-        boolean valid = false;
-
         System.out.println("1. Complete another transaction");
         System.out.println("2. Sign out");
 
@@ -22,7 +20,8 @@ public class SignOutScreen {
                 String dummy = scanner.next();
                 option = Integer.parseInt(dummy);
             } catch (Exception e) {
-                System.out.println("Please select a number: ");
+                System.out.println("Please enter 1 or 2");
+                System.exit(0);
             }
 
             switch (option) {
@@ -33,14 +32,15 @@ public class SignOutScreen {
 
                 case 2:
                     System.out.println("Thank you for using Kannon Bank.");
-                    System.exit(0);
+
                     break;
                 default:
-                    System.out.println("Not a valid choice");
+                    //System.out.println("Please enter 1, 2");
                     break;
 
             }
-        } while(false);
+        } while(option != 2 );
+        System.exit(0);
 
     }
 }

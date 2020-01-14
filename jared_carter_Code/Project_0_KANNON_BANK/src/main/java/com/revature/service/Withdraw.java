@@ -1,6 +1,8 @@
 package com.revature.service;
 
 import com.revature.pojos.Accounts_Bank;
+import com.revature.repo.BankAccountRepo;
+import com.revature.screens.SignOutScreen;
 
 import java.util.Scanner;
 
@@ -18,6 +20,7 @@ public class Withdraw {
         Scanner scanner = new Scanner(System.in);
 
         //find account associated with id
+        BankAccountRepo bankAccountRepo = new BankAccountRepo();
         temp = bankAccountRepo.findAccountBank(id);
 
         balance = temp.getBalance();
@@ -45,14 +48,14 @@ public class Withdraw {
             } else {
 
                 System.out.println("Sorry, you do not enough to withdraw.");
-                SignOut(id);
+                SignOutScreen.signOut(id);
 
 
             }
 
 
         }
-        SignOut(id);
+        SignOutScreen.signOut(id);
     }
 
 }
