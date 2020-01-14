@@ -191,3 +191,4 @@ END;
 
 COMMIT;
 
+SELECT * FROM rbs_app

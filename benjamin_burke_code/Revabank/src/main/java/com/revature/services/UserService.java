@@ -6,10 +6,13 @@ import com.revature.exceptions.ResourcePersistenceException;
 import com.revature.models.User;
 import com.revature.repos.UserRepository;
 
+import static com.revature.AppDriver.currentUser;
+
 public class UserService {
 
     private UserRepository userRepo;
-    private AccountService accRepo;
+
+
 
     public UserService(UserRepository repo){
         this.userRepo=repo;
@@ -17,15 +20,19 @@ public class UserService {
     }
 
     public void register(User newUser) {
-        if(!isUserValid(newUser)) throw new InvalidRequestException();
 
-        if(userRepo.findUseername(newUser.getUsername().isPresent()){
-            throw  new ResourcePersistenceException("Username is Taken!");
+        if (!isUserValid(newUser)) throw new InvalidRequestException();
+
+        if (userRepo.findUserByUsername(newUser.getUsername()).isPresent()) {
+            throw new ResourcePersistenceException("Username is already in use!");
         }
 
+
         userRepo.save(newUser);
-        currentuser = newUser;
+        currentUser = newUser;
+
     }
+
 
     public void authenticate(String username, String password){
         if (username== null || username.trim().equals("")

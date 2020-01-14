@@ -2,6 +2,7 @@ package com.revature;
 
 import com.revature.models.User;
 import com.revature.repos.UserRepository;
+import com.revature.screens.*;
 import com.revature.services.UserService;
 import com.revature.util.ScreenRouter;
 
@@ -26,6 +27,23 @@ public class AppDriver {
         final UserService userService = new UserService(userRepo);
 
         router = new ScreenRouter();
+        router.addScreen(new HomeScreen())
+                .addScreen(new LoginScreen(userService))
+                .addScreen(new RegisterScreen(userService))
+                .addScreen(new AccountSelectScreen())
+                .addScreen(new CreateChecking())
+                .addScreen(new CreateSaving())
 
+
+                .addScreen(new UserProfileScreen());
+
+    }
+
+    public static void main(String[] args) {
+
+        while (appRunning){
+            router.navigate("/home");
+
+        }
     }
 }

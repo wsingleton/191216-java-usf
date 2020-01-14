@@ -2,6 +2,7 @@ package com.revature.services;
 
 import com.revature.exceptions.InvalidRequestException;
 import com.revature.models.Account;
+import com.revature.models.User;
 import com.revature.repos.AccountRepository;
 
 public class AccountService {
@@ -19,13 +20,13 @@ public class AccountService {
     public void register(Account newAcc, int id){
         if (!isValid(newAcc)) throw new InvalidRequestException();
         AccountRepository acc = new AccountRepository();
-        acc.save(newAcc, id);
+        acc.save2(newAcc, id);
     }
 
     public boolean isValid(Account acc){
         if (acc == null){
             return false;
-        } if (acc.getAccountType() == null || acc.getAccountType().trim("")){
+        } if(acc.getAccountType() == null || acc.getAccountType().trim().equals("")){
             return false;
         }
         return true;
