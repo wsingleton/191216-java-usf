@@ -50,7 +50,7 @@ public class UserService {
         System.out.println("\n\nPlease choose an account.");
 
         try {
-            System.out.println("Enter the account number ");
+            System.out.println("Enter the account number. ");
             System.out.print("> ");
             String choice = app().getConsole().readLine();
             Integer acctNum = Integer.parseInt(choice);

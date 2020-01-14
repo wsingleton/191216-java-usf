@@ -18,7 +18,7 @@ public class JointAccountScreen extends Screen {
 
         System.out.println("Who would you like to add to your " + app().getCurrentSession().getSessionAccount().getAccountType() +
                 " account?");
-        System.out.println("Enter the username for new addition. ");
+        System.out.println("Enter the username of new user. ");
 
         try {
             System.out.print("> ");
