@@ -16,5 +16,8 @@ public class AccountsMenu extends Menu {
     public void render() {
         System.out.println(ANSI_BLUE + "Accounts belonging to " + AppDriver.currentUser.getGivenName() + " " + AppDriver.currentUser.getFamilyName() + ":" + ANSI_RESET);
         acctService.showBals();
+        System.out.println("");
+        System.out.println("Returning to dashboard...");
+        AppDriver.router.navigate("/dashboard");
     }
 }
