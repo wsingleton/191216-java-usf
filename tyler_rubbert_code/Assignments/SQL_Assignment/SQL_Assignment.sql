@@ -218,4 +218,94 @@ END;
 /
 
 -- 4.0 Create a stored procedure that selects the first and last names of all the employees.
+CREATE OR REPLACE PROCEDURE get_employees(my_cursor OUT SYS_REFCURSOR)
+IS 
+BEGIN
+    OPEN my_cursor FOR
+    SELECT firstname, lastname
+    FROM employee
+    ORDER BY lastname;
+END;
+/
 
+DECLARE 
+    v_cursor    SYS_REFCURSOR;
+    v_fn        employee.firstname%TYPE;
+    v_ln        employee.lastname%TYPE;
+BEGIN
+    get_employees(v_cursor);
+    LOOP
+        FETCH v_cursor 
+        INTO v_fn, v_ln;
+        EXIT WHEN v_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(v_ln || ', ' || v_fn);
+    END LOOP;
+    CLOSE v_cursor;
+END;
+/
+
+-- 4.2  Create a stored procedure that updates the personal information of an employee.
+CREATE OR REPLACE PROCEDURE update_employee(f_name IN VARCHAR2, l_name IN VARCHAR2, new_firstname IN VARCHAR2, new_lastname IN VARCHAR2)
+IS
+BEGIN
+    UPDATE employee
+    SET firstname = new_firstname, lastname = new_lastname 
+    WHERE firstname = f_name AND lastname = l_name;
+END;
+/
+
+BEGIN
+    update_employee('Joe', 'Dirt', 'Joseph', 'Dirty');
+END;
+/
+
+-- 4.2 Create a stored procedure that returns the managers of an employee
+
+
+-- 4.3 Create a stored procedure that returns the name and company of a customer.
+
+-- 5.0 Create a transaction that given a invoiceId will delete that invoice
+
+
+-- 5.0 Create a transaction nested within a stored procedure that inserts a new record in the Customer table
+
+-- 6.1 Create an after insert trigger on the employee table fired after a new record is inserted into the table
+
+-- 6.1 Create an after update trigger on the album table that fires after a row is updated in the table
+
+-- 6.1 Create an after delete trigger on the customer table that fires after a row is deleted from the table
+
+-- 6.2 Create a before trigger that restricts the deletion of any invoice that is priced over 50 dollars
+
+-- 7.1 Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId
+SELECT firstname, lastname, invoiceid
+FROM customer
+JOIN invoice
+USING(customerid);
+
+-- 7.2 Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, last name, invoiceId, and total
+SELECT firstname, lastname, customerid, invoiceid, total
+FROM customer
+FULL OUTER JOIN invoice
+USING(customerid);
+
+-- 7.3 Create a right join that joins album and artist specifying artist name and title
+SELECT title, name
+FROM artist
+RIGHT JOIN album
+USING(artistid);
+
+-- 7.4 Create a cross join that joins album and artist and sorts by artist name in ascending order
+SELECT title, name
+FROM artist
+CROSS JOIN album
+ORDER BY name ASC;
+
+-- 7.5 Perform a self-join on the employee table, joining on the reports to column
+SELECT *
+FROM employee
+SELF JOIN employee
+USING(reportsto);
+
+-- 8.1 Create an index on of table of your choice
+CREATE INDEX artist_index ON artist(name);
