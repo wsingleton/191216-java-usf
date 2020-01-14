@@ -63,7 +63,7 @@ CREATE TABLE transactions (
     acct_id             NUMBER(5),
     trans_type_id       NUMBER(10),
     amount              NUMBER(10,2),
-    trans_date          TIMESTAMP,
+    trans_date          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
     CONSTRAINT pk_transactions
     PRIMARY KEY (trans_id),
@@ -76,6 +76,7 @@ CREATE TABLE transactions (
     FOREIGN KEY (trans_type_id)
     REFERENCES transaction_types (trans_type_id)
 );
+DROP TABLE transactions;
 
 CREATE SEQUENCE account_types_pk_seq
 MINVALUE 1
@@ -208,3 +209,38 @@ INSERT INTO users_accounts VALUES (7,7);
 INSERT INTO users_accounts VALUES (8,8);
 
 COMMIT;
+
+CREATE OR REPLACE PROCEDURE update_acct (bal IN accounts.balance%TYPE, a_id IN accounts.acct_id%TYPE)
+IS
+BEGIN
+    UPDATE accounts
+    SET balance = bal
+    WHERE acct_id = a_id;
+
+    COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE add_trans (tr_id IN transactions.trans_id%type, u_id IN transactions.user_id%TYPE, a_id IN transactions.acct_id%TYPE, 
+    t_id IN transactions.trans_type_id%TYPE, amount IN transactions.amount%TYPE)
+IS
+BEGIN
+    INSERT INTO transactions (trans_id, user_id, acct_id,trans_type_id, amount)
+    VALUES (tr_id, u_id, a_id, t_id, amount);
+    
+    COMMIT;
+END;
+/
+
+CALL add_trans (1,1,1,1,500);
+
+CREATE OR REPLACE PROCEDURE get_transaction_history (u_id IN transactions.user_id%TYPE, a_id IN transactions.acct_id%TYPE)
+IS
+t_list transactions%rowtype;
+BEGIN
+    SELECT user_id, acct_id, trans_type_id, amount, TO_CHAR(trans_date, 'DD/MM/YY HH:MM:SS')
+    FROM transactions
+    WHERE user_id = u_id AND acct_id = a_id;
+END;
+/
+drop procedure get_transaction_history;
