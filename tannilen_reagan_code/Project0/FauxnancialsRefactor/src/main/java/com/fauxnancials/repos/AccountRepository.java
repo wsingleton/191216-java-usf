@@ -14,10 +14,10 @@ public class AccountRepository implements CrudRepository<Acct> {
         Set<Acct> accts = new HashSet<>();
 
         try (Connection conn=ConnectionFactory.getInstance().getConnection()) {
-            String sql = "SELECT * FROM fauxnancials_admin.accounts WHERE user_id=?";
+            String sql = "SELECT * FROM fauxnancials_admin.accounts WHERE user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,id);
-            ResultSet rs = pstmt.executeQuery(sql);
+            ResultSet rs = pstmt.executeQuery();
             accts = mapResultSet(rs);
         } catch (SQLException e) {
             e.printStackTrace();
