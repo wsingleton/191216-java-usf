@@ -1,4 +1,4 @@
 package com.revature.screens;
 
-public class CustomerSelection {
+public class CustomerSelection extends Screen {
 }

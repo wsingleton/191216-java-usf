@@ -30,7 +30,7 @@ public class AppDriver {
                 .addScreen(new RegisterScreen(userService))
                 .addScreen(new CustomerSelection())
                 .addScreen(new DepositScreen())
-                .addScreen(new WithdrawScreen())
+                .addScreen(new WithdrawScreen());
     }
 
     public static void main(String[] args) {
