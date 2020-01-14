@@ -1,12 +1,17 @@
 package com.revature.fauxbankextended.services;
 
+import com.revature.fauxbankextended.models.Account;
 import com.revature.fauxbankextended.models.Transaction;
 import com.revature.fauxbankextended.models.TransactionType;
+import com.revature.fauxbankextended.models.User;
 import com.revature.fauxbankextended.repos.AccountRepository;
 import com.revature.fauxbankextended.repos.TransactionRepository;
+import com.revature.fauxbankextended.util.ConnectionFactory;
+import com.revature.fauxbankextended.util.UserSession;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Set;
 
 import static com.revature.fauxbankextended.BankDriver.*;
 
@@ -81,5 +86,32 @@ public class AccountService {
         BigDecimal bigDecimal = BigDecimal.valueOf(amount);
         return bigDecimal.setScale(2, RoundingMode.DOWN).doubleValue();
 
+    }
+
+    public void chooseAccount(User user) {
+        Set<Account> accounts= acctRepo.findAccountsById(user.getId());
+        Account acct = new Account();
+        System.out.println("Your current accounts:");
+        for(Account a : accounts) {
+            System.out.println(a);
+        }
+        System.out.println("\n\nPlease choose an account.");
+
+        try {
+            System.out.println("Enter the account number. ");
+            System.out.print("> ");
+            String choice = app().getConsole().readLine();
+            Integer acctNum = Integer.parseInt(choice);
+            acct = acctRepo.getAccount(user, acctNum);
+        }catch(Exception e) {
+            System.err.println("[ERROR] - " + e.getMessage());
+        }
+
+        app().setCurrentSession(new UserSession(user, acct, ConnectionFactory.getInstance().getConnection()));
+    }
+
+    public void transferMoney () {
+
+        acctRepo.findAccountsById(app().getCurrentSession().getSessionUser().getId());
     }
 }

@@ -3,6 +3,7 @@ package com.revature.fauxbankextended.screens;
 import com.revature.fauxbankextended.exceptions.AuthenticationException;
 import com.revature.fauxbankextended.exceptions.InvalidRequestException;
 import com.revature.fauxbankextended.models.User;
+import com.revature.fauxbankextended.services.AccountService;
 import com.revature.fauxbankextended.services.UserService;
 
 import static com.revature.fauxbankextended.BankDriver.*;
@@ -10,10 +11,12 @@ import static com.revature.fauxbankextended.BankDriver.*;
 public class LoginScreen extends Screen {
 
     private UserService userService;
+    private AccountService accountService;
 
-    public LoginScreen(UserService userService) {
+    public LoginScreen(UserService userService, AccountService accountService) {
         super("LoginScreen", "/login");
         this.userService = userService;
+        this.accountService = accountService;
     }
 
     @Override
@@ -23,8 +26,7 @@ public class LoginScreen extends Screen {
         String password;
 
         try {
-
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n");
             System.out.println("Please provide your login credentials");
             System.out.print("Username: ");
             username = app().getConsole().readLine();
@@ -32,7 +34,7 @@ public class LoginScreen extends Screen {
             password = app().getConsole().readLine();
 
             User user = userService.authenticate(username, password);
-            userService.chooseAccount(user);
+            accountService.chooseAccount(user);
 
             if (app().isSessionValid()) {
                 System.out.println("[LOG - Login successful, navigating to dashboard...");
@@ -47,6 +49,5 @@ public class LoginScreen extends Screen {
             System.out.println("[LOG] - Shutting down application");
             app().setAppRunning(false);
         }
-
     }
 }

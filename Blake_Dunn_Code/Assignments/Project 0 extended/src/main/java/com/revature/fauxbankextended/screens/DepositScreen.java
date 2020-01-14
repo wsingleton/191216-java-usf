@@ -18,7 +18,7 @@ public class DepositScreen extends Screen {
 
         Double balance = app().getCurrentSession().getSessionAccount().getBalance();
 
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n");
         System.out.println("Your Account Balance: $" + balance);
         System.out.println("How much would you like to deposit? (Must be less than 10000)");
         System.out.print("> ");

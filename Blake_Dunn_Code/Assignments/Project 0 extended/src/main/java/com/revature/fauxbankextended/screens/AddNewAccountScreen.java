@@ -21,7 +21,7 @@ public class AddNewAccountScreen extends Screen {
         System.out.println("2) Savings");
 
         try {
-            System.out.print(">");
+            System.out.print("> ");
             String choice = app().getConsole().readLine();
             userService.setNewAccount(app().getCurrentSession().getSessionUser(), choice);
 

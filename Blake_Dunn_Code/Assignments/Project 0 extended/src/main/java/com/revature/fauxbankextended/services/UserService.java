@@ -38,30 +38,8 @@ public class UserService {
 
         User user = userRepo.getUser(username, password);
         return user;
-}
-
-    public void chooseAccount(User user) {
-        Set<Account> accounts= acctRepo.findAccountsById(user.getId());
-        Account acct = new Account();
-        System.out.println("Your current accounts:");
-        for(Account a : accounts) {
-            System.out.println(a);
-        }
-        System.out.println("\n\nPlease choose an account.");
-
-        try {
-            System.out.println("Enter the account number. ");
-            System.out.print("> ");
-            String choice = app().getConsole().readLine();
-            Integer acctNum = Integer.parseInt(choice);
-            acct = acctRepo.getAccount(user, acctNum);
-        }catch(Exception e) {
-            System.err.println("[ERROR] - " + e.getMessage());
-        }
-
-        app().setCurrentSession(new UserSession(user, acct, ConnectionFactory.getInstance().getConnection()));
-
     }
+
 
     public User register(User user) {
 
@@ -140,11 +118,8 @@ public class UserService {
         Set<Transaction> history = transRepo.getCurrentAccountTransactionsHistory();
 
         for(Transaction t : history) {
-            System.out.print("User ID: " + t.getAcctId());
-            System.out.print("  Account ID: " + t.getAcctId());
-            System.out.print("  Transaction: " + t.getType());
-            System.out.print("  Transaction Amount: " + t.getAmount());
-            System.out.print("  Transaction Date: " + t.getDate());
+            System.out.println("   "+t.getAcctId() + "          " + t.getAcctId() +
+                    "          " + t.getType() + "          " + t.getAmount() + "          " + t.getDate());
         }
     }
 }

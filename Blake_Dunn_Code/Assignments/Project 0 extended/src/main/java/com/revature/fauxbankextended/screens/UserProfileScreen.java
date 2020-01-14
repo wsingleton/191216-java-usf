@@ -11,12 +11,12 @@ public class UserProfileScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("Welcome " + app().getCurrentSession().getSessionUser().getFirstName() + " to the your profile screen.\n\n");
+        System.out.println("Welcome " + app().getCurrentSession().getSessionUser().getFirstName() + ", to the your profile screen.\n\n");
         System.out.println("+----------  Menu  ----------+ \n");
 
         System.out.println("1) Transaction History");
         System.out.println("2) Create a New Account");
-        System.out.println("3) Create User to Current Account");
+        System.out.println("3) Add Another User to This Account");
         System.out.println("4) Switch Accounts");
         System.out.println("5) Dashboard");
         System.out.println("6) Sign out");
@@ -39,8 +39,7 @@ public class UserProfileScreen extends Screen {
                     app().getRouter().navigate("/joint");
                     break;
                 case "4":
-                    System.out.println("Under Construction");
-                    //app().getRouter().navigate("/switch");
+                    app().getRouter().navigate("/switch");
                     break;
                 case "5":
                     app().getRouter().navigate("/dashboard");

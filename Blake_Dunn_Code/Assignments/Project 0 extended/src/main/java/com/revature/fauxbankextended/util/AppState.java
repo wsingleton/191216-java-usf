@@ -43,7 +43,7 @@ public class AppState {
                 .addScreen(new AddNewAccountScreen(userService))
                 .addScreen(new TransactionHistoryScreen(userService))
                 .addScreen(new TransferMoneyScreen())
-                .addScreen(new SwitchAccountsScreen())
+                .addScreen(new SwitchAccountsScreen(userService))
                 .addScreen(new JointAccountScreen(userService));
     }
 

@@ -26,7 +26,7 @@ public class AccountRepository implements CrudRepository<Account> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT a.acct_id, a.balance " +
+            String sql = "SELECT a.acct_id, a.balance, a.type_id " +
                     "FROM accounts a " +
                     "JOIN users_accounts b " +
                     "ON a.acct_id = b.acct_id " +

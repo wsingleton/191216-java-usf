@@ -16,7 +16,7 @@ public class TransactionHistoryScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.print("User ID          Account ID          Transaction          Transaction Amount          Transaction Date");
+        System.out.print("   User ID          Account ID          Transaction          Transaction Amount          Transaction Date");
         userService.viewCurrentAcctTransactionHistory();
 
         app().getRouter().navigate("/transition");
