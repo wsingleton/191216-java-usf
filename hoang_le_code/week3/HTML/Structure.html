@@ -1,0 +1,93 @@
+<!--
+    the doctype directive shoulf be the very first non comment line declare within our HTML. documents (even before the <html> tag)
+
+    it is not technically a tag , but a directive , or an instruction to web browser about what version of html the page is written in 
+
+-->
+<!doctype html>
+<html>
+    <head>
+            <!--
+                <head>
+                    contrains information about the page, rather than the content shown (aka metadata). we can inclide some information such as 
+                    <stype>     : use to apply internal css styling to the webpage
+                    <link>      : use for linking external resourves to this document (external css)
+                    <scrip>     : use to include JS , which can mank e our webpage more dynamuc/ interactive
+                    <meta>      : use to provide search engine rebot extra info about our page (SEO)
+                    <title>     : provide a tittle for the webpage , which appears in the tab 
+
+            -->
+            <title> HTML Basic: Structure </title>
+    </head>
+    <body>
+        <!--
+            <body> 
+                contrains information/content that will displayed to the user , when rendered by the web brower 
+
+        -->
+
+        <!--
+            HTML tags/elements
+
+            use to indicate how content should be displayed . usaually will require an opening and closing tag. 
+            those that do not require closing tags are know as "self-closing" tags . 
+
+                <P>     : paragtaph
+                <h1>    : heading tags (RAnge from 1-6; 1 being the largest)
+                <div>   : division/devider : used to group related element together 
+                <img>   : image (self-closing)
+                <a>     : anchor/huperlink , used to create links to other pages, or to sections within the current page 
+                <br>    : line break (self-closing)
+                <hr>    : horizontal rule (self-closing)
+                <form>  : similar to <div> , but will encapsulate form elements/members
+                <input> : create a filed for user input of some sort ( text, checkboc, radiobutton, etc) , self closing
+
+        Attributes
+                    HTML slements can have attribute , which provide additional informationbaout the contrents of an element, they appear within 
+                    the opening tags of an ATML element , and are made of two part : a name.key . and a value . the name and the value are separated 
+                    by an equals sign (=) and ....   of the attribute is encapsulation within double qutes("") 
+
+        -->
+
+        <h1>This is the main heading</h1>
+        <p>
+
+            this text might be used to introduce the rest of the page, if the page is long enough. 
+
+
+
+
+            we can make use of subheading to further
+            organnize our web page's content.
+        </p>
+        <h2>
+
+            this is subheading 
+        </h2>
+        <p>
+            more content could go here if had any...  
+        </p>
+        <h3>
+            this is even smaller than the other headings... maybe to create nested content 
+        </h3>
+        <p>
+            4 &gt; 5 
+        </p>
+        <p>
+            sanford & son 
+        </p>
+        <p>
+            here is some text . &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; heris nonbreaking space 
+        </p>
+        <!--
+            Excape characters/code 
+            there are some characters that are ised on and reserved by HTML . If we wish to use them in our content, we will need to use their escape code equivalents : 
+            < - less- then - &lt; &#60
+            > - greater than - &gt; &#61
+            & - AMpersand - &amp; 
+            "" - quotation - &quot
+                - single space - &nbsp
+        -->
+
+    </body>
+</html>

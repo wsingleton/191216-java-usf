@@ -24,7 +24,7 @@ public class LoginScreen extends Screen {
 
         try {
 
-            System.out.println("\n\n\n\n\n\n\n\n\n+-----------------------+\n");
+            System.out.println("\n+-----------------------+\n");
             System.out.println("Please provide your login credentials");
             System.out.print("Username: ");
             username = console.readLine();
@@ -34,17 +34,17 @@ public class LoginScreen extends Screen {
             userService.authenticate(username, password);
 
             if (currentUser != null) {
-                System.out.println("[LOG] - Login successful");
+                System.out.println("Login successful");
                 router.navigate("/UserProfileScreen");
             }
 
         } catch (InvalidRequestException | AuthenticationException e) {
 
-            System.out.println("[LOG] - Invalid login credentials provided!");
+            System.out.println("Invalid login credentials provided!");
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("[ERROR] - An unexpected exception occurred");
-            System.out.println("[LOG] - Shutting down application");
+            System.err.println("An unexpected exception occurred");
+            System.out.println("Shutting down application");
             appRunning = false;
         }
 
