@@ -352,7 +352,7 @@ SELECT c.firstname, c.lastname, i.invoiceid FROM customer c JOIN invoice i USING
 
 --7.2 OUTER
 --Task – Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, last name, invoiceId, and total.
---SELECT c.customerid, c.firstname, c.lastname, i.invoiceid, i.total FROM customer c OUTER JOIN invoice i USING (customerid);
+SELECT c.customerid, c.firstname, c.lastname, i.invoiceid, i.total FROM customer c OUTER JOIN invoice i USING (customerid);
 
 --7.3 RIGHT
 --Task – Create a right join that joins album and artist specifying artist name and title.
@@ -360,7 +360,7 @@ SELECT artist.name, album.title FROM artist RIGHT JOIN album USING (artistid);
 
 --7.4 CROSS
 --Task – Create a cross join that joins album and artist and sorts by artist name in ascending order.
---SELECT artist.name, album.title FROM artist CROSS JOIN album USING (artistid) ORDER BY artist.name;
+SELECT artist.name, album.title FROM artist CROSS JOIN album USING (artistid) ORDER BY artist.name;
 
 --7.5 SELF
 --Task – Perform a self-join on the employee table, joining on the reports to column.
@@ -369,5 +369,5 @@ SELECT e.firstname, e.lastname, e.reportsto, em.firstname, em.lastname FROM empl
 --8.0 INDEXes
 --8.1 INDEXes
 --Task – Create an index on of table of your choice
---CREATE UNIQUE INDEX emp_unique_index ON employee(employeeid)
---    TABLESPACE 
+CREATE UNIQUE INDEX emp_unique_index ON employee(employeeid)
+    TABLESPACE users;
