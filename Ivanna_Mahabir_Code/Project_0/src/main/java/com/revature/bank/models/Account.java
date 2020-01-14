@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class Account {
     private Integer acctId;
-    private Double deposit;
+    private Double balance;
 
     public Account(){
         super();
     }
 
-    public Account(Integer acctId, Double deposit) {
+    public Account(Integer acctId, Double balance) {
         this.acctId = acctId;
-        this.deposit = deposit;
+        this.balance = balance;
     }
 
     public Integer getAcctId() {
@@ -23,12 +23,12 @@ public class Account {
         this.acctId = acctId;
     }
 
-    public Double getDeposit() {
-        return deposit;
+    public Double getBalance() {
+        return balance;
     }
 
-    public void setDeposit(Double deposit) {
-        this.deposit = deposit;
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 
     @Override
@@ -37,19 +37,19 @@ public class Account {
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
         return Objects.equals(acctId, account.acctId) &&
-                Objects.equals(deposit, account.deposit);
+                Objects.equals(balance, account.balance);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(acctId, deposit);
+        return Objects.hash(acctId, balance);
     }
 
     @Override
     public String toString() {
         return "Account{" +
                 "acctId=" + acctId +
-                ", deposit=" + deposit +
+                ", deposit=" + balance +
                 '}';
     }
 }

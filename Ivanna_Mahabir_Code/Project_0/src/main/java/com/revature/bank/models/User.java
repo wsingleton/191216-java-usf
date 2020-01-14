@@ -13,7 +13,9 @@ public class User {
         super();
     }
 
-    public User(String usrName, String passWord) {
+    public User(String firstName, String lastName, String usrName, String passWord) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.usrName = usrName;
         this.passWord = passWord;
     }
