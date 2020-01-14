@@ -1,4 +1,4 @@
-package com.revature.exceptions;
+package com.revature.exceptcions;
 
 public class ResourcePersistenceException extends RuntimeException {
     public ResourcePersistenceException(){
