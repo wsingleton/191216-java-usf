@@ -1,0 +1,222 @@
+---------------2.1-------------------
+
+SELECT * FROM EMPLOYEE;
+
+SELECT * FROM EMPLOYEE WHERE LASTNAME = 'King';
+
+SELECT * FROM EMPLOYEE WHERE FIRSTNAME ='Andrew' AND REPORTSTO IS NULL;
+
+---------------2.2-------------------
+
+SELECT * FROM ALBUM ORDER BY TITLE DESC;
+
+SELECT FIRSTNAME FROM CUSTOMER ORDER BY FIRSTNAME;
+
+---------------2.3-------------------
+
+INSERT INTO GENRE (GENREID, NAME) VALUES (26, 'KPOP');
+INSERT INTO GENRE (GENREID, NAME) VALUES (27,'GOSPEL');
+
+INSERT INTO EMPLOYEE(EMPLOYEEID, LASTNAME, FIRSTNAME, TITLE, REPORTSTO, BIRTHDATE, HIREDATE, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL)
+VALUES(87,'Marsh', 'Randy', 'Sales Support Agent', 2, '23-OCT-67', '15-AUG-04',
+    '5432 This ST', 'Edmonton', 'AB', 'Canada', 'T5K 2L2', '+1 (780) 428-1234', '+1 (780) 428-9876', 'randy@chinookcorp.com');
+INSERT INTO EMPLOYEE(EMPLOYEEID, LASTNAME, FIRSTNAME, TITLE, REPORTSTO, BIRTHDATE, HIREDATE, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL)
+VALUES(24,'Jack', 'Stevens', 'Secret Agent', 2, '21-OCT-67', '15-NOV-04',
+    '5432 Piss ST', 'Edmonton', 'AB', 'USA', 'M5K 2B2', '+1 (718) 428-1234', '+1 (917) 428-2346', 'unreachable@chinookcorp.com');
+ 
+INSERT INTO CUSTOMER(CUSTOMERID, FIRSTNAME, LASTNAME, COMPANY, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL, SUPPORTREPID)
+VALUES(60, 'Jackson', 'Action', 'Revature', '45 Forest Hills Drive', 'LaVile', 'NC', 'USA', '23975', '1(940) 438-3820', '1(940) 438-3821', 'actionj@revature.com', 3);
+INSERT INTO CUSTOMER(CUSTOMERID, FIRSTNAME, LASTNAME, COMPANY, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL, SUPPORTREPID)
+VALUES(61, 'Little', 'Action', 'Revature', '45 Forest Hills-Rego Park', 'Smallville', 'NJ', 'USA', '24575', '1(940) 548-3820', '1(940) 648-3821', 'actionj@revature.com', 3);
+
+---------------2.4-------------------
+
+UPDATE CUSTOMER SET FIRSTNAME = 'Robert'
+WHERE CUSTOMERID = 32;
+UPDATE CUSTOMER SET LASTNAME = 'Walker'
+WHERE CUSTOMERID = 32;
+
+UPDATE ARTIST SET NAME = 'CCR'
+WHERE NAME = 'Creedence Clearwater Revival';
+
+---------------2.5-------------------
+
+SELECT * FROM INVOICE WHERE BILLINGADDRESS LIKE 'T%';
+
+---------------2.6-------------------
+
+SELECT * FROM INVOICE WHERE TOTAL BETWEEN 15 AND 50;
+
+SELECT * FROM EMPLOYEE WHERE HIREDATE BETWEEN DATE '2003-06-01' AND DATE '2004-03-01';
+
+---------------2.7-------------------
+
+ALTER TABLE INVOICE DROP CONSTRAINTS FK_INVOICECUSTOMERID;
+
+DELETE FROM CUSTOMER WHERE FIRSTNAME = 'Robert' AND LASTNAME = 'Walter';
+
+---------------3.1-------------------
+
+CREATE OR REPLACE FUNCTION timenow
+	RETURN CURRENT_TIME AS thetimenow CURRENT_TIME;
+
+BEGIN
+	SELECT SYSTIMESTAMP INTO thetimenow FROM DUAL
+	RETURN THETIMENOW;
+END;
+/
+
+CREATE OR REPLACE FUNCTION medialen(id NUMBER)
+	RETURN NUMBER AS thelen NUMBER;
+
+BEGIN
+	SELECT NAME FROM MEDIATYPE INTO thelen WHERE MEDIATYPEID = id;
+	RETURN THELEN;
+END;
+/
+
+---------------3.2-------------------
+
+CREATE OR REPLACE FUNCTION invoiceavg
+	RETURN NUMBER AS inavg NUMBER;
+
+BEGIN
+	SELECT AVG TOTAL FROM INVOICE INTO inavg
+	RETURN INAVG;
+END;
+/
+
+
+CREATE OR REPLACE FUNCTION mostpricey
+	RETURN NUMBER AS bigcost NUMBER;
+
+BEGIN
+	SELECT MAX UNITPRICE FROM TRACK INTO bigcost
+	RETURN BIGCOST;
+END;
+/
+
+---------------3.3-------------------
+
+CREATE OR REPLACE FUNCTION new_avg
+    RETURN NUMBER
+    AS avgprice NUMBER;
+
+
+
+BEGIN
+    SELECT AVG UNITPRICE
+    INTO avgprice
+    FROM INVOICELINE
+    RETURN avgprice;
+END;
+/
+
+---------------3.4-------------------
+
+CREATE OR REPLACE FUNCTION after_1968
+    RETURN SYS_REFCURSOR
+    IS my_cursor SYS_REFCURSOR;
+
+BEGIN
+    OPEN my_cursor FOR
+    SELECT firstname, lastname, birthdate
+    FROM employee
+    WHERE birthdate BETWEEN DATE'1968-12-31' AND DATE'2019-12-31';
+    RETURN my_cursor;
+END;
+/
+
+---------------4.1-------------------
+
+CREATE OR REPLACE PROCEDURE get_name(new_cursor SYS_REFCURSOR)
+BEGIN
+	OPEN new_cursor FOR
+	SELECT FIRSTNAME, LASTNAME FROM EMPLOYEE 
+	ORDER BY FIRSTNAME;
+END;
+/
+
+---------------4.2-------------------
+
+CREATE OR REPLACE PROCEDURE update_personal(
+fn IN FIRSTNAME%TYPE, new_fn FIRSTNAME%TYPE)
+
+BEGIN
+	UPDATE EMPLOYEE SET FIRSTNAME = new_fn
+	WHERE fn = FIRSTNAME;
+END;
+/
+
+---------------4.3-------------------
+
+CREATE OR REPLACE PROCEDURE managers (new_cursor SYS_REFCURSOR)
+BEGIN
+	OPEN new_cursor FOR
+	SELECT FIRSTNAME, LASTNAME, REPORTSTO FROM EMPLOYEE 
+	ORDER BY FIRSTNAME;
+END;
+/
+
+---------------6.1-------------------
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE TRIGGER e_insert AFTER INSERT ON EMPLOYEE
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('a new employee has been inserted');
+END;
+/
+------------------------------------
+
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE TRIGGER a_update AFTER INSERT ON ALBUM
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('The album has been updated');
+END;
+/
+
+-------------------------------------
+
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE TRIGGER c_delete AFTER DELETE ON CUSTOMER
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('The customer has been deleted');
+END;
+/
+---------------6.2-------------------
+CREATE OR REPLACE TRIGGER cannot_delete BEFORE DELETE ON INVOICE FOR EACH ROW
+
+BEGIN
+	IF(INVOICE.TOTAL > 20)
+	THEN RAISE_APPLICATION_ERROR(-20000, 'cannot delete total over $20');
+END;
+/
+---------------7.1-------------------
+
+SELECT FIRSTNAME, LASTNAME, INVOICEID FROM CUSTOMER, INVOICE
+WHERE CUSTOMER.CUSTOMERID = INVOICE.INVOICEID;
+
+---------------7.2-------------------
+
+SELECT FIRSTNAME, LASTNAME, TOTAL, INVOICEID FROM CUSTOMER, INVOICE
+WHERE CUSTOMER.CUSTOMERID = INVOICE.INVOICEID;
+
+---------------7.3-------------------
+
+SELECT NAME, ALBUM.TITLE FROM ARTIST
+RIGHT OUTER JOIN ALBUM ON ALBUM.ALBUMID = ARTIST.ARTISTID ORDER BY NAME;
+
+---------------7.4-------------------
+
+SELECT * FROM ARTIST
+CROSS JOIN ALBUM ORDER BY NAME;
+
+---------------7.5-------------------
+
+SELECT * FROM EMPLOYEE e2 INNER JOIN EMPLOYEE ON e2.REPORTSTO = EMPLOYEE.REPORTSTO;
+
+---------------8.0-------------------
+
+CREATE INDEX my_index ON EMPLOYEE.LASTNAME;
