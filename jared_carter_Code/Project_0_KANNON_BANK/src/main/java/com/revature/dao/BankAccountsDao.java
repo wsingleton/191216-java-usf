@@ -126,7 +126,7 @@ public class BankAccountsDao implements Dao<Accounts_Bank, Integer> {
 
             conn.setAutoCommit(false);
 
-            String sql = "UPDATE ACCOUNTS_BANK SET ACCOUNT_BALANCE = ? WHERE  OWNER_ACCOUNT = ?";
+            String sql = "UPDATE ACCOUNTS_BANK SET ACCOUNT_BALANCE = ? WHERE OWNER_ACCOUNT = ?";
 
 
             PreparedStatement ps = conn.prepareStatement(sql);

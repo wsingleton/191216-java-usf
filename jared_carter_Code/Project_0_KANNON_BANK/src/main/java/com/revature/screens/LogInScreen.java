@@ -49,8 +49,6 @@ public class LogInScreen {
             if(u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 checkUser = true;
 
-
-
                 ExistingUserScreen.existingUserScreen(u.getId());
                 break;
 
@@ -61,7 +59,7 @@ public class LogInScreen {
 
             System.out.println("The username or password is invalid, please try again.");
             System.exit(0);
-            //logIn();
+
         }
 
 

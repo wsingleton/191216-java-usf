@@ -2,6 +2,7 @@ package com.revature.service;
 
 import com.revature.pojos.Accounts_Bank;
 import com.revature.repo.BankAccountRepo;
+import com.revature.screens.AccountTransactionScreen;
 import com.revature.screens.SignOutScreen;
 
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 public class Deposit {
     public static void deposit(int id) {
 
-        double balance = 0;
+        double balance;
         double deposit= 0;
         boolean valid = false;
 
@@ -20,7 +21,6 @@ public class Deposit {
         //find account associated with id
         BankAccountRepo bankAccountRepo = new BankAccountRepo();
         temp = bankAccountRepo.findAccountBank(id);
-
         balance = temp.getBalance();
 
         System.out.println("Please enter deposit amount: ");

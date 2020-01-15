@@ -15,12 +15,9 @@ public class CreateAccountScreen {
         String lastName;
         String username;
         String password;
-
-
         Scanner scanner = new Scanner(System.in);
 
         //---------------- Ask for user info ----------------
-
         System.out.println("First name: ");
         firstName = scanner.nextLine();
 

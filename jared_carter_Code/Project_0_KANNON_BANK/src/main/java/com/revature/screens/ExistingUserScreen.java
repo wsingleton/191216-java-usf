@@ -24,7 +24,7 @@ public class ExistingUserScreen {
 
         System.out.println("Hello " + currentUser.getFirstName());
         System.out.println("1. Make a deposit");
-        System.out.println("2. Make a withdrawal");
+        System.out.println("2. Make a withdraw");
         System.out.println("3. View balance");
         System.out.println("4. Sign out");
 
@@ -34,7 +34,7 @@ public class ExistingUserScreen {
                 String dummy = scanner.next();
                 option = Integer.parseInt(dummy);
             } catch (Exception e) {
-                System.out.println("Please enter 1, 2 or 3");
+                System.out.println("Please enter 1, 2, 3 or 4");
             }
 
             switch(option) {

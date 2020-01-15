@@ -2,6 +2,9 @@ package com.revature.service;
 
 import com.revature.pojos.Accounts_Bank;
 import com.revature.repo.BankAccountRepo;
+import com.revature.screens.AccountTransactionScreen;
+import com.revature.screens.ExistingUserScreen;
+import com.revature.screens.SignOutScreen;
 
 public class ViewBalance {
     public static void viewBalance(int id){
@@ -13,11 +16,13 @@ public class ViewBalance {
 
         temp = bankAccountRepo.findAccountBank(id);
 
+
         balance = temp.getBalance();
 
         Accounts_Bank updateUser = new Accounts_Bank(temp.getAccountOwner(), balance);
         bankAccountRepo.updateAccountBank(updateUser);
         System.out.println("Your current balance is $" + updateUser.getBalance());
+        SignOutScreen.signOut(id);
 
 
 

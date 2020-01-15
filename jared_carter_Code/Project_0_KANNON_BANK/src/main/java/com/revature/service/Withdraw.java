@@ -39,7 +39,11 @@ public class Withdraw {
 
                 balance -= withdraw;
 
-                Accounts_Bank updateUser = new Accounts_Bank(temp.getAccountOwner(), balance);
+                Accounts_Bank updateUser = new Accounts_Bank();
+
+                //updateUser.setBalance(balance);
+
+              //  temp.getAccountOwner(),
 
                 bankAccountRepo.updateAccountBank(updateUser);
 
