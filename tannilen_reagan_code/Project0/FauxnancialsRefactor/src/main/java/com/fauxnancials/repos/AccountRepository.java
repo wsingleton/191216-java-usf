@@ -1,9 +1,7 @@
 package com.fauxnancials.repos;
 
-import com.fauxnancials.AppDriver;
 import com.fauxnancials.models.Acct;
 import com.fauxnancials.models.AcctType;
-import com.fauxnancials.models.User;
 import com.fauxnancials.util.ConnectionFactory;
 
 import java.sql.*;
@@ -35,11 +33,7 @@ public class AccountRepository implements CrudRepository<Acct> {
             pstmt.setDouble(2,acct.getBalance());
             pstmt.setInt(3, acct.getUserID());
             int rowsInserted=pstmt.executeUpdate();
-        }
-        catch (SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -72,7 +66,7 @@ public class AccountRepository implements CrudRepository<Acct> {
     private Set<Acct> mapResultSet(ResultSet rs) throws SQLException {
         Set<Acct> accts = new HashSet<>();
         while (rs.next()) {
-            Acct temp=new Acct();
+            Acct temp = new Acct();
             temp.setAcctID(rs.getInt("acct_id"));
             temp.setAcctType(AcctType.getAcctTypeById(rs.getInt("type_id")));
             temp.setBalance(rs.getDouble("acct_bal"));

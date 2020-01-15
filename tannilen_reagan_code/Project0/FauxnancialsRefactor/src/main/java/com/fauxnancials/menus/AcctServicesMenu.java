@@ -26,10 +26,14 @@ public class AcctServicesMenu extends Menu {
                 case "1":
                     acctService.createNewAcct(1);
                     System.out.println("New checking account created.");
+                    System.out.println("Returning to dashboard...");
+                    AppDriver.router.navigate("/dashboard");
                     break;
                 case "2":
                     acctService.createNewAcct(2);
                     System.out.println("New savings account created.");
+                    System.out.println("Returning to dashboard...");
+                    AppDriver.router.navigate("/dashboard");
                     break;
                 case "x":
                 case "X":

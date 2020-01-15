@@ -70,6 +70,6 @@ public class Acct {
                 '}';
     }
     public String acctShow() {
-        return ("Account #" + acctID + "(" + acctType.toString() + "\n" + "Current Balance: $" + balance);
+        return ("Account #" + acctID + " (" + acctType.toString() + ")\n" + "Current Balance: $" + balance);
     }
 }

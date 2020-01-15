@@ -31,7 +31,7 @@ public class AcctService {
     public void showBals() {
         if (userAccts != null && !userAccts.isEmpty()) {
             for (Acct a : userAccts) {
-                a.acctShow();
+                System.out.println(a.acctShow());
                 System.out.println("");
             }
         } else {
