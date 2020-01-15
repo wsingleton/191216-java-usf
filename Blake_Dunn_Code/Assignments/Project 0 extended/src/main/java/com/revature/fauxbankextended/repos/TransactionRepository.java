@@ -20,10 +20,9 @@ public class TransactionRepository implements CrudRepository<Transaction> {
         try{
             String sql = "SELECT user_id, acct_id, trans_type_id, amount, " +
                     "trans_date " +
-                    " FROM transactions WHERE user_id = ? AND acct_id = ?";
+                    " FROM transactions WHERE acct_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id", "acct_id", "trans_type_id", "amount", "trans_date"});
-            pstmt.setInt(1, app().getCurrentSession().getSessionUser().getId());
-            pstmt.setInt(2, app().getCurrentSession().getSessionAccount().getId());
+            pstmt.setInt(1, app().getCurrentSession().getSessionAccount().getId());
             transHistory = mapResultSet(pstmt.executeQuery());
         }catch(SQLException e) {
             e.printStackTrace();
