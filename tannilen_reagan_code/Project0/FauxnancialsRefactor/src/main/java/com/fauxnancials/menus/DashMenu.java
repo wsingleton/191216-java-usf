@@ -1,10 +1,8 @@
 package com.fauxnancials.menus;
 
 import com.fauxnancials.AppDriver;
-import com.fauxnancials.repos.AccountRepository;
 import com.fauxnancials.services.AcctService;
 
-import java.io.IOException;
 import java.time.LocalTime;
 
 import static com.fauxnancials.util.AnsiColours.ANSI_RED;
@@ -75,6 +73,7 @@ public class DashMenu extends Menu {
                     break;
                 default:
                     System.out.println(ANSI_RED + "Invalid input.  Please try again." + ANSI_RESET);
+                    AppDriver.router.navigate("/dashboard");
             }
         } catch (Exception e) {
             System.out.println(ANSI_RED + "An unexpected exception has occurred.");

@@ -1,8 +1,10 @@
 package com.fauxnancials.menus;
 
 import com.fauxnancials.AppDriver;
+import com.fauxnancials.exceptions.InvalidRequestException;
 import com.fauxnancials.models.Acct;
 import com.fauxnancials.services.AcctService;
+import org.omg.CORBA.DynAnyPackage.Invalid;
 
 import java.util.Set;
 
@@ -51,6 +53,7 @@ public class DepositsMenu extends Menu {
             try {
                 System.out.print("> ");
                 String userSelection = AppDriver.console.readLine();
+                userSelection=acctService.numericInputCleanup(userSelection);
                 try {
                     dpstAmmt = Double.parseDouble(userSelection);
                 } catch (NumberFormatException e) {
@@ -64,14 +67,25 @@ public class DepositsMenu extends Menu {
                 System.out.println("Closing application...");
                 AppDriver.appRunning = false;
             }
-            double currentBal = tgt.getBalance();
-            tgt = acctService.deposit(tgt, dpstAmmt);
-            if (currentBal == tgt.getBalance()) {
-                System.out.println(ANSI_RED + "An unexpected error has occurred.  Transaction failed." + ANSI_RESET);
-                System.out.println("Returning to dashboard...");
-                AppDriver.router.navigate("/dashboard");
-            } else {
-                System.out.println("Deposit complete.");
+            boolean validDeposit=acctService.validInput(dpstAmmt);
+            if (!validDeposit) {
+                try {
+                    throw new InvalidRequestException();
+                }
+                catch (InvalidRequestException e) {
+                    System.out.println("Transaction cancelled. Returning to dashboard...");
+                    AppDriver.router.navigate("/dashboard");
+                }
+            }
+            else {
+                double currentBal = tgt.getBalance();
+                tgt = acctService.deposit(tgt, dpstAmmt);
+                if (currentBal == tgt.getBalance()) {
+                    System.out.println(ANSI_RED + "An unexpected error has occurred.  Transaction failed." + ANSI_RESET);
+                } else {
+                    System.out.println("Transaction complete.  $" + dpstAmmt + "deposited.");
+                    System.out.println("New balance: $" + tgt.getBalance());
+                }
                 System.out.println("Returning to dashboard...");
                 AppDriver.router.navigate("/dashboard");
             }

@@ -1,6 +1,7 @@
 package com.fauxnancials.menus;
 
 import com.fauxnancials.AppDriver;
+import com.fauxnancials.exceptions.InvalidRequestException;
 import com.fauxnancials.models.Acct;
 import com.fauxnancials.services.AcctService;
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
@@ -28,8 +29,8 @@ public class TransfersMenu extends Menu {
             System.out.println("Returning to user dashboard...");
             AppDriver.router.navigate("/dashboard");
         } else {
-            int srcAcct=0;
-            int tgtAcct=0;
+            int srcAcct = 0;
+            int tgtAcct = 0;
             System.out.println(ANSI_BLUE + "Available accounts:" + ANSI_RESET);
             acctService.showBals();
             System.out.println("");
@@ -67,13 +68,14 @@ public class TransfersMenu extends Menu {
                 System.out.println("Closing application...");
                 AppDriver.appRunning = false;
             }
-            Acct src=acctService.pullAcct(srcAcct);
-            Acct tgt=acctService.pullAcct(tgtAcct);
-            double tsfrAmmt=0.0;
+            Acct src = acctService.pullAcct(srcAcct);
+            Acct tgt = acctService.pullAcct(tgtAcct);
+            double tsfrAmmt = 0.0;
             System.out.println("How much would you like to transfer?");
             try {
                 System.out.print("> ");
                 String userSelection = AppDriver.console.readLine();
+                userSelection = acctService.numericInputCleanup(userSelection);
                 try {
                     tsfrAmmt = Double.parseDouble(userSelection);
                 } catch (NumberFormatException e) {
@@ -87,26 +89,37 @@ public class TransfersMenu extends Menu {
                 System.out.println("Closing application...");
                 AppDriver.appRunning = false;
             }
-            double currentBal=src.getBalance();
-            src=acctService.withdrawal(src,tsfrAmmt);
-            if (currentBal==src.getBalance()) {
-                System.out.println(ANSI_RED + "An unexpected error has occurred.  Transaction failed." + ANSI_RESET);
-                System.out.println("Returning to dashboard...");
-                AppDriver.router.navigate("/dashboard");
-            }
-            else {
-                currentBal=tgt.getBalance();
-                tgt=acctService.deposit(tgt, tsfrAmmt);
-                if (currentBal==tgt.getBalance()) {
-                    System.out.println(ANSI_RED + "An unexpected error has occurred.  Transaction failed.");
-                    System.out.println("Please contact your local branch office to correct this issue." + ANSI_RESET);
-                    System.out.println("Closing application...");
-                    AppDriver.appRunning = false;
+            double currentBal = src.getBalance();
+            boolean validDeposit = acctService.validInput(tsfrAmmt);
+            if (!validDeposit) {
+                try {
+                    throw new InvalidRequestException();
                 }
-                else {
-                    System.out.println("Transaction complete.");
+                catch (InvalidRequestException e) {
+                    System.out.println("Transaction cancelled. Returning to dashboard...");
+                    AppDriver.router.navigate("/dashboard");
+                }
+            } else {
+                src = acctService.withdrawal(src, tsfrAmmt);
+                if (currentBal == src.getBalance()) {
+                    System.out.println(ANSI_RED + "An unexpected error has occurred.  Transaction failed." + ANSI_RESET);
                     System.out.println("Returning to dashboard...");
                     AppDriver.router.navigate("/dashboard");
+                } else {
+                    currentBal = tgt.getBalance();
+                    tgt = acctService.deposit(tgt, tsfrAmmt);
+                    if (currentBal == tgt.getBalance()) {
+                        System.out.println(ANSI_RED + "An unexpected error has occurred.  Transaction failed.");
+                        System.out.println("Please contact your local branch office to correct this issue." + ANSI_RESET);
+                        System.out.println("Closing application...");
+                        AppDriver.appRunning = false;
+                    } else {
+                        System.out.println("Transaction complete.  $" + tsfrAmmt + " transferred.");
+                        System.out.println("New balance for account #" + src.getAcctID() + ": $" + src.getBalance());
+                        System.out.println("New balance for account #" + tgt.getAcctID() + ": $" + tgt.getBalance());
+                        System.out.println("Returning to dashboard...");
+                        AppDriver.router.navigate("/dashboard");
+                    }
                 }
             }
         }

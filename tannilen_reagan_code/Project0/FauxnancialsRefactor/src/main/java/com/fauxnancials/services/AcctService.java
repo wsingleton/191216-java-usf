@@ -1,6 +1,7 @@
 package com.fauxnancials.services;
 
 import com.fauxnancials.AppDriver;
+import com.fauxnancials.exceptions.InvalidRequestException;
 import com.fauxnancials.exceptions.ResourceNotFoundException;
 import com.fauxnancials.models.Acct;
 import com.fauxnancials.models.AcctType;
@@ -14,6 +15,9 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+
+import static com.fauxnancials.util.AnsiColours.ANSI_RED;
+import static com.fauxnancials.util.AnsiColours.ANSI_RESET;
 
 public class AcctService {
     private AccountRepository acctRepo;
@@ -91,5 +95,24 @@ public class AcctService {
             e.printStackTrace();
         }
         return acct;
+    }
+    public boolean validInput(double input) {
+        boolean valid;
+        if (input<0) {
+            System.out.println(ANSI_RED + "Values may not be negative." + ANSI_RESET);
+            valid=false;
+        }
+        else {valid=true;}
+        return valid;
+    }
+    public String numericInputCleanup(String input) {
+        if (input.contains("$")) {
+            input=input.replace("$", "");
+        }
+        if (input.contains(".")){
+            int i = input.indexOf(".")+2;
+            input=input.substring(0,i);
+        }
+        return input;
     }
 }
