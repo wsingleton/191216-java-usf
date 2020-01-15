@@ -45,10 +45,10 @@ public class AcctRepository implements CrudRepository<Account> {
         Optional<Account> _acct = Optional.empty();
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "SELECT * FROM CBANK.accts WHERE user_name = ?";
+            String sql = "SELECT * FROM CBANK.accts WHERE acctusr = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, username);
+            pstmt.setString(2, username);
             ResultSet rs = pstmt.executeQuery();
             Set<Account> set = mapResultSet(rs);
             if(!set.isEmpty()) _acct = set.stream().findFirst();
@@ -66,7 +66,7 @@ public class AcctRepository implements CrudRepository<Account> {
     @Override
     public void save(Account newObj) {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "INSERT INTO CBANK.accts VALUES (0, ?, ?)";
+            String sql = "INSERT INTO CBANK.accts VALUES (1, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"acctid"});
             pstmt.setString(2, newObj.getUsername());
             pstmt.setDouble(3, newObj.getBalance());
@@ -108,7 +108,7 @@ public class AcctRepository implements CrudRepository<Account> {
         while(rs.next()){
             Account temp = new Account();
             temp.setAcctId(rs.getInt("acctid"));
-            temp.setUsername(rs.getString("username"));
+            temp.setUsername(rs.getString("acctusr"));
             temp.setBalance(rs.getDouble("balance"));
             accts.add(temp);
         }

@@ -9,9 +9,8 @@ public class User {
     private String lastName;
     private String usrName;
     private String passWord;
-    private Integer acctId;
 
-    public User(){
+    public User() {
         super();
     }
 
@@ -22,13 +21,12 @@ public class User {
         this.passWord = passWord;
     }
 
-    public User(Integer userId, String firstName, String lastName, String usrName, String passWord, Integer acctId) {
+    public User(Integer userId, String firstName, String lastName, String usrName, String passWord) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.usrName = usrName;
         this.passWord = passWord;
-        this.acctId = acctId;
     }
 
     public Integer getUserId() {
@@ -71,22 +69,15 @@ public class User {
         this.passWord = passWord;
     }
 
-    public Integer getAcctId() {
-        return acctId;
-    }
-
-    public void setAcctId(Integer acctId) {
-        this.acctId = acctId;
-    }
 
     //test for a Capital Letter
-    public static boolean uCase(char ch){
+    public static boolean uCase(char ch) {
         ch = Character.toUpperCase(ch);
         return ch >= 'A' && ch <= 'Z';
     }
 
     //test for a number
-    public static boolean nCase(String passwor){
+    public static boolean nCase(String passwor) {
         return Pattern.compile("[0-9]").matcher(passwor).find();
     }
 
@@ -116,13 +107,12 @@ public class User {
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(usrName, user.usrName) &&
-                Objects.equals(passWord, user.passWord) &&
-                Objects.equals(acctId, user.acctId);
+                Objects.equals(passWord, user.passWord);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, firstName, lastName, usrName, passWord, acctId);
+        return Objects.hash(userId, firstName, lastName, usrName, passWord);
     }
 
     @Override
@@ -133,7 +123,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", usrName='" + usrName + '\'' +
                 ", passWord='" + passWord + '\'' +
-                ", acctId=" + acctId +
                 '}';
     }
 }

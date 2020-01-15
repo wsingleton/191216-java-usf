@@ -17,7 +17,7 @@ public class UserRepository implements CrudRepository<User> {
             String sql = "SELECT * FROM CBANK.busers WHERE user_name = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, username);
+            pstmt.setString(4, username);
             ResultSet rs = pstmt.executeQuery();
             Set<User> set = mapResultSet(rs);
             if(!set.isEmpty()) _user = set.stream().findFirst();
@@ -37,8 +37,8 @@ public class UserRepository implements CrudRepository<User> {
             //SELECT * FROM busers WHERE user_name is not null AND user_pass is not null; (alternative, maybe)
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
+            pstmt.setString(4, username);
+            pstmt.setString(5, password);
 
             ResultSet rs = pstmt.executeQuery();
             Set<User> set = mapResultSet(rs);
@@ -57,14 +57,13 @@ public class UserRepository implements CrudRepository<User> {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
             String sql = "INSERT INTO CBANK.busers VALUES (1, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
-            pstmt.setString(1, newObj.getFirstName());
-            pstmt.setString(2, newObj.getLastName());
-            pstmt.setString(3, newObj.getUsrName());
-            pstmt.setString(4, newObj.getPassWord());
+            pstmt.setString(2, newObj.getFirstName());
+            pstmt.setString(3, newObj.getLastName());
+            pstmt.setString(4, newObj.getUsrName());
+            pstmt.setString(5, newObj.getPassWord());
 
 
             int rowsInserted = pstmt.executeUpdate();
-
             if(rowsInserted != 0){
                 ResultSet rs = pstmt.getGeneratedKeys();
                 while (rs.next()){
@@ -101,10 +100,10 @@ public class UserRepository implements CrudRepository<User> {
         while(rs.next()){
             User temp = new User();
             temp.setUserId(rs.getInt("user_id"));
-            temp.setUsrName(rs.getString("username"));
-            temp.setPassWord(rs.getString("password"));
-            temp.setFirstName(rs.getString("first_name"));
-            temp.setLastName(rs.getString("last_name"));
+            temp.setFirstName(rs.getString("user_fn"));
+            temp.setLastName(rs.getString("user_ln"));
+            temp.setUsrName(rs.getString("user_name"));
+            temp.setPassWord(rs.getString("user_pass"));
             users.add(temp);
         }
 

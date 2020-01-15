@@ -1,6 +1,7 @@
 package com.revature.bank.screens;
 
 import com.revature.bank.exceptions.InvalidRequestException;
+import com.revature.bank.exceptions.ResourcePersistenceException;
 import com.revature.bank.models.User;
 import com.revature.bank.services.UserService;
 
@@ -27,11 +28,7 @@ public class RegisterScreen extends Screen{
 
         try{
             System.out.println("\n\n\n\n\n\n\n\n");
-            System.out.println("Register New Account");
-            System.out.println("First Name:");
-            firstName = console.readLine();
-            System.out.println("Last Name:");
-            lastName = console.readLine();
+            System.out.println("Register New Account\n");
             System.out.println("Username: Must be between 8 to 15 characters in length \n" +
                     "\t\t  Must include at least 1 Capital letter \n" +
                     "\t\t  Must include at least 1 number\n");
@@ -50,6 +47,11 @@ public class RegisterScreen extends Screen{
                 router.navigate("/home");
             }
 
+            System.out.println("First Name:");
+            firstName = console.readLine();
+            System.out.println("Last Name:");
+            lastName = console.readLine();
+
             User newUser = new User(firstName, lastName, userName, passWord);
 
             userService.register(newUser);
@@ -59,7 +61,8 @@ public class RegisterScreen extends Screen{
                 router.navigate("/profile");
             }
         }
-        catch(InvalidRequestException e){
+        catch(InvalidRequestException | ResourcePersistenceException e){
+            System.err.println("Registration unsuccessful, invalid values provided or username is taken");
             e.printStackTrace();
         }
         catch (IOException e){
