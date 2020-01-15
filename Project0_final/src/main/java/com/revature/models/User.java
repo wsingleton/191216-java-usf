@@ -6,10 +6,7 @@ public class User {
 
     public User() {
         super();
-
     }
-
-
 
     public User(String username, String password, double balance) {
         this.username = username;
@@ -17,8 +14,6 @@ public class User {
         this.balance = balance;
 
     }
-
-
 
     private String username;
     private String password;
@@ -37,27 +32,20 @@ public class User {
 
     }
 
-
-
     public void setPassword(String password) {
         this.password = password;
 
     }
-
-
 
     public double getBalance() {
         return balance;
 
     }
 
-
-
     public void setBalance(double balance) {
         this.balance = balance;
 
     }
-
 
 
     @Override
@@ -75,8 +63,6 @@ public class User {
         return Objects.hash(username, password, balance);
 
     }
-
-
 
     @Override
     public String toString() {
