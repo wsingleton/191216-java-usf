@@ -3,6 +3,7 @@ package com.fauxnancials.repos;
 import com.fauxnancials.AppDriver;
 import com.fauxnancials.models.Acct;
 import com.fauxnancials.models.AcctType;
+import com.fauxnancials.models.User;
 import com.fauxnancials.util.ConnectionFactory;
 
 import java.sql.*;
@@ -44,7 +45,21 @@ public class AccountRepository implements CrudRepository<Acct> {
     }
     @Override
     public Optional<Acct> findByID(Integer id) {
-        return Optional.empty();
+        Optional<Acct> acct = Optional.empty();
+        try (Connection conn= ConnectionFactory.getInstance().getConnection()) {
+            String sql="SELECT * FROM fauxnancials_admin.accounts WHERE acct_id=?";
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            pstmt.setInt(1,id);
+            ResultSet rs = pstmt.executeQuery();
+            Set<Acct> accts= mapResultSet(rs);
+            if (!accts.isEmpty()) {
+                acct=accts.stream().findFirst();
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return acct;
     }
     @Override
     public boolean update(Acct acct) {

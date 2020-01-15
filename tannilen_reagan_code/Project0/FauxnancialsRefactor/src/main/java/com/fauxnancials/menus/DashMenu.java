@@ -33,7 +33,6 @@ public class DashMenu extends Menu {
         } else {
             System.out.println("Good morning, " + AppDriver.currentUser.getGivenName() + ".");
         }
-        System.out.println(AppDriver.currentUser.toString());
         System.out.println("What would you like to do today?");
         System.out.println("1. view accounts and balances");
         System.out.println("2. make a deposit");
