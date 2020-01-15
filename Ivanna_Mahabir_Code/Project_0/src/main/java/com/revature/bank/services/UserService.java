@@ -2,6 +2,7 @@ package com.revature.bank.services;
 
 import com.revature.bank.exceptions.AuthenticatironException;
 import com.revature.bank.exceptions.InvalidRequestException;
+import com.revature.bank.exceptions.ResourcePersistenceException;
 import com.revature.bank.models.User;
 import com.revature.bank.repos.UserRepository;
 
@@ -12,6 +13,12 @@ public class UserService {
     private UserRepository userRepo;
 
     public UserService(UserRepository repo){ this.userRepo = repo; }
+
+
+    public User getUserByUsername(String username){
+        currentUser = userRepo.findUserByUsername(username).orElseThrow(AuthenticatironException::new);
+        return currentUser;
+    }
 
     public void authenticate(String username, String password){
         if(username == null || username.trim().equals("")
@@ -25,7 +32,7 @@ public class UserService {
         if(!isUserValid(newUser)) throw new InvalidRequestException();
 
         if(userRepo.findUserByUsername(newUser.getUsrName()).isPresent()){
-
+            throw new ResourcePersistenceException("Username is already in use!");
         }
         userRepo.save(newUser);
         currentUser = newUser;

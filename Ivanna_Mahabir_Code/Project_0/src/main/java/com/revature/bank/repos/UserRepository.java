@@ -62,6 +62,7 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.setString(3, newObj.getUsrName());
             pstmt.setString(4, newObj.getPassWord());
 
+
             int rowsInserted = pstmt.executeUpdate();
 
             if(rowsInserted != 0){

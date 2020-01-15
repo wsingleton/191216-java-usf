@@ -1,5 +1,6 @@
 package com.revature.bank;
 
+import com.revature.bank.models.Account;
 import com.revature.bank.models.User;
 import com.revature.bank.repos.AcctRepository;
 import com.revature.bank.repos.UserRepository;
@@ -19,6 +20,8 @@ public class AppDriver {
     public static ScreenRouter router;
     public static Boolean appRunning;
     public static User currentUser;
+    public static Account currentAcct;
+
 
     static {
         System.out.println("[LOG] - Initializing application");
@@ -29,22 +32,23 @@ public class AppDriver {
         final AcctRepository acctRepo = new AcctRepository();
 
         final UserService userService = new UserService(userRepo);
-        final AcctService acctService = new AcctService();
+        final AcctService acctService = new AcctService(acctRepo);
 
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
-              .addScreen(new RegisterScreen(userService))
-              .addScreen(new LoginScreen(userService))
-              .addScreen(new ProfileScreen(acctService));
+                .addScreen(new RegisterScreen(userService))
+                .addScreen(new LoginScreen(userService))
+                .addScreen(new ProfileScreen(acctService));
 
         System.out.println("[LOG] Application initialization complete.");
 
     }
-}
 
-public static void main(String[] args){
 
-    while (appRunning){
-        router.navigate("/home");
+    public static void main(String[] args) {
+
+        while (appRunning) {
+            router.navigate("/home");
+        }
     }
 }
