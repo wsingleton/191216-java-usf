@@ -32,12 +32,26 @@ public class RegisterScreen extends Screen{
             firstName = console.readLine();
             System.out.println("Last Name:");
             lastName = console.readLine();
+            System.out.println("Username: Must be between 8 to 15 characters in length \n" +
+                    "\t\t  Must include at least 1 Capital letter \n" +
+                    "\t\t  Must include at least 1 number\n");
             System.out.println("Username:");
             userName = console.readLine();
+            System.out.println("Password: Must be between 8 to 15 characters in length \n" +
+                    "\t\t  Must include at least 1 Capital letter \n" +
+                    "\t\t  Must include at least 1 number\n");
             System.out.println("Password:");
             passWord = console.readLine();
 
+            boolean userValid = currentUser.validate(userName); //checks if username meets criteria
+            boolean passValid = currentUser.validate(passWord); //checks if password meets criteria
+            if(userValid != true ||passValid != true){
+                System.out.println("Invalid Input\n");
+                router.navigate("/home");
+            }
+
             User newUser = new User(firstName, lastName, userName, passWord);
+
             userService.register(newUser);
 
             if(currentUser != null){

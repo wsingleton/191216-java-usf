@@ -29,7 +29,8 @@ public class HomeScreen extends Screen {
                     break;
 
                 case "3":
-                    router.navigate("/Exiting the applicationa...");
+                    System.out.println("Exiting the application");
+                    appRunning = false;
                     break;
 
                 default:

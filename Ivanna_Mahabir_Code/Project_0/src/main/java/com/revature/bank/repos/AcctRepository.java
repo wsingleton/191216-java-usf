@@ -52,6 +52,7 @@ public class AcctRepository implements CrudRepository<Account> {
             ResultSet rs = pstmt.executeQuery();
             Set<Account> set = mapResultSet(rs);
             if(!set.isEmpty()) _acct = set.stream().findFirst();
+
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -59,6 +60,8 @@ public class AcctRepository implements CrudRepository<Account> {
 
         return _acct;
     }
+
+
 
     @Override
     public void save(Account newObj) {

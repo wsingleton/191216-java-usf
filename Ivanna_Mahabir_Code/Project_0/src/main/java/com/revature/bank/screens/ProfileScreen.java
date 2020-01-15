@@ -44,12 +44,18 @@ public class ProfileScreen extends Screen {
                     //deposit
                     System.out.println("Deposit");
                     System.out.println("Enter Amount to Deposit: $");
-                    newAcct =
-
+                    Double deposit = Double.parseDouble(console.readLine());
+                    acctService.validateDeposit(deposit);
+                    router.navigate("/profile");
                     break;
 
                 case "3":
                     //withdrawal
+                    System.out.println("Withdrawal");
+                    System.out.println("Enter Amount to Withdraw: $");
+                    Double withdraw = Double.parseDouble(console.readLine());
+                    acctService.validateWith(withdraw);
+                    router.navigate("/profile");
                     break;
 
                 case "4":
@@ -58,6 +64,7 @@ public class ProfileScreen extends Screen {
 
                 default:
                     System.out.println("[LOG] - Invalid selection");
+                    router.navigate("/profile");
             }
         }
         catch (Exception e){

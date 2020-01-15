@@ -1,5 +1,6 @@
 package com.revature.bank.models;
 
+import java.util.InputMismatchException;
 import java.util.Objects;
 
 public class Account {
@@ -38,7 +39,19 @@ public class Account {
     }
 
     public void setBalance(Double balance) {
-        this.balance = balance;
+        try{
+            if(balance < 0.0){
+                System.out.println("Balance: " + balance + " is invalid");
+                System.out.println("Setting Initial Balance to $0.0");
+                setBalance(0.0);
+            }
+            else{
+                this.balance = balance;
+            }}
+        catch(InputMismatchException e) {
+            System.out.println("Invalid Input");
+            e.printStackTrace();
+        }
     }
 
     @Override

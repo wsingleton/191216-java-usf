@@ -35,14 +35,6 @@ public class LoginScreen extends Screen{
             System.out.println("Password: ");
             password = console.readLine();
 
-
-            boolean usernameValid = currentUser.validate(username); //test if username conditions are met
-            if (usernameValid == true){
-                currentUser.setUsrName(username); //if met, store username
-            } else{
-                router.navigate("/home");
-            }
-
             boolean userValid = currentUser.validate(username); //checks if username meets criteria
             boolean passValid = currentUser.validate(password); //checks if password meets criteria
             if(userValid!= true ||passValid != true){
