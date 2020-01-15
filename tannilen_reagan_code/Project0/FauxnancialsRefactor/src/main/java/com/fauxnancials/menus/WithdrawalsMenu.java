@@ -49,7 +49,7 @@ public class WithdrawalsMenu extends Menu {
             }
             Acct tgt = acctService.pullAcct(acct_id);
             double wdAmmt = 0.0;
-            System.out.println("How much would you like to transfer?");
+            System.out.println("How much would you like to withdraw?");
             try {
                 System.out.print("> ");
                 String userSelection = AppDriver.console.readLine();
