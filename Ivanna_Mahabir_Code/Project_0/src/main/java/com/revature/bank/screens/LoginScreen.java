@@ -44,15 +44,13 @@ public class LoginScreen extends Screen{
 
             userService.authenticate(username, password);
 
-            if(currentUser != null){
-                System.out.println("Login successful");
+            System.out.println("Login successful\n\n");
+            System.out.println("Welcome " + currentUser.getFirstName() + " " + currentUser.getLastName());
+            router.navigate("/profile");
 
-                System.out.println("Welcome " + currentUser.getFirstName() + " " + currentUser.getLastName());
-                currentUser.setUsrName(username);
-                router.navigate("/profile");
-            }
         }
         catch(InvalidRequestException | AuthenticatironException e){
+            e.printStackTrace();
             System.out.println("Invalid Login");
         }
         catch(Exception e){

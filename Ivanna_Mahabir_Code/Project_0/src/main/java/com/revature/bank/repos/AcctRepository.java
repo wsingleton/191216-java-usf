@@ -12,35 +12,6 @@ import java.util.Set;
 
 public class AcctRepository implements CrudRepository<Account> {
 
-/*    public void newAcct(Account newObj){
-
-        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "INSERT INTO CBANK.accts VALUES (0, ?, 0.0)";
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"acct_user"});
-            pstmt.setString(2, newObj.getUsername());
-
-
-            int rowsInserted = pstmt.executeUpdate();
-            if(rowsInserted != 0 ){
-                ResultSet rs = pstmt.getGeneratedKeys();
-                while(rs.next()){
-                    newObj.setAcctId(rs.getInt(1));
-                    newObj.setUsername(rs.getString(2));
-                    newObj.setBalance(0.0);
-
-                }
-            }
-        }
-
-
-        catch (SQLIntegrityConstraintViolationException e){
-            e.printStackTrace();
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-    }*/
-
     public Optional<Account> findAcctByUsername(String username){
         Optional<Account> _acct = Optional.empty();
 
@@ -48,10 +19,11 @@ public class AcctRepository implements CrudRepository<Account> {
             String sql = "SELECT * FROM CBANK.accts WHERE acctusr = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(2, username);
+            pstmt.setString(1, username);
+
             ResultSet rs = pstmt.executeQuery();
             Set<Account> set = mapResultSet(rs);
-            if(!set.isEmpty()) _acct = set.stream().findFirst();
+            if(!set.isEmpty()){_acct = set.stream().findFirst();}
 
         }
         catch (SQLException e){
@@ -61,7 +33,28 @@ public class AcctRepository implements CrudRepository<Account> {
         return _acct;
     }
 
+    public Optional<Account> updateAcct(String username, Double bal){
+        Optional<Account> _acct = Optional.empty();
 
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+            String sql = "UPDATE CBANK.accts SET balance = ? WHERE acctusr = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+            pstmt.setDouble(2, bal);
+
+
+            ResultSet rs = pstmt.executeQuery();
+            Set<Account> set = mapResultSet(rs);
+            if(!set.isEmpty()){_acct = set.stream().findFirst();}
+
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return _acct;
+    }
 
     @Override
     public void save(Account newObj) {

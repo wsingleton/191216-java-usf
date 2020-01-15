@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Account {
     private Integer acctId;
     private String username;
-    private Double balance = 0.0;
+    private Double balance;
 
     public Account() {
         super();
@@ -40,7 +40,7 @@ public class Account {
 
     public void setBalance(Double balance) {
         try{
-            if(balance < 0.0){
+            if(balance == null || balance < 0 ){
                 System.out.println("Balance: " + balance + " is invalid");
                 System.out.println("Setting Initial Balance to $0.0");
                 setBalance(0.0);

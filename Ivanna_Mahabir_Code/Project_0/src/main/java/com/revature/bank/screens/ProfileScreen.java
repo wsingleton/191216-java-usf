@@ -19,9 +19,6 @@ public class ProfileScreen extends Screen {
 
     @Override
     public void render() {
-        String username = currentUser.getUsrName();
-
-        Account newAcct = acctService.getAcctByUsername(username);
 
         System.out.println("Transactions");
         System.out.println("1) Balance Inquiry");
@@ -36,16 +33,22 @@ public class ProfileScreen extends Screen {
                 case "1":
                     //getbalance
                     System.out.println("Balance Inquiry");
-                    System.out.println("Your Current Balance: $" + newAcct.getBalance());
+                    acctService.getAcctByUsername(currentUser.getUsrName());
+                    System.out.println("Your Current Balance: $" + currentAcct.getBalance() + "\n\n");
                     router.navigate("/profile");
                     break;
 
                 case "2":
                     //deposit
                     System.out.println("Deposit");
+                    acctService.getAcctByUsername(currentUser.getUsrName());
+                    Double curBal = currentAcct.getBalance();
+                    System.out.println("Your Current Balance: $" + curBal);
+
                     System.out.println("Enter Amount to Deposit: $");
                     Double deposit = Double.parseDouble(console.readLine());
-                    acctService.validateDeposit(deposit);
+
+                    System.out.println("Your New Balance: $" + acctService.validateDeposit(curBal, deposit) + "\n\n");
                     router.navigate("/profile");
                     break;
 
@@ -61,6 +64,7 @@ public class ProfileScreen extends Screen {
                 case "4":
                     System.out.println("Logging Out...");
                     router.navigate("/home");
+                    break;
 
                 default:
                     System.out.println("[LOG] - Invalid selection");

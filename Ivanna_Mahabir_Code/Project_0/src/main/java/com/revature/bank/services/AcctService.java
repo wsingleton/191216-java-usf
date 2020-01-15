@@ -1,11 +1,11 @@
 package com.revature.bank.services;
 
 import com.revature.bank.exceptions.AuthenticatironException;
+import com.revature.bank.exceptions.InvalidRequestException;
 import com.revature.bank.models.Account;
 import com.revature.bank.repos.AcctRepository;
 
-import static com.revature.bank.AppDriver.currentAcct;
-import static com.revature.bank.AppDriver.router;
+import static com.revature.bank.AppDriver.*;
 
 public class AcctService {
 
@@ -14,20 +14,20 @@ public class AcctService {
     public AcctService(AcctRepository repo){ this.acctRepo = repo; }
 
 
-
     public Account getAcctByUsername(String username){
-        currentAcct = acctRepo.findAcctByUsername(username).orElseThrow(AuthenticatironException::new);
-        if(currentAcct.getBalance() == null || currentAcct.getBalance().equals("")){
-            currentAcct.setUsername(username);
-            currentAcct.setBalance(0.0);
+        if(username == null || username.trim().equals("")) {
+            throw new InvalidRequestException();
         }
+        currentAcct = acctRepo.findAcctByUsername(username).orElseThrow(AuthenticatironException::new);
         return currentAcct;
 
     }
 
-    public Double validateDeposit(Double deposit){
+    public Double validateDeposit(Double init, Double deposit){
         if(deposit >= 0 ){
-            deposit = currentAcct.getBalance() + deposit;
+            deposit += init;
+            currentAcct.setBalance(deposit);
+            acctRepo.updateAcct(currentAcct.getUsername(),deposit);
         }
         else{
             System.out.println("Invalid Deposit Amount Entered");
@@ -50,5 +50,5 @@ public class AcctService {
         }
         return withdraw;
     }
-    //validate deposit, withdrawal, new acct set deposit 0
+
 }

@@ -17,7 +17,7 @@ public class UserRepository implements CrudRepository<User> {
             String sql = "SELECT * FROM CBANK.busers WHERE user_name = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(4, username);
+            pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
             Set<User> set = mapResultSet(rs);
             if(!set.isEmpty()) _user = set.stream().findFirst();
@@ -34,11 +34,10 @@ public class UserRepository implements CrudRepository<User> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
             String sql = "SELECT * FROM CBANK.busers WHERE user_name = ? AND user_pass = ?";
-            //SELECT * FROM busers WHERE user_name is not null AND user_pass is not null; (alternative, maybe)
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(4, username);
-            pstmt.setString(5, password);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
             Set<User> set = mapResultSet(rs);
