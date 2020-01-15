@@ -9,7 +9,7 @@ import static com.revature.AppDriver.console;
 public class WithdrawScreen extends Screen {
 
     public WithdrawScreen(String name, String route){
-        super(name, route);
+        super("withdrawScreen", "/withdraw");
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.revature.services.UserService;
 import com.revature.util.ScreenRouter;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class AppDriver {
@@ -28,12 +29,12 @@ public class AppDriver {
         router.addScreen(new HomeScreen())
                 .addScreen(new LoginScreen(userService))
                 .addScreen(new RegisterScreen(userService))
-                .addScreen(new CustomerSelection())
-                .addScreen(new DepositScreen())
-                .addScreen(new WithdrawScreen());
+                .addScreen(new CustomerSelectionScreen("customerSelection", "/select"))
+                .addScreen(new DepositScreen("depositScreen", "/deposit"))
+                .addScreen(new WithdrawScreen("withdrawScreen","/withdraw"));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         while (appRunning){
             router.navigate("/home");

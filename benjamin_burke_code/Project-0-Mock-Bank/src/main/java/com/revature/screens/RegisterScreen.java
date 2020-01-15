@@ -6,6 +6,8 @@ import com.revature.exceptcions.ResourcePersistenceException;
 import com.revature.models.User;
 import com.revature.services.UserService;
 
+import java.io.IOException;
+
 import static com.revature.AppDriver.*;
 
 public class RegisterScreen extends Screen {
@@ -17,7 +19,7 @@ public class RegisterScreen extends Screen {
     }
 
     @Override
-    public void render() {
+    public void render() throws IOException {
         String username;
         String password;
         int accountID;
@@ -38,9 +40,7 @@ public class RegisterScreen extends Screen {
                 router.navigate("/customer");
             }
         } catch (InvalidRequestException | ResourcePersistenceException e){
-            System.out.println("-------------------------------");
-            System.out.println("Invalid data or username is taken!");
-            System.out.println("-------------------------------\n\n");
+            System.out.println("Login credentials taken!");
             router.navigate("/home");
         }
         catch (Exception e){

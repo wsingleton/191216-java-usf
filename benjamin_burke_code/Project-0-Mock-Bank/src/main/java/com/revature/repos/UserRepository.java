@@ -130,7 +130,7 @@ public class UserRepository implements CrudRepository<User> {
         Set<User> users = new HashSet<>();
         while (rs.next()) {
             User temp = new User();
-            temp.setId(rs.getInt("user_id"));
+            temp.setId(rs.getInt("id"));
             temp.setUsername(rs.getString("username"));
             temp.setPassword(rs.getString("password"));
             users.add(temp);

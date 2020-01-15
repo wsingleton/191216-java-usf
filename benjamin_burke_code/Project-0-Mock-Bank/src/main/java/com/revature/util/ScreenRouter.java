@@ -3,6 +3,7 @@ package com.revature.util;
 import com.revature.exceptcions.ScreenNotFoundException;
 import com.revature.screens.Screen;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public class ScreenRouter {
         return this;
     }
 
-    public void navigate(String route){
+    public void navigate(String route) throws IOException {
         screens.stream()
                 .filter(screen ->screen.getRoute().equals(route))
                 .findFirst().orElseThrow(ScreenNotFoundException::new)
