@@ -11,21 +11,20 @@ public class UserProfileScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("\n\n\n\n\n");
-        System.out.println("Welcome to the your profile screen " + app().getCurrentSession().getSessionUser().getFirstName() + "\n");
-        System.out.println("+----------  Menu  ----------+ \n");
+        System.out.println("\n\n");
+        System.out.println("Welcome to the your profile screen, " + app().getCurrentSession().getSessionUser().getFirstName() + "\n");
+        System.out.println("+----------  Profile Menu  ----------+ \n");
 
         System.out.println("1) Transaction History");
         System.out.println("2) Create a New Account");
-        System.out.println("3) Add Another User to This Account");
+        System.out.println("3) Add user to Current Account");
         System.out.println("4) Switch Accounts");
         System.out.println("5) Dashboard");
         System.out.println("6) Sign out");
         System.out.println("7) Exit");
-        System.out.println("Select an option.");
 
         try {
-            System.out.print("> ");
+            System.out.print("\n> ");
             String input = app().getConsole().readLine();
 
             switch (input) {

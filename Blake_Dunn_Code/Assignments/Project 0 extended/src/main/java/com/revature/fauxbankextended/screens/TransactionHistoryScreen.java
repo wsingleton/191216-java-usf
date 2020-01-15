@@ -16,11 +16,11 @@ public class TransactionHistoryScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("\n\n\n\n\n");
+        System.out.println("\n\n\n");
+        System.out.println("+-------  Transaction History  ------- +\n\n");
         System.out.println("   User ID          Account ID          Transaction          Transaction Amount                Transaction Date");
         userService.viewCurrentAcctTransactionHistory();
 
         app().getRouter().navigate("/transition");
-
     }
 }

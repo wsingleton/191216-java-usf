@@ -2,7 +2,6 @@ package com.revature.fauxbankextended.repos;
 
 import com.revature.fauxbankextended.models.Transaction;
 import com.revature.fauxbankextended.models.TransactionType;
-import com.revature.fauxbankextended.util.ConnectionFactory;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -29,9 +28,7 @@ public class TransactionRepository implements CrudRepository<Transaction> {
         }catch(SQLException e) {
             e.printStackTrace();
         }
-
         return transHistory;
-
     }
 
     @Override

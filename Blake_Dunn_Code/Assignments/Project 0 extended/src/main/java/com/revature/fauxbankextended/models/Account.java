@@ -70,9 +70,9 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "Id=" + Id +
-                ", balance=" + balance +
-                ", accountType=" + accountType +
+                "Id = " + Id +
+                ", Balance = " + balance +
+                ", Account Type = " + accountType +
                 '}';
     }
 }

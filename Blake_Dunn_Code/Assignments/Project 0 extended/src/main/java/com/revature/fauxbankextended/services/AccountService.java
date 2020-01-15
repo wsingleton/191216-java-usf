@@ -94,22 +94,18 @@ public class AccountService {
         Set<Account> accounts= acctRepo.findAccountsById(user.getId());
         Account acct = new Account();
 
-        System.out.println("\n\n\n");
-        System.out.println("Your current accounts:\n");
+        System.out.println("\n\n");
+        System.out.println("+--- Current Accounts ---+\n");
         for(Account a : accounts) {
             System.out.println(a);
         }
-        System.out.println("\nPlease choose an account.");
+        System.out.println("\n+--- Choose Account ---+");
 
         try {
-            System.out.println("Enter the account number. ");
             System.out.print("> ");
             String choice = app().getConsole().readLine();
 
-            if (choice == null || choice.equals("") || choice.matches("^[a-zA-Z]*$")) {
-                System.out.println("Try again!");
-                return false;
-            }
+            if (choice == null || choice.equals("") || choice.matches("^[a-zA-Z]*$")) return false;
 
             Integer acctNum = Integer.parseInt(choice);
             acct = acctRepo.getAccount(user, acctNum);
@@ -126,14 +122,15 @@ public class AccountService {
         Set<Account> accounts = acctRepo.findAccountsById(app().getCurrentSession().getSessionUser().getId());
         Account acct1 = new Account();
         Account acct2 = new Account();
-        System.out.println("\n\n\n");
-        System.out.println("Your current accounts:");
+        if (accounts.size() < 2) return false;
+        System.out.println("\n\n");
+        System.out.println("Your current accounts:\n");
         for(Account a : accounts) {
             System.out.println(a);
         }
 
-        System.out.println("Which account do you want to transfer money to?");
-        System.out.print("Enter account number: ");
+        System.out.println("\n+--- Transfer From ---+");
+        System.out.print("Enter account number >  ");
         try{
             String option1 = app().getConsole().readLine();
             Integer choice1 = Integer.parseInt(option1);
@@ -151,7 +148,7 @@ public class AccountService {
                 throw new ResourceNotFoundException();
             }
 
-            System.out.println("Enter the account you'd like to transfer from.");
+            System.out.println("\n\n+--- Transfer To ---+");
             System.out.print("> ");
             String option2 = app().getConsole().readLine();
 
@@ -172,7 +169,7 @@ public class AccountService {
             Double acct1Balance = acct1.getBalance();
             Double acct2Balance = acct2.getBalance();
 
-            System.out.println("How much would you like to transfer?");
+            System.out.println("\n\n+--- Transfer Amount ---+");
             System.out.print("> ");
             String amount = app().getConsole().readLine();
 
@@ -187,8 +184,8 @@ public class AccountService {
             }
             Double updatedTransfer = convertAmount(transferAmount);
 
-            acct1Balance += updatedTransfer;
-            acct2Balance -= updatedTransfer;
+            acct1Balance -= updatedTransfer;
+            acct2Balance += updatedTransfer;
 
             acct1.setBalance(acct1Balance);
             acct2.setBalance(acct2Balance);

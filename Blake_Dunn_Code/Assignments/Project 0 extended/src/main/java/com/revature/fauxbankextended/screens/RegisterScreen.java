@@ -27,7 +27,8 @@ public class RegisterScreen extends Screen {
 
         try{
 
-            System.out.println("\n\n\n\n\n");
+            System.out.println("\n\n");
+            System.out.println("+-------  Register  ------- +\n");
             System.out.println("Sign up for a new account");
             System.out.print("First name: " );
             firstName = app().getConsole().readLine();
@@ -35,15 +36,15 @@ public class RegisterScreen extends Screen {
             lastName = app().getConsole().readLine();
             System.out.print("Username (Must be between 8-14 characters): ");
             userName = app().getConsole().readLine();
-            System.out.println("Password must contain special character and be between 8-14 characters.");
+            System.out.println("Password must contain special character and be between 8-14 characters");
             System.out.print("Password: ");
             password = app().getConsole().readLine();
 
             User newUser = new User(firstName, lastName, userName, password);
             User user = userService.register(newUser);
 
-            System.out.println("Please choose an account type.");
-            System.out.println("1) Checking Account");
+            System.out.println("\nPlease choose an account type");
+            System.out.println("\n1) Checking Account");
             System.out.println("2) Savings Account");
             System.out.print("> ");
             type = app().getConsole().readLine();

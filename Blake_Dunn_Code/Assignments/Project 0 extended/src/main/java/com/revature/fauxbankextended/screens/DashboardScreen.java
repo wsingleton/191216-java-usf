@@ -11,7 +11,8 @@ public class DashboardScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("\n\n\n\n\n");
+        System.out.println("\n\n\n");
+        System.out.println("+-------  Dash Board  ------- +\n");
         System.out.println("1) Check Balance");
         System.out.println("2) Deposit");
         System.out.println("3) Withdraw");
@@ -19,10 +20,10 @@ public class DashboardScreen extends Screen {
         System.out.println("5) Profile");
         System.out.println("6) Sign out");
         System.out.println("7) Exit");
-        System.out.println("Please choose an option.");
+
 
         try {
-            System.out.print("> ");
+            System.out.print("\n> ");
             String input = app().getConsole().readLine();
 
             switch (input) {

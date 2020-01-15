@@ -26,8 +26,8 @@ public class LoginScreen extends Screen {
         String password;
 
         try {
-            System.out.println("\n\n\n\n\n");
-            System.out.println("Please provide your login credentials");
+            System.out.println("\n\n");
+            System.out.println("+-------  Sign-in  ------- +\n");
             System.out.print("Username: ");
             username = app().getConsole().readLine();
             System.out.print("Password: ");
@@ -37,16 +37,16 @@ public class LoginScreen extends Screen {
             accountService.chooseAccount(user);
 
             if (app().isSessionValid()) {
-                System.out.println("[LOG - Login successful, navigating to dashboard...");
+                System.out.println("Success!");
                 app().getRouter().navigate("/dashboard");
             }
 
         }catch (InvalidRequestException | AuthenticationException e) {
-            System.out.println("[LOG] - Invalid login credentials provided!");
+            System.out.println("Invalid login credentials provided!");
         }
         catch (Exception e) {
             System.err.println("[ERROR] - An unexpected exception occurred");
-            System.out.println("[LOG] - Shutting down application");
+            System.out.println("Shutting down application");
             app().setAppRunning(false);
         }
     }

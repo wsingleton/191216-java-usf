@@ -16,17 +16,18 @@ public class JointAccountScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("\n\n\n\n\n");
+        System.out.println("\n\n\n");
+        System.out.println("+-------  Joint Account  ------- +\n");
         System.out.println("Who would you like to add to your " + app().getCurrentSession().getSessionAccount().getAccountType() +
-                " account?");
-        System.out.println("Enter the username of new user. ");
+                " account?\n");
+        System.out.println("Enter the username of new user ");
 
         try {
             System.out.print("> ");
             String username = app().getConsole().readLine();
             User newUser = userService.setJointAccount(username);
 
-            System.out.println("You now share your " + app().getCurrentSession().getSessionAccount().getAccountType() +
+            System.out.println("\n\nYou now share your " + app().getCurrentSession().getSessionAccount().getAccountType() +
                     " with " + newUser.getFirstName());
 
         }catch(Exception e) {

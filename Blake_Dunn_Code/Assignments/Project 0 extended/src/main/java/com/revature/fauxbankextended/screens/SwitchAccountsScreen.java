@@ -15,11 +15,13 @@ public class SwitchAccountsScreen extends Screen {
     @Override
     public void render() {
 
+        System.out.println("+-------  Switch Account  ------- +\n");
+
         accountService.chooseAccount(app().getCurrentSession().getSessionUser());
 
         if (app().isSessionValid()) {
             System.out.println("[LOG - You have now switched to your " +
-                    app().getCurrentSession().getSessionAccount().getAccountType());
+                    app().getCurrentSession().getSessionAccount().getAccountType() + " account.");
             app().getRouter().navigate("/dashboard");
         }
 

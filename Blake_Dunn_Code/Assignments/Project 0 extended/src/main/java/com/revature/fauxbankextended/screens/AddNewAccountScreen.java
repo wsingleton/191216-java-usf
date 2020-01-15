@@ -16,8 +16,9 @@ public class AddNewAccountScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("\n\n\n\n\n");
-        System.out.println("What type of account would you like to add?");
+        System.out.println("\n\n\n");
+        System.out.println("+-------  Create New Account  ------- +\n");
+        System.out.println("What type of account would you like to add?\n");
         System.out.println("1) Checking");
         System.out.println("2) Savings");
 

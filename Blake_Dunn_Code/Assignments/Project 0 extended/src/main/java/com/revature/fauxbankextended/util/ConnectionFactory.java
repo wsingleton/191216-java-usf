@@ -44,6 +44,5 @@ public class ConnectionFactory {
             e.printStackTrace();
         }
         return conn;
-
     }
 }

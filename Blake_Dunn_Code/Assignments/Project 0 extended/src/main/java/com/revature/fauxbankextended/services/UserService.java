@@ -1,5 +1,6 @@
 package com.revature.fauxbankextended.services;
 
+import com.revature.fauxbankextended.exceptions.AuthenticationException;
 import com.revature.fauxbankextended.exceptions.InvalidRequestException;
 import com.revature.fauxbankextended.exceptions.ResourcePersistenceException;
 import com.revature.fauxbankextended.models.*;
@@ -37,6 +38,7 @@ public class UserService {
                 || password == null || password.trim().equals("")) throw new InvalidRequestException();
 
         User user = userRepo.getUser(username, password);
+
         return user;
     }
 
@@ -75,6 +77,9 @@ public class UserService {
     }
 
     public User setJointAccount(String username) {
+
+        if (username == null || username.trim().equals("")) throw new InvalidRequestException();
+
         User addToAccount = new User();
         Optional<User> _user = userRepo.findUserByUserName(username);
 

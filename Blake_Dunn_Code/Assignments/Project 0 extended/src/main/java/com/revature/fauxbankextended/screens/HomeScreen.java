@@ -11,7 +11,8 @@ public class HomeScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("Welcome to Faux Bank!\n");
+        System.out.println("\n\n\n");
+        System.out.println("+-------  Welcome to Faux Bank  ------- +\n");
         System.out.println("1) Login");
         System.out.println("2) Register");
         System.out.println("3) Exit Application");

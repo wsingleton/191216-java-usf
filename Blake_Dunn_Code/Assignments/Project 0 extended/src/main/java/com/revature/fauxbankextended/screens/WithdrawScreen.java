@@ -19,9 +19,10 @@ public class WithdrawScreen extends Screen {
 
         Double balance = app().getCurrentSession().getSessionAccount().getBalance();
 
-        System.out.println("\n\n\n\n\n");
+        System.out.println("\n\n\n");
+        System.out.println("+-------  Withdraw  ------- +\n");
         System.out.println("Your Account Balance: $" + balance);
-        System.out.println("How much would you like to withdraw?");
+        System.out.println("Enter Withdraw Amount");
         System.out.print("> ");
 
         try{
@@ -33,6 +34,5 @@ public class WithdrawScreen extends Screen {
         }
 
         app().getRouter().navigate("/transition");
-
     }
 }

@@ -94,28 +94,22 @@ public class UserRepository implements CrudRepository<User> {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
         return newUser;
-
     }
 
     @Override
     public Optional<User> findById(Integer id) {
-
         return null;
     }
 
     @Override
     public Boolean update(User updateUser) {
-
         return false;
-
     }
 
     public Boolean updateCompositeKey(User user, Account account) {
-        Connection conn = app().getCurrentSession().getConnection();
 
-        try {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()){
             String sql = "INSERT INTO users_accounts VALUES (?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, user.getId());

@@ -17,7 +17,7 @@ public class TransferMoneyScreen extends Screen {
     public void render() {
 
         System.out.println("\n\n\n");
-        System.out.println("Welcome to the transfer screen.");
+        System.out.println("+-------  Transfers  ------- +\n");
 
         if(accountService.transferMoney()) {
             System.out.println("Your transfer was a success!");
@@ -27,8 +27,5 @@ public class TransferMoneyScreen extends Screen {
         }
 
         app().getRouter().navigate("/dashboard");
-
-
-
     }
 }

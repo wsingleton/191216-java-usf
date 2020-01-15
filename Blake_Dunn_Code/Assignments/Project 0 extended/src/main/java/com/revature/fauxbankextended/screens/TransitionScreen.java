@@ -11,11 +11,12 @@ public class TransitionScreen extends Screen {
     @Override
     public void render(){
 
-        System.out.println("\n\n\n\n");
-        System.out.println("Would you like to perform another transaction?");
-        System.out.println("1) Yes");
-        System.out.println("2) Logout");
-        System.out.println("3) Exit Application");
+        System.out.println("\n\n");
+        System.out.println("+--- New Transaction ---+");
+        System.out.println("1) Dashboard");
+        System.out.println("2) Profile");
+        System.out.println("3) Logout");
+        System.out.println("4) Exit Application");
 
         try {
             System.out.print("> ");
@@ -27,10 +28,13 @@ public class TransitionScreen extends Screen {
                     app().getRouter().navigate("/dashboard");
                     break;
                 case "2":
+                    app().getRouter().navigate("/profile");
+                    break;
+                case "3":
                     app().invalidateCurrentSession();
                     app().getRouter().navigate("/home");
                     break;
-                case "3":
+                case "4":
                     System.out.println("Exiting application...");
                     app().setAppRunning(false);
                     break;
