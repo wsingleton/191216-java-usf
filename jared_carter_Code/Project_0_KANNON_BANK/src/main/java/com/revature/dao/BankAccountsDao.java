@@ -61,10 +61,10 @@ public class BankAccountsDao implements Dao<Accounts_Bank, Integer> {
             while(rs.next()) {
 
                 bk = new Accounts_Bank();
-                bk.setId(rs.getInt(2));
+                bk.setId(rs.getInt(1));
                // bk.setAccountType(rs.getInt(2));
-                bk.setAccountOwner(rs.getInt(3));
-                bk.setBalance(rs.getDouble(4));
+                bk.setAccountOwner(rs.getInt(2));
+                bk.setBalance(rs.getDouble(3));
 
             }
 
@@ -84,7 +84,7 @@ public class BankAccountsDao implements Dao<Accounts_Bank, Integer> {
 
             conn.setAutoCommit(false);
 
-            String sql = "INSERT INTO ACCOUNTS_BANK ( OWNER_ACCOUNT, ACCOUNT_BALANCE) VALUES(?, ?)";
+            String sql = "INSERT INTO ACCOUNTS_BANK (OWNER_ACCOUNT, ACCOUNT_BALANCE) VALUES(?, ?)";
             String[] keyNames = {"ACCOUNT_ID"};
 
             PreparedStatement ps = conn.prepareStatement(sql, keyNames);
@@ -126,14 +126,14 @@ public class BankAccountsDao implements Dao<Accounts_Bank, Integer> {
 
             conn.setAutoCommit(false);
 
-            String sql = "UPDATE ACCOUNTS_BANK SET BALANCE_ACCOUNT= ? WHERE  OWNER_ACCOUNT = ?";
+            String sql = "UPDATE ACCOUNTS_BANK SET ACCOUNT_BALANCE = ? WHERE  OWNER_ACCOUNT = ?";
 
 
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setDouble(1,  obj.getBalance());
            // ps.setInt(2, obj.getAccountType());
-            ps.setInt(3, obj.getAccountOwner());
+            ps.setInt(2, obj.getAccountOwner());
             ps.executeUpdate();
 
             conn.commit();

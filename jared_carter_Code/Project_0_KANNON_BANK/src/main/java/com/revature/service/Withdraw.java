@@ -35,7 +35,8 @@ public class Withdraw {
                 System.out.println("Please enter a number: ");
             }
             //Make sure withdrawal is not greater than the current balance
-            if (withdraw < balance + 1) {
+            if (withdraw < balance ) {
+
                 balance -= withdraw;
 
                 Accounts_Bank updateUser = new Accounts_Bank(temp.getAccountOwner(), balance);
@@ -45,13 +46,19 @@ public class Withdraw {
                 System.out.println("Your current balance is: " + updateUser.getBalance());
 
                 valid = true;
+
             } else {
 
                 System.out.println("Sorry, you do not enough to withdraw.");
                 SignOutScreen.signOut(id);
 
+               }
 
-            }
+
+
+
+
+
 
 
         }
