@@ -28,16 +28,17 @@ public class AppState {
         final UserAccountRepository uaRepo = new UserAccountRepository();
 
         final UserService userService = new UserService(userRepo);
-        final AccountService accountService = new AccountService(accRepo);
+        final AccountService accountService = new AccountService(accRepo, uaRepo);
         final UserAccountService userAccountService = new UserAccountService(uaRepo);
+
 
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
-                .addScreen(new RegisterScreen(userService, accountService, userAccountService))
+                .addScreen(new RegisterScreen(userService, accountService, userAccountService, userRepo, accRepo, uaRepo))
                 .addScreen(new LoginScreen(userService))
                 .addScreen(new UserProfileScreen())
-                .addScreen(new DepositScreen())
-                .addScreen(new WithdrawScreen());
+                .addScreen(new DepositScreen(accountService))
+                .addScreen(new WithdrawScreen(accountService));
 
     }
 

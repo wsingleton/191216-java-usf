@@ -19,17 +19,21 @@ import static com.revature.project_0.AppDriver.app;
 public class RegisterScreen extends Screen {
 
     private UserRepository userRepository;
+    private AccountRepository accountRepository;
     private UserAccountRepository userAccountRepository;
     private UserService userService;
     private AccountService accountService;
     private UserAccountService userAccountService;
 
-    public RegisterScreen(UserService userService, AccountService accountService, UserAccountService userAccountService) {
+    public RegisterScreen(UserService userService, AccountService accountService, UserAccountService userAccountService, UserRepository userRepository, AccountRepository accountRepository, UserAccountRepository userAccountRepository) {
         super("RegisterScreen", "/register");
         System.out.println("[LOG] - Instantiating " + super.getName());
         this.userService = userService;
         this.accountService = accountService;
         this.userAccountService = userAccountService;
+        this.userRepository = userRepository;
+        this.accountRepository = accountRepository;
+        this.userAccountRepository = userAccountRepository;
     }
 
     @Override
@@ -65,7 +69,7 @@ public class RegisterScreen extends Screen {
             User tempUser = userRepository.findUserByUsername(username).get();
             newUserId = tempUser.getUserId();
             int newAccountId;
-            Account tempAccount = userAccountRepository.getAccountByUser(tempUser);
+            Account tempAccount = accountRepository.findByUsername(app().getCurrentSession().getSessionUser().getUsername()).get();
             newAccountId = tempAccount.getAccountId();
             userAccountService.register(newUserId, newAccountId);
 
@@ -75,7 +79,7 @@ public class RegisterScreen extends Screen {
                 app().getRouter().navigate("/user");
             }
 
-        } catch (InvalidRequestException | ResourcePersistentException e) {
+        } catch (NumberFormatException | InvalidRequestException | ResourcePersistentException e) {
             System.err.println("Registration unsuccessful, invalid values provided or username is taken");
         } catch (Exception e) {
             e.printStackTrace();

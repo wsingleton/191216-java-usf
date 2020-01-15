@@ -15,14 +15,33 @@ import static com.revature.project_0.AppDriver.app;
 
 public class AccountRepository implements CrudRepository<Account>{
 
+    public Optional<Account> findByUsername(String username) {
+        Optional<Account> account = Optional.empty();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM accounts WHERE creator_username = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+            account = mapResultSet(rs).stream().findFirst();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return account;
+    }
+
     @Override
     public void save(Account newOjb) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO accounts VALUES (0, ?, ?)";
+            String sql = "INSERT INTO accounts VALUES (0, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"account_id"});
             pstmt.setDouble(1, newOjb.getBalance());
             pstmt.setInt(2, newOjb.getAccountType().ordinal() + 1);
+            pstmt.setString(3, app().getCurrentSession().getSessionUser().getUsername());
 
 
             int rowsInserted = pstmt.executeUpdate();
@@ -88,8 +107,8 @@ public class AccountRepository implements CrudRepository<Account>{
 
         try {
 
-            String sql = "UPDATE users SET balance = ?" +
-                    "WHERE user_id = ?";
+            String sql = "UPDATE accounts SET balance = ?" +
+                    "WHERE account_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setDouble(1, updatedObj.getBalance());
             pstmt.setInt(2, updatedObj.getAccountId());
@@ -112,7 +131,7 @@ public class AccountRepository implements CrudRepository<Account>{
 
         while (rs.next()) {
             Account temp = new Account();
-            temp.setAccountId(rs.getInt("user_id"));
+            temp.setAccountId(rs.getInt("account_id"));
             temp.setBalance(rs.getDouble("balance"));
             temp.setAccountType(AccountType.getAccountTypeById(rs.getInt("account_type")));
 
