@@ -22,7 +22,7 @@ public class ExistingUserScreen {
         BankAccountRepo bankAccountRepo = new BankAccountRepo();
         Accounts_Bank accounts_bank = bankAccountRepo.findAccountBank(currentUser.getId());
 
-        System.out.println("Hello " + currentUser.getFirstName() + "your balance is ");
+        System.out.println("Hello " + currentUser.getFirstName());
         System.out.println("1. Make a deposit");
         System.out.println("2. Make a withdrawal");
         System.out.println("3. View balance");

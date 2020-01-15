@@ -29,9 +29,9 @@ public class BankAccountsDao implements Dao<Accounts_Bank, Integer> {
             while(rs.next()) {
 
                 Accounts_Bank acc = new Accounts_Bank();
-                acc.setId(rs.getInt("ACCOUNT_ID"));
-                acc.setAccountOwner(rs.getInt(3));
-                acc.setBalance(rs.getDouble(4));
+                acc.setId(rs.getInt(1)); //"ACCOUNT_ID"
+                acc.setAccountOwner(rs.getInt(2));
+                acc.setBalance(rs.getDouble(3));
                 accounts_bank.add(acc);
 
             }
@@ -61,7 +61,7 @@ public class BankAccountsDao implements Dao<Accounts_Bank, Integer> {
             while(rs.next()) {
 
                 bk = new Accounts_Bank();
-                bk.setId(rs.getInt(1));
+                bk.setId(rs.getInt(2));
                // bk.setAccountType(rs.getInt(2));
                 bk.setAccountOwner(rs.getInt(3));
                 bk.setBalance(rs.getDouble(4));
@@ -84,7 +84,7 @@ public class BankAccountsDao implements Dao<Accounts_Bank, Integer> {
 
             conn.setAutoCommit(false);
 
-            String sql = "INSERT INTO ACCOUNTS_BANK ( OWNER_ACCOUNT, BALANCE_ACCOUNT) VALUES(?, ?)";
+            String sql = "INSERT INTO ACCOUNTS_BANK ( OWNER_ACCOUNT, ACCOUNT_BALANCE) VALUES(?, ?)";
             String[] keyNames = {"ACCOUNT_ID"};
 
             PreparedStatement ps = conn.prepareStatement(sql, keyNames);

@@ -60,7 +60,8 @@ public class LogInScreen {
         if (!checkUser) {
 
             System.out.println("The username or password is invalid, please try again.");
-            logIn();
+            System.exit(0);
+            //logIn();
         }
 
 
