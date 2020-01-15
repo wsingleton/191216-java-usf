@@ -143,7 +143,7 @@ public class UserRepo implements CrudRepository<User> {
             temp.setPassword(rs.getString("password"));
             temp.setFirstName(rs.getString("first_name"));
             temp.setLastName(rs.getString("last_name"));
-            temp.setRole(Role.CLIENT);
+            temp.setRole(Role.CUSTOMER);
             users.add(temp);
         }
 

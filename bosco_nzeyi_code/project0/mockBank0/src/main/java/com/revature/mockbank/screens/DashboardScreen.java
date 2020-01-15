@@ -21,11 +21,8 @@ public class DashboardScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("\n                                 MOCKBANK \n");
         System.out.println("                             Welcome " + currentUser.getFirstName()
                 + "    \n");
-        System.out.println("You have " + " [NUMBER OF ACTIVE ACCOUNTS] account(s) \n");
-        System.out.println("Account in use: " + "[Account number] \n");
         System.out.println("Select one of the options below to continue \n");
         System.out.println("1) Create a new account");
         System.out.println("2) Deposit");

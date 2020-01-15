@@ -45,15 +45,11 @@ public class RegisterScreen extends Screen{
             // set the current user to the user who just registered.
             currentUser = registeredUser;
 
+            if (currentUser != null) {
                 System.out.println("[LOG] - New user created. Login to continue...");
-            System.out.println(currentUser.toString());
+                System.out.println(currentUser.toString());
                 router.navigate("/login");
-
-
-//            if (currentUser != null) {
-//                System.out.println("[LOG] - New user created. Navigating to dashboard...");
-//                router.navigate("/dashboard");
-//            }
+            }
 
         } catch (InvalidRequestException | ResourcePersistenceException e) {
             System.err.println("Registration unsuccessful, invalid values provided or username is taken");

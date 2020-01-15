@@ -9,6 +9,7 @@ import com.revature.mockbank.models.User;
 import com.revature.mockbank.repositories.UserRepo;
 import static com.revature.mockbank.AppDriver.currentUser;
 import static com.revature.mockbank.repositories.UserRepo.*;
+
 public class UserService {
 
     private UserRepo userRepo;
