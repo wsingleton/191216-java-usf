@@ -35,18 +35,14 @@ public class AcctRepository implements CrudRepository<Account> {
 
     public Optional<Account> updateAcct(String username, Double bal){
         Optional<Account> _acct = Optional.empty();
-
+        if(bal < 0){ bal=0.0;}
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "UPDATE CBANK.accts SET balance = ? WHERE acctusr = ?";
+            String sql = "UPDATE CBANK.accts SET balance =" + bal+ "WHERE CBANk.accts.acctusr = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
-            pstmt.setDouble(2, bal);
-
 
             ResultSet rs = pstmt.executeQuery();
-            Set<Account> set = mapResultSet(rs);
-            if(!set.isEmpty()){_acct = set.stream().findFirst();}
 
         }
         catch (SQLException e){

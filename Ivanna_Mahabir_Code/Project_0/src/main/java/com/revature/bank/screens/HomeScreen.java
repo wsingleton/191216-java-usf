@@ -29,12 +29,12 @@ public class HomeScreen extends Screen {
                     break;
 
                 case "3":
-                    System.out.println("Exiting the application");
+                    System.out.println("Exiting the application\n");
                     appRunning = false;
                     break;
 
                 default:
-                    System.out.println("[LOG] - Invalid selection");
+                    System.out.println("[LOG] - Invalid selection\n\n");
             }
         }
         catch (Exception e){

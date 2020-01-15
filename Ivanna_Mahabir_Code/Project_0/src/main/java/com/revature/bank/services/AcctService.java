@@ -30,24 +30,27 @@ public class AcctService {
             acctRepo.updateAcct(currentAcct.getUsername(),deposit);
         }
         else{
-            System.out.println("Invalid Deposit Amount Entered");
+            System.out.println("Invalid Deposit Amount Entered\n\n");
             router.navigate("/profile");
         }
         return deposit;
     }
 
-    public Double validateWith(Double withdraw){
+    public Double validateWith(Double init, Double withdraw){
         if(withdraw >= 0 ){
-            if(withdraw < currentAcct.getBalance()) withdraw -= currentAcct.getBalance();
-            else {
-                System.out.println("Invalid Withdrawal Amount Entered");
-                router.navigate("/profile");
+            if(withdraw <= init){
+                withdraw = init - withdraw;
+                currentAcct.setBalance(withdraw);
+                acctRepo.updateAcct(currentAcct.getUsername(), withdraw);
             }
-        }
-        else{
-            System.out.println("Invalid Withdrawal Amount Entered");
+            else {
+                System.out.println("Invalid Withdrawal Amount Entered\n\n");
+                router.navigate("/profile"); }
+        } else{
+            System.out.println("Invalid Withdrawal Amount Entered\n\n");
             router.navigate("/profile");
         }
+
         return withdraw;
     }
 

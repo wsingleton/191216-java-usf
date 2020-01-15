@@ -34,6 +34,7 @@ public class ProfileScreen extends Screen {
                     //getbalance
                     System.out.println("Balance Inquiry");
                     acctService.getAcctByUsername(currentUser.getUsrName());
+
                     System.out.println("Your Current Balance: $" + currentAcct.getBalance() + "\n\n");
                     router.navigate("/profile");
                     break;
@@ -55,19 +56,24 @@ public class ProfileScreen extends Screen {
                 case "3":
                     //withdrawal
                     System.out.println("Withdrawal");
+                    acctService.getAcctByUsername(currentUser.getUsrName());
+                    curBal = currentAcct.getBalance();
+                    System.out.println("Your Current Balance: $" + curBal);
+
                     System.out.println("Enter Amount to Withdraw: $");
                     Double withdraw = Double.parseDouble(console.readLine());
-                    acctService.validateWith(withdraw);
+
+                    System.out.println("Your New Balance: $" + acctService.validateWith(curBal, withdraw) + "\n\n");
                     router.navigate("/profile");
                     break;
 
                 case "4":
-                    System.out.println("Logging Out...");
+                    System.out.println("Logging Out...\n\n");
                     router.navigate("/home");
                     break;
 
                 default:
-                    System.out.println("[LOG] - Invalid selection");
+                    System.out.println("[LOG] - Invalid selection\n");
                     router.navigate("/profile");
             }
         }
