@@ -1,0 +1,28 @@
+div {
+    border: 1px solid;
+    padding: 5px;
+    background-color: slategray;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: blue;
+}
+
+#inheritance {
+    color: red;
+}
+
+.main-header {
+    border-radius: 10%;
+}
+
+div > a:visited {
+    color: goldenrod;
+}
+div > a:active {
+    color: darkred;
+}
+div > a:hover {
+    color: green;
+}

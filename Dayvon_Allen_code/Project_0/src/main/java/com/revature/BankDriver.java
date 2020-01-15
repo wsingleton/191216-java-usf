@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class BankDriver {
 
     public static Scanner console;
-    public static User currentUser;
+    public static User currentUser = new User();
     public static ScreenRouter router;
     public static Boolean appRunning;
 
@@ -39,5 +39,9 @@ public class BankDriver {
 
             }
         }
+    }
+
+    public static User user() {
+        return currentUser;
     }
 }

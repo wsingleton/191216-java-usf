@@ -2,7 +2,6 @@ package com.revature.repos;
 
 import com.revature.models.Account;
 import com.revature.util.ConnectionFactory;
-import oracle.jdbc.OracleTypes;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -39,7 +38,6 @@ public class AccountRepository {
     public void increaseAccountBalance(String depositAmount){
         double newBalance;
         if(depositAmount.matches("\\d+(\\.\\d{1,2})?")){
-
             newBalance = Double.parseDouble(depositAmount) + findAccountBalanceById();
             try(Connection conn = ConnectionFactory.getInstance().getConnection()){
                 String sql = "UPDATE bank_app.accounts SET balance = ? WHERE accountid = ?";
@@ -58,7 +56,6 @@ public class AccountRepository {
             System.out.println("Must only use digits(no more than two numbers after a decimal)");
             System.out.println("------------------------------\n");
             router.navigate("/customer");
-
         }
     }
 
@@ -91,9 +88,9 @@ public class AccountRepository {
             System.out.println("Must only use digits(no more than two numbers after a decimal)");
             System.out.println("------------------------------\n");
             router.navigate("/customer");
-
         }
     }
+
 
     //a method that uses a statement
     public Set<Account> findAllAccounts() {
