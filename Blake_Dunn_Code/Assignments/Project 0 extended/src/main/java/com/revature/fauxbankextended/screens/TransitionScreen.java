@@ -11,6 +11,7 @@ public class TransitionScreen extends Screen {
     @Override
     public void render(){
 
+        System.out.println("\n\n\n\n");
         System.out.println("Would you like to perform another transaction?");
         System.out.println("1) Yes");
         System.out.println("2) Logout");

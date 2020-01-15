@@ -63,7 +63,7 @@ public class AccountRepository implements CrudRepository<Account> {
     public Account save(Account newAccount) {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO accounts VALUES (0, ?, ?)";
+            String sql = "INSERT INTO accounts (acct_id, type_id, balance) VALUES (0, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"acct_id"});
             pstmt.setDouble (1, newAccount.getBalance());
             pstmt.setInt(2, newAccount.getAccountType().ordinal() +1);

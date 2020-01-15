@@ -20,9 +20,9 @@ public class TransactionRepository implements CrudRepository<Transaction> {
 
         try{
             String sql = "SELECT user_id, acct_id, trans_type_id, amount, " +
-                    "TO_CHAR(trans_date, 'MM/DD/YY HH24:MM:SS') " +
+                    "trans_date " +
                     " FROM transactions WHERE user_id = ? AND acct_id = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id", "acct_id", "trans_type_id", "amount", "trans_date"});
             pstmt.setInt(1, app().getCurrentSession().getSessionUser().getId());
             pstmt.setInt(2, app().getCurrentSession().getSessionAccount().getId());
             transHistory = mapResultSet(pstmt.executeQuery());
@@ -39,7 +39,8 @@ public class TransactionRepository implements CrudRepository<Transaction> {
         Connection conn = app().getCurrentSession().getConnection();
         try {
 
-            String sql = "INSERT INTO transactions VALUES (0, ?, ?, ?, ?)";
+            String sql = "INSERT INTO transactions (trans_id, user_id, acct_id, trans_type_id, amount) " +
+                    " VALUES (0, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"trans_id"});
             pstmt.setInt(1, newTrans.getUserId());
             pstmt.setInt(2, newTrans.getAcctId());
@@ -78,7 +79,6 @@ public class TransactionRepository implements CrudRepository<Transaction> {
         Set<Transaction> transactions = new HashSet<>();
         while (rs.next()) {
             Transaction temp = new Transaction();
-            temp.setTransId(rs.getInt("trans_id"));
             temp.setUserId(rs.getInt("user_id"));
             temp.setAcctId(rs.getInt("acct_id"));
             temp.setType(TransactionType.getTransactionTypeById(rs.getInt("trans_type_id")));

@@ -118,8 +118,8 @@ public class UserService {
         Set<Transaction> history = transRepo.getCurrentAccountTransactionsHistory();
 
         for(Transaction t : history) {
-            System.out.println("   "+t.getAcctId() + "          " + t.getAcctId() +
-                    "          " + t.getType() + "          " + t.getAmount() + "          " + t.getDate());
+            System.out.println("      "+t.getAcctId() + "                 " + t.getAcctId() +
+                    "                 " + t.getType() + "                   " + t.getAmount() + "                    " + t.getDate());
         }
     }
 }

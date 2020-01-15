@@ -16,7 +16,7 @@ public class JointAccountScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n");
         System.out.println("Who would you like to add to your " + app().getCurrentSession().getSessionAccount().getAccountType() +
                 " account?");
         System.out.println("Enter the username of new user. ");

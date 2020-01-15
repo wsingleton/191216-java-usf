@@ -26,7 +26,7 @@ public class LoginScreen extends Screen {
         String password;
 
         try {
-            System.out.println("\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n");
             System.out.println("Please provide your login credentials");
             System.out.print("Username: ");
             username = app().getConsole().readLine();

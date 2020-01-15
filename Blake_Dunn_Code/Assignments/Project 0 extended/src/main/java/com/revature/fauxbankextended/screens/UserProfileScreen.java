@@ -11,7 +11,8 @@ public class UserProfileScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("Welcome " + app().getCurrentSession().getSessionUser().getFirstName() + ", to the your profile screen.\n\n");
+        System.out.println("\n\n\n\n\n");
+        System.out.println("Welcome to the your profile screen " + app().getCurrentSession().getSessionUser().getFirstName() + "\n");
         System.out.println("+----------  Menu  ----------+ \n");
 
         System.out.println("1) Transaction History");

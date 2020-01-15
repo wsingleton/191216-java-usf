@@ -27,7 +27,7 @@ public class RegisterScreen extends Screen {
 
         try{
 
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n");
             System.out.println("Sign up for a new account");
             System.out.print("First name: " );
             firstName = app().getConsole().readLine();

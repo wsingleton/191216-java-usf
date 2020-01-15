@@ -16,6 +16,7 @@ public class TransferMoneyScreen extends Screen {
     @Override
     public void render() {
 
+        System.out.println("\n\n\n");
         System.out.println("Welcome to the transfer screen.");
 
         if(accountService.transferMoney()) {

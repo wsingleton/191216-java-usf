@@ -90,19 +90,27 @@ public class AccountService {
 
     }
 
-    public void chooseAccount(User user) {
+    public boolean chooseAccount(User user) {
         Set<Account> accounts= acctRepo.findAccountsById(user.getId());
         Account acct = new Account();
-        System.out.println("Your current accounts:");
+
+        System.out.println("\n\n\n");
+        System.out.println("Your current accounts:\n");
         for(Account a : accounts) {
             System.out.println(a);
         }
-        System.out.println("\n\nPlease choose an account.");
+        System.out.println("\nPlease choose an account.");
 
         try {
             System.out.println("Enter the account number. ");
             System.out.print("> ");
             String choice = app().getConsole().readLine();
+
+            if (choice == null || choice.equals("") || choice.matches("^[a-zA-Z]*$")) {
+                System.out.println("Try again!");
+                return false;
+            }
+
             Integer acctNum = Integer.parseInt(choice);
             acct = acctRepo.getAccount(user, acctNum);
         }catch(Exception e) {
@@ -110,6 +118,7 @@ public class AccountService {
         }
 
         app().setCurrentSession(new UserSession(user, acct, ConnectionFactory.getInstance().getConnection()));
+        return true;
     }
 
     public boolean transferMoney () {
@@ -117,6 +126,7 @@ public class AccountService {
         Set<Account> accounts = acctRepo.findAccountsById(app().getCurrentSession().getSessionUser().getId());
         Account acct1 = new Account();
         Account acct2 = new Account();
+        System.out.println("\n\n\n");
         System.out.println("Your current accounts:");
         for(Account a : accounts) {
             System.out.println(a);
