@@ -13,8 +13,9 @@ public class ScreenRouter {
         screens.add(screen);
         return this;
     }
-
+//navigates to the route that is inserted into the router
     public void navigate(String route) throws ScreenNotFoundException {
+        //a lambda that looks for a screen with the same route now as the one that was input(throws ScreenNotFoundException if not found)
         screens.stream()
                 .filter(screen -> screen.getRoute().equals(route))
                 .findFirst()

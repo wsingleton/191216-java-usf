@@ -23,13 +23,13 @@ public class RegisterScreen extends Screen {
         try{
             System.out.println("\n\n\n\n\n\n\n\n\n\n+------------------------------------+");
             System.out.println("Sign up for a new account");
-            System.out.print("Username: ");
+            System.out.print("Username (all spaces will be stripped): ");
             username = console.nextLine();
-            System.out.print("Password: ");
+            System.out.print("Password (Cannot use semicolons and all spaces will be stripped): ");
             password = console.nextLine();
             accountID = username.toLowerCase().hashCode();
 
-            User newUser = new User(username.toLowerCase(),password,accountID);
+            User newUser = new User(username.toLowerCase().replaceAll(" ", ""),password.replaceAll(" ", ""),accountID);
             userService.register(newUser);
 
             if (currentUser != null) {

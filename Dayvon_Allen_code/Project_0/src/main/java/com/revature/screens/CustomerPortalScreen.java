@@ -64,4 +64,5 @@ public class CustomerPortalScreen extends Screen {
             appRunning = false;
         }
     }
+
 }

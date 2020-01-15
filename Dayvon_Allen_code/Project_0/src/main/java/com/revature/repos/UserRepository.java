@@ -21,7 +21,6 @@ public class UserRepository implements BankActionRepository<User> {
             String sql = "INSERT INTO bank_app.users VALUES (?,?,?)";
             String sql1 = "INSERT INTO bank_app.accounts VALUES (?,?)";
 
-            //to get generated id, has to be a string array(because you can potentially have multiple generated ids, column that will have generated id
             PreparedStatement pstmt = conn.prepareStatement(sql);
             PreparedStatement pstmt1 = conn.prepareStatement(sql1);
             pstmt1.setString(1, Integer.toString(newObj.getUsername().hashCode()));
@@ -30,7 +29,6 @@ public class UserRepository implements BankActionRepository<User> {
             pstmt.setString(2, newObj.getPassword());
             pstmt.setString(3, Integer.toString(newObj.getUsername().hashCode()));
 
-            //returns the number of rows that were affected
             pstmt1.executeUpdate();
             pstmt.executeUpdate();
         } catch( SQLIntegrityConstraintViolationException e) {
@@ -100,7 +98,7 @@ public class UserRepository implements BankActionRepository<User> {
         return users;
     }
 
-    //maps through result set(places the account into a set).
+    //maps through result set(places the User into a set).
     private Set<User> mapResultSet(ResultSet rs) throws SQLException {
         Set<User> users = new HashSet<>();
         while (rs.next()) {

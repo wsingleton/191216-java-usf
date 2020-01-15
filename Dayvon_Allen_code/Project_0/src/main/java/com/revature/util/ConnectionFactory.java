@@ -7,12 +7,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+// singleton designed connection factory that allows for you to only create one instance
 public class ConnectionFactory {
     private static ConnectionFactory connFactory = new ConnectionFactory();
     private Properties props = new Properties();
     private ConnectionFactory(){
 
         super();
+        //loads the property file in
         try {
             props.load(new FileReader("src/main/resources/application.properties"));
         }catch (IOException e) {
