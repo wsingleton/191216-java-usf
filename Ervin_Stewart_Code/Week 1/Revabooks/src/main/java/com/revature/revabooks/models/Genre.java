@@ -12,6 +12,7 @@ public enum Genre {
     private Genre(String genre) {
         this.genre = genre;
     }
+
     public static Genre getGenreById(int id) {
         Genre genre = null;
         switch (id) {

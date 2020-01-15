@@ -3,19 +3,24 @@ package com.liberationbank.screens;
 import com.liberationbank.exceptions.InvalidRequestException;
 import com.liberationbank.exceptions.ResourcePersistenceException;
 import com.liberationbank.models.User;
+import com.liberationbank.services.AccountService;
 
 import java.util.Scanner;
 
 import static com.liberationbank.AppDriver.*;
 
 public class DashboardScreen extends Screen {
-    public DashboardScreen(){
+    private AccountService accountService;
+    public DashboardScreen(AccountService accountService){
         super("DashboardScreen", "/dashboard");
         System.out.println("[LOG] - Instantiating "+ super.getName());
+        this.accountService = accountService;
     }
     @Override
     public void render() {
-        System.out.println("Welcome!");
+
+        accountService.retrieveUserAccount(currentUser);
+        System.out.println("Welcome, " + currentUser.getFirstName()+ "!");
         System.out.println("To view balance enter 1\n" +
                 "To make a deposit enter 2\n" +
                 "To make a withdrawal enter 3");
@@ -43,9 +48,11 @@ public class DashboardScreen extends Screen {
             default:
                 System.out.println("Not a valid input");
         }}catch(InvalidRequestException | ResourcePersistenceException e){
-            System.err.println("Registration unsuccessful, invalid values provided or username is taken");
+            System.err.println("Invalid values provided");
         }catch(Exception e){
-            System.err.println("[ERROR] - An Unexpected exception occured");
+            e.printStackTrace();
+
+            System.err.println("[ERROR] - An Unexpected exception occurred");
             System.out.println("[LOG] - shutting down application");
             appRunning = false;
         }

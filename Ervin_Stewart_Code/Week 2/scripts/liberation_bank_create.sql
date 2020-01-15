@@ -43,10 +43,10 @@ CREATE TABLE user_roles (
 
 CREATE TABLE users (
     user_id     NUMBER,
-    username    VARCHAR2(25) UNIQUE NOT NULL,
-    password    VARCHAR2(25) NOT NULL,
     first_name  VARCHAR2(25) NOT NULL,
     last_name   VARCHAR2(25) NOT NULL,
+    username    VARCHAR2(25) UNIQUE NOT NULL,
+    password    VARCHAR2(25) NOT NULL,
     role_id     NUMBER,
     CONSTRAINT pk_users
     PRIMARY KEY (user_id),
@@ -56,14 +56,14 @@ CREATE TABLE users (
 );
 
 CREATE TABLE account_type (
-    account_type_id    NUMBER,
+    account_type_id    NUMBER ,
     account_type_name  VARCHAR2(25),
     CONSTRAINT pk_account_types
     PRIMARY KEY (account_type_id)
 );
 CREATE TABLE accounts (
-    account_id     NUMBER,
-    balance    NUMBER,
+    account_id     NUMBER ,
+    balance    NUMBER DEFAULT 0,
     account_type_id   NUMBER,
     CONSTRAINT pk_accounts
     PRIMARY KEY (account_id),
@@ -73,7 +73,7 @@ CREATE TABLE accounts (
 );
 CREATE TABLE users_accounts (
     user_id     NUMBER,
-    account_id     NUMBER,
+    account_id     NUMBER ,
     CONSTRAINT pk_ck_users_accounts
     PRIMARY KEY (user_id, account_id),
     CONSTRAINT fk_user
@@ -144,3 +144,52 @@ BEGIN
 END;
 /
 
+insert into account_type(account_type_name)
+ values ('CHECKING');
+ insert into account_type(account_type_name)
+ values ('SAVINGS');
+ commit;
+ insert into user_roles(role_name)
+ values ('ADMIN');
+ insert into user_roles(role_name)
+ values ('BASIC_MEMBER');
+ 
+ insert into users( last_name, first_name, username, password, role_id)
+ values ('Stewart','Ervin','Spacemvn', 'password', 1);
+ insert into accounts( balance,account_type_id)
+ values (150000, 1);
+ 
+ ALTER TABLE accounts
+MODIFY balance DEFAULT 0;
+
+insert into users_accounts (user_id, account_id)
+values(1,1)
+
+--procedure that updates USERS_ACCOUNTS 
+create or replace procedure set_users_accounts(newuser_id number, newaccount_id number)
+is
+begin
+insert into users_accounts(user_id,account_id)
+ values(newuser_id,newaccount_id);
+ commit;
+end;
+/
+
+
+
+insert into users(user_id,first_name,last_name,username,password,role_id)
+values(0,'Blake','Dunn','Bulayke','bdunn22',1);
+
+insert into accounts ( account_id, account_type_id)
+values(400000,2);
+
+update accounts
+set balance = 420000
+where account_id = 43;
+
+update users
+set username = 'Gandalph', last_name = 'Mccullen', first_name = 'Edward',password = 'thewhite!'
+where user_id = 41;
+
+insert into users_accounts (user_id, account_id)
+values(43,43);

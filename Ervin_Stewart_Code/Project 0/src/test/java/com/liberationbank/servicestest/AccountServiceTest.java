@@ -36,7 +36,7 @@ public class AccountServiceTest {
         String message = "if a negative number is input, return false";
         double testWithdrawalValue = 500;
         double testBalanceValue = 5000;
-        boolean actualResult = sut.validateWithdrawBalance(testWithdrawalValue, testBalanceValue);
+        boolean actualResult = sut.validateWithdrawalBalance(testWithdrawalValue, testBalanceValue);
         assertTrue(message, actualResult);
     }
 
@@ -45,7 +45,7 @@ public class AccountServiceTest {
         String message = "if a negative number is input, return false";
         double testWithdrawalValue = -5;
         double testBalanceValue = 5000;
-        boolean actualResult = sut.validateWithdrawBalance(testWithdrawalValue, testBalanceValue);
+        boolean actualResult = sut.validateWithdrawalBalance(testWithdrawalValue, testBalanceValue);
         assertFalse(message, actualResult);
     }
 
@@ -54,7 +54,7 @@ public class AccountServiceTest {
         String message = "if a negative number is input, return false";
         double testWithdrawalValue = 5001;
         double testBalanceValue = 5000;
-        boolean actualResult = sut.validateWithdrawBalance(testWithdrawalValue, testBalanceValue);
+        boolean actualResult = sut.validateWithdrawalBalance(testWithdrawalValue, testBalanceValue);
         assertFalse(message, actualResult);
     }
 

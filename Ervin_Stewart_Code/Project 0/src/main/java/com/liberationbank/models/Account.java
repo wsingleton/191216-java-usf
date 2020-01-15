@@ -7,6 +7,13 @@ public class Account {
     private Double balance;
     private AccountType accountType;
 
+    public Account(){super();}
+
+    public Account(Double balance, AccountType accountType){
+        this.balance = balance;
+        this.accountType = accountType;
+    }
+
     public Account(Integer id, Double balance, AccountType accountType) {
         this.id = id;
         this.balance = balance;

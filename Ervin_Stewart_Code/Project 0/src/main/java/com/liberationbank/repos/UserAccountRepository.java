@@ -1,8 +1,7 @@
 package com.liberationbank.repos;
 
-import com.liberationbank.models.Role;
-import com.liberationbank.models.User;
-import com.liberationbank.models.UserAccount;
+import com.liberationbank.models.*;
+import com.liberationbank.util.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,16 +15,16 @@ public class UserAccountRepository implements CrudRepository  {
 
    public UserAccount getUserAccountByUserId(Integer userId){
 
-       UserAccount userUserAccount = new UserAccount();
-       Set<Book> bookSet = new HashSet<>();
+       UserAccount currentUserAccount = new UserAccount();
+       Set<Account> accountSet = new HashSet<>();
        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
            String sql = "SELECT * " +
-                   "FROM user_wishlists w " +
+                   "FROM users_accounts ua " +
                    "JOIN users u " +
-                   "ON w.user_id = u.user_id " +
-                   "JOIN books b " +
-                   "ON w.book_id = b.book_id " +
-                   "WHERE w.user_id = ?";
+                   "ON ua.user_id = u.user_id " +
+                   "JOIN accounts a " +
+                   "ON ua.account_id = a.account_id " +
+                   "WHERE ua.user_id = ?";
            PreparedStatement pstmt = conn.prepareStatement(sql);
            pstmt.setInt(1, userId);
            ResultSet rs = pstmt.executeQuery();
@@ -41,27 +40,23 @@ public class UserAccountRepository implements CrudRepository  {
                    owner.setRole(Role.getRoleById(rs.getInt("role_id")));
                    ownerCreated = true;
                }
-               Book temp = new Book();
-               temp.setId(rs.getInt("book_id"));
-               temp.setIsbn(rs.getString("isbn"));
-               temp.setTitle(rs.getString("title"));
-               temp.setAuthor(new Author(rs.getString("author_fn"), rs.getString("author_ln")));
-               temp.setGenres(Genre.getGenreById(rs.getInt("genre_id")));
-               temp.setStockCount(rs.getInt("stock_count"));
-               temp.setPrice(rs.getDouble("price"));
-               bookSet.add(temp);
+               Account temp = new Account();
+               temp.setId(rs.getInt("account_id"));
+               temp.setBalance(rs.getDouble("balance"));
+               temp.setAccountType(AccountType.getAccountTypeById(rs.getInt("account_type_id")));
+               accountSet.add(temp);
            }
-           userWishList.setOwner(owner);
-           userWishList.setBookWishList(bookSet);
+           currentUserAccount.setOwner(owner);
+           currentUserAccount.setUserAccount(accountSet);
        } catch (SQLException e) {
            e.printStackTrace();
        }
-       return userUserAccount;
+       return currentUserAccount;
    }
 
 
     @Override
-    public void save(Object newObj) {
+    public void save(Object newobj) {
 
     }
 
