@@ -36,9 +36,9 @@ public class AccountTransactionScreen {
         System.out.println("2. Create another account");
         System.out.println("3. Sign out");
 
-        System.out.println("Enter an option");
+
         do {
-            option = scanner.nextInt();
+            System.out.println("Enter an option");
 
             try {
                 String dummy = scanner.next();
@@ -55,7 +55,7 @@ public class AccountTransactionScreen {
                     ExistingUserScreen.existingUserScreen(user.getId());
                     break;
                 case 2:
-                    accountTransaction(user);
+                    CreateAccountScreen.createAccount();
                     break;
                 case 3:
                     System.out.println("Thank you for using Kannon Bank.");

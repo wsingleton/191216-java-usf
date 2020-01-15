@@ -75,7 +75,7 @@ UPDATE accounts_bank
 SET ACCOUNT_BALANCE = 10
 WHERE OWNER_ACCOUNT = 22
 
-Insert Into Accounts_Bank Values (21,'2','17')
+Insert Into Accounts_Bank Values (1,'0','17')
 
 COMMIT;
 
