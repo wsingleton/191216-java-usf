@@ -17,9 +17,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -32,7 +30,6 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
 public class UserServiceTest {
     UserService sut;
     UserRepository userRepo = mock(UserRepository.class);
-    BankDriver mockDriver = mock(BankDriver.class);
     User mockUser = mock(User.class);
 
     ArrayList<User> mockUsers = new ArrayList<>();
@@ -45,7 +42,6 @@ public class UserServiceTest {
         mockUsers.add(new User("test_user", "", 303094949));
         mockUsers.add(new User("testUser", "testpassword", 1010101010));
         mockUsers.add(new User("testUser", "testpassword", 1010101010));
-
 
     }
 

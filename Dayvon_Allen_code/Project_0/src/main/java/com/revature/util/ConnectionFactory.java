@@ -32,7 +32,6 @@ public class ConnectionFactory {
                     props.getProperty("admin-usr"), props.getProperty("admin-pw"));
 
         } catch(ClassNotFoundException | SQLException e){
-            e.printStackTrace();
         }
 
         return conn;
