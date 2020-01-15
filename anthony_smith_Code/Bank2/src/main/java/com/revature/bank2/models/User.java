@@ -5,7 +5,7 @@ import java.util.Objects;
 public class User {
 
 
-        String user_id;
+        Integer user_id;
         String username;
         String password;
         String email;
@@ -26,7 +26,7 @@ public class User {
 
         }
 
-    public User(String user_id, String firstName, String lastName, String username, String password) {
+    public User(Integer user_id, String firstName, String lastName, String username, String password) {
 
             this.user_id = user_id;
             this.firstname = firstname;
@@ -36,11 +36,11 @@ public class User {
     }
 
 
-        public String getUser_id() {
+        public int getUser_id() {
             return user_id;
         }
 
-        public void setUser_id(String user_id) {
+        public void setUser_id(Integer user_id) {
             this.user_id = user_id;
         }
 
@@ -115,4 +115,3 @@ public class User {
         }
     }
 
-}

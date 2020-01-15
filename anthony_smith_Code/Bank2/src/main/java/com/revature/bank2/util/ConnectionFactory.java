@@ -21,9 +21,16 @@ public class ConnectionFactory {
 
     private static ConnectionFactory connFactory = new ConnectionFactory();
 
+    private Properties props = new Properties();
+
     private ConnectionFactory() {
         super();
 
+        try {
+            props.load(new FileReader("./src/main/resources/application.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -32,20 +39,65 @@ public class ConnectionFactory {
     }
 
 
-
-
-    public Connection getConnection(User sessionUser){
+    public Connection getConnection() {
 
         Connection conn = null;
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
+            conn = DriverManager.getConnection(
+                    props.getProperty("url"),
+                    props.getProperty("user"),
+                    props.getProperty("password")
+            );
 
-        } catch(ClassNotFoundException | SQLException e){
+
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
 
         return conn;
+
     }
+
+
+//    public Connection getConnection(User sessionUser){
+//
+//        Connection conn = null;
+//
+//
+//        try {
+//            switch(userRole) {
+//                case ADMIN:
+//                case MANAGER:
+//                    conn = DriverManager.getConnection(
+//                            props.getProperty("url"),
+//                            props.getProperty("admin-usr"),
+//                            props.getProperty("admin-pw")
+//                    );
+//                    break;
+//                case PREMIUM_MEMBER:
+//                case BASIC_MEMBER:
+//                    conn = DriverManager.getConnection(
+//                            props.getProperty("url"),
+//                            props.getProperty("usr"),
+//                            props.getProperty("pw")
+//                    );
+//                    break;
+//                default:
+//                    conn = null;
+//            }
+//
+//        } catch (SQLException sqle) {
+//            sqle.printStackTrace();
+//        }
+//
+//
+//        return conn;
+//
+//    }
+
+
+
 }

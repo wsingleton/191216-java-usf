@@ -1,5 +1,7 @@
 package com.revature.bank2.screens;
 
+import com.revature.bank2.exceptions.InvalidRequestException;
+
 import java.util.Scanner;
 
 public class RegisterScreen extends Screen{
