@@ -16,7 +16,7 @@ public class BankAccountsDao implements Dao<Accounts_Bank, Integer> {
     @Override
     public List<Accounts_Bank> findAll() {
 
-        List<Accounts_Bank> bank_acc = new ArrayList<Accounts_Bank>();
+        List<Accounts_Bank> accounts_bank = new ArrayList<Accounts_Bank>();
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
@@ -30,10 +30,9 @@ public class BankAccountsDao implements Dao<Accounts_Bank, Integer> {
 
                 Accounts_Bank acc = new Accounts_Bank();
                 acc.setId(rs.getInt("ACCOUNT_ID"));
-                //acc.setAccountType(rs.getInt(2));
                 acc.setAccountOwner(rs.getInt(3));
                 acc.setBalance(rs.getDouble(4));
-                bank_acc.add(acc);
+                accounts_bank.add(acc);
 
             }
         } catch (SQLException e) {
@@ -42,7 +41,7 @@ public class BankAccountsDao implements Dao<Accounts_Bank, Integer> {
 
         }
 
-        return bank_acc;
+        return accounts_bank;
 
     }
 

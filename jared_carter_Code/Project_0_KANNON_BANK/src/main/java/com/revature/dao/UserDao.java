@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.revature.pojos.User;
 import com.revature.util.ConnectionFactory;
+import oracle.jdbc.internal.OracleTypes;
 
 //import oracle.jdbc.OracleTypes;
 
@@ -22,11 +23,11 @@ public class UserDao implements Dao<User, Integer>{
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
-            String sql = "{ call RETRIVE_ALL_BANK_ACCOUNTS(?) }";
+            String sql = "{ call RETRIEVE_USERS_BANK(?) }";
 
             CallableStatement cs = conn.prepareCall(sql);
 
-            //cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.execute();
 
             ResultSet rs = (ResultSet) cs.getObject(1);
@@ -34,7 +35,7 @@ public class UserDao implements Dao<User, Integer>{
             while(rs.next()) {
 
                 User temp = new User();
-                temp.setId(rs.getInt("USER_ID"));
+                temp.setId(rs.getInt(1));
                 temp.setFirstName(rs.getString(2));
                 temp.setLastName(rs.getString(3));
                 temp.setUsername(rs.getString(4));

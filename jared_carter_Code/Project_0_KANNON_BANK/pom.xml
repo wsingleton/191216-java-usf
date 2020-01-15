@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.revature</groupId>
-    <artifactId>mockBank0</artifactId>
+    <artifactId>Project_0_KANNON_BANK</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>

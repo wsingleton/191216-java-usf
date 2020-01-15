@@ -10,16 +10,20 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
-    private static ConnectionFactory connFactory = null;
+    private static ConnectionFactory connFactory = new ConnectionFactory();
+    private Properties prop = new Properties();
 
     private ConnectionFactory() {
-
-
+    super();
+    try {
+        prop.load(new FileReader("./src/main/resources/application.properties"));
+    } catch(IOException e) { e.printStackTrace(); }
     }
 
     public static synchronized ConnectionFactory getInstance() {
 
         if(connFactory == null) connFactory = new ConnectionFactory();
+
         return connFactory;
 
     }
@@ -28,29 +32,17 @@ public class ConnectionFactory {
     public Connection getConnection() {
 
         Connection conn = null;
-        Properties prop = new Properties();
-        String path = "src/main/resources/application.properties";
+
+
 
         try {
-
-            prop.load(new FileReader(path));
-
-
-            Class.forName(prop.getProperty("driver"));
+            Class.forName("oracle.jdbc.driver.OracleDriver");
 
 
             conn = DriverManager.getConnection(
                     prop.getProperty("url"),
-                    prop.getProperty("usr"),
-                    prop.getProperty("psw"));
-
-        } catch (FileNotFoundException e) {
-
-            e.printStackTrace();
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
+                    prop.getProperty("user"),
+                    prop.getProperty("passw"));
 
         } catch (ClassNotFoundException e) {
 
