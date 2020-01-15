@@ -135,4 +135,21 @@ public class UserRepository implements CrudRepository<User> {
         }
         return users;
     }
+
+    public Set<User> findAll() {
+
+        Set<User> users = new HashSet<>();
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM users";
+            Statement stmt = conn.createStatement(); // STATEMENT should never be used with user provided input
+            ResultSet rs = stmt.executeQuery(sql);
+            users = mapResultSet(rs);
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
 }

@@ -36,6 +36,9 @@ CREATE TABLE accounts (
     REFERENCES account_types(type_id)
 );
 
+ALTER TABLE accounts
+ADD created_date DATE DEFAULT CURRENT_DATE;
+
 CREATE TABLE users_accounts (
     user_id     NUMBER(5),
     acct_id     NUMBER(5),
@@ -63,7 +66,7 @@ CREATE TABLE transactions (
     acct_id             NUMBER(5),
     trans_type_id       NUMBER(10),
     amount              NUMBER(10,2),
-    trans_date          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    trans_date          TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0),
     
     CONSTRAINT pk_transactions
     PRIMARY KEY (trans_id),
@@ -198,6 +201,11 @@ INSERT INTO accounts VALUES(0, 1, 63524);
 INSERT INTO accounts VALUES(0, 1, 73643);
 INSERT INTO accounts VALUES (0, 1, 500);
 
+INSERT INTO accounts (acct_id, type_id, balance) VALUES (0, 2, 4098);
+INSERT INTO accounts (acct_id, type_id, balance) VALUES(0, 2, 63524);
+INSERT INTO accounts (acct_id, type_id, balance) VALUES(0, 2, 73643);
+INSERT INTO accounts (acct_id, type_id, balance) VALUES (0, 2, 500);
+
 
 INSERT INTO users_accounts VALUES (1,1);
 INSERT INTO users_accounts VALUES (2,2);
@@ -207,6 +215,10 @@ INSERT INTO users_accounts VALUES (5,5);
 INSERT INTO users_accounts VALUES (6,6);
 INSERT INTO users_accounts VALUES (7,7);
 INSERT INTO users_accounts VALUES (8,8);
+INSERT INTO users_accounts VALUES (1,21);
+INSERT INTO users_accounts VALUES (2,22);
+INSERT INTO users_accounts VALUES (3,23);
+INSERT INTO users_accounts VALUES (4,24);
 
 COMMIT;
 
@@ -234,13 +246,9 @@ END;
 
 CALL add_trans (1,1,1,1,500);
 
-CREATE OR REPLACE PROCEDURE get_transaction_history (u_id IN transactions.user_id%TYPE, a_id IN transactions.acct_id%TYPE)
-IS
-t_list transactions%rowtype;
-BEGIN
-    SELECT user_id, acct_id, trans_type_id, amount, TO_CHAR(trans_date, 'DD/MM/YY HH:MM:SS')
-    FROM transactions
-    WHERE user_id = u_id AND acct_id = a_id;
-END;
-/
-drop procedure get_transaction_history;
+Delete from users where user_id = 21;
+commit;
+insert into users_accounts values (22, 26);
+SELECT user_id, acct_id, trans_type_id, amount, trans_date(TO_CHAR(trans_date, 'MM/DD/YY HH24:MM:SS')) AS "Transaction_Date"
+FROM transactions
+WHERE user_id = 1 AND acct_id = 1;
