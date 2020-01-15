@@ -24,7 +24,7 @@ public class UserSession {
         return sessionUser;
     }
 
-    public void setSessionUser() {
+    public void setSessionUser(User sessionUser) {
         this.sessionUser = sessionUser;
     }
 

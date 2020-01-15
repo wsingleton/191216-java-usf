@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Account {
 
-    private int accountId;
-    private double balance;
+    private Integer accountId;
+    private Double balance;
     private AccountType accountType;
 
     public Account() {
@@ -13,6 +13,7 @@ public class Account {
     }
 
     public Account(double balance, AccountType accountType) {
+        this.accountId = 0;
         this.balance = balance;
         this.accountType = accountType;
     }

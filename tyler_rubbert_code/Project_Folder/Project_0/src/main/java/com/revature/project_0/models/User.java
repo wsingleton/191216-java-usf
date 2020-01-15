@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class User {
 
-    private int userId;
+    private Integer userId;
     private String username;
     private String password;
     private String firstName;
@@ -29,7 +29,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 

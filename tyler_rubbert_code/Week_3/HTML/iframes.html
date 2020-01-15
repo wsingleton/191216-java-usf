@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Basics: Iframes & Media Tags</title>
+</head>
+<body>
+    <main>
+        <h1>Iframes</h1>
+        <p>
+            An iframe is like a little window taht has been placed into your
+            webpage. The term "iframe" is an abbreviateion for "inline frame".
+        </p>
+
+        <p>
+            One common use of iframes is to embed Google Maps into the webpage.
+            The content of the iframe can be to an HTML page(which can be 
+            located either externally or locally on our machine/web server)
+        </p>
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d174622.112409228!2d-96.96859708387123!3d46.854112456273974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52c8cb8d84677145%3A0x81aa30a52791aaca!2sFargo%2C%20ND!5e0!3m2!1sen!2sus!4v1579021139695!5m2!1sen!2sus" 
+        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>" 
+        
+
+        <br/><br/><br/>
+
+        <p>
+            Another common use of iframes is to embed videos into a page.
+            Youtube provies excellent support for getting the iframe info
+            regarding any video you wish to embed into your webpage.
+        </p>
+
+        <hr/>
+
+        <p>
+            Using iframes works just fine when we have an externally hosted video.  However,
+            if I have my own video content that is located on the web server as this document,
+            then the HTML5 &lt;video&gt; tag to accomplish this.
+        </p>
+
+        <video src="assets/videos/tropic-trees.mp4" width="560" controls loop></video>
+    </main>
+</body>
+</html>

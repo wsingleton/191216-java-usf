@@ -1,9 +1,11 @@
 package com.revature.project_0.util;
 
 import com.revature.project_0.repos.AccountRepository;
+import com.revature.project_0.repos.UserAccountRepository;
 import com.revature.project_0.repos.UserRepository;
 import com.revature.project_0.screens.*;
 import com.revature.project_0.services.AccountService;
+import com.revature.project_0.services.UserAccountService;
 import com.revature.project_0.services.UserService;
 
 import java.io.BufferedReader;
@@ -23,14 +25,16 @@ public class AppState {
 
         final UserRepository userRepo = new UserRepository();
         final AccountRepository accRepo = new AccountRepository();
+        final UserAccountRepository uaRepo = new UserAccountRepository();
 
         final UserService userService = new UserService(userRepo);
         final AccountService accountService = new AccountService(accRepo);
+        final UserAccountService userAccountService = new UserAccountService(uaRepo);
 
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
-                .addScreen(new RegisterScreen())
-                .addScreen(new LoginScreen())
+                .addScreen(new RegisterScreen(userService, accountService, userAccountService))
+                .addScreen(new LoginScreen(userService))
                 .addScreen(new UserProfileScreen())
                 .addScreen(new DepositScreen())
                 .addScreen(new WithdrawScreen());
