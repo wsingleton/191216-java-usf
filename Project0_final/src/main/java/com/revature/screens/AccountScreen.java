@@ -1,5 +1,7 @@
 package com.revature.screens;
 
+import com.revature.BankMain;
+
 import java.io.IOException;
 
 import static com.revature.BankMain.appLaunched;
@@ -15,6 +17,7 @@ public class AccountScreen extends Screen {
     public void load() {
         System.out.println("Your current balance is ");
         System.out.println("Press 1) to make a deposit or 2) to make a withdraw");
+        System.out.println("Press 3 to log out");
 
         try {
 
@@ -27,6 +30,9 @@ public class AccountScreen extends Screen {
                 case "2" :
                     //withdraw method here
                     break;
+                case "3" :
+                    System.out.println("Have a good day");
+                    BankMain.navigation.navigate("/home");
                 default:
                     //throw an exception here
             }

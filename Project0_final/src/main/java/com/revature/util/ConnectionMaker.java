@@ -1,5 +1,8 @@
 package com.revature.util;
 
+import com.revature.models.User;
+import oracle.jdbc.internal.OracleStatement;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -34,4 +37,17 @@ public class ConnectionMaker {
          return connection;
     }
 
+    public Connection getConnection(User user) {
+
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@niles-db.cgbvd9f8ntqe.us-east-2.rds.amazonaws.com:1521:ORCL","banking_app", "p4ssw0rd");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return connection;
+    }
 }

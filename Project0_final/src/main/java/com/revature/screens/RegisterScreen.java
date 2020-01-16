@@ -11,6 +11,7 @@ import java.io.IOException;
 public class RegisterScreen extends Screen {
 
     private UserServices uService;
+
     public RegisterScreen(UserServices uService) {
         super("RegisterScreen", "/register");
         this.uService = uService;
@@ -24,14 +25,16 @@ public class RegisterScreen extends Screen {
 
         try {
 
-            System.out.println("Enter your username: ");
+            System.out.println("Enter your username desired username ");
             username = BankMain.userInputs.readLine();
-            System.out.println("Enter your password");
+            System.out.println("Enter your password desired password ");
             password = BankMain.userInputs.readLine();
 
             User newUser = new User (username, password, 0.0);
             uService.register(newUser);
-            System.out.println("Registration successful!");
+            System.out.println("Registration successful! Directing to account page");
+            BankMain.navigation.navigate("/account");
+
 
 
         } catch (InvalidEntryException | DuplicateException e) {

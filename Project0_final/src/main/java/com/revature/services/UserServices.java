@@ -1,9 +1,13 @@
 package com.revature.services;
 
+import com.revature.BankMain;
 import com.revature.exceptions.DuplicateException;
 import com.revature.exceptions.InvalidCredentialsException;
+import com.revature.exceptions.InvalidEntryException;
 import com.revature.models.User;
 import com.revature.repos.UserRepository;
+import com.revature.util.ConnectionMaker;
+import com.revature.util.UserConnection;
 
 public class UserServices {
 
@@ -25,6 +29,16 @@ public class UserServices {
         uRepo.save(newUser);
     }
 
+    public void login(String username, String password) {
+        if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
+            throw new InvalidEntryException();
+        }
+
+        User returningUser = uRepo.findByCredentials(username, password).orElseThrow(InvalidCredentialsException::new);
+        BankMain.currentConn.setExisting(new UserConnection(returningUser, ConnectionMaker.getInstance().getConnection(returningUser)));
+
+    }
+
     public boolean UserValidation (User user) {
 
         if (user == null) return false;
@@ -32,4 +46,6 @@ public class UserServices {
         if (user.getPassword() == null || user.getPassword().trim().equals("")) return false;
         return true;
     }
+
+
 }

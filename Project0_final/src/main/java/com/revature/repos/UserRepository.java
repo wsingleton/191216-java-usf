@@ -63,6 +63,7 @@ public class UserRepository implements CrudRepository<User>{
 
             PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM banking_app.users WHERE username = ?");
             pstmt.setString(1, username);
+
             ResultSet results = pstmt.executeQuery();
             _user = mapResultSet(results).stream().findFirst();
 
@@ -85,6 +86,26 @@ public class UserRepository implements CrudRepository<User>{
 
         return users;
 
+    }
+
+    public Optional<User> findByCredentials(String username, String password) {
+
+        Optional<User> _user = Optional.empty();
+
+
+        try (Connection connection = ConnectionMaker.getInstance().liveConnection()) {
+
+            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM banking_app.users WHERE username = ? AND password = ?");
+            pstmt.setString(1, username);
+            pstmt.setString(2,password);
+
+            ResultSet results = pstmt.executeQuery();
+            _user = mapResultSet(results).stream().findFirst();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return _user;
     }
 
 }
