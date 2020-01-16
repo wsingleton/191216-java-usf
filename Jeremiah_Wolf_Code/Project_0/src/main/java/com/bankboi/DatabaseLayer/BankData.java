@@ -11,16 +11,16 @@ import java.util.List;
 import com.bankboi.plainjava.BankAccounts;
 import com.bankboi.util.InternetConnection;
 
-public class BankData {
+public class BankData implements Database<BankAccounts, Integer> {
 
     @Override
-    public List<BankData> findAll() {
+    public List<BankAccounts> findAll() {
 
         List<BankAccounts> accounts_bank = new ArrayList<BankAccounts>();
 
         try(Connection conn = InternetConnection.getInstance().getConnection()){
 
-            String query = "SELECT * FROM ACCOUNTS_BANK ORDER BY OWNER_ACCOUNT";
+            String query = "SELECT * FROM ACCOUNTS_BANK ORDER BY ACCOUNT_MAIN";
 
             Statement statement = conn.createStatement();
 
@@ -52,7 +52,7 @@ public class BankData {
 
         try(Connection conn = InternetConnection.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ACCOUNTS_BANK WHERE OWNER_ACCOUNT = ?";
+            String sql = "SELECT * FROM ACCOUNTS_BANK WHERE ACCOUNT_MAIN = ?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,  id);
@@ -83,7 +83,7 @@ public class BankData {
             //If a connection is in auto-commit mode then all its SQL statements are run and committed as individual transactions.
             conn.setAutoCommit(false);
 
-            String sql = "INSERT INTO ACCOUNTS_BANK (OWNER_ACCOUNT, ACCOUNT_BALANCE) VALUES(?, ?)";
+            String sql = "INSERT INTO ACCOUNTS_BANK (ACCOUNT_MAIN, ACCOUNT_BALANCE) VALUES(?, ?)";
             String[] keyNames = {"ACCOUNT_ID"};
 
             PreparedStatement ps = conn.prepareStatement(sql, keyNames);
@@ -125,7 +125,7 @@ public class BankData {
 
             conn.setAutoCommit(false);
 
-            String sql = "UPDATE ACCOUNTS_BANK SET ACCOUNT_BALANCE = ? WHERE OWNER_ACCOUNT = ?";
+            String sql = "UPDATE ACCOUNTS_BANK SET ACCOUNT_BALANCE = ? WHERE ACCOUNT_MAIN = ?";
 
 
             PreparedStatement ps = conn.prepareStatement(sql);

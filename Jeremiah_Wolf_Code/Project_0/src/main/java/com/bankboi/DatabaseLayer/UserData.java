@@ -8,7 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserData {
+public class UserData implements Database<Users, Integer>{
+
 
     @Override
     public List<Users> findAll() {
@@ -53,7 +54,7 @@ public class UserData {
 
         try(Connection conn = InternetConnection.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM USERS_BANK WHERE USER_ID = ?";
+            String sql = "SELECT * FROM BANK_USER WHERE USER_ID = ?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,  id);
@@ -86,7 +87,7 @@ public class UserData {
 
             conn.setAutoCommit(false);
 
-            String sql = "INSERT INTO USERS_BANK (FIRSTNAME, LASTNAME, USERNAME, PASS_WORD)"
+            String sql = "INSERT INTO BANK_USER (FN, LN, UN, PASSD)"
                     + " VALUES(?, ?, ?, ?)";
 
             String[] keyNames = {"USER_ID"};
@@ -128,7 +129,7 @@ public class UserData {
 
         try(Connection conn = InternetConnection.getInstance().getConnection()) {
 
-            String sql = "UPDATE USERS_BANK SET FIRSTNAME = ?, LASTNAME = ?, USERNAME = ?, PASS_WORD = ? WHERE USER_ID = ?";
+            String sql = "UPDATE BANK_USER SET FN = ?, LN = ?, UN = ?, PASSD = ? WHERE USER_ID = ?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,  obj.getFirstName());
