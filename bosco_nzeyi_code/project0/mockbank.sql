@@ -173,6 +173,10 @@ VALUES(0, 1, 1, 'Deposit', 100);
 ALTER TABLE users
 DROP COLUMN address;
 
+-- Removes date openned column from the table
+ALTER TABLE accounts
+DROP COLUMN date_opened;
+
 -- Set sysdate as default input for date-opened column in accounts table
 ALTER TABLE accounts
 MODIFY date_opened DATE DEFAULT SYSDATE;
@@ -186,9 +190,9 @@ SELECT EXTRACT(SECOND FROM activity_date) "second" FROM activities ;
 
 COMMIT;
 
-SELECT * FROM users;
+SELECT * FROM activities;
 SELECT SYSDATE FROM DUAL;
-DELETE FROM users;
+DELETE FROM accounts;
 -- UPDATING BALANCES ON SAVINGS ACCOUNTS AND CALCULATING COMPOUND INTEREST EARNED
     --
     --
@@ -201,6 +205,38 @@ VALUES(1, 1);
 INSERT INTO users_accounts
 VALUES(1, 2);
 COMMIT;
+
+-- CREATE A PROCEDURE THAT UPDATES THE AMOUNT IF A DEPOSIT OR WITHDRAW IS MADE
+CREATE OR REPLACE PROCEDURE update_balance (accountId IN NUMBER, amount IN NUMBER, activity_type IN VARCHAR2)
+IS  
+BEGIN
+
+    IF
+    activity_type = 'Deposit'
+    THEN
+    UPDATE accounts
+    SET current_balance = current_balance + amount
+    WHERE account_id = accountId;
+    ELSIF
+    activity_type = 'Withdraw'
+    THEN 
+    UPDATE accounts
+    SET current_balance = current_balance - amount
+    WHERE account_id = accountId;
+    ELSE
+    dbms_output.put_line('Request failed');
+    END IF;
+END;
+/
+
+BEGIN
+update_balance(43, 50, 'Withdraw');
+END;
+
+SELECT * FROM accounts WHERE account_id = 84;
+SELECT * FROM activities WHERE account_id = 82;
+SELECT * FROM users_accounts;
+
 
 
 

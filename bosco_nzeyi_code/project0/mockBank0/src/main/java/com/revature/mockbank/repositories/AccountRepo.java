@@ -1,8 +1,6 @@
 package com.revature.mockbank.repositories;
 
-import com.revature.mockbank.models.Account;
-import com.revature.mockbank.models.AccountAccess;
-import com.revature.mockbank.models.AccountType;
+import com.revature.mockbank.models.*;
 import com.revature.mockbank.repositories.CrudRepository;
 import com.revature.mockbank.util.ConnectionFactory;
 import oracle.jdbc.proxy.annotation.Pre;
@@ -10,15 +8,14 @@ import oracle.jdbc.proxy.annotation.Pre;
 import static com.revature.mockbank.AppDriver.*;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class AccountRepo implements CrudRepository<Account> {
 
     public static Account newAccount;
-    public static Set<String> activities;
+//    public static Map<Integer, Integer> usersAccounts = new HashMap<>();
+        public static ArrayList<Integer> usersAccounts = new ArrayList<>();
+
 
 
     @Override
@@ -67,25 +64,61 @@ public class AccountRepo implements CrudRepository<Account> {
         }
     }
 
-    @Override
-    public Set<Account> findAll() {
-        return null;
+    // find all accounts associated to the user.
+        public ArrayList<Integer> findAllAccounts(int userId){
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+            ArrayList<Integer> accounts = new ArrayList<>();
+
+            String sql = "SELECT account_id FROM users_accounts WHERE user_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userId);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()){
+                accounts.add(rs.getInt(1));
+            }
+            usersAccounts = accounts;
+        }catch(SQLException e){
+            e.printStackTrace();
+            System.out.println("Connection could not be established");
+        }
+        listOfAccounts = usersAccounts;
+        return usersAccounts;
+    }
+
+    public Account findAccountById(Integer id) {
+        Account account = new Account();
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM accounts WHERE account_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            account = mapResultSet(rs);
+            //currentAccount = account;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("CONNECTION COULD NOT BE ESTABLISHED");
+        }
+        return account;
     }
 
     @Override
-    public Optional<Account> findById(Integer id) {
-        return Optional.empty();
-    }
+    public Set<Account> findAll() { return null; }
 
     @Override
-    public Optional<Account> findByUsername(String username) {
-        return Optional.empty();
-    }
+    public Optional<Account> findById(Integer id) { return Optional.empty(); }
+
 
     @Override
-    public Boolean update(Integer id) {
-        return null;
-    }
+    public Optional<Account> findByUsername(String username) { return Optional.empty(); }
+
+    @Override
+    public Boolean update(Integer id) { return null; }
 
     @Override
     public Boolean delete(Integer id) {
@@ -105,10 +138,13 @@ public class AccountRepo implements CrudRepository<Account> {
             int rowsInserted = cstmt.executeUpdate();
             if(rowsInserted == 0){
                     System.out.println("Problem performing the operation");
+            } else {
+                // updating the transaction table with this deposit activity
+                updateActivitiesTable(accountNumber, userId, activityType, amount);
+                System.out.println("Deposit successful. ... Navigating back to the dashboard");
+                // update the balance in the currentAccount in use
+                currentAccount.setBalance(currentAccount.getBalance() + amount);
             }
-
-            // updating the transaction table with this deposit activity
-            updateActivitiesTable(accountNumber, userId, activityType, amount);
 
         }catch(SQLException e){
             e.printStackTrace();
@@ -134,12 +170,18 @@ public class AccountRepo implements CrudRepository<Account> {
 
             // updating the transaction table with this withdraw activity
             updateActivitiesTable(accountNumber, userId, activityType, amount);
+            System.out.println("Withdraw successful. ... Navigating back to the dashboard");
+
+            // update the balance in the currentAccount in use
+            currentAccount.setBalance(currentAccount.getBalance() - amount);
 
         }catch(SQLException e){
             e.printStackTrace();
             System.out.println("An error occurred while connecting to the database");
         }
     }
+
+    // check balance
 
     public void updateActivitiesTable(int accountNumber, int userId, String transactionType, double amount){
 
@@ -162,47 +204,33 @@ public class AccountRepo implements CrudRepository<Account> {
                     System.out.println("Your new activity id is: " + rs.getInt(1));
                 }
             }
-
         }catch (SQLException e){
             e.printStackTrace();
             System.out.println("A problem occurred while inserting into the table [Activities]");
         }
     }
 
-    public void activityLog (int userId){
+    private Account mapResultSet(ResultSet rs) {
 
-        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            ArrayList<String> logs = new ArrayList<>();
-           String[] st = new String[]{};
-            String sql = "SELECT * FROM activities WHERE user_id = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"activity_id", "user_id", "account_id", "activity_date",
-                    "transaction_details", "amount"});
-            pstmt.setInt(1, userId);
-            int rowsAffected = pstmt.executeUpdate();
-            if(rowsAffected != 0){
-                ResultSet rs = pstmt.getGeneratedKeys();
-                ArrayList<String> strings = new ArrayList<>();
-                while (rs.next()){
-                    strings.add(rs.getInt(1) + "         " );
-                    strings.add(rs.getInt(2) + "           ");
-                    strings.add(rs.getInt(3) + "         " );
-                    strings.add(rs.getDate(4) + "         ");
-                    strings.add(rs.getString(5) + "            ");
-                    strings.add(rs.getDouble(6) + "");
+        Account data = new Account();
 
-//                    String activity = rs.getInt(1) + "         " + rs.getInt(2) + "           " +
-//                            rs.getInt(3) + "         " + rs.getDate(4) + "         " +
-//                            rs.getString(5) + "            " + rs.getDouble(6);
-//                    activities.add(activity);
-                    System.out.println("Activities found");
-                }
+        try {
+
+            while (rs.next()){
+
+                data.setAccount_id(rs.getInt(1));
+                data.setAccount_type(rs.getString(2).equals("Checking")? AccountType.CHECKING : AccountType.SAVING);
+                data.setAccount_access(rs.getString(3).equals("Personal")? AccountAccess.PERSONAL: AccountAccess.SHARED);
+                data.setBalance(rs.getInt(4));
             }
-            activityLog = activities;
-        } catch (SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Connection could not be established. Try again later...");
+            System.out.println("COULD NOT MAP ACTIVITIES");
         }
+        currentAccount = data;
+
+        return data;
+
     }
-
-
 }

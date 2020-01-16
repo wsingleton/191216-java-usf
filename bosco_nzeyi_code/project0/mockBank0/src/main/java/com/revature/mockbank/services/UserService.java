@@ -6,6 +6,7 @@ import com.revature.mockbank.exceptions.InvalidRequestException;
 import com.revature.mockbank.exceptions.ResourcePersistenceException;
 import com.revature.mockbank.models.Role;
 import com.revature.mockbank.models.User;
+import com.revature.mockbank.repositories.AccountRepo;
 import com.revature.mockbank.repositories.UserRepo;
 import static com.revature.mockbank.AppDriver.currentUser;
 import static com.revature.mockbank.repositories.UserRepo.*;
@@ -13,9 +14,11 @@ import static com.revature.mockbank.repositories.UserRepo.*;
 public class UserService {
 
     private UserRepo userRepo;
+    private AccountRepo accountRepo;
 
-    public UserService(UserRepo repo) {
+    public UserService(UserRepo repo, AccountRepo accountRepo) {
         this.userRepo = repo;
+        this.accountRepo = accountRepo;
     }
 
     public void register(User newUser) {
@@ -29,6 +32,8 @@ public class UserService {
         //newUser.setRole(Role.CLIENT);
         userRepo.save(newUser);
         currentUser = registeredUser;
+        int currentUserId = currentUser.getId();
+        accountRepo.findAllAccounts(currentUserId);
 
     }
 
@@ -43,6 +48,8 @@ public class UserService {
 
 //        userRepo.findUserByCredentials(username, password).orElseThrow(() -> new AuthenticationException());
         currentUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+
+
     }
 
     public boolean isUserValid(User user) {

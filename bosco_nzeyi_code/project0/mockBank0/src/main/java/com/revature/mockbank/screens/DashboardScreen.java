@@ -21,16 +21,17 @@ public class DashboardScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("                             Welcome " + currentUser.getFirstName()
-                + "    \n");
-        System.out.println("Select one of the options below to continue \n");
+//        System.out.println("                             Welcome " + currentUser.getFirstName()
+//                + "    \n");
+        System.out.println("\nSelect one of the options below to continue \n");
         System.out.println("1) Create a new account");
         System.out.println("2) Deposit");
         System.out.println("3) Withdraw");
-        System.out.println("4) Log account history");
-        System.out.println("5) transfer funds");
-        System.out.println("6) Switch to another account");
-        System.out.println("7) Check balance");
+        System.out.println("4) Log Account History");
+//        System.out.println("5) transfer funds");
+//        System.out.println("6) Switch to another account");
+        System.out.println("5) Check balance");
+        System.out.println("6) Log out");
 
         try {
 
@@ -50,18 +51,18 @@ public class DashboardScreen extends Screen {
                     break;
                 case "4":
                     router.navigate("/accountHistory");
+//                   break;
+//                case "5":
+//                    router.navigate("/transfer");
+//                    break;
+//                case "6":
+//                    router.navigate("/switch");
                     break;
                 case "5":
-                    router.navigate("/transfer");
-                    break;
-                case "6":
-                    router.navigate("/switch");
-                    break;
-                case "7":
                     router.navigate("/balance");
                     break;
-                case "8":
-                    System.out.println("Exiting application...");
+                case "6":
+                    System.out.println("Exiting the application...");
                     appRunning = false;
                     break;
                 default:

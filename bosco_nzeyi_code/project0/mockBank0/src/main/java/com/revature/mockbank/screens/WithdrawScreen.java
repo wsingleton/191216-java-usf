@@ -26,24 +26,29 @@ public class WithdrawScreen extends Screen {
             int accountId = currentAccount.getAccount_id();
             int userId = currentUser.getId();
 
-            if(!(option.trim().equals("")) || !(new Integer(option)<1)){
+            if(!(option.trim().equals(""))){
+                if(!accountService.isNumeric(option)){
+                    System.out.println("Invalid number. Try again");
+                    router.navigate("/dashboard");
+                }
                 double amount = new Double(option);
 
                 accountService.withdraw(accountId, userId, amount);
 
-                System.out.println("Withdraw successful. ... Navigating back to the dashboard");
+                //System.out.println("Withdraw successful. ... Navigating back to the dashboard");
+
                 // send the user back to the dashboard
                 router.navigate("/dashboard");
-
             }
         }catch (InvalidRequestException | ResourcePersistenceException e) {
-            System.err.println("Registration unsuccessful, invalid values provided or username is taken");
+            System.err.println("Invalid values provided");
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             System.err.println("[ERROR] - An unexpected exception occurred");
             System.out.println("[LOG] - Shutting down application");
-            appRunning = false;
+            //appRunning = false;
         }
 
     }
+
 }

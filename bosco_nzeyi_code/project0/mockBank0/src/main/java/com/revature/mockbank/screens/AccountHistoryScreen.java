@@ -1,6 +1,8 @@
 package com.revature.mockbank.screens;
 
+import com.revature.mockbank.models.TransactionHistory;
 import com.revature.mockbank.repositories.AccountRepo;
+import com.revature.mockbank.repositories.TransactionRepo;
 import com.revature.mockbank.services.AccountService;
 import static com.revature.mockbank.AppDriver.*;
 import static com.revature.mockbank.services.AccountService.*;
@@ -20,16 +22,22 @@ public class AccountHistoryScreen extends Screen {
     @Override
     public void render() {
         try {
+//            if(currentUser == null){
+//                System.out.println("Current User could not be detected");
+//            } else {
+//                accountService.activityHistory(currentUser.getId());
+//                System.out.println("Activities request sent");
+//                System.out.println("tHE CURRENT USER ID IS " + currentUser.getId());
+//            }
+
             accountService.activityHistory(currentUser.getId());
 
-            Set<String> history = activityLog;
-
-            if (history.size() != 0) {
+            if (activityLog.size() != 0) {
                 System.out.println("\n-----------------------------------------------------------------------\n");
                 System.out.println("ACTIVITY ID           USER ID             ACCOUNT NUMBER            ACTIVITY DATE" +
                         "               TRANSACTION DETAILS          AMOUNT");
-                System.out.println(history.toString());
-                for (String act : history) {
+                //System.out.println(activityLog.toString());
+                for (TransactionHistory act : activityLog) {
                     System.out.println(act);
                 }
                 router.navigate("/dashboard");
