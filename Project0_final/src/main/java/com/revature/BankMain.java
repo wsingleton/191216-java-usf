@@ -1,7 +1,9 @@
 package com.revature;
 
 import com.revature.models.User;
+import com.revature.repos.UserRepository;
 import com.revature.screens.*;
+import com.revature.services.UserServices;
 import com.revature.util.ScreenNavigation;
 
 import java.io.BufferedReader;
@@ -15,6 +17,10 @@ public class BankMain {
     public static BufferedReader userInputs;
 
     static {
+
+        final UserRepository uRepo = new UserRepository();
+        final UserServices userServices = new UserServices(uRepo);
+
         appLaunched = true;
         userInputs = new BufferedReader(new InputStreamReader(System.in));
         navigation = new ScreenNavigation();
@@ -22,9 +28,10 @@ public class BankMain {
         navigation.addScreen(new AccountScreen());
         navigation.addScreen(new LoginScreen());
         navigation.addScreen(new ProfileScreen());
-        navigation.addScreen(new RegisterScreen());
+        navigation.addScreen(new RegisterScreen(userServices));
         navigation.addScreen(new SearchScreen());
     }
+
     public static void main(String[] args) {
 
         while (appLaunched) {
