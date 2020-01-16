@@ -39,7 +39,6 @@ public class AccountServiceTest {
     UserSession mockSession = mock(UserSession.class);
     Account mockAcct = mock(Account.class);
     User mockUser = mock(User.class);
-    Transaction mockTrans = mock(Transaction.class);
 
     @Before
     public void setUp() {

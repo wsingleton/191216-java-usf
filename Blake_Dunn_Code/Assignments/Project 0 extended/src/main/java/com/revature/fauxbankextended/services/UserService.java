@@ -47,7 +47,7 @@ public class UserService {
             throw new ResourcePersistenceException("Username is already in use!");
         }
 
-        return userRepo.save(user);
+        return user;
     }
 
     public void setNewAccount(User user, String type) {
@@ -64,10 +64,10 @@ public class UserService {
                 System.out.println("Invalid selection");
                 app().setAppRunning(false);
         }
-
+        User newUser = userRepo.save(user);
         Account acct = acctRepo.save(newAccount);
-        userRepo.updateCompositeKey(user, acct);
-        app().setCurrentSession(new UserSession(user, acct, ConnectionFactory.getInstance().getConnection()));
+        userRepo.updateCompositeKey(newUser, acct);
+        app().setCurrentSession(new UserSession(newUser, acct, ConnectionFactory.getInstance().getConnection()));
     }
 
     public User setJointAccount(String username) {
@@ -79,6 +79,9 @@ public class UserService {
 
         if (_user.isPresent()) {
             addToAccount = _user.get();
+        }
+        else {
+            app().getRouter().navigate("/dashboard");
         }
 
         userRepo.updateCompositeKey(addToAccount, app().getCurrentSession().getSessionAccount());

@@ -158,6 +158,7 @@ public class UserServiceTest {
         when(mockState.getCurrentSession()).thenReturn(mockSession);
         when(mockConnFactory.getInstance()).thenReturn(mockConnFactory);
         when(mockConnFactory.getConnection()).thenReturn(mockConn);
+        when(userRepo.save(any())).thenReturn(user);
         when(acctRepo.save(Mockito.any())).thenReturn(expectedAcct);
         when(userRepo.updateCompositeKey(Mockito.any(), Mockito.any())).thenReturn(true);
         sut.setNewAccount(user, type);
@@ -174,6 +175,7 @@ public class UserServiceTest {
         when(mockState.getCurrentSession()).thenReturn(mockSession);
         when(mockConnFactory.getInstance()).thenReturn(mockConnFactory);
         when(mockConnFactory.getConnection()).thenReturn(mockConn);
+        when(userRepo.save(any())).thenReturn(user);
         when(acctRepo.save(Mockito.any())).thenReturn(expectedAcct);
         when(userRepo.updateCompositeKey(Mockito.any(), Mockito.any())).thenReturn(true);
         sut.setNewAccount(user, type);
