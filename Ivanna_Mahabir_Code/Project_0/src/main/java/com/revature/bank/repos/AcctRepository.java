@@ -55,16 +55,17 @@ public class AcctRepository implements CrudRepository<Account> {
     @Override
     public void save(Account newObj) {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "INSERT INTO CBANK.accts VALUES (1, ?, ?)";
+            String sql = "INSERT INTO CBANK.accts VALUES (0, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"acctid"});
-            pstmt.setString(2, newObj.getUsername());
-            pstmt.setDouble(3, newObj.getBalance());
+            pstmt.setString(1, newObj.getUsername());
+            pstmt.setDouble(2, newObj.getBalance());
 
             int rowsInserted = pstmt.executeUpdate();
+
             if(rowsInserted != 0 ){
                 ResultSet rs = pstmt.getGeneratedKeys();
                 while(rs.next()){
-                    newObj.setAcctId(1);
+                    newObj.setAcctId(rs.getInt(1));
 
                 }
             }

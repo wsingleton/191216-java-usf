@@ -12,6 +12,10 @@ public class Account {
         super();
     }
 
+    public Account(String username) {
+        this.username = username;
+    }
+
     public Account(Integer acctId, String username, Double balance) {
         this.acctId = acctId;
         this.username = username;
@@ -41,9 +45,8 @@ public class Account {
     public void setBalance(Double balance) {
         try{
             if(balance == null || balance < 0 ){
-                System.out.println("Balance: " + balance + " is invalid");
-                System.out.println("Setting Initial Balance to $0.0");
-                setBalance(0.0);
+                System.out.println("Balance: " + balance + " is invalid. Setting balance to $0");
+                this.balance = 0.0;
             }
             else{
                 this.balance = balance;

@@ -2,7 +2,9 @@ package com.revature.bank.services;
 
 import com.revature.bank.exceptions.AuthenticatironException;
 import com.revature.bank.exceptions.InvalidRequestException;
+import com.revature.bank.exceptions.ResourcePersistenceException;
 import com.revature.bank.models.Account;
+import com.revature.bank.models.User;
 import com.revature.bank.repos.AcctRepository;
 
 import static com.revature.bank.AppDriver.*;
@@ -18,7 +20,14 @@ public class AcctService {
         if(username == null || username.trim().equals("")) {
             throw new InvalidRequestException();
         }
-        currentAcct = acctRepo.findAcctByUsername(username).orElseThrow(AuthenticatironException::new);
+        if(acctRepo.findAcctByUsername(username).isPresent()) {
+            currentAcct = acctRepo.findAcctByUsername(username).orElseThrow(AuthenticatironException::new);
+        }
+        else{
+            Account newAcct = new Account(username);
+            acctRepo.save(newAcct);
+            currentAcct = newAcct;
+        }
         return currentAcct;
 
     }
@@ -53,5 +62,6 @@ public class AcctService {
 
         return withdraw;
     }
+
 
 }

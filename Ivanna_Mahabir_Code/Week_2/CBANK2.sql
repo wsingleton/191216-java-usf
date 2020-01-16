@@ -21,16 +21,16 @@ CREATE TABLE busers(
     REFERENCES accts (acctid)
 );
 
-INSERT INTO accts VALUES (1,'BlackOrder7', 500);
-INSERT INTO accts VALUES (2,'alchemist12', 650);
-INSERT INTO accts VALUES (3,'kuroshitsuji31', 2358);
-INSERT INTO accts VALUES (4,'Mech4nic', 986);
-INSERT INTO accts VALUES (5, 'Funtom13',54300);
-INSERT INTO accts VALUES (6,'horrorGirl1331', 69843);
-INSERT INTO accts VALUES (7,'wildChild5', 325);
-INSERT INTO accts VALUES (8,'bHunter1', 1584);
-INSERT INTO accts VALUES (9,'Nanali12345', 4850);
-INSERT INTO accts VALUES (10,'Brother17', 25908);
+INSERT INTO accts VALUES (1,'aWalker15', 500);
+INSERT INTO accts VALUES (2,'Fullmetal4', 650);
+INSERT INTO accts VALUES (3,'sMichealis9', 2358);
+INSERT INTO accts VALUES (4,'wRockbell3', 986);
+INSERT INTO accts VALUES (5,'cPhantom12',54300);
+INSERT INTO accts VALUES (6,'wallFlower16', 69843);
+INSERT INTO accts VALUES (7,'SkipBeat1', 325);
+INSERT INTO accts VALUES (8,'Fvalentin3', 1584);
+INSERT INTO accts VALUES (9,'blacKnight17', 4850);
+INSERT INTO accts VALUES (10,'DarkBoots2', 25908);
 
 INSERT INTO busers VALUES (1, 'Ciel', 'Phantomhive', 'cPhantom12', 'Funtom13', 5);
 INSERT INTO busers VALUES (2, 'Sebastian', 'Michaelis', 'sMichealis9', 'kuroshitsuji31', 3);

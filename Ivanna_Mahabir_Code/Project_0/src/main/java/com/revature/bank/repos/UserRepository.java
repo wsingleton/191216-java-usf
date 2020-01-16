@@ -54,15 +54,15 @@ public class UserRepository implements CrudRepository<User> {
     @Override
     public void save(User newObj) {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "INSERT INTO CBANK.busers VALUES (1, ?, ?, ?, ?)";
+            String sql = "INSERT INTO CBANK.busers VALUES (0, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
-            pstmt.setString(2, newObj.getFirstName());
-            pstmt.setString(3, newObj.getLastName());
-            pstmt.setString(4, newObj.getUsrName());
-            pstmt.setString(5, newObj.getPassWord());
-
+            pstmt.setString(1, newObj.getFirstName());
+            pstmt.setString(2, newObj.getLastName());
+            pstmt.setString(3, newObj.getUsrName());
+            pstmt.setString(4, newObj.getPassWord());
 
             int rowsInserted = pstmt.executeUpdate();
+
             if(rowsInserted != 0){
                 ResultSet rs = pstmt.getGeneratedKeys();
                 while (rs.next()){
