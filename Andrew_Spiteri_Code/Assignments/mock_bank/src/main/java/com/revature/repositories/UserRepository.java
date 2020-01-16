@@ -4,6 +4,8 @@ import com.revature.models.Account;
 import com.revature.models.Role;
 import com.revature.models.User;
 
+import javax.xml.transform.Result;
+
 import static com.revature.MockBankDriver.router;
 import static com.revature.util.ConnectionFactory.*;
 
@@ -134,22 +136,18 @@ GRANT create view TO chinook;
         return user;
     }
 
-    public boolean update(User user) {
-
-        return false;
-    }
 
 
     public boolean deleteById(Integer id) {
         try {
-            String sql = "DELETE FROM ACCOUNT WHERE ID = ?";
-            PreparedStatement ps = getCon().prepareStatement(sql);
-            ps.setInt(1, id);
-            int num = ps.executeUpdate();
-            sql = "DELETE FROM USERS WHERE ID = ?";
-            ps = getCon().prepareStatement(sql);
-            ps.setInt(1, id);
-            num += ps.executeUpdate();
+            String sql = "DELETE FROM ACCOUNT WHERE ID = " + id;
+            Statement st = getCon().createStatement();
+            int num = st.executeUpdate(sql);
+            sql = "{call cs_procedure (?,?)}";
+            CallableStatement calls = getCon().prepareCall(sql);
+            calls.setInt(1,id);
+            calls.registerOutParameter(2, Types.NUMERIC);
+            num += calls.executeUpdate();
             if(num > 0){
                 return true;
             }
@@ -165,13 +163,14 @@ GRANT create view TO chinook;
         Set<Integer> userIdSet = new HashSet<>();
         Integer tu, exp, cs, isjoint = 0, joint_id = 0, user_id = 0;
         try{
+
             String sql = "SELECT isjoint FROM users WHERE id = ?";
             PreparedStatement ps = getCon().prepareStatement(sql);
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
             if(rs.isBeforeFirst()) {
                 while (rs.next()) {
-                    isjoint = rs.getInt("isjoint");
+                    isjoint = rs.getInt(1);
                 }
             }
             if(isjoint == 1){

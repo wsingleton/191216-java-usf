@@ -55,7 +55,7 @@ public class AccountServiceTest {
 
     @Test
     public void createAccountTest(){
-        Account account = mock(Account.c
+        Account account = mock(Account.class);
     }
 
 }

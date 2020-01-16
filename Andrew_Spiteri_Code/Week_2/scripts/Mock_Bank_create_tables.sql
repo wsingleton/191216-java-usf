@@ -82,10 +82,7 @@ BEGIN
     INSERT INTO isjoint (user_id)
     VALUES(:new.id);
 END;
-/ 
- 
- 
- 
+/  
 
 select * 
 from 
@@ -94,3 +91,13 @@ where
    type = 'TRIGGER' 
 and 
    name = 'joint_pk_trigger';
+   
+--+-------------------------------------------------+
+
+CREATE OR REPLACE PROCEDURE cs_procedure
+(cust_id IN NUMBER) AS
+BEGIN
+    DELETE
+    FROM users WHERE id = cust_id;
+END;
+/
