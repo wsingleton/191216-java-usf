@@ -1,6 +1,5 @@
 package com.revature.fauxbankextended.services;
 
-import com.revature.fauxbankextended.exceptions.AuthenticationException;
 import com.revature.fauxbankextended.exceptions.InvalidRequestException;
 import com.revature.fauxbankextended.exceptions.ResourcePersistenceException;
 import com.revature.fauxbankextended.models.*;
@@ -8,7 +7,6 @@ import com.revature.fauxbankextended.repos.*;
 import com.revature.fauxbankextended.util.ConnectionFactory;
 import com.revature.fauxbankextended.util.UserSession;
 
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -37,9 +35,7 @@ public class UserService {
         if (username == null || username.trim().equals("")
                 || password == null || password.trim().equals("")) throw new InvalidRequestException();
 
-        User user = userRepo.getUser(username, password);
-
-        return user;
+        return userRepo.getUser(username, password);
     }
 
 
@@ -51,9 +47,7 @@ public class UserService {
             throw new ResourcePersistenceException("Username is already in use!");
         }
 
-        User newUser = userRepo.save(user);
-
-        return newUser;
+        return userRepo.save(user);
     }
 
     public void setNewAccount(User user, String type) {
@@ -100,7 +94,6 @@ public class UserService {
         Pattern pattern = Pattern.compile("[a-zA-Z0-9]*");
         Matcher matcher = pattern.matcher(user.getPassword());
 
-        if (user == null) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")
                 || !(user.getFirstName().matches("^[a-zA-Z]*$"))) return false;
         if (user.getLastName() == null || user.getLastName().trim().equals("")
@@ -123,7 +116,16 @@ public class UserService {
         Set<Transaction> history = transRepo.getCurrentAccountTransactionsHistory();
 
         for(Transaction t : history) {
-            System.out.println("      "+t.getAcctId() + "                 " + t.getAcctId() +
+            System.out.println("      "+t.getUserId() + "                 " + t.getAcctId() +
+                    "                 " + t.getType() + "                   " + t.getAmount() + "                    " + t.getDate());
+        }
+    }
+
+    public void viewCurrentUserTransactionHistory() {
+        Set<Transaction> history = transRepo.getUserTransactionsHistory();
+
+        for(Transaction t : history) {
+            System.out.println("      "+t.getUserId() + "                 " + t.getAcctId() +
                     "                 " + t.getType() + "                   " + t.getAmount() + "                    " + t.getDate());
         }
     }

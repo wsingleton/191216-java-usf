@@ -16,11 +16,40 @@ public class TransactionHistoryScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("\n\n\n");
-        System.out.println("+-------  Transaction History  ------- +\n\n");
-        System.out.println("   User ID          Account ID          Transaction          Transaction Amount                Transaction Date");
-        userService.viewCurrentAcctTransactionHistory();
+        System.out.println("\n+-------  View Transaction History  ------- +\n");
+        System.out.println("1) View all your transactions");
+        System.out.println("2) View current account transactions");
+
+        try {
+            System.out.print("> ");
+            String input = app().getConsole().readLine();
+
+            switch(input) {
+                case "1":
+                    printTransactionHistory();
+                    userService.viewCurrentUserTransactionHistory();
+                    break;
+                case "2":
+                    printTransactionHistory();
+                    userService.viewCurrentAcctTransactionHistory();
+                    break;
+                default:
+                    System.out.println("Invalid selection");
+                    app().getRouter().navigate("/dashboard");
+            }
+
+        }catch (Exception e) {
+            System.err.println("[ERROR] - " + e.getMessage());
+        }
 
         app().getRouter().navigate("/transition");
+    }
+
+    public void printTransactionHistory () {
+
+        System.out.println("\n\n");
+        System.out.println("+-------  Transaction History  ------- +\n\n");
+        System.out.println("   User ID          Account ID        Transaction Type           Transaction Amount              Transaction Date");
+
     }
 }

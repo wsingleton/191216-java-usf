@@ -30,6 +30,24 @@ public class TransactionRepository implements CrudRepository<Transaction> {
         return transHistory;
     }
 
+    public Set<Transaction> getUserTransactionsHistory() {
+        Connection conn = app().getCurrentSession().getConnection();
+
+        Set<Transaction> transHistory = new HashSet<>();
+
+        try{
+            String sql = "SELECT user_id, acct_id, trans_type_id, amount, " +
+                    "trans_date " +
+                    " FROM transactions WHERE user_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id", "acct_id", "trans_type_id", "amount", "trans_date"});
+            pstmt.setInt(1, app().getCurrentSession().getSessionUser().getId());
+            transHistory = mapResultSet(pstmt.executeQuery());
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return transHistory;
+    }
+
     @Override
     public Transaction save(Transaction newTrans) {
         Connection conn = app().getCurrentSession().getConnection();

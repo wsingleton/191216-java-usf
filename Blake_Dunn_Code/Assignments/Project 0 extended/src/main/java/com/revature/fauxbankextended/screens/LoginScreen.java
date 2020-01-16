@@ -36,13 +36,19 @@ public class LoginScreen extends Screen {
             User user = userService.authenticate(username, password);
             accountService.chooseAccount(user);
 
-            if (app().isSessionValid()) {
+            if (app().isSessionValid() && app().getCurrentSession().getSessionAccount() != null) {
                 System.out.println("Success!");
                 app().getRouter().navigate("/dashboard");
+            }
+            else {
+                System.out.println("Sorry, try again...");
+                app().invalidateCurrentSession();
+                app().getRouter().navigate("/home");
             }
 
         }catch (InvalidRequestException | AuthenticationException e) {
             System.out.println("Invalid login credentials provided!");
+            app().getRouter().navigate("/home");
         }
         catch (Exception e) {
             System.err.println("[ERROR] - An unexpected exception occurred");

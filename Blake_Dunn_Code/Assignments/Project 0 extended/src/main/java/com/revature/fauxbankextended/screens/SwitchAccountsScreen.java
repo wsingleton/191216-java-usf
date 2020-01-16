@@ -15,7 +15,7 @@ public class SwitchAccountsScreen extends Screen {
     @Override
     public void render() {
 
-        System.out.println("+-------  Switch Account  ------- +\n");
+        System.out.println("\n\n+-------  Switch Account  ------- +");
 
         accountService.chooseAccount(app().getCurrentSession().getSessionUser());
 

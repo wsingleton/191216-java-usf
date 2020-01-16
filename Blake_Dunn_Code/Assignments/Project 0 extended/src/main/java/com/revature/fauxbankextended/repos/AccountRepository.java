@@ -44,20 +44,6 @@ public class AccountRepository implements CrudRepository<Account> {
         return accounts;
     }
 
-    public Account getAccount(User user, Integer inputId) {
-        Set<Account> accounts = findAccountsById(user.getId());
-        Account acct = new Account();
-        Optional<Account> _acct = accounts.stream().filter(a -> a.getId().equals(inputId)).findFirst();
-
-        if (_acct.isPresent()) {
-            acct = _acct.get();
-        }
-        else {
-            throw new ResourceNotFoundException();
-        }
-        return acct;
-    }
-
     @Override
     public Account save(Account newAccount) {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
