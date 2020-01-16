@@ -1,21 +1,32 @@
 package com.revature.screens;
 
-import com.revature.BankMain;
+import com.revature.exceptions.InsufficientFundsException;
+import com.revature.exceptions.InvalidEntryException;
+import com.revature.repos.AccountRepository;
+
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
-import static com.revature.BankMain.appLaunched;
-import static com.revature.BankMain.userInputs;
+import static com.revature.BankMain.*;
 
 public class AccountScreen extends Screen {
 
-    public AccountScreen() {
+    private AccountRepository accRepo;
+
+    public AccountScreen(AccountRepository accRepo) {
         super("AccountScreen", "/account");
+        this.accRepo = accRepo;
     }
 
     @Override
     public void load() {
-        System.out.println("Your current balance is ");
+
+        double moneyadd; double moneysub; double amount;
+
+        System.out.println("Your current balance is " + currentUser.getBalance());
         System.out.println("Press 1) to make a deposit or 2) to make a withdraw");
         System.out.println("Press 3 to log out");
 
@@ -24,18 +35,44 @@ public class AccountScreen extends Screen {
             String path = userInputs.readLine();
 
             switch (path) {
-                case "1" :
-                    //deposit method here
+                case "1":
+
+                    System.out.println("How much would you like to deposit?");
+                    moneyadd = Double.parseDouble(userInputs.readLine());
+                    BigDecimal bd = new BigDecimal(moneyadd).setScale(2, RoundingMode.HALF_UP);
+                    amount = bd.doubleValue();
+
+
+                    currentUser.setBalance(amount + currentUser.getBalance());
+                    accRepo.save(currentUser);
+                    navigation.navigate("/account");
                     break;
-                case "2" :
-                    //withdraw method here
+
+                case "2":
+
+                    System.out.println("How much would you like to withdraw");
+                    moneysub = Double.parseDouble(userInputs.readLine());
+                    BigDecimal dp = new BigDecimal(moneysub).setScale(2, RoundingMode.HALF_UP);
+                    amount = dp.doubleValue();
+                    if (amount > currentUser.getBalance()) {
+                        System.err.println("Insufficient funds");
+                    } else {
+                        currentUser.setBalance(currentUser.getBalance() - amount);
+                        accRepo.save(currentUser);
+
+                    }
+                    navigation.navigate("/account");
                     break;
-                case "3" :
+
+                case "3":
                     System.out.println("Have a good day");
-                    BankMain.navigation.navigate("/home");
+                    navigation.navigate("/home");
                 default:
-                    //throw an exception here
+                    throw new InvalidEntryException();
             }
+        } catch (InvalidEntryException | InsufficientFundsException e) {
+            System.out.println("Your entry is invalid");
+
         } catch (IOException e ) {
             System.err.println("An unexpected problem occurred...proceeding to shutdown");
             appLaunched = false;

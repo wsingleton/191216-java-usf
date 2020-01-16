@@ -30,6 +30,8 @@ public class LoginScreen extends Screen {
             password = BankMain.userInputs.readLine();
 
             uService.login(username, password);
+            System.out.println("login successful");
+            BankMain.navigation.navigate("/account");
 
             } catch (InvalidEntryException | InvalidCredentialsException e) {
             e.printStackTrace();
@@ -39,8 +41,6 @@ public class LoginScreen extends Screen {
             System.out.println("Exiting the application");
             BankMain.appLaunched = false;
         }
-
-        System.out.println("login successful");
 
     }
 }

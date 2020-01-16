@@ -4,17 +4,19 @@ import com.revature.BankMain;
 import com.revature.exceptions.DuplicateException;
 import com.revature.exceptions.InvalidEntryException;
 import com.revature.models.User;
+import com.revature.repos.AccountRepository;
+import com.revature.repos.UserRepository;
 import com.revature.services.UserServices;
 
 import java.io.IOException;
 
 public class RegisterScreen extends Screen {
 
-    private UserServices uService;
+    private UserServices uServices;
 
-    public RegisterScreen(UserServices uService) {
+    public RegisterScreen(UserServices uServices) {
         super("RegisterScreen", "/register");
-        this.uService = uService;
+        this.uServices = uServices;
     }
 
     @Override
@@ -31,11 +33,9 @@ public class RegisterScreen extends Screen {
             password = BankMain.userInputs.readLine();
 
             User newUser = new User (username, password, 0.0);
-            uService.register(newUser);
-            System.out.println("Registration successful! Directing to account page");
-            BankMain.navigation.navigate("/account");
-
-
+            uServices.register(newUser);
+            System.out.println("Registration successful! Directing to home page");
+            BankMain.navigation.navigate("/home");
 
         } catch (InvalidEntryException | DuplicateException e) {
             System.err.println("Registration failed");
@@ -45,5 +45,6 @@ public class RegisterScreen extends Screen {
             System.out.println("Exiting the application");
             BankMain.appLaunched = false;
         }
+
     }
 }

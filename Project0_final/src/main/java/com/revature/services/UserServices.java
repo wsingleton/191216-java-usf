@@ -1,6 +1,6 @@
 package com.revature.services;
 
-import com.revature.BankMain;
+import static com.revature.BankMain.currentUser;
 import com.revature.exceptions.DuplicateException;
 import com.revature.exceptions.InvalidCredentialsException;
 import com.revature.exceptions.InvalidEntryException;
@@ -34,8 +34,7 @@ public class UserServices {
             throw new InvalidEntryException();
         }
 
-        User returningUser = uRepo.findByCredentials(username, password).orElseThrow(InvalidCredentialsException::new);
-        BankMain.currentConn.setExisting(new UserConnection(returningUser, ConnectionMaker.getInstance().getConnection(returningUser)));
+        currentUser = uRepo.findByCredentials(username, password).orElseThrow(InvalidCredentialsException::new);
 
     }
 

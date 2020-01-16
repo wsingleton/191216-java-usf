@@ -21,18 +21,16 @@ public class HomeScreen extends Screen {
 
             switch (path) {
                 case "1" :
-                    navigation.navigate("/register");
-                    break;
+                    navigation.navigate("/register"); break;
                 case "2" :
-                    navigation.navigate("/login");
-                    break;
+                    navigation.navigate("/login"); break;
                 case "3" :
                     System.out.println("Have a good day");
-                    appLaunched = false;
-                    break;
+                    appLaunched = false; break;
                 default:
                     System.out.println("Invalid entry");
             }
+
         } catch (IOException e ) {
             System.err.println("An unexpected problem occurred...proceeding to shutdown");
             appLaunched = false;
