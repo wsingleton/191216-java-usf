@@ -32,7 +32,9 @@ public class AccountRepository implements CrudRepository<Account> {
             pstmt.setInt(1, userId);
 
             ResultSet rs = pstmt.executeQuery();
-            account = mapResultSet(rs).stream().findFirst();
+            Set<Account> set = mapResultSet(rs);
+
+            if(!set.isEmpty())account = set.stream().findFirst();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -44,10 +46,10 @@ public class AccountRepository implements CrudRepository<Account> {
     @Override
     public void save(Account newOjb) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-            String sql = "INSERT INTO accounts VALUES(0, ?)";
+            String sql = "INSERT INTO bank_app.accounts VALUES(0, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"account_id"});
             pstmt.setDouble(1, newOjb.getBalance());
-//            pstmt.setString(2, app().getCurrentSession().getSessionUser().getUsername());
+            pstmt.setString(2, app().getAccountType().ordinal+1);
 
             int rowsInserted = pstmt.executeUpdate();
 
@@ -60,7 +62,12 @@ public class AccountRepository implements CrudRepository<Account> {
                 }
         }
 
-    }catch (SQLException e){
+
+    }catch (SQLIntegrityConstraintViolationException e){
+            e.printStackTrace();
+        }
+
+        catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -112,11 +119,10 @@ public class AccountRepository implements CrudRepository<Account> {
 
         try {
 
-            String sql = "UPDATE accounts SET balance = ?" +
-                    "WHERE accountId = ?";
+            String sql = "UPDATE bank_app.accounts SET balance = ? WHERE account_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, updatedObj.getAccountId());
-            pstmt.setDouble(2, updatedObj.getBalance());
+            pstmt.setDouble(1, updatedObj.getBalance());
+            pstmt.setInt(2, updatedObj.getAccountId());
 
             int rowsUpdated = pstmt.executeUpdate();
 
@@ -124,7 +130,11 @@ public class AccountRepository implements CrudRepository<Account> {
                 updated = true;
             }
 
-        } catch (SQLException e) {
+        } catch (SQLIntegrityConstraintViolationException e){
+            e.printStackTrace();
+        }
+
+        catch (SQLException e) {
             e.printStackTrace();
         }
 
