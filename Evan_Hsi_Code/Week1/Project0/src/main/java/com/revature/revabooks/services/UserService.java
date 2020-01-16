@@ -30,7 +30,8 @@ public class UserService {
             throw new InvalidRequestException();
 
 
-        currentUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+        currentUser = userRepo.findUserByCredentials(username, password)
+                .orElseThrow(AuthenticationException::new);
     }
 
     public void register(User user) {

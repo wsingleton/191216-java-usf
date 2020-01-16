@@ -35,7 +35,7 @@ public class LoginScreen extends Screen {
             System.out.print("Password: ");
             password = console.readLine();
 
-            //userService.authenticate(username, password);
+            userService.authenticate(username, password);
 
             if(currentUser != null) {
                 System.out.println("[LOG] - Login successful, navigating to dashboard...");
@@ -51,7 +51,7 @@ public class LoginScreen extends Screen {
         catch(Exception e) {
             e.printStackTrace();
             System.err.println("[ERROR] - An unexpected exception occurred");
-            System.out.println("[LOG] - Shutting down application");
+            //System.out.println("[LOG] - Shutting down application");
             appRunning = false;
         }
     }

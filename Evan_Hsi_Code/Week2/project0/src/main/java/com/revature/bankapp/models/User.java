@@ -16,10 +16,12 @@ public class User {
 
     public User(String firstName, String lastName,
                 String userName, String passWord) {
+        setId(0);
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
-        this.passWord = passWord.hashCode();
+        setPassWord(passWord);
+        this.role = Role.BASIC_MEMBER;
     }
 
     public User(int id, String firstName, String lastName,
@@ -71,6 +73,7 @@ public class User {
     public void setPassWord(String passWord) {
         this.passWord = passWord.hashCode();
     }
+
     public void setPassWord(int hash) { this.passWord = hash; }
 
     public Role getRole() {

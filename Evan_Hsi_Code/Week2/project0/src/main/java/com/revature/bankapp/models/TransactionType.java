@@ -2,8 +2,7 @@ package com.revature.bankapp.models;
 
 public enum TransactionType {
 
-    DEPOSIT("Deposit"), WITHDRAWAL("Withdrawal"),
-    TRANSIN("Transfer In"), TRANSOUT("Transfer Out");
+    DEPOSIT("Deposit"), WITHDRAWAL("Withdrawal");
 
     private String transactionType;
 
@@ -21,12 +20,6 @@ public enum TransactionType {
         switch (id) {
             case 2:
                 transactionType = WITHDRAWAL;
-                break;
-            case 3:
-                transactionType = TRANSIN;
-                break;
-            case 4:
-                transactionType = TRANSOUT;
                 break;
             default:
                 transactionType = DEPOSIT;

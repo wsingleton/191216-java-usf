@@ -15,12 +15,12 @@ public class UserRepository implements CrudRepository<User> {
     public void save(User user) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO rbs_app.users VALUES (0, ?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
-            pstmt.setString(1, user.getUserName());
-            pstmt.setInt(2, user.getPassWord());
-            pstmt.setString(3, user.getFirstName());
-            pstmt.setString(4, user.getLastName());
+            String sql = "INSERT INTO bank_app.users VALUES (0, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"userid"});
+            pstmt.setString(1, user.getFirstName());
+            pstmt.setString(2, user.getLastName());
+            pstmt.setString(3, user.getUserName());
+            pstmt.setInt(4, user.getPassWord());
             pstmt.setInt(5, user.getRole().ordinal() + 1);
             int rowsInserted = pstmt.executeUpdate();
 
@@ -73,10 +73,9 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.setString(3, user.getLastName());
             pstmt.setString(4, user.getUserName());
             pstmt.setInt(5, user.getPassWord());
-            pstmt.setString(6, user.getRole().toString());
+            pstmt.setInt(6, user.getRole().ordinal() + 1);
 
             int rowsUpdated = pstmt.executeUpdate();
-            
 
         } catch (SQLException e) { e.printStackTrace(); return false; }
         return true;
@@ -85,13 +84,27 @@ public class UserRepository implements CrudRepository<User> {
     @Override
     public boolean deleteById(int id) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "DELETE FROM USERS WHERE USER_ID=?";
+            String sql = "DELETE FROM USERS WHERE USERID=?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, 25);
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
 
             System.out.println("Deleted successfully");
         } catch (SQLException e) { e.printStackTrace(); return false;}
+        return true;
+    }
+
+    public boolean deleteOwn() {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "DELETE FROM USERS WHERE USERID = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userid);
+            pstmt.executeUpdate();
+
+            System.out.println("Deleted Successfully. Goodbye.");
+
+        } catch (SQLException e) { e.printStackTrace(); return false; }
         return true;
     }
 
@@ -143,12 +156,12 @@ public class UserRepository implements CrudRepository<User> {
 
         while(rs.next()) {
             User temp = new User();
-            temp.setId(rs.getInt("user_id"));
+            temp.setId(rs.getInt("userid"));
             temp.setUserName(rs.getString("username"));
             temp.setPassWord(rs.getInt("password"));
-            temp.setFirstName(rs.getString("first_name"));
-            temp.setLastName(rs.getString("last_name"));
-            temp.setRole(Role.getRoleByID(rs.getInt("role_id")));    //come back to this
+            temp.setFirstName(rs.getString("firstname"));
+            temp.setLastName(rs.getString("lastname"));
+            temp.setRole(Role.getRoleByID(rs.getInt("type")));    //come back to this
             users.add(temp);
         }
 

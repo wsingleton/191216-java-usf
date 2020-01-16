@@ -30,15 +30,35 @@ public class RegisterScreen extends Screen {
             System.out.println("Sign up for a new account");
             System.out.print("First name: ");
             firstName = console.readLine();
-            System.out.println("Last name: ");
+            if(firstName == null || firstName.trim().equals("")) throw new InvalidRequestException();
+            for(int i = 0; i < firstName.length(); i++) {
+                if(!Character.isAlphabetic(firstName.charAt(i))) throw new InvalidRequestException();
+            }
+            System.out.print("Last name: ");
             lastName = console.readLine();
-            System.out.println("Username: ");
+            if(lastName == null || lastName.trim().equals("")) throw new InvalidRequestException();
+            for(int i = 0; i < lastName.length(); i++) {
+                if(!Character.isAlphabetic(lastName.charAt(i))) throw new InvalidRequestException();
+            }
+            System.out.print("Username: ");
             username = console.readLine();
-            System.out.println("Password: ");
+            if(username == null || username.trim().equals("")) throw new InvalidRequestException();
+            for(int i = 0; i < username.length(); i++) {
+                if(!Character.isAlphabetic(username.charAt(i)) && !(username.charAt(i) == '#')
+                        && !(username.charAt(i) == '$') && !(username.charAt(i) == '%')
+                        && !(username.charAt(i) == '@')) throw new InvalidRequestException();
+            }
+            System.out.print("Password: ");
             password = console.readLine();
+            if(password == null || password.trim().equals("")) throw new InvalidRequestException();
+            for(int i = 0; i < password.length(); i++) {
+                if(!Character.isLetterOrDigit(password.charAt(i)) && !(password.charAt(i) == '#')
+                        && !(password.charAt(i) == '$') && !(password.charAt(i) == '%')
+                        && !(password.charAt(i) == '@')) throw new InvalidRequestException();
+            }
 
             User newUser = new User(firstName, lastName, username, password);
-            //userService.register(newUser);
+            userService.register(newUser);
 
             if (currentUser != null) {
                 System.out.println("[LOG] - New user created! Navigating to dashboard...");
@@ -50,7 +70,7 @@ public class RegisterScreen extends Screen {
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("[ERROR] - An unexpected exception occurred");
-            System.out.println("[LOG] - Shutting down application");
+            //System.out.println("[LOG] - Shutting down application");
             appRunning = false;
         }
 
