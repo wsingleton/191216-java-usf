@@ -83,7 +83,7 @@ public class WithdrawalsMenu extends Menu {
                 if (currentBal == tgt.getBalance()) {
                     System.out.println(ANSI_RED + "An unexpected error has occurred.  Transaction failed." + ANSI_RESET);
                 } else {
-                    System.out.println("Transaction complete.  $" + wdAmmt + "withdrawn.");
+                    System.out.println("Transaction complete.  $" + wdAmmt + " withdrawn.");
                     System.out.println("New balance: $" + tgt.getBalance());
                 }
                 System.out.println("Returning to dashboard...");

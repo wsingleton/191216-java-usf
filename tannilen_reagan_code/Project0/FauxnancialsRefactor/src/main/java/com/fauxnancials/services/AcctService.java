@@ -110,7 +110,7 @@ public class AcctService {
             input=input.replace("$", "");
         }
         if (input.contains(".")){
-            int i = input.indexOf(".")+2;
+            int i = input.indexOf(".")+3;
             input=input.substring(0,i);
         }
         return input;
