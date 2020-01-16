@@ -17,6 +17,7 @@ public class AccountServiceTest {
     private double testAmount;
     private Double expectedResult;
     private Double actualResult;
+    private String messagelog;
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -49,7 +50,6 @@ public class AccountServiceTest {
         assertEquals(message, expectedResult, actualResult);
 
     }
-
 
     @Test
     public void testValidateAmountWithNegativeNumber() {
@@ -95,5 +95,69 @@ public class AccountServiceTest {
         String message = "If a null object is provided, return 0";
         assertEquals(message, new Double(0.0), sut.validatedAmount(testAmount));
     }
+
+    // testing isNumeric method
+
+    @Test
+    public void testIsNumeric(){
+        messagelog = "If a string provided can be parsed into a double i.e contains numbers only, the method should return true";
+        String testAmount = "100.567";
+        boolean expectedResult = true;
+        boolean actualResult = sut.isNumeric(testAmount);
+        assertEquals(messagelog, expectedResult, actualResult);
+
+    }
+
+    @Test
+    public void testIsNumericWithStringsOnly(){
+        messagelog = "If a string provided does not contain any number, the method should return false";
+        String testAmount = "Kitabi";
+        boolean expectedResult = false;
+        boolean actualResult = sut.isNumeric(testAmount);
+        assertEquals(messagelog, expectedResult, actualResult);
+
+    }
+
+    @Test
+    public void testIsNumericWithStringMixedWithNumbers(){
+        messagelog = "If a string provided is a mix of numbers and characters, the method should return false";
+        String testAmount = "1250Kitabi";
+        boolean actualResult = sut.isNumeric(testAmount);
+        assertEquals(messagelog, false, actualResult);
+    }
+
+    @Test
+    public void testIsNumericWithEmptyInput(){
+        messagelog = "If a string provided is empty, the method should return false";
+        String testAmount = "";
+        boolean actualResult = sut.isNumeric(testAmount);
+        assertEquals(messagelog, false, actualResult);
+    }
+
+    @Test
+    public void testIsNumericWithNullInput(){
+        messagelog = "If no input provided, the method should return false";
+        boolean actualResult = sut.isNumeric(null);
+        assertEquals(messagelog, false, actualResult);
+    }
+
+    // Tests for negative value checker method
+
+    @Test
+    public void testNegativeValuesCheckerWithANegativeNumber(){
+        messagelog = "If an amount provided is less or equal to zero, the method should return true";
+        double testAmount = -456.89;
+        boolean actualResult = sut.negativeValuesChecker(testAmount);
+        assertEquals(messagelog, true, actualResult);
+    }
+
+    @Test
+    public void testNegativeValuesCheckerWithAPositiveNumber(){
+        messagelog = "If an amount provided is greater than zero, the method should return false";
+        double testAmount = 45689;
+        boolean actualResult = sut.negativeValuesChecker(testAmount);
+        assertEquals(messagelog, false, actualResult);
+    }
+
 
 }
