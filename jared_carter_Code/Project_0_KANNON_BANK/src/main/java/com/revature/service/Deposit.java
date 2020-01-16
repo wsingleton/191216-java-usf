@@ -18,7 +18,7 @@ public class Deposit {
 
         Scanner scanner = new Scanner(System.in);
 
-        //find account associated with id
+
         BankAccountRepo bankAccountRepo = new BankAccountRepo();
         temp = bankAccountRepo.findAccountBank(id);
         balance = temp.getBalance();
@@ -32,18 +32,11 @@ public class Deposit {
             } catch(Exception e){
                 System.out.println("Please enter a number: ");
             }
-            //Make sure withdrawal is not greater than the current balance
+
             if (deposit > 0) {
                 balance += deposit;
 
                 Accounts_Bank updateUser = new Accounts_Bank(temp.getAccountOwner(), balance);
-                updateUser.setId(id);
-
-                System.out.println(balance);
-                System.out.println(id);
-
-                System.out.println(updateUser.getBalance());
-                System.out.println(updateUser.getId());
 
                 bankAccountRepo.updateAccountBank(updateUser);
 

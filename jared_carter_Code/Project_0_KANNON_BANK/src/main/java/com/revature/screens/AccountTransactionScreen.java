@@ -27,7 +27,7 @@ public class AccountTransactionScreen {
 
         account_Bank.setBalance(balance);
 
-        //add bank account info to Bank
+
 
         BankAccountRepo bankAccountRepo = new BankAccountRepo();
         bankAccountRepo.saveAccountBank(account_Bank);
@@ -63,8 +63,7 @@ public class AccountTransactionScreen {
                     break;
 
                 default:
-                    //System.out.println("");
-                    //accountTransaction(user);
+
                     break;
 
 

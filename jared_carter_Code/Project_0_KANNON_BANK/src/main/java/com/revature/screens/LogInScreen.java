@@ -10,8 +10,7 @@ public class LogInScreen {
 
     public static void logIn() {
 
-        //Creating a new account
-        //set user inputs
+
 
         String username;
         String password;
@@ -19,11 +18,11 @@ public class LogInScreen {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Ask for username and password
+
         System.out.println("Enter your username: ");
         username = scanner.nextLine();
 
-        //check username for empty string or null
+
         if (username.equals("") || username.isEmpty()) {
 
             System.out.println("Invalid username.");
@@ -34,7 +33,7 @@ public class LogInScreen {
         System.out.println("Enter your password: ");
         password = scanner.nextLine();
 
-        //check password for empty string or null
+
         if (password.equals("") || password.isEmpty()) {
 
             System.out.println("Invalid password.");

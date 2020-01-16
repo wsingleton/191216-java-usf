@@ -14,12 +14,12 @@ public class Withdraw {
         double withdraw = 0;
         boolean valid = false;
 
-        //Create a temporary account to grab current user info
+
         Accounts_Bank temp = null;
 
         Scanner scanner = new Scanner(System.in);
 
-        //find account associated with id
+
         BankAccountRepo bankAccountRepo = new BankAccountRepo();
         temp = bankAccountRepo.findAccountBank(id);
 
@@ -34,16 +34,13 @@ public class Withdraw {
             } catch(Exception e){
                 System.out.println("Please enter a number: ");
             }
-            //Make sure withdrawal is not greater than the current balance
-            if (withdraw < balance ) {
+
+            if (withdraw < balance + 1 ) {
 
                 balance -= withdraw;
                 Accounts_Bank updateUser = new Accounts_Bank(temp.getAccountOwner(), balance);
 
 
-                //updateUser.setBalance(balance);
-
-              //  temp.getAccountOwner(),
 
                 bankAccountRepo.updateAccountBank(updateUser);
 

@@ -25,7 +25,7 @@ public class MainMenuScreen {
                 //System.exit(0);
             }
 
-            //Switch statement to check for Login or Create a New Account
+
 
 
             switch (option) {

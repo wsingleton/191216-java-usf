@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class CreateAccountScreen {
     public static void createAccount() {
 
-        //User fields
 
         String firstName;
         String lastName;
@@ -17,7 +16,7 @@ public class CreateAccountScreen {
         String password;
         Scanner scanner = new Scanner(System.in);
 
-        //---------------- Ask for user info ----------------
+
         System.out.println("First name: ");
         firstName = scanner.nextLine();
 
@@ -34,8 +33,6 @@ public class CreateAccountScreen {
 
         User newUser = new User(firstName, lastName, username, password);
 
-        //Check DB if username exists
-        //get list of users
         UserRepo userRepo = new UserRepo();
 
         List<User> users = userRepo.findAllUsers();
