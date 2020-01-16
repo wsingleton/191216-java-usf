@@ -1,9 +1,11 @@
 package com.revature.repos;
 
 import com.revature.models.Account;
+import com.revature.models.AccountType;
 import com.revature.util.ConnectionFactory;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -11,15 +13,23 @@ import java.util.Set;
 import static com.revature.AppDriver.app;
 
 public class AccountRepository implements CrudRepository<Account> {
+    private Integer key;
+    private HashMap<Integer, Account>accountDb;
 
-    public Optional<Account> findByUsername(String username) {
+    public Optional<Account> getAccountByUserId(Integer userId) {
         Optional<Account> account = Optional.empty();
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "SELECT * FROM accounts WHERE username = ?";
+            String sql =  "SELECT * " +
+                    "FROM accounts a " +
+                    "JOIN users_accounts ua " +
+                    "ON a.account_id = ua.account_id " +
+                    "JOIN users u " +
+                    "ON w.user_id = b.book_id " +
+                    "WHERE u.user_id = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, username);
+            pstmt.setInt(1, userId);
 
             ResultSet rs = pstmt.executeQuery();
             account = mapResultSet(rs).stream().findFirst();
@@ -75,7 +85,7 @@ public class AccountRepository implements CrudRepository<Account> {
     }
 
     @Override
-    public Optional<Account> findById(Integer id) {
+    public Optional<Account> findById(Integer userId) {
         Connection conn = app().getCurrentSession().getConnection();
         Optional<Account> account = Optional.empty();
 
@@ -83,10 +93,10 @@ public class AccountRepository implements CrudRepository<Account> {
 
             String sql = "SELECT * FROM accounts WHERE accountId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, userId);
 
             ResultSet rs = pstmt.executeQuery();
-            account = mapResultSet(rs).stream().findFirst();
+           Set<Account> set = mapResultSet(rs);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -126,8 +136,10 @@ public class AccountRepository implements CrudRepository<Account> {
 
         while (rs.next()) {
             Account temp = new Account();
-            temp.setAccountId(rs.getInt("accountId"));
+            temp.setAccountId(rs.getInt("account_id"));
             temp.setBalance(rs.getDouble("balance"));
+            temp.setAccountType(AccountType.getAccountTypeById(rs.getInt("account_type_id")));
+
 
 
             accounts.add(temp);
