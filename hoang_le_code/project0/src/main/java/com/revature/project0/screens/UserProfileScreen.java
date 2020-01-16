@@ -30,7 +30,7 @@ public class UserProfileScreen extends Screen {
                 while( input != "3"){
                     System.out.println("What you want to do today");
                     System.out.println("1---Enter Checking---");
-                    System.out.println("2--- Create new Saving---");
+                    System.out.println("2---Create new Saving account---");
                     System.out.println("3---Quit---");
                     System.out.println("enter your choise");
                     input = console.readLine();
@@ -69,7 +69,7 @@ public class UserProfileScreen extends Screen {
                 while( input != "3"){
                     System.out.println("What you want to do today");
                     System.out.println("1---Enter Saving---");
-                    System.out.println("2--- Create new Checking---");
+                    System.out.println("2---Create new Checking Account---");
                     System.out.println("3---Quit---");
                     System.out.println("enter your choise");
                     input = console.readLine();

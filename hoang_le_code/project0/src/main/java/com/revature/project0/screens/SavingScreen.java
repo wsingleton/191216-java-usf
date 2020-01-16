@@ -18,8 +18,10 @@ public class SavingScreen extends Screen {
 
             String input = "";
             int id = currentUser.getId();
+            AccountRepository check = new AccountRepository();
             while( input != "3"){
                 System.out.println("---------SAVING--------");
+                System.out.println("Your balance is : " + check.getBalance("Saving",id));
                 System.out.println("What do you want to do today ");
                 System.out.println("1---deposit---");
                 System.out.println("2---withdraw---");

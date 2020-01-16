@@ -10,10 +10,14 @@ import static com.revature.project0.AppDriver.currentUser;
 
 public class UserService {
 
-    private UserRepository userRepo;
+    public UserRepository userRepo;
 
     public UserService(UserRepository repo) {
         this.userRepo = repo;
+    }
+
+    public UserService() {
+        super();
     }
 
     public void register(User newUser) {

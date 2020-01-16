@@ -9,6 +9,70 @@ import java.util.*;
 
 public class AccountRepository implements CrudRepository<Accounts> {
 
+
+    public Boolean checkAccount(int id) {
+
+        Boolean a = true;
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+
+
+            String sql = " select * from accounts WHERE user_id = "+ id + " ";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            System.out.println(id);
+            Set<Accounts> set = mapResultSet(rs);
+
+
+            if(set.isEmpty() == true) {
+                a = false;
+            }
+
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return a;
+    }
+
+
+
+    public Double getBalance(String type, int id){
+        Double balance = 0.0;
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+
+            CallableStatement stmt = conn.prepareCall("{call returnbalance(?,?,?)}");
+            stmt.setString(1, type);
+            stmt.setInt(2, id);
+
+            //register the OUT parameter before calling the stored procedure
+            stmt.registerOutParameter(3, Types.DOUBLE);
+
+            stmt.executeUpdate();
+
+            //read the OUT parameter now
+            balance = stmt.getDouble(3);
+
+
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+        return balance;
+    }
+
+
+
+
+
     public void withdraw(String type, Double amount, int id){
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 

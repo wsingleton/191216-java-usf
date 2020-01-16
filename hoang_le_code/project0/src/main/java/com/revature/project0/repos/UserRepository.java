@@ -18,6 +18,36 @@ public class UserRepository implements CrudRepository<User> {
 
 
 
+    public Boolean checkUsername(String username) {
+
+        Boolean a = true;
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+
+            username = " \'" + username + "\'  ";
+            String sql = " select * from users WHERE username =  " + username;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+
+            Set<User> set = mapResultSet(rs);
+
+
+            if(set.isEmpty() == true) {
+                a = false;
+            }
+
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return a;
+    }
+
+
     public Optional<User> findUserByUsername(String username) {
 
         Optional <User> _user = Optional.empty();
@@ -27,6 +57,7 @@ public class UserRepository implements CrudRepository<User> {
             String sql = " select * from users WHERE username = ? ";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
+            username = " \'" + username + "\'  ";
             pstmt.setString(1, username);
 
             ResultSet rs = pstmt.executeQuery();

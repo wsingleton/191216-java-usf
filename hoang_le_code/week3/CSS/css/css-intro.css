@@ -1,0 +1,40 @@
+/*
+    css Selector
+        *()             Universal
+        p()             type/tag
+        .className()    class
+        #idName()       id
+        h1,a()          multi-select
+        h1,#idName90    multi-select
+        li > a()        chiild
+        p a()           Descendant
+        h1+p()          Sibling.Adjacent
+
+*/
+
+div{
+    border: 1px solid;
+    padding: 5px;
+    background-color: slategrey;
+}
+
+p{
+    font-family: Arial, Helvetica, sans-serif;
+    color: blue;
+}
+
+#inheritance{
+    color: red;
+}
+.main-header{
+    border-radius: 5%;
+}
+div > a:visited{
+    color: goldenrod;
+}
+div > a:hover{
+    color: green;
+}
+div > a:active{
+    color: darkred;
+}

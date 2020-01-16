@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Basics: Forms</title>
+</head>
+<body>
+    
+    <main>
+        <form action="http://www.example.com" method="GET">
+
+            <fieldset>
+                <legend>Your Details</legend>
+                
+                <label>
+                    Name:
+                    <input type="text" name="username" maxlength="50" required/>
+                </label>
+                <br/><br/>
+                <label>
+                    Email:
+                    <input
+                        type="email" name="user-email"
+                        size="30" maxlength="255"
+                        placeholder="Enter your email address"
+                    />
+                </label>
+            </fieldset>
+            
+            <br/>
+
+            <fieldset>
+                <legend>Your Review</legend>
+
+                <p>
+                    <label for="hear-about">How did you hear about us?</label>
+                    <select name="referred" id="hear-about">
+                        <option value="">Please make a selection</option>
+                        <option value="google">Google</option>
+                        <option value="advert">Advertisement</option>
+                        <option value="friend">Friend</option>
+                        <option value="other">Other</option>
+                    </select>
+                </p>
+
+                <p>
+                    Would you visit again?
+                    <br/>
+                    <label>
+                        Yes
+                        <input type="radio" name="will-return" value="yes"/>
+                    </label>
+                    <label>
+                        No
+                        <input type="radio" name="will-return" value="no"/>
+                    </label>
+                    <label>
+                        Maybe
+                        <input type="radio" name="will-return" value="maybe"/>
+                    </label>
+                </p>
+
+                <label>
+                    Sign me up for email updates!
+                    <input type="checkbox" name="subscribe" checked="checked"/>
+                </label>
+
+                <br/><br/>
+
+                <label>
+                    Please provide any additional comments:<br/>
+                    <textarea name="comments" cols="30" rows="10"></textarea>
+                </label>
+
+            </fieldset>
+
+            <br/>
+
+            <input type="submit" value="Submit Review"/>
+
+        </form>
+
+    </main>
+
+</body>
+</html>
