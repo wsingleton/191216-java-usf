@@ -27,3 +27,4 @@ public class ScreenRouter {
                 .findFirst().orElseThrow(ScreenNotFoundException::new)
                 .render();
     }
+}
