@@ -34,7 +34,7 @@ public class AppState {
 
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
-                .addScreen(new RegisterScreen(userService, accountService, userAccountService, userRepo, accRepo, uaRepo))
+                .addScreen(new RegisterScreen(userService, accountService, userAccountService, userRepo, accRepo))
                 .addScreen(new LoginScreen(userService))
                 .addScreen(new UserProfileScreen())
                 .addScreen(new DepositScreen(accountService))

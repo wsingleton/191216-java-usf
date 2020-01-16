@@ -5,14 +5,9 @@ import com.revature.project_0.exceptions.ResourcePersistentException;
 import com.revature.project_0.models.Account;
 import com.revature.project_0.models.AccountType;
 import com.revature.project_0.models.User;
-import com.revature.project_0.models.UserAccount;
 import com.revature.project_0.repos.AccountRepository;
-import com.revature.project_0.repos.UserAccountRepository;
 import com.revature.project_0.repos.UserRepository;
-import com.revature.project_0.services.AccountService;
-import com.revature.project_0.services.UserAccountService;
-import com.revature.project_0.services.UserService;
-import com.revature.project_0.util.UserSession;
+import com.revature.project_0.services.*;
 
 import static com.revature.project_0.AppDriver.app;
 
@@ -20,12 +15,12 @@ public class RegisterScreen extends Screen {
 
     private UserRepository userRepository;
     private AccountRepository accountRepository;
-    private UserAccountRepository userAccountRepository;
+//    private UserAccountRepository userAccountRepository;
     private UserService userService;
     private AccountService accountService;
     private UserAccountService userAccountService;
 
-    public RegisterScreen(UserService userService, AccountService accountService, UserAccountService userAccountService, UserRepository userRepository, AccountRepository accountRepository, UserAccountRepository userAccountRepository) {
+    public RegisterScreen(UserService userService, AccountService accountService, UserAccountService userAccountService, UserRepository userRepository, AccountRepository accountRepository) {
         super("RegisterScreen", "/register");
         System.out.println("[LOG] - Instantiating " + super.getName());
         this.userService = userService;
@@ -33,7 +28,7 @@ public class RegisterScreen extends Screen {
         this.userAccountService = userAccountService;
         this.userRepository = userRepository;
         this.accountRepository = accountRepository;
-        this.userAccountRepository = userAccountRepository;
+
     }
 
     @Override
@@ -60,12 +55,17 @@ public class RegisterScreen extends Screen {
 
             balance = Double.parseDouble(app().getConsole().readLine());
 
-
+            // Add new user to the database
             User newUser = new User(username, password, firstname, lastname);
             userService.register(newUser);
+
+            // Add new account made by current user(also new user)
             Account newAccount = new Account(balance, AccountType.CHECKINGS);
             accountService.registerAccount(newAccount);
+
             int newUserId;
+
+            // use the ids from new user and account to make a user account.
             User tempUser = userRepository.findUserByUsername(username).get();
             newUserId = tempUser.getUserId();
             int newAccountId;
