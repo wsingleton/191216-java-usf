@@ -9,6 +9,12 @@ import java.io.*;
 
 public class BankDriver {
 
+    private static appState as = new appState();
+
+    public static appState app() {
+        return as;
+    }
+
     public static BufferedReader console;
     public static ScreenRouter router;
     public static boolean appRunning;

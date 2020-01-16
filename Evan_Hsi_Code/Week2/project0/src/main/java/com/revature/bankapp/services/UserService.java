@@ -6,6 +6,9 @@ import com.revature.bankapp.exceptions.ResourcePersistenceException;
 import com.revature.bankapp.models.Role;
 import com.revature.bankapp.models.User;
 import com.revature.bankapp.repositories.UserRepository;
+
+import java.util.Set;
+
 import static com.revature.bankapp.BankDriver.*;
 
 public class UserService {
@@ -38,13 +41,17 @@ public class UserService {
         userid = user.getId();
     }
 
+    public Set<User> findAll() {
+        return userRepository.findAll();
+    }
+
     public boolean updateUser(User user) { return userRepository.update(user); }
 
     public boolean deleteUserById(int id) { return userRepository.deleteById(id); }
 
     public boolean deleteOwn() { return userRepository.deleteOwn(); }
 
-    public boolean isUserValid(User user) {
+    private boolean isUserValid(User user) {
         if (user == null) return false;
         if (user.getFirstName() == null || user.getFirstName().trim() == "") return false;
         if (user.getLastName() == null || user.getLastName().trim() == "") return false;

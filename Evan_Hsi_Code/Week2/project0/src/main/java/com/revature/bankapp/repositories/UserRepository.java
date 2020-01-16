@@ -76,9 +76,11 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.setInt(6, user.getRole().ordinal() + 1);
 
             int rowsUpdated = pstmt.executeUpdate();
+            if(rowsUpdated == 1) return true;
+            else return false;
 
-        } catch (SQLException e) { e.printStackTrace(); return false; }
-        return true;
+        } catch (SQLException e) { e.printStackTrace(); }
+        return false;
     }
 
     @Override
