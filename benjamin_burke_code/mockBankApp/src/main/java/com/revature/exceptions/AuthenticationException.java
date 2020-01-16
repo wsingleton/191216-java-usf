@@ -1,4 +1,10 @@
 package com.revature.exceptions;
 
-public class AuthenticationException {
+
+public class AuthenticationException extends RuntimeException {
+
+    public AuthenticationException() {
+        super("Authentication Failed");
+    }
+
 }
