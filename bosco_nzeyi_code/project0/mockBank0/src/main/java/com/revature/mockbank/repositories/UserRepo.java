@@ -6,10 +6,7 @@ import com.revature.mockbank.models.User;
 import com.revature.mockbank.util.ConnectionFactory;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 import static com.revature.mockbank.AppDriver.*;
 
@@ -63,9 +60,15 @@ public class UserRepo implements CrudRepository<User> {
     @Override
     public Set<User> findAll() {
         Set<User> users = new HashSet<>();
-//        userDb.forEach((k,v) -> {
-//            users.add(v);
-//        });
+            try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+                String sql = "SELECT * FROM users";
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                users = mapResultSet(rs);
+            }catch (SQLException e){
+                System.err.println("COULD NOT ESTABLISH CONNECTION");
+            }
         return users;
     }
 

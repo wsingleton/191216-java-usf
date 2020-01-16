@@ -1,13 +1,14 @@
 package com.revature.mockbank.services;
 
 import com.revature.mockbank.AppDriver;
-import com.revature.mockbank.exceptions.AuthenticationException;
-import com.revature.mockbank.exceptions.InvalidRequestException;
-import com.revature.mockbank.exceptions.ResourcePersistenceException;
+import com.revature.mockbank.exceptions.*;
 import com.revature.mockbank.models.Role;
 import com.revature.mockbank.models.User;
 import com.revature.mockbank.repositories.AccountRepo;
 import com.revature.mockbank.repositories.UserRepo;
+
+import java.util.Set;
+
 import static com.revature.mockbank.AppDriver.currentUser;
 import static com.revature.mockbank.repositories.UserRepo.*;
 
@@ -19,6 +20,9 @@ public class UserService {
     public UserService(UserRepo repo, AccountRepo accountRepo) {
         this.userRepo = repo;
         this.accountRepo = accountRepo;
+    }
+    public UserService(UserRepo repo) {
+        this.userRepo = repo;
     }
 
     public void register(User newUser) {
@@ -37,6 +41,21 @@ public class UserService {
 
     }
 
+    public Set<User> findAllUsers(String role) {
+
+        Set<User> users;
+
+        if (!(role.equals("Admin"))) {
+            throw new AuthorizationException();
+        }
+        users = userRepo.findAll();
+
+        if (users.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+        return users;
+    }
+
     public void authenticate(String username, String password) {
 
         if (username == null || username.trim().equals("")
@@ -46,7 +65,6 @@ public class UserService {
         }
 
         currentUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
-
     }
 
     public boolean isUserValid(User user) {
@@ -57,4 +75,5 @@ public class UserService {
         if (user.getPassword() == null || user.getPassword().trim().equals("")) return false;
         return true;
     }
+
 }
