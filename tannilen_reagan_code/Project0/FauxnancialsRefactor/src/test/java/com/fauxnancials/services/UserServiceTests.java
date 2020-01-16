@@ -2,7 +2,6 @@ package com.fauxnancials.services;
 
 import com.fauxnancials.exceptions.AuthenticationException;
 import com.fauxnancials.exceptions.InvalidRequestException;
-import com.fauxnancials.exceptions.ResourcePersistenceException;
 import com.fauxnancials.models.User;
 import com.fauxnancials.models.UserType;
 import com.fauxnancials.repos.UserRepository;
