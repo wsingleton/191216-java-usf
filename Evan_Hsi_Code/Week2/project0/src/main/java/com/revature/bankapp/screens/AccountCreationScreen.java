@@ -51,7 +51,7 @@ public class AccountCreationScreen extends Screen {
                 case "3":
                     appRunning = false;
                     run = false;
-                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     break;
                 default:
                     System.out.println("[LOG] - Invalid selection!");

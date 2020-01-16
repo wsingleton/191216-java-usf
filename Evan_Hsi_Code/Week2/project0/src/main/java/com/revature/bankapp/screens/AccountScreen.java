@@ -1,9 +1,11 @@
 package com.revature.bankapp.screens;
 
+import com.revature.bankapp.models.Account;
 import com.revature.bankapp.services.AccountService;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Set;
 
 import static com.revature.bankapp.BankDriver.*;
 import static java.lang.System.exit;
@@ -24,7 +26,7 @@ public class AccountScreen extends Screen {
     }
     @Override
     public void render() {
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
         boolean run = true;
         start:
@@ -49,7 +51,10 @@ public class AccountScreen extends Screen {
 
             switch(userChoice) {
                 case "1":
-                    System.out.println(accountService.findAllByUser(userid));
+                    Set<Account> actSet = null;
+                    actSet = accountService.findAllByUser(userid);
+                    if(actSet == null || actSet.size() == 0) System.out.println("No Accounts");
+                    else System.out.println(actSet);
                     break;
                 case "2":
                     router.navigate("/accountcreation");

@@ -22,7 +22,6 @@ public class TransactionService {
     }
 
     public Set<Transaction> findByID(int id) {
-        System.out.println("check2");
         return transactionRepository.findByAccount(id);
     }
 }

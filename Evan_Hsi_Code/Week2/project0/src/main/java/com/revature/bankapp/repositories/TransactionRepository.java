@@ -52,14 +52,12 @@ public class TransactionRepository implements CrudRepository<Transaction> {
 
     public Set<Transaction> findByAccount(int id) {
         Set<Transaction> allset = new HashSet<>();
-        System.out.println("check3");
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
             System.out.println("check4");
             String sql = "SELECT * FROM TRANSACTIONS WHERE ACCOUNTID = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
-            System.out.println("check5");
             allset = mapResultSet(rs);
 
         } catch (SQLException e) { e.printStackTrace(); }

@@ -1,10 +1,12 @@
 package com.revature.bankapp.screens;
 
+import com.revature.bankapp.models.Account;
 import com.revature.bankapp.models.Type;
 import com.revature.bankapp.services.AccountService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Set;
 
 import static com.revature.bankapp.BankDriver.*;
 
@@ -40,7 +42,10 @@ public class JointAccountCreationScreen extends Screen{
                 String userChoice = console.readLine();
                 switch (userChoice) {
                     case "1":
-                        System.out.println(accountService.findAllByUser(userid));
+                        Set<Account> actSet = null;
+                        actSet = accountService.findAllByUser(userid);
+                        if(actSet == null || actSet.size() == 0) System.out.println("No Accounts");
+                        else System.out.println(actSet);
                         break;
                     case "2":
                         System.out.println(accountService.findAllJoint());

@@ -87,7 +87,6 @@ public class AccountRepository implements CrudRepository<Account> {
     public void addUserToAccount(String un, String pw, int id) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-            System.out.println("IM IN");
             String sql = "SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, un);
