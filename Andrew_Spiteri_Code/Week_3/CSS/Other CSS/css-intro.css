@@ -1,0 +1,39 @@
+/*
+    CSS selectors
+
+    *{} - universal selector
+    p{} - type/tag
+    .className{} - class
+    #idName{} - id
+    h1, a{} - multi-selector
+    h1, #idName{} -multi-selector
+    li > a {} - child
+    p a {} - all anchor tags inside of a paragraph, descendent
+    h1 + p {} - h1s adjacent to a paragraph, sibling/adjacent
+*/
+
+div{
+    border: 1px solid;
+    padding: 5px;
+    background-color: slategray;
+}
+p{
+    font-family: Arial, Helvetica, sans-serif;
+    color: blue;
+}
+#inheritance{
+    color: red;
+}
+.main-header{
+    border-radius: 5%;
+}
+div > a:visited{
+    color: salmon;
+}
+div > a:hover{
+    color: green;
+}
+
+div>a:active{
+    color: darkred;
+}

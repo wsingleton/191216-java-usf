@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Basics: Images</title>
+
+   
+</head>
+<body>
+    <!--
+        HTML Images <img>
+
+            Used to add an aimage to teh web page.  It is a self0closing tag, so
+            no need to procide a closing tag
+        Attributes of < img> 
+
+            src     =   path to the image file (can be local or external)
+            alt     =   provides a text desc if image does not load, screen readers
+            title   =   used to procvide titutlar info when hovered over
+            width   =   specifies desired width of image
+            height  =   specifies desired height of image
+            align   =   used to align the image with any surrounding content        
+    -->    
+    <!-- <img> is a inline element, <p> is a block level element -->
+        <div>
+            <p>
+                <img src="assets/images/quokka.jpg" alt="It's a quokka" width="400" height="250"
+                    title="The quokka is a small marsupial about size of a domestic cat" />
+            </p>
+    
+            <p>
+                <img src="assets/images/earth-spinning.gif" width="250" alt="Earth spinning animation" />
+    
+                <br />
+    
+                <img src="assets/images/loading-star.gif" alt="loading animation">
+            </p>
+        </div>
+    
+        <div>
+            <!-- 
+            Where we place <img> tags matters. The placement of an image will affect how the surrounding
+            text will be displayed.
+        -->
+            <img src="assets/images/bird-of-paradise-flower.jpg" alt="Bird of Paradise Flower" width="100" height="100">
+            <p>Strelitzia, whose common name is the bird of paradise flower, because of a resemblance of its flowers
+                to birds-of-paradise (Paradisaea raggiana). The species S. nicolai is the largest in the genus, reaching
+                10m tall, with stately white and blue flowers; the other species typically reach 2-3.5m tall, except
+                S. caudata which is a tree of a typically smaller size than S. nicolai. The leaves are large, 30–200cm
+                long and 10–80cm broad, similar to a banana leaf in appearance but with a longer petiole, and arranged
+                strictly in two ranks to form a fan-like crown of evergreen foliage. The flowers are produced in a
+                horizontal inflorescence emerging from a stout spathe.</p>
+            <br />
+            <hr />
+    
+            <p><img src="assets/images/bird-of-paradise-flower.jpg" alt="Bird of Paradise Flower" width="100" height="100">
+                Strelitzia, whose common name is the bird of paradise flower, because of a resemblance of its flowers
+                to birds-of-paradise (Paradisaea raggiana). The species S. nicolai is the largest in the genus, reaching
+                10m tall, with stately white and blue flowers; the other species typically reach 2-3.5m tall, except
+                S. caudata which is a tree of a typically smaller size than S. nicolai. The leaves are large, 30–200cm
+                long and 10–80cm broad, similar to a banana leaf in appearance but with a longer petiole, and arranged
+                strictly in two ranks to form a fan-like crown of evergreen foliage. The flowers are produced in a
+                horizontal inflorescence emerging from a stout spathe.</p>
+            <br />
+            <hr />
+            <p>Strelitzia, whose common name is the bird of paradise flower, because of a resemblance of its flowers
+                to birds-of-paradise (Paradisaea raggiana). The species S. nicolai is the largest in the genus, reaching
+                10m tall, with stately white and blue flowers; the other species typically reach 2-3.5m tall, except
+                S. caudata which is a tree of a typically smaller size than S. nicolai.
+    
+                <img src="assets/images/bird-of-paradise-flower.jpg" alt="Bird of Paradise Flower" width="100" height="100">The
+                leaves are large, 30–200cm
+                long and 10–80cm broad, similar to a banana leaf in appearance but with a longer petiole, and arranged
+                strictly in two ranks to form a fan-like crown of evergreen foliage. The flowers are produced in a
+                horizontal inflorescence emerging from a stout spathe.</p>
+            <br>
+            <hr>
+            <p><img src="assets/images/bird-of-paradise-flower.jpg" alt="Bird of Paradise Flower" width="100" height="100"
+                    align="right">
+                <img src="assets/images/bird-of-paradise-flower.jpg" alt="Bird of Paradise Flower" width="100" height="100"
+                align="left">
+                Strelitzia, whose common name is the bird of paradise flower, because of a resemblance of its flowers
+                to birds-of-paradise (Paradisaea raggiana). The species S. nicolai is the largest in the genus, reaching
+                10m tall, with stately white and blue flowers; the other species typically reach 2-3.5m tall, except
+                S. caudata which is a tree of a typically smaller size than S. nicolai. The leaves are large, 30–200cm
+                long and 10–80cm broad, similar to a banana leaf in appearance but with a longer petiole, and arranged
+                strictly in two ranks to form a fan-like crown of evergreen foliage. The flowers are produced in a
+                horizontal inflorescence emerging from a stout spathe.</p>
+            <br>
+            <hr>
+            <!-- 
+            If you only specify the width, the browser can infer the appropraite height based upon the
+            image file's aspect ratio.
+        -->
+            <img src="https://yt3.ggpht.com/a/AGF-l7_IPKJORqk1Wo7AR4jMhW15Ma-za_QDlRxMcQ=s900-mo-c-c0xffffffff-rj-k-no"
+                width="400">
+
+                <!--Images can be used fgor cross-site scripting (XSS), aka JavaScript injection-->
+            <img src="fakelink-woiajfeoiahioghdio.com" onerror="alert('Hack hack hack!  One BTC now!');"
+        </div>
+</body>
+</html>

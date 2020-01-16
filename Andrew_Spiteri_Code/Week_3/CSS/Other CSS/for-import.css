@@ -1,0 +1,14 @@
+body{
+    background-color: silver;
+    color: white;
+    padding: 28px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+    background-color: #ffffff;
+    background-color: hsla(0, 100%, 100%, .5);
+    color: #64646A;
+    padding: inherit;
+    
+}

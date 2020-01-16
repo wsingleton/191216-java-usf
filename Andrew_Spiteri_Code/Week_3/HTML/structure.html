@@ -1,0 +1,90 @@
+<!--
+    This is an HTML comment.  It can be multi-line.
+-->
+<!--
+    THe DOCTYPE directive should be the very first non-comment line
+    declared within our HTML docs (even before the <html> tag).
+
+    It is not technically a tag, but a directive, or an instruction
+    to wewb browser about what version of HTML the page is wiritten in.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+            <head> 
+                contains informaiton about the page, rather then the content
+                shown (aak methadta).  We can include some information, such as:
+
+                    <style>     :used to apply internal css styling
+                    <link>      :used for linking exsxternal resources to this document (external CSS)
+                    <script>    :used to include JS which can make our webpage more dynamic
+                    <meta>      :used to provide search engine robots extra info about our page
+                    <title>     :used to provide a title for the webpage which appears in tab
+        -->
+        <title>HTML Basics: Structure</title>
+    </head>
+    <body>
+        <!--
+            Contains information.content that will be displayed to the user, when redeered by 
+            the web browser.
+        -->
+        <!--
+            HTML tags/elements
+                Used to indicate how content should be displayed.  Usually will require 
+                an operning and a lcosing tag.  THose that do not require slocing tags are 
+                known as ":self-clsoing" tags. 
+                    
+                <p>     :paragraph, block tag
+                <h#>    :heading (range from 1-6, 1 being the largest)
+                <div>   :division/divider (used to group related elements together)
+                <img>   :image (self-closing tage), inline tag
+                <a>     :anchor/hyperlink; used to create links to other webpages, or sections of the current page
+                <br>    :break, (self-closing tage)
+                <hr>    :horizontal rule, put one horizontal line across page for you (self-enclosing)
+                <form>  :similar to div but encapsulates form elements
+                <input> :creates a field for user input of some sort [text, checkbox, radio button] (self-closing)
+            
+            Attributes
+                HTML elements can have attributes, which provide additional information
+                about the contents of an element,.  THey appear within the opening tags of an hTML elements,
+                and are made of two partsL na name/key, and a value.  THe name and the value aree separated by an equals sign (=)
+                and the value of the attribute iss encapsilated within double quotess ("")
+        -->
+        <h1>This is the main heading</h1>
+        <p>THis text might be used to introduce the reast of the page.   If the page is long enough.
+
+
+
+
+
+            we can make use of subheadings to further organize our webpage
+            content
+        </p>
+        <h2>This is a sub-heading</h2>
+        <p>
+            More content could go here if you had any...
+            blah blah blah
+        </p>
+        <h3>THis is even smaller than the other headings...maybe to create the illusion of nesting content</h3>
+        <p>
+            4 &gt; 5
+        </p>
+        <p>
+            Sanford &amp; Son
+        </p>
+        <p>
+            Here is some text. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here is more text.
+        </p>
+        <!--
+            Escape characters/codes
+                There are some characters that are used in and reserved by HTML.  If we wishh to use
+                tem in our content, we will need to use their escape code equuivalents.
+
+                <       Less-than
+                >       Greater-than
+                &       Ampersand
+                ""      Quotations
+        -->
+    </body>
+</html>

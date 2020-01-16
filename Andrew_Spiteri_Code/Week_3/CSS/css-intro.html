@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Intro</title>
+
+    <!-- Link external CSS files using <link> -->
+    <link rel="stylesheet" type="text/css" href="css/css-intro.css">
+    <!--
+        We can include styling INTERNALLY, by adding the <style> tag to the <head>
+            of our HTML document, containing whatever CSS rulesets we want to apply 
+            to our elements.
+    -->
+    
+    <style>
+        /*
+            CSS multi-line comments (the only kind of CSS comment)
+        */
+        body{
+            margin: 5% 15%;
+            background-color: lightgrey;
+        }
+        h1{
+            color: #00f;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="main-header">
+        <h1>Intro to CSS</h1>
+        <p><i>A little styling, long way</i></p>
+        <br/>
+        <div class="css-def">
+            <h2>WHat is CSS</h2>
+            <p>
+                <abbr title="Cascading Style Sheets">CSS</abbr> allows you to create rules that specify
+                how the content of an element should appear.  For example, you can specify that the
+                background of page is light grey and use the Arial typeface, or that all level one
+                headings should appaear in blue.
+            </p>
+        </div>
+        <div class="understanding-css">
+            <h2>Understanding CSS Poistioning: Thinking <em>inside</em> the box</h2>
+            <p>
+                One of the coerw xconcepts to understanding CSS is how it leverages teh box model on our
+                elments CSS allows for us to create rules that control the way each section of the 
+                box model (content, padding, border, and margin ) is presented
+            </p>
+        </div>
+        <a href="w3schools.com" target="_blank">
+            Checkout w3schools
+        </a>
+        <div class="inheritance">
+            <h2>CSS Inheritance</h2>
+            <p>
+                We can have external stylesheets inherit from other stylesheets if we wish
+            </p>
+        </div>
+    </div>
+</body>
+</html>
