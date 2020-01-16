@@ -37,7 +37,7 @@ public class AppDriver {
                 .addScreen(new RegisterScreen(userService, accountService))
                 .addScreen(new LoginScreen(userService))
                 .addScreen(new DashboardScreen(accountService))
-                .addScreen(new UserProfileScreen())
+               // .addScreen(new UserProfileScreen())
                 .addScreen(new WithdrawalScreen(accountService, accountRepo))
                 .addScreen(new DepositScreen(accountService, accountRepo))
                 .addScreen(new BalanceScreen());
