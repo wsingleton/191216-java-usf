@@ -33,10 +33,10 @@ public class AppState {
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
                 .addScreen(new LoginScreen(userService))
-                .addScreen(new RegisterScreen(userService))
-                .addScreen(new UserSelectionScreen("userSelection", "/select"))
-                .addScreen(new DepositScreen(accountService));
-//                .addScreen(new WithdrawScreen("withdrawScreen","/withdraw"));
+                .addScreen(new RegisterScreen(userService, accountService,accountUserService, userRepo, accRepo, auRepo))
+                .addScreen(new UserSelectionScreen())
+                .addScreen(new DepositScreen(accountService))
+                .addScreen(new WithdrawScreen(accountService));
     }
 
     public BufferedReader getConsole() {

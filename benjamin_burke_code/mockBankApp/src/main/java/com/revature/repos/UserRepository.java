@@ -59,7 +59,7 @@ public class UserRepository implements CrudRepository<User> {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "INSERT INTO bank_app.users VALUES (0, ?, ?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"id"});
             pstmt.setString(1, newOjb.getUsername());
             pstmt.setString(2, newOjb.getPassword());
 
@@ -75,6 +75,9 @@ public class UserRepository implements CrudRepository<User> {
                 }
             }
 
+        }catch (SQLIntegrityConstraintViolationException e){
+            e.printStackTrace();
+
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -84,18 +87,16 @@ public class UserRepository implements CrudRepository<User> {
     @Override
     public Set<User> findAll() {
 
-        Connection conn = app().getCurrentSession().getConnection();
         Set<User> users = new HashSet<>();
+        try ( Connection conn = app().getCurrentSession().getConnection();){
 
-        try {
-
-            String sql = "SELECT * FROM bank_app.users";
+            String sql = "SELECT * FROM users";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             users = mapResultSet(rs);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Can't establish connection");
         }
 
         return users;
@@ -133,7 +134,7 @@ public class UserRepository implements CrudRepository<User> {
 
         try {
 
-            String sql = "UPDATE users SET username = ?, password = ?, first_name = ?, last_name = ?" +
+            String sql = "UPDATE users SET username = ?, password = ?" +
                     "WHERE user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, updatedObj.getUsername());
@@ -159,7 +160,7 @@ public class UserRepository implements CrudRepository<User> {
 
         while (rs.next()) {
             User temp = new User();
-            temp.setUserId(rs.getInt("user_id"));
+//            temp.setUserId(rs.getInt("user_id"));
             temp.setUsername(rs.getString("username"));
             temp.setPassword(rs.getString("password"));
             users.add(temp);

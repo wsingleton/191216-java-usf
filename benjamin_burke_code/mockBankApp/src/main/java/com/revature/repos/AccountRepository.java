@@ -37,7 +37,7 @@ public class AccountRepository implements CrudRepository<Account> {
             String sql = "INSERT INTO accounts VALUES(0, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"account_id"});
             pstmt.setDouble(1, newOjb.getBalance());
-            pstmt.setString(2, app().getCurrentSession().getSessionUser().getUsername());
+//            pstmt.setString(2, app().getCurrentSession().getSessionUser().getUsername());
 
             int rowsInserted = pstmt.executeUpdate();
 

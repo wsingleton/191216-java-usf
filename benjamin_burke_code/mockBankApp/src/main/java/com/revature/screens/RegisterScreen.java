@@ -6,6 +6,7 @@ import com.revature.models.Account;
 import com.revature.models.User;
 import com.revature.repos.AccountRepository;
 import com.revature.repos.AccountUserRepository;
+import com.revature.repos.UserRepository;
 import com.revature.services.AccountService;
 import com.revature.services.AccountUserService;
 import com.revature.services.UserService;
@@ -16,12 +17,12 @@ public class RegisterScreen extends Screen {
 
     private UserRepository userRepository;
     private AccountRepository accountRepository;
-    private AccountUserRepository userAccountRepository;
+    private AccountUserRepository accountUserRepository;
     private UserService userService;
     private AccountService accountService;
     private AccountUserService accountUserService;
 
-    public RegisterScreen(UserService userService, AccountService accountService, UserAccountService userAccountService, UserRepository userRepository, AccountRepository accountRepository, UserAccountRepository userAccountRepository) {
+    public RegisterScreen(UserService userService, AccountService accountService, AccountUserService accountUserService, UserRepository userRepository, AccountRepository accountRepository, AccountUserRepository accountUserRepository) {
         super("RegisterScreen", "/register");
         System.out.println("[LOG] - Instantiating " + super.getName());
         this.userService = userService;

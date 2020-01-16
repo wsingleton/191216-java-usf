@@ -6,6 +6,7 @@ public class Account {
 
     private Integer accountId;
     private Double balance;
+    private AccountType accountType;
 
     public Account(){
         super();
