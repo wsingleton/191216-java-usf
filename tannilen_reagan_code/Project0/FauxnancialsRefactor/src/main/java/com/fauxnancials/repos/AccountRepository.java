@@ -1,5 +1,6 @@
 package com.fauxnancials.repos;
 
+import com.fauxnancials.exceptions.ResourcePersistenceException;
 import com.fauxnancials.models.Acct;
 import com.fauxnancials.models.AcctType;
 import com.fauxnancials.util.ConnectionFactory;
@@ -27,14 +28,22 @@ public class AccountRepository implements CrudRepository<Acct> {
     @Override
     public void save(Acct acct) {
         try (Connection conn=ConnectionFactory.getInstance().getConnection()) {
-            String sql="insert into fauxnancials_admin.accounts values (0, ?, ?, ?)";
-            PreparedStatement pstmt=conn.prepareStatement(sql);
-            pstmt.setInt(1, AcctType.getTypeIDByType(acct.getAcctType()));
-            pstmt.setDouble(2,acct.getBalance());
-            pstmt.setInt(3, acct.getUserID());
-            int rowsInserted=pstmt.executeUpdate();
+            String sql="{call saveAcct(0, ?, ?, ?, ?)}";
+            CallableStatement cstmt=conn.prepareCall(sql);
+            cstmt.setInt(1, AcctType.getTypeIDByType(acct.getAcctType()));
+            cstmt.setDouble(2,acct.getBalance());
+            cstmt.setInt(3, acct.getUserID());
+            cstmt.registerOutParameter(4, Types.NUMERIC);
+            cstmt.executeUpdate();
+            int updExecuted=cstmt.getInt(4);
+            if (updExecuted==0) {
+                throw new ResourcePersistenceException();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        catch (ResourcePersistenceException ex) {
+            System.err.println("Account creation failed.  Please visit your local branch office or try again later.");
         }
     }
     @Override
@@ -72,6 +81,19 @@ public class AccountRepository implements CrudRepository<Acct> {
             temp.setBalance(rs.getDouble("acct_bal"));
             temp.setUserID(rs.getInt("user_id"));
             accts.add(temp);
+        }
+        return accts;
+    }
+    public Set<Acct> getAllAccts() {
+        Set<Acct> accts = new HashSet<>();
+
+        try (Connection conn=ConnectionFactory.getInstance().getConnection()) {
+            String sql = "SELECT * FROM fauxnancials_admin.accounts";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            accts = mapResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return accts;
     }
