@@ -72,22 +72,22 @@ public class UserRepository implements CrudRepository<User> {
             acc.setBalance(0.0);
 
             String sql = " INSERT INTO bank_app.users VALUES(0,?,?)";
-            String sql2 = "INSERT INTO bank_app.accounts VALUES(?,0)";
+//            String sql2 = "INSERT INTO bank_app.accounts VALUES(?,0)";
 
             //users
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"id"});
             //account
-            PreparedStatement pstm2 = conn.prepareStatement(sql2, new  String[]{"accountId"});
+//            PreparedStatement pstm2 = conn.prepareStatement(sql2, new  String[]{"accountId"});
             // accounts
-            pstm2.setString(1, acc.getAccountId());
-            pstm2.setDouble(2,acc.getBalance());
+//            pstm2.setInt(1, acc.getAccountId());
+//            pstm2.setDouble(2,acc.getBalance());
             // users
             pstmt.setString(1, newObj.getUsername());
             pstmt.setString(2, newObj.getPassword());
 
 
             int rowsInserted = pstmt.executeUpdate();
-            pstm2.executeUpdate();
+//            pstm2.executeUpdate();
             if(rowsInserted != 0){
 
                 ResultSet rs = pstmt.getGeneratedKeys();
@@ -113,7 +113,7 @@ public class UserRepository implements CrudRepository<User> {
     public Set<User> findAll() {
 
         Set<User> users = new HashSet<>();
-        try(Connection conn = ConnectionFactory.getInstance().getConnection();){
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
             String sql = " SELECT * FROM users";
             Statement stmt = conn.createStatement();

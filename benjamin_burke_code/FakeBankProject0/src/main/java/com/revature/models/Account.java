@@ -19,7 +19,7 @@ public class Account {
         return accountId;
     }
 
-    public void setAccountId(String accountId) {
+    public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 
@@ -29,6 +29,15 @@ public class Account {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountId=" + accountId +
+                ", balance=" + balance +
+                '}';
     }
 
     @Override
@@ -45,11 +54,5 @@ public class Account {
         return Objects.hash(accountId, balance);
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "accountId='" + accountId + '\'' +
-                ", balance=" + balance +
-                '}';
-    }
+
 }

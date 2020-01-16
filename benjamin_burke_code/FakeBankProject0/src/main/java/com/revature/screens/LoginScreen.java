@@ -1,11 +1,14 @@
 package com.revature.screens;
 
-import com.revature.exceptcions.InvalidRequestException;
+import com.revature.exceptions.InvalidRequestException;
+
 import com.revature.services.UserService;
 
 import javax.security.sasl.AuthenticationException;
 
 import static com.revature.AppDriver.*;
+import static com.revature.util.AppState.console;
+import static com.revature.util.AppState.router;
 
 
 public class LoginScreen extends Screen {
@@ -26,13 +29,13 @@ public class LoginScreen extends Screen {
             System.out.println("\n\n\n\n\n\n\n\n\n+-----------------------+\n");
             System.out.println("Please provide your login credentials");
             System.out.print("Username: ");
-            username = console.readLine();
+            username = app().getConsole().readLine();
             System.out.print("Password: ");
-            password = console.readLine();
+            password = app().getConsole().readLine();
 
             userService.authenticate(username, password);
 
-            if (currentUser != null) {
+            if (app().isSessionValid()) {
                 System.out.println("[LOG] - Login successful");
                 router.navigate("/select");
             }
@@ -42,7 +45,7 @@ public class LoginScreen extends Screen {
             e.printStackTrace();
             System.err.println("[Error] - An unxpected exception occurred");
             System.out.println("[log] -goodybye");
-            appRunning=false;
+            app().setAppRunning(false);
         }
     }
 }

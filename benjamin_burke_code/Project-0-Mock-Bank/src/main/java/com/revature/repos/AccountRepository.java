@@ -15,21 +15,21 @@ import static com.revature.AppDriver.router;
 public class AccountRepository {
 
     public double findAccountById(){
-        Optional<Account> _account = Optional.empty();
+        Optional<Account> accountId = Optional.empty();
         final double[] balance = new double[1];
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "SELECT * FROM bank_app.accounts WHERE accountid = ?";
+            String sql = "SELECT * FROM bank_app.accounts WHERE accountId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, Integer.toString(currentUser.getUsername().hashCode()));
             ResultSet rs = pstmt.executeQuery();
             Set<Account> set = mapResultSet(rs);
-            if(!set.isEmpty()) _account = set.stream().findFirst();
+            if(!set.isEmpty()) accountId = set.stream().findFirst();
 
         }catch(SQLException e){
 
         }
-        _account.ifPresent(account -> {
+        accountId.ifPresent(account -> {
             balance[0] = account.getBalance();
         });
 
@@ -39,12 +39,12 @@ public class AccountRepository {
     public void depositAccountBalance( String da) throws IOException {
         double newBalance;
 
-        newBalance = findAccountById() + Double.parseDouble(da);
-        if (newBalance <= 0) {
-            System.out.println("You can't deposit negative money! that's withdrawing");
 
+//        if (newBalance <= 0) {
+//            System.out.println("You can't deposit negative money! that's withdrawing");
+            newBalance = findAccountById() + Double.parseDouble(da);
             try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-                String sql = "UPDATE bank_app.accounts SET balance = ? WHERE accountid = ?";
+                String sql = "UPDATE bank_app.accounts SET balance = ? WHERE accountId = ?";
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setDouble(1, newBalance);
                 pstmt.setString(2, Integer.toString(currentUser.getUsername().hashCode()));
@@ -52,9 +52,9 @@ public class AccountRepository {
 
             } catch (SQLException e) {
 
-            }
-            router.navigate("/balance");
-        } else {
+
+
+
             System.out.println("Must only use digits(no more than two numbers after a decimal)");
             router.navigate("/customer");
 

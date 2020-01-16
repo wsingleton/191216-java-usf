@@ -3,11 +3,13 @@ package com.revature.models;
 import java.util.Objects;
 
 public class User {
+
     private Integer id;
     private String username;
     private String password;
 
-    public User() {
+    public User(){
+        super();
     }
 
     public User(String username, String password) {
@@ -21,11 +23,11 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -50,7 +52,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
+        return Objects.equals(id, user.id) &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password);
     }

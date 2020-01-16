@@ -1,12 +1,14 @@
 package com.revature.services;
-
-import com.revature.exceptcions.AuthenticationException;
-import com.revature.exceptcions.InvalidRequestException;
-import com.revature.exceptcions.ResourcePersistenceException;
+import com.revature.exceptions.AuthenticationException;
+import com.revature.exceptions.InvalidRequestException;
+import com.revature.exceptions.ResourcePersistenceException;
 import com.revature.models.User;
 import com.revature.repos.UserRepository;
+import com.revature.util.ConnectionFactory;
+import com.revature.util.UserSession;
 
-import static com.revature.AppDriver.currentUser;
+import static com.revature.AppDriver.app;
+
 
 public class UserService {
     private UserRepository userRepo;
@@ -26,7 +28,7 @@ public class UserService {
             throw new ResourcePersistenceException("Username is already in use!");
         }
         userRepo.save(newUser);
-        currentUser = newUser;
+        app().setCurrentSession(new UserSession(newUser, ConnectionFactory.getInstance().getConnection(newUser)));
     }
 
 
@@ -38,7 +40,8 @@ public class UserService {
         }
 //        userRepo.findUserByCredentials(username, password).orElseThrow(()->new AuthenticationException());
 //        userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
-        currentUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+        User authUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+        app().setCurrentSession(new UserSession(authUser, ConnectionFactory.getInstance().getConnection(authUser)));
     }
 
     public boolean isUserValid(User user) {

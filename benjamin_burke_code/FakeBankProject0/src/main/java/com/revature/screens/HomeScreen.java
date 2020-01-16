@@ -1,12 +1,14 @@
 package com.revature.screens;
 
 import static com.revature.AppDriver.*;
-import static com.revature.AppDriver.appRunning;
+//import static com.revature.AppDriver.appRunning;
+import static com.revature.util.AppState.router;
 
 public class HomeScreen extends Screen {
 
     public HomeScreen(){
         super("HomeScreen","/home");
+        System.out.println("[LOG] - Instantiating " + super.getName());
     }
 
     @Override
@@ -20,7 +22,7 @@ public class HomeScreen extends Screen {
         try {
 
             System.out.println("> ");
-            String ui = console.readLine();
+            String ui = app().getConsole().readLine();
             switch (ui){
 
                 case "1":
@@ -29,16 +31,17 @@ public class HomeScreen extends Screen {
                     router.navigate("/register"); break;
                 case "3":
                     System.out.println("Exiting...goodbye");
-                    appRunning=false;
+                    app().setAppRunning(false);
                     break;
                 default:
-                    System.out.println("Please pick another selection!");}
+                    System.out.println("Please pick another selection!");
+            }
 
 
         } catch (Exception e){
             System.err.println("[ERROR] -" + e.getMessage());
             System.out.println("[LOG]-GoodyBye!");
-            appRunning = false;
+            app().setAppRunning(false);
         }
     }
 }
