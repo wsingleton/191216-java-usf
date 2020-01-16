@@ -61,9 +61,9 @@ public class BankAccountsDao implements Dao<Accounts_Bank, Integer> {
             while(rs.next()) {
 
                 bk = new Accounts_Bank();
-                bk.setId(rs.getInt(1));
+                bk.setId(rs.getInt(2));
                // bk.setAccountType(rs.getInt(2));
-                bk.setAccountOwner(rs.getInt(2));
+                bk.setAccountOwner(rs.getInt(1));
                 bk.setBalance(rs.getDouble(3));
 
             }

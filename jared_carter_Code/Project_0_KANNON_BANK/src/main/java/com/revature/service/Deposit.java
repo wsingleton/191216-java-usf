@@ -37,6 +37,13 @@ public class Deposit {
                 balance += deposit;
 
                 Accounts_Bank updateUser = new Accounts_Bank(temp.getAccountOwner(), balance);
+                updateUser.setId(id);
+
+                System.out.println(balance);
+                System.out.println(id);
+
+                System.out.println(updateUser.getBalance());
+                System.out.println(updateUser.getId());
 
                 bankAccountRepo.updateAccountBank(updateUser);
 

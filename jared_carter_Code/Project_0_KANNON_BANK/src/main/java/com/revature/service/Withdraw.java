@@ -38,8 +38,8 @@ public class Withdraw {
             if (withdraw < balance ) {
 
                 balance -= withdraw;
+                Accounts_Bank updateUser = new Accounts_Bank(temp.getAccountOwner(), balance);
 
-                Accounts_Bank updateUser = new Accounts_Bank();
 
                 //updateUser.setBalance(balance);
 
