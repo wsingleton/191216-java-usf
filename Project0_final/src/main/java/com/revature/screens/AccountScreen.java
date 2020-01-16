@@ -41,10 +41,14 @@ public class AccountScreen extends Screen {
                     moneyadd = Double.parseDouble(userInputs.readLine());
                     BigDecimal bd = new BigDecimal(moneyadd).setScale(2, RoundingMode.HALF_UP);
                     amount = bd.doubleValue();
+                    
+                    if (amount < 0) {
+                        System.err.println("Invalid Input");
+                    } else {
+                        currentUser.setBalance(amount + currentUser.getBalance());
+                        accRepo.save(currentUser);
+                    }
 
-
-                    currentUser.setBalance(amount + currentUser.getBalance());
-                    accRepo.save(currentUser);
                     navigation.navigate("/account");
                     break;
 
@@ -54,7 +58,7 @@ public class AccountScreen extends Screen {
                     moneysub = Double.parseDouble(userInputs.readLine());
                     BigDecimal dp = new BigDecimal(moneysub).setScale(2, RoundingMode.HALF_UP);
                     amount = dp.doubleValue();
-                    if (amount > currentUser.getBalance()) {
+                    if (amount > currentUser.getBalance() || amount < 0) {
                         System.err.println("Insufficient funds");
                     } else {
                         currentUser.setBalance(currentUser.getBalance() - amount);
