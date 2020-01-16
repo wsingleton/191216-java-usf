@@ -21,7 +21,7 @@ public class BalanceScreen extends Screen {
         try {
             System.out.println("\n\n\n\n\n\n\n\n\n+-------------------------------+\n");
             System.out.println("The Balance on your "+ currentAccount.getAccountType()
-                    + " is: \n"+ currentAccount.getBalance());
+                    + " account is: \n"+ currentAccount.getBalance());
 
             System.out.println("To make a deposit enter 1\n" +
                                  "To make a withdrawal enter 2");
@@ -44,12 +44,13 @@ public class BalanceScreen extends Screen {
 
                     default:
                         System.out.println("Not a valid input");
+                        router.navigate("/dashboard");
                 }}catch(InvalidRequestException | ResourcePersistenceException e){
                 System.err.println("Invalid values provided");
             }catch(Exception e){
                 System.err.println("[ERROR] - An Unexpected exception occurred");
                 System.out.println("[LOG] - shutting down application");
-                appRunning = false;
+            router.navigate("/dashboard");
             }
 
         }

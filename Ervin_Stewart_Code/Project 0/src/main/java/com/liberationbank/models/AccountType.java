@@ -25,8 +25,7 @@ public enum AccountType {
     }
     @Override
     public String toString() {
-        return "AccountType{" +
-                "accountType='" + accountType + '\'' +
-                '}';
+        return accountType
+                ;
     }
 }

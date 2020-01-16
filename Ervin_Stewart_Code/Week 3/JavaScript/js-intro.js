@@ -66,7 +66,7 @@ if(currentHour> 18){
 greeting = 'goodmorning';
 }else{ greeting ='hello';}
 
-document.write('<her>' +greeting+'</h3>')
+//document.write('<her>' +greeting+'</h3>' )
 /*
 global
     +the scoe that contains ans is visible in all scopes
@@ -130,3 +130,63 @@ lexical
             + A || B will return A if A is truthy, otherwise it defaults to B
     
     */
+let myHotel = {name: 'Ritz',rooms:300,booked:150, available(){return this.rooms -this.booked;}};
+
+let idCounter = 1
+
+function* idGenerator(){
+while(true){
+return idCounter++;
+}
+
+}
+
+function addStudent(){
+
+    let studentNameInputField = document.getElementById('name');
+    console.log(studentNameInputField);
+    let studentName = document.getElementById('name').value;
+    let studentMajor = document.getElementById('major').value;
+
+    console.log(studentName,studentMajor);
+    if (studentName && studentMajor){
+        let row = document.createElement('tr');
+        let studentIdCell = document.createElement('td');
+        let studentNameCell = document.createElement('td');
+        let studentMajorCell = document.createElement('td');
+
+        row.appendChild(studentIdCell);
+        row.appendChild(studentNameCell);
+        row.appendChild(studentMajorCell);
+
+        document.getElementById('students').appendChild(row);
+
+        studentIdCell.innerText = idGenerator().next().value;
+        studentNameCell.innerText = studentName;
+        studentMajorCell.innerText = studentMajor;
+
+        studentNameInputField.value = '';
+        document.getElementById('major').value = '';
+
+    }
+
+ }
+
+ document.getElementById('add').addEventListener('click', addStudent);
+
+ const myArray = [10,20,30];
+
+ for(const value of myArray){
+     console.log(value);
+ }
+
+
+ let myObject ={
+'asd asd': 1, 
+y:2,
+z:3
+ };
+
+ for (const property in myObject){
+     console.log(`myObject.${property} = ${myObject[property]}`);
+ }

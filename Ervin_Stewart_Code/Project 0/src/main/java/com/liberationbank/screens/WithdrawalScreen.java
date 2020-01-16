@@ -54,13 +54,15 @@ public class WithdrawalScreen extends Screen {
                     router.navigate("/home");
                 default:
                     System.out.println("Not a valid input");
+                    router.navigate("/dashboard");
             }
         } catch(InvalidRequestException | ResourcePersistenceException e){
             System.err.println("Transaction unsuccessful, invalid values provided");
+            router.navigate("/dashboard");
         }catch(Exception e){
             System.err.println("[ERROR] - An Unexpected exception occured");
             System.out.println("[LOG] - shutting down application");
-            appRunning = false;
+            router.navigate("/dashboard");
         }
 
         }
