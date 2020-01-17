@@ -1,6 +1,5 @@
 package com.bankboi.util;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -41,8 +40,8 @@ public class InternetConnection {
 
             conn = DriverManager.getConnection(
                     prop.getProperty("url"),
-                    prop.getProperty("user"),
-                    prop.getProperty("passw"));
+                    prop.getProperty("un"),
+                    prop.getProperty("pw"));
 
         } catch (ClassNotFoundException e) {
 

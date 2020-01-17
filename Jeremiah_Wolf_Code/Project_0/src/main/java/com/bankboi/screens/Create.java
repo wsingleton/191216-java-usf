@@ -42,7 +42,7 @@ import java.util.Scanner;
 
                 if(u.getUsername().equals(username)) {
 
-                    System.out.println("Username already taken. Please choose another one.");
+                    System.out.println("Username already taken.");
                     usernameCheck = true;
                     createAccount();
                     break;

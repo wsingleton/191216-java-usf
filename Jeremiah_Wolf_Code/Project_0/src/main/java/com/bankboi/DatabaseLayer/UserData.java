@@ -87,7 +87,7 @@ public class UserData implements Database<Users, Integer>{
 
             conn.setAutoCommit(false);
 
-            String sql = "INSERT INTO BANK_USER (FN, LN, UN, PASSD)"
+            String sql = "INSERT INTO BANK_USER (FirstName, LastName, UserName, Password)"
                     + " VALUES(?, ?, ?, ?)";
 
             String[] keyNames = {"USER_ID"};
@@ -129,7 +129,7 @@ public class UserData implements Database<Users, Integer>{
 
         try(Connection conn = InternetConnection.getInstance().getConnection()) {
 
-            String sql = "UPDATE BANK_USER SET FN = ?, LN = ?, UN = ?, PASSD = ? WHERE USER_ID = ?";
+            String sql = "UPDATE BANK_USER SET FirstName = ?, LastName = ?, UserName = ?, Password = ? WHERE USER_ID = ?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,  obj.getFirstName());

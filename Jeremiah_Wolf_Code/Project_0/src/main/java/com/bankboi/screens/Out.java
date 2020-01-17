@@ -11,7 +11,7 @@ public class Out {
 
         int option = 0;
 
-        System.out.println("1. Complete another transaction");
+        System.out.println("1. Make another Transaction");
         System.out.println("2. Sign out");
 
         do {

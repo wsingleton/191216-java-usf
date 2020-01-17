@@ -10,7 +10,7 @@ public class Main {
         int option = 0;
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Welcome to Kannon Bank");
+        System.out.println("Good Morrow, This is BankBoi, Plus Ultra");
         System.out.println("1. Login");
         System.out.println("2. Create an account");
         System.out.println("3. Exit");
@@ -42,7 +42,7 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("Thank you for using Kannon Bank.");
+                    System.out.println("Thank you for banking at BankBoi! Plus Ultra");
 
                     break;
 

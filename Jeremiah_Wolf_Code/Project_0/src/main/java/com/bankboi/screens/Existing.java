@@ -7,13 +7,8 @@ import com.bankboi.plainjava.BankAccounts;
 import com.bankboi.plainjava.Users;
 import com.bankboi.repos.bankboirepo;
 import com.bankboi.repos.userrepo;
-import com.bankboi.actions.Deposit;
-import com.bankboi.actions.Withdraw;
-import com.bankboi.actions.Balance;
 
 import java.util.Scanner;
-
-import static com.bankboi.actions.Deposit.deposit;
 
 public class Existing {
 
@@ -58,12 +53,11 @@ public class Existing {
                     break;
 
                 case 4:
-                    System.out.println("Thank you for using Kannon Bank.");
+                    System.out.println("Thank you for banking at BankBoi! Plus Ultra");
 
                     break;
 
                 default:
-                    // System.out.println("Please enter 1, 2 or 3");
                     break;
 
             }

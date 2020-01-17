@@ -1,14 +1,15 @@
 package com.bankboi.repos;
 
-import java.util.List;
 import com.bankboi.DatabaseLayer.BankData;
 import com.bankboi.plainjava.BankAccounts;
+
+import java.util.List;
 
     public class bankboirepo {
 
         static BankData bankAcc = new BankData();
 
-        public List<BankData> findAllBankAcc() {
+        public List<BankAccounts> findAllBankAcc() {
 
             return bankAcc.findAll();
 

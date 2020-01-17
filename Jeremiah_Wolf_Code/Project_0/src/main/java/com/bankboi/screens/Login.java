@@ -56,7 +56,7 @@ public class Login {
         }
         if (!checkUser) {
 
-            System.out.println("The username or password is invalid, please try again.");
+            System.out.println("The username or password is invalid");
             System.exit(0);
 
         }
