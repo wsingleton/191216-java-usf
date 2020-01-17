@@ -1,7 +1,6 @@
 package com.revature.bank.repos;
 
 import com.revature.bank.models.Account;
-import com.revature.bank.models.User;
 import com.revature.bank.util.ConnectionFactory;
 
 

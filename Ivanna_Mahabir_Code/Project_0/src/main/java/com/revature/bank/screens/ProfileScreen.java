@@ -2,8 +2,6 @@ package com.revature.bank.screens;
 
 import com.revature.bank.services.AcctService;
 
-import java.io.IOException;
-
 import static com.revature.bank.AppDriver.*;
 
 public class ProfileScreen extends Screen {
@@ -12,7 +10,6 @@ public class ProfileScreen extends Screen {
 
     public ProfileScreen(AcctService acctService){
         super("ProfileScreen", "/profile");
-        System.out.println("Instantiating " + super.getName());
         this.acctService = acctService;
     }
 

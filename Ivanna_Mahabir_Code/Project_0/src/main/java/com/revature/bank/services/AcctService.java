@@ -2,16 +2,15 @@ package com.revature.bank.services;
 
 import com.revature.bank.exceptions.AuthenticatironException;
 import com.revature.bank.exceptions.InvalidRequestException;
-import com.revature.bank.exceptions.ResourcePersistenceException;
 import com.revature.bank.models.Account;
-import com.revature.bank.models.User;
 import com.revature.bank.repos.AcctRepository;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Statement;
 
-import static com.revature.bank.AppDriver.*;
+import static com.revature.bank.AppDriver.currentAcct;
+import static com.revature.bank.AppDriver.router;
 
 public class AcctService {
 

@@ -23,7 +23,6 @@ public class AppDriver {
     public static Account currentAcct;
 
     static {
-        System.out.println("[LOG] - Initializing application");
         appRunning = true;
         console = new BufferedReader(new InputStreamReader(System.in));
 
@@ -39,7 +38,6 @@ public class AppDriver {
                 .addScreen(new LoginScreen(userService))
                 .addScreen(new ProfileScreen(acctService));
 
-        System.out.println("[LOG] Application initialization complete.");
     }
 
     public static void main(String[] args) {

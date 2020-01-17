@@ -15,7 +15,6 @@ public class RegisterScreen extends Screen{
 
     public RegisterScreen(UserService userService){
         super("RegisterScreen", "/register");
-        System.out.println("instantiating " + super.getName());
         this.userService = userService;
     }
 
@@ -55,10 +54,9 @@ public class RegisterScreen extends Screen{
             User newUser = new User(firstName, lastName, userName, passWord);
 
             userService.register(newUser);
-            //acctService.register(userName);
 
             if(currentUser != null){
-                System.out.println("New User Created! Logging in...");
+                System.out.println("New User Created! Logging in...\n");
                 router.navigate("/profile");
             }
         }

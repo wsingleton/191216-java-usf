@@ -12,7 +12,6 @@ public class LoginScreen extends Screen{
 
     public LoginScreen(UserService userService){
         super("LoginScreen", "/login");
-        System.out.println("[LOG] - instantiating " + super.getName());
         this.userService = userService;
     }
 
