@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Intro</title>
+
+    <!-- Link external CSS files using <link> -->
+    <link rel="stylesheet" type="text/css" href="css/css-intro.css"/>
+
+    <!-- 
+        We can include styling INTERNALLY, by adding the <style> tag to the <head>
+        of our HTML document, containing whatever CSS rulesets we want to apply
+        to our elements.
+    -->
+    <style>
+
+        /*
+            CSS Multi-line comments (the only kind of CSS comment)
+        */
+        body {
+            margin: 5% 15%;
+            background-color: lightgrey;
+        }
+
+        h1 {
+            color: #00f;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <div class="main-header">
+        <h1>Introduction to CSS</h1>
+        <p><i>A little styling goes a long way...</i></p>
+    </div>
+
+    <br/>
+
+    <div class="css-def">
+        <h2>What is CSS?</h2>
+        <p>
+            <abbr title="Cascading Stylesheets">CSS</abbr> allows you to create rules that specify
+            how the content of an element should appear. For example, you can specify that the 
+            background of page is light grey and use the Arial typeface, or that all level one
+            headings should appear in blue, italic, and Times New Roman font.
+        </p>
+    </div>
+
+    <div class="understanding-css">
+        <h2>Understanding CSS Positioning: Thinking <em>inside</em> the box</h2>
+        <p>
+            One of the core concepts to understanding CSS is how it leverages the box model on our
+            elements. CSS allows for us to create rules that control the way each section of the
+            box model (content, padding, border, and margin) is presented.
+        </p>
+    </div>
+    
+    <a href="https://www.w3schools.com/css/default.asp" target="_blank">
+        Checkout W3Schools for more!
+    </a>
+
+    <div id="inheritance">
+        <h2>CSS Inheritance</h2>
+        <p style="color: coral">We can have our external stylesheets inherit from other stylesheets if we wish.</p>
+    </div>
+    
+</body>
+</html>

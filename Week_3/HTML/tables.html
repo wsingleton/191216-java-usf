@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Basics: Tables</title>
+</head>
+<body>
+
+    <!--
+        HTML Tables Tags
+
+            <table>
+            <thead>
+            <tbody>
+            <tr>
+            <th>
+            <td>
+    -->
+
+    <main>
+        <h1>Transactions</h1>
+
+        <!--
+            Technically, we should not manipulate styling inline, we would do this
+            within a internal CSS <style> tag (within the <head>) or within a external
+            CSS stylesheet.
+        -->
+        <table style="border: solid 1px black; background-color: #efefef">
+            <thead>
+                <tr>
+                    <th width="150">Date</th>
+                    <th>Description</th>
+                    <th width="100">Amount</th>
+                    <th width="100">Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>01/14/2020</td>
+                    <td>Revature - OCA Reimbursement</td>
+                    <td>$250.00</td>
+                    <td>$470.05</td>
+                </tr>
+                <tr>
+                    <td>01/10/2020</td>
+                    <td>Gas</td>
+                    <td>($40.00)</td>
+                    <td>$220.05</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+    
+</body>
+</html>
