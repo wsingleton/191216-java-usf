@@ -422,3 +422,41 @@ class CustomError extends Error {
 }
 let myError = new CustomError();
 console.log(myError);
+/*
+    Prototypal Inheritance
+        -   JS's inhernitance mechanism is not tquite the same as Java's, which uses a class-based inheritance system.
+            Instead, JS is known for its use of "prototypal inheritance".
+                +   Each object has a private property which holds a link to another object called its "prototype",
+                    represented by the __proto__ property.
+                +   The prototype object had a prototype of its own, which has a prototype of its own, and so on,
+                    until an object is reached that has null as its prototype.
+                +   Methods can be added to objects as properties, and any object has access to to its prototype's
+                    properties.  These properties can be redeclared with new implementation as a sort of "method
+                    overriding".
+*/
+let bestHotel=new HotelBuilder("Test", 200, 123);
+console.dir(bestHotel);
+/*
+    Spread/Rest Operator
+        - Spread/rest syntax allows an iterable such as an array expression or string to be expanded in places where
+          zero or more arguments (for function calls) or elements (for array literals) are expected, or an object
+          expression to be expanded in places where zero or more key/value pairs (for object literals) are expected.
+*/
+/*
+    for..of and for..in
+        - for..of
+            + uses an object-specific iterator and loops over its generated value
+        - for..in
+            + loop over enumerated property names of an object
+*/
+
+const myArray=[10, 20, 30];
+for (const value of myArray) {
+    console.log(value);
+}
+let myObject = {
+    x: 1, y: 2, z: 3
+};
+for (const property in myObject) {
+    console.log(`myObject.${property} = ${myObject[property]}`);
+}

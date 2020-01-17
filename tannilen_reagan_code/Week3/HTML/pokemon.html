@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pokemon!</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            body {
+                margin: 5rem 16rem;
+                background-color: slategrey;
+            }
+            #pokemonName {
+                text-align:center;
+            }
+            #pokemonImg {
+                margin:auto;
+                display:block;
+            }
+            h5 {
+                color: darkslategrey;
+            }
+        </style>
+</head>
+<body>
+    <!--
+        AJAX: Asynchronous JavaScript and XML
+            - Allows the browser to reload only small bits of data/information
+            - We do not have to wait for the server to respond to one request to send another
+            - Every computer-based language understands XML, but we will be using JSON as the format instead
+            - A technique for accessing webservers from a webpage asynchronously
+            - It is NOT a programming language
+        AJAX TECHNIQUE: 3 Parts
+            - Browser build-in XMLHttpRequest Object (requests data from the webserver)
+            - JavaScript
+            - HTML DOM (HTML Document which displays or uses the data)
+    -->
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h3>POKÉDEX</h3>
+            <h5>
+                <span class="label label-secondary">using the RESTful Pokémon API</span>
+            </h5>
+        </div>
+    </div>
+    <div class="container">
+        <input type="text" id="pokemonID" placeholder="Input Pokémon ID" class="form-control"/>
+        <input type="submit" id="pokemonSubmit" value="GET POKÉMON INFO" class="form-control btn btn-secondary"/>
+    </div>
+    <div>
+        <img id="pokemonImg" alt="" src=""/>
+        <h5 id="pokemonName"></h5>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="../js/pokemon.js"></script>
+</body>
+</html>
