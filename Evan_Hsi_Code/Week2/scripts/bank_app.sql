@@ -98,7 +98,7 @@ CREATE SEQUENCE bank_account_seq
     INCREMENT BY 1
     CACHE 20;
     
-Delete From Users where USERID = 5;
+Delete From Users where USERID = 4;
     
     
 CREATE OR REPLACE TRIGGER bank_account_seq_trigger BEFORE INSERT ON ACCOUNTS

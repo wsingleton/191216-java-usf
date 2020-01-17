@@ -17,13 +17,13 @@ document.getElementById("pokemonSubmit")
 
 function getPokemon() {
     //getting the id/field value
-    let id = document.getElementById("pokemonId").nodeValue;
+    let pokemonId = document.getElementById("pokemonId").value;
 
     //create an XMLHttpRequest object to allow us to make requests
     let xhttp = new XMLHttpRequest(); // step two
 
     //create a connection (endpoint/url, verb, boolean asynch or not)
-    xhttp.open("GET", 'https://pokeapi.co/api/v2/pokemon/' + id, true);
+    xhttp.open("GET", 'https://pokeapi.co/api/v2/pokemon/' + pokemonId, true);
     xhttp.send(); // step three
     xhttp.onreadystatechange = function() {
         /*
@@ -37,7 +37,7 @@ function getPokemon() {
         */
 
         if(xhttp.readyState == 4 && xhttp.status == 200) {
-            let pokmeon = JSON.parse(xhttp.responseText);
+            let pokemon = JSON.parse(xhttp.responseText);
             // if steps 4 and 5 are successful, we got our pokemon object
 
             setValues(pokemon);
@@ -52,5 +52,5 @@ function setValues(pokemon) {
     document.getElementById("pokemonName").innerHTML = pokemon.name;
     let pokemonImgElement = document.getElementById("pokemonImg");
     pokemonImgElement.setAttribute("src", pokemon.sprites.front_default);
-    pokemonImgElement.setAttribute("alt", pokmeon.name);
+    pokemonImgElement.setAttribute("alt", pokemon.name);
 }

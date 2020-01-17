@@ -3,9 +3,13 @@
 <head>
     <meta charset='utf-8'>
     <title>Pokemon</title>
-    <link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">>
-    <script src='/Users/evanhsi/Documents/repos/191216-java-usf/Evan_Hsi_Code/Week3/HTML/js/ajax-example.js'></script>
+    <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous">
+    <!--
+        <script src='/Users/evanhsi/Documents/repos/191216-java-usf/Evan_Hsi_Code/Week3/HTML/js/ajax-example.js'></script>
+    -->
 
 </head>
 <body>
@@ -13,26 +17,24 @@
         <div class = "jumbotron text-center">
             <h3>AJAX Example</h3>
             <h5>
-                <span class="label label-success">
-                    Using the RESTFUL Pokemon
-                </span>
+                <span class="label label-success">Using the RESTFUL Pokemon</span>
             </h5>
         </div>
     </div>
     
     <div class="container">
-        <input type="text" id="pokemonId" placeholder="enterPokmeonId"
+        <input type="text" id="pokemonId" placeholder="enter Pokemon Id"
         class="form-control"/>
-        <input type="submit" id="pokmeonSubmit" value="Get Pokmeon Info"
+        <input type="submit" id="pokemonSubmit" value="Get Pokemon Info"
         class="form-control btn btn-success"/>
     </div>
 
     <div>
-        <img id="pokmeonImg" alt="" src="">
-        <h3 id="pokemonName?"></h3>
+        <img id="pokemonImg" alt="" src="">
+        <h3 id="pokemonName"></h3>
     </div>
 
-    <script type="text/javascript" src="ajax-example.js"></script>
+    <script type="text/javascript" src="js/ajax-example.js"></script>
     
 </body>
 </html>
