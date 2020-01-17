@@ -1,26 +1,22 @@
-package com.bankboi.DatabaseLayer;
+package com.revature.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.revature.pojos.User;
+import com.revature.util.ConnectionFactory;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bankboi.plainjava.BankAccounts;
-import com.bankboi.util.InternetConnection;
-
-public class BankData implements Database<BankAccounts, Integer> {
+public class BankAccountsDao implements Database<User.Accounts_Bank, Integer> {
 
     @Override
-    public List<BankAccounts> findAll() {
+    public List<User.Accounts_Bank> findAll() {
 
-        List<BankAccounts> accounts_bank = new ArrayList<BankAccounts>();
+        List<User.Accounts_Bank> accounts_bank = new ArrayList<User.Accounts_Bank>();
 
-        try(Connection conn = InternetConnection.getInstance().getConnection()){
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
-            String query = "SELECT * FROM ACCOUNTS_BANK ORDER BY ACCOUNT_MAIN";
+            String query = "SELECT * FROM ACCOUNTS_BANK ORDER BY OWNER_ACCOUNT";
 
             Statement statement = conn.createStatement();
 
@@ -28,7 +24,7 @@ public class BankData implements Database<BankAccounts, Integer> {
 
             while(rs.next()) {
 
-                BankAccounts acc = new BankAccounts();
+                User.Accounts_Bank acc = new User.Accounts_Bank();
                 acc.setId(rs.getInt(1));
                 acc.setAccountOwner(rs.getInt(2));
                 acc.setBalance(rs.getDouble(3));
@@ -41,18 +37,18 @@ public class BankData implements Database<BankAccounts, Integer> {
 
         }
 
-        return findAll();
+        return accounts_bank;
 
     }
 
     @Override
-    public BankAccounts findById(Integer id) {
+    public User.Accounts_Bank findById(Integer id) {
 
-        BankAccounts bk = null;
+        User.Accounts_Bank bk = null;
 
-        try(Connection conn = InternetConnection.getInstance().getConnection()) {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ACCOUNTS_BANK WHERE ACCOUNT_MAIN = ?";
+            String sql = "SELECT * FROM ACCOUNT_BANK WHERE OWNER_ACCOUNT = ?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,  id);
@@ -60,7 +56,7 @@ public class BankData implements Database<BankAccounts, Integer> {
 
             while(rs.next()) {
 
-                bk = new BankAccounts();
+                bk = new User.Accounts_Bank();
                 bk.setId(rs.getInt(2));
                 bk.setAccountOwner(rs.getInt(1));
                 bk.setBalance(rs.getDouble(3));
@@ -77,13 +73,12 @@ public class BankData implements Database<BankAccounts, Integer> {
     }
 
     @Override
-    public BankAccounts save(BankAccounts obj) {
+    public User.Accounts_Bank save(User.Accounts_Bank obj) {
 
-        try(Connection conn = InternetConnection.getInstance().getConnection()) {
-            //If a connection is in auto-commit mode then all its SQL statements are run and committed as individual transactions.
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
             conn.setAutoCommit(false);
 
-            String sql = "INSERT INTO ACCOUNTS_BANK (ACCOUNT_MAIN, ACCOUNT_BALANCE) VALUES(?, ?)";
+            String sql = "INSERT INTO ACCOUNT_BANK (OWNER_ACCOUNT, ACCOUNT_BALANCE) VALUES(?, ?)";
             String[] keyNames = {"ACCOUNT_ID"};
 
             PreparedStatement ps = conn.prepareStatement(sql, keyNames);
@@ -118,14 +113,14 @@ public class BankData implements Database<BankAccounts, Integer> {
     }
 
     @Override
-    public BankAccounts update(BankAccounts obj) {
+    public User.Accounts_Bank update(User.Accounts_Bank obj) {
 
 
-        try(Connection conn = InternetConnection.getInstance().getConnection()) {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             conn.setAutoCommit(false);
 
-            String sql = "UPDATE ACCOUNTS_BANK SET ACCOUNT_BALANCE = ? WHERE ACCOUNT_MAIN = ?";
+            String sql = "UPDATE ACCOUNT_BANK SET ACCOUNT_BALANCE = ? WHERE OWNER_ACCOUNT = ?";
 
 
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -146,7 +141,7 @@ public class BankData implements Database<BankAccounts, Integer> {
     }
 
     @Override
-    public void delete(BankAccounts obj) {
+    public void delete(User.Accounts_Bank obj) {
         // TODO Auto-generated method stub
 
     }

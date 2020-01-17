@@ -1,12 +1,11 @@
-package com.bankboi.screens;
+package com.revature.screens;
 
-import com.bankboi.actions.Balance;
-import com.bankboi.actions.Deposit;
-import com.bankboi.actions.Withdraw;
-import com.bankboi.plainjava.BankAccounts;
-import com.bankboi.plainjava.Users;
-import com.bankboi.repos.bankboirepo;
-import com.bankboi.repos.userrepo;
+import com.revature.pojos.User;
+import com.revature.repo.BankAccountRepo;
+import com.revature.repo.UserRepo;
+import com.revature.service.Deposit;
+import com.revature.service.Balance;
+import com.revature.service.Withdraw;
 
 import java.util.Scanner;
 
@@ -17,19 +16,19 @@ public class Existing {
         int option = 0;
 
         Scanner scanner = new Scanner(System.in);
-        userrepo userRepo = new userrepo();
-        Users currentUser = userRepo.findUser(id);
-        bankboirepo bankAccountRepo = new bankboirepo();
-        BankAccounts accounts_bank = bankAccountRepo.findAccountBank(currentUser.getId());
+        UserRepo userRepo = new UserRepo();
+        User currentUser = userRepo.findUser(id);
+        BankAccountRepo bankAccountRepo = new BankAccountRepo();
+        User.Accounts_Bank accounts_bank = bankAccountRepo.findAccountBank(currentUser.getId());
 
-        System.out.println("Hello " + currentUser.getFirstName());
+        System.out.println("Welcome " + currentUser.getFirstName());
         System.out.println("1. Make a deposit");
         System.out.println("2. Make a withdraw");
-        System.out.println("3. View balance");
-        System.out.println("4. Sign out");
+        System.out.println("3. View your current funds");
+        System.out.println("4. Go fight Evil");
 
         do{
-            System.out.println("Enter an option");
+            System.out.println("What is your choice hero?");
             try {
                 String dummy = scanner.next();
                 option = Integer.parseInt(dummy);
@@ -53,7 +52,7 @@ public class Existing {
                     break;
 
                 case 4:
-                    System.out.println("Thank you for banking at BankBoi! Plus Ultra");
+                    System.out.println("Go and Save the WORLD ");
 
                     break;
 

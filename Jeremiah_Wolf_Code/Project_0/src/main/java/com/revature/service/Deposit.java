@@ -1,10 +1,8 @@
-package com.bankboi.actions;
+package com.revature.service;
 
-
-import com.bankboi.plainjava.BankAccounts;
-import com.bankboi.repos.bankboirepo;
-import com.bankboi.screens.AcctTrans;
-import com.bankboi.screens.Out;
+import com.revature.pojos.User;
+import com.revature.repo.BankAccountRepo;
+import com.revature.screens.Out;
 
 import java.util.Scanner;
 
@@ -15,38 +13,38 @@ public class Deposit {
         double deposit= 0;
         boolean valid = false;
 
-        BankAccounts temp = null;
+        User.Accounts_Bank temp = null;
 
         Scanner scanner = new Scanner(System.in);
 
 
-        bankboirepo bankAccountRepo = new bankboirepo();
+        BankAccountRepo bankAccountRepo = new BankAccountRepo();
         temp = bankAccountRepo.findAccountBank(id);
         balance = temp.getBalance();
 
-        System.out.println("How much do you want to put into you acct: ");
+        System.out.println("How much would you like to deposit hero?");
         while(!valid) {
             try {
                 String dummy = scanner.next();
                 deposit = Double.parseDouble(dummy);
 
             } catch(Exception e){
-                System.out.println("Put in a number: ");
+                System.out.println("Please enter a number: ");
             }
 
             if (deposit > 0) {
                 balance += deposit;
 
-                BankAccounts updateUser = new BankAccounts(temp.getAccountOwner(), balance);
+                User.Accounts_Bank updateUser = new User.Accounts_Bank(temp.getAccountOwner(), balance);
 
                 bankAccountRepo.updateAccountBank(updateUser);
 
-                System.out.println("you have:  " + updateUser.getBalance());
+                System.out.println("Your current balance is: $ " + updateUser.getBalance());
 
                 valid = true;
             } else {
 
-                System.out.println("Deposit more than $0 ");
+                System.out.println("Please deposit amount greater than 0.");
                 Out.signOut(id);
 
 

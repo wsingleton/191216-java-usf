@@ -1,4 +1,4 @@
-package com.bankboi.screens;
+package com.revature.screens;
 
 import java.util.Scanner;
 
@@ -11,11 +11,11 @@ public class Out {
 
         int option = 0;
 
-        System.out.println("1. Make another Transaction");
-        System.out.println("2. Sign out");
+        System.out.println("1. Make another transaction");
+        System.out.println("2. Go Fight EVIL");
 
         do {
-            System.out.println("Enter an option: ");
+            System.out.println("What is your choice hero? ");
             try {
                 String dummy = scanner.next();
                 option = Integer.parseInt(dummy);
@@ -31,11 +31,10 @@ public class Out {
                     break;
 
                 case 2:
-                    System.out.println("Thank you for using BankBoi.");
+                    System.out.println("Go and Save the WORLD ");
 
                     break;
                 default:
-                    //System.out.println("Please enter 1, 2");
                     break;
 
             }

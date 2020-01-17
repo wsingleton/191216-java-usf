@@ -1,8 +1,8 @@
-package com.bankboi.screens;
+package com.revature.screens;
 
 import java.util.Scanner;
 
-public class Main {
+public class MainMenu {
     public static void mainMenu()
 
     {
@@ -10,13 +10,13 @@ public class Main {
         int option = 0;
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Good Morrow, This is BankBoi, Plus Ultra");
-        System.out.println("1. Login");
-        System.out.println("2. Create an account");
-        System.out.println("3. Exit");
+        System.out.println("Good Morrow, Welcome to UA Bank, PLUS ULTRA!");
+        System.out.println("1. Sign Into Current Hero Account");
+        System.out.println("2. Create a New Hero Account");
+        System.out.println("3. Go Fight EVIL");
         do {
 
-            System.out.println("Enter an option: ");
+            System.out.println("What is your choice hero?");
             try {
                 String dummy = scanner.next();
                 option = Integer.parseInt(dummy);
@@ -42,12 +42,11 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("Thank you for banking at BankBoi! Plus Ultra");
+                    System.out.println("Go and Save the WORLD");
 
                     break;
 
                 default:
-                    //System.out.println("Please enter 1, 2 or 3");
                     break;
             }
         } while(option != 3 );

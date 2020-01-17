@@ -1,9 +1,10 @@
-package com.bankboi.DatabaseLayer;
+
+package com.revature.dao;
 
 import java.io.Serializable;
 import java.util.List;
 
-public interface Database <T, I extends Serializable> {
+public interface Database<T, I extends Serializable> {
 
     List<T> findAll();
 

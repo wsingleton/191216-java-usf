@@ -1,7 +1,7 @@
-package com.bankboi.screens;
+package com.revature.screens;
 
-import com.bankboi.plainjava.Users;
-import com.bankboi.repos.userrepo;
+import com.revature.pojos.User;
+import com.revature.repo.UserRepo;
 
 import java.util.List;
 import java.util.Scanner;
@@ -19,31 +19,31 @@ public class Login {
         Scanner scanner = new Scanner(System.in);
 
 
-        System.out.println("Enter your username: ");
+        System.out.println("Enter your Hero Name: ");
         username = scanner.nextLine();
 
 
         if (username.equals("") || username.isEmpty()) {
 
-            System.out.println("Invalid username.");
+            System.out.println("That is not your Hero Name.");
             logIn();
 
         }
 
-        System.out.println("Enter your password: ");
+        System.out.println("Enter your Super Secure Password: ");
         password = scanner.nextLine();
 
 
         if (password.equals("") || password.isEmpty()) {
 
-            System.out.println("Invalid password.");
+            System.out.println("Invalid Super Secure Password.");
             logIn();
 
         }
-        userrepo userRepo = new userrepo();
-        List<Users> users = userRepo.findAllUsers();
+        UserRepo userRepo = new UserRepo();
+        List<User> users = userRepo.findAllUsers();
 
-        for (Users u : users) {
+        for (User u : users) {
 
             if(u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 checkUser = true;
@@ -56,7 +56,7 @@ public class Login {
         }
         if (!checkUser) {
 
-            System.out.println("The username or password is invalid");
+            System.out.println("The Hero Name or Super Secure Password is invalid, you better not be an evil villian");
             System.exit(0);
 
         }

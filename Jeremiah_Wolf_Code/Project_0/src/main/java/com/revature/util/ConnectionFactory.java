@@ -1,4 +1,4 @@
-package com.bankboi.util;
+package com.revature.util;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,23 +7,23 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class InternetConnection {
+public class ConnectionFactory {
 
-    private static InternetConnection netConn = new InternetConnection();
+    private static ConnectionFactory connFactory = new ConnectionFactory();
     private Properties prop = new Properties();
 
-    private InternetConnection() {
+    private ConnectionFactory() {
         super();
         try {
             prop.load(new FileReader("./src/main/resources/application.properties"));
         } catch(IOException e) { e.printStackTrace(); }
     }
 
-    public static synchronized InternetConnection getInstance() {
+    public static synchronized ConnectionFactory getInstance() {
 
-        if(netConn == null) netConn = new InternetConnection();
+        if(connFactory == null) connFactory = new ConnectionFactory();
 
-        return netConn;
+        return connFactory;
 
     }
 
@@ -40,8 +40,8 @@ public class InternetConnection {
 
             conn = DriverManager.getConnection(
                     prop.getProperty("url"),
-                    prop.getProperty("un"),
-                    prop.getProperty("pw"));
+                    prop.getProperty("user"),
+                    prop.getProperty("passw"));
 
         } catch (ClassNotFoundException e) {
 

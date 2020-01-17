@@ -1,14 +1,13 @@
-package com.bankboi.screens;
+package com.revature.screens;
 
-import com.bankboi.plainjava.BankAccounts;
-import com.bankboi.plainjava.Users;
-import com.bankboi.repos.bankboirepo;
+import com.revature.pojos.User;
+import com.revature.repo.BankAccountRepo;
 
 import java.util.Scanner;
 
 public class AcctTrans {
 
-    public static void accountTransaction(Users user) {
+    public static void accountTransaction(User user) {
 
         double balance;
         int option = 0;
@@ -17,35 +16,35 @@ public class AcctTrans {
         Scanner scanner = new Scanner(System.in);
 
 
-        BankAccounts account_Bank = new BankAccounts();
+        User.Accounts_Bank account_Bank = new User.Accounts_Bank();
 
 
         account_Bank.setAccountOwner(ownerAccount);
 
-        System.out.println("Enter deposit amount: ");
+        System.out.println("How many funds would you like? ");
         balance = scanner.nextDouble();
 
         account_Bank.setBalance(balance);
 
 
 
-        bankboirepo bankAccountRepo = new bankboirepo();
+        BankAccountRepo bankAccountRepo = new BankAccountRepo();
         bankAccountRepo.saveAccountBank(account_Bank);
 
         System.out.println("1. Make a transaction");
-        System.out.println("2. Create another account");
-        System.out.println("3. Sign out");
+        System.out.println("2. Make a separate account, hero");
+        System.out.println("3. Leave and fight crime!");
 
 
         do {
-            System.out.println("Enter an option");
+            System.out.println("What Would You like to do Hero?");
 
             try {
                 String dummy = scanner.next();
                 option = Integer.parseInt(dummy);
             }
             catch(Exception e){
-                System.out.println("Please enter 1, 2 or 3 ");
+                System.out.println("Enter Your Selection");
             }
 
             switch (option) {
@@ -58,7 +57,7 @@ public class AcctTrans {
                     Create.createAccount();
                     break;
                 case 3:
-                    System.out.println("Thanks for banking at BankBoi. PLUS ULTRA!");
+                    System.out.println("Good Morrow, Welcome to UA, PLUS ULTRA!");
 
                     break;
 

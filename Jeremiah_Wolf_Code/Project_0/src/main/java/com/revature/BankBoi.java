@@ -1,11 +1,10 @@
-package com.bankboi;
+package com.revature;
 
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.InputMismatchException;
+
 public class BankBoi {
 
     Bank myBank = new Bank();

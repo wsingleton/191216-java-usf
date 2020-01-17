@@ -1,25 +1,25 @@
-package com.bankboi.DatabaseLayer;
+package com.revature.dao;
 
-import com.bankboi.plainjava.Users;
-import com.bankboi.util.InternetConnection;
-import oracle.jdbc.OracleTypes;
+import com.revature.pojos.User;
+import com.revature.util.ConnectionFactory;
+import oracle.jdbc.internal.OracleTypes;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserData implements Database<Users, Integer>{
 
+
+public class UserData implements Database<User, Integer> {
 
     @Override
-    public List<Users> findAll() {
+    public List<User> findAll() {
 
-        List<Users> users = new ArrayList<Users>();
+        List<User> users = new ArrayList<User>();
 
-        try(Connection conn = InternetConnection.getInstance().getConnection()){
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
             String sql = "{ call RETRIEVE_USERS_BANK(?) }";
-
             CallableStatement cs = conn.prepareCall(sql);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
@@ -29,7 +29,7 @@ public class UserData implements Database<Users, Integer>{
 
             while(rs.next()) {
 
-                Users temp = new Users();
+                User temp = new User();
                 temp.setId(rs.getInt(1));
                 temp.setFirstName(rs.getString(2));
                 temp.setLastName(rs.getString(3));
@@ -48,13 +48,13 @@ public class UserData implements Database<Users, Integer>{
     }
 
     @Override
-    public Users findById(Integer id) {
+    public User findById(Integer id) {
 
-        Users user = null;
+        User user = null;
 
-        try(Connection conn = InternetConnection.getInstance().getConnection()) {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM BANK_USER WHERE USER_ID = ?";
+            String sql = "SELECT * FROM USERS_BANK WHERE USER_ID = ?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,  id);
@@ -62,7 +62,7 @@ public class UserData implements Database<Users, Integer>{
 
             while(rs.next()) {
 
-                user = new Users();
+                user = new User();
                 user.setId(rs.getInt(1));
                 user.setFirstName(rs.getString(2));
                 user.setLastName(rs.getString(3));
@@ -81,13 +81,13 @@ public class UserData implements Database<Users, Integer>{
     }
 
     @Override
-    public Users save(Users obj) {
+    public User save(User obj) {
 
-        try(Connection conn = InternetConnection.getInstance().getConnection()) {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             conn.setAutoCommit(false);
 
-            String sql = "INSERT INTO BANK_USER (FirstName, LastName, UserName, Password)"
+            String sql = "INSERT INTO USERS_BANK (FIRSTNAME, LASTNAME, USERNAME, PASS_WORD)"
                     + " VALUES(?, ?, ?, ?)";
 
             String[] keyNames = {"USER_ID"};
@@ -125,11 +125,11 @@ public class UserData implements Database<Users, Integer>{
     }
 
     @Override
-    public Users update(Users obj) {
+    public User update(User obj) {
 
-        try(Connection conn = InternetConnection.getInstance().getConnection()) {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE BANK_USER SET FirstName = ?, LastName = ?, UserName = ?, Password = ? WHERE USER_ID = ?";
+            String sql = "UPDATE USERS_BANK SET FIRSTNAME = ?, LASTNAME = ?, USERNAME = ?, PASS_WORD = ? WHERE USER_ID = ?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,  obj.getFirstName());
@@ -150,7 +150,7 @@ public class UserData implements Database<Users, Integer>{
     }
 
     @Override
-    public void delete(Users obj) {
+    public void delete(User obj) {
         // TODO Auto-generated method stub
 
     }
