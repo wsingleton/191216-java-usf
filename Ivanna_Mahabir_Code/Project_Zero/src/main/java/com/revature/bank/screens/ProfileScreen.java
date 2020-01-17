@@ -2,8 +2,6 @@ package com.revature.bank.screens;
 
 import com.revature.bank.services.AcctService;
 
-import java.io.IOException;
-
 import static com.revature.bank.AppDriver.*;
 
 public class ProfileScreen extends Screen {
@@ -17,25 +15,25 @@ public class ProfileScreen extends Screen {
     }
 
 
+
     @Override
     public void render() {
-        acctService.register(currentUser.getUsrName());
 
-        System.out.println("\nTransactions");
+        System.out.println("Transactions");
         System.out.println("1) Balance Inquiry");
         System.out.println("2) Deposit");
         System.out.println("3) Withdrawal");
         System.out.println("4) Log Out");
 
         try{
-            acctService.getAcctByUsername(currentUser.getUsrName());
-
             System.out.println("> ");
             String userSelection = console.readLine();
             switch (userSelection){
                 case "1":
                     //getbalance
                     System.out.println("Balance Inquiry");
+                    acctService.getAcctByUsername(currentUser.getUsrName());
+
                     System.out.println("Your Current Balance: $" + currentAcct.getBalance() + "\n\n");
                     router.navigate("/profile");
                     break;
@@ -43,10 +41,13 @@ public class ProfileScreen extends Screen {
                 case "2":
                     //deposit
                     System.out.println("Deposit");
+                    acctService.getAcctByUsername(currentUser.getUsrName());
                     Double curBal = currentAcct.getBalance();
                     System.out.println("Your Current Balance: $" + curBal);
+
                     System.out.println("Enter Amount to Deposit: $");
-                    Double deposit = valid(console.readLine());
+                    Double deposit = Double.parseDouble(console.readLine());
+
                     System.out.println("Your New Balance: $" + acctService.validateDeposit(curBal, deposit) + "\n\n");
                     router.navigate("/profile");
                     break;
@@ -54,11 +55,12 @@ public class ProfileScreen extends Screen {
                 case "3":
                     //withdrawal
                     System.out.println("Withdrawal");
+                    acctService.getAcctByUsername(currentUser.getUsrName());
                     curBal = currentAcct.getBalance();
                     System.out.println("Your Current Balance: $" + curBal);
 
                     System.out.println("Enter Amount to Withdraw: $");
-                    Double withdraw = valid(console.readLine());
+                    Double withdraw = Double.parseDouble(console.readLine());
 
                     System.out.println("Your New Balance: $" + acctService.validateWith(curBal, withdraw) + "\n\n");
                     router.navigate("/profile");
@@ -80,16 +82,5 @@ public class ProfileScreen extends Screen {
             appRunning = false;
         }
 
-    }
-
-    public Double valid(String input){
-        Double inputVal = 0.0;
-        try{
-            inputVal = Double.parseDouble(input);
-        }
-        catch(Exception e){
-            System.err.println("Please Enter A Valid Amount\n\n");
-        }
-        return inputVal;
     }
 }

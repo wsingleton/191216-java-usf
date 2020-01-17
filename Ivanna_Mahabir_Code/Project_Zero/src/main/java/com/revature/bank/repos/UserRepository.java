@@ -14,7 +14,7 @@ public class UserRepository implements CrudRepository<User> {
         Optional<User> _user = Optional.empty();
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "SELECT * FROM CBANK.busers WHERE user_name = ?";
+            String sql = "SELECT * FROM users WHERE user_name = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
@@ -33,7 +33,7 @@ public class UserRepository implements CrudRepository<User> {
         Optional<User> _user = Optional.empty();
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "SELECT * FROM CBANK.busers WHERE user_name = ? AND user_pass = ?";
+            String sql = "SELECT * FROM CBANK.users WHERE user_name = ? AND user_pass = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
@@ -50,16 +50,16 @@ public class UserRepository implements CrudRepository<User> {
     }
 
 
+
     @Override
     public void save(User newObj) {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "INSERT INTO CBANK.busers VALUES ((SELECT MAX(user_id)+1 FROM CBANK.busers), ?, ?, ?, ?)";
+            String sql = "INSERT INTO CBANK.users VALUES (0, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
             pstmt.setString(1, newObj.getFirstName());
             pstmt.setString(2, newObj.getLastName());
             pstmt.setString(3, newObj.getUsrName());
             pstmt.setString(4, newObj.getPassWord());
-
 
             int rowsInserted = pstmt.executeUpdate();
 

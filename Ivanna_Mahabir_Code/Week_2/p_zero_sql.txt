@@ -1,0 +1,36 @@
+CREATE TABLE useracct(
+    user_id            NUMBER(5),   
+    acct_id           NUMBER(5),  
+    
+    CONSTRAINT   pk_useracct   
+    PRIMARY KEY(user_id),
+    
+    CONSTRAINT    fk_useracct   
+    FOREIGN KEY(acct_id)
+    REFERENCES accounts(acct_id)
+);
+
+CREATE TABLE accounts(
+    acct_id           NUMBER(5)   CONSTRAINT   pk_accounts   PRIMARY KEY,
+    balance           NUMBER(10, 2)   
+);
+
+CREATE TABLE users(
+    user_id          NUMBER(5)  CONSTRAINT pk_users PRIMARY KEY,
+    user_fn          VARCHAR2(25),
+    user_ln          VARCHAR2(25),
+    user_name        VARCHAR2(25),
+    user_pass        VARCHAR2(25)
+);
+
+INSERT INTO accounts VALUES (4, 500);
+INSERT INTO accounts VALUES (7, 650);
+INSERT INTO accounts VALUES (10, 325);
+
+INSERT INTO users VALUES (1, 'Edward', 'Elric', 'Fullmetal4', 'alchemist12');
+INSERT INTO users VALUES (2, 'Allen', 'Walker', 'aWalker15', 'BlackOrder7');
+INSERT INTO users VALUES (3, 'Kyoko', 'Mogami', 'SkipBeat1', 'wildChild5');
+
+INSERT INTO useracct VALUES (1, 4);
+INSERT INTO useracct VALUES (2, 7);
+INSERT INTO useracct VALUES (3, 10);

@@ -1,9 +1,7 @@
 package com.revature.bank.repos;
 
 import com.revature.bank.models.Account;
-import com.revature.bank.models.User;
 import com.revature.bank.util.ConnectionFactory;
-
 
 import java.sql.*;
 import java.util.HashSet;
@@ -16,7 +14,7 @@ public class AcctRepository implements CrudRepository<Account> {
         Optional<Account> _acct = Optional.empty();
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "SELECT * FROM CBANK.accts WHERE acctusr = ?";
+            String sql = "SELECT * FROM CBANK.accounts WHERE acct_id = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
@@ -37,7 +35,7 @@ public class AcctRepository implements CrudRepository<Account> {
         Optional<Account> _acct = Optional.empty();
         if(bal < 0){ bal=0.0;}
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "UPDATE CBANK.accts SET balance =" + bal+ "WHERE CBANk.accts.acctusr = ?";
+            String sql = "UPDATE CBANK.accounts SET balance =" + bal+ "WHERE CBANk.accounts.acctusr = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
@@ -54,11 +52,10 @@ public class AcctRepository implements CrudRepository<Account> {
 
     @Override
     public void save(Account newObj) {
-
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "INSERT INTO CBANK.accts VALUES ((SELECT MAX(acctid)+1 FROM CBANK.accts), ?, ?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"acctid"});
-            pstmt.setString(1, newObj.getUsername());
+            String sql = "INSERT INTO CBANK.accounts VALUES (?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"acct_id"});
+
             pstmt.setDouble(2, newObj.getBalance());
 
             int rowsInserted = pstmt.executeUpdate();
@@ -99,8 +96,7 @@ public class AcctRepository implements CrudRepository<Account> {
         while(rs.next()){
             Account temp = new Account();
             temp.setAcctId(rs.getInt("acctid"));
-            temp.setUsername(rs.getString("acctusr"));
-            temp.setBalance(rs.getDouble("balance"));
+            temp.setBalance(rs.getInt("balance"));
             accts.add(temp);
         }
 

@@ -2,6 +2,7 @@ package com.revature.bank;
 
 import com.revature.bank.models.Account;
 import com.revature.bank.models.User;
+import com.revature.bank.models.UserAcct;
 import com.revature.bank.repos.AcctRepository;
 import com.revature.bank.repos.UserRepository;
 import com.revature.bank.screens.HomeScreen;
@@ -21,6 +22,7 @@ public class AppDriver {
     public static Boolean appRunning;
     public static User currentUser;
     public static Account currentAcct;
+    public static UserAcct currentUserAcct;
 
     static {
         System.out.println("[LOG] - Initializing application");
