@@ -6,8 +6,8 @@ import com.revature.screens.MainMenuScreen;
 
 public class MainMenu {
 
-   static BankAccountRepo bankAccountRepo = new BankAccountRepo();
-   static UserRepo userRepo = new UserRepo();
+   final BankAccountRepo bankAccountRepo = new BankAccountRepo();
+   final UserRepo userRepo = new UserRepo();
 
     public static void main(String[] args) {
 

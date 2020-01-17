@@ -12,7 +12,7 @@ import com.revature.pojos.User;
 import com.revature.util.ConnectionFactory;
 import oracle.jdbc.internal.OracleTypes;
 
-//import oracle.jdbc.OracleTypes;
+
 
 public class UserDao implements Dao<User, Integer>{
 
@@ -24,7 +24,7 @@ public class UserDao implements Dao<User, Integer>{
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
             String sql = "{ call RETRIEVE_USERS_BANK(?) }";
-
+//CallableStatement is used to call stored procedures in a database. A stored procedure is like a function or method in a class, except it lives inside the database.
             CallableStatement cs = conn.prepareCall(sql);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);

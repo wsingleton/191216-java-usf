@@ -40,7 +40,7 @@ public class Deposit {
 
                 bankAccountRepo.updateAccountBank(updateUser);
 
-                System.out.println("Your current balance is: " + updateUser.getBalance());
+                System.out.println("Your current balance is: $ " + updateUser.getBalance());
 
                 valid = true;
             } else {

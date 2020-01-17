@@ -9,11 +9,11 @@ public class BankAccountRepo {
 
     static BankAccountsDao bankAcc = new BankAccountsDao();
 
-    public List<Accounts_Bank> findAllBankAcc() {
+   // public List<Accounts_Bank> findAllBankAcc() {
 
-        return bankAcc.findAll();
+       // return bankAcc.findAll();
 
-    }
+  //  }
 
     public Accounts_Bank findAccountBank(int id) {
 

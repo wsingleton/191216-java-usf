@@ -19,7 +19,6 @@ public class Withdraw {
 
         Scanner scanner = new Scanner(System.in);
 
-
         BankAccountRepo bankAccountRepo = new BankAccountRepo();
         temp = bankAccountRepo.findAccountBank(id);
 
@@ -40,11 +39,9 @@ public class Withdraw {
                 balance -= withdraw;
                 Accounts_Bank updateUser = new Accounts_Bank(temp.getAccountOwner(), balance);
 
-
-
                 bankAccountRepo.updateAccountBank(updateUser);
 
-                System.out.println("Your current balance is: " + updateUser.getBalance());
+                System.out.println("Your current balance is: $ " + updateUser.getBalance());
 
                 valid = true;
 
