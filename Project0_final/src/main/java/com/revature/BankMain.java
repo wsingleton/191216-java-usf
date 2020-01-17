@@ -37,6 +37,8 @@ public class BankMain {
         navigation.addScreen(new ProfileScreen());
         navigation.addScreen(new RegisterScreen(userServices));
         navigation.addScreen(new SearchScreen());
+        navigation.addScreen(new Deposit(accRepo));
+        navigation.addScreen(new Withdraw(accRepo));
     }
 
     public static void main(String[] args) {

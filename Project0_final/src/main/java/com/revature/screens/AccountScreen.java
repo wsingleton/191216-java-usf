@@ -23,7 +23,7 @@ public class AccountScreen extends Screen {
     @Override
     public void load() {
 
-        double moneyadd; double moneysub; double amount;
+        double moneysub; double amount;
 
         System.out.println("Your current balance is " + currentUser.getBalance());
         System.out.println("Press 1) to make a deposit or 2) to make a withdraw");
@@ -35,36 +35,11 @@ public class AccountScreen extends Screen {
 
             switch (path) {
                 case "1":
-
-                    System.out.println("How much would you like to deposit?");
-                    moneyadd = Double.parseDouble(userInputs.readLine());
-                    BigDecimal bd = new BigDecimal(moneyadd).setScale(2, RoundingMode.HALF_UP);
-                    amount = bd.doubleValue();
-
-                    if (amount < 0) {
-                        System.err.println("Invalid Input");
-                    } else {
-                        currentUser.setBalance(amount + currentUser.getBalance());
-                        accRepo.save(currentUser);
-                    }
-
-                    navigation.navigate("/account");
+                    navigation.navigate("/deposit");
                     break;
 
                 case "2":
-
-                    System.out.println("How much would you like to withdraw");
-                    moneysub = Double.parseDouble(userInputs.readLine());
-                    BigDecimal dp = new BigDecimal(moneysub).setScale(2, RoundingMode.HALF_UP);
-                    amount = dp.doubleValue();
-                    if (amount > currentUser.getBalance() || amount < 0) {
-                        System.err.println("Insufficient funds");
-                    } else {
-                        currentUser.setBalance(currentUser.getBalance() - amount);
-                        accRepo.save(currentUser);
-
-                    }
-                    navigation.navigate("/account");
+                    navigation.navigate("/withdraw");
                     break;
 
                 case "3":
