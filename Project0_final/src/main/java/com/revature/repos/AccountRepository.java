@@ -3,13 +3,13 @@ package com.revature.repos;
 import com.revature.models.User;
 import com.revature.util.ConnectionMaker;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 public class AccountRepository implements CrudRepository<User> {
+
     @Override
     public void save(User currentUser) {
         try  {
@@ -30,8 +30,27 @@ public class AccountRepository implements CrudRepository<User> {
     }
 
     @Override
-    public Set findAll() {
-        return null;
+    public Set<User> findAll() {
+
+        HashSet<User> accounts = new HashSet<>();
+
+        try {
+
+            Connection connection = ConnectionMaker.getInstance().liveConnection();
+            CallableStatement cstmt = connection.prepareCall("{CALL banking_app.allAccounts}");
+            ResultSet results = cstmt.executeQuery();
+
+            while(results.next()) {
+                User temp = new User();
+                temp.setUsername(results.getString("username"));
+                accounts.add(temp);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return accounts;
     }
 
     @Override

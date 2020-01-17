@@ -8,7 +8,6 @@ import com.revature.repos.AccountRepository;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 import static com.revature.BankMain.*;
 
@@ -41,7 +40,7 @@ public class AccountScreen extends Screen {
                     moneyadd = Double.parseDouble(userInputs.readLine());
                     BigDecimal bd = new BigDecimal(moneyadd).setScale(2, RoundingMode.HALF_UP);
                     amount = bd.doubleValue();
-                    
+
                     if (amount < 0) {
                         System.err.println("Invalid Input");
                     } else {
