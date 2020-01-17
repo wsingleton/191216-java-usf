@@ -19,7 +19,7 @@ public class UserDao implements Dao<User, Integer>{
     @Override
     public List<User> findAll() {
 
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
