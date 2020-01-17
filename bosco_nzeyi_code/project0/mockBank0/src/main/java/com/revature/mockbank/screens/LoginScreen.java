@@ -72,6 +72,8 @@ public class LoginScreen extends Screen {
                         //e.getStackTrace();
                         System.out.println("INVALID INPUT");
                     }
+                } else {
+                    router.navigate("/dashboard");
                 }
             }
         } catch (InvalidRequestException | AuthenticationException e) {

@@ -67,6 +67,9 @@ public class DashboardScreen extends Screen {
                     break;
                 default:
                     System.out.println("[LOG] - INVALID SELECTION! Try again");
+                    //currentUser = null;
+                    //currentUser = null;
+                    router.navigate("/login");
             }
 
         } catch (Exception e) {

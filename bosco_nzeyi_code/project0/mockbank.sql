@@ -200,11 +200,11 @@ DELETE FROM accounts;
     --
     
 -- INSERTING PRELIMINARY DATA IN THE USERS_ACCOUNTS TABLE (COMPOSITE KEY TABLE)
-INSERT INTO users_accounts
-VALUES(1, 1);
-INSERT INTO users_accounts
-VALUES(1, 2);
-COMMIT;
+--INSERT INTO users_accounts
+--VALUES(1, 1);
+--INSERT INTO users_accounts
+--VALUES(1, 2);
+--COMMIT;
 
 -- CREATE A PROCEDURE THAT UPDATES THE AMOUNT IF A DEPOSIT OR WITHDRAW IS MADE
 CREATE OR REPLACE PROCEDURE update_balance (accountId IN NUMBER, amount IN NUMBER, activity_type IN VARCHAR2)
@@ -233,10 +233,20 @@ BEGIN
 update_balance(43, 50, 'Withdraw');
 END;
 
-SELECT * FROM accounts WHERE account_id = 84;
-SELECT * FROM activities WHERE account_id = 82;
-SELECT * FROM users_accounts;
+SELECT * FROM accounts WHERE account_id = 91;
+SELECT * FROM activities WHERE account_id = 91;
+SELECT * FROM users_accounts WHERE user_id = 32;
+SELECT * FROM ACTIVITIES;
 
+SELECT * FROM accounts;
+SELECT * FROM users_accounts;
+SELECT * FROM users WHERE username = 'nebo';
+
+INSERT INTO users_accounts VALUES(61, 45);
+COMMIT;
+
+DELETE FROM activities WHERE amount < 0;
+COMMIT;
 
 
 
