@@ -48,9 +48,9 @@ ___
 
 **Week 3:** HTML, CSS, Bootstrap, & JavaScript
 
-**Week 4:** Servlets, TypeScript, & Angular
+**Week 4:** Servlets and AWS Cloud
 
-**Week 5:** DevOps Principals, AWS Cloud, & Hibernate
+**Week 5:** DevOps Principals and Angular
 
 **Week 6:** Spring Framework
 
