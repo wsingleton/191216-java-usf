@@ -411,3 +411,16 @@ console.log(name + ' is ' + age);
 /*
     Creating Objects
 */
+
+
+// for..in
+let myObject = {
+    'my prop': 1,
+    y: 2,
+    z: 3
+}
+
+for(const property in myObject){
+    console.log(`myObject.${property} = ${myObject[property]}`)
+}
+

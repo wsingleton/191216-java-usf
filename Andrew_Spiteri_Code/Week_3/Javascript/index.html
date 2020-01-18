@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Hello AJAX</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h5>AJAX example</h5>
+            <h5>
+                <span class="label label-success">Useing the RESTful Pokemon</span>
+            </h5>
+        </div>
+    </div>
+    <div class="container">
+        <input type="text" id="pokemonId" placeholder="Enter Pokemon Id" class="form-control"/>
+        <input type="submit" id="pokemonSubmit" value="Get POkemon Info" class="form-control btn btn-success" />
+    </div>
+
+    <div>
+        <img id="pokemonImg" alt="" src="">
+        <h3 id="pokemonName"></h3>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/JavaScript" src="js/ajax-example.js"></script>
+</body>
+<!--
+    AJAX - Asynchronous Javascript and XML
+    Asynchronous - the browser  does not need to reload the enrite page
+    when only a small bit of data on the page has changed.
+    
+    We do not have to wait for the server to respond to a previous request 
+    to send a new one.
+
+    In our example we are using JSON as our data format.
+
+    AJAX - is a technique for accessing web servers from a webpage asynchronously
+    It is not a programming language.
+
+    AJAX consists of: 
+        - browser built-in XMLHttpRequest Object (requests data from the web server)
+        - JavaScript
+        - HTML DOM (to display or use the data)
+-->
+</html>
