@@ -1,18 +1,19 @@
-/* 1. Leap Year */ //wrong
+/* 1. Leap Year */ //correct
 
 function leapYear(date){
     let dateObject = new Date(date);
     let year = dateObject.getFullYear();
-    if(year % 400 === 0){
+    year += 1;
+    if(year % 400 == 0){
         return true;
-    }else if(year % 4 === 0){
+    }else if(year % 4 == 0){
         return true;
     }else{
         return false;
     }
 }
 
-/* 2. Email Validation */ 
+/* 2. Email Validation */ //correct
 
 function isEmail(string){  
 
@@ -42,15 +43,13 @@ function removeScript(string){
 /* 5. Letter Shift */
 
 function letterShift(string){
-    let first = string[0];
-    for(let i = 0; i < string.length; i++){
-        if(i === string.length - 1){
-            string[i] = first;
-            break;
-        }
-        string[i] = string[i+1]
-    }
-    return string;
+    let holder, concatString = '';
+    string.split('').forEach(function (c) {
+        holder = c.charCodeAt(0);
+        holder += 1;
+        concatString = concatString + String.fromCharCode(holder);
+    });
+    return concatString;
 }
 
 /* 6. Vowel Count */ //correct
@@ -119,16 +118,29 @@ function addArr(array1, array2){
 
 }
 
-/* 9. Longest String */
+/* 9. Longest String */ //correct
 
 function longestStr(array){
-    for()
+    let holder = 0;
+    let longStr;
+    for(let i = 0; i < array.length; i++){
+        if(array[i].length > holder){
+            holder = array[i].length;
+            longStr = i;
+        }
+    }
+    return longStr;
 }
 
-/* 10. Area of a Triangle */
+/* 10. Area of a Triangle */ //correct
 
 function area(number1, number2, number3){
-
+    if(number1+number2>number3 && number1+number3>number2 && number2+number3>number1){
+        let s = (number1+number2+number3)/2;
+        let area = Math.sqrt(s*(s-number1)*(s-number2)*(s-number3));
+        return area;
+    }
+    return 'Is not a triangle';
 }
 
 /* 11. Similar Polygons */
