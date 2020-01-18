@@ -40,7 +40,7 @@ function removeScript(string){
     return string;
 }
 
-/* 5. Letter Shift */
+/* 5. Letter Shift */ //correct
 
 function letterShift(string){
     let holder, concatString = '';
@@ -143,20 +143,40 @@ function area(number1, number2, number3){
     return 'Is not a triangle';
 }
 
-/* 11. Similar Polygons */
+/* 11. Similar Polygons */ //correct
 
-function areSimilar(array, array){
-
+function areSimilar(array1, array2){
+    if(array1.length === array2.length){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 /* 12. Equivalent Arrays */
 
-function equvArr(array, array){
-
+function equvArr(array1, array2){
+    if(array1.length == array2.length){
+        for(let i = 0; i < array1.length; i++){
+            for(let j = 0; j < array2.length; j++){
+                if(array1[i] === array2[j]){
+                    array2.splice(i, 1);
+                }
+            }
+        }
+        if(array2.length === 0){
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+    
 }
 
 /* 13. Tic Tac Toe */
 
 function tictactoe(array){
-
+    
 }
