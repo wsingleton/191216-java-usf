@@ -5,6 +5,9 @@ import com.revature.fauxbankextended.models.Account;
 import com.revature.fauxbankextended.models.User;
 import com.revature.fauxbankextended.util.ConnectionFactory;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -122,20 +125,6 @@ public class UserRepository implements CrudRepository<User> {
         return true;
     }
 
-    private Set<User> mapResultSet(ResultSet rs) throws SQLException {
-        Set<User> users = new HashSet<>();
-        while (rs.next()) {
-            User temp = new User();
-            temp.setId(rs.getInt("user_id"));
-            temp.setUserName(rs.getString("username"));
-            temp.setPassword(rs.getString("password"));
-            temp.setFirstName(rs.getString("first_name"));
-            temp.setLastName(rs.getString("last_name"));
-            users.add(temp);
-        }
-        return users;
-    }
-
     public Set<User> findAll() {
 
         Set<User> users = new HashSet<>();
@@ -151,5 +140,46 @@ public class UserRepository implements CrudRepository<User> {
             e.printStackTrace();
         }
         return users;
+    }
+
+    private Set<User> mapResultSet(ResultSet rs) throws SQLException {
+        Set<User> users = new HashSet<>();
+        while (rs.next()) {
+            User temp = new User();
+            temp.setId(rs.getInt("user_id"));
+            temp.setUserName(rs.getString("username"));
+            temp.setPassword(rs.getString("password"));
+            temp.setFirstName(rs.getString("first_name"));
+            temp.setLastName(rs.getString("last_name"));
+            users.add(temp);
+        }
+        return users;
+    }
+
+    public static void test(){
+//        BufferedImage test = null;
+        System.out.println("sending image");
+        try{
+            InputStream test = new FileInputStream("C:/Users/bdunn/OneDrive/Pictures/iCloud Photos/Uploads/Project 1 Requirements.pdf");
+
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            ImageIO.write(test, "jpg", baos);
+//            baos.flush();
+//            byte[] imageInByte = baos.toByteArray();
+
+            Connection conn = ConnectionFactory.getInstance().getConnection();
+            System.out.println("connection established");
+                String sql = "INSERT INTO test VALUES (?)";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setBlob(1, test);
+                pstmt.execute();
+            System.out.println("record inserted");
+
+        }catch(IOException  | SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

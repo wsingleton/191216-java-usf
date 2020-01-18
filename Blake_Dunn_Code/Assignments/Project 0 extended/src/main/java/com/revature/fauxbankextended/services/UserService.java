@@ -70,6 +70,26 @@ public class UserService {
         app().setCurrentSession(new UserSession(newUser, acct, ConnectionFactory.getInstance().getConnection()));
     }
 
+    public void addNewAccount(User user, String type) {
+        Account newAccount = new Account(0.0);
+
+        switch(type){
+            case "1":
+                newAccount.setAccountType(AccountType.CHECKING);
+                break;
+            case "2":
+                newAccount.setAccountType(AccountType.SAVINGS);
+                break;
+            default:
+                System.out.println("Invalid selection");
+                app().setAppRunning(false);
+        }
+
+        Account acct = acctRepo.save(newAccount);
+        userRepo.updateCompositeKey(user, acct);
+        app().setCurrentSession(new UserSession(user, acct, ConnectionFactory.getInstance().getConnection()));
+    }
+
     public User setJointAccount(String username) {
 
         if (username == null || username.trim().equals("")) throw new InvalidRequestException();

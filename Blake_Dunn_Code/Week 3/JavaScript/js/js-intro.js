@@ -184,13 +184,13 @@ test1();
 let z = 1 + 1 + '1';
 console.log(z); // '21'
 
-let z = '1' + 1 + 1;
+z = '1' + 1 + 1;
 console.log(z); // '111'
 
 let y = (1 == '1');
 console.log(y); // true
 
-let y = (1 === '1');
+y = (1 === '1');
 console.log(y); // false
 
 console.log(0 == '0'); // true
@@ -439,24 +439,24 @@ let hoist_test7 = function() {
 }
 
 // hoist_test8(); // throws TypeError: hoist_test8 is declared, but is not yet a function 
-var hoist_test7 = function() {
+var hoist_test8 = function() {
     console.log(x);
     var x = 6;
 }
 
-function hoist_test9() {
+// function hoist_test9() {
 
-    console.log(b); // throws ReferenceError
+//     console.log(b); // throws ReferenceError
 
-    function innerFunction() {
-        console.log(b); // undefined
-        var x = 6;
-        console.log(b); // 6
-    }
-    console.log(b); // throws ReferenceError
-}
+//     function innerFunction() {
+//         console.log(b); // undefined
+//         var x = 6;
+//         console.log(b); // 6
+//     }
+//     console.log(b); // throws ReferenceError
+// }
 
-hoist_test9();
+// hoist_test9();
 
 /*
     Closures
@@ -622,7 +622,7 @@ class Animal {
  class Dog extends Animal {
 
     constructor(name) {
-        this.name = name;
+        super(name);
     }
 
     speak() {
@@ -644,9 +644,24 @@ class Animal {
  
 
 
- // Spread operator
+/*
+    Spread/Rest Operator
 
+        Spread/rest syntax allows an iterable such as an array expression or string to be 
+        expanded in places where zero or more arguments (for function calls) or elements
+        (for array literals) are expected, or an object expression to be expanded in places
+        where zero or more key/value pairs (for object literals) are expected.
+*/
 
+function sum(x, y, z) {
+    return x + y + z;
+}
+
+let numbers = [1, 2, 3];
+let mySum = sum(numbers[0], numbers[1], numbers[2]);
+console.log(mySum);
+let yourSum = sum(...numbers);
+console.log(yourSum);
 
  // Destructuring operator
  let j, k, rest;
@@ -689,5 +704,54 @@ class Animal {
  }
 
  class CustomError extends Error {
-     
+     constructor() {
+         super('hey look! a custom error')
+     }
  } 
+
+ let myError = new CustomError();
+ console.dir(myError);
+
+ /*
+    Prototypal Inheritance
+
+        JS's inheritance mechanism is not quite the same as Java's, which uses a 
+        class-based inheritance system. Instead, JS is known for its use of 
+        "prototypal inheritance".
+
+            - Each object has a private property which holds a link to another 
+              object, ccalled its "prototype" (represented by the __proto__property)
+
+            - The prototype object has a prototype of its own, and so on until an
+              an object is reached that has nulll as it prototype
+
+            - 
+ */
+
+ /*
+    for..of && for..in
+
+        - for..of
+            + uses an object-specific iterator and loops over its generated value
+
+        - for..in
+            +loop over enumerated property names of an object
+ */
+
+ const myArray = [10, 20, 30];
+
+ for (const value of myArray) {
+     console.log(value);
+ }
+
+ // for..in
+
+ let myObject = {
+     'asd asd': 1,
+     y: 2,
+     z: 3
+ };
+
+ for (const property in myObject) {
+     console.log(`myObject.${property} = ${myObject[property]}`);
+ }

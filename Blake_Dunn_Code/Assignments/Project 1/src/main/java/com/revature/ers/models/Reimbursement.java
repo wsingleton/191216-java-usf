@@ -1,0 +1,163 @@
+package com.revature.ers.models;
+
+
+import java.io.File;
+import java.sql.Timestamp;
+import java.util.Objects;
+
+public class Reimbursement {
+
+    private Integer reimbId;
+    private Double amount;
+    private Timestamp submitted;
+    private Timestamp resolved;
+    private String description;
+    private File receipt;
+    private Integer authorId;
+    private Integer resolverId;
+    private ReimbursementStatus status;
+    private ReimbursementType type;
+
+    public Reimbursement () {
+        super();
+    }
+
+    public Reimbursement(Integer reimbId, Double amount, Timestamp submitted, String description, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
+        this.reimbId = reimbId;
+        this.amount = amount;
+        this.submitted = submitted;
+        this.description = description;
+        this.authorId = authorId;
+        this.status = status;
+        this.type = type;
+    }
+
+    public Reimbursement(Integer reimbId, Double amount, Timestamp submitted, String description, File receipt, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
+        this.reimbId = reimbId;
+        this.amount = amount;
+        this.submitted = submitted;
+        this.description = description;
+        this.receipt = receipt;
+        this.authorId = authorId;
+        this.status = status;
+        this.type = type;
+    }
+
+    public Integer getReimbId() {
+        return reimbId;
+    }
+
+    public void setReimbId(Integer reimbId) {
+        this.reimbId = reimbId;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public Timestamp getSubmitted() {
+        return submitted;
+    }
+
+    public void setSubmitted(Timestamp submitted) {
+        this.submitted = submitted;
+    }
+
+    public Timestamp getResolved() {
+        return resolved;
+    }
+
+    public void setResolved(Timestamp resolved) {
+        this.resolved = resolved;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public File getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(File receipt) {
+        this.receipt = receipt;
+    }
+
+    public Integer getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
+    }
+
+    public Integer getResolverId() {
+        return resolverId;
+    }
+
+    public void setResolverId(Integer resolverId) {
+        this.resolverId = resolverId;
+    }
+
+    public ReimbursementStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReimbursementStatus status) {
+        this.status = status;
+    }
+
+    public ReimbursementType getType() {
+        return type;
+    }
+
+    public void setType(ReimbursementType type) {
+        this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reimbursement that = (Reimbursement) o;
+        return Objects.equals(reimbId, that.reimbId) &&
+                Objects.equals(amount, that.amount) &&
+                Objects.equals(submitted, that.submitted) &&
+                Objects.equals(resolved, that.resolved) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(receipt, that.receipt) &&
+                Objects.equals(authorId, that.authorId) &&
+                Objects.equals(resolverId, that.resolverId) &&
+                status == that.status &&
+                type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(reimbId, amount, submitted, resolved, description, receipt, authorId, resolverId, status, type);
+    }
+
+    @Override
+    public String toString() {
+        return "Reimbursement{" +
+                "reimbId=" + reimbId +
+                ", amount=" + amount +
+                ", submitted=" + submitted +
+                ", resolved=" + resolved +
+                ", description='" + description + '\'' +
+                ", receipt=" + receipt +
+                ", authorId=" + authorId +
+                ", resolverId=" + resolverId +
+                ", status=" + status +
+                ", type=" + type +
+                '}';
+    }
+}

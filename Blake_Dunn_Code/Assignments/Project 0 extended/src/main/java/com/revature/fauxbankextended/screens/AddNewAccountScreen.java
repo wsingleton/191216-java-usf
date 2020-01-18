@@ -25,7 +25,7 @@ public class AddNewAccountScreen extends Screen {
         try {
             System.out.print("> ");
             String choice = app().getConsole().readLine();
-            userService.setNewAccount(app().getCurrentSession().getSessionUser(), choice);
+            userService.addNewAccount(app().getCurrentSession().getSessionUser(), choice);
 
             if (app().getCurrentSession() != null) {
                 app().getRouter().navigate("/dashboard");

@@ -246,9 +246,21 @@ END;
 
 CALL add_trans (1,1,1,1,500);
 
-Delete from users where user_id = 21;
+Delete from transactions;
 commit;
 insert into users_accounts values (22, 26);
 SELECT user_id, acct_id, trans_type_id, amount, trans_date(TO_CHAR(trans_date, 'MM/DD/YY HH24:MM:SS')) AS "Transaction_Date"
 FROM transactions
 WHERE user_id = 1 AND acct_id = 1;
+
+
+select *
+from transactions
+where user_id = 1;
+
+select *
+from transactions
+where acct_id = 21
+order by user_id;
+
+delete from users where user_id = 42;

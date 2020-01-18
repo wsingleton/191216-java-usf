@@ -23,7 +23,7 @@ public class TransferMoneyScreen extends Screen {
             System.out.println("Your transfer was a success!");
         }
         else {
-            System.out.println("Sorry, we could not complete our transfer.");
+            System.out.println("Sorry, we could not complete your transfer.");
         }
 
         app().getRouter().navigate("/dashboard");
