@@ -113,6 +113,6 @@
         }
 	```
 
-  - Step 10: Use the command `mvn tomcat7:deploy` to execute the Maven goal to build and deploy the application to the locally running Tomcat Web Server
+  - Step 10: Use the command `mvn tomcat7:deploy` to execute the Maven goal to build and deploy the application to the locally running Tomcat Web Server. The application can be managed through the use of other Maven goal commands provided by the `tomcat7-maven-plugin` or through the Tomcat Web App Manager GUI found at `http://localhost:8080/manager/html`.
 
 
