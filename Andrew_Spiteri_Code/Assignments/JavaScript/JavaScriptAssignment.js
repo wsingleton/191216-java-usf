@@ -49,39 +49,24 @@ function subForm(){
     let phone = document.getElementById('phone').value;
     let bday = document.getElementById('bday').value;
     let planet = document.getElementById('planet').value;
-    let gender = document.getElementsByName('gender').value;
+    let gender = document.getElementsByName('gender');
+    let genderVal = gender[0].value;
     let color = document.getElementById('color').value;
-    let activities = document.getElementsByClassName('activity').value;
-    if(fName){
-        console.log('fname: ' +fName);
-    }
-    if(lName){
-        console.log('lname: ' +lName);
-    }
-    if(email){
-        console.log('email: ' +email);
-    }
-    if(phone){
-        console.log('phone: ' +phone);
-    }
-    if(bday){
-        console.log('bday: ' +bday);
-    }
-    if(planet){
-        console.log('planet: ' +planet);
-    }
-    if(gender){
-        console.log('gender: ' +gender);
-    }
-    if(color){
-        console.log('color: ' +color);
-    }
-    if(activities){
-        console.log('actitiees: ' +activities);
+    let activities = document.getElementsByClassName('activity');
+    let activitiesBool;
+    output = [];
+    for(let i = 0; i < activities.length; i++){
+        if(activities[i].checked){
+            activitiesBool = true;
+            output.push(
+                `<ul>
+                    <li>${activities[i].value}</li>
+                </ul>`
+            )
+        }
     }
     
-
-    if(fName && lName && email && phone && bday && planet && gender && color && activities){
+    if(fName && lName && email && phone && bday && planet && genderVal && color && activitiesBool){
         console.log('first if');
         if(isEmail(email) && fName.length >= 2 && lName.length >= 2 && isPhone(phone)){
             console.log('second if');
@@ -110,12 +95,9 @@ function subForm(){
             phoneCell.innerText = phone;
             bdayCell.innerText = bday;
             colorCell.innerText = color;
-            genderCell.innerText = gender;
-            activitiesCell.innerText = function(){
-                for (const i of activities) {
-                    i.print;
-                }
-            }
+            genderCell.innerText = genderVal;
+
+            activitiesCell.innerHTML = output.join('');
         }
     }
 }
