@@ -15,8 +15,7 @@ function leapYear(date){
 
 /* 2. Email Validation */ //correct
 
-function isEmail(string){  
-
+function isEmail(string){
  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(string))
   {
     return (true)
