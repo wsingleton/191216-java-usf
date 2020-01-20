@@ -41,6 +41,9 @@ window.onload = function (){
 
     let heading1 = document.getElementsByTagName('h1');
     heading1[0].addEventListener('click', colorChange);
+
+    let operation = document.getElementById('operation');
+    operation.addEventListener('click', this.calculator);
 }
 
 function alienText(){
@@ -148,7 +151,6 @@ function printSpan(){
     for(let i = 0; i < spans.length; i++){
         text += spans[i].innerHTML;
     }
-    console.log(text);
 }
 
 function itsEarthTime(){
@@ -163,4 +165,26 @@ function colorChange(){
     setTimeout(function() {
         bgColor[0].setAttribute('background-color', randomColor)
     }, 3000);
+}
+
+function calculator(){
+    console.log('calculator');
+    let operation = document.getElementById('operation');
+    let result = document.getElementById('result');
+    let number1 = document.getElementById('n1').value;
+    let number2 = document.getElementById('n2').value;
+    number1 = Number(number1);
+    number2 = Number(number2);
+    console.log(operation.value);
+    if(typeof(number1) == 'number' && typeof(number2) == 'number'){
+        if(operation.value == 'Add'){
+            result.innerText = number1 + number2;
+        }else if(operation.value == 'Multiply'){
+            result.innerText = number1 * number2;
+        }else if(operation.value == 'Subtract'){
+            result.innerText = number1 - number2;
+        }else if(operation.value == 'Divide'){
+            result.innerText = number1 / number2;
+        }
+    }
 }
