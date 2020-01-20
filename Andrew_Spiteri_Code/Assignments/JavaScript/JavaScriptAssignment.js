@@ -32,11 +32,15 @@ window.onload = function (){
 
     let detailsSection = document.getElementsByTagName('summary');
     detailsSection[0].addEventListener('mouseover', this.openDetails);
+    detailsSection[0].addEventListener('mouseleave', closeDetails);
 
     this.printSpan();
 
     let earthBtn = document.getElementById('earth_time_check');
     earthBtn.addEventListener('click', itsEarthTime);
+
+    let heading1 = document.getElementsByTagName('h1');
+    heading1[0].addEventListener('click', colorChange);
 }
 
 function alienText(){
@@ -132,6 +136,12 @@ function openDetails(){
     details[0].open = true;
 }
 
+function closeDetails(){
+    console.log('closeDetails');
+    let details = document.getElementsByTagName('details');
+    details[0].open = false;
+}
+
 function printSpan(){
     let spans = document.getElementsByTagName('span');
     let text = '';
@@ -145,4 +155,12 @@ function itsEarthTime(){
     let date = new Date();
     let earthTime = document.getElementById('earth_time');
     earthTime.innerHTML = date.getUTCHours()+':'+date.getUTCMinutes()+':'+date.getUTCSeconds()+' '+date.getUTCDay()+'/'+date.getUTCDate()+'/'+date.getUTCFullYear();
+}
+
+function colorChange(){
+    let bgColor = document.getElementsByClassName('container');
+    let randomColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+    setTimeout(function() {
+        bgColor[0].setAttribute('background-color', randomColor)
+    }, 3000);
 }
