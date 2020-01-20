@@ -26,10 +26,8 @@ function isEmail(string){
 
 /* 3. Remove Character */ //wrong
 
-function removeChar(string, position){
-    string[position] = ' '; 
-    string.trim();
-    return string[position];   
+function removeCharac(string, position){
+    return string.substr(0, position) + string.substr(position + 1);  
 }
         
 /* 4. Remove "Script" */ //correct
