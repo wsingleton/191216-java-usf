@@ -26,18 +26,25 @@ window.onload = function (){
     let list = planetForm.children;
     list[3].setAttribute('disabled', true);
 
-    planetForm.addEventListener('click', alientText);
+    planetForm.addEventListener('click', alienText);
 
     document.getElementById('form-sub').addEventListener('click', subForm);
+
+    let detailsSection = document.getElementsByTagName('summary');
+    detailsSection[0].addEventListener('onmouseover', this.openDetails);
+
+    this.printSpan();
 }
 
-function alientText(){
+function alienText(){
     let planetSelector = document.getElementById('planet');
     let hiddenAtt = document.getElementsByTagName('p');
     if(planetSelector.value !== 'Earth'){
         for(let i = 0; i < hiddenAtt.length; i++)  {
             hiddenAtt[i].removeAttribute('hidden');
         }
+    }else if(planetSelector.value == 'Earth'){
+        hiddenAtt[5].setAttribute('hidden', true);
     }
 }
 
@@ -114,4 +121,19 @@ function isPhone(string){
         return true;
     }
     return false;
+}
+
+function openDetails(){
+    console.log('openDetails');
+    let details = document.getElementsByTagName('details');
+    details[0].open = true;
+}
+
+function printSpan(){
+    let spans = document.getElementsByTagName('span');
+    let text = '';
+    for(let i = 0; i < spans.length; i++){
+        text += spans[i].innerHTML;
+    }
+    console.log(text);
 }
