@@ -44,6 +44,9 @@ window.onload = function (){
 
     let operation = document.getElementById('operation');
     operation.addEventListener('click', this.calculator);
+
+    this.walkTheDOM(document.getRootNode());
+    
 }
 
 function alienText(){
@@ -175,7 +178,6 @@ function calculator(){
     let number2 = document.getElementById('n2').value;
     number1 = Number(number1);
     number2 = Number(number2);
-    console.log(operation.value);
     if(typeof(number1) == 'number' && typeof(number2) == 'number'){
         if(operation.value == 'Add'){
             result.innerText = number1 + number2;
@@ -186,5 +188,13 @@ function calculator(){
         }else if(operation.value == 'Divide'){
             result.innerText = number1 / number2;
         }
+    }
+}
+
+function walkTheDOM(node){
+    ni = document.createNodeIterator(document.documentElement, NodeFilter.SHOW_ELEMENT);
+
+    while(node = ni.nextNode()) {
+        console.log(node.nodeName);
     }
 }
