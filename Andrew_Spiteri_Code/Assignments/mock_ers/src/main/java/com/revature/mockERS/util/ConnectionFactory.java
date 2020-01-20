@@ -18,6 +18,8 @@ public class ConnectionFactory {
             props.load(new FileReader("./src/main/resources/application.properties"));
         }catch (IOException e){
             System.out.println("Issue retrieving credentials for database.");
+            //TODO REMOVE STACKTRACE
+            e.printStackTrace();
            // router.navigate("/home");
         }
         con = createConnection();
