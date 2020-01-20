@@ -31,9 +31,12 @@ window.onload = function (){
     document.getElementById('form-sub').addEventListener('click', subForm);
 
     let detailsSection = document.getElementsByTagName('summary');
-    detailsSection[0].addEventListener('onmouseover', this.openDetails);
+    detailsSection[0].addEventListener('mouseover', this.openDetails);
 
     this.printSpan();
+
+    let earthBtn = document.getElementById('earth_time_check');
+    earthBtn.addEventListener('click', itsEarthTime);
 }
 
 function alienText(){
@@ -136,4 +139,10 @@ function printSpan(){
         text += spans[i].innerHTML;
     }
     console.log(text);
+}
+
+function itsEarthTime(){
+    let date = new Date();
+    let earthTime = document.getElementById('earth_time');
+    earthTime.innerHTML = date.getUTCHours()+':'+date.getUTCMinutes()+':'+date.getUTCSeconds()+' '+date.getUTCDay()+'/'+date.getUTCDate()+'/'+date.getUTCFullYear();
 }
