@@ -1,3 +1,7 @@
-body{
-    background-image: url(vacation.jpg);
+body { 
+    background: url(vacation.jpg) no-repeat center center fixed #000; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
