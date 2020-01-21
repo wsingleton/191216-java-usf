@@ -9,8 +9,8 @@ import static com.revature.AppDriver.*;
 import static com.revature.util.AppState.console;
 import static com.revature.util.AppState.router;
 
-public class UserSelectionScreen extends Screen {
-    public UserSelectionScreen(String name, String route){
+public class Dashboard extends Screen {
+    public Dashboard(String name, String route){
         super("customerSelection", "/select");
     }
 

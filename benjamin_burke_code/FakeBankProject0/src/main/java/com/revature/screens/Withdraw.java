@@ -1,4 +1,4 @@
 package com.revature.screens;
 
-public class WithdrawScreen {
+public class Withdraw {
 }
