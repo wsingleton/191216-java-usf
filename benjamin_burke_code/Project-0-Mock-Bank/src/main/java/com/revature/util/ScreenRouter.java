@@ -1,6 +1,6 @@
 package com.revature.util;
 
-import com.revature.exceptcions.ScreenNotFoundException;
+import com.revature.exceptions.ScreenNotFoundException;
 import com.revature.screens.Screen;
 
 import java.io.IOException;

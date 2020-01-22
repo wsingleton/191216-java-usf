@@ -1,6 +1,6 @@
 package com.revature.screens;
 
-import com.revature.exceptcions.InvalidRequestException;
+import com.revature.exceptions.InvalidRequestException;
 import com.revature.services.UserService;
 
 import javax.security.sasl.AuthenticationException;

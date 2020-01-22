@@ -10,8 +10,8 @@ public class Account {
     public Account() {
     }
 
-    public Account(Integer accountId, Double balance) {
-        this.accountId = accountId;
+    public Account(Integer account_Id, Double balance) {
+        this.accountId = account_Id;
         this.balance = balance;
     }
 
@@ -35,7 +35,7 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "accountId=" + accountId +
+                "account_Id=" + accountId +
                 ", balance=" + balance +
                 '}';
     }

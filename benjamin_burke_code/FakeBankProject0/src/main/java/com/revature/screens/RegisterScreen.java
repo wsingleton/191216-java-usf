@@ -12,6 +12,7 @@ import com.revature.repos.AccountRepository;
 import com.revature.repos.AccountUserRepository;
 import com.revature.repos.UserRepository;
 import com.revature.services.AccountService;
+import com.revature.services.AccountUserService;
 import com.revature.services.UserService;
 
 import java.io.IOException;
@@ -28,16 +29,19 @@ public class RegisterScreen extends Screen {
     private AccountUserService accountUserService;
 
     public RegisterScreen(UserService userService) {
-        super("RegisterScreen", "/register")
+        super("RegisterScreen", "/register");
         System.out.println("[LOG] - Instantiating " + super.getName());;
         this.userService = userService;
+        this.accountService =accountService;
     }
 
     @Override
     public void render() throws IOException {
         String username;
         String password;
-        int id;
+        double balance;
+        int userId;
+        int accountId = 0;
 
         try{
             System.out.println("\n\n\n\n\n\n\n\n\n\n+------------------------------------+");
@@ -46,21 +50,35 @@ public class RegisterScreen extends Screen {
             username = app().getConsole().readLine();
             System.out.print("Password: ");
             password = app().getConsole().readLine();
-            id = username.toLowerCase().hashCode();
+            userId = username.toLowerCase().hashCode();
 
-            User newUser = new User( id, username.toLowerCase(),password);
+            balance = Double.parseDouble(app().getConsole().readLine());
+
+            User newUser = new User(username.toLowerCase(),password);
             userService.register(newUser);
-            Account newAccount = new Account()
+            Account newAccount = new Account(accountId, balance);
+            accountService.registerAccount(newAccount);
+            int newUserId;
+            User tempUser = userRepository.findUserByUsername(username).get();
+            newUserId = tempUser.getUserId();
+            int newAccountId;
+            Account tempAccount = accountRepository.findByUsername(app().getCurrentSession().getSessionUser().getUsername()).get();
+            newAccountId = tempAccount.getAccountId();
+            accountUserService.register(newUserId, newAccountId);
 
-            if (currentUser != null) {
-                router.navigate("/home");
+
+
+
+            if (app().isSessionValid()) {
+                System.out.println("User created");
+                app().getRouter().navigate("/home");
             }
         } catch (InvalidRequestException | ResourcePersistenceException e){
             System.out.println("Login credentials taken!");
-            router.navigate("/home");
+            app().getRouter().navigate("/home");
         }
         catch (Exception e){
             System.err.println("Shutting down application...");
-            AppDriver.appRunning = false;
+            app().setAppRunning(false);
         }    }
 }

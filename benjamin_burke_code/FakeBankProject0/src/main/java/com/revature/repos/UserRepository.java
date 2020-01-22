@@ -68,8 +68,8 @@ public class UserRepository implements CrudRepository<User> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
-            Account acc = new Account();
-            acc.setBalance(0.0);
+//            Account acc = new Account();
+//            acc.setBalance(0.0);
 
             String sql = " INSERT INTO bank_app.users VALUES(0,?,?)";
 //            String sql2 = "INSERT INTO bank_app.accounts VALUES(?,0)";
@@ -93,10 +93,10 @@ public class UserRepository implements CrudRepository<User> {
                 ResultSet rs = pstmt.getGeneratedKeys();
 
                 while (rs.next()){
-                    newObj.setId(rs.getInt(1));
+                    newObj.SetUserId(rs.getInt(1));
                 }
-                System.out.println("You are now registered! Your new username is " + newObj);
-                System.out.println("You balance is " + acc.getBalance());
+//                System.out.println("You are now registered! Your new username is " + newObj);
+//                System.out.println("You balance is " + acc.getBalance());
             }
 
         }catch (SQLIntegrityConstraintViolationException e){
@@ -110,6 +110,7 @@ public class UserRepository implements CrudRepository<User> {
 
     }
 
+    @Override
     public Set<User> findAll() {
 
         Set<User> users = new HashSet<>();
@@ -146,7 +147,7 @@ public class UserRepository implements CrudRepository<User> {
         Set<User> users = new HashSet<>();
         while (rs.next()) {
             User temp = new User();
-            temp.setId(rs.getInt("id"));
+//            temp.getUserId(rs.getInt("userId"));
             temp.setUsername(rs.getString("username"));
             temp.setPassword(rs.getString("password"));
             users.add(temp);

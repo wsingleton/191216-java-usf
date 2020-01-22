@@ -1,17 +1,23 @@
 package com.revature.repos;
 
+import com.revature.models.Role;
 import com.revature.models.User;
 import com.revature.util.ConnectionFactory;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 
-import static com.revature.AppDriver.app;
+
 
 public class UserRepository implements CrudRepository<User> {
+    private Integer key;
+    private HashMap<Integer, User>UserDb;
+
+
     public Optional<User> findUserByUsername(String username) {
 
         Optional<User> user = Optional.empty();
@@ -19,11 +25,13 @@ public class UserRepository implements CrudRepository<User> {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM users WHERE username = ?";
+
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
 
             ResultSet rs = pstmt.executeQuery();
-            user = mapResultSet(rs).stream().findFirst();
+            Set<User> set = mapResultSet(rs);
+            if(!set.isEmpty()) user = set.stream().findFirst();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,7 +51,8 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
-            user = mapResultSet(rs).stream().findFirst();
+            Set<User> set = mapResultSet(rs);
+            if(!set.isEmpty()) user = set.stream().findFirst();
 
         }catch (SQLException e) {
             e.printStackTrace();
@@ -58,10 +67,13 @@ public class UserRepository implements CrudRepository<User> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO bank_app.users VALUES (0, ?, ?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"id"});
-            pstmt.setString(1, newOjb.getUsername());
-            pstmt.setString(2, newOjb.getPassword());
+            String sql = "INSERT INTO users VALUES (0, ?,?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"user_id"});
+            pstmt.setString(1, newOjb.getFirstName());
+            pstmt.setString(2, newOjb.getLastName());
+            pstmt.setString(3, newOjb.getUsername());
+            pstmt.setString(4, newOjb.getPassword());
+//            pstmt.setInt(5,newOjb.getRole().ordinal()+1);
 
 
             int rowsInserted = pstmt.executeUpdate();
@@ -88,9 +100,9 @@ public class UserRepository implements CrudRepository<User> {
     public Set<User> findAll() {
 
         Set<User> users = new HashSet<>();
-        try ( Connection conn = app().getCurrentSession().getConnection();){
+        try ( Connection conn = ConnectionFactory.getInstance().getConnection()){
 
-            String sql = "SELECT * FROM users";
+            String sql = "SELECT * FROM project0Bank.users";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             users = mapResultSet(rs);
@@ -103,10 +115,11 @@ public class UserRepository implements CrudRepository<User> {
 
     }
 
+    //idk if i need this now
     @Override
     public Optional<User> findById(Integer id) {
 
-        Connection conn = app().getCurrentSession().getConnection();
+        Connection conn = ConnectionFactory.getInstance().getConnection();
         Optional<User> user = Optional.empty();
 
         try {
@@ -126,10 +139,11 @@ public class UserRepository implements CrudRepository<User> {
 
     }
 
+    //same deal idk if i need this
     @Override
     public Boolean update(User updatedObj) {
 
-        Connection conn = app().getCurrentSession().getConnection();
+        Connection conn = ConnectionFactory.getInstance().getConnection();
         boolean updated = false;
 
         try {
@@ -160,9 +174,12 @@ public class UserRepository implements CrudRepository<User> {
 
         while (rs.next()) {
             User temp = new User();
-//            temp.setUserId(rs.getInt("user_id"));
+            temp.setUserId(rs.getInt("user_id"));
             temp.setUsername(rs.getString("username"));
             temp.setPassword(rs.getString("password"));
+            temp.setFirstName(rs.getString("first_name"));
+            temp.setLastName(rs.getString("last_name"));
+            temp.setRole(Role.getRoleById(rs.getInt("role_id")));
             users.add(temp);
         }
 

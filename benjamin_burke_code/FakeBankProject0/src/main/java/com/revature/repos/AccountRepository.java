@@ -56,6 +56,7 @@ public class AccountRepository implements CrudRepository<Account>{
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
             String sql = " SELECT * FROM accounts";
+            //I need to understand this more, need to ask Wezley
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             accounts = mapResultSet(rs);
@@ -79,7 +80,9 @@ public class AccountRepository implements CrudRepository<Account>{
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
 
-            String sql = "UPDATE accounts SET balance = ? WHERE accountId = ?";
+            //need to ask about proper format
+            String sql = "UPDATE accounts SET balance = ? WHERE account_Id = ?";
+            //preparedstatement?
             PreparedStatement pstmt= conn.prepareStatement(sql);
             pstmt.setInt(1, updatedObj.getAccountId());
             pstmt.setDouble(2, updatedObj.getBalance());
@@ -105,7 +108,7 @@ public class AccountRepository implements CrudRepository<Account>{
         Set<Account> acc = new HashSet<>();
         while (rs.next()) {
             Account temp = new Account();
-            temp.setAccountId(rs.getInt("accountId"));
+            temp.setAccountId(rs.getInt("account_Id"));
             temp.setBalance(rs.getDouble("balance"));
             acc.add(temp);
         }

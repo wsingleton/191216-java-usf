@@ -11,13 +11,13 @@ import java.sql.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import static com.revature.AppDriver.*;
+import static com.revature.AppDriver.app;
 
 public class AccountUserRepository implements CrudRepository<AccountUser> {
 
 
     @Override
-    public void save(AccountUser newObj) {
+    public  void save(AccountUser newObj) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
             String sql = "INSERT INTO accounts_users VALUES(?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -37,11 +37,11 @@ public class AccountUserRepository implements CrudRepository<AccountUser> {
         int accountId;
         Account currentAccount = null;
 
-        Set<AccountUser> AccountUser = findAll();
+        Set<AccountUser> AccountUsers = findAll();
 
-        for (AccountUser s : AccountUser) {
-            if (s.getUserId() == currentUser.getId()){
-                accountId = s.getAccountId();
+        for (AccountUser u : AccountUsers) {
+            if (u.getUserId() == currentUser.getUserId()){
+                accountId = u.getAccountId();
                 currentAccount = accountRepository.findById(accountId).get();
             }
         }

@@ -1,17 +1,14 @@
 package com.revature.util;
 
 
-import com.revature.exceptcions.ScreenNotFoundException;
-import com.revature.screens.Screen;
+import com.revature.exceptions.ScreenNotFoundException;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.HashSet;
 import java.util.Properties;
-import java.util.Set;
 
 public class ConnectionFactory {
     private static ConnectionFactory connFactory = new ConnectionFactory();

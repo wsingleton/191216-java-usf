@@ -51,7 +51,7 @@ public class AccountRepository implements CrudRepository<Accounts> {
         return _userAccount;
     }
 
-// le's idea to move the save from sevices to repo
+// le's idea to move the save from service to repo
     public void save2(Accounts newObj, String username) {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){

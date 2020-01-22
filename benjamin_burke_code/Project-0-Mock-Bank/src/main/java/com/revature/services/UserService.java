@@ -1,8 +1,8 @@
 package com.revature.services;
 
-import com.revature.exceptcions.AuthenticationException;
-import com.revature.exceptcions.InvalidRequestException;
-import com.revature.exceptcions.ResourcePersistenceException;
+import com.revature.exceptions.AuthenticationException;
+import com.revature.exceptions.InvalidRequestException;
+import com.revature.exceptions.ResourcePersistenceException;
 import com.revature.models.User;
 import com.revature.repos.UserRepository;
 

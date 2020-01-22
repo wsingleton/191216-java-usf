@@ -1,0 +1,120 @@
+--CREATE USER bank_app
+--IDENTIFIED BY p4ssw0rd
+--DEFAULT TABLESPACE users
+--TEMPORARY TABLESPACE temp
+--QUOTA 10M ON users;
+
+--GRANT CONNECT TO bank_app;
+--GRANT RESOURCE TO bank_app;
+--GRANT CREATE SESSION TO bank_app;
+--GRANT CREATE TABLE TO bank_app;
+--GRANT CREATE VIEW TO bank_app;
+
+CREATE USER bank_user
+IDENTIFIED BY p4ssw0rd;
+
+--CREATE TABLE Users (
+--id integer not null,
+--username VARCHAR2(25) not null,
+--password VARCHAR2(25) not null,
+--primary key (id)
+--);
+--
+--CREATE TABLE Accounts (
+--id integer,
+--balance decimal(10,2) default 0,
+--primary key (id)
+--);
+
+ALTER TABLE Accounts_Users
+RENAME COLUMN id TO userId;
+--
+--CREATE TABLE Accounts_Users (
+--    id int NOT NULL,
+--    accountId int NOT NULL,
+--    CONSTRAINT PK_Accounts_Users PRIMARY KEY (id, accountId),
+--    FOREIGN KEY (id) REFERENCES Users (id),
+--    FOREIGN KEY (accountId) REFERENCES Accounts (accountId)
+--);/
+--
+INSERT INTO users (id, username, password)
+VALUES(8, 'Olive', 'hauser');
+
+INSERT INTO ACCOUNTS (accountid, balance)
+VALUES (8, 1000);
+
+COMMIT;
+
+INSERT INTO accounts_users(id, accountId)
+VALUES (8,8);
+COMMIT;
+--
+SELECT * FROM bank_app.users;
+---------------------------------------------
+--CREATE SEQUENCE users_pk_seq
+--MINVALUE 1
+--MAXVALUE 9999999
+--INCREMENT BY 1
+--START WITH 1;
+--/
+--CREATE OR REPLACE TRIGGER users_pk_seq
+--BEFORE INSERT ON users
+--FOR EACH ROW
+--BEGIN
+--    SELECT USERS_PK_SEQ.NEXTVAL
+--    INTO :new.id
+--    FROM dual;
+--END;
+--/
+--TRUNCATE TABLE users;
+
+--SELECT users.id, accounts.accountid, accounts.balance
+--FROM users
+--INNER JOIN accounts ON users.id=users.id;/
+
+CREATE SEQUENCE accounts_pk_seq
+MINVALUE 1
+MAXVALUE 9999999
+INCREMENT BY 1
+START WITH 1;
+--------------------------
+CREATE OR REPLACE TRIGGER accounts_pk_trigger
+BEFORE INSERT ON accounts
+FOR EACH ROW
+BEGIN
+    SELECT accounts_pk_seq.NEXTVAL
+    INTO :new.accountId
+    FROM dual;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE get_all_accounts(my_cursor OUT SYS_RECURSOR)
+IS
+BEGIN
+    OPEN my_cursor FOR
+    SELECT *
+    FROM accounts
+    ORDER BY accountid;
+END;
+/
+
+DECLARE
+    a_id        accounts.accountid%TYPE;
+    a_b         accounts.balance%TYPE;
+    v_cursor    SYS_REFCURSOR;
+
+BEGIN
+    get_all_accounts(v_cursor);
+    
+    LOOP
+        FETCH v_cursor
+        INTO a_id, a_b;
+        EXIT WHEN v_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('bank account id: ' || a_id || ', balance: ' || a_b);
+        End LOOP;
+        
+        CLOSE v_cursor;
+    END;
+    /
+
+

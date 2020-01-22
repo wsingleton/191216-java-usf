@@ -1,0 +1,10 @@
+				 WElcome Screen
+				 (Welcome, What do you
+				 want to do? Login or
+					sign up)
+
+					↓
+	sign up	Screen				Login Screen
+		
+		()
+					

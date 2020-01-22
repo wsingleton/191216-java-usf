@@ -1,12 +1,8 @@
 package com.revature.services;
 
-import com.revature.exceptcions.InvalidRequestException;
-import com.revature.models.Account;
+import com.revature.exceptions.InvalidRequestException;
 import com.revature.models.User;
 import com.revature.repos.AccountRepository;
-import jdk.nashorn.internal.ir.CallNode;
-
-import static com.revature.AppDriver.*;
 
 public class AccountService {
 

@@ -1,6 +1,5 @@
 package com.revature.util;
 
-import com.revature.models.User;
 import com.revature.repos.AccountRepository;
 import com.revature.repos.AccountUserRepository;
 import com.revature.repos.UserRepository;
@@ -33,7 +32,7 @@ public class AppState {
         router.addScreen(new HomeScreen())
                 .addScreen(new LoginScreen(userService))
                 .addScreen(new RegisterScreen(userService))
-                .addScreen(new UserSelectionScreen("userSelection", "/select"))
+                .addScreen(new Dashboard("userSelection", "/select"))
                 .addScreen(new DepositScreen(accountService));
 //                .addScreen(new WithdrawScreen("withdrawScreen","/withdraw"));
     }

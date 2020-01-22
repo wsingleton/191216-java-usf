@@ -29,20 +29,20 @@ public class ConnectionFactory {
         return connFactory;
     }
 
-    public Connection getConnection(User sessionUser){
-        Connection conn = null;
-
-        try {
-            conn = DriverManager.getConnection(
-                    props.getProperty("url"),
-                    props.getProperty("admin-user"),
-                    props.getProperty("admin-pw")
-            );
-        } catch (SQLException sql){
-            sql.printStackTrace();
-        }
-        return conn;
-    }
+//    public Connection getConnection(User sessionUser){
+//        Connection conn = null;
+//
+//        try {
+//            conn = DriverManager.getConnection(
+//                    props.getProperty("url"),
+//                    props.getProperty("admin-user"),
+//                    props.getProperty("admin-pw")
+//            );
+//        } catch (SQLException sql){
+//            sql.printStackTrace();
+//        }
+//        return conn;
+//    }
 
 
 
