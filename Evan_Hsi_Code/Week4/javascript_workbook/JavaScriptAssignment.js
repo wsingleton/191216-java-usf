@@ -23,14 +23,35 @@ window.onload = () => {
     console.log(ighead);
     ighead.onclick = cctime;
 
+    document.getElementById('n1').addEventListener('mouseleave', displayCalc);
+    document.getElementById('n2').addEventListener('mouseleave', displayCalc);
+    document.getElementById('operation').onchange = displayCalc;
+
     walkTheDom(document.body, walkTheDom);
+
 
 }
 
 function displayCalc() {
-    let n1 = document.getElementById('n1').value;
-    let n2 = document.getElementById('n2').value;
-    document.getElementById('result').innerHTML = (parseInt(n1) + parseInt(n2));
+    let n1 = parseInt(document.getElementById('n1').value);
+    let n2 = parseInt(document.getElementById('n2').value);
+    if((n1 + n2) !== (n1 + n2)) {
+        document.getElementById('result').innerHTML = "Invalid Numbers";
+        return;
+    }
+    let op = document.getElementById('operation');
+    let opval = op.options[op.selectedIndex].value;
+
+    if(opval === 'Add') {
+        document.getElementById('result').innerHTML = (n1 + n2);
+    } else if(opval === 'Subtract') {
+        document.getElementById('result').innerHTML = (n1 - n2);
+    } else if(opval === 'Multiply') {
+        document.getElementById('result').innerHTML = (n1 * n2);
+    } else if(opval === 'Divide') {
+        document.getElementById('result').innerHTML = (n1 / n2);
+    }
+
 }
 
 function walkTheDom(node, func) {
