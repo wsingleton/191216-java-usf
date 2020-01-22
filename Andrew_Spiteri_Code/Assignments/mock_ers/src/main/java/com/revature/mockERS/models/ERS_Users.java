@@ -5,6 +5,7 @@ import java.util.Objects;
 public class ERS_Users {
     private String ersUsername, ersPassword, user_first_name, user_last_name, user_email;
     private Integer id;
+    private ERS_User_Roles role;
 
     public ERS_Users(String ersUsername, String ersPassword, String user_first_name, String user_last_name, String user_email) {
         this.ersUsername = ersUsername;
@@ -61,6 +62,22 @@ public class ERS_Users {
 
     public void setUser_email(String user_email) {
         this.user_email = user_email;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public ERS_User_Roles getRole() {
+        return role;
+    }
+
+    public void setRole(ERS_User_Roles role) {
+        this.role = role;
     }
 
     @Override

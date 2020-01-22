@@ -22,4 +22,9 @@ public enum ERS_User_Roles {
         }
         return role;
     }
+
+    @Override
+    public String toString() {
+        return  roleName;
+    }
 }
