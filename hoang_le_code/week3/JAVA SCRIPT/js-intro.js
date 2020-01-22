@@ -122,9 +122,16 @@ Variable declaration
 
 */
 
+
+// not work , const cant change 
+//const ab = 2;
+//ab = 3;
+
+
+
 /*
 
-Type cpercion & truthy/falsy value
+Type coercion & truthy/falsy value
 
     type coercion
         the automatic , or impitvit , conversion a data type to another 
@@ -240,5 +247,29 @@ myArea = (function (width,height){
     return width*height;
 })(5,20)
 console.log(myArea)
+
+/*
+Hoisting 
+    -a general way of thinking about how execution context (specifically the creation and excuting pases)
+    work in JS. the JS interpreter does not execute scripts sequentially (line by line) . but instead whenever a script enters into 
+    a new excution context there are 2 phases of activity 
+
+        1 prepareation/ creation 
+            the new scope is created
+            declare cariable and finctions ( and thier argusmetn) are created (memory allocated on stack)
+        2 execution 
+            assignment of values to variables 
+            runs function invocations 
+            evaluate expressions
+
+
+
+*/
+
+
+test();
+function test(){
+    consolelog('function was hoisted')
+}
 
 

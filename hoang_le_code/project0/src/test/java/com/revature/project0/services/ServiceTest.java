@@ -12,7 +12,7 @@ public class ServiceTest {
 
     @org.junit.Test
     public void register() {
-        User u1 = new User("test1","test1","test1","test1");
+        User u1 = new User("test5","test5","test5","test5");
 
 
         UserRepository a = new UserRepository();
@@ -20,7 +20,7 @@ public class ServiceTest {
         UserRepository a1 = new UserRepository();
         check.register(u1);
         assertTrue(
-                a.checkUsername("test1"));
+                a.checkUsername("test5"));
     }
 
     @org.junit.Test

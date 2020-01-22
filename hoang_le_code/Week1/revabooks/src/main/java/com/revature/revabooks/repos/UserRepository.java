@@ -28,7 +28,7 @@ public class UserRepository implements CrudRepository<User> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
-            String sql = " select * from rbs_app.users WHERE username = ? ";
+            String sql = " select * from app_user WHERE username = ? ";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
@@ -53,7 +53,7 @@ public class UserRepository implements CrudRepository<User> {
         Optional<User> _user =Optional.empty();
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
-            String sql = " select * from rbs_app.users where username = ? and password = ? ";
+            String sql = " select * from app_user where username = ? and password = ? ";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
@@ -79,7 +79,7 @@ public class UserRepository implements CrudRepository<User> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
-            String sql = " INSERT INTO rbs_app.users VALUES(0,?,?,?,?,4)";
+            String sql = " INSERT INTO app_user VALUES(0,?,?,?,?,4)";
 
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"user_id"});
 
@@ -116,7 +116,7 @@ public class UserRepository implements CrudRepository<User> {
         Set<User> users = new HashSet<>();
         try(Connection conn = ConnectionFactory.getInstance().getConnection();){
 
-            String sql = " SELECT * FROM rbs_app.users";
+            String sql = " SELECT * FROM rbs_app_user";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             users = mapResultSet(rs);
@@ -132,8 +132,28 @@ public class UserRepository implements CrudRepository<User> {
     public Optional<User> findById(Integer id) {
 
 
+        Optional <User> _user = Optional.empty();
 
-        return Optional.empty();
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+            String sql = " select * from app_user WHERE user_id = ? ";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+            Set<User> set = mapResultSet(rs);
+
+
+            if(!set.isEmpty()) {
+                _user = set.stream().findFirst();
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return _user;
 
     }
 

@@ -1,92 +1,109 @@
 <!--
-    the doctype directive shoulf be the very first non comment line declare within our HTML. documents (even before the <html> tag)
-
-    it is not technically a tag , but a directive , or an instruction to web browser about what version of html the page is written in 
-
+    This is an HTML comment;
+    it can be multi-line
 -->
-<!doctype html>
+
+<!-- 
+    The DOCTYPE directive must be the very first non-comment line
+    declared within our HTML documents (even before the <html> tag).
+    It is not a tag, it is a directive, or instructon to the browser
+    about what version of HTML the page is written in.
+ -->
+<!DOCTYPE html>
 <html>
     <head>
-            <!--
-                <head>
-                    contrains information about the page, rather than the content shown (aka metadata). we can inclide some information such as 
-                    <stype>     : use to apply internal css styling to the webpage
-                    <link>      : use for linking external resourves to this document (external css)
-                    <scrip>     : use to include JS , which can mank e our webpage more dynamuc/ interactive
-                    <meta>      : use to provide search engine rebot extra info about our page (SEO)
-                    <title>     : provide a tittle for the webpage , which appears in the tab 
-
-            -->
-            <title> HTML Basic: Structure </title>
+        <!--
+            <head>
+                    Contains information about the page, rather than the
+                    content shown. We can include some information, such
+                    as:
+                        - <style> tag to apply internal CSS styling to the webpage
+                        - <link> tags for making use of external resources (external CSS)
+                        - <script> tags to make use of JavaScript (JS), which can make our webpages more dynamic
+                        - <meta> tags to include meta-info about the content of the page for SEO purposes
+                        - <title> provides a title for the web page (displays on the top of browser window/tab)
+                    
+        -->
+        <title>HTML Basics: Structure</title>
     </head>
     <body>
         <!--
-            <body> 
-                contrains information/content that will displayed to the user , when rendered by the web brower 
-
+            <body>
+                
+                Contains information/content that will be displayed to
+                the user, when rendered by the browser.
         -->
 
         <!--
             HTML tags/elements
-
-            use to indicate how content should be displayed . usaually will require an opening and closing tag. 
-            those that do not require closing tags are know as "self-closing" tags . 
-
-                <P>     : paragtaph
-                <h1>    : heading tags (RAnge from 1-6; 1 being the largest)
-                <div>   : division/devider : used to group related element together 
-                <img>   : image (self-closing)
-                <a>     : anchor/huperlink , used to create links to other pages, or to sections within the current page 
-                <br>    : line break (self-closing)
-                <hr>    : horizontal rule (self-closing)
-                <form>  : similar to <div> , but will encapsulate form elements/members
-                <input> : create a filed for user input of some sort ( text, checkboc, radiobutton, etc) , self closing
-
-        Attributes
-                    HTML slements can have attribute , which provide additional informationbaout the contrents of an element, they appear within 
-                    the opening tags of an ATML element , and are made of two part : a name.key . and a value . the name and the value are separated 
-                    by an equals sign (=) and ....   of the attribute is encapsulation within double qutes("") 
-
+                Used to indicate how content should be displayed. Usually
+                will require an opening and a closing tag, those that do
+                not require closing tags are known as "self-closing" tags.
+                <p>     paragraph
+                <h#>    headings (range from 1-6, 1 being the largest)
+                <div>   division/divider; used to group related elements together
+                <img>   image (self-closing)
+                <a>     anchor; used to create links to other webpages, or to sections of the current page
+                <br>    line break (self-closing)
+                <hr>    horizontal rule
+                <input> creates a field for user input or some sort of [text, checkbox, etc.] (self-closing)
+            Attributes
+                    HTML elements can have attributes, which provide additional
+                    information about the contents of an element. They appear
+                    within the opening tags of an HTML element, and are made of
+                    two parts: a name/key, and a value. The name and the value are
+                    separated by an equals sign (=). The value of an attribute is 
+                    encapsulated within double quotes ("").
         -->
-
         <h1>This is the main heading</h1>
         <p>
-
-            this text might be used to introduce the rest of the page, if the page is long enough. 
-
-
-
-
-            we can make use of subheading to further
-            organnize our web page's content.
+            This text might be used to introduce the rest of the page. If 
+            the page is long enough, 
+            
+            
+            
+            
+            we can make use of subheadings to further
+            organize our webpage's content.
         </p>
-        <h2>
 
-            this is subheading 
-        </h2>
+        <h2>The is a sub-heading</h2>
         <p>
-            more content could go here if had any...  
+            Blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah
         </p>
+
+
+
+
+        <!-- HTML does not care about whitespace -->
+
+
+
+
+        <br/>
+
         <h3>
-            this is even smaller than the other headings... maybe to create nested content 
+            This is a even smaller heading, giving the appearance
+            of nested content.
         </h3>
-        <p>
-            4 &gt; 5 
-        </p>
-        <p>
-            sanford & son 
-        </p>
-        <p>
-            here is some text . &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; heris nonbreaking space 
-        </p>
+        <p>4 &lt; 5 </p>
+        <p>HTML &amp; CSS</p>
+        <p>Here is some text.&nbsp;&nbsp;&nbsp;Text.</p>
+
         <!--
-            Excape characters/code 
-            there are some characters that are ised on and reserved by HTML . If we wish to use them in our content, we will need to use their escape code equivalents : 
-            < - less- then - &lt; &#60
-            > - greater than - &gt; &#61
-            & - AMpersand - &amp; 
-            "" - quotation - &quot
-                - single space - &nbsp
+            Escape characters
+                There are some characters that are used in and reserved
+                for HTML code. If you want to use them in your content
+                then you need to use their escape character equivalents.
+                <       -   Less-than       &lt;        &#60;
+                >       -   Greater-than    &gt;        &#61;    
+                &       -   Ampersand       &amp;       
+                ""      -   Quotations      &quot;
+                        -   Space           &nbsp;
         -->
 
     </body>
