@@ -12,6 +12,6 @@ function login(){
 }
 
 function register(){
-    document.removeChild('login');
+    document.element
 }
    

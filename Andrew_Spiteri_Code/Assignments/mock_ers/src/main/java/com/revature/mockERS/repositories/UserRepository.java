@@ -5,6 +5,7 @@ import com.revature.mockERS.models.ERS_Users;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import static com.revature.mockERS.util.ConnectionFactory.getCon;
 
@@ -30,8 +31,7 @@ public class UserRepository {
         return false;
     }
 
-    //todo finish login function, figure out Optional
-    public ERS_Users findByUsername(String username, Integer password){
+    public Optional<ERS_Users> findByUsername(String username, Integer password){
         String sql = "SELECT * FROM ers_users WHERE ers_username = ?";
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
@@ -42,15 +42,40 @@ public class UserRepository {
                     Integer id = rs.getInt("ers_users_id");
                     String un = rs.getString("ers_username");
                     String pw = rs.getString("ers_password");
-                    rs.getString("user_first_name");
-                    rs.getString("user_last_name");
-                    rs.getString("user_email");
-
+                    String fn = rs.getString("user_first_name");
+                    String ln = rs.getString("user_last_name");
+                    String email = rs.getString("user_email");
+                    ERS_Users user = new ERS_Users(id, un, pw, fn, ln, email);
+                    return Optional.of(user);
                 }
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return null;
+        return Optional.empty();
+    }
+
+    public Optional<ERS_Users> findById(Integer id){
+        String sql = "SELECT * FROM ers_users WHERE ers_username = ?";
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.isBeforeFirst()){
+                while(rs.next()){
+                    Integer u_id = rs.getInt("ers_users_id");
+                    String un = rs.getString("ers_username");
+                    String pw = rs.getString("ers_password");
+                    String fn = rs.getString("user_first_name");
+                    String ln = rs.getString("user_last_name");
+                    String email = rs.getString("user_email");
+                    ERS_Users user = new ERS_Users(id, un, pw, fn, ln, email);
+                    return Optional.of(user);
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }
