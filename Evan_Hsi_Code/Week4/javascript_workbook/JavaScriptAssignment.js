@@ -27,7 +27,7 @@ window.onload = () => {
     document.getElementById('n2').addEventListener('mouseleave', displayCalc);
     document.getElementById('operation').onchange = displayCalc;
 
-    walkTheDom(document.body, walkTheDom);
+    //walkTheDom(document.body, walkTheDom);
 
 
 }
@@ -109,17 +109,93 @@ function closeDetails() {
 }
 
 function validate() {
-    let submitBtn = document.getElementById("form-sub");
-    let formCheck = document.querySelectorAll( 
-        'form.form-group > input[name^="gender"]:checked');
-    console.log(formCheck);
-    if(formCheck.length == 0) {
-        console.log('invalid');
+    let firstname = document.getElementById('firstname').value;
+    let lastname = document.getElementById('lastname').value;
+    let email = document.getElementById('email').value;
+    let phone = document.getElementById('phone').value;
+    let bday = document.getElementById('bday').value;
+    let color = document.getElementById('color').value;
+    let gender = document.querySelectorAll('form.form-group > input[name^="gender"]:checked');
+    let activities = document.querySelectorAll('.activity:checked');
+    if(nameVal(firstname, lastname) == false) { return; }
+    if(emailVal(email) == false) { return; }
+    if(phVal(phone) == false) { return; }
+    if(gender.length == 0) { return; }
+    if(activities.length == 0) { return; }
+    
+    let row = document.createElement('tr');
+    let nameTable = document.createElement('td');
+    let emailTable = document.createElement('td');
+    let phoneTable = document.createElement('td');
+    let bdayTable = document.createElement('td');
+    let colorTable = document.createElement('td');
+    let genderTable = document.createElement('td');
+    let actTable = document.createElement('td');
+    let actList = document.createElement('ul');
+
+    document.querySelector('tbody').appendChild(row);
+    row.appendChild(nameTable);
+    row.appendChild(emailTable);
+    row.appendChild(phoneTable);
+    row.appendChild(bdayTable);
+    row.appendChild(colorTable);
+    row.appendChild(genderTable);
+    //row.appendChild(actTable);
+    row.appendChild(actList);
+
+    nameTable.innerText = firstname;
+    emailTable.innerText = email;
+    phoneTable.innerText = phone;
+    bdayTable.innerText = bday;
+    colorTable.innerText = color;
+    genderTable.innerText = gender[0].value;
+
+    for(let i = 0; i < activities.length; i++) {
+        let ele = document.createElement('li');
+        actList.appendChild(ele);
+        console.log(activities);
+        ele.innerText = activities[i].innerHTML;
     }
 
-        
-    
+    document.getElementById('firstname').value = "";
+    document.getElementById('lastname').value = "";
+    document.getElementById('email').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('bday').value = '';
+    document.getElementById('color').value = '#000000';
+    let cleargender = document.querySelectorAll('form.form-group > input[name^="gender"]:checked');
+    let clearact = document.querySelectorAll('.activity:checked');
+    for(let i = 0; i < clearact.length; i++) {
+        clearact[i].checked = false;
+    }
+    cleargender[0].checked = false;
+
 }
+
+function nameVal(fname, lname) {
+    let regex = /^([a-z ,.'-]{2,})+$/i;
+    if(fname.match(regex) && lname.match(regex)) {
+        return true;
+    }
+    else return false;
+}
+
+function emailVal(email) {
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(email.match(regex)){
+        return true;
+    }
+    else return false;
+
+}
+
+function phVal(phone) {
+    let regex = /^([0-9]{10})+$/;
+    if(phone.match(regex)) { return true; }
+    else return false;
+}
+
+
 
 function alienText() {
     let d = document.getElementsByClassName('container')[0]
