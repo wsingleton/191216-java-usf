@@ -9,11 +9,26 @@ public enum ERS_Reimbursement_Type {
         this.type = type;
     }
 
-    public String getType() {
+    public static ERS_Reimbursement_Type getTypeById(Integer id){
+        ERS_Reimbursement_Type type = null;
+        switch (id){
+            case 1:
+                type = ERS_Reimbursement_Type.LODGING;
+                break;
+            case 2:
+                type = ERS_Reimbursement_Type.TRAVEL;
+                break;
+            case 3:
+                type = ERS_Reimbursement_Type.FOOD;
+                break;
+            case 4:
+                type = ERS_Reimbursement_Type.OTHER;
+        }
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    @Override
+    public String toString() {
+        return  type;
     }
 }
