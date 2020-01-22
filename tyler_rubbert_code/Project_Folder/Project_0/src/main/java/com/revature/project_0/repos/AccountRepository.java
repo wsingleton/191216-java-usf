@@ -72,10 +72,6 @@ public class AccountRepository implements CrudRepository<Account>{
             ResultSet rs = cstmt.executeQuery(sql);
             accounts = mapResultSet(rs);
 
-//            String sql = "SELECT * FROM accounts";
-//            Statement stmt = conn.createStatement();
-//            ResultSet rs = stmt.executeQuery(sql);
-//            accounts = mapResultSet(rs);
 
         } catch (SQLException e) {
             e.printStackTrace();

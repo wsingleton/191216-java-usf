@@ -63,6 +63,14 @@ public class AccountServiceTest {
 
     }
 
+    @Test
+    public void depositIntoAccount() {
+        mockStatic(AppDriver.class);
+        when(mockDriver.app()).thenReturn(mockState);
+        when(mockState.getCurrentSession()).thenReturn(mockSession);
+
+    }
+
 
 
 }
