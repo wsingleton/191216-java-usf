@@ -28,14 +28,13 @@ public class  Withdraw {
 
         while (!valid) {
             try {
-                String dummy = scanner.next();
-                withdraw = Integer.parseInt(dummy);
+                 withdraw  = scanner.nextInt();
             } catch (Exception e) {
                 System.out.println("Please enter a number");
             }
 
             if (withdraw < balance + 1) {
-                balance -= withdraw;
+                balance = balance - withdraw;
                 Account updateUser = new Account(temp.getUser_id(), balance);
 
                 bankRepo.updateAccountBank(updateUser);
@@ -44,7 +43,7 @@ public class  Withdraw {
 
                 valid = true;
             } else {
-                System.out.println("Sorry.");
+                System.out.println("Sorry Preforming a over draft is not allowed .");
                 DashboardScreen.dashboard(id);
             }
         }

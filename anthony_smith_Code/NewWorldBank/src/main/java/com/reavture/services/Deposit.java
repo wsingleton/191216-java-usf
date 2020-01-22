@@ -53,7 +53,7 @@ public class Deposit {
                 System.out.println("Please deposit amount greater than 0.");
 
 
-                System.out.println("Sorry.");
+                System.out.println("Sorry. You made a invalid selection. Please try again");
                 DashboardScreen.dashboard(id);
             }
 

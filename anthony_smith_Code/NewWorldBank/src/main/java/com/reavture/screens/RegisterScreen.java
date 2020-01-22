@@ -37,7 +37,7 @@ public class RegisterScreen {
 
         User newUser = new User(username, email, lastName, firstName, password);
 
-        System.out.println(newUser);
+//        System.out.println(newUser);
 
 
         UserRepo userRepo = new UserRepo();
