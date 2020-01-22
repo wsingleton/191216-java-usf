@@ -20,13 +20,13 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE TRIGGER ers_users_insert_trig
-BEFORE INSERT ON ers_users
+CREATE OR REPLACE TRIGGER ers_reimbursement_insert_trig
+BEFORE INSERT ON ers_reimbursement
 FOR EACH ROW
 
 BEGIN
-    SELECT ers_users_pk_seq.NEXTVAL
-    into :new.ers_users_id
+    SELECT ers_reimbursement_pk_seq.NEXTVAL
+    into :new.reimb_id
     FROM dual;
 END;
 /

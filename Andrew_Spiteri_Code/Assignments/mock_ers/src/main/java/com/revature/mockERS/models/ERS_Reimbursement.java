@@ -5,12 +5,22 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class ERS_Reimbursement {
+    private Integer reimbId;
     private BigDecimal reimb_amount;
     private ERS_Reimbursement_Status reimb_submitted, reimb_resolved;
     private ERS_Reimbursement_Type reimb_description;
     private File reimb_receipt;
 
     public ERS_Reimbursement(BigDecimal reimb_amount, ERS_Reimbursement_Status reimb_submitted, ERS_Reimbursement_Status reimb_resolved, ERS_Reimbursement_Type reimb_description, File reimb_receipt) {
+        this.reimb_amount = reimb_amount;
+        this.reimb_submitted = reimb_submitted;
+        this.reimb_resolved = reimb_resolved;
+        this.reimb_description = reimb_description;
+        this.reimb_receipt = reimb_receipt;
+    }
+
+    public ERS_Reimbursement(Integer reimbId, BigDecimal reimb_amount, ERS_Reimbursement_Status reimb_submitted, ERS_Reimbursement_Status reimb_resolved, ERS_Reimbursement_Type reimb_description, File reimb_receipt) {
+        this.reimbId = reimbId;
         this.reimb_amount = reimb_amount;
         this.reimb_submitted = reimb_submitted;
         this.reimb_resolved = reimb_resolved;
