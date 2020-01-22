@@ -20,7 +20,6 @@ window.onload = () => {
     let ighead = document.querySelector(
         'div.container > h4'
     );
-    console.log(ighead);
     ighead.onclick = cctime;
 
     document.getElementById('n1').addEventListener('mouseleave', displayCalc);
@@ -153,8 +152,8 @@ function validate() {
     for(let i = 0; i < activities.length; i++) {
         let ele = document.createElement('li');
         actList.appendChild(ele);
-        console.log(activities);
-        ele.innerText = activities[i].innerHTML;
+        //console.log(activities);
+        ele.innerText = activities[i].nextSibling.textContent;
     }
 
     document.getElementById('firstname').value = "";
