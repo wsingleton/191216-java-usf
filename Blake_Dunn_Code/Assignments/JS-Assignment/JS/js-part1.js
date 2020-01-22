@@ -11,7 +11,6 @@ function leapYear(date){
             }
 
         } else {
-            
             return true;
         }
 
@@ -150,7 +149,7 @@ function longestStr(array){
             x = array[i];
         }
     }
-    return array.indexOf(x);
+    return array.indexOf(O);
 }
 
 /* 10. Area of a Triangle */
@@ -174,19 +173,17 @@ function area(a, b, c){
 function areSimilar(array, array1){
 
     let ratio = [];
-    let test1;
-    let test2;
+    let test1 = 0;
+    let test2 = 0;
+    let max = Math.max.apply(null,array);
+    let max1 = Math.max.apply(null, array1);
 
-    if (array.length < 2 || array1.length < 2){
-        return console.log('Fail');
-    };
-
-    if (array.length != array1.length) {
+    if (array.length <= 2 || array1.length <= 2 || array.length != array1.length){
         return console.log('Fail');
     };
 
     for (i = 0; i < array.length; i++){
-        if(array[i] != Math.max(array)) {
+        if(array[i] != max) {
             test1 += array[i];
         }else {
             continue;
@@ -194,17 +191,16 @@ function areSimilar(array, array1){
     };
 
     for (i = 0; i < array1.length; i++){
-        if(array[i] != Math.max(array1)) {
+        if(array1[i] != max1) {
             test2 += array1[i];
         }else {
             continue;
         }
     };
 
-    if(test1 > Math.max(array) || test2 > Math.max(array1)){
+    if(test1 < max || test2 < max1){
         return console.log('Fail');
     }
-
     
     for(i = 0; i < array.length; i++) {
         ratio.push(array[i]/array1[i]);
@@ -246,6 +242,67 @@ function equivArr(array, array1){
 
 /* 13. Tic Tac Toe */
 
-function tictactoe(array){
 
+function tictactoe(array){
+    let arr = array;
+    let c1 = 0;
+    let c2 = 0;
+    let c3 = 0;
+    let count = 0
+    let a1 = [];
+    let a2 = []
+
+
+    for (let i = 0; i < 3; i++){
+        for(let j = 0; j < 3; j++){
+            if (arr[i][j] === 'X'){
+                c1++;
+                a1.push(++count);
+                
+            }
+            if (arr[i][j] === 'O'){
+                c2++;
+                a2.push(++count);
+            }
+            if (array[i][j] === 'empty'){
+                c3++;
+                ++count;
+            }
+        }
+       
+    }    
+   
+    if (c1 > 5 || c2 > 5) {
+        return console.log('Invalid game');
+    }
+    if (c3 > 4) {
+        return console.log('No winner yet');
+    }
+    if (c1 + c2 === 9){
+        return console.log('Nobody wins')
+    }
+
+    if ((a1.includes(1) && a1.includes(2) && a1.includes(3)) ||
+        (a1.includes(4) && a1.includes(5) && a1.includes(6)) ||
+        (a1.includes(7) && a1.includes(8) && a1.includes(9)) ||
+        (a1.includes(1) && a1.includes(4) && a1.includes(7)) ||
+        (a1.includes(2) && a1.includes(5) && a1.includes(8)) ||
+        (a1.includes(3) && a1.includes(6) && a1.includes(9)) ||
+        (a1.includes(1) && a1.includes(5) && a1.includes(9)) ||
+        (a1.includes(3) && a1.includes(5) && a1.includes(7))){
+
+        console.log('X wins');
+    }
+
+    if ((a2.includes(1) && a2.includes(2) && a2.includes(3)) ||
+        (a2.includes(4) && a2.includes(5) && a2.includes(6)) ||
+        (a2.includes(7) && a2.includes(8) && a2.includes(9)) ||
+        (a2.includes(1) && a2.includes(4) && a2.includes(7)) ||
+        (a2.includes(2) && a2.includes(5) && a2.includes(8)) ||
+        (a2.includes(3) && a2.includes(6) && a2.includes(9)) ||
+        (a2.includes(1) && a2.includes(5) && a2.includes(9)) ||
+        (a2.includes(3) && a2.includes(5) && a2.includes(7))){
+
+        console.log('O wins');
+    }
 }

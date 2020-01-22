@@ -1,4 +1,4 @@
 package com.revature.ers.exceptions;
 
-public class AuthenticationException {
+public class AuthenticationException extends RuntimeException {
 }

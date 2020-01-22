@@ -10,4 +10,23 @@ public enum ReimbursementStatus {
         this.status = status;
     }
 
+    public static ReimbursementStatus getStatusById(int id) {
+
+        ReimbursementStatus status = null;
+
+        switch (id) {
+            case 1:
+                status = ReimbursementStatus.PENDING;
+                break;
+            case 2:
+                status = ReimbursementStatus.APPROVED;
+                break;
+            default:
+                status = ReimbursementStatus.DENIED;
+        }
+
+        return status;
+
+    }
+
 }

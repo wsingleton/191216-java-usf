@@ -3,12 +3,14 @@ package com.revature.ers.models;
 
 import java.io.File;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 public class Reimbursement {
 
     private Integer reimbId;
     private Double amount;
+    private Date expenseDate;
     private Timestamp submitted;
     private Timestamp resolved;
     private String description;
@@ -22,9 +24,43 @@ public class Reimbursement {
         super();
     }
 
-    public Reimbursement(Integer reimbId, Double amount, Timestamp submitted, String description, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
+    public Reimbursement(Double amount, Date expenseDate, Integer authorId, ReimbursementType type) {
+        this.amount = amount;
+        this.expenseDate = expenseDate;
+        this.authorId = authorId;
+        this.type = type;
+    }
+
+    public Reimbursement(Double amount, Date expenseDate, String description, Integer authorId, ReimbursementType type) {
+        this.amount = amount;
+        this.expenseDate = expenseDate;
+        this.description = description;
+        this.authorId = authorId;
+        this.type = type;
+    }
+
+    public Reimbursement(Double amount, Date expenseDate, String description, File receipt, ReimbursementType type) {
+        this.amount = amount;
+        this.expenseDate = expenseDate;
+        this.description = description;
+        this.receipt = receipt;
+        this.type = type;
+    }
+
+    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Timestamp submitted, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
         this.reimbId = reimbId;
         this.amount = amount;
+        this.expenseDate = expenseDate;
+        this.submitted = submitted;
+        this.authorId = authorId;
+        this.status = status;
+        this.type = type;
+    }
+
+    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Timestamp submitted, String description, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
+        this.reimbId = reimbId;
+        this.amount = amount;
+        this.expenseDate = expenseDate;
         this.submitted = submitted;
         this.description = description;
         this.authorId = authorId;
@@ -32,13 +68,28 @@ public class Reimbursement {
         this.type = type;
     }
 
-    public Reimbursement(Integer reimbId, Double amount, Timestamp submitted, String description, File receipt, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
+    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Timestamp submitted, String description, File receipt, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
         this.reimbId = reimbId;
         this.amount = amount;
+        this.expenseDate = expenseDate;
         this.submitted = submitted;
         this.description = description;
         this.receipt = receipt;
         this.authorId = authorId;
+        this.status = status;
+        this.type = type;
+    }
+
+    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Timestamp submitted, Timestamp resolved, String description, File receipt, Integer authorId, Integer resolverId, ReimbursementStatus status, ReimbursementType type) {
+        this.reimbId = reimbId;
+        this.amount = amount;
+        this.expenseDate = expenseDate;
+        this.submitted = submitted;
+        this.resolved = resolved;
+        this.description = description;
+        this.receipt = receipt;
+        this.authorId = authorId;
+        this.resolverId = resolverId;
         this.status = status;
         this.type = type;
     }
@@ -57,6 +108,14 @@ public class Reimbursement {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public Date getExpenseDate() {
+        return expenseDate;
+    }
+
+    public void setExpenseDate(Date expenseDate) {
+        this.expenseDate = expenseDate;
     }
 
     public Timestamp getSubmitted() {
@@ -130,6 +189,7 @@ public class Reimbursement {
         Reimbursement that = (Reimbursement) o;
         return Objects.equals(reimbId, that.reimbId) &&
                 Objects.equals(amount, that.amount) &&
+                Objects.equals(expenseDate, that.expenseDate) &&
                 Objects.equals(submitted, that.submitted) &&
                 Objects.equals(resolved, that.resolved) &&
                 Objects.equals(description, that.description) &&
@@ -142,7 +202,7 @@ public class Reimbursement {
 
     @Override
     public int hashCode() {
-        return Objects.hash(reimbId, amount, submitted, resolved, description, receipt, authorId, resolverId, status, type);
+        return Objects.hash(reimbId, amount, expenseDate, submitted, resolved, description, receipt, authorId, resolverId, status, type);
     }
 
     @Override
@@ -150,6 +210,7 @@ public class Reimbursement {
         return "Reimbursement{" +
                 "reimbId=" + reimbId +
                 ", amount=" + amount +
+                ", expenseDate=" + expenseDate +
                 ", submitted=" + submitted +
                 ", resolved=" + resolved +
                 ", description='" + description + '\'' +

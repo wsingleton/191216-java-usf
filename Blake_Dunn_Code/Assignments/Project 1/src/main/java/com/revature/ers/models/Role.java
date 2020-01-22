@@ -9,4 +9,23 @@ public enum Role {
     Role(String role) {
         this.role = role;
     }
+
+    public static Role getRoleById(int id) {
+
+        Role role = null;
+
+        switch (id) {
+            case 1:
+                role = Role.ADMIN;
+                break;
+            case 2:
+                role = Role.MANAGER;
+                break;
+            default:
+                role = Role.EMPLOYEE;
+        }
+
+        return role;
+
+    }
 }

@@ -3,7 +3,11 @@
 --DROP TABLE ers_reimb_status;
 --DROP TABLE ers_reimb_type;
 --DROP TABLE ers_user_roles;
-
+--DROP SEQUENCE reimb_pk_seq;
+--DROP SEQUENCE reimb_status_pk_seq;
+--DROP SEQUENCE reimb_types_pk_seq;
+--DROP SEQUENCE user_role_pk_seq;
+--DROP SEQUENCE users_pk_seq;
 --+---------------------------------------------------------------
 
 CREATE TABLE ers_reimb_status (
@@ -38,6 +42,7 @@ REFERENCES ers_user_roles (ers_user_role_id)
 CREATE TABLE ers_reimbursement (
 reimb_id            NUMBER CONSTRAINT ers_reimbursement_pk PRIMARY KEY,
 reimb_amount        NUMBER NOT NULL,
+expense_date        DATE,
 reimb_submitted     TIMESTAMP NOT NULL,
 reimb_resolved      TIMESTAMP,
 reimb_description   VARCHAR2(250),

@@ -1,4 +1,4 @@
-// Single line
+// Single line comments
 
 /*
     Multi-line
@@ -7,69 +7,69 @@
 
 /*
     What is JavaScript?
-
-        - https://github.com/getify/You-Dont-Know-JS/tree/1st-ed
-        - https://github.com/getify/You-Dont-Know-JS/tree/2nd-ed
-
         - It is the language of the Internet
             + a lightweight, interpreted programming language with first-class functions
-            + loosely-type; types exist, but are not declared explictly
+            + loosely-type; types exist, but are not declared explicitly
             + not technically an OO language, but referred to as an OB language (Object-Based)
-            + originally Brenden Eich of Netscape (Mozilla) in days
-            + is most commonly run in web browsers (Google Chrome V8 Engine)
-            + Server-side JS is possible with Node.js (more of that later...)
-            
+            + originally Brenden Eich of Netscape (Mozilla) in 10 days
+            + is most commonly run in web browser (Google Chrome V8 Engine)
+            + server-side JS is possible with Node.js (more or that later...)
         - It is unrelated to Java
-            - "Java is to JavaScript as ham is to hamsters." -- Jeremy Keith, 2009
-            - name is a marketing ploy to gain attention from the existing Java community
-            - syntatctic similarities are superficial, as most C-derived languages look similar
-
+            + "Java is to JavaScript as ham is to hamster." -- Jeremy Keith, 2009
+            + name is a marketing ploy to gain attention from the existing Java community
+            + syntactic similarities are superficial, as most C-derived languages look similar
         - It is an implementation of the ECMAScript standard
             + made official in TC39 (TC = Technical Committee)
             + current version is ECMAScript 2019 (ES10)
             + standard: https://www.ecma-international.org/ecma-262/10.0/index.html
             + https://developer.mozilla.org/en-US/docs/Web/JavaScript
-
         - It uses a single-threaded memory model
             + consists of the Stack, Heap, Event Table, Event Queue, and the Event Loop
             + the Event Loop gives JS the illusion of running tasks concurrently
-            + Event Loop video: https://www.youtube.com/watch?v=8aGhZQkoFbQ
-            + https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop    
+            + https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop
+            + https://www.youtube.com/watch?v=8aGhZQkoFbQ
+            
 */
 
-/* 
+/*
     JS Datatypes
-
         - Boolean
             + represents a logical entity having one of two values: true or false
-
+        
         - Number
             + represents a 64-bit floating point number
-
-        - String 
+        - String
             + represents textual data
-
         - Undefined
-            + the value of a variable that has been declared, but not intialized
-
+            + the value of a variable that has been declared, but not initialized
         - Null
             + represents the intentional absence of any object value
-
         - Symbol
             + represents a guaranteed unique value
-
-        - Object 
+        - Object
             + refers to a data structure containing states and behaviors
             + subtypes: arrays and functions
 */
 
-
 let x = 'color';
 console.log(typeof(x));
 
+x = 5;
+console.log(typeof(x));
 
+x = 3 > 5;
+console.log(typeof(x));
 
-//--------------------------------------------------------------------------
+x = {};
+console.log(typeof(x));
+
+x = [];
+console.log(typeof(x));
+
+x = function () {};
+console.log(typeof(x));
+
+//-----------------------------------------------------
 
 let today = new Date();
 let currentHour = today.getHours();
@@ -79,56 +79,49 @@ if (currentHour > 18) {
     greeting = 'Good evening';
 } else if (currentHour > 12) {
     greeting = 'Good afternoon';
-} else if(currentHour > 0) {
+} else if (currentHour > 0) {
     greeting = 'Good morning';
 } else {
-    greeting = 'Welcome'
+    greeting = 'Welcome';
 }
 
 // We can use the 'document' object to inject HTML into our web page
 document.write('<h3>' + greeting + '</h3>');
 
-/* 
-
-    - global
-        + the scope that contains, and is visible in, all other scopes
-
-    - local
-        + any new scope created inside of the global scope
-        + as a result, sometimes referred to as "function" scope
-
-    - block
-        + any new scope created inside of a local scope
-        + accomplished through: if, while, switch, try, catch, for
-
-    - lexical 
-        + provides the ability of an inner function to access the scope of it outer/parent function
-        + often referred to as "closure" scope
+/*
+    Variable Scopes
+        - global
+            + the scope that contains, and is visible in, all other scopes
+        - local
+            + any new scope created inside of the global scope
+            + as a result, sometimes referred to as "function" scope
+        - block
+            + any new scope created inside of a local scope
+            + accomplished through: if, while, switch, try, catch, for
+        - lexical
+            + provides the ability of an inner function to access the scope of its outer/parent function
+            + often referred to as "closure" scope
 */
 
-// var location = 'https://google.com'; // sends us to Google (same as change value of window.location)
-// let location = 'https://google.com'; // SyntaxError
+// var location = 'https://www.google.com'; // sends us to Google (same as change value of window.location)
+// let location = 'https://www.google.com'; // SyntaxError, because location is already a property of window
 
-/* 
+/*
     Variable Declarative Keywords
-
         - var
             + can be scoped globally or locally
             + cannot be block scoped
             + subject to hoisting phenomenon
             + used when declaring a simple mutable variable
-
         - let
-            + scoped to the global, local or the block level
-            + introduced ES2015 (ES6)
+            + scoped to the global, local, or the block level
+            + introduced in ES2015 (ES6)
             + used when declaring a simple mutable variable
-
         - const
-            + scoped to the global, local or the block level
-            + introduced in EC2015
+            + scoped to the global, local, or block level
+            + introduced in ES2015
             + used when declaring an immutable variable
-            + must be intialized upon declaration (no deferred assignment)
-
+            + must be initialized upon declaration (no deferred assignment)
         - (global)
             + lack of a keyword
             + values declared in such a way are bound to the browser's window object
@@ -149,7 +142,7 @@ function test1() {
     // console.log(y); // throws ReferenceError
     // console.log(z); // throws ReferenceError
 
-    if(true) {
+    if (true) {
         var x = 5;
         let y = 10;
         const z = 20;
@@ -164,11 +157,9 @@ test1();
 
 /*
     Type Coercion & Truthy/Falsy Values
-
         - Type coercion
             + the automatic, or implicit, conversion of values from one datatype to another
             + ex: 7 + 7 + '7' = '147'
-
         - Truthy/Falsy values
             + all variables, regardless of the datatype of their value, can be evaluated as booleans
             + there are six falsy values, everything else is truthy
@@ -184,7 +175,7 @@ test1();
 let z = 1 + 1 + '1';
 console.log(z); // '21'
 
-z = '1' + 1 + 1;
+z = '1' + 1 + 1
 console.log(z); // '111'
 
 let y = (1 == '1');
@@ -203,53 +194,51 @@ let yourValue;
 if (yourValue) {
     console.log('truthy') // technically semicolons are not required, but use them anyway (best practice)
 } else {
-    console.log('falsy')
+    console.log('falsy');
 }
 
 yourValue = 'jello';
 if (yourValue) {
-    console.log('truthy');  
+    console.log('truthy');
 } else {
     console.log('falsy');
 }
 
 yourValue = [];
 if (yourValue) {
-    console.log('truthy');  
+    console.log('truthy');
 } else {
     console.log('falsy');
 }
 
 yourValue = {};
 if (yourValue) {
-    console.log('truthy') 
+    console.log('truthy');
 } else {
-    console.log('falsy')
+    console.log('falsy');
 }
 
 yourValue = 10 / 0;
 if (yourValue) {
-    console.log('truthy') // truthy because infinity is defined
+    console.log('truthy'); // divide by zero results in 'Infinity', which is a truthy value.
 } else {
-    console.log('falsy')
+    console.log('falsy');
 }
 
 yourValue = 10 / 'jello';
 if (yourValue) {
-    console.log('truthy') 
+    console.log('truthy');
 } else {
-    console.log('falsy')
+    console.log('falsy');
 }
 
 /*
     Guard and Default Operators
-
-        - Guard 
+        - Guard
             + &&
             + ex: return authUser && username;
-            + A && B will l return B if A is truthy
-            + basically, a short-curcuit AND with some neat side effects
-
+            + A && B will return B if A is truthy
+            + basically, a short-circuit AND with some neat side effects
         - Default
             + ||
             + ex: let authUser = authenticate(creds) || {};
@@ -259,56 +248,50 @@ if (yourValue) {
 
 /*
     Functions
-
         - Types of functions
             + Standard function declarations
             + Anonymous functions and function expressions
-            + Immdiate-invoked function expressions (IIFEs)
-            + Callback funtions
+            + Immediate-invoked function expressions (IIFEs)
+            + Callback functions
             + Arrow functions
             + Generator function
-
-        - Functions are FIRST-CLASS MEMEBERS in the language
+        - Functions are FIRST-CLASS MEMBERS in the language
             + functions can be assigned to a variable
-            + functions can be passed as a parameter to other functions (callback)
+            + functions can be passed as a parameter to other functions (callbacks)
             + functions can be declared inside of other functions (closures)
-            + functions can return another function 
-
+            + functions can return another function
         - Anonymous functions and function expressions
             + a variable can be assigned to the logic of a function
             + functions on the right side of the assignment operator do not require declared names
             + the logic of the function is invoked using the variable to which it was assigned
-
         - IIFEs
-            + an implementation of the Self-Executing Anonymous Function design patter
+            + an implementation of the Self-Executing Anonymous Function design pattern
             + anonymous functions that are executed as soon as the interpreter comes across them
             + https://developer.mozilla.org/en-US/docs/Glossary/IIFE
-
         - Generator functions
             + uses the function* declaration syntax
             + return a Generator object
-            + can be used to generate values, finite or infinite
+            + can be used to generate values, can be finite or infinite
             + https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*
-
         - Arrow functions
-            + introduced in ES2015
+            + introducted in ES2015
             + a syntactically compact alternative to regular function expressions
             + no bindings to the 'this', 'arguments', 'super', 'new.target' keywords
-            + https://dev.to/ycmjason/let-me-explain-to-you-what-is-this-javascript-44ja
 */
 
+// Standard function declarations
 function getArea(width, height) {
     return width * height;
 }
 
-let myArea = getArea(5,10);
+let myArea = getArea(5, 10);
 console.log(myArea); // 50
 
 myArea = getArea('5', 10);
-console.log(myArea); //50
+console.log(myArea); // 50
 
 myArea = getArea('five', 10);
-console.log(myArea); //NaN
+console.log(myArea); // NaN
 
 function getSize(width, height, depth) {
     let area = getArea(width, height);
@@ -325,19 +308,17 @@ let area = function (width, height) {
 }
 
 console.log(area);
-console.log(area(5,10));
+console.log(area(5, 10, 123));
 
 // IIFE
-
 myArea = (function (width, height) {
     console.log(width, height);
     return width * height;
-})(5,20);
+})(5, 20);
 
 console.log(myArea);
 
 // Arrow functions
-
 let elements = [
     'Hydrogen',
     'Helium',
@@ -347,73 +328,70 @@ let elements = [
 
 console.log(elements[0]); // 'Hydrogen'
 
-// Pre - ES2015
+// Pre-ES2015 
 elements.forEach(function(element) {
     console.log(element);
 });
 
-console.log('+---------------+');
+console.log('+------------+');
 
+// ES2015 and beyond
 elements.forEach((element) => {
     console.log(element);
 });
 
-console.log('+---------------+');
+console.log('+------------+');
 
-
-elements.forEach(element => console.log(element));
-
-
-console.log('+---------------+');
-
-
+// another variation
 elements.forEach((element) => console.log(element));
 
+console.log('+------------+');
 
-console.log('+---------------+');
+// another variation
+elements.forEach(element => console.log(element));
 
+console.log('+------------+');
 
 let myMap = elements.map(element => element.length);
 console.log(myMap);
 
+
 /*
     Hoisting
-
         A general way of thinking about how execution context (specifically the creation 
-        and execution phases) work in JS. The JS interpretor does not execute scripts
-        sequentially (line by line), but instead whenever a script enters into a new 
+        and execution phases) work in JS. The JS interpreter does not execute scripts
+        sequentially  (line by line). but instead whenever a script enters into a new
         execution context, there are two phases of activity:
-
             1. Preparation/Creation
                 - the new scope is created
                 - declared variables and functions (and their arguments) are created (memory allocated on Stack)
-
-            2. Executions
+            
+            2. Execution
                 - assignment of values to variables
                 - runs function invocations
                 - evaluate expressions
- */
+*/
 
- testFunctionHoist();
+testFunctionHoist();
 
- function testFunctionHoist() {
-     console.log('function was hoisted.');
- }
+function testFunctionHoist() {
+    console.log('function was hoisted');
+}
 
- function hoist_test1() {
-     var x;
-     x = 6;
-     console.log(x);
- }
+function hoist_test1() {
+    var x;
+    x = 6;
+    console.log(x); // 6
+}
 
- function hoist_test2() {
-     var x;
-     console.log(x);
-     x = 6;
- }
+function hoist_test2() {
+    var x;
+    console.log(x); // undefined 
+    x = 6;
+}
 
- function hoist_test3() {
-    console.log(x);
+function hoist_test3() {
+    console.log(x); // undefined
     var x = 6;
 }
 
@@ -432,45 +410,44 @@ function hoist_test6() {
     b = 6;
 }
 
-// hoist_test7(); // throws ReferenceError: at this point, hoist_test7 is not visible at all 
+// hoist_test7(); // throws ReferenceError: at this point, hoist_test7 is not visible at all
 let hoist_test7 = function() {
-    console.log(x);
+    console.log(x);// undefined
     var x = 6;
 }
 
-// hoist_test8(); // throws TypeError: hoist_test8 is declared, but is not yet a function 
+// hoist_test8(); // throws TypeError: hoist_test8 is declared, but is not yet a function
 var hoist_test8 = function() {
-    console.log(x);
+    console.log(x);// undefined
     var x = 6;
 }
 
-// function hoist_test9() {
+function hoist_test9() {
 
-//     console.log(b); // throws ReferenceError
+    // console.log(b); // throws ReferenceError
 
-//     function innerFunction() {
-//         console.log(b); // undefined
-//         var x = 6;
-//         console.log(b); // 6
-//     }
-//     console.log(b); // throws ReferenceError
-// }
+    function innerFunction() {
+        console.log(b); // undefined
+        var b = 6;
+        console.log(b); // 6
+    }
 
-// hoist_test9();
+    // console.log(b); // throws ReferenceError
+
+}
+
+hoist_test9();
 
 /*
     Closures
-
-        According to MDN, a closure is the combination of a function bundled together (enclosed) 
-        with references to its surrounding state (the lexical environment)
-
+        According to MDN, a closure is the combination of a function bundled together (enclosed)
+        with references to its surrounding state (the lexical environment).
         - gives an inner function access to an outer function's scope
             + even if the inner function was the returned value of the outer function
             + an effective way of employing encapsulation within JS
-
 */
 
-// Create counter
+// Create some counter
 let counter = 0;
 
 function incrementCounter() {
@@ -479,33 +456,31 @@ function incrementCounter() {
 
 function incrementCounter_v2() {
     let myCounter = 0;
-    return myCounter++;
+    return ++myCounter;
 }
 
-function incrementCounter_v3 () {
+function incrementCounter_v3() {
 
     let myCounter = 0;
 
     return function() {
         return ++myCounter;
     }
+
 }
 
 let count = incrementCounter_v3();
 
-
 /*
     Template Literals
-
         - introduced in ES2015 (ES6)
         - allows for value/expression interpolation (think System.out.printf())
 */
-
-let name = 'Blake';
-let age = 27;
-console.log(name + 'is' + age);
+let name = 'Wezley';
+let age = 29;
+console.log(name + ' is ' + age);
 console.log(`${name} is ${age}`); // interpolation
-console.log(`${name} will be ${age + 1} next year.`); // can be used with expressions
+console.log(`${name} will be ${age + 1} next year.`) // can be used with expressions
 
 // Any included whitespace is kept
 console.log(`<p>
@@ -514,29 +489,25 @@ console.log(`<p>
 
 /*
     Creating Objects
-
-        - Object literal notation
+        -  Object literal notation
             + uses {} to encapsulate states and behaviors of the object
-            + property/key names are separated from their values using a colon (:)
+            + property/key names are separated from theirvalues using a colon (:)
             + key/value pairs are separated from one another by a comma (,)
-
         - Constructor notation
             + can be created using the Object constructor, and configured separately
             + a "class" function can be used to create instances of an object
-
-        - Class syntax 
-            + introduced in ES2015
+        - Class syntax
+            + introduced in ES2015 (ES6)
             + sugar syntax; effectively a cleaner implementation of "class" functions
             + class declarations are not subject to hoisting
             + capable of containing static methods
             + cleaner inheritance configuration using the 'extends' keyword ("subclassing")
+        
+*/
 
- */
-
- // Object literals
-
+// Object literals
 let hotel = {
-    name: 'Marriot',
+    name: 'Marriott',
     rooms: 180,
     booked: 162,
     available: function() {
@@ -562,16 +533,12 @@ document.write(`<ul>
 
 /*
     JSON
-
         - stands for: JavaScript Object Notation
         - syntactically similar to JS object literal notation, hence the name...
         - note the syntactic differences (props are encapsulated w/in quotations, no functions/methods are represented)
         - used as a "data interchange format"; helps us to send data from JS <-> Java (as an alternative to XML)
-
 */
-
 let hotelJSON = JSON.stringify(hotel);
-console.log(hotelJSON);
 console.log(typeof(hotelJSON), hotelJSON);
 
 // Constructor notation
@@ -583,43 +550,39 @@ newHotel.booked = 190;
 newHotel.available = () => {
     return this.rooms - this.booked;
 };
-
 console.dir(newHotel);
 
 // "Class" function
-
 function Hotel(name, rooms, booked) {
     this.name = name;
     this.rooms = rooms;
     this.booked = booked;
-    this.available = function () {
+    this.available = () => {
         return this.rooms - this.booked;
     }
-};
+}
 
 let yourHotel = new Hotel('Holiday Inn', 100, 75);
 console.dir(yourHotel);
 console.log(yourHotel.name, yourHotel.available());
 
-
 // Class syntax
-
 class Animal {
     static x = 5;
 
-    //no such thing as constructor overloading in JS (there can be only one!)
+    // no such thing as constructor overloading in JS (there can be only one!)
     constructor(name) {
         this.name = name;
     }
 
     speak() {
         console.log(this);
-        console.log(this.name + 'speaks...');
+        console.log(this.name + ' speaks...');
     }
 
- }
+}
 
- class Dog extends Animal {
+class Dog extends Animal {
 
     constructor(name) {
         super(name);
@@ -627,32 +590,33 @@ class Animal {
 
     speak() {
         console.log(this);
-        console.log(this.name + 'barks...');
+        console.log(this.name + ' barks.');
     }
 
     wagTail = () => {
         console.log(this);
-        console.log('The good boy is wagging his tail');
+        console.log('The good boy is wagging his tail.');
     }
- }
 
- let spot = new Dog('Spot');
- spot.speak();
- spot.wagTail();
- console.log(Animal.x);
+}
 
- 
+let spot = new Dog('Spot');
+spot.speak();
+spot.wagTail();
+console.log(Animal.x);
 
+let fido = new Animal('Fido');
+fido.speak();
+
+//--------------------------------------------------
 
 /*
     Spread/Rest Operator
-
         Spread/rest syntax allows an iterable such as an array expression or string to be 
         expanded in places where zero or more arguments (for function calls) or elements
         (for array literals) are expected, or an object expression to be expanded in places
         where zero or more key/value pairs (for object literals) are expected.
 */
-
 function sum(x, y, z) {
     return x + y + z;
 }
@@ -663,95 +627,90 @@ console.log(mySum);
 let yourSum = sum(...numbers);
 console.log(yourSum);
 
- // Destructuring operator
- let j, k, rest;
- [j, k] = [10, 20];
+// Destructuring operator
+let j, k, rest;
+[j, k] = [10, 20];
 
- console.log(j);
- console.log(k);
+console.log(j); // 10
+console.log(k); // 20
 
-// Comibing the spread operator with the destructuring operator
- [j, k, ...rest] = [10, 20, 30, 40, 50];
- console.log(j);
- console.log(k);
- console.log(rest);
+// Combining the rest operator with the destructuring operator
+[j, k, ...rest] = [10, 20, 30, 40, 50];
+console.log(j); // 10
+console.log(k); // 20
+console.log(rest); // [30, 40, 50]
 
- //Using the destructuring with object
+// Using the destructuring with objects
+let obj = {
+    p: 42,
+    q: true
+};
 
- let obj = {
-     p: 42,
-     q: true
- };
-
- let {p, q} = obj;
- console.log(p);
- console.log(q);
-
+let {p, q} = obj;
+console.log(p);
+console.log(q);
 
 
- // -------------------------------
+//--------------------------
 
- // Error handling
+// Error Handling
 
- function throwsError() {
-     throw new Error('oop. error');
- }
+function throwsError() {
+    throw new Error('oops. there was an error');
+}
 
- try {
-     throwsError();
- } catch (Error) {
-     console.log('error caught')
- }
+try {
+    throwsError();
+} catch (Error) {
+    console.log('the error was caught');
+}
 
- class CustomError extends Error {
-     constructor() {
-         super('hey look! a custom error')
-     }
- } 
+class CustomError extends Error {
+    constructor() {
+        super('hey look! a custom error.')
+    }
+}
 
- let myError = new CustomError();
- console.dir(myError);
+let myError = new CustomError();
+console.dir(myError);
 
- /*
+/*
     Prototypal Inheritance
-
         JS's inheritance mechanism is not quite the same as Java's, which uses a 
-        class-based inheritance system. Instead, JS is known for its use of 
+        class-based inheritance system. Instead, JS is known for its use of
         "prototypal inheritance".
-
-            - Each object has a private property which holds a link to another 
-              object, ccalled its "prototype" (represented by the __proto__property)
-
+            - Each object has a private property which holds a link to another
+              object, called its "prototype" (represented by the __proto__ property)
             - The prototype object has a prototype of its own, and so on until an
-              an object is reached that has nulll as it prototype
+              object is reached that has null as its prototype.
+            - Methods can be added to objects as properties, and any object has 
+              access to its prototype's properties. These properties can be
+              redclared with new implementation as a sort of "method overriding".
+*/
 
-            - 
- */
-
- /*
+/*
     for..of && for..in
-
         - for..of
             + uses an object-specific iterator and loops over its generated value
-
         - for..in
-            +loop over enumerated property names of an object
- */
+            + loop over enumerated property names of an object
+*/
 
- const myArray = [10, 20, 30];
 
- for (const value of myArray) {
-     console.log(value);
- }
+// for..of
+const myArray = [10, 20, 30];
 
- // for..in
+for (const value of myArray) {
+    console.log(value);
+}
 
- let myObject = {
-     'asd asd': 1,
-     y: 2,
-     z: 3
- };
+// for..in
+let myObject = {
+    'my prop': 1,
+    y: 2,
+    z: 3
+};
 
- for (const property in myObject) {
-     console.log(`myObject.${property} = ${myObject[property]}`);
- }
+for (const property in myObject) {
+    console.log(`myObject.${property} = ${myObject[property]}`);
+}
