@@ -1,0 +1,254 @@
+/* 1. Leap Year */
+
+function leapyear(year)
+{
+return (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
+}
+console.log(leapyear(2017));
+
+
+/* 2. Email Validation */ 
+
+function isEmail(string){
+{
+    var emailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(inputText.value.match(emailformat))
+    {
+    document.form1.text1.focus();
+    return true;
+    }
+    else
+    {
+    alert("Invalid email address!");
+    document.form1.text1.focus();
+    return false;
+    }
+}
+
+
+}
+
+/* 3. Remove Character */
+
+function removeChar(string, position){
+function removeChar(string, position) 
+ {
+  part1 = string.substring(0, position);
+  part2 = string.substring(position + 1, string.length);
+  return (part1 + part2);
+ }
+
+
+}
+        
+/* 4. Remove "Script" */
+
+function removeScript(string){
+function removeScript(string)
+{
+  if (string.length < 6) {
+    return string;
+  }
+  let result = string;
+    
+  if (string.substring(10, 4) == 'Script') 
+    {
+    
+   result = string.substring(0, 4) + string.substring(10,string.length);
+      
+  }
+  return result;
+}
+
+}
+
+/* 5. Letter Shift */
+
+function letterShift(string){
+
+function letterShift(string) {
+var word = string.split('');
+for (var i = 0; i < word.length; i++) {
+
+
+switch(word[i]) {
+case ' ':
+break;
+case 'z':
+word[i] = 'a';
+break;
+default:
+word[i] = String.fromCharCode(1 + word[i].charCodeAt(0));
+}
+
+
+}
+return word.join('');
+}
+
+
+}
+
+/* 6. Vowel Count */
+
+function vowelCount(string){
+function vowelCount(string)
+{
+  var vowels = 'AEIOUaeiou';
+  var vowelCount = 0;
+  
+  for(var x = 0; x < string.length ; x++)
+  { if (vowels.indexOf(string[x]) !== -1)
+    {
+      vowelCount += 1; }
+  
+  }
+  return vowelCount;
+}
+
+
+
+}
+
+/* 7. Reverse Array */
+
+function reverseArr(array){
+var array = [8, 19, 16];
+print(array);
+var reversedArray = array.reverse();
+print(reversedArray);
+
+
+
+}
+
+
+
+
+/* 8. Add Array */
+
+function addArr(array, array){
+function addArr (arr1, arr2) {
+
+    var arrayhold = [];
+    arr1 = arr1.toString().split(',').map(Number)
+    arr2 = arr2.toString().split(',').map(Number)
+    
+
+    for (var i in arr1) {
+    if(arr2.indexOf(arr1[i]) === -1) arrayhold.push(arr1[i])
+    }
+
+    for(i in arr2) {
+    if(arr1.indexOf(arr2[i]) === -1) arrayhold.push(arr2[i])
+    }
+
+
+    return arrayhold.sort((a,b) => a+b);
+
+
+    }
+
+
+
+}
+
+/* 9. Longest String */
+
+function longestStr(array){
+
+function longestStr(array) {
+
+    var max = array[0].length
+
+    array.map(str => max = Math.max(max, str.length))
+
+    result = array.filter(str => str.length == max)
+
+    return result;
+
+  }
+
+
+}
+
+/* 10. Area of a Triangle */
+
+function area(number, number, number){
+
+function triangleCheck(numberx,numbery, numberz) {
+
+    if ((numberxnumbery > numberz) && (numberxnumberz > numbery) && (numberynumberz > numberx)) {
+
+        var pre = (numberx + numbery + numberz)/2
+        return Math.sqrt(pre*((numberx)*(numbery)*(numberz)));;
+
+    }
+    else {
+        alert("Undefined.");
+    }
+  }
+
+
+}
+
+/* 11. Similar Polygons */
+
+function areSimilar(array, array){
+function areSimilar(array1, array2){
+
+    if(array1.length === array2.length){
+
+        return true
+
+    }
+
+    else{
+
+        return false
+    }
+}
+
+
+}
+
+/* 12. Equivalent Arrays */
+
+function equvArr(array, array){
+
+
+function equArray(array1, array2) {
+
+    if (array1 === array2) return true
+
+    if (array1 == null || array2 == null) return false
+
+    if (array1.length != array2.length) return false
+
+  
+    for (var i = 0; i < array1.length; ++i) {
+
+     
+        if (array1[i] !== array2[i]) return false
+        
+    }
+
+    return true;
+
+  }
+
+
+
+
+
+}
+
+/* 13. Tic Tac Toe */
+
+function tictactoe(array){
+
+}
+
+
+
+
