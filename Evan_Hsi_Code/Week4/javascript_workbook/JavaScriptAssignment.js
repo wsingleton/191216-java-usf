@@ -1,7 +1,7 @@
 window.onload = () => {
-    document.getElementsByName('google')[0].setAttribute('href', 'google.com');
-    document.getElementsByName('twitter')[0].setAttribute('href', 'twitter.com');
-    document.getElementsByName('slack')[0].setAttribute('href', 'slack.com');
+    document.getElementsByName('google')[0].setAttribute('href', 'https://www.google.com');
+    document.getElementsByName('twitter')[0].setAttribute('href', 'https://www.twitter.com');
+    document.getElementsByName('slack')[0].setAttribute('href', 'https://www.slack.com');
     document.getElementsByName('javadocs')[0].setAttribute('href', 'https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html');
 
     document.getElementById("planet").options[3].disabled = true;
