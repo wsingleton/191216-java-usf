@@ -1,7 +1,6 @@
 package com.revature.ers.models;
 
-
-import java.io.File;
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
@@ -11,10 +10,10 @@ public class Reimbursement {
     private Integer reimbId;
     private Double amount;
     private Date expenseDate;
-    private Timestamp submitted;
-    private Timestamp resolved;
+    private Date submitted;
+    private Date resolved;
     private String description;
-    private File receipt;
+    private InputStream receipt;
     private Integer authorId;
     private Integer resolverId;
     private ReimbursementStatus status;
@@ -39,7 +38,7 @@ public class Reimbursement {
         this.type = type;
     }
 
-    public Reimbursement(Double amount, Date expenseDate, String description, File receipt, ReimbursementType type) {
+    public Reimbursement(Double amount, Date expenseDate, String description, InputStream receipt, ReimbursementType type) {
         this.amount = amount;
         this.expenseDate = expenseDate;
         this.description = description;
@@ -47,7 +46,7 @@ public class Reimbursement {
         this.type = type;
     }
 
-    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Timestamp submitted, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
+    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Date submitted, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
         this.reimbId = reimbId;
         this.amount = amount;
         this.expenseDate = expenseDate;
@@ -57,7 +56,7 @@ public class Reimbursement {
         this.type = type;
     }
 
-    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Timestamp submitted, String description, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
+    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Date submitted, String description, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
         this.reimbId = reimbId;
         this.amount = amount;
         this.expenseDate = expenseDate;
@@ -68,7 +67,7 @@ public class Reimbursement {
         this.type = type;
     }
 
-    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Timestamp submitted, String description, File receipt, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
+    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Date submitted, String description, InputStream receipt, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
         this.reimbId = reimbId;
         this.amount = amount;
         this.expenseDate = expenseDate;
@@ -80,7 +79,7 @@ public class Reimbursement {
         this.type = type;
     }
 
-    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Timestamp submitted, Timestamp resolved, String description, File receipt, Integer authorId, Integer resolverId, ReimbursementStatus status, ReimbursementType type) {
+    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Date submitted, Date resolved, String description, InputStream receipt, Integer authorId, Integer resolverId, ReimbursementStatus status, ReimbursementType type) {
         this.reimbId = reimbId;
         this.amount = amount;
         this.expenseDate = expenseDate;
@@ -118,19 +117,19 @@ public class Reimbursement {
         this.expenseDate = expenseDate;
     }
 
-    public Timestamp getSubmitted() {
+    public Date getSubmitted() {
         return submitted;
     }
 
-    public void setSubmitted(Timestamp submitted) {
+    public void setSubmitted(Date submitted) {
         this.submitted = submitted;
     }
 
-    public Timestamp getResolved() {
+    public Date getResolved() {
         return resolved;
     }
 
-    public void setResolved(Timestamp resolved) {
+    public void setResolved(Date resolved) {
         this.resolved = resolved;
     }
 
@@ -142,11 +141,11 @@ public class Reimbursement {
         this.description = description;
     }
 
-    public File getReceipt() {
+    public InputStream getReceipt() {
         return receipt;
     }
 
-    public void setReceipt(File receipt) {
+    public void setReceipt(InputStream receipt) {
         this.receipt = receipt;
     }
 
