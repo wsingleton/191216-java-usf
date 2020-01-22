@@ -46,6 +46,7 @@ public class UserTest {
         mUser.add(new User(4, "Tarja","", "User3", "Pass3"));
         mUser.add(new User(5, "Tarja","Turu", "", "Pass3"));
         mUser.add(new User(6, "Tarja","Turu", "User3", ""));
+        mUser.add(new User(7, "Sharon","Del", "userName$3", "P4ssword#"));
 
     }
 
@@ -89,5 +90,15 @@ public class UserTest {
         User _expectedResult = mUser.get(5);
         Assert.assertFalse(sut.isUserValid(_expectedResult));
     }
-
+/*    @Test
+    public void testIsUserValidWithInvalidUser(){
+        String testUser = mUser.get(6).getUsrName();
+        //User _expectedResult = user.validate(testUser);
+        Assert.assertFalse(User.validate(testUser));
+    }
+    @Test
+    public void testIsUserValidWithInvalidPass(){
+        User _expectedResult = mUser.get(7);
+        Assert.assertFalse(sut.isUserValid(_expectedResult));
+    }*/
 }

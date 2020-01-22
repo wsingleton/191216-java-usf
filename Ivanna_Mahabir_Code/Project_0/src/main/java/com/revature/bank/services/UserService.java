@@ -36,7 +36,6 @@ public class UserService {
         }
         userRepo.save(newUser);
         currentUser = newUser;
-
     }
 
     public boolean isUserValid(User user){
@@ -47,5 +46,4 @@ public class UserService {
         if(user.getPassWord() == null || user.getPassWord().trim().equals("")) return false;
         return true;
     }
-
 }
