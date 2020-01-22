@@ -1,0 +1,10 @@
+body {background:#222228;font-family:tahoma;font-size:1em;color:#aaaaae;text-align:justify;}
+.img1 {background-image:url(https://images.pexels.com/photos/813872/pexels-photo-813872.jpeg);height:200px;background-attachment:fixed;background-position:center;background-repeat:no-repeat;background-size:cover}
+.img2 {background-image:url(https://images.pexels.com/photos/326097/pexels-photo-326097.jpeg);height:200px;background-attachment:fixed;background-position:center;background-repeat:no-repeat;background-size:cover;}
+.img3 {background-image:url(https://images.pexels.com/photos/235621/pexels-photo-235621.jpeg);height:200px;background-attachment:fixed;background-position:center;background-repeat:no-repeat;background-size:cover;}
+.content {max-width:60%;margin:auto;background:rgba(0,0,0,.3);padding:25px;border-radius:25px;margin-top:20px;margin-bottom:20px;border-bottom:double 9px #aaaaae;border-right:double 9px #aaaaae;}
+.content h1 {background:linear-gradient(90deg, rgba(150, 150, 175, 1) 0%, rgba(250, 250, 275, 1) 50%, rgba(150, 150, 175, 1) 100%);color:transparent;background-clip:text; -webkit-background-clip:text;text-shadow:rgba(0,0,0,.5) 2px 2px 2px;}
+.content h2 {font-style:italic;color:#ccccce;text-shadow:#000 2px 2px 2px;padding-left:50px;}
+body::-webkit-scrollbar{width:10px;}
+body::-webkit-scrollbar-track{background:rgba(0,0,0,.8);box-shadow:inset 0px 0px 5px #000;}
+body::-webkit-scrollbar-thumb{background:#55555e;box-shadow:inset 0px 0px 5px #555;border-radius:25px;}
