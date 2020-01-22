@@ -16,7 +16,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.mock;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockIgnore({"org.mockito.*"})
@@ -26,7 +25,7 @@ public class AccountServiceTest {
     AccountService sut;
 
     ArrayList<Account> mockAccount = new ArrayList<>();
-    AccountRepository acctRepo = mock(AccountRepository.class);
+//    AccountRepository acctRepo = mock(AccountRepository.class);
 
     @Before
     public void setUp() {

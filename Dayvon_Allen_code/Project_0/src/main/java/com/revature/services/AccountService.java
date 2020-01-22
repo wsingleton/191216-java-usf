@@ -20,7 +20,7 @@ public class AccountService {
                 acct.increaseAccountBalance(this.depositAmount);
                 router.navigate("/balance");
             }
-            else{
+            else {
                 throw new InvalidRequestException();
             }
     }
