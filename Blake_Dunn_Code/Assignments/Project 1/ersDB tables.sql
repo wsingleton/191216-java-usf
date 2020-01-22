@@ -8,7 +8,7 @@
 --DROP SEQUENCE reimb_types_pk_seq;
 --DROP SEQUENCE user_role_pk_seq;
 --DROP SEQUENCE users_pk_seq;
---+---------------------------------------------------------------
+----+---------------------------------------------------------------
 
 CREATE TABLE ers_reimb_status (
 reimb_status_id     NUMBER CONSTRAINT reimb_status_pk PRIMARY KEY,
@@ -43,8 +43,8 @@ CREATE TABLE ers_reimbursement (
 reimb_id            NUMBER CONSTRAINT ers_reimbursement_pk PRIMARY KEY,
 reimb_amount        NUMBER NOT NULL,
 expense_date        DATE,
-reimb_submitted     TIMESTAMP NOT NULL,
-reimb_resolved      TIMESTAMP,
+reimb_submitted     DATE NOT NULL,
+reimb_resolved      DATE,
 reimb_description   VARCHAR2(250),
 reimb_receipt       BLOB,
 reimb_author        NUMBER NOT NULL,
