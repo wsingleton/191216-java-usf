@@ -59,7 +59,7 @@ window.onload = () => {
 
     retrieveQuestions();
 
-    buttonDiv.addEventListener('mouseover', isQuizValid);
+    //buttonDiv.addEventListener('mouseover', isQuizValid);
     submitBtn.addEventListener('click', showResults);
 
 }
@@ -96,7 +96,8 @@ function isQuizValid() {
     console.log('Validating Quiz...');
 
     let submitBtn = document.getElementById('submit');
-    let SelectedAnswers = document.querySelectorAll('div.answers > label > input[name^="question-"]:checked');
+    let SelectedAnswers = document.querySelectorAll(
+        'div.answers > label > input[name^="question-"]:checked');
     console.log(SelectedAnswers);
     let myQuestions = document.querySelectorAll('div.question');
 
@@ -111,6 +112,7 @@ function isQuizValid() {
 
 function showResults() {
     console.log('Grading Quiz...');
+    
 
 }
 
