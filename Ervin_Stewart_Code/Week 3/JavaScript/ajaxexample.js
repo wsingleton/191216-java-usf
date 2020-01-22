@@ -15,7 +15,7 @@ xhttp.onreadystatechange = function(){
     }
 }
 }
-
+document.getElem
 function setValue(pokemon){
     document.getElementById("pokemonName").innerHTML = pokemon.name;
 let pokemonIMGElement = document.getElementById("pokemonImg");
