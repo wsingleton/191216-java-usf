@@ -30,6 +30,7 @@ public class UserRepository {
         return false;
     }
 
+    //todo finish login function, figure out Optional
     public ERS_Users findByUsername(String username, Integer password){
         String sql = "SELECT * FROM ers_users WHERE ers_username = ?";
         try{
@@ -38,7 +39,13 @@ public class UserRepository {
             ResultSet rs = ps.executeQuery();
             if(rs.isBeforeFirst()){
                 while(rs.next()){
-                    //todo finish login function, figure out Optional
+                    Integer id = rs.getInt("ers_users_id");
+                    String un = rs.getString("ers_username");
+                    String pw = rs.getString("ers_password");
+                    rs.getString("user_first_name");
+                    rs.getString("user_last_name");
+                    rs.getString("user_email");
+
                 }
             }
         }catch (SQLException e){
