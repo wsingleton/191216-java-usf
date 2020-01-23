@@ -20,4 +20,16 @@
         <url-pattern>/test</url-pattern>
     </servlet-mapping>
 
+
+
+    <servlet>
+        <servlet-name>CalculatorServlet</servlet-name>
+        <servlet-class>com.revature.servlets.CalculatorServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CalculatorServlet</servlet-name>
+        <url-pattern>/calculator</url-pattern>
+    </servlet-mapping>
+
 </web-app>
