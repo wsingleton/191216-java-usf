@@ -45,9 +45,8 @@ function home(){
     loginBtn.setAttribute('id', 'login');
     loginBtn.innerText = 'Login';
 
-    let regA = document.createElement('a');
+    let regA = document.createElement('button');
     regA.setAttribute('id', 'register');
-    regA.setAttribute('href', 'http://localhost:8080/ers-app/');
     regA.innerText = "Register";
 
     let divContainer = document.getElementById('container');
@@ -87,9 +86,73 @@ function register(){
     unInput.setAttribute('placeholder', 'Username');
     unInput.setAttribute('width', '30px');
 
+    let pwLabel = document.createElement('label');
+    pwLabel.setAttribute('for', 'regPwInput');
+    pwLabel.setAttribute('class', 'form-label');
+    pwLabel.setAttribute('id', 'regPwLabel');
+    pwLabel.innerText = "Password:";
+
+    let pwInput = document.createElement('input');
+    pwInput.setAttribute('type', 'text');
+    pwInput.setAttribute('class', 'form-control');
+    pwInput.setAttribute('name', 'pw-input');
+    pwInput.setAttribute('id', 'pw-reg');
+    pwInput.setAttribute('placeholder', 'Password');
+    pwInput.setAttribute('width', '30px');
+
+    let fnLabel = document.createElement('label');
+    fnLabel.setAttribute('for', 'regFnInput');
+    fnLabel.setAttribute('class', 'form-label');
+    fnLabel.setAttribute('id', 'regFnLabel');
+    fnLabel.innerText = "First Name:";
+
+    let fnInput = document.createElement('input');
+    fnInput.setAttribute('type', 'text');
+    fnInput.setAttribute('class', 'form-control');
+    fnInput.setAttribute('name', 'fn-input');
+    fnInput.setAttribute('id', 'fn-reg');
+    fnInput.setAttribute('placeholder', 'First Name');
+    fnInput.setAttribute('width', '30px');
+
+    let lnLabel = document.createElement('label');
+    lnLabel.setAttribute('for', 'regLnInput');
+    lnLabel.setAttribute('class', 'form-label');
+    lnLabel.setAttribute('id', 'regLnLabel');
+    lnLabel.innerText = "Last Name:";
+
+    let lnInput = document.createElement('input');
+    lnInput.setAttribute('type', 'text');
+    lnInput.setAttribute('class', 'form-control');
+    lnInput.setAttribute('name', 'ln-input');
+    lnInput.setAttribute('id', 'ln-reg');
+    lnInput.setAttribute('placeholder', 'Last Name');
+    lnInput.setAttribute('width', '30px');
+
+    let emLabel = document.createElement('label');
+    emLabel.setAttribute('for', 'regEmInput');
+    emLabel.setAttribute('class', 'form-label');
+    emLabel.setAttribute('id', 'regEmLabel');
+    emLabel.innerText = "Email:";
+
+    let emInput = document.createElement('input');
+    emInput.setAttribute('type', 'text');
+    emInput.setAttribute('class', 'form-control');
+    emInput.setAttribute('name', 'em-input');
+    emInput.setAttribute('id', 'em-reg');
+    emInput.setAttribute('placeholder', 'Email');
+    emInput.setAttribute('width', '30px');
+
     divContainer.appendChild(formRegister);
     formRegister.appendChild(unLabel);
     formRegister.appendChild(unInput);
+    formRegister.appendChild(pwLabel);
+    formRegister.appendChild(pwInput);
+    formRegister.appendChild(fnLabel);
+    formRegister.appendChild(fnInput);
+    formRegister.appendChild(lnLabel);
+    formRegister.appendChild(lnInput);
+    formRegister.appendChild(emLabel);
+    formRegister.appendChild(emInput);
 }
 
 function login(){    
@@ -102,7 +165,7 @@ function login(){
 
         let xhttp = new XMLHttpRequest();
 
-        xhttp.open("PUT", 'http://localhost:8080/ers-app/', true);
+        xhttp.open('POST', 'http://localhost:8080/ers-app/user', true);
         let data = JSON.stringify({'username': uname, 'password': passw})
         xhttp.send(data);
         xhttp.onreadystatechange = function(){

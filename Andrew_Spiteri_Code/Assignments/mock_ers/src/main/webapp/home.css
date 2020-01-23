@@ -9,7 +9,7 @@ body {
 .form-control{
     max-width: 50%;
     position: relative;
-    top: 250px;
+    top: 100px;
     left: 50%;
     -ms-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translate(-50%,-50%);
@@ -18,7 +18,7 @@ body {
 
 .form-label{
     position: relative;
-    top: 250px;
+    top: 100px;
     left: 28%;
     -ms-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translate(-50%,-50%);
@@ -27,7 +27,7 @@ body {
 
 #login{
     position: relative;
-    top: 280px;
+    top: 75%;
     left: 28%;
     -ms-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translate(-50%,-50%);
@@ -36,8 +36,8 @@ body {
 
 #register{    
     position: relative;
-    top: 270px;
-    left: 28%;
+    top: 75%;
+    left: 35%;
     -ms-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
