@@ -109,4 +109,13 @@ rbs-db-user-setup.sql
 
 # IntelliJ-specific files
 *.iml
+<<<<<<< HEAD
 .idea/
+=======
+.idea/
+
+# Gradle stuff
+gradlew
+gradlew.bat
+*.gradle
+>>>>>>> d746eeaffb9c085cea65ee6b4af648058d240cee
