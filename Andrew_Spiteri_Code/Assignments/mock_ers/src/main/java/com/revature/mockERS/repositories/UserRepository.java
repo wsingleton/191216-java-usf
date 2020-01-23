@@ -5,6 +5,7 @@ import com.revature.mockERS.models.ERS_Users;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.revature.mockERS.util.ConnectionFactory.getCon;
@@ -31,7 +32,7 @@ public class UserRepository {
         return false;
     }
 
-    public Optional<ERS_Users> findByUsername(String username, Integer password){
+    public Optional<ERS_Users> findByCredentials(String username, String password){
         String sql = "SELECT * FROM ers_users WHERE ers_username = ?";
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
@@ -46,7 +47,9 @@ public class UserRepository {
                     String ln = rs.getString("user_last_name");
                     String email = rs.getString("user_email");
                     ERS_Users user = new ERS_Users(id, un, pw, fn, ln, email);
-                    return Optional.of(user);
+                    if(user.getErsUsername().equals(username) && user.hashCode() == Objects.hash(password)) {
+                        return Optional.of(user);
+                    }
                 }
             }
         }catch (SQLException e){
