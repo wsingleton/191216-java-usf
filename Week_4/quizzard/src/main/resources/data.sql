@@ -98,3 +98,5 @@ INSERT INTO study_set_card VALUES (4, 13);
 INSERT INTO study_set_card VALUES (5, 14);
 INSERT INTO study_set_card VALUES (5, 15);
 INSERT INTO study_set_card VALUES (5, 16);
+
+COMMIT;
