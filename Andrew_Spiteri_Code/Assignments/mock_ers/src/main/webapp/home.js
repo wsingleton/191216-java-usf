@@ -47,6 +47,8 @@ function home(){
 
     let regA = document.createElement('a');
     regA.setAttribute('id', 'register');
+    regA.setAttribute('href', 'http://localhost:8080/ers-app/');
+    regA.innerText = "Register";
 
     let divContainer = document.getElementById('container');
 
@@ -63,7 +65,31 @@ function home(){
 }
 
 function register(){
-    
+    let divContainer = document.getElementById('container');        
+    let formHome = document.getElementById('loginForm')
+    divContainer.removeChild(formHome);
+
+    let formRegister = document.createElement('div');
+    formRegister.setAttribute('class', 'form-group');
+    formRegister.setAttribute('id', 'registerForm');
+
+    let unLabel = document.createElement('label');
+    unLabel.setAttribute('for', 'regUnInput');
+    unLabel.setAttribute('class', 'form-label');
+    unLabel.setAttribute('id', 'regUnLabel');
+    unLabel.innerText = "Username:";
+
+    let unInput = document.createElement('input');
+    unInput.setAttribute('type', 'text');
+    unInput.setAttribute('class', 'form-control');
+    unInput.setAttribute('name', 'un-input');
+    unInput.setAttribute('id', 'un-reg');
+    unInput.setAttribute('placeholder', 'Username');
+    unInput.setAttribute('width', '30px');
+
+    divContainer.appendChild(formRegister);
+    formRegister.appendChild(unLabel);
+    formRegister.appendChild(unInput);
 }
 
 function login(){    
@@ -71,8 +97,10 @@ function login(){
     let passw = document.getElementById('passw').value;
     if(uname && passw){
         let divContainer = document.getElementById('container');        
-        let formDiv = document.getElementById('loginForm');;
-        divContainer.removeChild(formDiv);
+        let formHome = document.getElementById('loginForm')
+        divContainer.removeChild(formHome);
+
+        
     }
 }
    
