@@ -1,5 +1,7 @@
 package com.revature.mockERS.models;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum ERS_Reimbursement_Status {
     ACCEPTED("Accepted"), REJECTED("Rejected"), PROCESSING("Processing"), PRESPROCESSING("Pre-Processing");
     private String status;
@@ -8,6 +10,7 @@ public enum ERS_Reimbursement_Status {
         this.status = status;
     }
 
+    @JsonValue
     public static ERS_Reimbursement_Status getStatusById(Integer id){
         ERS_Reimbursement_Status status = null;
         switch (id){

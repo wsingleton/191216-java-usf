@@ -1,5 +1,7 @@
 package com.revature.mockERS.models;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum ERS_Reimbursement_Type {
     LODGING("Lodging"), TRAVEL("Travel"), FOOD("Food"), OTHER("Other");
 
@@ -9,6 +11,7 @@ public enum ERS_Reimbursement_Type {
         this.type = type;
     }
 
+    @JsonValue
     public static ERS_Reimbursement_Type getTypeById(Integer id){
         ERS_Reimbursement_Type type = null;
         switch (id){
