@@ -9,9 +9,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.revature.ers.AppDriver.app;
-
 public class UserRepository implements CrudRepository<User> {
+
     @Override
     public void save(User newUser) {
 
@@ -46,10 +45,9 @@ public class UserRepository implements CrudRepository<User> {
     @Override
     public Set<User> findAll() {
 
-        Connection conn = app().getCurrentSession().getConnection();
         Set<User> users = new HashSet<>();
 
-        try {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
             String sql = "SELECT * FROM ersadmin.ers_users";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);

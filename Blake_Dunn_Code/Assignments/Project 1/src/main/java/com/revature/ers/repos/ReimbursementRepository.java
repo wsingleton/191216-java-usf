@@ -8,9 +8,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.revature.ers.AppDriver.app;
-
 public class ReimbursementRepository implements CrudRepository<Reimbursement> {
+
     @Override
     public void save(Reimbursement newReimb) {
 
@@ -44,10 +43,10 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public Set<Reimbursement> findAll() {
-        Connection conn = app().getCurrentSession().getConnection();
+
         Set<Reimbursement> reimbs = new HashSet<>();
 
-        try {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
             String sql = "SELECT * FROM ersadmin.ers_reimbursement";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -79,6 +78,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public Boolean update(Reimbursement updatedReimb) {
+
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "UPDATE ersadmin.ers_reimbursement SET reimb_resolved = ?, " +
@@ -103,6 +103,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public Boolean deleteById(Integer id) {
+
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "DELETE FROM ersadmin.ers_reimbursement WHERE reimb_id = ?";
