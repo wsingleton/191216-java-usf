@@ -102,12 +102,12 @@ function login(){
 
         let xhttp = new XMLHttpRequest();
 
-        xhttp.open("GET", 'http://localhost:8080/ers-app/', true);
+        xhttp.open("PUT", 'http://localhost:8080/ers-app/', true);
         let data = JSON.stringify({'username': uname, 'password': passw})
         xhttp.send(data);
         xhttp.onreadystatechange = function(){
             if(xhttp.readyState === 4 && xhttp.status === 200){
-
+                alert('Login successful');
             }
         }
     }

@@ -115,6 +115,7 @@ function retrieveQuestions(){
     console.log("retrieving questions...");
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://api.myjson.com/bins/sc7ti/', true);
+    
     xhr.send();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){

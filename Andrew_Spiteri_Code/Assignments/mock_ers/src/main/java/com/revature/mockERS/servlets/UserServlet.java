@@ -33,6 +33,6 @@ public class UserServlet extends HttpServlet {
     @JsonAnyGetter
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
-        UserServlet us = new ObjectMapper().readerFor(UserServlet.class).readValue(req.)
+        UserServlet us = new ObjectMapper().readerFor(UserServlet.class).readValue(req.getQueryString());
     }
 }
