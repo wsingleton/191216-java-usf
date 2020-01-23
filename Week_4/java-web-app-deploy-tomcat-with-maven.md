@@ -7,7 +7,7 @@
 	
 	
 ### Instructions:
-  - Step 1: Edit Tomcat's `tomcat-users.xml` file (found in the `$CATALINA_BASE/conf` directory) to include the following within the `<tomcat-users>` tag:
+  - Step 1: Edit Tomcat's `tomcat-users.xml` file (found in the `$CATALINA_HOME/conf` directory) to include the following within the `<tomcat-users>` tag:
 
 	```
 	<role rolename="manager-gui"/>
@@ -29,7 +29,7 @@
 	</server>
 	```
 
-  - Step 3: Start the Tomcat Web Server by running the command: `sh $CATALINA_HOME/startup.sh`. Check `https://localhost:8080` for success, you should see the Tomcat landing page.
+  - Step 3: Start the Tomcat Web Server by running the command: `sh $CATALINA_HOME/conf/startup.sh`. Check `https://localhost:8080` for success, you should see the Tomcat landing page.
 
 
   - Step 4: Create a Maven Project (no archetype required), configure project to Java 8, and change packaging to WAR
