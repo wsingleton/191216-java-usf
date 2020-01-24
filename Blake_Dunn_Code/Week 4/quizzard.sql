@@ -266,3 +266,5 @@ INSERT INTO study_set_card VALUES (5, 15);
 INSERT INTO study_set_card VALUES (5, 16);
 
 COMMIT;
+
+Update app_user set password = 'killinit' where user_id = 8;

@@ -2,11 +2,14 @@ package com.revature.ers.models;
 
 public enum ReimbursementStatus {
 
-    PENDING ("Pending"), APPROVED ("Approved"), DENIED ("Denied");
+    PENDING (1,"Pending"), APPROVED (2,"Approved"), DENIED (3,"Denied");
 
+    private int id;
     private String status;
 
-    ReimbursementStatus(String status) {
+    ReimbursementStatus(Integer id, String status) {
+
+        this.id = id;
         this.status = status;
     }
 
@@ -26,7 +29,15 @@ public enum ReimbursementStatus {
         }
 
         return status;
+    }
 
+    public int getStatusId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return status;
     }
 
 }

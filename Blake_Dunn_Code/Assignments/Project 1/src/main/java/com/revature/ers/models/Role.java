@@ -2,15 +2,18 @@ package com.revature.ers.models;
 
 public enum Role {
 
-    ADMIN ("Admin"), MANAGER ("Manager"), EMPLOYEE ("Employee");
+    ADMIN (1, "Admin"), MANAGER (2, "Manager"), EMPLOYEE (3,"Employee");
 
+    private int id;
     private String role;
 
-    Role(String role) {
+    Role(Integer id, String role) {
+
+        this.id = id;
         this.role = role;
     }
 
-    public static Role getRoleById(int id) {
+    public static Role getById(int id) {
 
         Role role = null;
 
@@ -26,6 +29,14 @@ public enum Role {
         }
 
         return role;
+    }
 
+    public int getRoleId(){
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return role;
     }
 }

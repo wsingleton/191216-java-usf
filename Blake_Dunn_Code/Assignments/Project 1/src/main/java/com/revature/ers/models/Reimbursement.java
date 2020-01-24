@@ -1,6 +1,8 @@
 package com.revature.ers.models;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.util.Date;
 import java.util.Objects;
 
@@ -8,9 +10,9 @@ public class Reimbursement {
 
     private Integer reimbId;
     private Double amount;
-    private Date expenseDate;
-    private Date submitted;
-    private Date resolved;
+    private String expenseDate;
+    private String submitted;
+    private String resolved;
     private String description;
     private InputStream receipt;
     private Integer authorId;
@@ -22,14 +24,14 @@ public class Reimbursement {
         super();
     }
 
-    public Reimbursement(Double amount, Date expenseDate, Integer authorId, ReimbursementType type) {
+    public Reimbursement(Double amount, String expenseDate, Integer authorId, ReimbursementType type) {
         this.amount = amount;
         this.expenseDate = expenseDate;
         this.authorId = authorId;
         this.type = type;
     }
 
-    public Reimbursement(Double amount, Date expenseDate, String description, Integer authorId, ReimbursementType type) {
+    public Reimbursement(Double amount, String expenseDate, String description, Integer authorId, ReimbursementType type) {
         this.amount = amount;
         this.expenseDate = expenseDate;
         this.description = description;
@@ -37,48 +39,48 @@ public class Reimbursement {
         this.type = type;
     }
 
-    public Reimbursement(Double amount, Date expenseDate, String description, InputStream receipt, ReimbursementType type) {
+    public Reimbursement(Double amount, String expenseDate, String description, InputStream receipt, ReimbursementType type) {
         this.amount = amount;
         this.expenseDate = expenseDate;
-        this.description = description;
-        this.receipt = receipt;
-        this.type = type;
-    }
-
-    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Date submitted, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
-        this.reimbId = reimbId;
-        this.amount = amount;
-        this.expenseDate = expenseDate;
-        this.submitted = submitted;
-        this.authorId = authorId;
-        this.status = status;
-        this.type = type;
-    }
-
-    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Date submitted, String description, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
-        this.reimbId = reimbId;
-        this.amount = amount;
-        this.expenseDate = expenseDate;
-        this.submitted = submitted;
-        this.description = description;
-        this.authorId = authorId;
-        this.status = status;
-        this.type = type;
-    }
-
-    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Date submitted, String description, InputStream receipt, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
-        this.reimbId = reimbId;
-        this.amount = amount;
-        this.expenseDate = expenseDate;
-        this.submitted = submitted;
         this.description = description;
         this.receipt = receipt;
+        this.type = type;
+    }
+
+    public Reimbursement(Integer reimbId, Double amount, String expenseDate, String submitted, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
+        this.reimbId = reimbId;
+        this.amount = amount;
+        this.expenseDate = expenseDate;
+        this.submitted = submitted;
         this.authorId = authorId;
         this.status = status;
         this.type = type;
     }
 
-    public Reimbursement(Integer reimbId, Double amount, Date expenseDate, Date submitted, Date resolved, String description, InputStream receipt, Integer authorId, Integer resolverId, ReimbursementStatus status, ReimbursementType type) {
+    public Reimbursement(Integer reimbId, Double amount, String expenseDate, String submitted, String description, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
+        this.reimbId = reimbId;
+        this.amount = amount;
+        this.expenseDate = expenseDate;
+        this.submitted = submitted;
+        this.description = description;
+        this.authorId = authorId;
+        this.status = status;
+        this.type = type;
+    }
+
+    public Reimbursement(Integer reimbId, Double amount, String expenseDate, String submitted, String description, InputStream receipt, Integer authorId, ReimbursementStatus status, ReimbursementType type) {
+        this.reimbId = reimbId;
+        this.amount = amount;
+        this.expenseDate = expenseDate;
+        this.submitted = submitted;
+        this.description = description;
+        this.receipt = receipt;
+        this.authorId = authorId;
+        this.status = status;
+        this.type = type;
+    }
+
+    public Reimbursement(Integer reimbId, Double amount, String expenseDate, String submitted, String resolved, String description, InputStream receipt, Integer authorId, Integer resolverId, ReimbursementStatus status, ReimbursementType type) {
         this.reimbId = reimbId;
         this.amount = amount;
         this.expenseDate = expenseDate;
@@ -108,27 +110,27 @@ public class Reimbursement {
         this.amount = amount;
     }
 
-    public Date getExpenseDate() {
+    public String getExpenseDate() {
         return expenseDate;
     }
 
-    public void setExpenseDate(Date expenseDate) {
+    public void setExpenseDate(String expenseDate) {
         this.expenseDate = expenseDate;
     }
 
-    public Date getSubmitted() {
+    public String getSubmitted() {
         return submitted;
     }
 
-    public void setSubmitted(Date submitted) {
+    public void setSubmitted(String submitted) {
         this.submitted = submitted;
     }
 
-    public Date getResolved() {
+    public String getResolved() {
         return resolved;
     }
 
-    public void setResolved(Date resolved) {
+    public void setResolved(String resolved) {
         this.resolved = resolved;
     }
 

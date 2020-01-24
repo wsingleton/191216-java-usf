@@ -23,7 +23,7 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.setString(3, newUser.getFirstName());
             pstmt.setString(4, newUser.getLastName());
             pstmt.setString(5, newUser.getEmail());
-            pstmt.setInt(6, newUser.getRole().ordinal() + 1);
+            pstmt.setInt(6, newUser.getRole().getRoleId());
 
             int rowsInserted = pstmt.executeUpdate();
 
@@ -68,6 +68,7 @@ public class UserRepository implements CrudRepository<User> {
             String sql = "SELECT * FROM ersadmin.ers_users WHERE ers_user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
+
             ResultSet rs = pstmt.executeQuery();
             Set<User> set = mapResultSet(rs);
             if (!set.isEmpty()) _user = set.stream().findFirst();
@@ -142,7 +143,7 @@ public class UserRepository implements CrudRepository<User> {
         return _user;
     }
 
-    public Optional<User> findUserByUserName(String username) {
+    public Optional<User> findUserByUsername(String username) {
 
         Optional<User> _user = Optional.empty();
 
@@ -161,6 +162,27 @@ public class UserRepository implements CrudRepository<User> {
         return _user;
     }
 
+    public Set<User> findUsersByRole(Role role) {
+
+        Set<User> users = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM eradmin_ers_users WHERE user_role_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, role.getRoleId());
+
+            ResultSet rs = pstmt.executeQuery();
+            users = mapResultSet(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
+
+    }
+
     private Set<User> mapResultSet(ResultSet rs) throws SQLException {
         Set<User> users = new HashSet<>();
 
@@ -172,7 +194,7 @@ public class UserRepository implements CrudRepository<User> {
             temp.setFirstName(rs.getString("user_first_name"));
             temp.setLastName(rs.getString("user_last_name"));
             temp.setEmail(rs.getString("user_email"));
-            temp.setRole(Role.getRoleById(rs.getInt("user_rold_id")));
+            temp.setRole(Role.getById(rs.getInt("user_rold_id")));
         }
 
         return users;

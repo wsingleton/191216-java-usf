@@ -2,11 +2,14 @@ package com.revature.ers.models;
 
 public enum ReimbursementType {
 
-    LODGING ("Lodging"), TRAVEL ("Travel"), FOOD ("Food"), OTHER ("Other");
+    LODGING (1,"Lodging"), TRAVEL (2,"Travel"), FOOD (3,"Food"), OTHER (4,"Other");
 
+    private int id;
     private String type;
 
-    ReimbursementType(String type) {
+    ReimbursementType(Integer id, String type) {
+
+        this.id = id;
         this.type = type;
     }
 
@@ -29,6 +32,14 @@ public enum ReimbursementType {
         }
 
         return type;
+    }
 
+    public int getTypeId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return type;
     }
 }
