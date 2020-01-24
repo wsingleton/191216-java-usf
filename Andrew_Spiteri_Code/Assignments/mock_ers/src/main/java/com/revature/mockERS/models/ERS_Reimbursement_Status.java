@@ -3,11 +3,13 @@ package com.revature.mockERS.models;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ERS_Reimbursement_Status {
-    ACCEPTED("Accepted"), REJECTED("Rejected"), PROCESSING("Processing"), PRESPROCESSING("Pre-Processing");
+    ACCEPTED(4,"Accepted"), REJECTED(3,"Rejected"), PROCESSING(2,"Processing"), PRESPROCESSING(1,"Pre-Processing");
     private String status;
+    private Integer id;
 
-    ERS_Reimbursement_Status(String status){
+    ERS_Reimbursement_Status(Integer id, String status){
         this.status = status;
+        this.id = id;
     }
 
     @JsonValue
@@ -27,6 +29,22 @@ public enum ERS_Reimbursement_Status {
                 status = ERS_Reimbursement_Status.ACCEPTED;
         }
         return status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override

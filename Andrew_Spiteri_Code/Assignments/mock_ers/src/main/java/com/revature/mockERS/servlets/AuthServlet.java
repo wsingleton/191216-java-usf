@@ -6,6 +6,7 @@ import com.revature.mockERS.exceptions.AuthenticationException;
 import com.revature.mockERS.models.ERS_Users;
 import com.revature.mockERS.repositories.UserRepository;
 import com.revature.mockERS.services.UserService;
+import com.revature.mockERS.util.UserSession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.MalformedInputException;
+
+import static com.revature.mockERS.util.ConnectionFactory.getCon;
 
 
 @WebServlet("/auth")
@@ -30,7 +33,8 @@ public class AuthServlet extends HttpServlet {
         try{
             Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
             authUser = us.login(creds.getUsername(), creds.getPassword());
-            String authUserJSON = mapper.writeValueAsString(authUser);
+            String authUserJSON = "{'ersUsername':"+authUser.getErsUsername()+"}";
+            UserSession userSession = new UserSession(authUser, getCon());
             writer.write(authUserJSON);
         }catch (MalformedInputException e){
             resp.setStatus(400);
@@ -38,6 +42,12 @@ public class AuthServlet extends HttpServlet {
             resp.setStatus(401);
         }catch (Exception e){
             resp.setStatus(500);
+            e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
     }
 }

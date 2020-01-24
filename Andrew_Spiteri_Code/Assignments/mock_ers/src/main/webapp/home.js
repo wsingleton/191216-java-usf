@@ -7,7 +7,10 @@ window.onload = () => {
 }
 
 function homePage(){
+    let divContainer = document.getElementById('container');        
+
     let header1 = document.createElement('i');
+    header1.setAttribute('id', 'header1');
     header1.setAttribute('class', 'fa fa-angle-right');
     header1.setAttribute('aria-hidden', 'true');
     header1.innerText = "Welcome to the Mock Employee Reimbursement System";
@@ -49,8 +52,6 @@ function homePage(){
     let regA = document.createElement('button');
     regA.setAttribute('id', 'register');
     regA.innerText = "Register";
-
-    let divContainer = document.getElementById('container');
 
     divContainer.appendChild(header1);
     divContainer.appendChild(formDiv);
@@ -179,7 +180,13 @@ function register(){
         xhttp.send(data);
         xhttp.onreadystatechange = () =>{
             if(xhttp.readyState === 4 && xhttp.status === 200){
-                alert('Registration successful');
+                alert('Successfully registered!');
+                let divContainer = document.getElementById('container');        
+                let formRegister = document.getElementById('registerForm')
+                let header1 = document.getElementById('header1');
+                divContainer.removeChild(header1);
+                divContainer.removeChild(formRegister);
+                homePage();
             }
         }
     }
@@ -189,18 +196,17 @@ function login(){
     let uname = document.getElementById('un').value;
     let passw = document.getElementById('passw').value;
     if(uname && passw){
-        let divContainer = document.getElementById('container');        
-        let formHome = document.getElementById('loginForm')
-        divContainer.removeChild(formHome);
-
         let xhttp = new XMLHttpRequest();
 
-        xhttp.open('POST', 'http://localhost:8080/ers-app/user', true);
-        let data = JSON.stringify({'ersUsername': uname, 'ersPassword': passw})
+        xhttp.open('POST', 'http://localhost:8080/ers-app/auth', true);
+        let data = JSON.stringify({'username': uname, 'password': passw})
         xhttp.send(data);
         xhttp.onreadystatechange = function(){
             if(xhttp.readyState === 4 && xhttp.status === 200){
                 alert('Login successful');
+                // let divContainer = document.getElementById('container');        
+                // let formHome = document.getElementById('loginForm')
+                // divContainer.removeChild(formHome);
             }
         }
     }

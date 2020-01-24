@@ -48,7 +48,10 @@ public class UserRepository {
                     String ln = rs.getString("user_last_name");
                     String email = rs.getString("user_email");
                     ERS_Users user = new ERS_Users(id, un, pw, fn, ln, email);
-                    if(user.getErsUsername().equals(username) && user.hashCode() == Objects.hash(password)) {
+                    System.out.println("Username: " + user.getErsUsername());
+                    Integer passwInt = Integer.parseInt(pw);
+                    System.out.println("Password: " + user.getErsPassword());
+                    if(user.getErsUsername().equals(username) && user.getErsPassword().equals(String.valueOf(Objects.hash(password)))) {
                         return Optional.of(user);
                     }
                 }
