@@ -112,13 +112,13 @@ public class UserService {
 
     }
 
-    public void authenticate(String username, String password) {
+    public User authenticate(String username, String password) {
 
         if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
             throw new InvalidRequestException();
         }
 
-        User authUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+        return userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
 
     }
 
@@ -148,6 +148,9 @@ public class UserService {
         if (user.getUsername() == null || user.getUsername().trim().equals("")) return false;
         if (user.getPassword() == null || user.getPassword().trim().equals("")) return false;
         return true;
+    }
+    public User getUserById(int id) {
+        return userRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
 }
