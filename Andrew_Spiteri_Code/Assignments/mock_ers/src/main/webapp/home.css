@@ -27,7 +27,7 @@ body {
 
 #login{
     position: relative;
-    top: 75%;
+    top: 170px;
     left: 28%;
     -ms-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translate(-50%,-50%);
@@ -36,8 +36,17 @@ body {
 
 #register{    
     position: relative;
-    top: 75%;
+    top: 170px;
     left: 35%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+#registerFormBtn{
+    position: relative;
+    top: 7rem;
+    left: 30%;
     -ms-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);

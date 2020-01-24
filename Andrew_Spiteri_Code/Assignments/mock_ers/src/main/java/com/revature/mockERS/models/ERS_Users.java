@@ -2,10 +2,13 @@ package com.revature.mockERS.models;
 
 import java.util.Objects;
 
+
 public class ERS_Users {
     private String ersUsername, ersPassword, user_first_name, user_last_name, user_email;
     private Integer id;
     private ERS_User_Roles role;
+
+    public ERS_Users(){}
 
     public ERS_Users(String ersUsername, String ersPassword, String user_first_name, String user_last_name, String user_email) {
         this.ersUsername = ersUsername;

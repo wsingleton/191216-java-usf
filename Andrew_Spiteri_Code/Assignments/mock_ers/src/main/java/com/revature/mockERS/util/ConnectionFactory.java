@@ -2,6 +2,7 @@ package com.revature.mockERS.util;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,14 +16,17 @@ public class ConnectionFactory {
     private ConnectionFactory(){
         super();
         try{
-            props.load(new FileReader("./src/main/resources/application.properties"));
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            InputStream input = loader.getResourceAsStream("application.properties");
+            props.load(input);
+            con = createConnection();
         }catch (IOException e){
             System.out.println("Issue retrieving credentials for database.");
             //TODO REMOVE STACKTRACE
             e.printStackTrace();
            // router.navigate("/home");
         }
-        con = createConnection();
+
     }
 
     public static Connection getCon(){ return con; }

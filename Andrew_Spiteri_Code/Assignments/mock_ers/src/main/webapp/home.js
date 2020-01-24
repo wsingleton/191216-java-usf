@@ -1,11 +1,12 @@
 window.onload = () => {
-    home();
+    homePage();
 
     this.document.getElementById('login').addEventListener('click', login);
-    this.document.getElementById('register').addEventListener('click', register);
+    this.document.getElementById('register').addEventListener('click', registerPage);
+
 }
 
-function home(){
+function homePage(){
     let header1 = document.createElement('i');
     header1.setAttribute('class', 'fa fa-angle-right');
     header1.setAttribute('aria-hidden', 'true');
@@ -63,7 +64,7 @@ function home(){
     
 }
 
-function register(){
+function registerPage(){
     let divContainer = document.getElementById('container');        
     let formHome = document.getElementById('loginForm')
     divContainer.removeChild(formHome);
@@ -93,7 +94,7 @@ function register(){
     pwLabel.innerText = "Password:";
 
     let pwInput = document.createElement('input');
-    pwInput.setAttribute('type', 'text');
+    pwInput.setAttribute('type', 'password');
     pwInput.setAttribute('class', 'form-control');
     pwInput.setAttribute('name', 'pw-input');
     pwInput.setAttribute('id', 'pw-reg');
@@ -142,6 +143,11 @@ function register(){
     emInput.setAttribute('placeholder', 'Email');
     emInput.setAttribute('width', '30px');
 
+    let regBtn = document.createElement('button');
+    regBtn.setAttribute('id', 'registerFormBtn')
+    regBtn.innerText = "Register"
+
+
     divContainer.appendChild(formRegister);
     formRegister.appendChild(unLabel);
     formRegister.appendChild(unInput);
@@ -153,6 +159,30 @@ function register(){
     formRegister.appendChild(lnInput);
     formRegister.appendChild(emLabel);
     formRegister.appendChild(emInput);
+    formRegister.appendChild(regBtn);
+
+    regBtn.addEventListener('click', register);
+}
+
+function register(){
+    let uname = document.getElementById('un-reg').value;
+    let passw = document.getElementById('pw-reg').value;
+    let fname = document.getElementById('fn-reg').value;
+    let lname = document.getElementById('ln-reg').value;
+    let email = document.getElementById('em-reg').value;
+
+    if(uname && passw && fname && lname && email){
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.open('POST', 'http://localhost:8080/ers-app/user', true);
+        let data = JSON.stringify({'ersUsername':uname,'ersPassword':passw,'user_first_name':fname,'user_last_name':lname,'user_email':email});
+        xhttp.send(data);
+        xhttp.onreadystatechange = () =>{
+            if(xhttp.readyState === 4 && xhttp.status === 200){
+                alert('Registration successful');
+            }
+        }
+    }
 }
 
 function login(){    
@@ -166,7 +196,7 @@ function login(){
         let xhttp = new XMLHttpRequest();
 
         xhttp.open('POST', 'http://localhost:8080/ers-app/user', true);
-        let data = JSON.stringify({'username': uname, 'password': passw})
+        let data = JSON.stringify({'ersUsername': uname, 'ersPassword': passw})
         xhttp.send(data);
         xhttp.onreadystatechange = function(){
             if(xhttp.readyState === 4 && xhttp.status === 200){

@@ -13,7 +13,7 @@ import static com.revature.mockERS.util.ConnectionFactory.getCon;
 public class UserRepository {
 
     public Boolean addUser(ERS_Users user){
-        String sql = "INSERT INTO ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) VALUES (?,?,?,?,?,?)";
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
             ps.setString(1,user.getErsUsername());
@@ -21,6 +21,7 @@ public class UserRepository {
             ps.setString(3, user.getUser_first_name());
             ps.setString(4, user.getUser_last_name());
             ps.setString(5,user.getUser_email());
+            ps.setInt(6, 2);
             Integer success = ps.executeUpdate();
             if(success == 1){
                 return true;
@@ -77,6 +78,30 @@ public class UserRepository {
                 }
             }
         }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public Optional<ERS_Users> findByUsername(String username){
+        String sql = "SELECT * FROM ers_users WHERE ers_username = ?";
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if(rs.isBeforeFirst()){
+                while(rs.next()){
+                    String un = rs.getString("ers_username");
+                    String pw = rs.getString("ers_password");
+                    String fn = rs.getString("user_first_name");
+                    String ln = rs.getString("user_last_name");
+                    String email = rs.getString("user_email");
+                    ERS_Users user = new ERS_Users(un, pw, fn, ln, email);
+                    return Optional.of(user);
+                }
+            }
+        }catch (SQLException e){
+            System.out.println("Exception in findByUsername.");
             e.printStackTrace();
         }
         return Optional.empty();

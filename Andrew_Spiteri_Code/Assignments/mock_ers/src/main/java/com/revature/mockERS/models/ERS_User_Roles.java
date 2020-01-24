@@ -14,10 +14,10 @@ public enum ERS_User_Roles {
         ERS_User_Roles role = null;
         switch (id){
             case 1:
-                role = ERS_User_Roles.FINANCE_MANAGER;
+                role = ERS_User_Roles.USER;
                 break;
             case 2:
-                role = ERS_User_Roles.USER;
+                role = ERS_User_Roles.FINANCE_MANAGER;
                 break;
         }
         return role;
