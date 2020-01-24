@@ -139,7 +139,9 @@ function areSimilar(arr1, arr2) {
         return false;
     }
 
-    // compare ratio of side lengths? congruency of angles? HOW???
+    // compare ratio of side lengths
+
+    
 }
 
 // 12. Equivalen arrays

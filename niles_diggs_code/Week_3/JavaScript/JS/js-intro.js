@@ -22,6 +22,9 @@
             - Single threaded memory model
                 + consists of the stack, Heap, Event, Table, Event Queue, and the Event Loop
                 + the Event Loop gives JS the illusion of running tasks concurrently 
+
+        we use JS to implement behavior, how we want our websites to act and function are written in JS, html is about the content
+        of the page, and CSS by comparison is about the designing of the page
 */
 
 /*
@@ -561,6 +564,12 @@ document.write(`<ul>
 */
 let hotelJSON = JSON.stringify(hotel);
 console.log(typeof(hotelJSON), hotelJSON);
+
+// Costructor notation
+
+let newHotel = new Object();
+console.dir(newHotel);
+
 // add in the notes from wednesday
 
 /*
