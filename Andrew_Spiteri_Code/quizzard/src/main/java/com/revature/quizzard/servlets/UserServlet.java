@@ -28,6 +28,11 @@ public class UserServlet extends HttpServlet {
         resp.setContentType("application/json");
         String userIdParam = req.getParameter("userId");
 
+        if(req.getSession(false) != null){
+            User thisUser = (User) req.getSession().getAttribute("this-user");
+            System.out.println(thisUser);
+        }
+
         if(userIdParam == null){
             Set<User> users = userService.getAllUsers();
             String usersJSON = mapper.writeValueAsString(users);

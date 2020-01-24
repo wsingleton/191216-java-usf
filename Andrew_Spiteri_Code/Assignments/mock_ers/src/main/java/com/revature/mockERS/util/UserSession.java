@@ -6,8 +6,10 @@ import com.revature.mockERS.models.ERS_Users;
 import java.sql.Connection;
 
 public class UserSession {
-    private ERS_Users sessionUser;
+    private static ERS_Users sessionUser;
     private Connection connection;
+
+    UserSession(){}
 
     public UserSession(ERS_Users user, Connection conn){
         if(user == null || conn == null){
@@ -17,7 +19,7 @@ public class UserSession {
         connection = conn;
     }
 
-    public ERS_Users getSessionUser(){
+    public static ERS_Users getSessionUser(){
         return sessionUser;
     }
 

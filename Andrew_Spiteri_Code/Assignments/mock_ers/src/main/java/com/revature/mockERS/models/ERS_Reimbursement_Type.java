@@ -3,11 +3,13 @@ package com.revature.mockERS.models;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ERS_Reimbursement_Type {
-    LODGING("Lodging"), TRAVEL("Travel"), FOOD("Food"), OTHER("Other");
+    LODGING(1,"Lodging"), TRAVEL(2,"Travel"), FOOD(3,"Food"), OTHER(4,"Other");
 
     private String type;
+    private Integer id;
 
-    ERS_Reimbursement_Type(String type){
+    ERS_Reimbursement_Type(Integer id,String type){
+        this.id = id;
         this.type = type;
     }
 
@@ -28,6 +30,22 @@ public enum ERS_Reimbursement_Type {
                 type = ERS_Reimbursement_Type.OTHER;
         }
         return type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override

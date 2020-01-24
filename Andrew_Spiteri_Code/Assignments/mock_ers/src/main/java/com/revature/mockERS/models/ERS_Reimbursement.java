@@ -1,25 +1,34 @@
 package com.revature.mockERS.models;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.io.File;
 import java.math.BigDecimal;
+import java.sql.Blob;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class ERS_Reimbursement {
     private Integer reimbId;
     private BigDecimal reimb_amount;
-    private ERS_Reimbursement_Status reimb_submitted, reimb_resolved;
-    private ERS_Reimbursement_Type reimb_description;
-    private File reimb_receipt;
+    private Timestamp reimb_submitted, reimb_resolved;
+    private String reimb_description;
+    private Blob reimb_receipt;
+    private ERS_Reimbursement_Status status;
+    private ERS_Reimbursement_Type type;
 
-    public ERS_Reimbursement(BigDecimal reimb_amount, ERS_Reimbursement_Status reimb_submitted, ERS_Reimbursement_Status reimb_resolved, ERS_Reimbursement_Type reimb_description, File reimb_receipt) {
+
+    public ERS_Reimbursement(BigDecimal reimb_amount, Timestamp reimb_submitted, Timestamp reimb_resolved, String reimb_description, Blob reimb_receipt, ERS_Reimbursement_Status status, ERS_Reimbursement_Type type) {
         this.reimb_amount = reimb_amount;
         this.reimb_submitted = reimb_submitted;
         this.reimb_resolved = reimb_resolved;
         this.reimb_description = reimb_description;
         this.reimb_receipt = reimb_receipt;
+        this.status = status;
+        this.type = type;
     }
 
-    public ERS_Reimbursement(Integer reimbId, BigDecimal reimb_amount, ERS_Reimbursement_Status reimb_submitted, ERS_Reimbursement_Status reimb_resolved, ERS_Reimbursement_Type reimb_description, File reimb_receipt) {
+    public ERS_Reimbursement(Integer reimbId, BigDecimal reimb_amount, Timestamp reimb_submitted, Timestamp reimb_resolved, String reimb_description, Blob reimb_receipt) {
         this.reimbId = reimbId;
         this.reimb_amount = reimb_amount;
         this.reimb_submitted = reimb_submitted;
@@ -36,36 +45,60 @@ public class ERS_Reimbursement {
         this.reimb_amount = reimb_amount;
     }
 
-    public ERS_Reimbursement_Status getReimb_submitted() {
+    public Timestamp getReimb_submitted() {
         return reimb_submitted;
     }
 
-    public void setReimb_submitted(ERS_Reimbursement_Status reimb_submitted) {
+    public void setReimb_submitted(Timestamp reimb_submitted) {
         this.reimb_submitted = reimb_submitted;
     }
 
-    public ERS_Reimbursement_Status getReimb_resolved() {
+    public Timestamp getReimb_resolved() {
         return reimb_resolved;
     }
 
-    public void setReimb_resolved(ERS_Reimbursement_Status reimb_resolved) {
+    public void setReimb_resolved(Timestamp reimb_resolved) {
         this.reimb_resolved = reimb_resolved;
     }
 
-    public ERS_Reimbursement_Type getReimb_description() {
+    public String getReimb_description() {
         return reimb_description;
     }
 
-    public void setReimb_description(ERS_Reimbursement_Type reimb_description) {
+    public void setReimb_description(String reimb_description) {
         this.reimb_description = reimb_description;
     }
 
-    public File getReimb_receipt() {
+    public Blob getReimb_receipt() {
         return reimb_receipt;
     }
 
-    public void setReimb_receipt(File reimb_receipt) {
+    public void setReimb_receipt(Blob reimb_receipt) {
         this.reimb_receipt = reimb_receipt;
+    }
+
+    public Integer getReimbId() {
+        return reimbId;
+    }
+
+    public void setReimbId(Integer reimbId) {
+        this.reimbId = reimbId;
+    }
+
+    public ERS_Reimbursement_Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(ERS_Reimbursement_Status status) {
+        this.status = status;
+    }
+
+    public ERS_Reimbursement_Type getType() {
+        return type;
+    }
+
+    public void setType(ERS_Reimbursement_Type type) {
+        this.type = type;
     }
 
     @Override
