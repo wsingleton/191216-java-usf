@@ -1,31 +1,26 @@
 package com.ers.liberation.models;
 
 public enum ReimbursementType {
-    LODGING("Lodging"),TRAVEL("Travel"),FOOD("Food"),OTHER("Other");
+    LODGING(1,"Lodging"),TRAVEL(2,"Travel"),FOOD(3,"Food"),OTHER(4,"Other");
+    private Integer id;
     private String reimbursementType;
 
-    ReimbursementType(String reimbursementType) {
+    ReimbursementType(Integer id, String reimbursementType) {
+        this.id = id;
         this.reimbursementType = reimbursementType;
     }
 
-    public static ReimbursementType getReimbursementTypeById(Integer Id){
-        ReimbursementType reimbursementType = null;
-        switch (Id){
-            case 1:
-                reimbursementType = LODGING;
-                break;
-            case 2:
-                reimbursementType = TRAVEL;
-                break;
-            case 3:
-                reimbursementType = FOOD;
-                break;
-            default:
-                reimbursementType = OTHER;
-                break;
-        }
+    public Integer getId() {
+        return id;
+    }
 
-        return reimbursementType;
+    public static ReimbursementType getReimbTypeById(int id) {
+        for (ReimbursementType reimbursementType : ReimbursementType.values()) {
+            if (reimbursementType.id == id) {
+                return reimbursementType;
+            }
+        }
+        return ReimbursementType.OTHER;
     }
 
 

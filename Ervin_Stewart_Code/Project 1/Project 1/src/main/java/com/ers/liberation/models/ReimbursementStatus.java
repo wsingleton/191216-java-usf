@@ -1,28 +1,26 @@
 package com.ers.liberation.models;
 
 public enum ReimbursementStatus {
-        PENDING("Pending"),APPROVED("Approved"), DENIED("Denied");
+        PENDING(3,"Pending"),APPROVED(2,"Approved"), DENIED(1,"Denied");
+        private Integer id;
          private String reimbursementStatus;
 
-    ReimbursementStatus(String reimbursementStatus) {
+    ReimbursementStatus(Integer id, String reimbursementStatus) {
+        this.id = id;
         this.reimbursementStatus = reimbursementStatus;
     }
 
-    public static ReimbursementStatus getReimbursementStatusById(Integer Id){
-        ReimbursementStatus reimbursementStatus = null;
-        switch (Id){
-            case 1:
-                reimbursementStatus = DENIED;
-                break;
-            case 2:
-                reimbursementStatus = APPROVED;
-                break;
-            default:
-                reimbursementStatus = PENDING;
-                break;
-        }
+    public Integer getId() {
+        return id;
+    }
 
-        return reimbursementStatus;
+    public static ReimbursementStatus getReimbStatusById(Integer id){
+        for (ReimbursementStatus reimbursementStatus : ReimbursementStatus.values()) {
+            if (reimbursementStatus.id == id) {
+                return reimbursementStatus;
+            }
+        }
+        return ReimbursementStatus.PENDING;
     }
 
 

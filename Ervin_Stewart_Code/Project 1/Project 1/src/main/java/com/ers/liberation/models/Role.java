@@ -2,34 +2,31 @@ package com.ers.liberation.models;
 
 public enum Role {
 
-    EMPLOYEE("Employee"),FINANCE_MANAGER("Manager"),CFO("Chief Financial Manager");
+    EMPLOYEE(1,"Employee"),FINANCE_MANAGER(2,"Manager"),CFO(3,"Chief Financial Manager");
 
-
+    private Integer id;
     private String roleName;
 
-    Role(String roleName){this.roleName = roleName;}
+    Role(Integer id, String roleName) {
+        this.id = id;
+        this.roleName = roleName;
+    }
 
-    public static Role getRoleById(Integer Id){
-        Role role = null;
-        switch (Id){
-            case 1:
-            role = CFO;
-            break;
-            case 2:
-                role= FINANCE_MANAGER;
-                break;
-            case 3:
-                role = EMPLOYEE;
-                break;
+    public Integer getId() {
+        return id;
+    }
 
+    public static Role getById(Integer Id){
+        for (Role role : Role.values()) {
+            if (role.id == Id) {
+                return role;
+            }
         }
-        return role;
+        return Role.EMPLOYEE;
     }
 
     @Override
     public String toString() {
-        return "Role{" +
-                "roleName='" + roleName + '\'' +
-                '}';
+        return roleName;
     }
 }
