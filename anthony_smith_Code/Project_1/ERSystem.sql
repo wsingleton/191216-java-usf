@@ -1,3 +1,15 @@
+create user ers_admin identified by p4ssw0rd default tablespace users temporary tablespace temp quota 10M on users;
+--grant privileges to admin user
+grant connect to ers_admin;
+grant resource to ers_admin;
+grant create session to ers_admin;
+grant create table to ers_admin;
+grant create view to ers_admin;
+
+
+----------------------------------------------------
+
+
 CREATE TABLE ERS_REIMBURSMENT_STATUS
 (
     REIMB_STATUS_ID     NUMBER,
