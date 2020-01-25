@@ -1,70 +1,23 @@
-h4{
-    background-color: #000000;
-    color: #011c4e;
-    border-bottom: 1.5px solid orange;   /* color: whitesmoke;*/
-    padding-left:15px;
-    padding-bottom: 25PX;
-    padding-top: 10px;
-    
-}
-h5{
-    background-color: #000000;
-    color: #011c4e;
-    border-bottom: 1.5px solid orange;   /* color: whitesmoke;*/
-    padding-left:15px;
-    padding-bottom: 25PX;
-    padding-top: 10px;
-    
-}
-#password{
-    
-    width: 205px;
-    box-sizing: border-box;
-    /*border: 2px solid #ccc;*/
-    
-    resize: none;
-}
-#isAdmin{
-    padding-left: 100px;
 
+nav{padding-top: 10px 20px 10px 10px;
+    text-align: right;
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+    border-bottom:2.5px groove gold;
+    background-color:  rgba(145, 155, 141, 0.548);}
+a{border-right:10px thin #4169e1;}
+div.content-container{
+    margin-top:100PX;
+    margin-left: 550px;
+    margin-right: 400px;
 }
-
-    .login_block{padding-left: 10px;
-        padding-right: 10px;
-    }
-
-#login{
-    border-style: groove;
-    background-color:#141414;
-    border-color: #1f1e1e;
-    border-radius: 5px;
-    margin-left: 500px;
-    margin-right:500px;
-    margin-top: 125px;
-    padding-left: 2.5px;
-    
-}
-#validate_login{
-  color: white;
-    background-color: #011c4e;
-    margin-left: 7px;
+*.content-spacer{
     margin-top: 25px;
-    
-}
-#validate_admin_access{
-    color: white;
-    background-color: #011c4e;
-    margin-left: 197px;
-    margin-top: 25px;
+    width:200px;
 }
 body{
-    background-color:white;/* #0a0b0c;
-    /*background-image: url("giphy.gif");
-    color:white ;
-    /*  margin: auto;
-    background-color: #2a3439;
-     margin-top: 70; 
-margin-left: 70;
-margin-bottom: 70;
-margin-right: 70; */
-} 
+    
+    background-color: ivory;
+    color: black;
+}
