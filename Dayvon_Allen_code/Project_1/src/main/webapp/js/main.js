@@ -101,10 +101,10 @@ let credJson = JSON.stringify(creds);
 function register(e) {
 e.preventDefault();
 let password = document.getElementById('password').value;
-let username = document.getElementById('username').value;
+let username = document.getElementById('username').value.toLowerCase();
 let firstName= document.getElementById('firstName').value;
 let lastName = document.getElementById('lastName').value;
-let email = document.getElementById('email').value;
+let email = document.getElementById('email').value.toLowerCase();
 
 let user = {
      username: username,
@@ -127,12 +127,11 @@ let xhr = new XMLHttpRequest();
      xhr.onreadystatechange = () => {
          if(xhr.readyState === 4 ) {
                         if(xhr.status === 201) {
-//                        let user = JSON.parse(xhr.responseText);
                         loadLogin()
                         console.clear();
                         }
                         else if(xhr.status === 409) {
-                            document.getElementById("warning").innerText ="Username is taken";
+                            document.getElementById("warning").innerText ="Username or email is taken";
                             document.getElementById("warning").style.display = "flex";
                             setTimeout(() => {
                                 document.getElementById("warning").style.display = "none";

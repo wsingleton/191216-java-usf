@@ -92,9 +92,10 @@ body{
 
 #warning{
     position:absolute;
+    z-index: 3;
     left: 50%;
-    margin-top: .4rem;
-    height: 4vh;
+    top: .3rem;
+    height: 6vh;
     width: 30vw;
     border: solid 1px red;
     border-radius: 100px;
