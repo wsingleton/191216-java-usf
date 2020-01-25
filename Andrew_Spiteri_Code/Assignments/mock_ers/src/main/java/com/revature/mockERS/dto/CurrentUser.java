@@ -6,6 +6,8 @@ public class CurrentUser {
     private String username;
     private Integer id;
 
+    public CurrentUser () {}
+
     public CurrentUser(Integer id, String username) {
         this.id = id;
         this.username = username;

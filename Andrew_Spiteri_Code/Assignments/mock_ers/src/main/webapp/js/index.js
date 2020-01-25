@@ -192,8 +192,6 @@ function register(){
     }
 }
 
-
-
 function login(){    
     let uname = document.getElementById('un').value;
     let passw = document.getElementById('passw').value;
@@ -237,8 +235,28 @@ function loadDashboard(){
         if(xhttp.readyState === 4){
             if(xhttp.status === 200){
                 document.getElementById('container').innerHTML = xhttp.responseText;
+                document.getElementById('reimb_submit').addEventListener('click', createReimb);                
+            }
+        }
+    }
+}  
+
+function createReimb(){
+    console.log('in createReimb()');
+    let xhttp = new XMLHttpRequest();
+    let amount = document.getElementById('reimb_amount').value;
+    let desc = document.getElementById('description').value;
+    //let receipt = document.getElementById('receipt').value;
+    let type = document.getElementById('type').value;
+    if(amount){
+        xhttp.open('POST', 'http://localhost:8080/ers-app/reimb', true);
+        let data = JSON.stringify({'amount':amount,'desc':desc,'type':type});
+        xhttp.send(data);
+        xhttp.onreadystatechange = () => {
+            if(xhttp.readyState === 4 && xhttp.status === 201){
+                alert('Successfully saved ');
+                loadDashboard();
             }
         }
     }
 }
-   

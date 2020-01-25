@@ -24,16 +24,20 @@ public class ReimbursementServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("UserServlet doPost()");
+        System.out.println("ReimbursementServlet doPost()");
         resp.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = resp.getWriter();
         try{
             ReimbursementIn newReimb = mapper.readValue(req.getInputStream(), ReimbursementIn.class);
-            rs.createNew(newReimb);
+            Boolean created = rs.createNew(newReimb);
             String newReimbJSON = mapper.writeValueAsString(newReimb);
             writer.write(newReimbJSON);
-            resp.setStatus(200);
+            if(created) {
+                resp.setStatus(201);
+            }else{
+                throw new ResourcePersistenceException();
+            }
         }catch (MismatchedInputException e){
             resp.setStatus(400);
             writer.write(e.getMessage());

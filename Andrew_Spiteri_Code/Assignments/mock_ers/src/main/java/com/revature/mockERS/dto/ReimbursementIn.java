@@ -6,13 +6,13 @@ import java.sql.Blob;
 public class ReimbursementIn {
     BigDecimal amount;
     String desc;
-    Blob blob;
     String type;
 
-    public ReimbursementIn(BigDecimal amount, String desc, Blob blob, String type) {
+    public ReimbursementIn(){}
+
+    public ReimbursementIn(BigDecimal amount, String desc, String type) {
         this.amount = amount;
         this.desc = desc;
-        this.blob = blob;
         this.type = type;
     }
 
@@ -30,14 +30,6 @@ public class ReimbursementIn {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public Blob getBlob() {
-        return blob;
-    }
-
-    public void setBlob(Blob blob) {
-        this.blob = blob;
     }
 
     public String getType() {
