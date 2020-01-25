@@ -1,5 +1,50 @@
 package com.revature.mockERS.servlets;
 
-public class ReimbursementServlet {
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import com.revature.mockERS.dto.ErrorResponse;
+import com.revature.mockERS.dto.ReimbursementIn;
+import com.revature.mockERS.exceptions.ResourcePersistenceException;
+import com.revature.mockERS.models.ERS_Reimbursement;
+import com.revature.mockERS.models.ERS_Users;
+import com.revature.mockERS.repositories.ReimbursementRepository;
+import com.revature.mockERS.services.ReimbursementService;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+@WebServlet("/reimb")
+public class ReimbursementServlet extends HttpServlet {
+    ReimbursementService rs = new ReimbursementService(new ReimbursementRepository());
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("UserServlet doPost()");
+        resp.setContentType("application/json");
+        ObjectMapper mapper = new ObjectMapper();
+        PrintWriter writer = resp.getWriter();
+        try{
+            ReimbursementIn newReimb = mapper.readValue(req.getInputStream(), ReimbursementIn.class);
+            rs.createNew(newReimb);
+            String newReimbJSON = mapper.writeValueAsString(newReimb);
+            writer.write(newReimbJSON);
+            resp.setStatus(200);
+        }catch (MismatchedInputException e){
+            resp.setStatus(400);
+            writer.write(e.getMessage());
+        }catch (ResourcePersistenceException e){
+            resp.setStatus(409);
+            ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());
+            err.setMessage(e.getMessage());
+            writer.write(mapper.writeValueAsString(err));
+        }catch (Exception e){
+            resp.setStatus(500);
+            e.printStackTrace();
+        }
+    }
 }

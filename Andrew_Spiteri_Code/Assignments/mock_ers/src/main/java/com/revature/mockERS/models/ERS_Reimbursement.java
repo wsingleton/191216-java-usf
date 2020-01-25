@@ -18,6 +18,8 @@ public class ERS_Reimbursement {
     private ERS_Reimbursement_Type type;
 
 
+    public ERS_Reimbursement(){}
+
     public ERS_Reimbursement(BigDecimal reimb_amount, Timestamp reimb_submitted, Timestamp reimb_resolved, String reimb_description, Blob reimb_receipt, ERS_Reimbursement_Status status, ERS_Reimbursement_Type type) {
         this.reimb_amount = reimb_amount;
         this.reimb_submitted = reimb_submitted;

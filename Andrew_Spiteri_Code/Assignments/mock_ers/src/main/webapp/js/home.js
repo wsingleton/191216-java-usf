@@ -192,6 +192,8 @@ function register(){
     }
 }
 
+
+
 function login(){    
     let uname = document.getElementById('un').value;
     let passw = document.getElementById('passw').value;
@@ -204,9 +206,37 @@ function login(){
         xhttp.onreadystatechange = function(){
             if(xhttp.readyState === 4 && xhttp.status === 200){
                 alert('Login successful');
-                // let divContainer = document.getElementById('container');        
-                // let formHome = document.getElementById('loginForm')
-                // divContainer.removeChild(formHome);
+                document.getElementById('un').innerText = '';
+                document.getElementById('passw').innerText = '';
+                let divContainer = document.getElementById('container');        
+                let formHome = document.getElementById('loginForm')
+                divContainer.removeChild(formHome);
+                loadDashboard();
+                
+            }
+        }
+    }
+}
+
+function logout(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'auth', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('logout successful!')
+        }
+    }
+}
+
+function loadDashboard(){
+    let xhttp = new XMLHttpRequest();
+    xhttp.open('GET', 'dashboard.view', true);
+    xhttp.send();
+    xhttp.onreadystatechange = () =>{
+        if(xhttp.readyState === 4){
+            if(xhttp.status === 200){
+                document.getElementById('container').innerHTML = xhttp.responseText;
             }
         }
     }

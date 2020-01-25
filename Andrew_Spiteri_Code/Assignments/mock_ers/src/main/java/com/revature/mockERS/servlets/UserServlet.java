@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.Set;
 
 
 @WebServlet("/user")
@@ -33,18 +33,26 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("UserServlet doGet()");
+        ObjectMapper mapper = new ObjectMapper();
+        resp.setContentType("application/json");
+        //
+        String userIdParam = req.getParameter("userId");
 
-        PrintWriter writer = resp.getWriter();
-        writer.write("<h1>Hello World!</h1>");
-    }
+        if(req.getSession(false) != null){
+            ERS_Users thisUser = (ERS_Users) req.getSession().getAttribute("this-user");
+        }
 
-    @Override
-    @JsonAnyGetter
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
-        System.out.println("UserServlet doPut()");
-        UserServlet us = new ObjectMapper().readerFor(UserServlet.class).readValue(req.getQueryString());
+        if(userIdParam == null){
+            //Set<ERS_Users> users = us.
+        }else{
+            try{
+                //ERS_Users user
+            }catch (Exception e){
+                resp.setStatus(400);
+            }
+        }
+
+
     }
 
     @Override

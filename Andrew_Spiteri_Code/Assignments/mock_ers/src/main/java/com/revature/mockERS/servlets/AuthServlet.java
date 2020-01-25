@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.MalformedInputException;
@@ -36,6 +37,8 @@ public class AuthServlet extends HttpServlet {
             String authUserJSON = "{'ersUsername':"+authUser.getErsUsername()+"}";
             UserSession userSession = new UserSession(authUser, getCon());
             writer.write(authUserJSON);
+            HttpSession session = req.getSession();
+            session.setAttribute("this-user", authUser);
         }catch (MalformedInputException e){
             resp.setStatus(400);
         }catch (AuthenticationException e){
@@ -48,6 +51,8 @@ public class AuthServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        if(req.getSession(false) != null){
+            req.getSession().invalidate();
+        }
     }
 }

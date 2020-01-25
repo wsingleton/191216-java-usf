@@ -1,0 +1,28 @@
+.form-control{
+    max-width: 50%;
+    position: relative;
+    top: 100px;
+    left: 50%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);    
+}
+
+.form-label{
+    position: relative;
+    top: 100px;
+    left: 28%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+#reimb_submit{
+    position: relative;
+    top: 7rem;
+    left: 30%;
+    right:70%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
