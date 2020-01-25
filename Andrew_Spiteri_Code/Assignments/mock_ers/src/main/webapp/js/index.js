@@ -234,11 +234,29 @@ function loadDashboard(){
         if(xhttp.readyState === 4){
             if(xhttp.status === 200){
                 document.getElementById('container').innerHTML = xhttp.responseText;
-                document.getElementById('reimb_submit').addEventListener('click', createReimb);                
+                document.getElementById('reimb_submit').addEventListener('click', createReimb);
+                returnReimb();
             }
         }
     }
 }  
+
+function returnReimb(){
+    let xhttp = new XMLHttpRequest();
+    xhttp.open('GET', 'http://localhost:8080/ers-app/reimb', true);
+    xhttp.send();
+    xhttp.onreadystatechange = () =>{
+        if(xhttp.readyState === 4 && xhttp.status === 200){
+            let data = JSON.parse(xhttp.responseText);
+            setValues();
+        }        
+    }
+}
+
+function setValues(){
+    let table = document.getElementById('reimb_table');
+    
+}
 
 function createReimb(){
     let xhttp = new XMLHttpRequest();
@@ -257,4 +275,6 @@ function createReimb(){
         }
     }
 }
+
+
 
