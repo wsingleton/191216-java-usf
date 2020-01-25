@@ -98,14 +98,34 @@ let credJson = JSON.stringify(creds);
     }
 }
 
-function register() {
+function register(e) {
 e.preventDefault();
+//strip all space
 let password = document.getElementById('password').value;
-let username = document.getElementById('username').value.toLowerCase();
-let firstName= document.getElementById('firstName').value;
-let lastName = document.getElementById('lastName').value;
-let email = document.getElementById('email').value.toLowerCase();
+let username = document.getElementById('username').value.toLowerCase().replace(/\s+/g, '');
+let firstName= document.getElementById('firstName').value.replace(/\s+/g, '');
+let lastName = document.getElementById('lastName').value.replace(/\s+/g, '');
+let email = document.getElementById('email').value.toLowerCase().replace(/\s+/g, '');
 
+let re =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if(re.test(email) === false) {
+    document.getElementById("warning").innerText ="Must use a valid email.";
+    document.getElementById("warning").style.display = "flex";
+                         setTimeout(() => {
+                         document.getElementById("warning").style.display = "none";
+                         }, 2500);
+
+}
+else if(username.length < 1 || password.length < 1 || firstName.length < 1 || lastName.length < 1){
+       console.log("No input!")
+       document.getElementById("warning").innerText ="Fields can't be empty.";
+       document.getElementById("warning").style.display = "flex";
+                            setTimeout(() => {
+                            document.getElementById("warning").style.display = "none";
+                            }, 2500)
+ }
+else{
 let user = {
      username: username,
      password: password,
@@ -141,6 +161,7 @@ let xhr = new XMLHttpRequest();
 
      }
 
+}
 }
 }
 
