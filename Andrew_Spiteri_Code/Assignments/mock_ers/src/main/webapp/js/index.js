@@ -203,7 +203,6 @@ function login(){
         xhttp.send(data);
         xhttp.onreadystatechange = function(){
             if(xhttp.readyState === 4 && xhttp.status === 200){
-                alert('Login successful');
                 document.getElementById('un').innerText = '';
                 document.getElementById('passw').innerText = '';
                 let divContainer = document.getElementById('container');        
@@ -242,11 +241,9 @@ function loadDashboard(){
 }  
 
 function createReimb(){
-    console.log('in createReimb()');
     let xhttp = new XMLHttpRequest();
     let amount = document.getElementById('reimb_amount').value;
     let desc = document.getElementById('description').value;
-    //let receipt = document.getElementById('receipt').value;
     let type = document.getElementById('type').value;
     if(amount){
         xhttp.open('POST', 'http://localhost:8080/ers-app/reimb', true);
@@ -260,3 +257,4 @@ function createReimb(){
         }
     }
 }
+
