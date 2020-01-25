@@ -1,5 +1,6 @@
 package com.revature.mockERS.repositories;
 
+import com.revature.mockERS.models.ERS_User_Roles;
 import com.revature.mockERS.models.ERS_Users;
 
 import java.sql.PreparedStatement;
@@ -47,7 +48,9 @@ public class UserRepository {
                     String fn = rs.getString("user_first_name");
                     String ln = rs.getString("user_last_name");
                     String email = rs.getString("user_email");
+                    Integer role = rs.getInt("user_role_id");
                     ERS_Users user = new ERS_Users(id, un, pw, fn, ln, email);
+                    user.setRole(ERS_User_Roles.getRoleById(role));
                     System.out.println("Username: " + user.getErsUsername());
                     Integer passwInt = Integer.parseInt(pw);
                     System.out.println("Password: " + user.getErsPassword());
