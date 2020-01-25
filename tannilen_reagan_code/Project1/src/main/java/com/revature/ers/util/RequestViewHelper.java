@@ -5,6 +5,8 @@ public class RequestViewHelper {
         switch (uri) {
             case "/ers/login.view":
                 return "partials/login.html";
+            case "/ers/dash.view":
+                return "partials/dash.html";
             default:
                 return "";
         }
