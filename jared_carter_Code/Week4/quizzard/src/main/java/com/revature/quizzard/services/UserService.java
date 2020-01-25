@@ -13,6 +13,9 @@ public class UserService {
 
     private UserRepository userRepo;
 
+    public User getUserById(int id) {
+        return userRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
+    }
     public UserService(UserRepository repo) {
         super();
         this.userRepo = repo;
@@ -112,13 +115,13 @@ public class UserService {
 
     }
 
-    public void authenticate(String username, String password) {
+    public User authenticate(String username, String password) {
 
         if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
             throw new InvalidRequestException();
         }
 
-        User authUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+       return userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
 
     }
 

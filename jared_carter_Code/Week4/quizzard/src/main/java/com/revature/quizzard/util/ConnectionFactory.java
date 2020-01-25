@@ -5,6 +5,7 @@ import com.revature.quizzard.models.User;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -20,7 +21,9 @@ public class ConnectionFactory {
         super();
 
         try {
-            props.load(new FileReader("./src/main/resources/application.properties"));
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            InputStream input = loader.getResourceAsStream("application.properties");
+            props.load(input);
         } catch (IOException e) {
             e.printStackTrace();
         }

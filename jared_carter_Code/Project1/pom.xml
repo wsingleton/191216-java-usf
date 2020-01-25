@@ -8,25 +8,36 @@
         <groupId>com.revature</groupId>
         <artifactId>reva-pom</artifactId>
         <version>1.0.0</version>
-
     </parent>
 
     <groupId>com.revature</groupId>
-    <artifactId>quizzard</artifactId>
+    <artifactId>project_1_ERS</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-<properties>
-    <jackson.version>2.10.1</jackson.version>
-</properties>
+    <properties>
+        <jackson.version>2.10.1</jackson.version>
+    </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc8</artifactId>
             <version>12.2.0.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -36,7 +47,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.10.1</version>
+            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>
@@ -44,6 +55,7 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -56,12 +68,13 @@
                     <configuration>
                         <url>http://localhost:8080/manager/text</url>
                         <server>LocalTomcat</server>
-                        <path>/quizzard</path>
+                        <path>/project_1_ERS</path>
                         <update>true</update>
                     </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
     </build>
+
 
 </project>
