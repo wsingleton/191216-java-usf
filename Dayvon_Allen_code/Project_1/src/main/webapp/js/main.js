@@ -10,7 +10,6 @@ function loadLogin() {
      css.setAttribute('rel', 'stylesheet');
      css.setAttribute('href', 'css/login.css');
      document.getElementsByTagName("head")[0].appendChild(css);
-     console.log(document.querySelectorAll("head")[0].children);
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'login.view', true);
     xhr.send();
@@ -122,16 +121,7 @@ let css = document.createElement('link');
                             let username = document.querySelectorAll(".txtb input")[2];
                             let email = document.querySelectorAll(".txtb input")[3];
                             let password = document.querySelectorAll(".txtb input")[4];
-                            window.onload = () => {
-                                console.log(window.innerHeight);
-                                console.log(window.innerWidth);
-                            }
                             firstname.addEventListener('focus', () => {
-                                let css = document.createElement('link');
-                                css.setAttribute('rel', 'stylesheet');
-                                css.setAttribute('href', 'login.css');
-                                document.getElementsByTagName("head")[0].appendChild(css)
-                                console.log(document.querySelectorAll("head")[0].children[5]);
                                 firstname.classList.add('focus');
                             });
 
