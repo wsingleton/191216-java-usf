@@ -90,6 +90,20 @@ body{
     cursor: pointer;
 }
 
+#warning{
+    position:absolute;
+    left: 50%;
+    margin-top: .4rem;
+    height: 4vh;
+    width: 30vw;
+    border: solid 1px red;
+    border-radius: 100px;
+    display: none;
+  align-items: center;
+  justify-content: center;
+    transform: translateX(-50%);
+}
+
 /*laptop */
 @media (min-width: 1438px)
   and (max-width: 1445px)

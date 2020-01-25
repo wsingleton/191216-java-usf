@@ -3,7 +3,10 @@ package com.revature.ers.servlet;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.revature.ers.dtos.Credentials;
+import com.revature.ers.dtos.NewUser;
 import com.revature.ers.exceptions.InvalidRequestException;
+import com.revature.ers.exceptions.ResourcePersistenceException;
+import com.revature.ers.models.Role;
 import com.revature.ers.models.User;
 import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.UserService;
@@ -23,19 +26,17 @@ public class RegisterServlet extends HttpServlet {
 
     public final UserService userService = new UserService(new UserRepository());
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = res.getWriter();
         res.setContentType("application/json");
+        System.out.println(req);
 
         try {
-            Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
-            User authUser = userService.authenticate(creds.getUsername(),creds.getPassword());
-            String authUserJSON = mapper.writeValueAsString(authUser);
-            writer.write(authUserJSON);
-
+            User user = mapper.readValue(req.getInputStream(), User.class);
+            userService.register(user);
+            res.setStatus(201);
         } catch (MismatchedInputException e) {
             res.setStatus(400);
         } catch (AuthenticationException e) {
@@ -44,6 +45,9 @@ public class RegisterServlet extends HttpServlet {
         catch (Exception e) {
             res.setStatus(500);
         } catch (InvalidRequestException e) {
+            e.printStackTrace();
+        } catch (ResourcePersistenceException e) {
+            res.setStatus(409);
             e.printStackTrace();
         }
     }

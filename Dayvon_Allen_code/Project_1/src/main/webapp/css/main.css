@@ -67,7 +67,33 @@
     color: lavender !important;
     font-size: 2.8rem;
      cursor: pointer;
-
 }
 
+/* Dashboard */
+
+#circle{
+    height: 12px;
+    width: 12px;
+    background-color: gold;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+#filter {
+    margin-right: 6rem;
+}
+
+nav {
+    background: linear-gradient(120deg, #3498db, #4eb1b8) !important;
+}
+
+
+#logOut:hover{
+    color: lavender !important;
+}
+
+#dropdownId:hover{
+    color: lavender !important;
+
+}
 

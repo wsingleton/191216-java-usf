@@ -41,7 +41,6 @@ function loadLogin(e) {
             })
             document.getElementById('sign-up').addEventListener('click', loadRegister);
             document.getElementById('login').addEventListener('click', login);
-
         }
     }
 }
@@ -99,20 +98,65 @@ let credJson = JSON.stringify(creds);
     }
 }
 
+function register(e) {
+e.preventDefault();
+let password = document.getElementById('password').value;
+let username = document.getElementById('username').value;
+let firstName= document.getElementById('firstName').value;
+let lastName = document.getElementById('lastName').value;
+let email = document.getElementById('email').value;
+
+let user = {
+     username: username,
+     password: password,
+     firstName: firstName,
+     lastName: lastName,
+     email: email,
+     role: 2
+};
+
+console.log(user)
+
+let userJson = JSON.stringify(user);
+
+console.log(userJson)
+
+let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'register', true);
+    xhr.send(userJson);
+     xhr.onreadystatechange = () => {
+         if(xhr.readyState === 4 ) {
+                        if(xhr.status === 201) {
+//                        let user = JSON.parse(xhr.responseText);
+                        loadLogin()
+                        console.clear();
+                        }
+                        else if(xhr.status === 409) {
+                            document.getElementById("warning").innerText ="Username is taken";
+                            document.getElementById("warning").style.display = "flex";
+                            setTimeout(() => {
+                                document.getElementById("warning").style.display = "none";
+                            }, 2500)
+                                console.log("Registraion Failed!")
+                            }
+
+     }
+
+}
+}
+
 function logout(){
 let xhr = new XMLHttpRequest();
 xhr.open('GET', 'auth', true);
 xhr.send()
   xhr.onreadystatechange = () => {
         if(xhr.readyState === 4 && xhr.status === 200) {
-            console.log('logout successful')
+            document.getElementById("logOut").addEventListener('click', loadHome)
         }
     }
-
 }
 
 function loadDashboard(user) {
-
  let xhr = new XMLHttpRequest();
                     xhr.open('GET', 'dashboard.view', true);
                     xhr.send();
@@ -195,7 +239,7 @@ let css = document.createElement('link');
                             password.addEventListener('focus', () => {
                                 password.classList.add('focus');
                             });
-
+                            document.getElementById("register").addEventListener("click", register);
                             document.getElementById("signIn").addEventListener("click", loadLogin);
                         }
                     }
@@ -212,5 +256,4 @@ function loadHome() {
                             document.getElementById("registerBut").addEventListener("click", loadRegister);
                         }
                     }
-
 }
