@@ -98,7 +98,7 @@ let credJson = JSON.stringify(creds);
     }
 }
 
-function register(e) {
+function register() {
 e.preventDefault();
 let password = document.getElementById('password').value;
 let username = document.getElementById('username').value.toLowerCase();
@@ -127,7 +127,7 @@ let xhr = new XMLHttpRequest();
      xhr.onreadystatechange = () => {
          if(xhr.readyState === 4 ) {
                         if(xhr.status === 201) {
-                        loadLogin()
+                        loadHome()
                         console.clear();
                         }
                         else if(xhr.status === 409) {
