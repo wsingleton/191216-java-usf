@@ -1,6 +1,7 @@
 package com.revature.mockERS.services;
 
 import com.revature.mockERS.dto.ReimbursementIn;
+import com.revature.mockERS.dto.ReimbursementOut;
 import com.revature.mockERS.models.ERS_Reimbursement;
 import com.revature.mockERS.models.ERS_Reimbursement_Status;
 import com.revature.mockERS.models.ERS_Reimbursement_Type;
@@ -8,6 +9,7 @@ import com.revature.mockERS.repositories.ReimbursementRepository;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Set;
 
 public class ReimbursementService {
     private ReimbursementRepository rr = new ReimbursementRepository();
@@ -29,7 +31,9 @@ public class ReimbursementService {
         return rr.addReimbursement(ers_reimbursement);
     }
 
-    
+    public Set<ReimbursementOut> returnAllUnprocessedReimbs(){
+        return rr.getAllUnprocessedReimbs();
+    }
 }
 
 
