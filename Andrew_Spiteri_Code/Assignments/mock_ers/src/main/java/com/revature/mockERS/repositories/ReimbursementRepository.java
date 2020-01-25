@@ -42,7 +42,7 @@ public class ReimbursementRepository {
     public Set<ReimbursementOut> getAllUnprocessedReimbs(){
         Set<ReimbursementOut> reimbs = new HashSet<>();
         ReimbursementOut ro = new ReimbursementOut();
-        String sql = "SELECT * FROM ers_reimbursements WHERE reimb_status_id = 1 OR reimb_status_id = 2";
+        String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = 1 OR reimb_status_id = 2";
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
