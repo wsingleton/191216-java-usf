@@ -35,8 +35,8 @@ public class UserSession {
         this.connection = connection;
     }
 
-    public Boolean isAdminOrManager(){
-        ERS_User_Roles currentUserRole = this.getSessionUser().getRole();
+    public static Boolean isAdminOrManager(){
+        ERS_User_Roles currentUserRole = getSessionUser().getRole();
         return currentUserRole.equals(ERS_User_Roles.FINANCE_MANAGER);
     }
 }

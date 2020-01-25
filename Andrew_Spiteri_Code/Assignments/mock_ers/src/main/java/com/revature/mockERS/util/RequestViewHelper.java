@@ -2,6 +2,7 @@ package com.revature.mockERS.util;
 
 public class RequestViewHelper {
 
+
     public static String process(String uri){
         switch (uri){
             case "/ers-app/login.view":
@@ -9,7 +10,11 @@ public class RequestViewHelper {
             case "/ers-app/register.view":
                 return "partials/register.html";
             case "/ers-app/dashboard.view":
-                return "partials/basic-dashboard.html";
+                if(UserSession.isAdminOrManager()){
+                    return "partials/admin-dashboard.html";
+                }else{
+                    return "partials/basic-dashboard.html";
+                }
             default:
                 return "";
         }
