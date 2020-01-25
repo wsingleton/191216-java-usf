@@ -20,7 +20,7 @@ public class UserService {
         return userRepo.findByCredentials(username, password).orElseThrow(ResourceNotFoundException::new);
     }
 
-    public void register(ERS_Users newUser){
+    public Boolean register(ERS_Users newUser){
         if(!isUserValid(newUser)) throw new InvalidRequestException();
 
         if(userRepo.findByUsername(newUser.getErsUsername()).isPresent()){
@@ -28,7 +28,11 @@ public class UserService {
             throw new ResourcePersistenceException("Username is already in use!");
         }
         newUser.setRole(ERS_User_Roles.USER);
-        userRepo.addUser(newUser);
+        Boolean success = userRepo.addUser(newUser);
+        if (success){
+            return true;
+        }
+        return false;
     }
 
     public Boolean isUserValid(ERS_Users user) {
