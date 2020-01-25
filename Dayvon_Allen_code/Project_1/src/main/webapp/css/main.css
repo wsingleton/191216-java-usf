@@ -60,9 +60,14 @@
 #registerBut:hover {
     color: lavender !important;
     font-size: 2.8rem;
+     cursor: pointer;
 }
 
 #loginBut:hover{
     color: lavender !important;
     font-size: 2.8rem;
+     cursor: pointer;
+
 }
+
+

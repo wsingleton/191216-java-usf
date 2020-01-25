@@ -48,11 +48,8 @@ public class AuthServlet extends HttpServlet {
 
         } catch (MismatchedInputException e) {
             res.setStatus(400);
-        } catch (AuthenticationException e) {
+        } catch (Exception e) {
             res.setStatus(401);
-        }
-        catch (Exception e) {
-            res.setStatus(500);
         } catch (InvalidRequestException e) {
             e.printStackTrace();
         }

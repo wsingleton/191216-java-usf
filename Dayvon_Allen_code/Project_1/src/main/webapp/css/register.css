@@ -86,6 +86,10 @@ body{
     font-size: 13px;
 }
 
+#signIn:hover {
+    cursor: pointer;
+}
+
 /*laptop */
 @media (min-width: 1438px)
   and (max-width: 1445px)

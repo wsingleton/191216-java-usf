@@ -1,8 +1,9 @@
 window.onload = () => {
 loadHome()
 }
-function loadLogin() {
+function loadLogin(e) {
     console.log('in loadLogin()');
+    e.preventDefault();
     if(document.querySelectorAll("head")[0].children.length === 7){
         document.querySelectorAll("head")[0].children[6].remove();
     }
@@ -45,10 +46,20 @@ function loadLogin() {
     }
 }
 
-function login(){
+function login(e){
+ e.preventDefault();
 let username = document.getElementById('username').value;
 let password = document.getElementById('password').value;
 
+if(username.length < 1 || password.length < 1){
+console.log("No input!")
+document.getElementById("warning").innerText ="Fields can't be empty.";
+document.getElementById("warning").style.display = "flex";
+                     setTimeout(() => {
+                     document.getElementById("warning").style.display = "none";
+                     }, 2500)
+}
+else{
 let creds = {
     username: username,
     password: password
@@ -61,17 +72,30 @@ let credJson = JSON.stringify(creds);
      xhr.onreadystatechange = () => {
             if(xhr.readyState === 4 ) {
                 if(xhr.status === 200) {
-
                 let user = JSON.parse(xhr.responseText);
-                console.log(user);
-                loadDashboard();
+                loadDashboard(user);
+                console.clear();
                 }
                 if(xhr.status === 401) {
-                document.getElementById('login-message').innerText = 'Login Failed!';
+                  console.log("Login Failed!")
+                  document.getElementById("warning").innerText ="Invalid Credentials";
+                  document.getElementById("warning").style.display = "flex";
+                      setTimeout(() => {
+                      document.getElementById("warning").style.display = "none";
+                      }, 2500)
+//                document.getElementById('login-message').innerText = 'Login Failed!';
+                }
+                 if(xhr.status === 400) {
+                 document.getElementById("warning").innerText ="Invalid Credentials";
+                 document.getElementById("warning").style.display = "flex";
+                     setTimeout(() => {
+                     document.getElementById("warning").style.display = "none";
+                     }, 2500)
+                                  console.log("Login Failed!")
+                //                document.getElementById('login-message').innerText = 'Login Failed!';
                 }
             }
-
-
+    }
     }
 }
 
@@ -82,13 +106,12 @@ xhr.send()
   xhr.onreadystatechange = () => {
         if(xhr.readyState === 4 && xhr.status === 200) {
             console.log('logout successful')
-            loadLogin();
         }
     }
 
 }
 
-function loadDashboard() {
+function loadDashboard(user) {
 
  let xhr = new XMLHttpRequest();
                     xhr.open('GET', 'dashboard.view', true);
@@ -96,11 +119,13 @@ function loadDashboard() {
                     xhr.onreadystatechange = () => {
                         if(xhr.readyState === 4 && xhr.status === 200) {
                             document.getElementById("root").innerHTML = xhr.responseText;
+                            logout();
                         }
                     }
 }
 
-function loadRegister() {
+function loadRegister(e) {
+    e.preventDefault();
  if(document.querySelectorAll("head")[0].children.length === 7){
         document.querySelectorAll("head")[0].children[6].remove();
     }
@@ -177,7 +202,6 @@ let css = document.createElement('link');
 }
 
 function loadHome() {
-
  let xhr = new XMLHttpRequest();
                     xhr.open('GET', 'home.view', true);
                     xhr.send();
@@ -185,7 +209,8 @@ function loadHome() {
                         if(xhr.readyState === 4 && xhr.status === 200) {
                             document.getElementById("root").innerHTML = xhr.responseText;
                             document.getElementById("loginBut").addEventListener("click", loadLogin);
-                            document.getElementById("registerBut").addEventListener("click", loadRegister)
+                            document.getElementById("registerBut").addEventListener("click", loadRegister);
                         }
                     }
+
 }

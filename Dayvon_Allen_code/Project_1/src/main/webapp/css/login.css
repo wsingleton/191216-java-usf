@@ -11,6 +11,20 @@
     transform: translate(-50%,-50%);
 }
 
+#warning{
+    position:absolute;
+    left: 50%;
+    margin-top: .7rem;
+    height: 6vh;
+    width: 30vw;
+    border: solid 1px red;
+    border-radius: 100px;
+    display: none;
+  align-items: center;
+  justify-content: center;
+    transform: translateX(-50%);
+}
+
 .login-form h1{
     text-align: center;
     margin-bottom: 60px;
@@ -69,6 +83,10 @@
 
 .logbtn:hover{
     background-position: right;
+}
+
+#sign-up:hover{
+    cursor: pointer;
 }
 
 .bottom-text{
