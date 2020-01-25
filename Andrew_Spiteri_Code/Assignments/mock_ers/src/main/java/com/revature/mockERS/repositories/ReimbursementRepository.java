@@ -1,11 +1,18 @@
 package com.revature.mockERS.repositories;
 
+import com.revature.mockERS.dto.ReimbursementOut;
 import com.revature.mockERS.models.ERS_Reimbursement;
+import com.revature.mockERS.models.ERS_Reimbursement_Status;
+import com.revature.mockERS.models.ERS_Reimbursement_Type;
 import com.revature.mockERS.models.ERS_Users;
 import com.revature.mockERS.util.UserSession;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.revature.mockERS.util.ConnectionFactory.getCon;
 
@@ -31,4 +38,42 @@ public class ReimbursementRepository {
         }
         return false;
     }
+
+    public Set<ReimbursementOut> getAllUnprocessedReimbs(){
+        Set<ReimbursementOut> reimbs = new HashSet<>();
+        ReimbursementOut ro = new ReimbursementOut();
+        String sql = "SELECT * FROM ers_reimbursements WHERE reimb_status_id = 1 OR reimb_status_id = 2";
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.isBeforeFirst()){
+                while (rs.next()){
+                    Integer id = rs.getInt("reimb_id");
+                    String desc = rs.getString("reimb_description");
+                    Integer type = rs.getInt("reimb_type_id");
+                    Integer status = rs.getInt("reimb_status_id");
+                    Timestamp received = rs.getTimestamp("reimb_submitted");
+                    Timestamp completed = rs.getTimestamp("reimb_resolved");
+                    ro.setId(id);
+                    if(desc != null) {
+                        ro.setDescription(desc);
+                    }else{
+                        ro.setDescription("No description given.");
+                    }
+                    ERS_Reimbursement_Type typeEnum = ERS_Reimbursement_Type.getTypeById(type);
+                    ro.setType(typeEnum.getType());
+                    ERS_Reimbursement_Status statusEnum = ERS_Reimbursement_Status.getStatusById(status);
+                    ro.setStatus(statusEnum.getStatus());
+                    ro.setReceived(received);
+                    ro.setCompleted(completed);
+                    reimbs.add(ro);
+                }
+            }
+            return reimbs;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
