@@ -15,10 +15,12 @@ public class UserRepository implements CrudRepository<User> {
     public Optional<User> findUserByCredentials(String username, String password) {
         Optional<User> user = Optional.empty();
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+            System.out.println(conn);
             String sql = "SELECT * FROM proj_1_admin.ers_users WHERE ers_username=? AND ers_password=?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
             pstmt.setString(2, Integer.toString(password.hashCode()));
+            System.out.println(pstmt);
             ResultSet rs = pstmt.executeQuery();
             user = mapResultSet(rs).stream().findFirst();
         } catch (SQLException e) {

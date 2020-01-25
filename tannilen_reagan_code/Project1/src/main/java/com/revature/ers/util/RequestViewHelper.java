@@ -7,6 +7,8 @@ public class RequestViewHelper {
                 return "partials/login.html";
             case "/ers/dash.view":
                 return "partials/dash.html";
+            case "/ers/about.view":
+                return "partials/about.html";
             default:
                 return "";
         }

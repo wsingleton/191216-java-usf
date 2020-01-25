@@ -9,6 +9,7 @@ import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.UserService;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@WebServlet("/auth")
 public class AuthServlet extends HttpServlet {
     public final UserService userService=new UserService(new UserRepository());
     @Override
@@ -26,6 +28,7 @@ public class AuthServlet extends HttpServlet {
         try {
             Credentials creds=mapper.readValue(req.getInputStream(), Credentials.class);
             User authUser=userService.authenticate(creds.getUsername(), creds.getPassword());
+            System.out.println(authUser);
             String authUserJSON=mapper.writeValueAsString(authUser);
             writer.write(authUserJSON);
             HttpSession session = req.getSession();
@@ -43,6 +46,7 @@ public class AuthServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("Logout function in Auth Servlet called.");
         if(req.getSession(false) != null) {
             req.getSession().invalidate();
         }
