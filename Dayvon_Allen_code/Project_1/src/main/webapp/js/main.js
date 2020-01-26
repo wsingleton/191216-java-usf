@@ -2,7 +2,7 @@ let showForm = false;
 let loggedOut = false;
 let modalIdGenerator = 0;
 
-
+let sortedInfo;
 
 window.onload = () => {
 loadHome()
@@ -165,7 +165,6 @@ let xhr = new XMLHttpRequest();
                                 console.log("Registraion Failed!")
                             }
      }
-
 }
 }
 }
@@ -191,6 +190,7 @@ console.log(currentUser);
                     xhr.send();
                     xhr.onreadystatechange = () => {
                         if(xhr.readyState === 4 && xhr.status === 200) {
+                            console.log("ran")
                             document.getElementById("root").innerHTML = xhr.responseText;
                             document.getElementById("logOut").addEventListener("click", logout)
                             if(currentUser["role"] === "EMPLOYEE"){
@@ -212,16 +212,17 @@ console.log(currentUser);
                                      if(xhr4.status === 201) {
 
                                      let userReimbInfo = JSON.parse(xhr4.responseText);
+                                     console.log(userReimbInfo["subTime"]);
                                      console.log(userReimbInfo);
-//                                     document.getElementById("expenseButton").style.display = "block";
-                                     for (let i = 0; i < userReimbInfo.length; i++){
-                                          makeUserContent(userReimbInfo[i]["id"], userReimbInfo[i]["typeId"],userReimbInfo[i]["amount"], userReimbInfo[i]["authId"], userReimbInfo[i]["resId"],userReimbInfo[i]["statusId"], userReimbInfo[i]["desc"], currentUser)
+                                      sortedInfo =  userReimbInfo.sort((a, b) => b["id"] - a["id"])
+                                       console.log(sortedInfo);
+                                     for (let i = 0; i < sortedInfo.length; i++){
+                                          makeUserContent(sortedInfo[i]["id"], sortedInfo[i]["typeId"],sortedInfo[i]["amount"], sortedInfo[i]["authId"], sortedInfo[i]["resId"],sortedInfo[i]["statusId"], sortedInfo[i]["desc"], currentUser)
                                           }
 
                                       }
                                    }
                                 }
-
 
                                 document.getElementById("expenseButton").addEventListener('click', showFormFunc);
                                 document.getElementById("expenseSubmit").addEventListener('click', () => {
@@ -245,10 +246,9 @@ console.log(currentUser);
                                     xhr1.open('POST', 'reimb', true);
                                     xhr1.send(reimbJSON);
                                     xhr1.onreadystatechange = () => {
-                                     if(xhr.readyState === 4 ) {
-                                         if(xhr.status === 201) {
-                                             loadDashboard(currentUser)
-                                             console.clear();
+                                     if(xhr1.readyState === 4 ) {
+                                         if(xhr1.status === 201) {
+                                             loadDashboard(user);
                                          }
                                 }}
                             })
@@ -562,7 +562,6 @@ function makeContent(id, type, amount, author, resolver, status, descContent, cu
         }
     })
     modalIdGenerator++
-
 }
 
 function makeUserContent(id, type, amount, author, resolver, status, descContent, currentUser) {
@@ -671,14 +670,12 @@ function makeUserContent(id, type, amount, author, resolver, status, descContent
     document.getElementById("mainContent").appendChild(modalDiv1);
 
     modalIdGenerator++
-
 }
 
 
 
-
-
-
-
+function bufferFunction(user) {
+    loadDashboard(user)
+}
 
 
