@@ -1,6 +1,8 @@
 package com.revature.project1.services;
 
+import com.revature.project1.exceptions.AuthenticationException;
 import com.revature.project1.exceptions.InvalidRequestException;
+import com.revature.project1.exceptions.ResourceNotFoundException;
 import com.revature.project1.exceptions.ResourcePersistenceException;
 import com.revature.project1.models.Role;
 import com.revature.project1.models.User;
