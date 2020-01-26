@@ -13,7 +13,8 @@ import java.io.IOException;
 public class ViewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String view= RequestViewHelper.process(req.getRequestURI());
+        System.out.println(req.getRequestURI());
+        String view=RequestViewHelper.process(req.getRequestURI());
         req.getRequestDispatcher(view).forward(req, resp);
     }
 }
