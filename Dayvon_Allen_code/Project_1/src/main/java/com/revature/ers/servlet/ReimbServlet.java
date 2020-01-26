@@ -20,11 +20,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Set;
 
 @WebServlet("/reimb")
 public class ReimbServlet extends HttpServlet {
 
     public final ReimbursementService reimbService = new ReimbursementService(new ReimbursementRepository());
+
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+        ObjectMapper mapper = new ObjectMapper();
+        res.setContentType("application/json");
+        Set<Reimbursement> reimb = reimbService.getAllReimbursements();
+        String reimbJSON = mapper.writeValueAsString(reimb);
+        res.getWriter().write(reimbJSON);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {

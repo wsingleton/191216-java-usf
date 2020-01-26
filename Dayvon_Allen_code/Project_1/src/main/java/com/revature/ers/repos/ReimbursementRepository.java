@@ -5,10 +5,7 @@ import com.revature.ers.models.Status;
 import com.revature.ers.models.Type;
 import com.revature.ers.util.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -45,7 +42,21 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public Set<Reimbursement> findAll() {
-        return null;
+
+        Set<Reimbursement> reimb = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+
+            String sql = "SELECT * FROM ers_project.ers_reimbursement";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            reimb = mapResultSet(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reimb;
     }
 
     @Override

@@ -1,4 +1,5 @@
 let showForm = false
+let loggedOut = false
 window.onload = () => {
 loadHome()
 }
@@ -166,7 +167,9 @@ let xhr = new XMLHttpRequest();
 }
 }
 
-function logout(){
+function logout(e){
+e.preventDefault();
+loggedOut = true;
 let xhr = new XMLHttpRequest();
 xhr.open('GET', 'auth', true);
 xhr.send()
@@ -186,18 +189,15 @@ console.log(currentUser);
                     xhr.onreadystatechange = () => {
                         if(xhr.readyState === 4 && xhr.status === 200) {
                             document.getElementById("root").innerHTML = xhr.responseText;
-                            console.log(currentUser);
                             document.getElementById("logOut").addEventListener("click", logout)
-                            console.log(currentUser["role"]);
                             if(currentUser["role"] === "EMPLOYEE"){
-                            document.getElementById("approve").style.display = "none";
-                            document.getElementById("deny").style.display = "none";
-                            document.getElementById("info").style.display = "none";
-                            document.getElementById("expenseButton").addEventListener('click', showFormFunc);
-                            document.getElementById("expenseSubmit").addEventListener('click', () => {
-                                 showFormFunc();
-
-                                let amount = document.getElementById("amount").value;
+                                document.getElementById("approve").style.display = "none";
+                                document.getElementById("deny").style.display = "none";
+                                document.getElementById("info").style.display = "none";
+                                document.getElementById("expenseButton").addEventListener('click', showFormFunc);
+                                document.getElementById("expenseSubmit").addEventListener('click', () => {
+                               showFormFunc();
+                               let amount = document.getElementById("amount").value;
                                 let selectBox = document.getElementById("type");
                                 let type = selectBox.options[selectBox.selectedIndex].value;
                                 let desc = document.getElementById("desc").value;
@@ -243,12 +243,23 @@ console.log(currentUser);
                                 document.getElementById("approve").style.display = "inline-block";
                                 document.getElementById("deny").style.display = "inline-block";
                                 document.getElementById("info").style.display = "inline-block";
+
+                                let xhr2 = new XMLHttpRequest();
+                                xhr2.open('GET', 'reimb', true);
+                                xhr2.send()
+                                xhr2.onreadystatechange = () => {
+                                  if(xhr2.readyState === 4 ) {
+                                                  if(xhr2.status === 200) {
+                                                  let reimbInfo = JSON.parse(xhr2.responseText);
+                                                  console.log(reimbInfo);
+                                                  }
+                                 }
                             }
 
                         }
                     }
 }
-
+}
 function loadRegister(e) {
     e.preventDefault();
  if(document.querySelectorAll("head")[0].children.length === 7){
@@ -333,6 +344,16 @@ function loadHome() {
                     xhr.onreadystatechange = () => {
                         if(xhr.readyState === 4 && xhr.status === 200) {
                             document.getElementById("root").innerHTML = xhr.responseText;
+                            if(loggedOut === true){
+                            console.log("Successfully Logged out!")
+                            document.getElementById("message").innerText ="Successfully Logged Out!";
+                            document.getElementById("message").style.display = "flex";
+                            loggedOut = false;
+                                                 setTimeout(() => {
+                                                 document.getElementById("message").style.display = "none";
+                                                 }, 2500)
+                            }
+
                             document.getElementById("loginBut").addEventListener("click", loadLogin);
                             document.getElementById("registerBut").addEventListener("click", loadRegister);
                         }

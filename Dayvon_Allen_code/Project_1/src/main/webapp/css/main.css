@@ -69,6 +69,20 @@
      cursor: pointer;
 }
 
+#message{
+    position:absolute;
+    left: 50%;
+    margin-top: .7rem;
+    height: 6vh;
+    width: 30vw;
+    border: solid 1px #5cb85c;
+    border-radius: 100px;
+    display: none;
+  align-items: center;
+  justify-content: center;
+    transform: translateX(-50%);
+}
+
 /* Dashboard */
 
 #circle{
@@ -96,7 +110,6 @@ nav {
     color: lavender !important;
 
 }
-
 
 #dashboardBody{
     min-height: 100vh;
