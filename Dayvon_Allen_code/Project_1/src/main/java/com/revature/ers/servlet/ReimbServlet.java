@@ -35,6 +35,8 @@ public class ReimbServlet extends HttpServlet {
         Set<Reimbursement> reimb = reimbService.getAllReimbursements();
         String reimbJSON = mapper.writeValueAsString(reimb);
         res.getWriter().write(reimbJSON);
+        System.out.println("[LOG] Successfully sent response");
+
     }
 
     @Override
@@ -46,11 +48,15 @@ public class ReimbServlet extends HttpServlet {
             reimb.setStatusId(Status.getById(1));
             reimbService.createReimbursement(reimb);
             res.setStatus(201);
+            System.out.println("[LOG] Created successfully");
+
         } catch (MismatchedInputException e) {
             res.setStatus(400);
+            System.out.println("[ERR] Error");
         }
         catch (Exception e) {
             res.setStatus(500);
+            System.out.println("[ERR] Error");
         }
     }
 }

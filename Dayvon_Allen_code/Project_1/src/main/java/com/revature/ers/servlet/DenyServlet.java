@@ -30,10 +30,13 @@ public class DenyServlet extends HttpServlet {
             reimb.setStatusId(Status.DENIED);
             reimbRepo.update(reimb);
             res.setStatus(201);
+            System.out.println("[LOG] Denied successfully");
         } catch (MismatchedInputException e) {
             res.setStatus(400);
+            System.out.println("[ERR] Error");
         } catch (Exception e) {
             res.setStatus(500);
+            System.out.println("[ERR] Error");
         }
 
     }

@@ -33,9 +33,12 @@ public class ApproveServlet extends HttpServlet {
             reimb.setStatusId(Status.APPROVED);
             reimbRepo.update(reimb);
             res.setStatus(201);
+            System.out.println("[LOG] Approved successfully");
         } catch (MismatchedInputException e) {
+            System.out.println("[ERR] Error");
             res.setStatus(400);
         } catch (Exception e) {
+            System.out.println("[ERR] Error");
             res.setStatus(500);
         }
     }

@@ -45,13 +45,19 @@ public class AuthServlet extends HttpServlet {
             writer.write(authUserJSON);
             HttpSession session = req.getSession();
             session.setAttribute("this-user", authUser);
+            System.out.println("[LOG] Authenticated successfully");
+
 
         } catch (MismatchedInputException e) {
             res.setStatus(400);
+            System.out.println("[ERR] Error");
         } catch (Exception e) {
             res.setStatus(401);
+            System.out.println("[ERR] Error");
+
         } catch (InvalidRequestException e) {
             e.printStackTrace();
+            System.out.println("[ERR] Error");
         }
     }
 }

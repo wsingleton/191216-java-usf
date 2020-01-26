@@ -31,11 +31,14 @@ public class UserReimbServlet extends HttpServlet {
             res.setStatus(201);
         } catch (MismatchedInputException e) {
             res.setStatus(400);
+            System.out.println("[ERR] Error");
         } catch (AuthenticationException e) {
             res.setStatus(401);
+            System.out.println("[ERR] Error");
         }
         catch (Exception e) {
             res.setStatus(500);
+            System.out.println("[ERR] Error");
         }
 
 

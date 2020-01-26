@@ -31,12 +31,12 @@ public class RegisterServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
 //        PrintWriter writer = res.getWriter();
         res.setContentType("application/json");
-        System.out.println(req);
 
         try {
             User user = mapper.readValue(req.getInputStream(), User.class);
             userService.register(user);
             res.setStatus(201);
+            System.out.println("[LOG] Registered successfully");
         } catch (MismatchedInputException e) {
             res.setStatus(400);
         } catch (AuthenticationException e) {
