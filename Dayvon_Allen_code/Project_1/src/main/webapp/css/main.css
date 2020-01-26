@@ -107,8 +107,50 @@ nav {
     background: #1CC676;
     border: none;
     transition:  .9s;
+    outline: none;
 }
 
 #expenseButton:hover{
     background: #36d68b;
 }
+
+#expenseForm {
+    display: none;
+    height: 60vh;
+    margin-top: 1rem;
+    background-color: #40ad7a;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#amount{
+    width: 30vw;
+}
+
+#type{
+    width: 30vw;
+}
+textarea {
+    width: 30vw;
+    height: 20vh;
+}
+
+#expenseSubmit{
+    margin-top: 2rem;
+    width: 30vw;
+border: none;
+    outline: none;}
+
+#approve{
+    border: none;
+        outline: none;
+}
+
+#info{
+border: none;
+    outline: none;}
+
+#deny{
+border: none;
+    outline: none;}

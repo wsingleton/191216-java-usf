@@ -21,6 +21,20 @@
 <div id="dashboardBody">
 <div class="container  pt-4">
     <button id="expenseButton" type="button" name="" class="btn btn-dark btn-lg btn-block">Add a new Expense</button>
+    <form id="expenseForm">
+        <label for="amount" class="text-white">Amount</label>
+        <input type="number" class="form-control" id="amount" placeholder="Ex. 20.00">
+
+        <label class="my-1 mr-2 text-white" for="type">Reimbursement Type</label>
+        <select class="custom-select my-1 mr-sm-2" id="type">
+            <option value="relocation" selected>Relocation</option>
+            <option value="certification">Certification</option>
+            <option value="miscellaneous">Miscellaneous</option>
+        </select>
+        <span class="text-white">Description:</span>
+        <textarea  id="desc"></textarea>
+        <button type="button" name="" id="expenseSubmit" class="btn btn-primary btn-lg btn-block">Create Expense</button>
+    </form>
     <div class="card mt-3">
         <div class="card-header">
             Reimbursement ID: 23049

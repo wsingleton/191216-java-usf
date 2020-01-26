@@ -1,3 +1,4 @@
+let showForm = false
 window.onload = () => {
 loadHome()
 }
@@ -171,7 +172,7 @@ xhr.open('GET', 'auth', true);
 xhr.send()
   xhr.onreadystatechange = () => {
         if(xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById("logOut").addEventListener('click', loadHome)
+            loadHome();
         }
     }
 }
@@ -186,7 +187,34 @@ console.log(currentUser);
                         if(xhr.readyState === 4 && xhr.status === 200) {
                             document.getElementById("root").innerHTML = xhr.responseText;
                             console.log(currentUser);
+                            document.getElementById("logOut").addEventListener("click", logout)
                             console.log(currentUser["role"]);
+                            if(currentUser["role"] === "EMPLOYEE"){
+                            document.getElementById("approve").style.display = "none";
+                            document.getElementById("deny").style.display = "none";
+                            document.getElementById("info").style.display = "none";
+                            document.getElementById("expenseButton").addEventListener('click', showFormFunc);
+                            document.getElementById("amount").addEventListener("keyup", () => {
+                                if(document.getElementById("amount").value.length < 1){
+                                     document.getElementById("expenseSubmit").setAttribute("disabled", true);
+                                }
+                                else{
+                                     document.getElementById("expenseSubmit").removeAttribute("disabled");
+                                    }
+                            })
+                            if(document.getElementById("amount").value < 1){
+                                document.getElementById("expenseSubmit").setAttribute("disabled", true);
+                            }
+                            else{
+                               document.getElementById("expenseSubmit").removeAttribute("disabled");
+                            }
+                            }
+                            else {
+                                document.getElementById("expenseButton").style.display = "none";
+                                document.getElementById("approve").style.display = "inline-block";
+                                document.getElementById("deny").style.display = "inline-block";
+                                document.getElementById("info").style.display = "inline-block";
+                            }
 
                         }
                     }
@@ -281,3 +309,18 @@ function loadHome() {
                         }
                     }
 }
+
+function showFormFunc() {
+    showForm = !showForm;
+    if(showForm === false) {
+        document.getElementById("expenseButton").innerText = "Add a new Expense";
+        document.getElementById("expenseForm").style.display = "none";
+    }
+    else {
+        document.getElementById("expenseButton").innerText = "Close";
+        document.getElementById("expenseForm").style.display = "flex";
+    }
+}
+
+document.getElementById("expenseButton").addEventListener('click', showFormFunc);
+
