@@ -85,9 +85,15 @@ body{
     text-align: center;
     font-size: 13px;
 }
-
+#signIn{
+background: none;
+border: none !important;
+color: #007BFF;
+outline: none;
+}
 #signIn:hover {
     cursor: pointer;
+    text-decoration: underline;
 }
 
 #warning{
