@@ -1,5 +1,6 @@
 window.onload = () => {
 loadHome();
+
 }
 
 function loadHome() {
@@ -12,10 +13,38 @@ function loadHome() {
     xhr.onreadystatechange =() => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById("root").innerHTML = xhr.responseText;
+            document.getElementById('home-login').addEventListener('click', loadLogin);
+        }
+    }
+}
+
+function loadDashboard() {
+
+    console.log('in dashboard');
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'dashboard.view', true);
+    xhr.send();
+    xhr.onreadystatechange =() => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("root").innerHTML = xhr.responseText;
 
         }
     }
 }
+
+//function loadNav(){
+//
+//let xhr = new XMLHttpRequest();
+//    xhr.open('GET', 'nav.view', true);
+//    xhr.send();
+//    xhr.onreadystatechange =() => {
+//        if (xhr.readyState === 4 && xhr.status === 200) {
+//            document.getElementById("nav").innerHTML = xhr.responseText;
+//
+//        }
+//    }
+//}
 
 
 
