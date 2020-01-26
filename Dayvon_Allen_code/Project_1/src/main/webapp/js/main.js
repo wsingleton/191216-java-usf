@@ -1,5 +1,9 @@
-let showForm = false
-let loggedOut = false
+let showForm = false;
+let loggedOut = false;
+let modalIdGenerator = 0;
+
+
+
 window.onload = () => {
 loadHome()
 }
@@ -240,9 +244,9 @@ console.log(currentUser);
                             }
                             else {
                                 document.getElementById("expenseButton").style.display = "none";
-                                document.getElementById("approve").style.display = "inline-block";
-                                document.getElementById("deny").style.display = "inline-block";
-                                document.getElementById("info").style.display = "inline-block";
+//                                document.getElementById("approve").style.display = "inline-block";
+//                                document.getElementById("deny").style.display = "inline-block";
+//                                document.getElementById("info").style.display = "inline-block";
 
                                 let xhr2 = new XMLHttpRequest();
                                 xhr2.open('GET', 'reimb', true);
@@ -250,8 +254,13 @@ console.log(currentUser);
                                 xhr2.onreadystatechange = () => {
                                   if(xhr2.readyState === 4 ) {
                                                   if(xhr2.status === 200) {
+
                                                   let reimbInfo = JSON.parse(xhr2.responseText);
                                                   console.log(reimbInfo);
+                                                  document.getElementById("expenseButton").style.display = "none";
+                                                  for (let i = 0; i < reimbInfo.length; i++){
+                                                    makeContent(reimbInfo[i]["id"], reimbInfo[i]["typeId"],reimbInfo[i]["amount"], reimbInfo[i]["authId"], reimbInfo[i]["resId"],reimbInfo[i]["statusId"], reimbInfo[i]["desc"])
+                                                  }
                                                   }
                                  }
                             }
@@ -373,4 +382,120 @@ function showFormFunc() {
 }
 
 document.getElementById("expenseButton").addEventListener('click', showFormFunc);
+
+
+
+function makeContent(id, type,  amount, author, resolver, status, descContent) {
+    let parentDiv = document.createElement("div");
+    let secondDiv = document.createElement("div");
+    let thirdDiv = document.createElement("div");
+    let title = document.createElement("h5");
+    let amountText = document.createElement("p")
+    let authorText = document.createElement("p")
+    let resolvedText = document.createElement("p")
+    let statusText = document.createElement("p")
+    let hr = document.createElement("hr")
+    let hr2 = document.createElement("hr")
+    let hr3 = document.createElement("hr")
+    let hr4 = document.createElement("hr")
+    let hr5 = document.createElement("hr")
+    let but1 = document.createElement("a")
+    let but2 = document.createElement("a")
+    let but3 = document.createElement("a")
+
+    parentDiv.classList.add("mt-4");
+
+
+    but1.innerText = "Approve"
+    but2.innerText = "Deny"
+    but3.innerText = "More Info"
+
+    but1.classList.add("btn", "btn-success", "approve", "text-white");
+    but2.classList.add("btn", "btn-danger", "deny", "text-white", "ml-2");
+    but3.classList.add("btn", "btn-info", "info", "text-white", "ml-2");
+    but1.href = "#"
+    but2.href = "#"
+    but3.href = "#"
+    but3.setAttribute("data-target", `#model${modalIdGenerator}`);
+    but3.setAttribute("data-toggle", "modal");
+    parentDiv.classList.add("card", "mt-3");
+    secondDiv.classList.add("card-header");
+    thirdDiv.classList.add("card-body")
+    title.classList.add("card-title");
+    amountText.classList.add("card-text");
+    authorText.classList.add("card-text");
+    resolvedText.classList.add("card-text");
+    statusText.classList.add("card-text");
+    title.innerText = "Reimbursement Type: " + type;
+    amountText.innerText = "Author: " + author;
+    authorText.innerText = "Amount: " + amount;
+    resolvedText.innerText = "Resolver: " + resolver;
+    statusText.innerText = "Status: " + status;
+
+    thirdDiv.appendChild(title);
+    thirdDiv.appendChild(hr);
+    thirdDiv.appendChild(amountText);
+    thirdDiv.appendChild(hr2);
+    thirdDiv.appendChild(authorText);
+    thirdDiv.appendChild(hr3);
+    thirdDiv.appendChild(resolvedText);
+    thirdDiv.appendChild(hr4);
+    thirdDiv.appendChild(statusText);
+    thirdDiv.appendChild(hr5);
+    thirdDiv.appendChild(but1);
+    thirdDiv.appendChild(but2);
+    thirdDiv.appendChild(but3);
+    secondDiv.innerText = "Reimbursement ID: " + id;
+
+    parentDiv.appendChild(secondDiv);
+    parentDiv.appendChild(thirdDiv);
+    document.getElementById("mainContent").appendChild(parentDiv);
+
+    let modalDiv1 = document.createElement("div");
+    let modalDiv2 = document.createElement("div");
+    let modalDiv3 = document.createElement("div");
+    let modalDiv4 = document.createElement("div");
+    let modalDiv5 = document.createElement("div");
+    let modalDiv6 = document.createElement("div");
+    let modalTitle = document.createElement("h5");
+    let modalButton = document.createElement("button");
+    let footerButton = document.createElement("button");
+
+    modalButton.classList.add("close");
+    modalButton.setAttribute("type", "button");
+    modalButton.setAttribute("data-dismiss", "modal");
+    modalButton.innerHTML = "&times;"
+    modalTitle.innerText = "Description";
+    modalTitle.classList.add("modal-title");
+
+    footerButton.classList.add("btn", "btn-secondary");
+    footerButton.setAttribute("type", "button");
+    footerButton.setAttribute("data-dismiss", "modal");
+    footerButton.innerText = "Close"
+
+    modalDiv1.setAttribute("id", `model${modalIdGenerator}`);
+    modalDiv1.setAttribute("role", "dialog");
+    modalDiv1.classList.add("modal", "fade");
+    modalDiv2.setAttribute("role", "document");
+    modalDiv2.classList.add("modal-dialog");
+    modalDiv3.classList.add("modal-content");
+    modalDiv4.classList.add("modal-header");
+    modalDiv5.classList.add("modal-body");
+    modalDiv6.classList.add("modal-footer");
+    modalDiv5.innerText = `${descContent}`;
+    modalDiv4.appendChild(modalTitle);
+    modalDiv4.appendChild(modalButton);
+    modalDiv6.appendChild(footerButton);
+    modalDiv3.appendChild(modalDiv4);
+    modalDiv3.appendChild(modalDiv5);
+    modalDiv3.appendChild(modalDiv6);
+    modalDiv2.appendChild(modalDiv3);
+    modalDiv1.appendChild(modalDiv2);
+    document.getElementById("mainContent").appendChild(modalDiv1);
+
+    modalIdGenerator++
+}
+
+
+
 

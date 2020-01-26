@@ -97,6 +97,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             temp.setAmount(rs.getString("reimb_amount"));
             temp.setSubTime("reimb_submitted");
             temp.setAuthId(rs.getInt("reimb_author"));
+            temp.setDesc(rs.getString("reimb_description"));
             temp.setStatusId(Status.getById(rs.getInt("reimb_status_id")));
             temp.setTypeId(Type.getById(rs.getInt("reimb_type_id")));
             reimbursement.add(temp);
