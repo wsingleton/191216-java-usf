@@ -97,3 +97,18 @@ nav {
 
 }
 
+
+#dashboardBody{
+    min-height: 100vh;
+    background: linear-gradient(120deg, #3498db, #4eb1b8) !important;
+}
+
+#expenseButton{
+    background: #1CC676;
+    border: none;
+    transition:  .9s;
+}
+
+#expenseButton:hover{
+    background: #36d68b;
+}

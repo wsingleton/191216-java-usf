@@ -177,13 +177,17 @@ xhr.send()
 }
 
 function loadDashboard(user) {
+let currentUser = user;
+console.log(currentUser);
  let xhr = new XMLHttpRequest();
                     xhr.open('GET', 'dashboard.view', true);
                     xhr.send();
                     xhr.onreadystatechange = () => {
                         if(xhr.readyState === 4 && xhr.status === 200) {
                             document.getElementById("root").innerHTML = xhr.responseText;
-                            logout();
+                            console.log(currentUser);
+                            console.log(currentUser["role"]);
+
                         }
                     }
 }
