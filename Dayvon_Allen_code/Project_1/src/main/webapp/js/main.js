@@ -311,25 +311,27 @@ console.log(currentUser);
                                                   if(xhr2.status === 200) {
 
                                                   let reimbInfo = JSON.parse(xhr2.responseText);
+                                                   let sortedInfo2 =  reimbInfo.sort((a, b) => b["id"] - a["id"])
+
                                                   console.log(reimbInfo);
                                                   document.getElementById("expenseButton").style.display = "none";
-                                                  for (let i = 0; i < reimbInfo.length; i++){
+                                                  for (let i = 0; i < sortedInfo2.length; i++){
                                                   if(all === true) {
-                                                     makeContent(reimbInfo[i]["id"], reimbInfo[i]["typeId"],reimbInfo[i]["amount"], reimbInfo[i]["authId"], reimbInfo[i]["resId"],reimbInfo[i]["statusId"], reimbInfo[i]["desc"], currentUser)
+                                                     makeContent(sortedInfo2[i]["id"], sortedInfo2[i]["typeId"],sortedInfo2[i]["amount"], sortedInfo2[i]["authId"], sortedInfo2[i]["resId"],sortedInfo2[i]["statusId"], sortedInfo2[i]["desc"], sortedInfo2[i]["subTime"], currentUser)
                                                     }
                                                     else if(approvedData === true) {
-                                                        if(reimbInfo[i]["statusId"] === "APPROVED"){
-                                                         makeContent(reimbInfo[i]["id"], reimbInfo[i]["typeId"],reimbInfo[i]["amount"], reimbInfo[i]["authId"], reimbInfo[i]["resId"],reimbInfo[i]["statusId"], reimbInfo[i]["desc"], currentUser)
+                                                        if(sortedInfo2[i]["statusId"] === "APPROVED"){
+                                                         makeContent(sortedInfo2[i]["id"], sortedInfo2[i]["typeId"],sortedInfo2[i]["amount"], sortedInfo2[i]["authId"], sortedInfo2[i]["resId"],sortedInfo2[i]["statusId"], sortedInfo2[i]["desc"], sortedInfo2[i]["subTime"], currentUser)
                                                         }
                                                     }
                                                      else if(pendingData === true) {
-                                                      if(reimbInfo[i]["statusId"] === "PENDING"){
-                                                            makeContent(reimbInfo[i]["id"], reimbInfo[i]["typeId"],reimbInfo[i]["amount"], reimbInfo[i]["authId"], reimbInfo[i]["resId"],reimbInfo[i]["statusId"], reimbInfo[i]["desc"], currentUser)
+                                                      if(sortedInfo2[i]["statusId"] === "PENDING"){
+                                                            makeContent(sortedInfo2[i]["id"], sortedInfo2[i]["typeId"],sortedInfo2[i]["amount"], sortedInfo2[i]["authId"], sortedInfo2[i]["resId"],sortedInfo2[i]["statusId"], sortedInfo2[i]["desc"], sortedInfo2[i]["subTime"], currentUser)
                                                         }
                                                       }
                                                        else if(deniedData === true) {
-                                                         if(reimbInfo[i]["statusId"] === "DENIED"){
-                                                            makeContent(reimbInfo[i]["id"], reimbInfo[i]["typeId"],reimbInfo[i]["amount"], reimbInfo[i]["authId"], reimbInfo[i]["resId"],reimbInfo[i]["statusId"], reimbInfo[i]["desc"], currentUser)
+                                                         if(sortedInfo2[i]["statusId"] === "DENIED"){
+                                                            makeContent(sortedInfo2[i]["id"], sortedInfo2[i]["typeId"],sortedInfo2[i]["amount"], sortedInfo2[i]["authId"], sortedInfo2[i]["resId"],sortedInfo2[i]["statusId"], sortedInfo2[i]["desc"], sortedInfo2[i]["subTime"], currentUser)
                                                           }
                                                       }
                                                   }
@@ -460,7 +462,7 @@ document.getElementById("expenseButton").addEventListener('click', showFormFunc)
 
 
 
-function makeContent(id, type, amount, author, resolver, status, descContent, currentUser) {
+function makeContent(id, type, amount, author, resolver, status, descContent, time, currentUser) {
     let parentDiv = document.createElement("div");
     let secondDiv = document.createElement("div");
     let thirdDiv = document.createElement("div");
@@ -506,7 +508,7 @@ function makeContent(id, type, amount, author, resolver, status, descContent, cu
     title.innerText = "Reimbursement Type: " + type;
     amountText.innerText = "Author: " + author;
     authorText.innerText = "Amount: $" + amount;
-    resolvedText.innerText = "Resolver: " + resolver;
+    resolvedText.innerText = "Time submitted: " + time;
     let span = document.createElement("span");
     if (status === "PENDING") {
         span.style.backgroundColor = "gold"
