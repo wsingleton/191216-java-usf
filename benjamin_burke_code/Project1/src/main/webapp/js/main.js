@@ -1,20 +1,20 @@
-window.onload=()=>{
-
+window.onload = () => {
 loadHome();
-
 }
 
-function loadHome(){
+function loadHome() {
 
-let xhr = new XMLHttpRequest();
-xhr.open('GET', 'home.view', true);
-xhr.send();
-xhr.onreadystatechange=()=>{
-      if(xhr.readyState === 4 && xhr.status === 2000){
-        document.getElementById('root').innerHTM= xhr.responseText;
+    console.log('in loadHome');
 
-      }
-   }
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'home.view', true);
+    xhr.send();
+    xhr.onreadystatechange =() => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("root").innerHTML = xhr.responseText;
+
+        }
+    }
 }
 
 

@@ -7,10 +7,10 @@ public class RequestViewHelper {
         switch (uri){
             case "/Project1/home.view":
                 return "partials/home.html";
-//            case "/project1/register.view":
-//                return "partials/register.html";
-//            case "/project1/login/dashboard":
-//                return "partials/dashboard.html";
+            case "/project1/register.view":
+                return "partials/register.html";
+            case "/project1/login/dashboard":
+                return "partials/dashboard.html";
             default:
                 return "";
         }
