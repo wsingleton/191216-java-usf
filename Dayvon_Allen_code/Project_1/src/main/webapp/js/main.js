@@ -1,6 +1,10 @@
 let showForm = false;
 let loggedOut = false;
 let modalIdGenerator = 0;
+let all = true;
+let approvedData = false;
+let deniedData = false;
+let pendingData = false;
 
 let sortedInfo;
 
@@ -269,9 +273,35 @@ console.log(currentUser);
                             }
                             else {
                                 document.getElementById("expenseButton").style.display = "none";
-                                document.getElementById("approve").style.display = "inline-block";
-                                document.getElementById("deny").style.display = "inline-block";
-                                document.getElementById("info").style.display = "inline-block";
+
+                                document.getElementById("all").addEventListener("click", () => {
+                                    all = true;
+                                    approvedData = false;
+                                    pendingData = false;
+                                    deniedData = false;
+                                    loadDashboard(currentUser)
+                                })
+                                document.getElementById("approved").addEventListener("click", () => {
+                                    all = false;
+                                    approvedData = true;
+                                    pendingData = false;
+                                    deniedData = false;
+                                    loadDashboard(currentUser)
+                                })
+                                document.getElementById("denied").addEventListener("click", () => {
+                                    all = false;
+                                    approvedData = false;
+                                    pendingData = false;
+                                    deniedData = true;
+                                    loadDashboard(currentUser)
+                                })
+                                document.getElementById("pending").addEventListener("click", () => {
+                                    all = false;
+                                    approvedData = false;
+                                    pendingData = true;
+                                    deniedData = false;
+                                    loadDashboard(currentUser)
+                                })
 
                                 let xhr2 = new XMLHttpRequest();
                                 xhr2.open('GET', 'reimb', true);
@@ -284,8 +314,28 @@ console.log(currentUser);
                                                   console.log(reimbInfo);
                                                   document.getElementById("expenseButton").style.display = "none";
                                                   for (let i = 0; i < reimbInfo.length; i++){
-                                                    makeContent(reimbInfo[i]["id"], reimbInfo[i]["typeId"],reimbInfo[i]["amount"], reimbInfo[i]["authId"], reimbInfo[i]["resId"],reimbInfo[i]["statusId"], reimbInfo[i]["desc"], currentUser)
+                                                  if(all === true) {
+                                                     makeContent(reimbInfo[i]["id"], reimbInfo[i]["typeId"],reimbInfo[i]["amount"], reimbInfo[i]["authId"], reimbInfo[i]["resId"],reimbInfo[i]["statusId"], reimbInfo[i]["desc"], currentUser)
+                                                    }
+                                                    else if(approvedData === true) {
+                                                        if(reimbInfo[i]["statusId"] === "APPROVED"){
+                                                         makeContent(reimbInfo[i]["id"], reimbInfo[i]["typeId"],reimbInfo[i]["amount"], reimbInfo[i]["authId"], reimbInfo[i]["resId"],reimbInfo[i]["statusId"], reimbInfo[i]["desc"], currentUser)
+                                                        }
+                                                    }
+                                                     else if(pendingData === true) {
+                                                      if(reimbInfo[i]["statusId"] === "PENDING"){
+                                                            makeContent(reimbInfo[i]["id"], reimbInfo[i]["typeId"],reimbInfo[i]["amount"], reimbInfo[i]["authId"], reimbInfo[i]["resId"],reimbInfo[i]["statusId"], reimbInfo[i]["desc"], currentUser)
+                                                        }
+                                                      }
+                                                       else if(deniedData === true) {
+                                                         if(reimbInfo[i]["statusId"] === "DENIED"){
+                                                            makeContent(reimbInfo[i]["id"], reimbInfo[i]["typeId"],reimbInfo[i]["amount"], reimbInfo[i]["authId"], reimbInfo[i]["resId"],reimbInfo[i]["statusId"], reimbInfo[i]["desc"], currentUser)
+                                                          }
+                                                      }
                                                   }
+                                                    document.querySelector(".approve").style.display = "inline-block";
+                                                                                  document.querySelector(".deny").style.display = "inline-block";
+                                                                                  document.querySelector(".info").style.display = "inline-block";
                                                   }
                                  }
                             }
