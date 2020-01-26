@@ -1,8 +1,11 @@
 body {
-    background-color: darkorange;
+    background-color: slategray;
+    color: darkorange;
 }
 
 .jumbotron {
     background-color: dimgrey;
     color: darkorange;
 }
+
+

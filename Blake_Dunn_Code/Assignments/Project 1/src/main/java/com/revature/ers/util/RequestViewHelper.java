@@ -11,6 +11,10 @@ public class RequestViewHelper {
                 return "partials/login.html";
             case "/project_1_ERS/register.view":
                 return "partials/register.html";
+            case "/project_1_ERS/dashboard.view":
+                return "partials/dashboard.html";
+            case "/project_1_ERS/reimbs.view":
+                return "partials/reimb-table";
             case "/project_1_ERS/newreimb.view":
                 return "partials/newreimb.html";
             default:

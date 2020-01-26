@@ -12,7 +12,7 @@ import java.util.Set;
 public class UserRepository implements CrudRepository<User> {
 
     @Override
-    public void save(User newUser) {
+    public User save(User newUser) {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -40,6 +40,7 @@ public class UserRepository implements CrudRepository<User> {
             e.printStackTrace();
         }
 
+        return newUser;
     }
 
     @Override

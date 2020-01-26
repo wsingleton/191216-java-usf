@@ -1,7 +1,8 @@
 window.onload = () => {
     console.log('homescreen loaded?');
     loadHome();
-
+    document.getElementById('navdashboard').addEventListener('click', loadDashboard);
+    document.getElementById('signout').addEventListener('click', logout);
 }
 
 function loadHome() {
@@ -55,7 +56,7 @@ function login() {
 
                 let user = JSON.parse(xhr.responseText);
                 console.log(user);
-                // loadDashboard();
+                loadDashboard();
             }
 
             if (xhr.status === 401) {
@@ -107,7 +108,7 @@ function register() {
 
                 let user = JSON.parse(xhr.responseText);
                 console.log(user);
-                // loadDashboard();
+                loadDashboard();
             }
 
             if (xhr.status === 401) {
@@ -116,6 +117,8 @@ function register() {
         }
     }
 }
+
+
 
 function logout() {
     let xhr = new XMLHttpRequest();
@@ -126,4 +129,131 @@ function logout() {
             console.log('Logout successful!');
         }
     }
+
+    loadHome();
+}
+
+function loadDashboard() {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'dashboard.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('root').innerHTML = xhr.responseText;
+            document.getElementById('newreimbbutton').addEventListener('click', loadNewReimb);
+            document.getElementById('viewreimbbutton').addEventListener('click', loadReimbs);  
+        }
+    }
+}
+
+function loadNewReimb() {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'newreimb.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('root').innerHTML = xhr.responseText;
+            document.getElementById('newreimb').addEventListener('click', submitNewReimb);  
+        }
+    }
+}
+
+function submitNewReimb() {
+
+    let amount = getElementById('amount').value;
+    let date = getElementById('expensedate').value;
+    let select = getElementById('reimbtype');
+    let type = select.options[select.selectedIndex].innerHTML;
+    let description = getElementById('description').innerHTML;
+    let receipt = getElementById('receipt').value;
+
+    let creds = {
+        amount: amount,
+        expenseDate: date,
+        type: type,
+        description: description,
+        receipt: receipt
+    };
+
+    let credJSON = JSON.stringify(creds);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'reimbs', true);
+    xhr.send(credJSON);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+
+                let newReimb = JSON.parse(xhr.responseText);
+                console.log(newReimb);
+            }
+
+            if (xhr.status === 401) {
+                document.getElementById('reimb-message').innerText = 'New Submission Failed!';
+            }
+        }
+    }
+}
+
+function getReimbs() {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'reimbs', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let reimbList = JSON.parse(xhr.responseText);
+                console.log(reimbList);
+            }
+        }
+    }
+}
+
+function addRow() {
+
+    let row = document.createElement('tr');
+    let idCell = document.createElement('td');
+    let userIdCell = document.createElement('td');
+    let subDateCell = document.createElement('td');
+    let expDateCell = document.createElement('td');
+    let amtCell = document.createElement('td');
+    let typeCell = document.createElement('td');
+    let statusCell = document.createElement('td');
+
+    row.appendChild(idCell);
+    row.appendChild(userIdCell);
+    row.appendChild(subDateCell);
+    row.appendChild(expDateCell);
+    row.appendChild(amtCell);
+    row.appendChild(typeCell);
+    row.appendChild(statusCell);
+
+    document.getElementById('reimbtable').appendChild(row);
+
+    idCell.innerText = id;
+    userIdCell.innerText = userId;
+    subDateCell.innerText = subDate;
+    expDateCell.innerText = expDate;
+    amtCell.innerText = amount;
+    typeCell.innerText = type;
+    statusCell.innerText = status;
+
+}
+
+function isEmail(string){
+
+    let x = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(string);
+
+    return x;
+
+};
+
+function checkLength (string) {
+    if (string.length < 2) {
+        return false;
+    }
+    return true;
 }

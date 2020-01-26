@@ -13,12 +13,12 @@
               <label for="amount">Amount</label>
               <div class="input-group-prepend">
                   <span class="input-group-text">$</span>
-                  <input id="amount" type="text" class="form-control" aria-label="Amount">
+                  <input id="amount" type="text" class="form-control" aria-label="Amount" requried>
               </div>
           </div>
           <div class="form-group col-md-5">
               <label for="expensedate">Expense Date</label>
-              <input id="expensedate" type="text" class="form-control">
+              <input id="expensedate" type="text" class="form-control" required>
           </div>
           <div class="form-group col-md-5">
               <label for="reimbtype">Type</label>
@@ -32,9 +32,9 @@
           <br>
           <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text">With textarea</span>
+                <span class="input-group-text">Description</span>
               </div>
-              <textarea class="form-control" aria-label="With textarea"></textarea>
+              <textarea id="description" class="form-control" aria-label="With textarea"></textarea>
             </div>
           <br>
           <div class="input-group mb-3">
@@ -42,12 +42,16 @@
                 <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
               </div>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                <input type="file" class="custom-file-input" id="receipt" aria-describedby="inputGroupFileAddon01">
                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
               </div>
           </div>
       </div>
+      <button type="submit" class="btn btn-lg btn-secondary" id="newreimb">Submit</button>
     </form>
     </div> 
 </div>
+
+<br> <br>
+<div class="alert alert-danger" id="reimb-message"></div>
   

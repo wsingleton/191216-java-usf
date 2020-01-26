@@ -5,7 +5,7 @@ import java.util.Set;
 
 public interface CrudRepository <T> {
 
-    void save(T newObj);
+    T save(T newObj);
     Set<T> findAll();
     Optional<T> findById(Integer id);
     Boolean update(T updatedObj);

@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Set;
@@ -24,9 +25,14 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         ObjectMapper mapper = new ObjectMapper();
         String userIdParam = req.getParameter("userId");
         resp.setContentType("application/JSON");
+
+        if (req.getSession(false) != null) {
+            User thisUser = (User) req.getSession().getAttribute("this-user");
+        }
 
         if (userIdParam == null) {
             Set<User> users = userService.getAllUsers();
@@ -53,9 +59,11 @@ public class UserServlet extends HttpServlet {
         try {
 
             User newUser = mapper.readValue(req.getInputStream(), User.class);
-            userService.register(newUser);
+            User authUser = userService.register(newUser);
             String newUserJSON = mapper.writeValueAsString(newUser);
             resp.setStatus(201); // created
+            HttpSession session = req.getSession();
+            session.setAttribute("this-user", authUser);
 
         }catch (MismatchedInputException e) {
             resp.setStatus(400); // bad request

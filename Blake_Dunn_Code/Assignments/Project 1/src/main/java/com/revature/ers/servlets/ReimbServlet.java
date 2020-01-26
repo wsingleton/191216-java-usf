@@ -1,12 +1,12 @@
-package com.revature.quizzard.servlets;
+package com.revature.ers.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
-import com.revature.quizzard.dtos.ErrorResponse;
-import com.revature.quizzard.exceptions.ResourceNotFoundException;
-import com.revature.quizzard.models.User;
-import com.revature.quizzard.repos.UserRepository;
-import com.revature.quizzard.services.UserService;
+import com.revature.ers.dtos.ErrorResponse;
+import com.revature.ers.exceptions.ResourceNotFoundException;
+import com.revature.ers.models.Reimbursement;
+import com.revature.ers.repos.ReimbursementRepository;
+import com.revature.ers.services.ReimbursementService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,35 +17,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Set;
 
-@WebServlet("/users/*")
-public class UserServlet extends HttpServlet {
+@WebServlet ("/reimbs/*")
+public class ReimbServlet extends HttpServlet {
 
-    private final UserService userService = new UserService(new UserRepository());
+    private final ReimbursementService reimbService = new ReimbursementService(new ReimbursementRepository());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        String userIdParam = req.getParameter("userId");
+        String typeParam = req.getParameter("type");
         resp.setContentType("application/JSON");
 
-        if (req.getSession(false) != null) {
-            User thisUser = (User) req.getSession().getAttribute("this-user");
-            System.out.println(thisUser);
-        }
-
-        if (userIdParam == null) {
-            Set<User> users = userService.getAllUsers();
-            String usersJSON = mapper.writeValueAsString(users);
-            resp.getWriter().write(usersJSON);
-
-        }else {
-            try{
-            User user = userService.getUserById(Integer.parseInt(userIdParam));
-            String userJSON = mapper.writeValueAsString(user);
-            resp.getWriter().write(userJSON);
-            }catch (Exception e){
-                resp.setStatus(400);
-            }
+        if (typeParam == null) {
+            Set<Reimbursement> reimbs = reimbService.getAllReimbs();
+            String reimbsJSON = mapper.writeValueAsString(reimbs);
+            resp.getWriter().write(reimbsJSON);
         }
     }
 
@@ -57,9 +43,9 @@ public class UserServlet extends HttpServlet {
 
         try {
 
-            User newUser = mapper.readValue(req.getInputStream(), User.class);
-            userService.register(newUser);
-            String newUserJSON = mapper.writeValueAsString(newUser);
+            Reimbursement newReimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
+            reimbService.saveReimb(newReimb);
+            String newReimbJSON = mapper.writeValueAsString(newReimb);
             resp.setStatus(201); // created
 
         }catch (MismatchedInputException e) {

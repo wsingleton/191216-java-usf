@@ -20,7 +20,7 @@ public class UserService {
         this.userRepo = repo;
     }
 
-    public void register(User newUser) {
+    public User register(User newUser) {
 
         if (!isUserValid(newUser)) throw new InvalidRequestException();
 
@@ -29,7 +29,9 @@ public class UserService {
         }
 
         newUser.setRole(Role.EMPLOYEE);
-        userRepo.save(newUser);
+        User currentUser = userRepo.save(newUser);
+
+        return currentUser;
 
     }
 

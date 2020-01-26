@@ -11,7 +11,7 @@ import java.util.Set;
 public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
     @Override
-    public void save(Reimbursement newReimb) {
+    public Reimbursement save(Reimbursement newReimb) {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
             if (newReimb.getReceipt() != null) {
@@ -62,6 +62,8 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             e.printStackTrace();
         }
 
+        return newReimb;
+
     }
 
     @Override
@@ -82,6 +84,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public Optional<Reimbursement> findById(Integer id) {
+
         Optional<Reimbursement> _reimb = Optional.empty();
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {

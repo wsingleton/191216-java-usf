@@ -174,4 +174,4 @@ INSERT INTO ers_user_roles VALUES (0, 'ADMIN');
 INSERT INTO ers_user_roles VALUES (0, 'MANAGER');
 INSERT INTO ers_user_roles VALUES (0, 'EMPLOYEE');
 
-COMMIT;
+INSERT INTO ers_users VALUES (0, 'buhlakay', 'boatsnhoes', 'Blake', 'Dunn', 'bdunn@buhlakify.com', 1);

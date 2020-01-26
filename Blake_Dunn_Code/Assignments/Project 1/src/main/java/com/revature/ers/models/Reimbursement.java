@@ -1,9 +1,6 @@
 package com.revature.ers.models;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
-import java.sql.Blob;
-import java.util.Date;
 import java.util.Objects;
 
 public class Reimbursement {
