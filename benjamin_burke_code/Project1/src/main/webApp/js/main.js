@@ -6,7 +6,8 @@ loadHome();
 
 function loadHome(){
 
-let xhr = new XMLHttpRequest('GET', 'home.view', true);
+let xhr = new XMLHttpRequest();
+xhr.open('GET', 'home.view', true);
 xhr.send();
 xhr.onreadystatechange=()=>{
       if(xhr.readyState === 4 && xhr.status === 2000){
