@@ -38,34 +38,40 @@ public class ReimbursementRepository {
         return false;
     }
 
-    public ArrayList<ReimbursementOut> getAllUnprocessedReimbs(){
-        ArrayList<ReimbursementOut> reimbs = new ArrayList<>();
-        ReimbursementOut ro = new ReimbursementOut();
+    public List<ReimbursementOut> getAllUnprocessedReimbs(){
+        List<ReimbursementOut> reimbs = new ArrayList<>();
         String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = 1 OR reimb_status_id = 2";
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+            Integer id, type, status;
+            String desc;
+            Timestamp received, completed;
+            ERS_Reimbursement_Type typeEnum;
+            ERS_Reimbursement_Status statusEnum;
+            Boolean bool;
 
             while (rs.next()){
-                Integer id = rs.getInt("reimb_id");
-                String desc = rs.getString("reimb_description");
-                Integer type = rs.getInt("reimb_type_id");
-                Integer status = rs.getInt("reimb_status_id");
-                Timestamp received = rs.getTimestamp("reimb_submitted");
-                Timestamp completed = rs.getTimestamp("reimb_resolved");
+                id = rs.getInt("reimb_id");
+                desc = rs.getString("reimb_description");
+                type = rs.getInt("reimb_type_id");
+                status = rs.getInt("reimb_status_id");
+                received = rs.getTimestamp("reimb_submitted");
+                completed = rs.getTimestamp("reimb_resolved");
+                ReimbursementOut ro = new ReimbursementOut();
                 ro.setId(id);
                 if(desc != null) {
                     ro.setDescription(desc);
                 }else{
                     ro.setDescription("No description given.");
                 }
-                ERS_Reimbursement_Type typeEnum = ERS_Reimbursement_Type.getTypeById(type);
+                typeEnum = ERS_Reimbursement_Type.getTypeById(type);
                 ro.setType(typeEnum.getType());
-                ERS_Reimbursement_Status statusEnum = ERS_Reimbursement_Status.getStatusById(status);
+                statusEnum = ERS_Reimbursement_Status.getStatusById(status);
                 ro.setStatus(statusEnum.getStatus());
                 ro.setReceived(received);
                 ro.setCompleted(completed);
-                Boolean bool = reimbs.add(ro);
+                bool = reimbs.add(ro);
                 if(reimbs.contains(ro)){
                     System.out.println("Repository RO: "+ bool);
                 }

@@ -68,7 +68,7 @@ public class ReimbursementServlet extends HttpServlet {
             PrintWriter writer = resp.getWriter();
             try{
                 mapper.writerFor(ReimbursementOut.class);
-                ArrayList<ReimbursementOut> reimbs = rs.returnAllUnprocessedReimbs();
+                List<ReimbursementOut> reimbs = rs.returnAllUnprocessedReimbs();
                 StringBuilder reimbursement = new StringBuilder();
                 Iterator i = reimbs.iterator();
                 while (i.hasNext()) {

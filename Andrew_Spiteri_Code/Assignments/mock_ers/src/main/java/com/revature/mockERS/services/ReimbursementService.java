@@ -33,7 +33,7 @@ public class ReimbursementService {
         return rr.addReimbursement(ers_reimbursement);
     }
 
-    public ArrayList<ReimbursementOut> returnAllUnprocessedReimbs(){
+    public List<ReimbursementOut> returnAllUnprocessedReimbs(){
         return rr.getAllUnprocessedReimbs();
     }
 
