@@ -2,6 +2,20 @@ window.onload=()=>{
 
 }
 
+function loadHome(){
+
+let xhr = new XMLHttpRequest('GET', 'home.view', true);
+xhr.send();
+xhr.onreadystatechange=()=>{
+      if(xhr.readyState === 4 && xhr.status === 2000){
+        document.getElementById('root').innerHTM= xhr.responseText;
+
+      }
+   }
+}
+
+
+
 function loadLogin() {
     console.log('in loadLogin()');
     let xhr = new XMLHttpRequest();
