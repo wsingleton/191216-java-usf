@@ -1,13 +1,14 @@
-package com.revature.quizzard.models;
+package com.revature.ers.models;
 
 public enum Role {
 
-    ADMIN(1, "Admin"), DEV(2, "Dev"), BASIC_USER(3, "Basic User"),
-    PREMIUM_USER(4, "Premium User"), LOCKED(5, "Locked");
+    EMPLOYEE(1, "Employee"), MANAGER(2, "Manager");
 
     private int id;
     private String name;
 
+    Role() {
+    }
 
     Role(Integer id, String name) {
         this.id = id;
@@ -20,16 +21,12 @@ public enum Role {
                 return role;
             }
         }
-        return Role.LOCKED;
+        return Role.EMPLOYEE;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
     @Override
-    public String toString() {
-        return name;
-    }
+    public String toString() { return name; }
 
 }

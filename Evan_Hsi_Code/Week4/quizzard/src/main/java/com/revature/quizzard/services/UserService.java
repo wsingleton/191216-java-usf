@@ -74,6 +74,10 @@ public class UserService {
 
     }
 
+    public User getUserById(int id) {
+        return userRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
+    }
+
     public SortedSet<User> sortUsers(String sortCriterion, Set<User> usersForSorting) {
 
         SortedSet<User> users = new TreeSet<>(usersForSorting);
@@ -112,13 +116,13 @@ public class UserService {
 
     }
 
-    public void authenticate(String username, String password) {
+    public User authenticate(String username, String password) {
 
         if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
             throw new InvalidRequestException();
         }
 
-        User authUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+        return userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
 
     }
 

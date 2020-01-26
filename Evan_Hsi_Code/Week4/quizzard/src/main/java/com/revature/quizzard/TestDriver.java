@@ -43,6 +43,7 @@ public class TestDriver {
         System.out.println("after save: " + newUser);
         System.out.println("+----------------------------+");
 
+
         System.out.println("update user:");
         User updatedUser = newUser;
         updatedUser.setPassword("react!");
@@ -50,7 +51,17 @@ public class TestDriver {
         System.out.println("confirming update: " + repo.findUserByUsername("abatson"));
         System.out.println("+----------------------------+");
 
-        System.out.println("delete user not tested");
+        System.out.println("delete user: ");
+
+        System.out.println("before delete:");
+        for (User u : repo.findAll()) System.out.println(u.toString());
+        System.out.println("+----------------------------+");
+
+        repo.deleteById(newUser.getId());
+        System.out.println("after delete:");
+        for (User u : repo.findAll()) System.out.println(u.toString());
+        System.out.println("+----------------------------+");
+
 
 
     }

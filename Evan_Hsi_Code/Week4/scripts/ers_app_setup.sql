@@ -80,3 +80,40 @@ INSERT INTO ERS_REIMBURSEMENT_STATUS VALUES(2, 'DENIED');
 INSERT INTO ERS_REIMBURSEMENT_STATUS VALUES(3, 'APPROVED');
 
 commit;
+
+DROP SEQUENCE ers_users_seq;
+
+CREATE SEQUENCE ers_users_seq
+    MINVALUE 1
+    START WITH 1
+    INCREMENT BY 1;
+    
+DROP SEQUENCE ers_reimbursement_seq;
+
+CREATE SEQUENCE ers_reimbursement_seq
+    MINVALUE 1
+    START WITH 1
+    INCREMENT BY 1;
+    
+CREATE OR REPLACE TRIGGER ers_users_seq_trigger BEFORE INSERT ON ERS_USERS
+FOR EACH ROW
+BEGIN
+    SELECT ers_users_seq.NEXTVAL INTO :NEW.ERS_USERS_ID FROM DUAL;
+END;
+/
+    
+CREATE OR REPLACE TRIGGER ers_reimbursement_seq_trigger BEFORE INSERT ON ERS_REIMBURSEMENT
+FOR EACH ROW
+BEGIN
+    SELECT ers_reimbursement_seq.NEXTVAL INTO :NEW.REIMB_ID FROM DUAL;
+END;
+/  
+    
+    
+    
+    
+    
+    
+    
+    
+    

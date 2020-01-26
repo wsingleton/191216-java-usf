@@ -1,9 +1,5 @@
-package com.revature.quizzard.util;
+package com.revature.ers.utils;
 
-import com.revature.quizzard.models.Role;
-import com.revature.quizzard.models.User;
-
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -27,12 +23,9 @@ public class ConnectionFactory {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    public static ConnectionFactory getInstance() {
-        return connFactory;
-    }
+    public static ConnectionFactory getInstance() { return connFactory; }
 
     public Connection getConnection() {
 
@@ -43,10 +36,9 @@ public class ConnectionFactory {
 
             conn = DriverManager.getConnection(
                     props.getProperty("url"),
-                    props.getProperty("usr"),
+                    props.getProperty("un"),
                     props.getProperty("pw")
             );
-
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -55,5 +47,4 @@ public class ConnectionFactory {
         return conn;
 
     }
-
 }

@@ -11,6 +11,7 @@ public class User {
     private String lastName;
     private Role role;
 
+
     public User() {
         id = 0;
         username = "";
