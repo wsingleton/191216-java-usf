@@ -1,5 +1,7 @@
 window.onload=()=>{
 
+loadHome();
+
 }
 
 function loadHome(){
