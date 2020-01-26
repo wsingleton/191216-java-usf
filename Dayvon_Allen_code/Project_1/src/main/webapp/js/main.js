@@ -194,6 +194,35 @@ console.log(currentUser);
                             document.getElementById("deny").style.display = "none";
                             document.getElementById("info").style.display = "none";
                             document.getElementById("expenseButton").addEventListener('click', showFormFunc);
+                            document.getElementById("expenseSubmit").addEventListener('click', () => {
+                                 showFormFunc();
+
+                                let amount = document.getElementById("amount").value;
+                                let selectBox = document.getElementById("type");
+                                let type = selectBox.options[selectBox.selectedIndex].value;
+                                let desc = document.getElementById("desc").value;
+                                console.log(currentUser)
+                                let reimbursement = {
+                                     amount: amount,
+                                     desc: desc,
+                                     authId: currentUser["id"],
+                                     typeId: parseInt(type)
+                                };
+                                let reimbJSON = JSON.stringify(reimbursement);
+                                console.log(reimbJSON)
+                                  document.getElementById("amount").value = "";
+                                  document.getElementById("desc").value = "";
+                                let xhr1 = new XMLHttpRequest();
+                                    xhr1.open('POST', 'reimb', true);
+                                    xhr1.send(reimbJSON);
+                                    xhr1.onreadystatechange = () => {
+                                     if(xhr.readyState === 4 ) {
+                                         if(xhr.status === 201) {
+                                             loadDashboard(currentUser)
+                                             console.clear();
+                                         }
+                                }}
+                            })
                             document.getElementById("amount").addEventListener("keyup", () => {
                                 if(document.getElementById("amount").value.length < 1){
                                      document.getElementById("expenseSubmit").setAttribute("disabled", true);

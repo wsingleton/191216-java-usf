@@ -18,10 +18,10 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
     public void save(Reimbursement newObj) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO ers_project.ers_reimbursement VALUES (0, ?, ?, ?, ?,?);";
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"reimb_id"});
+            String sql = "INSERT INTO ers_project.ers_reimbursement VALUES (0, ?, CURRENT_TIMESTAMP, null, ?, null, ?,null, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, newObj.getAmount());
-            pstmt.setString(2, newObj.getSubTime());
+            pstmt.setString(2, newObj.getDesc());
             pstmt.setInt(3, newObj.getAuthId());
             pstmt.setInt(4, newObj.getStatusId().getId());
             pstmt.setInt(5, newObj.getTypeId().getId());
@@ -57,7 +57,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
     public boolean update(Reimbursement updatedObj) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE ers_project.ers_reimbursement SET reimb_status_id = (?), reimb_resolver_id = (?)  WHERE reimb_id = (?);";
+            String sql = "UPDATE ers_project.ers_reimbursement SET reimb_status_id = (?), reimb_resolver_id = (?)  WHERE reimb_id = (?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, updatedObj.getStatusId().getId());
             pstmt.setInt(2, updatedObj.getResId());

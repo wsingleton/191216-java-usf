@@ -26,6 +26,23 @@ public class Reimbursement {
         this.typeId = typeId;
     }
 
+    public Reimbursement(String amount, String desc, int authId, Type typeId) {
+        this.amount = amount;
+        this.desc = desc;
+        this.authId = authId;
+        this.typeId = typeId;
+    }
+
+    public Reimbursement(int id, String amount, String subTime, String desc, int authId, Status statusId, Type typeId) {
+        this.id = id;
+        this.amount = amount;
+        this.subTime = subTime;
+        this.desc = desc;
+        this.authId = authId;
+        this.statusId = statusId;
+        this.typeId = typeId;
+    }
+
     public Reimbursement(int id, String amount, String subTime, String resTimed, String desc, String receipt, int authId, int resId, Status statusId, Type typeId) {
         this.id = id;
         this.amount = amount;
