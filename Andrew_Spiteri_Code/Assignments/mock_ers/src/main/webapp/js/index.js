@@ -258,23 +258,28 @@ function setValues(table_values){
     console.log(table_values);
     let row = document.createElement('tr');
     let id = document.createElement('td');
-    let description = document.createElement('description');
+    let description = document.createElement('td');
     let type = document.createElement('td');
+    let status = document.createElement('td');
     let received = document.createElement('td');
     let completed = document.createElement('td');
-    
-    id.innerText = table_values.id;
-    description.innerText = table_values.description;
-    type.innerText = table_values.type;
-    status.innerText = table_values.status;
-    received.innerText = table_values.received;
-    completed.innerText = table_values.completed;
-    row.appendChild(id);
-    row.appendChild(description);
-    row.appendChild(type);
-    row.appendChild(received);
-    row.appendChild(completed);
-    table.appendChild(row);
+    for(let item of table_values){
+        for(let each in item){
+            id.innerText = each.id;
+            description.innerText = each.description;
+            type.innerText = each.type;
+            status.innerText = each.status;
+            received.innerText = each.received;
+            completed.innerText = each.completed;
+            row.appendChild(id);
+            row.appendChild(description);
+            row.appendChild(type);
+            row.appendChild(status);
+            row.appendChild(received);
+            row.appendChild(completed);
+            table.appendChild(row);
+        }
+    }
 }
 
 function createReimb(){

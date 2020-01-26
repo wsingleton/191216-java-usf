@@ -20,6 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 @WebServlet("/reimb")
@@ -65,11 +68,16 @@ public class ReimbursementServlet extends HttpServlet {
             PrintWriter writer = resp.getWriter();
             try{
                 mapper.writerFor(ReimbursementOut.class);
-                Set<ReimbursementOut> reimbs = rs.returnAllUnprocessedReimbs();
-                for (ReimbursementOut r:
-                     reimbs) {
-                    mapper.writeValue(writer, r);
+                ArrayList<ReimbursementOut> reimbs = rs.returnAllUnprocessedReimbs();
+                StringBuilder reimbursement = new StringBuilder();
+                Iterator i = reimbs.iterator();
+                while (i.hasNext()) {
+                     String reimbJSON = mapper.writeValueAsString(i.next());
+                     System.out.println("JSON: "+reimbJSON);
+                     reimbursement.append(reimbJSON);
                 }
+                System.out.println(reimbursement.toString());
+                mapper.writeValue(writer, reimbursement.toString());
             }catch (ResourcePersistenceException e){
                 resp.setStatus(409);
                 ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());

@@ -8,7 +8,9 @@ import com.revature.mockERS.models.ERS_Reimbursement_Type;
 import com.revature.mockERS.repositories.ReimbursementRepository;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 public class ReimbursementService {
@@ -31,7 +33,7 @@ public class ReimbursementService {
         return rr.addReimbursement(ers_reimbursement);
     }
 
-    public Set<ReimbursementOut> returnAllUnprocessedReimbs(){
+    public ArrayList<ReimbursementOut> returnAllUnprocessedReimbs(){
         return rr.getAllUnprocessedReimbs();
     }
 
