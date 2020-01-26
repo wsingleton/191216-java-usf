@@ -15,10 +15,10 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
             if (newReimb.getReceipt() != null) {
-                String sql = "INSERT INTO ersadmin.ers_reimbursement (reimb_id, reimb_amount, " +
-                        "expense_date, reimb_description, reimb_receipt, reimb_author," +
-                        " reimb_status_id, reimb_type_id) VALUES (0, ?, ?, ?, ?, ?, 1, ?)";
-                PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"reimb_id"});
+                String sql = "INSERT INTO ers_reimbursement (reimbId, amount, " +
+                        "expenseDate, description, receipt, author," +
+                        " statusId, typeId) VALUES (0, ?, ?, ?, ?, ?, 1, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"reimbId"});
                 pstmt.setDouble (1, newReimb.getAmount());
                 pstmt.setString(2, newReimb.getExpenseDate());
                 pstmt.setString(3, newReimb.getDescription());
@@ -36,10 +36,10 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                     }
                 }
             }else {
-                String sql = "INSERT INTO ersadmin.ers_reimbursement (reimb_id, reimb_amount, " +
-                        "expense_date, reimb_description, reimb_author, reimb_status_id, reimb_type_id) " +
+                String sql = "INSERT INTO ers_reimbursement (reimbId, amount, " +
+                        "expenseDate, description, author, statusId, typeId) " +
                         "VALUES (0, ?, ?, ?, ?, 1, ?)";
-                PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"reimb_id"});
+                PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"reimbId"});
                 pstmt.setDouble (1, newReimb.getAmount());
                 pstmt.setString(2, newReimb.getExpenseDate());
                 pstmt.setString(3, newReimb.getDescription());
@@ -72,7 +72,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
         Set<Reimbursement> reimbs = new HashSet<>();
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
-            String sql = "SELECT * FROM ersadmin.ers_reimbursement";
+            String sql = "SELECT * FROM ers_reimbursement";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             reimbs = mapResultSet(rs);
@@ -89,7 +89,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ersadmin.ers_reimbursement WHERE reimb_id = ?";
+            String sql = "SELECT * FROM ers_reimbursement WHERE reimbId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -107,8 +107,8 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE ersadmin.ers_reimbursement SET reimb_resolved = ?, " +
-                    "reimb_resolver = ?, reimb_status_id = ? WHERE reimb_id = ?";
+            String sql = "UPDATE ers_reimbursement SET resolved = ?, " +
+                    "resolver = ?, statusId = ? WHERE reimbId = ?";
             PreparedStatement pstmt = conn.prepareCall(sql);
             pstmt.setString (1, updatedReimb.getResolved());
             pstmt.setInt(2, updatedReimb.getResolverId());
@@ -132,7 +132,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "DELETE FROM ersadmin.ers_reimbursement WHERE reimb_id = ?";
+            String sql = "DELETE FROM ers_reimbursement WHERE reimbId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             int rowsDeleted = pstmt.executeUpdate();
@@ -152,7 +152,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ersadmin.ers_reimbursement WHERE reimb_type_id = ?";
+            String sql = "SELECT * FROM ers_reimbursement WHERE typeId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, typeId);
 
@@ -172,7 +172,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ersadmin.ers_reimbursement WHERE reimb_type_id = ?";
+            String sql = "SELECT * FROM ers_reimbursement WHERE typeId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, statusId);
 
@@ -192,7 +192,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ersadmin.ers_reimbursement WHERE author_id = ?";
+            String sql = "SELECT * FROM ers_reimbursement WHERE author = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             reimb = mapResultSet(pstmt.executeQuery());
@@ -208,15 +208,15 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         while (rs.next()) {
             Reimbursement temp = new Reimbursement();
-            temp.setReimbId(rs.getInt("reimb_id"));
-            temp.setAmount(rs.getDouble("reimb_amount"));
-            temp.setExpenseDate(rs.getString("expense_date"));
-            temp.setSubmitted(rs.getString("reimb_submitted"));
-            temp.setDescription(rs.getString("reimb_description"));
-            temp.setReceipt(rs.getBinaryStream("reimb_receipt"));
-            temp.setAuthorId(rs.getInt("reimb_author"));
-            temp.setStatus(ReimbursementStatus.getStatusById(rs.getInt("reim_status_id")));
-            temp.setType(ReimbursementType.getTypeById(rs.getInt("reimb_type_id")));
+            temp.setReimbId(rs.getInt("reimbId"));
+            temp.setAmount(rs.getDouble("amount"));
+            temp.setExpenseDate(rs.getString("expenseDate"));
+            temp.setSubmitted(rs.getString("submitted"));
+            temp.setDescription(rs.getString("description"));
+            temp.setReceipt(rs.getBinaryStream("receipt"));
+            temp.setAuthorId(rs.getInt("author"));
+            temp.setStatus(ReimbursementStatus.getStatusById(rs.getInt("statusId")));
+            temp.setType(ReimbursementType.getTypeById(rs.getInt("typeId")));
         }
 
         return reimbs;

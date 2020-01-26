@@ -16,8 +16,8 @@ public class UserRepository implements CrudRepository<User> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO ersadmin.ers_users VALUES (0, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"ers_user_id"});
+            String sql = "INSERT INTO ers_users VALUES (0, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"userId"});
             pstmt.setString (1, newUser.getUsername());
             pstmt.setString(2, newUser.getPassword());
             pstmt.setString(3, newUser.getFirstName());
@@ -49,7 +49,7 @@ public class UserRepository implements CrudRepository<User> {
         Set<User> users = new HashSet<>();
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = "SELECT * FROM ersadmin.ers_users";
+            String sql = "SELECT * FROM ers_users";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             users = mapResultSet(rs);
@@ -66,7 +66,7 @@ public class UserRepository implements CrudRepository<User> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ersadmin.ers_users WHERE ers_user_id = ?";
+            String sql = "SELECT * FROM ers_users WHERE userId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
 
@@ -85,7 +85,7 @@ public class UserRepository implements CrudRepository<User> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE ersadmin.ers_users SET ers_password = ? WHERE ers_user_id = ?";
+            String sql = "UPDATE ers_users SET password = ? WHERE userId = ?";
             PreparedStatement pstmt = conn.prepareCall(sql);
             pstmt.setString (1, user.getPassword());
             pstmt.setInt(2, user.getUserId());
@@ -107,7 +107,7 @@ public class UserRepository implements CrudRepository<User> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "DELETE FROM ersadmin.ers_users WHERE ers_user_id = ?";
+            String sql = "DELETE FROM ers_users WHERE userId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             int rowsDeleted = pstmt.executeUpdate();
@@ -128,7 +128,7 @@ public class UserRepository implements CrudRepository<User> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ersadmin.ers_users WHERE ers_username = ? AND ers_password = ?";
+            String sql = "SELECT * FROM ers_users WHERE username = ? AND password = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
@@ -150,7 +150,7 @@ public class UserRepository implements CrudRepository<User> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ersadmin.ers_users WHERE username = ?";
+            String sql = "SELECT * FROM ers_users WHERE username = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
@@ -169,7 +169,7 @@ public class UserRepository implements CrudRepository<User> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM eradmin_ers_users WHERE user_role_id = ?";
+            String sql = "SELECT * FROM ers_users WHERE roleId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, role.getRoleId());
 
@@ -189,13 +189,13 @@ public class UserRepository implements CrudRepository<User> {
 
         while (rs.next()) {
             User temp = new User();
-            temp.setUserId(rs.getInt("ers_user_id"));
-            temp.setUsername(rs.getString("ers_username"));
-            temp.setPassword(rs.getString("ers_password"));
-            temp.setFirstName(rs.getString("user_first_name"));
-            temp.setLastName(rs.getString("user_last_name"));
-            temp.setEmail(rs.getString("user_email"));
-            temp.setRole(Role.getById(rs.getInt("user_rold_id")));
+            temp.setUserId(rs.getInt("userId"));
+            temp.setUsername(rs.getString("username"));
+            temp.setPassword(rs.getString("password"));
+            temp.setFirstName(rs.getString("firstName"));
+            temp.setLastName(rs.getString("lastName"));
+            temp.setEmail(rs.getString("email"));
+            temp.setRole(Role.getById(rs.getInt("roleId")));
         }
 
         return users;

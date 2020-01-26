@@ -35,13 +35,14 @@ public class AuthServlet extends HttpServlet {
 
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = resp.getWriter();
-        resp.setContentType("application/json");
+        resp.setContentType("application/JSON");
 
         try {
 
             Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
             User authUser = userService.authenticate(creds.getUsername(), creds.getPassword());
             String authUserJSON = mapper.writeValueAsString(authUser);
+            resp.setStatus(200);
             writer.write(authUserJSON);
             HttpSession session = req.getSession();
             session.setAttribute("this-user", authUser);
@@ -49,7 +50,7 @@ public class AuthServlet extends HttpServlet {
         } catch (MismatchedInputException e) {
             resp.setStatus(400);
         }catch (AuthenticationException e) {
-            resp.setStatus(420);
+            resp.setStatus(401);
         }catch (Exception e) {
             resp.setStatus(500);
             e.printStackTrace();

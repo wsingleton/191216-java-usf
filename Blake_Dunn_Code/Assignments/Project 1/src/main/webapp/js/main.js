@@ -3,6 +3,7 @@ window.onload = () => {
     loadHome();
     document.getElementById('navdashboard').addEventListener('click', loadDashboard);
     document.getElementById('signout').addEventListener('click', logout);
+    
 }
 
 function loadHome() {
@@ -31,7 +32,11 @@ function loadLogin() {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
-            document.getElementById('login').addEventListener('click', login);
+            document.getElementById('login').addEventListener('click', function(event){
+                event.preventDefault();
+                login();
+            });
+            
         }
     }
 }
@@ -207,6 +212,10 @@ function getReimbs() {
             if (xhr.status === 200) {
                 let reimbList = JSON.parse(xhr.responseText);
                 console.log(reimbList);
+
+                for(let i = 0; i < reimbList.length; i++) {
+                    
+                }
             }
         }
     }
