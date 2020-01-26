@@ -6,7 +6,6 @@ import com.revature.ers.models.Type;
 import com.revature.ers.util.ConnectionFactory;
 
 import java.sql.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -65,25 +64,42 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
         return Optional.empty();
     }
 
+    public Set<Reimbursement> findAllById(int id) {
+        Set<Reimbursement> reimb = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+
+            String sql = "SELECT * FROM ers_project.ers_reimbursement WHERE reimb_author = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+            reimb = mapResultSet(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reimb;
+    }
+
     @Override
     public boolean update(Reimbursement updatedObj) {
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 
-            String sql = "UPDATE ers_project.ers_reimbursement SET reimb_status_id = (?), reimb_resolver_id = (?)  WHERE reimb_id = (?)";
+            String sql = "UPDATE ers_project.ers_reimbursement SET reimb_status_id = ? " +
+                    "WHERE reimb_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, updatedObj.getStatusId().getId());
-            pstmt.setInt(2, updatedObj.getResId());
-            pstmt.setInt(3, updatedObj.getId());
-
+            pstmt.setInt(2, updatedObj.getId());
 
             int rowsUpdated = pstmt.executeUpdate();
 
-            if (rowsUpdated != 0) {
-                return true;
-            }
+            return true;
+
+
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
         return false;
     }

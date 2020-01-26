@@ -164,7 +164,6 @@ let xhr = new XMLHttpRequest();
                             }, 2500)
                                 console.log("Registraion Failed!")
                             }
-
      }
 
 }
@@ -195,9 +194,35 @@ console.log(currentUser);
                             document.getElementById("root").innerHTML = xhr.responseText;
                             document.getElementById("logOut").addEventListener("click", logout)
                             if(currentUser["role"] === "EMPLOYEE"){
-                                document.getElementById("approve").style.display = "none";
-                                document.getElementById("deny").style.display = "none";
-                                document.getElementById("info").style.display = "none";
+
+                                let userIdData = {
+                                    id: parseInt(currentUser["id"])
+                                }
+
+                                let userIdJSON = JSON.stringify(userIdData);
+
+                                console.log(userIdJSON)
+
+                                let xhr4 = new XMLHttpRequest();
+                                xhr4.open('POST', 'userreimb', true);
+                                xhr4.send(userIdJSON)
+                                xhr4.onreadystatechange = () => {
+
+                                    if(xhr4.readyState === 4 ) {
+                                     if(xhr4.status === 201) {
+
+                                     let userReimbInfo = JSON.parse(xhr4.responseText);
+                                     console.log(userReimbInfo);
+//                                     document.getElementById("expenseButton").style.display = "block";
+                                     for (let i = 0; i < userReimbInfo.length; i++){
+                                          makeUserContent(userReimbInfo[i]["id"], userReimbInfo[i]["typeId"],userReimbInfo[i]["amount"], userReimbInfo[i]["authId"], userReimbInfo[i]["resId"],userReimbInfo[i]["statusId"], userReimbInfo[i]["desc"], currentUser)
+                                          }
+
+                                      }
+                                   }
+                                }
+
+
                                 document.getElementById("expenseButton").addEventListener('click', showFormFunc);
                                 document.getElementById("expenseSubmit").addEventListener('click', () => {
                                showFormFunc();
@@ -244,9 +269,9 @@ console.log(currentUser);
                             }
                             else {
                                 document.getElementById("expenseButton").style.display = "none";
-//                                document.getElementById("approve").style.display = "inline-block";
-//                                document.getElementById("deny").style.display = "inline-block";
-//                                document.getElementById("info").style.display = "inline-block";
+                                document.getElementById("approve").style.display = "inline-block";
+                                document.getElementById("deny").style.display = "inline-block";
+                                document.getElementById("info").style.display = "inline-block";
 
                                 let xhr2 = new XMLHttpRequest();
                                 xhr2.open('GET', 'reimb', true);
@@ -259,7 +284,7 @@ console.log(currentUser);
                                                   console.log(reimbInfo);
                                                   document.getElementById("expenseButton").style.display = "none";
                                                   for (let i = 0; i < reimbInfo.length; i++){
-                                                    makeContent(reimbInfo[i]["id"], reimbInfo[i]["typeId"],reimbInfo[i]["amount"], reimbInfo[i]["authId"], reimbInfo[i]["resId"],reimbInfo[i]["statusId"], reimbInfo[i]["desc"])
+                                                    makeContent(reimbInfo[i]["id"], reimbInfo[i]["typeId"],reimbInfo[i]["amount"], reimbInfo[i]["authId"], reimbInfo[i]["resId"],reimbInfo[i]["statusId"], reimbInfo[i]["desc"], currentUser)
                                                   }
                                                   }
                                  }
@@ -385,7 +410,7 @@ document.getElementById("expenseButton").addEventListener('click', showFormFunc)
 
 
 
-function makeContent(id, type,  amount, author, resolver, status, descContent) {
+function makeContent(id, type, amount, author, resolver, status, descContent, currentUser) {
     let parentDiv = document.createElement("div");
     let secondDiv = document.createElement("div");
     let thirdDiv = document.createElement("div");
@@ -416,6 +441,8 @@ function makeContent(id, type,  amount, author, resolver, status, descContent) {
     but1.href = "#"
     but2.href = "#"
     but3.href = "#"
+    but1.setAttribute("id", `approveBut${modalIdGenerator}`);
+    but2.setAttribute("id", `denyBut${modalIdGenerator}`);
     but3.setAttribute("data-target", `#model${modalIdGenerator}`);
     but3.setAttribute("data-toggle", "modal");
     parentDiv.classList.add("card", "mt-3");
@@ -428,17 +455,17 @@ function makeContent(id, type,  amount, author, resolver, status, descContent) {
     statusText.classList.add("card-text");
     title.innerText = "Reimbursement Type: " + type;
     amountText.innerText = "Author: " + author;
-    authorText.innerText = "Amount: " + amount;
+    authorText.innerText = "Amount: $" + amount;
     resolvedText.innerText = "Resolver: " + resolver;
     let span = document.createElement("span");
-    if(status === "PENDING"){
-         span.style.backgroundColor = "gold"
+    if (status === "PENDING") {
+        span.style.backgroundColor = "gold"
     }
-    else if(status === "APPROVED"){
-         span.style.backgroundColor = "#5cb85c"
+    else if (status === "APPROVED") {
+        span.style.backgroundColor = "#5cb85c"
     }
-    else if(status === "DENIED"){
-         span.style.backgroundColor = "#d9534f"
+    else if (status === "DENIED") {
+        span.style.backgroundColor = "#d9534f"
     }
     span.classList.add("circle")
     statusText.innerText = "Status: ";
@@ -505,8 +532,152 @@ function makeContent(id, type,  amount, author, resolver, status, descContent) {
     modalDiv1.appendChild(modalDiv2);
     document.getElementById("mainContent").appendChild(modalDiv1);
 
+    document.getElementById(`approveBut${modalIdGenerator}`).addEventListener("click", () => {
+        let data = {
+            id: id
+        };
+
+        let dataJSON = JSON.stringify(data);
+        let xhr = new XMLHttpRequest();
+        xhr.open('PUT', 'approve', true);
+        xhr.send(dataJSON);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 201) {
+                loadDashboard(currentUser);
+            }
+        }
+    })
+    document.getElementById(`denyBut${modalIdGenerator}`).addEventListener("click", () => {
+        let data = {
+            id: id
+        };
+        let dataJSON = JSON.stringify(data);
+        let xhr = new XMLHttpRequest();
+        xhr.open('PUT', 'deny', true);
+        xhr.send(dataJSON);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 201) {
+                loadDashboard(currentUser);
+            }
+        }
+    })
     modalIdGenerator++
+
 }
+
+function makeUserContent(id, type, amount, author, resolver, status, descContent, currentUser) {
+    let parentDiv = document.createElement("div");
+    let secondDiv = document.createElement("div");
+    let thirdDiv = document.createElement("div");
+    let title = document.createElement("h5");
+    let amountText = document.createElement("p")
+    let authorText = document.createElement("p")
+    let resolvedText = document.createElement("p")
+    let statusText = document.createElement("p")
+    let hr = document.createElement("hr")
+    let hr2 = document.createElement("hr")
+    let hr3 = document.createElement("hr")
+    let hr4 = document.createElement("hr")
+    let hr5 = document.createElement("hr")
+
+
+    parentDiv.classList.add("mt-4");
+
+    parentDiv.classList.add("card", "mt-3");
+    secondDiv.classList.add("card-header");
+    thirdDiv.classList.add("card-body")
+    title.classList.add("card-title");
+    amountText.classList.add("card-text");
+    authorText.classList.add("card-text");
+    resolvedText.classList.add("card-text");
+    statusText.classList.add("card-text");
+    title.innerText = "Reimbursement Type: " + type;
+    amountText.innerText = "Author: " + author;
+    authorText.innerText = "Amount: $" + amount;
+    let span = document.createElement("span");
+    if (status === "PENDING") {
+        span.style.backgroundColor = "gold"
+        resolvedText.innerText = "Has not been resolved yet.";
+    }
+    else if (status === "APPROVED") {
+        span.style.backgroundColor = "#5cb85c"
+        resolvedText.innerText = "Resolver: DLaw";
+
+    }
+    else if (status === "DENIED") {
+        span.style.backgroundColor = "#d9534f"
+        resolvedText.innerText = "Resolver: DLaw";
+    }
+    span.classList.add("circle")
+    statusText.innerText = "Status: ";
+    statusText.appendChild(span)
+
+    thirdDiv.appendChild(title);
+    thirdDiv.appendChild(hr);
+    thirdDiv.appendChild(amountText);
+    thirdDiv.appendChild(hr2);
+    thirdDiv.appendChild(authorText);
+    thirdDiv.appendChild(hr3);
+    thirdDiv.appendChild(resolvedText);
+    thirdDiv.appendChild(hr4);
+    thirdDiv.appendChild(statusText);
+    thirdDiv.appendChild(hr5);
+    secondDiv.innerText = "Reimbursement ID: " + id;
+
+    parentDiv.appendChild(secondDiv);
+    parentDiv.appendChild(thirdDiv);
+    document.getElementById("mainContent").appendChild(parentDiv);
+
+    let modalDiv1 = document.createElement("div");
+    let modalDiv2 = document.createElement("div");
+    let modalDiv3 = document.createElement("div");
+    let modalDiv4 = document.createElement("div");
+    let modalDiv5 = document.createElement("div");
+    let modalDiv6 = document.createElement("div");
+    let modalTitle = document.createElement("h5");
+    let modalButton = document.createElement("button");
+    let footerButton = document.createElement("button");
+
+    modalButton.classList.add("close");
+    modalButton.setAttribute("type", "button");
+    modalButton.setAttribute("data-dismiss", "modal");
+    modalButton.innerHTML = "&times;"
+    modalTitle.innerText = "Description";
+    modalTitle.classList.add("modal-title");
+
+    footerButton.classList.add("btn", "btn-secondary");
+    footerButton.setAttribute("type", "button");
+    footerButton.setAttribute("data-dismiss", "modal");
+    footerButton.innerText = "Close"
+
+    modalDiv1.setAttribute("id", `model${modalIdGenerator}`);
+    modalDiv1.setAttribute("role", "dialog");
+    modalDiv1.classList.add("modal", "fade");
+    modalDiv2.setAttribute("role", "document");
+    modalDiv2.classList.add("modal-dialog");
+    modalDiv3.classList.add("modal-content");
+    modalDiv4.classList.add("modal-header");
+    modalDiv5.classList.add("modal-body");
+    modalDiv6.classList.add("modal-footer");
+    modalDiv5.innerText = `${descContent}`;
+    modalDiv4.appendChild(modalTitle);
+    modalDiv4.appendChild(modalButton);
+    modalDiv6.appendChild(footerButton);
+    modalDiv3.appendChild(modalDiv4);
+    modalDiv3.appendChild(modalDiv5);
+    modalDiv3.appendChild(modalDiv6);
+    modalDiv2.appendChild(modalDiv3);
+    modalDiv1.appendChild(modalDiv2);
+    document.getElementById("mainContent").appendChild(modalDiv1);
+
+    modalIdGenerator++
+
+}
+
+
+
+
+
 
 
 
