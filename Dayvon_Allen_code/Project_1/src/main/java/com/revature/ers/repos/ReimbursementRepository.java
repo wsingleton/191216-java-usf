@@ -6,6 +6,7 @@ import com.revature.ers.models.Type;
 import com.revature.ers.util.ConnectionFactory;
 
 import java.sql.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -95,7 +96,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             Reimbursement temp = new Reimbursement();
             temp.setId(rs.getInt("reimb_id"));
             temp.setAmount(rs.getString("reimb_amount"));
-            temp.setSubTime("reimb_submitted");
+            temp.setSubTime(rs.getTimestamp("reimb_submitted").toString());
             temp.setAuthId(rs.getInt("reimb_author"));
             temp.setDesc(rs.getString("reimb_description"));
             temp.setStatusId(Status.getById(rs.getInt("reimb_status_id")));

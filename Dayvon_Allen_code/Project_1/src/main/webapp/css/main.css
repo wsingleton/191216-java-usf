@@ -21,10 +21,15 @@
     font-family: 'Raleway', sans-serif;
 }
 
+body, html {
+    overscroll-behavior: none;
+}
+
 /* ers home css */
 #body{
     min-height: 100vh;
     background-image: linear-gradient(120deg, #3498db, #4eb1b8);
+    overflow: hidden !important;
 }
 
 #main {
@@ -85,10 +90,9 @@
 
 /* Dashboard */
 
-#circle{
+.circle{
     height: 12px;
     width: 12px;
-    background-color: gold;
     border-radius: 50%;
     display: inline-block;
 }

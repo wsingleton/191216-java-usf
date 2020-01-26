@@ -15,6 +15,7 @@ public class Reimbursement {
     private Type typeId;
 
 
+
     public Reimbursement() {
     }
 
@@ -43,6 +44,18 @@ public class Reimbursement {
         this.typeId = typeId;
     }
 
+    public Reimbursement(int id, String amount, String subTime, String resTimed, String desc, int authId, int resId, Status statusId, Type typeId) {
+        this.id = id;
+        this.amount = amount;
+        this.subTime = subTime;
+        this.resTimed = resTimed;
+        this.desc = desc;
+        this.authId = authId;
+        this.resId = resId;
+        this.statusId = statusId;
+        this.typeId = typeId;
+    }
+
     public Reimbursement(int id, String amount, String subTime, String resTimed, String desc, String receipt, int authId, int resId, Status statusId, Type typeId) {
         this.id = id;
         this.amount = amount;
@@ -55,6 +68,7 @@ public class Reimbursement {
         this.statusId = statusId;
         this.typeId = typeId;
     }
+
 
     public int getId() {
         return id;
@@ -136,41 +150,5 @@ public class Reimbursement {
         this.typeId = typeId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Reimbursement that = (Reimbursement) o;
-        return id == that.id &&
-                authId == that.authId &&
-                resId == that.resId &&
-                Objects.equals(amount, that.amount) &&
-                Objects.equals(subTime, that.subTime) &&
-                Objects.equals(resTimed, that.resTimed) &&
-                Objects.equals(desc, that.desc) &&
-                Objects.equals(receipt, that.receipt) &&
-                statusId == that.statusId &&
-                typeId == that.typeId;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, amount, subTime, resTimed, desc, receipt, authId, resId, statusId, typeId);
-    }
-
-    @Override
-    public String toString() {
-        return "Reimbursement{" +
-                "id=" + id +
-                ", amount='" + amount + '\'' +
-                ", subTime='" + subTime + '\'' +
-                ", resTimed='" + resTimed + '\'' +
-                ", desc='" + desc + '\'' +
-                ", receipt='" + receipt + '\'' +
-                ", authId=" + authId +
-                ", resId=" + resId +
-                ", statusId=" + statusId +
-                ", typeId=" + typeId +
-                '}';
-    }
 }

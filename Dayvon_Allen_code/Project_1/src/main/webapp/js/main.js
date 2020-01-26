@@ -430,7 +430,19 @@ function makeContent(id, type,  amount, author, resolver, status, descContent) {
     amountText.innerText = "Author: " + author;
     authorText.innerText = "Amount: " + amount;
     resolvedText.innerText = "Resolver: " + resolver;
-    statusText.innerText = "Status: " + status;
+    let span = document.createElement("span");
+    if(status === "PENDING"){
+         span.style.backgroundColor = "gold"
+    }
+    else if(status === "APPROVED"){
+         span.style.backgroundColor = "#5cb85c"
+    }
+    else if(status === "DENIED"){
+         span.style.backgroundColor = "#d9534f"
+    }
+    span.classList.add("circle")
+    statusText.innerText = "Status: ";
+    statusText.appendChild(span)
 
     thirdDiv.appendChild(title);
     thirdDiv.appendChild(hr);
