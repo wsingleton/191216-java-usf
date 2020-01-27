@@ -18,7 +18,7 @@ public class UserRepository  implements CrudRepository<User>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ers_users WHERE role_id = ?";
+            String sql = "SELECT * FROM ers_users WHERE user_role_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, role.getId());
 
@@ -40,7 +40,7 @@ public class UserRepository  implements CrudRepository<User>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ers_users WHERE username = ?";
+            String sql = "SELECT * FROM ers_users WHERE ers_user_name = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
 
@@ -63,7 +63,7 @@ public class UserRepository  implements CrudRepository<User>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ers_users WHERE username = ? AND password = ?";
+            String sql = "SELECT * FROM ers_users WHERE ers_user_name = ? AND ers_password = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
             pstmt.setString(2, password);
@@ -84,7 +84,7 @@ public class UserRepository  implements CrudRepository<User>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO ers_uers VALUES (0, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO ers_users VALUES (0, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
             pstmt.setString(1, newObj.getUsername());
             pstmt.setString(2, newObj.getPassword());
@@ -117,7 +117,7 @@ public class UserRepository  implements CrudRepository<User>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 
-            String sql = "SELECT * FROM app_user";
+            String sql = "SELECT * FROM ers_users";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             users = mapResultSet(rs);
@@ -137,7 +137,7 @@ public class UserRepository  implements CrudRepository<User>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 
-            String sql = "SELECT * FROM ers_users WHERE user_id = ?";
+            String sql = "SELECT * FROM ers_users WHERE ers_user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
 
@@ -159,8 +159,8 @@ public class UserRepository  implements CrudRepository<User>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 
-            String sql = "UPDATE ers_users SET username = ?, password = ?, first_name = ?, last_name = ? " +
-                    "WHERE user_id = ?";
+            String sql = "UPDATE ers_users SET ers_user_name = ?, ers_password = ?,  user_first_name= ?, user_last_name = ? " +
+                    "WHERE ers_user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, updatedObj.getUsername());
             pstmt.setString(2, updatedObj.getPassword());
