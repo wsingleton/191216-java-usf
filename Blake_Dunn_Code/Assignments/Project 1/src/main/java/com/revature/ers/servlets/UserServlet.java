@@ -66,13 +66,16 @@ public class UserServlet extends HttpServlet {
             session.setAttribute("this-user", authUser);
 
         }catch (MismatchedInputException e) {
+            e.printStackTrace();
             resp.setStatus(400); // bad request
         } catch(ResourceNotFoundException e) {
+            e.printStackTrace();
             resp.setStatus(409); // conflict
             ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());
             err.setMessage(e.getMessage());
             writer.write(mapper.writeValueAsString(err));
         } catch(Exception e) {
+            e.printStackTrace();
             resp.setStatus(500); // internal server error
         }
 

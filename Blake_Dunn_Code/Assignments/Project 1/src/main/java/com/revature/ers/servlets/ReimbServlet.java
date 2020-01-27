@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.revature.ers.dtos.ErrorResponse;
 import com.revature.ers.exceptions.ResourceNotFoundException;
 import com.revature.ers.models.Reimbursement;
+import com.revature.ers.models.ReimbursementStatus;
+import com.revature.ers.models.Role;
+import com.revature.ers.models.User;
 import com.revature.ers.repos.ReimbursementRepository;
 import com.revature.ers.services.ReimbursementService;
 
@@ -24,14 +27,33 @@ public class ReimbServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String typeParam = req.getParameter("type");
-        resp.setContentType("application/JSON");
 
-        if (typeParam == null) {
-            Set<Reimbursement> reimbs = reimbService.getAllReimbs();
-            String reimbsJSON = mapper.writeValueAsString(reimbs);
-            resp.getWriter().write(reimbsJSON);
+        ObjectMapper mapper = new ObjectMapper();
+        String reimbParam = req.getParameter("reimbId");
+        resp.setContentType("application/JSON");
+        User user = (User) req.getSession().getAttribute("this-user");
+
+        if (reimbParam == null) {
+            if (user.getRole() == Role.ADMIN || user.getRole() == Role.MANAGER){
+
+                Set<Reimbursement> reimbs = reimbService.getAllReimbs();
+                String reimbsJSON = mapper.writeValueAsString(reimbs);
+                resp.getWriter().write(reimbsJSON);
+
+            }else {
+
+                Set<Reimbursement> reimbs = reimbService.getReimbByUser(user.getUserId());
+                String reimbsJSON = mapper.writeValueAsString(reimbs);
+                resp.getWriter().write(reimbsJSON);
+            }
+        }else {
+            try {
+                Reimbursement reimb = reimbService.getReimbById((Integer.parseInt(reimbParam)));
+                String reimbJSON = mapper.writeValueAsString(reimb);
+                resp.getWriter().write(reimbJSON);
+            } catch (Exception e) {
+                resp.setStatus(400);
+            }
         }
     }
 
@@ -40,13 +62,23 @@ public class ReimbServlet extends HttpServlet {
         resp.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = resp.getWriter();
+        User user = (User) req.getSession().getAttribute("this-user");
 
         try {
-
-            Reimbursement newReimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
-            reimbService.saveReimb(newReimb);
-            String newReimbJSON = mapper.writeValueAsString(newReimb);
-            resp.setStatus(201); // created
+            if (user.getRole() == Role.EMPLOYEE) {
+                Reimbursement newReimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
+                newReimb.setAuthorId(user.getUserId());
+                reimbService.saveReimb(newReimb);
+                String newReimbJSON = mapper.writeValueAsString(newReimb);
+                resp.setStatus(201); // created
+            }
+            else {
+                Reimbursement reimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
+                reimb.setResolverId(user.getUserId());
+                reimbService.updateReimbursement(reimb);
+                String updatedReimbJSON = mapper.writeValueAsString(reimb);
+                resp.setStatus(202); // accepted
+            }
 
         }catch (MismatchedInputException e) {
             resp.setStatus(400); // bad request

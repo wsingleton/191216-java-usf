@@ -107,13 +107,12 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE ers_reimbursement SET resolved = ?, " +
+            String sql = "UPDATE ers_reimbursement SET resolved = CURRENT_DATE, " +
                     "resolver = ?, statusId = ? WHERE reimbId = ?";
             PreparedStatement pstmt = conn.prepareCall(sql);
-            pstmt.setString (1, updatedReimb.getResolved());
-            pstmt.setInt(2, updatedReimb.getResolverId());
-            pstmt.setInt(3, updatedReimb.getStatus().getStatusId());
-            pstmt.setInt(4, updatedReimb.getReimbId());
+            pstmt.setInt(1, updatedReimb.getResolverId());
+            pstmt.setInt(2, updatedReimb.getStatus().getStatusId());
+            pstmt.setInt(3, updatedReimb.getReimbId());
 
             int rowsInserted = pstmt.executeUpdate();
 
@@ -217,6 +216,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             temp.setAuthorId(rs.getInt("author"));
             temp.setStatus(ReimbursementStatus.getStatusById(rs.getInt("statusId")));
             temp.setType(ReimbursementType.getTypeById(rs.getInt("typeId")));
+            reimbs.add(temp);
         }
 
         return reimbs;

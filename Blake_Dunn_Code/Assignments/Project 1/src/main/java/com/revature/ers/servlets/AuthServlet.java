@@ -48,8 +48,10 @@ public class AuthServlet extends HttpServlet {
             session.setAttribute("this-user", authUser);
 
         } catch (MismatchedInputException e) {
+            e.printStackTrace();
             resp.setStatus(400);
         }catch (AuthenticationException e) {
+            e.printStackTrace();
             resp.setStatus(401);
         }catch (Exception e) {
             resp.setStatus(500);

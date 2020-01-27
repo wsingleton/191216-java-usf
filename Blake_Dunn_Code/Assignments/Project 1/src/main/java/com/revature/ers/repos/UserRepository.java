@@ -1,5 +1,6 @@
 package com.revature.ers.repos;
 
+import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.models.Role;
 import com.revature.ers.models.User;
 import com.revature.ers.util.ConnectionFactory;
@@ -135,13 +136,25 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
-            Set<User> set = mapResultSet(rs);
-            if (!set.isEmpty()) _user = set.stream().findFirst();
+//            Set<User> set = mapResultSet(rs);
+           _user =  mapResultSet(rs).stream().findFirst();
 
         }catch (SQLException e) {
             e.printStackTrace();
         }
         return _user;
+    }
+
+    public User getUser(String username, String password) {
+        User user = new User();
+        Optional<User> _user = findUserByCredentials(username, password);
+        if (_user.isPresent()){
+            user = _user.get();
+        }
+        else {
+            throw new AuthenticationException();
+        }
+        return user;
     }
 
     public Optional<User> findUserByUsername(String username) {
@@ -196,6 +209,7 @@ public class UserRepository implements CrudRepository<User> {
             temp.setLastName(rs.getString("lastName"));
             temp.setEmail(rs.getString("email"));
             temp.setRole(Role.getById(rs.getInt("roleId")));
+            users.add(temp);
         }
 
         return users;

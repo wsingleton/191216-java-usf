@@ -165,6 +165,38 @@ function loadNewReimb() {
     }
 }
 
+function loadReimbs() {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'reimbs.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('root').innerHTML = xhr.responseText;
+            getReimbs();
+            // document.getElementsByTagName('a')[5].addEventListener('click', valueOfTable);
+            
+            // let link = document.getElementsByTagName('a');
+            // for (let i = 0; i < link.length; i++) {
+            //     let value = link[i].innerHTML;
+            // }
+            
+            // link.addEventListener('click', () => {
+            //     loadInfo(value);
+            //     console.log('this function works');
+            //     console.log(value);
+            // })
+            
+        }
+    }
+}
+
+// function valueOfTable() {
+//     document.getElementsByTagName('a').getAttribute('id')
+//     console.log(document.getElementsByTagName('a').getAttribute('id'));
+// }
+
+
 function submitNewReimb() {
 
     let amount = getElementById('amount').value;
@@ -214,14 +246,24 @@ function getReimbs() {
                 console.log(reimbList);
 
                 for(let i = 0; i < reimbList.length; i++) {
-                    
+                    addRow(reimbList[i]);
                 }
             }
         }
     }
 }
 
-function addRow() {
+function addRow(object) {
+
+    let id = object.reimbId;
+    let userId = object.authorId;
+    let subDate = object.submitted;
+    let newSub = subDate.substring(0,10);
+    let expDate = object.expenseDate;
+    let newExp = expDate.substring(0,10);
+    let amount = object.amount;
+    let type = object.type;
+    let status = object.status;
 
     let row = document.createElement('tr');
     let idCell = document.createElement('td');
@@ -241,14 +283,85 @@ function addRow() {
     row.appendChild(statusCell);
 
     document.getElementById('reimbtable').appendChild(row);
+    let link = document.createElement('a');
+    link.setAttribute('href', '#');
+    link.setAttribute('id', id);
+    link.innerText = id;
 
-    idCell.innerText = id;
+    idCell.append(link);
     userIdCell.innerText = userId;
-    subDateCell.innerText = subDate;
-    expDateCell.innerText = expDate;
+    subDateCell.innerText = newSub;
+    expDateCell.innerText = newExp;
     amtCell.innerText = amount;
     typeCell.innerText = type;
     statusCell.innerText = status;
+
+}
+
+function addInfo(object) {
+
+    let id = object.reimbId;
+    let userId = object.authorId;
+    let subDate = object.submitted;
+    let newSub = subDate.substring(0, 10);
+    console.log(newSub);
+    let expDate = object.expenseDate;
+    let newExp = expDate.substring(0, 10);
+    console.log(newExp);
+    let amount = object.amount;
+    let type = object.type;
+    let status = object.status;
+    let description = object.description;
+    let receipt = object.receipt;
+
+    let pId = document.getElementById('reimbId');
+    let pUserId = document.getElementById('reimbAuthor');
+    let pAmount = document.getElementById('reimbamount');
+    let pDate = document.getElementById('reimbdate');
+    let pSubmitted = document.getElementById('reimbsubmitted');
+    let pDescription = document.getElementById('reimbdescription');
+    let pReceipt = document.getElementById('reimbreceipt');
+    let pType = document.getElementById('reimbtype');
+
+    pId.innerText = id;
+    pUserId.innerText = userId;
+    pAmount.innerText = amount;
+    pDate.innerHTML = newSub;
+    pSubmitted.innerHTML = newExp;
+    pDescription.innerText = description;
+    pReceipt.innerText = 'null';
+    pType.innerText = type;
+
+}
+
+function getInfo(id) {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'reimbs?reimbId=' + id, true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let reimb = JSON.parse(xhr.responseText);
+                console.log(reimb);
+                addInfo(reimb);
+            }
+        }
+    }
+}
+
+function loadInfo(id) {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'reimbupdate.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('root').innerHTML = xhr.responseText;
+            getInfo(id);
+            
+        }
+    }
 
 }
 

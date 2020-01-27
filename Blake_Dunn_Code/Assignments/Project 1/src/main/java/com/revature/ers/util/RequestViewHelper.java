@@ -14,9 +14,11 @@ public class RequestViewHelper {
             case "/project_1_ERS/dashboard.view":
                 return "partials/dashboard.html";
             case "/project_1_ERS/reimbs.view":
-                return "partials/reimb-table";
+                return "partials/reimb-table.html";
             case "/project_1_ERS/newreimb.view":
                 return "partials/newreimb.html";
+            case "/project_1_ERS/reimbupdate.view":
+                return "partials/reimb-info.html";
             default:
                 return "";
         }

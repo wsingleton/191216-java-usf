@@ -126,7 +126,7 @@ public class UserService {
             throw new InvalidRequestException();
         }
 
-        return userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+        return userRepo.getUser(username, password);
 
     }
 
@@ -139,7 +139,7 @@ public class UserService {
         }
 
         Optional<User> persistedUser = userRepo.findUserByUsername(updatedUser.getUsername());
-        if (persistedUser.isPresent() && persistedUser.get().getUserId() != updatedUser.getUserId()) {
+        if (persistedUser.isPresent() && !persistedUser.get().getUserId().equals(updatedUser.getUserId())) {
             throw new ResourcePersistenceException("That username is taken by someone else!");
         }
 
