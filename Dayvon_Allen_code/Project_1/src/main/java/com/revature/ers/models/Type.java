@@ -1,7 +1,8 @@
 package com.revature.ers.models;
 
 public enum Type {
-    CERTIFICATION(1, "Certification"), RELOCATION(2, "Relocation"), MISCELLANEOUS(3, "Miscellaneous"), LOCKED(4, "Locked");
+    CERTIFICATION(1, "Certification"), RELOCATION(2, "Relocation"), MISCELLANEOUS(3, "Miscellaneous"), FOOD(4, "food"),
+    LODGING(5, "lodging"),TRAVEL(6, "travel"), OTHER(7, "other"),LOCKED(8, "locked");
 
     private int id;
     private String name;

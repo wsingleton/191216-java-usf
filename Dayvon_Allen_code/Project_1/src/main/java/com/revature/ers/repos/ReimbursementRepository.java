@@ -45,7 +45,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         Set<Reimbursement> reimb = new HashSet<>();
 
-        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM ers_project.ers_reimbursement";
             Statement stmt = conn.createStatement();

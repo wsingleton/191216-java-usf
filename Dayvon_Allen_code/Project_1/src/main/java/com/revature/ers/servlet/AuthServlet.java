@@ -24,7 +24,6 @@ public class AuthServlet extends HttpServlet {
 
     public final UserService userService = new UserService(new UserRepository());
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         if(req.getSession(false) != null){

@@ -242,6 +242,7 @@ console.log(currentUser);
                                      authId: currentUser["id"],
                                      typeId: parseInt(type)
                                 };
+                                console.log(reimbursement)
                                 let reimbJSON = JSON.stringify(reimbursement);
                                 console.log(reimbJSON)
                                   document.getElementById("amount").value = "";
