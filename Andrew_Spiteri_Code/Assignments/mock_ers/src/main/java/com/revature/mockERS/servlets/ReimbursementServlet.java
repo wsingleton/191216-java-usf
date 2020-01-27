@@ -1,5 +1,7 @@
 package com.revature.mockERS.servlets;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.revature.mockERS.dto.ErrorResponse;
@@ -67,17 +69,9 @@ public class ReimbursementServlet extends HttpServlet {
             ObjectMapper mapper = new ObjectMapper();
             PrintWriter writer = resp.getWriter();
             try{
-                mapper.writerFor(ReimbursementOut.class);
                 List<ReimbursementOut> reimbs = rs.returnAllUnprocessedReimbs();
-                StringBuilder reimbursement = new StringBuilder();
-                Iterator i = reimbs.iterator();
-                while (i.hasNext()) {
-                     String reimbJSON = mapper.writeValueAsString(i.next());
-                     System.out.println("JSON: "+reimbJSON);
-                     reimbursement.append(reimbJSON);
-                }
-                System.out.println(reimbursement.toString());
-                mapper.writeValue(writer, reimbursement.toString());
+                mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+                writer.print(mapper.writeValueAsString(reimbs));
             }catch (ResourcePersistenceException e){
                 resp.setStatus(409);
                 ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());

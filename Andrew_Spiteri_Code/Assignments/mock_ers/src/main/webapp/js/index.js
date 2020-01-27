@@ -199,7 +199,7 @@ function login(){
         let xhttp = new XMLHttpRequest();
 
         xhttp.open('POST', 'http://localhost:8080/ers-app/auth', true);
-        let data = JSON.stringify({'username': uname, 'password': passw})
+        let data = JSON.stringify({'username': uname, 'password': passw});
         xhttp.send(data);
         xhttp.onreadystatechange = function(){
             if(xhttp.readyState === 4 && xhttp.status === 200){
@@ -256,29 +256,28 @@ function returnReimb(){
 function setValues(table_values){
     let table = document.getElementById('reimb_table');
     console.log(table_values);
-    let row = document.createElement('tr');
-    let id = document.createElement('td');
-    let description = document.createElement('td');
-    let type = document.createElement('td');
-    let status = document.createElement('td');
-    let received = document.createElement('td');
-    let completed = document.createElement('td');
-    for(let item of table_values){
-        for(let each in item){
-            id.innerText = each.id;
-            description.innerText = each.description;
-            type.innerText = each.type;
-            status.innerText = each.status;
-            received.innerText = each.received;
-            completed.innerText = each.completed;
-            row.appendChild(id);
-            row.appendChild(description);
-            row.appendChild(type);
-            row.appendChild(status);
-            row.appendChild(received);
-            row.appendChild(completed);
-            table.appendChild(row);
-        }
+    for(const item of table_values){
+        let row = document.createElement('tr');
+        let id = document.createElement('td');
+        let description = document.createElement('td');
+        let type = document.createElement('td');
+        let status = document.createElement('td');
+        let received = document.createElement('td');
+        let completed = document.createElement('td');
+
+        id.innerText = item.id;
+        description.innerText = item.description;
+        type.innerText = item.type;
+        status.innerText = item.status;
+        received.innerText = new Date(item.received).toDateString();
+        completed.innerText = (item.completed != null) ? new Date(item.completed).toDateString() : '-';
+        row.appendChild(id);
+        row.appendChild(description);
+        row.appendChild(type);
+        row.appendChild(status);
+        row.appendChild(received);
+        row.appendChild(completed);
+        table.appendChild(row);
     }
 }
 
