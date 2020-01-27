@@ -18,8 +18,8 @@ public class TestServlet2 extends HttpServlet {
         resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
 
-        writer.write("test2 success");
-        //req.getRequestDispatcher("index.html").forward(req, resp);
+        //writer.write("test2 success");
+        req.getRequestDispatcher("index.html").forward(req, resp);
 
     }
 }

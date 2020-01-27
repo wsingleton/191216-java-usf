@@ -3,6 +3,7 @@ package com.revature.ers.repositories;
 import com.revature.ers.models.Role;
 import com.revature.ers.models.User;
 import com.revature.ers.utils.ConnectionFactory;
+import oracle.jdbc.proxy.annotation.Pre;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -15,7 +16,7 @@ public class UserRepository implements CrudRepository<User> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO ERS_APP.ERS_USER VALUES (0, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO ERS_APP.ERS_USERS VALUES (0, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"ERS_USERS_ID"});
             pstmt.setString(1, newObj.getUsername());
             pstmt.setString(2, newObj.getPassword());
@@ -41,6 +42,46 @@ public class UserRepository implements CrudRepository<User> {
 
     }
 
+    public Optional<User> findUserByUsername(String username) {
+
+        Optional<User> _user = Optional.empty();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM ers_app.ERS_USERS WHERE ERS_USERNAME = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+            _user = mapResultSet(rs).stream().findFirst();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return _user;
+
+    }
+
+    public Optional<User> findUserByCredentials(String username, String password) {
+        Optional<User> _user = Optional.empty();
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM ERS_APP.ERS_USERS WHERE ERS_USERNAME = ? AND ERS_PASSWORD = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            ResultSet rs = pstmt.executeQuery();
+            _user = mapResultSet(rs).stream().findFirst();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return _user;
+    }
     @Override
     public Set<User> findAll() {
 

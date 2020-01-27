@@ -6,7 +6,7 @@
 
     <display-name>project1</display-name>
     <welcome-file-list>
-        <welcome-file>test</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
     <servlet>
@@ -27,6 +27,26 @@
     <servlet-mapping>
         <servlet-name>TestServlet2</servlet-name>
         <url-pattern>/test2</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewServlet</servlet-name>
+        <servlet-class>com.revature.ers.servlets.ViewServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ViewServlet</servlet-name>
+        <url-pattern>*.view</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AuthServlet</servlet-name>
+        <servlet-class>com.revature.ers.servlets.AuthServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AuthServlet</servlet-name>
+        <url-pattern>/auth</url-pattern>
     </servlet-mapping>
 
 </web-app>

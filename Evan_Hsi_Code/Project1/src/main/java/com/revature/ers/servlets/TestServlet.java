@@ -19,8 +19,7 @@ public class TestServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
 
         writer.write("<p>Test Successful</p>");
-        //req.getRequestDispatcher("index.html").forward(req, resp);
-        resp.sendRedirect("index.html");
-
+        req.getRequestDispatcher("index.html").forward(req, resp);
+        //resp.sendRedirect("index.html");
     }
 }

@@ -62,7 +62,5 @@ public class TestDriver {
         for (User u : repo.findAll()) System.out.println(u.toString());
         System.out.println("+----------------------------+");
 
-
-
     }
 }

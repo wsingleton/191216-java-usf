@@ -34,6 +34,7 @@ public class AuthServlet extends HttpServlet {
             User authUser = userService.authenticate(creds.getUsername(), creds.getPassword());
             String authUserJSON = mapper.writeValueAsString(authUser);
             writer.write(authUserJSON);
+            System.out.println("quizzard auth");
             HttpSession session = req.getSession();
             session.setAttribute("this-user", authUser );
 
