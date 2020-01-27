@@ -32,7 +32,7 @@ public class UserRepository implements CrudRepository<User> {
     public void save(User newUser) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO quizzard.app_user VALUES (0, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO proj_1_admin.ers_users VALUES (0, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
             pstmt.setString(1, newUser.getUsername());
             pstmt.setString(2, newUser.getPassHash());
