@@ -17,4 +17,5 @@ p:first-letter {font-weight:bold;font-size:1.1em;text-shadow:#eee -1px -1px 1px;
 body::-webkit-scrollbar{width:10px;}
 body::-webkit-scrollbar-track{background:rgba(200,200,200,1);box-shadow:inset 0px 0px 5px #333;}
 body::-webkit-scrollbar-thumb{background:#fff;box-shadow:inset 0px 0px 5px #333;border-radius:25px;}
-.btn-circle {width:20px;height:20px;border-radius:10px;text-align:center;padding: 6px 0px;font-size:8px;}
+.btn-circle {border-radius:15px;width:30px;height:30px;text-align:center;padding: 6px 0px;font-size:10px;color:#fff;background:#aaa;border-left:solid 1px #ddd;border-top:solid 1px #ddd;border-bottom:solid 1px #bbb;border-right:solid 1px #bbb;box-shadow:inset #777 0px 0px 10px;}
+.btn-circle:hover {font-weight:bold;}

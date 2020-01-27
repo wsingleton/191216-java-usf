@@ -75,6 +75,8 @@ function loadDash(user) {
             document.getElementById("main").innerHTML=xhr.responseText;
             document.getElementById("fName").innerText=user.first;
             document.getElementById("lName").innerText=user.last;
+            document.getElementById("createReq").addEventListener("click", createReq(user));
+            document.getElementById("reviewReqs").addEventListener("click", reviewReqs(user));
         }
     }
     console.log("pepping Nav.")
@@ -93,6 +95,16 @@ function about() {
     document.getElementById("abt").setAttribute("class", "navtab active");
     let xhr=new XMLHttpRequest();
     xhr.open("GET", "about.view", true);
+    xhr.send();
+    xhr.onreadystatechange=()=>{
+        if (xhr.readyState===4 && xhr.status===200) {
+            document.getElementById("main").innerHTML=xhr.responseText;
+        }
+    }
+}
+function createReq(user) {
+    let xhr=new XMLHttpRequest();
+    xhr.open("GET", "createReq.view", true);
     xhr.send();
     xhr.onreadystatechange=()=>{
         if (xhr.readyState===4 && xhr.status===200) {
