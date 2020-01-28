@@ -1,7 +1,5 @@
 package com.revature.project1.models;
 
-import oracle.sql.DATE;
-
 import java.io.InputStream;
 import java.util.Objects;
 
@@ -10,33 +8,44 @@ public class Reimbursement {
     private Integer id;
     private Double amount;
     private String date;
-    private DATE submitted;
-    private DATE resolved;
+    private String submitted;
+    private String resolved;
     private String description;
     private InputStream receipt;
     private int authorId;
     private int resolverId;
-    private int status;
+    private Status status;
     private Type type;
 
-    public Reimbursement(){
+    public Reimbursement() {
         super();
     }
 
-    public Reimbursement(Double amount, String date, String description, int authorId, Type type) {
+    public Reimbursement(Integer id, Double amount, String date, String submitted, String description, InputStream receipt, int authorId, Status status, Type type) {
+        this.id = id;
         this.amount = amount;
         this.date = date;
+        this.submitted = submitted;
         this.description = description;
+        this.receipt = receipt;
+        this.authorId = authorId;
+        this.status = status;
+        this.type = type;
+    }
+
+    public Reimbursement(Double amount, String date, String submitted, int authorId, Type type) {
+        this.amount = amount;
+        this.date = date;
+        this.submitted = submitted;
         this.authorId = authorId;
         this.type = type;
     }
 
-    public Reimbursement(Double amount, String date, int authorId, Type type) {
-        this.amount = amount;
-        this.date = date;
-        this.authorId = authorId;
-        this.type = type;
-    }
+
+
+
+
+
 
     public Integer getId() {
         return id;
@@ -70,11 +79,11 @@ public class Reimbursement {
         this.submitted = submitted;
     }
 
-    public DATE getResolved() {
+    public String getResolved() {
         return resolved;
     }
 
-    public void setResolved(DATE resolved) {
+    public void setResolved(String resolved) {
         this.resolved = resolved;
     }
 
@@ -110,7 +119,7 @@ public class Reimbursement {
         this.resolverId = resolverId;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
@@ -118,7 +127,7 @@ public class Reimbursement {
         this.status = status;
     }
 
-    public int getType() {
+    public Type getType() {
         return type;
     }
 
@@ -133,6 +142,7 @@ public class Reimbursement {
         Reimbursement that = (Reimbursement) o;
         return authorId == that.authorId &&
                 resolverId == that.resolverId &&
+                status == that.status &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(amount, that.amount) &&
                 Objects.equals(date, that.date) &&
@@ -140,7 +150,6 @@ public class Reimbursement {
                 Objects.equals(resolved, that.resolved) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(receipt, that.receipt) &&
-                status == that.status &&
                 type == that.type;
     }
 
@@ -154,9 +163,9 @@ public class Reimbursement {
         return "Reimbursement{" +
                 "id=" + id +
                 ", amount=" + amount +
-                ", date=" + date +
-                ", submitted=" + submitted +
-                ", resolved=" + resolved +
+                ", date='" + date + '\'' +
+                ", submitted='" + submitted + '\'' +
+                ", resolved='" + resolved + '\'' +
                 ", description='" + description + '\'' +
                 ", receipt=" + receipt +
                 ", authorId=" + authorId +
@@ -166,3 +175,5 @@ public class Reimbursement {
                 '}';
     }
 }
+
+

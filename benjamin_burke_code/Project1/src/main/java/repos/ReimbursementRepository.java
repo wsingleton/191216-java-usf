@@ -15,6 +15,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
     public void save(Reimbursement reimb) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()){
             if (reimb.getReceipt() !=null) {
+                //figure out what to pass in
                 String sql = "insert into ers_reimbursement() VALUES ()";
                 PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"reimb_id"});
                 pstmt.setDouble(1, reimb.getAmount());
@@ -22,9 +23,21 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                 pstmt.setString(2, reimb.getSubmitted());
                 pstmt.setString(3, reimb.getDescription());
                 pstmt.setInt(4, reimb.getAuthorId());
-                pstmt.setInt(5, reimb.getStatus());
-                pstmt.setInt(6, reimb.getType());
+                pstmt.setInt(5, reimb.getStatus().getStatusId());
+                pstmt.setInt(6, reimb.getType().getTypeId());
+
+                int rowsInserted = pstmt.executeUpdate();
+
+                if (rowsInserted !=0){
+                    ResultSet rs = pstmt.getGeneratedKeys();
+
+                    while(rs.next()){
+                        reimb.setId(rs.getInt(1));
+                    }
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -57,9 +70,9 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             temp.setReceipt(rs.getBinaryStream("reimb_receipt"));
             temp.setAuthorId(rs.getInt("reimb_author"));
             //hmmmmmmm
-            temp.setStatus(Status.getById(rs.getInt("statusId")));
+            temp.setStatus(Status.getStatusById(rs.getInt("statusId")));
             temp.setType(Type.getTypeById(rs.getInt("typeId")));
-            reimbs.add(temp);
+
         }
 
         return reimbs;
@@ -70,16 +83,65 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public Optional<Reimbursement> findById(int id) {
-        return Optional.empty();
+
+        Optional<Reimbursement> _reimb = Optional.empty();
+
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM ers_reimbursement WHERE remb_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            Set<Reimbursement> set = mapResultSet(rs);
+            if (!set.isEmpty()) _reimb = set.stream().findFirst();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return _reimb;
     }
+
 
     @Override
     public boolean update(Reimbursement updatedObj) {
-        return false;
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "UPDATE ers_reimbursement SET resolved = CURRENT_DATE, " +
+                    "resolver = ?, statusId = ? WHERE reimbId = ?";
+            PreparedStatement pstmt = conn.prepareCall(sql);
+            pstmt.setInt(1, updatedObj.getResolverId());
+            pstmt.setInt(2, updatedObj.getStatus().getStatusId());
+            pstmt.setInt(3, updatedObj.getId());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted == 0) return false;
+
+        } catch(SQLIntegrityConstraintViolationException e) {
+            e.printStackTrace();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     @Override
     public boolean deleteById(int id) {
-        return false;
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "DELETE FROM ers_reimbursement WHERE reimb_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            int rowsDeleted = pstmt.executeUpdate();
+
+            if (rowsDeleted == 0){
+                return false;
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 }
