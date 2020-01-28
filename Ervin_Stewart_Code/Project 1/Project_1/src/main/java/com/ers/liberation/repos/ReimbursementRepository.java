@@ -105,14 +105,14 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
             String sql = "INSERT INTO ers_reimbursement VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"reimb_id"});
-            pstmt.setDouble(1, newObj.getUsername());
-            pstmt.setTimestamp(2, newObj.getPassword());
-            pstmt.setTimestamp(3, newObj.getRole().getId());
-            pstmt.setString(4, newObj.getFirstName());
-            pstmt.setBlob(5, newObj.getLastName());
-            pstmt.setInt(6, newObj.getRole().getId());
-            pstmt.setInt(7, newObj.getRole().getId());
-            pstmt.setInt(8, newObj.getRole().getId());
+            pstmt.setDouble(1, newObj.getAmount());
+            pstmt.setTimestamp(2, newObj.getSubmittedDate());
+            pstmt.setTimestamp(3, newObj.getResolvedDate());
+            pstmt.setString(4, newObj.getDescription());
+            pstmt.setBlob(5, newObj.getReceipt());
+            pstmt.setInt(6, newObj.getAuthorId());
+            pstmt.setInt(7, newObj.get().getId());
+            pstmt.setInt(8, newObj.getStatus().getId());
             pstmt.setInt(9, newObj.getRole().getId());
             int rowsInserted = pstmt.executeUpdate();
 

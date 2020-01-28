@@ -17,28 +17,36 @@
 </head>
 <body>
     
-    <div class = "content-container">        
-        <h2 id="welcome">Welcome<br> Liberation<br> Employee.</h2>
+    <div class = "content-container" id="login-component" >        
+        <h2 >Welcome Liberation Employee.</h2>
+        <div id="welcome" class="content">
+       
+        <br > 
         <div>
             
             <h5 class="content-spacer">Please Enter Your Login Credentials</h5>
+        <div>
             <h6 class="content-spacer">Username:</h6> 
-            <input class=login_block id="username" type="text">
+            <input class=login_block id="username" type="email">
+        </div>
+
+        <div>
             <h6 class="content-spacer">Password:</h6>
-             <input class=login_block id="password" type="text">
-            <p class="content-spacer"></p>
-            <button class="btn btn-outline-primary" type="submit">Login</button>
+            <input class=login_block id="password" type="text">
+        </div>
+            <br>
+            <div class="alert alert-danger" id="login-message"></div>
+            <button class="btn btn-outline-primary" id="login">Login</button>
         </div>
         <div class="content-spacer">
-            <a href="">Create an Account</a>
+            <a id="register" href="">Create an Account</a>
             <br>
             <a href="">Forgotten Password</a>
         </div>
         <br>
     </div>
-    <div id= "help">
-
     </div>
+    
     
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
