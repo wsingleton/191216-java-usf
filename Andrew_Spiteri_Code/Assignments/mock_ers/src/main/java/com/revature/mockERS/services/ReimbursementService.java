@@ -37,6 +37,9 @@ public class ReimbursementService {
         return rr.getAllUnprocessedReimbs();
     }
 
+    public Set<ReimbursementOut> returnReimbursementByUser(Integer id){
+        return rr.getReimbursementByUser(id);
+    }
 
 }
 

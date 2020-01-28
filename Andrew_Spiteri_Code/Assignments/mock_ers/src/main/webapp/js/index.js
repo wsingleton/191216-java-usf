@@ -247,6 +247,7 @@ function returnReimb(){
     xhttp.send();
     xhttp.onreadystatechange = () =>{
         if(xhttp.readyState === 4 && xhttp.status === 200){
+            console.log(xhttp.responseText);
             let data = JSON.parse(xhttp.responseText);
             setValues(data);
         }        
@@ -260,6 +261,7 @@ function setValues(table_values){
         let row = document.createElement('tr');
         let id = document.createElement('td');
         let description = document.createElement('td');
+        let amount = document.createElement('td');
         let type = document.createElement('td');
         let status = document.createElement('td');
         let received = document.createElement('td');
@@ -267,12 +269,17 @@ function setValues(table_values){
 
         id.innerText = item.id;
         description.innerText = item.description;
+        amount.innerText = new Intl.NumberFormat('en-US', { 
+            style: 'currency', 
+            currency: 'USD' 
+        }).format(item.amount);
         type.innerText = item.type;
         status.innerText = item.status;
         received.innerText = new Date(item.received).toDateString();
         completed.innerText = (item.completed != null) ? new Date(item.completed).toDateString() : '-';
         row.appendChild(id);
         row.appendChild(description);
+        row.appendChild(amount);
         row.appendChild(type);
         row.appendChild(status);
         row.appendChild(received);

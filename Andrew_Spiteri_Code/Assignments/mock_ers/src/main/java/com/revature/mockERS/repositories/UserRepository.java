@@ -22,7 +22,7 @@ public class UserRepository {
             ps.setString(3, user.getUser_first_name());
             ps.setString(4, user.getUser_last_name());
             ps.setString(5,user.getUser_email());
-            ps.setInt(6, 2);
+            ps.setInt(6, 1);
             Integer success = ps.executeUpdate();
             if(success == 1){
                 return true;

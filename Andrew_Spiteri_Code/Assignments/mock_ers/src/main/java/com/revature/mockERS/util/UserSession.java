@@ -37,6 +37,8 @@ public class UserSession {
 
     public static Boolean isAdminOrManager(){
         ERS_User_Roles currentUserRole = getSessionUser().getRole();
-        return currentUserRole.equals(ERS_User_Roles.FINANCE_MANAGER);
+        System.out.println(getSessionUser().toString());
+        System.out.println(getSessionUser().getRole());
+        return currentUserRole.equals("Finance_Manager");
     }
 }

@@ -46,8 +46,9 @@ tr{
 }
 
 #reimb_table{
-    position: relative;
     background-color: white;
+    position: relative;
+    margin-top: 10rem;
     top: 120px;
     left: 50%;
     -ms-transform: translateX(-50%) translateY(-50%);

@@ -7,8 +7,10 @@ import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.revature.mockERS.dto.ErrorResponse;
 import com.revature.mockERS.dto.ReimbursementIn;
 import com.revature.mockERS.dto.ReimbursementOut;
+import com.revature.mockERS.exceptions.ResourceNotFoundException;
 import com.revature.mockERS.exceptions.ResourcePersistenceException;
 import com.revature.mockERS.models.ERS_Reimbursement;
+import com.revature.mockERS.models.ERS_User_Roles;
 import com.revature.mockERS.models.ERS_Users;
 import com.revature.mockERS.repositories.ReimbursementRepository;
 import com.revature.mockERS.services.ReimbursementService;
@@ -63,8 +65,10 @@ public class ReimbursementServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(UserSession.isAdminOrManager()){
-            System.out.println("ReimbursementServlet doPost()");
+        ERS_Users authUser = (ERS_Users) req.getSession(false).getAttribute("this-user");
+
+        if(authUser.getRole().equals(ERS_User_Roles.FINANCE_MANAGER)){
+            System.out.println("Finance ReimbursementServlet doPost()");
             resp.setContentType("application/json");
             ObjectMapper mapper = new ObjectMapper();
             PrintWriter writer = resp.getWriter();
@@ -72,7 +76,7 @@ public class ReimbursementServlet extends HttpServlet {
                 List<ReimbursementOut> reimbs = rs.returnAllUnprocessedReimbs();
                 mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
                 writer.print(mapper.writeValueAsString(reimbs));
-            }catch (ResourcePersistenceException e){
+            }catch (ResourceNotFoundException e){
                 resp.setStatus(409);
                 ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());
                 err.setMessage(e.getMessage());
@@ -80,6 +84,46 @@ public class ReimbursementServlet extends HttpServlet {
             }catch (Exception e){
                 resp.setStatus(500);
                 e.printStackTrace();
+            }
+        }//TODO Create else statement that returns ReimbursementOut objects to Basic Users
+        else{
+            System.out.println("Finance ReimbursementServlet doPost()");
+            resp.setContentType("application/json");
+            ObjectMapper mapper = new ObjectMapper();
+            PrintWriter writer = resp.getWriter();
+            try{
+                Set<ReimbursementOut> reimbs = rs.returnReimbursementByUser(authUser.getId());
+                mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+                writer.print(mapper.writeValueAsString(reimbs));
+                System.out.println("Basic Reimbs: " + reimbs);
+            }catch (ResourceNotFoundException e){
+                resp.setStatus(409);
+                ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());
+                err.setMessage(e.getMessage());
+                writer.write(mapper.writeValueAsString(err));
+            }catch (Exception e){
+                resp.setStatus(500);
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ERS_Users authUser = (ERS_Users) req.getSession(false).getAttribute("this-user");
+
+        if(authUser.getRole().equals(ERS_User_Roles.FINANCE_MANAGER)){
+            System.out.println("Finance ReimbursementServlet doPut()");
+            resp.setContentType("application/json");
+            ObjectMapper mapper = new ObjectMapper();
+            PrintWriter writer = resp.getWriter();
+            try{
+
+            }catch (ResourceNotFoundException e){
+
+            }catch (Exception e){
+
             }
         }
     }

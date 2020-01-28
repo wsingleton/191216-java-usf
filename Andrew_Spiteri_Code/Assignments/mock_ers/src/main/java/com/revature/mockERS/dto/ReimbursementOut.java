@@ -5,18 +5,28 @@ import java.util.Objects;
 
 public class ReimbursementOut {
     private Integer id;
+    Double amount;
     private String description, type, status;
     Timestamp received, completed;
 
     public ReimbursementOut(){}
 
-    public ReimbursementOut(Integer id, String description, String type, String status, Timestamp received, Timestamp completed) {
+    public ReimbursementOut(Integer id, String description, String type, String status, Timestamp received, Timestamp completed, Double amount) {
         this.id = id;
         this.description = description;
         this.type = type;
         this.status = status;
         this.received = received;
         this.completed = completed;
+        this.amount = amount;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 
     public Integer getId() {
