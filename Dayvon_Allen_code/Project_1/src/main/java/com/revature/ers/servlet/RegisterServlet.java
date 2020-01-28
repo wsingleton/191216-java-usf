@@ -29,7 +29,6 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         ObjectMapper mapper = new ObjectMapper();
-//        PrintWriter writer = res.getWriter();
         res.setContentType("application/json");
 
         try {

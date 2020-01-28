@@ -5,6 +5,7 @@ import com.revature.ers.models.User;
 import com.revature.ers.util.ConnectionFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -100,6 +101,7 @@ public class UserRepository implements CrudRepository<User> {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public Set<User> findAll() {

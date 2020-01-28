@@ -46,7 +46,6 @@ public class AuthServlet extends HttpServlet {
             session.setAttribute("this-user", authUser);
             System.out.println("[LOG] Authenticated successfully");
 
-
         } catch (MismatchedInputException e) {
             res.setStatus(400);
             System.out.println("[ERR] Error");

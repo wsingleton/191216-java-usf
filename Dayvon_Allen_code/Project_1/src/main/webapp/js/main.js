@@ -5,27 +5,28 @@ let all = true;
 let approvedData = false;
 let deniedData = false;
 let pendingData = false;
+let user;
 
 let sortedInfo;
 
 window.onload = () => {
-loadHome()
+    loadHome()
 }
 function loadLogin(e) {
     console.log('in loadLogin()');
     e.preventDefault();
-    if(document.querySelectorAll("head")[0].children.length === 7){
+    if (document.querySelectorAll("head")[0].children.length === 7) {
         document.querySelectorAll("head")[0].children[6].remove();
     }
-     let css = document.createElement('link');
-     css.setAttribute('rel', 'stylesheet');
-     css.setAttribute('href', 'css/login.css');
-     document.getElementsByTagName("head")[0].appendChild(css);
+    let css = document.createElement('link');
+    css.setAttribute('rel', 'stylesheet');
+    css.setAttribute('href', 'css/login.css');
+    document.getElementsByTagName("head")[0].appendChild(css);
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'login.view', true);
     xhr.send();
     xhr.onreadystatechange = () => {
-        if(xhr.readyState === 4 && xhr.status === 200) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById("root").innerHTML = xhr.responseText;
             let username = document.querySelectorAll(".txtb input")[0];
             let password = document.querySelectorAll(".txtb input")[1];
@@ -35,14 +36,14 @@ function loadLogin(e) {
             });
 
             username.addEventListener('blur', () => {
-                if(username.value < 1){
-                username.classList.remove('focus');
+                if (username.value < 1) {
+                    username.classList.remove('focus');
                 }
             });
 
             password.addEventListener('blur', () => {
-                if(password.value < 1){
-                password.classList.remove('focus');
+                if (password.value < 1) {
+                    password.classList.remove('focus');
                 }
             });
 
@@ -55,401 +56,412 @@ function loadLogin(e) {
     }
 }
 
-function login(e){
- e.preventDefault();
-let username = document.getElementById('username').value;
-let password = document.getElementById('password').value;
+function login(e) {
+    e.preventDefault();
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
 
-if(username.length < 1 || password.length < 1){
-console.log("No input!")
-document.getElementById("warning").innerText ="Fields can't be empty.";
-document.getElementById("warning").style.display = "flex";
-                     setTimeout(() => {
-                     document.getElementById("warning").style.display = "none";
-                     }, 2500)
-}
-else{
-let creds = {
-    username: username,
-    password: password
-};
+    if (username.length < 1 || password.length < 1) {
+        console.log("No input!")
+        document.getElementById("warning").innerText = "Fields can't be empty.";
+        document.getElementById("warning").style.display = "flex";
+        setTimeout(() => {
+            document.getElementById("warning").style.display = "none";
+        }, 2500)
+    }
+    else {
+        let creds = {
+            username: username,
+            password: password
+        };
 
-let credJson = JSON.stringify(creds);
- let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'auth', true);
-    xhr.send(credJson);
-     xhr.onreadystatechange = () => {
-            if(xhr.readyState === 4 ) {
-                if(xhr.status === 200) {
-                let user = JSON.parse(xhr.responseText);
-                loadDashboard(user);
-                console.clear();
+        let credJson = JSON.stringify(creds);
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'auth', true);
+        xhr.send(credJson);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    let user = JSON.parse(xhr.responseText);
+                    loadDashboard(user);
+                    console.clear();
                 }
-                if(xhr.status === 401) {
-                  console.log("Login Failed!")
-                  document.getElementById("warning").innerText ="Invalid Credentials";
-                  document.getElementById("warning").style.display = "flex";
-                      setTimeout(() => {
-                      document.getElementById("warning").style.display = "none";
-                      }, 2500)
-//                document.getElementById('login-message').innerText = 'Login Failed!';
+                if (xhr.status === 401) {
+                    console.log("Login Failed!")
+                    document.getElementById("warning").innerText = "Invalid Credentials";
+                    document.getElementById("warning").style.display = "flex";
+                    setTimeout(() => {
+                        document.getElementById("warning").style.display = "none";
+                    }, 2500)
+                    //                document.getElementById('login-message').innerText = 'Login Failed!';
                 }
-                 if(xhr.status === 400) {
-                 document.getElementById("warning").innerText ="Invalid Credentials";
-                 document.getElementById("warning").style.display = "flex";
-                     setTimeout(() => {
-                     document.getElementById("warning").style.display = "none";
-                     }, 2500)
-                                  console.log("Login Failed!")
-                //                document.getElementById('login-message').innerText = 'Login Failed!';
+                if (xhr.status === 400) {
+                    document.getElementById("warning").innerText = "Invalid Credentials";
+                    document.getElementById("warning").style.display = "flex";
+                    setTimeout(() => {
+                        document.getElementById("warning").style.display = "none";
+                    }, 2500)
+                    console.log("Login Failed!")
+                    //                document.getElementById('login-message').innerText = 'Login Failed!';
                 }
             }
-    }
+        }
     }
 }
 
 function register(e) {
-e.preventDefault();
-//strip all space
-let password = document.getElementById('password').value;
-let username = document.getElementById('username').value.toLowerCase().replace(/\s+/g, '');
-let firstName= document.getElementById('firstName').value.replace(/\s+/g, '');
-let lastName = document.getElementById('lastName').value.replace(/\s+/g, '');
-let email = document.getElementById('email').value.toLowerCase().replace(/\s+/g, '');
+    e.preventDefault();
+    //strip all space
+    let password = document.getElementById('password').value;
+    let username = document.getElementById('username').value.toLowerCase().replace(/\s+/g, '');
+    let firstName = document.getElementById('firstName').value.replace(/\s+/g, '');
+    let lastName = document.getElementById('lastName').value.replace(/\s+/g, '');
+    let email = document.getElementById('email').value.toLowerCase().replace(/\s+/g, '');
 
-let re =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-if(re.test(email) === false) {
-    document.getElementById("warning").innerText ="Must use a valid email.";
-    document.getElementById("warning").style.display = "flex";
-                         setTimeout(() => {
-                         document.getElementById("warning").style.display = "none";
-                         }, 2500);
+    if (re.test(email) === false) {
+        document.getElementById("warning").innerText = "Must use a valid email.";
+        document.getElementById("warning").style.display = "flex";
+        setTimeout(() => {
+            document.getElementById("warning").style.display = "none";
+        }, 2500);
 
+    }
+    else if (username.length < 1 || password.length < 1 || firstName.length < 1 || lastName.length < 1) {
+        console.log("No input!")
+        document.getElementById("warning").innerText = "Fields can't be empty.";
+        document.getElementById("warning").style.display = "flex";
+        setTimeout(() => {
+            document.getElementById("warning").style.display = "none";
+        }, 2500)
+    }
+    else {
+        let user = {
+            username: username,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            role: 2
+        };
+
+        console.log(user)
+
+        let userJson = JSON.stringify(user);
+
+        console.log(userJson)
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'register', true);
+        xhr.send(userJson);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 201) {
+                    loadHome()
+                    console.clear();
+                }
+                else if (xhr.status === 409) {
+                    document.getElementById("warning").innerText = "Username or email is taken";
+                    document.getElementById("warning").style.display = "flex";
+                    setTimeout(() => {
+                        document.getElementById("warning").style.display = "none";
+                    }, 2500)
+                    console.log("Registraion Failed!")
+                }
+            }
+        }
+    }
 }
-else if(username.length < 1 || password.length < 1 || firstName.length < 1 || lastName.length < 1){
-       console.log("No input!")
-       document.getElementById("warning").innerText ="Fields can't be empty.";
-       document.getElementById("warning").style.display = "flex";
-                            setTimeout(() => {
-                            document.getElementById("warning").style.display = "none";
-                            }, 2500)
- }
-else{
-let user = {
-     username: username,
-     password: password,
-     firstName: firstName,
-     lastName: lastName,
-     email: email,
-     role: 2
-};
 
-console.log(user)
-
-let userJson = JSON.stringify(user);
-
-console.log(userJson)
-
-let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'register', true);
-    xhr.send(userJson);
-     xhr.onreadystatechange = () => {
-         if(xhr.readyState === 4 ) {
-                        if(xhr.status === 201) {
-                        loadHome()
-                        console.clear();
-                        }
-                        else if(xhr.status === 409) {
-                            document.getElementById("warning").innerText ="Username or email is taken";
-                            document.getElementById("warning").style.display = "flex";
-                            setTimeout(() => {
-                                document.getElementById("warning").style.display = "none";
-                            }, 2500)
-                                console.log("Registraion Failed!")
-                            }
-     }
-}
-}
-}
-
-function logout(e){
-e.preventDefault();
-loggedOut = true;
-let xhr = new XMLHttpRequest();
-xhr.open('GET', 'auth', true);
-xhr.send()
-  xhr.onreadystatechange = () => {
-        if(xhr.readyState === 4 && xhr.status === 200) {
+function logout(e) {
+    e.preventDefault();
+    loggedOut = true;
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'auth', true);
+    xhr.send()
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
             loadHome();
         }
     }
 }
 
 function loadDashboard(user) {
-let currentUser = user;
-console.log(currentUser);
- let xhr = new XMLHttpRequest();
-                    xhr.open('GET', 'dashboard.view', true);
-                    xhr.send();
-                    xhr.onreadystatechange = () => {
-                        if(xhr.readyState === 4 && xhr.status === 200) {
-                            console.log("ran")
-                            document.getElementById("root").innerHTML = xhr.responseText;
-                            document.getElementById("logOut").addEventListener("click", logout)
-                            if(currentUser["role"] === "EMPLOYEE"){
+    currentUser = user;
+    console.log(currentUser);
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'dashboard.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log("ran")
+            document.getElementById("root").innerHTML = xhr.responseText;
+            document.getElementById("logOut").addEventListener("click", logout)
+            if (currentUser["role"] === "EMPLOYEE") {
 
-                                let userIdData = {
-                                    id: parseInt(currentUser["id"])
-                                }
+                let userIdData = {
+                    id: parseInt(currentUser["id"])
+                }
 
-                                let userIdJSON = JSON.stringify(userIdData);
+                let userIdJSON = JSON.stringify(userIdData);
 
-                                console.log(userIdJSON)
+                console.log(userIdJSON)
 
-                                let xhr4 = new XMLHttpRequest();
-                                xhr4.open('POST', 'userreimb', true);
-                                xhr4.send(userIdJSON)
-                                xhr4.onreadystatechange = () => {
+                let xhr4 = new XMLHttpRequest();
+                xhr4.open('POST', 'userreimb', true);
+                xhr4.send(userIdJSON)
+                xhr4.onreadystatechange = () => {
 
-                                    if(xhr4.readyState === 4 ) {
-                                     if(xhr4.status === 201) {
+                    if (xhr4.readyState === 4) {
+                        if (xhr4.status === 201) {
 
-                                     let userReimbInfo = JSON.parse(xhr4.responseText);
-                                     console.log(userReimbInfo["subTime"]);
-                                     console.log(userReimbInfo);
-                                      sortedInfo =  userReimbInfo.sort((a, b) => b["id"] - a["id"])
-                                       console.log(sortedInfo);
-                                     for (let i = 0; i < sortedInfo.length; i++){
-                                          makeUserContent(sortedInfo[i]["id"], sortedInfo[i]["typeId"],sortedInfo[i]["amount"], sortedInfo[i]["authId"], sortedInfo[i]["resId"],sortedInfo[i]["statusId"], sortedInfo[i]["desc"], currentUser)
-                                          }
-
-                                      }
-                                   }
-                                }
-
-                                document.getElementById("expenseButton").addEventListener('click', showFormFunc);
-                                document.getElementById("expenseSubmit").addEventListener('click', () => {
-                               showFormFunc();
-                               let amount = document.getElementById("amount").value;
-                                let selectBox = document.getElementById("type");
-                                let type = selectBox.options[selectBox.selectedIndex].value;
-                                let desc = document.getElementById("desc").value;
-                                console.log(currentUser)
-                                let reimbursement = {
-                                     amount: amount,
-                                     desc: desc,
-                                     authId: currentUser["id"],
-                                     typeId: parseInt(type)
-                                };
-                                console.log(reimbursement)
-                                let reimbJSON = JSON.stringify(reimbursement);
-                                console.log(reimbJSON)
-                                  document.getElementById("amount").value = "";
-                                  document.getElementById("desc").value = "";
-                                let xhr1 = new XMLHttpRequest();
-                                    xhr1.open('POST', 'reimb', true);
-                                    xhr1.send(reimbJSON);
-                                    xhr1.onreadystatechange = () => {
-                                     if(xhr1.readyState === 4 ) {
-                                         if(xhr1.status === 201) {
-                                             loadDashboard(user);
-                                         }
-                                }}
-                            })
-                            document.getElementById("amount").addEventListener("keyup", () => {
-                                if(document.getElementById("amount").value.length < 1){
-                                     document.getElementById("expenseSubmit").setAttribute("disabled", true);
-                                }
-                                else{
-                                     document.getElementById("expenseSubmit").removeAttribute("disabled");
-                                    }
-                            })
-                            if(document.getElementById("amount").value < 1){
-                                document.getElementById("expenseSubmit").setAttribute("disabled", true);
-                            }
-                            else{
-                               document.getElementById("expenseSubmit").removeAttribute("disabled");
-                            }
-                            }
-                            else {
-                                document.getElementById("expenseButton").style.display = "none";
-
-                                document.getElementById("all").addEventListener("click", () => {
-                                    all = true;
-                                    approvedData = false;
-                                    pendingData = false;
-                                    deniedData = false;
-                                    loadDashboard(currentUser)
-                                })
-                                document.getElementById("approved").addEventListener("click", () => {
-                                    all = false;
-                                    approvedData = true;
-                                    pendingData = false;
-                                    deniedData = false;
-                                    loadDashboard(currentUser)
-                                })
-                                document.getElementById("denied").addEventListener("click", () => {
-                                    all = false;
-                                    approvedData = false;
-                                    pendingData = false;
-                                    deniedData = true;
-                                    loadDashboard(currentUser)
-                                })
-                                document.getElementById("pending").addEventListener("click", () => {
-                                    all = false;
-                                    approvedData = false;
-                                    pendingData = true;
-                                    deniedData = false;
-                                    loadDashboard(currentUser)
-                                })
-
-                                let xhr2 = new XMLHttpRequest();
-                                xhr2.open('GET', 'reimb', true);
-                                xhr2.send()
-                                xhr2.onreadystatechange = () => {
-                                  if(xhr2.readyState === 4 ) {
-                                                  if(xhr2.status === 200) {
-
-                                                  let reimbInfo = JSON.parse(xhr2.responseText);
-                                                   let sortedInfo2 =  reimbInfo.sort((a, b) => b["id"] - a["id"])
-
-                                                  console.log(reimbInfo);
-                                                  document.getElementById("expenseButton").style.display = "none";
-                                                  for (let i = 0; i < sortedInfo2.length; i++){
-                                                  if(all === true) {
-                                                     makeContent(sortedInfo2[i]["id"], sortedInfo2[i]["typeId"],sortedInfo2[i]["amount"], sortedInfo2[i]["authId"], sortedInfo2[i]["resId"],sortedInfo2[i]["statusId"], sortedInfo2[i]["desc"], sortedInfo2[i]["subTime"], currentUser)
-                                                    }
-                                                    else if(approvedData === true) {
-                                                        if(sortedInfo2[i]["statusId"] === "APPROVED"){
-                                                         makeContent(sortedInfo2[i]["id"], sortedInfo2[i]["typeId"],sortedInfo2[i]["amount"], sortedInfo2[i]["authId"], sortedInfo2[i]["resId"],sortedInfo2[i]["statusId"], sortedInfo2[i]["desc"], sortedInfo2[i]["subTime"], currentUser)
-                                                        }
-                                                    }
-                                                     else if(pendingData === true) {
-                                                      if(sortedInfo2[i]["statusId"] === "PENDING"){
-                                                            makeContent(sortedInfo2[i]["id"], sortedInfo2[i]["typeId"],sortedInfo2[i]["amount"], sortedInfo2[i]["authId"], sortedInfo2[i]["resId"],sortedInfo2[i]["statusId"], sortedInfo2[i]["desc"], sortedInfo2[i]["subTime"], currentUser)
-                                                        }
-                                                      }
-                                                       else if(deniedData === true) {
-                                                         if(sortedInfo2[i]["statusId"] === "DENIED"){
-                                                            makeContent(sortedInfo2[i]["id"], sortedInfo2[i]["typeId"],sortedInfo2[i]["amount"], sortedInfo2[i]["authId"], sortedInfo2[i]["resId"],sortedInfo2[i]["statusId"], sortedInfo2[i]["desc"], sortedInfo2[i]["subTime"], currentUser)
-                                                          }
-                                                      }
-                                                  }
-                                                    document.querySelector(".approve").style.display = "inline-block";
-                                                                                  document.querySelector(".deny").style.display = "inline-block";
-                                                                                  document.querySelector(".info").style.display = "inline-block";
-                                                  }
-                                 }
+                            let userReimbInfo = JSON.parse(xhr4.responseText);
+                            console.log(userReimbInfo["subTime"]);
+                            console.log(userReimbInfo);
+                            sortedInfo = userReimbInfo.sort((a, b) => b["id"] - a["id"])
+                            console.log(sortedInfo);
+                            for (let i = 0; i < sortedInfo.length; i++) {
+                                sorterUserManager(sortedInfo[i], currentUser);
                             }
 
                         }
                     }
-}
+                }
+                document.getElementById("all").addEventListener("click", () => {
+                    all = true;
+                    approvedData = false;
+                    pendingData = false;
+                    deniedData = false;
+                    loadDashboard(currentUser)
+                })
+                document.getElementById("approved").addEventListener("click", () => {
+                    all = false;
+                    approvedData = true;
+                    pendingData = false;
+                    deniedData = false;
+                    loadDashboard(currentUser)
+                })
+                document.getElementById("denied").addEventListener("click", () => {
+                    all = false;
+                    approvedData = false;
+                    pendingData = false;
+                    deniedData = true;
+                    loadDashboard(currentUser)
+                })
+                document.getElementById("pending").addEventListener("click", () => {
+                    all = false;
+                    approvedData = false;
+                    pendingData = true;
+                    deniedData = false;
+                    loadDashboard(currentUser)
+                })
+                document.getElementById("expenseButton").addEventListener('click', showFormFunc);
+                document.getElementById("expenseSubmit").addEventListener('click', () => {
+                    showFormFunc();
+                    let amount = document.getElementById("amount").value;
+                    let selectBox = document.getElementById("type");
+                    let type = selectBox.options[selectBox.selectedIndex].value;
+                    let desc = document.getElementById("desc").value;
+                    console.log(currentUser)
+                    let reimbursement = {
+                        amount: amount,
+                        desc: desc,
+                        authId: currentUser["id"],
+                        typeId: parseInt(type)
+                    };
+                    console.log(reimbursement)
+                    let reimbJSON = JSON.stringify(reimbursement);
+                    console.log(reimbJSON)
+                    document.getElementById("amount").value = "";
+                    document.getElementById("desc").value = "";
+                    let xhr1 = new XMLHttpRequest();
+                    xhr1.open('POST', 'reimb', true);
+                    xhr1.send(reimbJSON);
+                    xhr1.onreadystatechange = () => {
+                        if (xhr1.readyState === 4) {
+                            if (xhr1.status === 201) {
+                                loadDashboard(user);
+                            }
+                        }
+                    }
+                })
+                document.getElementById("amount").addEventListener("keyup", () => {
+                    if (document.getElementById("amount").value.length < 1) {
+                        document.getElementById("expenseSubmit").setAttribute("disabled", true);
+                    }
+                    else {
+                        document.getElementById("expenseSubmit").removeAttribute("disabled");
+                    }
+                })
+                if (document.getElementById("amount").value < 1) {
+                    document.getElementById("expenseSubmit").setAttribute("disabled", true);
+                }
+                else {
+                    document.getElementById("expenseSubmit").removeAttribute("disabled");
+                }
+            }
+            else {
+                document.getElementById("expenseButton").style.display = "none";
+
+                document.getElementById("all").addEventListener("click", () => {
+                    all = true;
+                    approvedData = false;
+                    pendingData = false;
+                    deniedData = false;
+                    loadDashboard(currentUser)
+                })
+                document.getElementById("approved").addEventListener("click", () => {
+                    all = false;
+                    approvedData = true;
+                    pendingData = false;
+                    deniedData = false;
+                    loadDashboard(currentUser)
+                })
+                document.getElementById("denied").addEventListener("click", () => {
+                    all = false;
+                    approvedData = false;
+                    pendingData = false;
+                    deniedData = true;
+                    loadDashboard(currentUser)
+                })
+                document.getElementById("pending").addEventListener("click", () => {
+                    all = false;
+                    approvedData = false;
+                    pendingData = true;
+                    deniedData = false;
+                    loadDashboard(currentUser)
+                })
+
+                let xhr2 = new XMLHttpRequest();
+                xhr2.open('GET', 'reimb', true);
+                xhr2.send()
+                xhr2.onreadystatechange = () => {
+                    if (xhr2.readyState === 4) {
+                        if (xhr2.status === 200) {
+
+                            let reimbInfo = JSON.parse(xhr2.responseText);
+                            let sortedInfo2 = reimbInfo[0].sort((a, b) => b["id"] - a["id"])
+
+                            console.log(reimbInfo);
+                            document.getElementById("expenseButton").style.display = "none";
+                            for (let i = 0; i < sortedInfo2.length; i++) {
+                                sorterFunctionManager(sortedInfo2[i], currentUser, reimbInfo[1])
+                            }
+                            document.querySelector(".approve").style.display = "inline-block";
+                            document.querySelector(".deny").style.display = "inline-block";
+                            document.querySelector(".info").style.display = "inline-block";
+                        }
+                    }
+                }
+
+            }
+        }
+    }
 }
 function loadRegister(e) {
     e.preventDefault();
- if(document.querySelectorAll("head")[0].children.length === 7){
+    if (document.querySelectorAll("head")[0].children.length === 7) {
         document.querySelectorAll("head")[0].children[6].remove();
     }
-let css = document.createElement('link');
-     css.setAttribute('rel', 'stylesheet');
-     css.setAttribute('href', 'css/register.css');
-     document.getElementsByTagName("head")[0].appendChild(css);
- let xhr = new XMLHttpRequest();
+    let css = document.createElement('link');
+    css.setAttribute('rel', 'stylesheet');
+    css.setAttribute('href', 'css/register.css');
+    document.getElementsByTagName("head")[0].appendChild(css);
+    let xhr = new XMLHttpRequest();
 
-                    xhr.open('GET', 'register.view', true);
-                    xhr.send();
-                    xhr.onreadystatechange = () => {
-                        if(xhr.readyState === 4 && xhr.status === 200) {
-                            document.getElementById("root").innerHTML = xhr.responseText;
+    xhr.open('GET', 'register.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("root").innerHTML = xhr.responseText;
 
-                            let firstname = document.querySelectorAll(".txtb input")[0];
-                            let lastname = document.querySelectorAll(".txtb input")[1];
-                            let username = document.querySelectorAll(".txtb input")[2];
-                            let email = document.querySelectorAll(".txtb input")[3];
-                            let password = document.querySelectorAll(".txtb input")[4];
-                            firstname.addEventListener('focus', () => {
-                                firstname.classList.add('focus');
-                            });
+            let firstname = document.querySelectorAll(".txtb input")[0];
+            let lastname = document.querySelectorAll(".txtb input")[1];
+            let username = document.querySelectorAll(".txtb input")[2];
+            let email = document.querySelectorAll(".txtb input")[3];
+            let password = document.querySelectorAll(".txtb input")[4];
+            firstname.addEventListener('focus', () => {
+                firstname.classList.add('focus');
+            });
 
-                            firstname.addEventListener('blur', () => {
-                                if (firstname.value.length < 1) {
+            firstname.addEventListener('blur', () => {
+                if (firstname.value.length < 1) {
 
-                                    firstname.classList.remove('focus');
-                                }
-                            });
+                    firstname.classList.remove('focus');
+                }
+            });
 
-                            lastname.addEventListener('blur', () => {
-                                if (lastname.value.length < 1) {
-                                    lastname.classList.remove('focus');
-                                }
-                            });
+            lastname.addEventListener('blur', () => {
+                if (lastname.value.length < 1) {
+                    lastname.classList.remove('focus');
+                }
+            });
 
-                            lastname.addEventListener('focus', () => {
-                                lastname.classList.add('focus');
-                            });
+            lastname.addEventListener('focus', () => {
+                lastname.classList.add('focus');
+            });
 
-                            username.addEventListener('blur', () => {
-                                if (username.value.length < 1) {
-                                    username.classList.remove('focus');
-                                }
-                            });
+            username.addEventListener('blur', () => {
+                if (username.value.length < 1) {
+                    username.classList.remove('focus');
+                }
+            });
 
-                            username.addEventListener('focus', () => {
-                                username.classList.add('focus');
-                            });
+            username.addEventListener('focus', () => {
+                username.classList.add('focus');
+            });
 
-                            email.addEventListener('blur', () => {
-                                if (email.value.length < 1) {
-                                    email.classList.remove('focus');
-                                }
-                            });
+            email.addEventListener('blur', () => {
+                if (email.value.length < 1) {
+                    email.classList.remove('focus');
+                }
+            });
 
-                            email.addEventListener('focus', () => {
-                                email.classList.add('focus');
-                            });
-                            password.addEventListener('blur', () => {
-                                if (password.value.length < 1) {
-                                    password.classList.remove('focus');
-                                }
-                            });
+            email.addEventListener('focus', () => {
+                email.classList.add('focus');
+            });
+            password.addEventListener('blur', () => {
+                if (password.value.length < 1) {
+                    password.classList.remove('focus');
+                }
+            });
 
-                            password.addEventListener('focus', () => {
-                                password.classList.add('focus');
-                            });
-                            document.getElementById("register").addEventListener("click", register);
-                            document.getElementById("signIn").addEventListener("click", loadLogin);
-                        }
-                    }
+            password.addEventListener('focus', () => {
+                password.classList.add('focus');
+            });
+            document.getElementById("register").addEventListener("click", register);
+            document.getElementById("signIn").addEventListener("click", loadLogin);
+        }
+    }
 }
 
 function loadHome() {
- let xhr = new XMLHttpRequest();
-                    xhr.open('GET', 'home.view', true);
-                    xhr.send();
-                    xhr.onreadystatechange = () => {
-                        if(xhr.readyState === 4 && xhr.status === 200) {
-                            document.getElementById("root").innerHTML = xhr.responseText;
-                            if(loggedOut === true){
-                            console.log("Successfully Logged out!")
-                            document.getElementById("message").innerText ="Successfully Logged Out!";
-                            document.getElementById("message").style.display = "flex";
-                            loggedOut = false;
-                                                 setTimeout(() => {
-                                                 document.getElementById("message").style.display = "none";
-                                                 }, 2500)
-                            }
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'home.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("root").innerHTML = xhr.responseText;
+            if (loggedOut === true) {
+                console.log("Successfully Logged out!")
+                document.getElementById("message").innerText = "Successfully Logged Out!";
+                document.getElementById("message").style.display = "flex";
+                loggedOut = false;
+                setTimeout(() => {
+                    document.getElementById("message").style.display = "none";
+                }, 2500)
+            }
 
-                            document.getElementById("loginBut").addEventListener("click", loadLogin);
-                            document.getElementById("registerBut").addEventListener("click", loadRegister);
-                        }
-                    }
+            document.getElementById("loginBut").addEventListener("click", loadLogin);
+            document.getElementById("registerBut").addEventListener("click", loadRegister);
+        }
+    }
 }
 
 function showFormFunc() {
     showForm = !showForm;
-    if(showForm === false) {
+    if (showForm === false) {
         document.getElementById("expenseButton").innerText = "Add a new Expense";
         document.getElementById("expenseForm").style.display = "none";
     }
@@ -653,12 +665,12 @@ function makeUserContent(id, type, amount, author, resolver, status, descContent
     }
     else if (status === "APPROVED") {
         span.style.backgroundColor = "#5cb85c"
-        resolvedText.innerText = "Resolver: DLaw";
+        resolvedText.innerText = "Resolver: Darryl Law";
 
     }
     else if (status === "DENIED") {
         span.style.backgroundColor = "#d9534f"
-        resolvedText.innerText = "Resolver: DLaw";
+        resolvedText.innerText = "Resolver: Darryl Law";
     }
     span.classList.add("circle")
     statusText.innerText = "Status: ";
@@ -725,10 +737,60 @@ function makeUserContent(id, type, amount, author, resolver, status, descContent
     modalIdGenerator++
 }
 
-
-
 function bufferFunction(user) {
     loadDashboard(user)
 }
 
+function sorterFunctionManager(sortedInfo2, currentUser, users) {
 
+    let username = "";
+    for (let i = 0; i < users.length; i++){
+        if(users[i]["id"] === sortedInfo2["authId"]){
+            username = users[i]["firstName"] + " " + users[i]["lastName"]
+        }
+    }
+
+
+    if (all === true) {
+        makeContent(sortedInfo2["id"], sortedInfo2["typeId"], sortedInfo2["amount"], username, sortedInfo2["resId"], sortedInfo2["statusId"], sortedInfo2["desc"], sortedInfo2["subTime"], currentUser)
+    }
+    else if (approvedData === true) {
+        if (sortedInfo2["statusId"] === "APPROVED") {
+            makeContent(sortedInfo2["id"], sortedInfo2["typeId"], sortedInfo2["amount"], username, sortedInfo2["resId"], sortedInfo2["statusId"], sortedInfo2["desc"], sortedInfo2["subTime"], currentUser)
+        }
+    }
+    else if (pendingData === true) {
+        if (sortedInfo2["statusId"] === "PENDING") {
+            makeContent(sortedInfo2["id"], sortedInfo2["typeId"], sortedInfo2["amount"], username, sortedInfo2["resId"], sortedInfo2["statusId"], sortedInfo2["desc"], sortedInfo2["subTime"], currentUser)
+        }
+    }
+    else if (deniedData === true) {
+        if (sortedInfo2["statusId"] === "DENIED") {
+            makeContent(sortedInfo2["id"], sortedInfo2["typeId"], sortedInfo2["amount"], username, sortedInfo2["resId"], sortedInfo2["statusId"], sortedInfo2["desc"], sortedInfo2["subTime"], currentUser)
+        }
+    }
+}
+function sorterUserManager(sortedInfo2, currentUser) {
+
+    let fullname = currentUser["firstName"] + " " + currentUser["lastName"];
+   
+
+    if (all === true) {
+        makeUserContent(sortedInfo2["id"], sortedInfo2["typeId"], sortedInfo2["amount"], fullname, sortedInfo2["resId"], sortedInfo2["statusId"], sortedInfo2["desc"], sortedInfo2["subTime"], currentUser)
+    }
+    else if (approvedData === true) {
+        if (sortedInfo2["statusId"] === "APPROVED") {
+            makeUserContent(sortedInfo2["id"], sortedInfo2["typeId"], sortedInfo2["amount"], fullname, sortedInfo2["resId"], sortedInfo2["statusId"], sortedInfo2["desc"], sortedInfo2["subTime"], currentUser)
+        }
+    }
+    else if (pendingData === true) {
+        if (sortedInfo2["statusId"] === "PENDING") {
+            makeUserContent(sortedInfo2["id"], sortedInfo2["typeId"], sortedInfo2["amount"], fullname, sortedInfo2["resId"], sortedInfo2["statusId"], sortedInfo2["desc"], sortedInfo2["subTime"], currentUser)
+        }
+    }
+    else if (deniedData === true) {
+        if (sortedInfo2["statusId"] === "DENIED") {
+            makeUserContent(sortedInfo2["id"], sortedInfo2["typeId"], sortedInfo2["amount"], fullname, sortedInfo2["resId"], sortedInfo2["statusId"], sortedInfo2["desc"], sortedInfo2["subTime"], currentUser)
+        }
+    }
+}
