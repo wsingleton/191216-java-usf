@@ -13,7 +13,7 @@ public enum Status {
         this.name = name;
     }
 
-    public Status getById(int id){
+    public static Status getById(int id){
         for (Status status : Status.values()) {
             if (status.id ==id) {
                 return status;

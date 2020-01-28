@@ -1,6 +1,5 @@
 package com.revature.project1.models;
 
-import oracle.sql.BLOB;
 import oracle.sql.DATE;
 
 import java.io.InputStream;
@@ -10,21 +9,21 @@ public class Reimbursement {
 
     private Integer id;
     private Double amount;
-    private DATE date;
+    private String date;
     private DATE submitted;
     private DATE resolved;
     private String description;
     private InputStream receipt;
     private int authorId;
     private int resolverId;
-    private Status status;
+    private int status;
     private Type type;
 
     public Reimbursement(){
         super();
     }
 
-    public Reimbursement(Double amount, DATE date, String description, int authorId, Type type) {
+    public Reimbursement(Double amount, String date, String description, int authorId, Type type) {
         this.amount = amount;
         this.date = date;
         this.description = description;
@@ -32,7 +31,7 @@ public class Reimbursement {
         this.type = type;
     }
 
-    public Reimbursement(Double amount, DATE date, int authorId, Type type) {
+    public Reimbursement(Double amount, String date, int authorId, Type type) {
         this.amount = amount;
         this.date = date;
         this.authorId = authorId;
@@ -55,19 +54,19 @@ public class Reimbursement {
         this.amount = amount;
     }
 
-    public DATE getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(DATE date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public DATE getSubmitted() {
+    public String getSubmitted() {
         return submitted;
     }
 
-    public void setSubmitted(DATE submitted) {
+    public void setSubmitted(String submitted) {
         this.submitted = submitted;
     }
 
@@ -111,7 +110,7 @@ public class Reimbursement {
         this.resolverId = resolverId;
     }
 
-    public Status getStatus() {
+    public int getStatus() {
         return status;
     }
 
@@ -119,7 +118,7 @@ public class Reimbursement {
         this.status = status;
     }
 
-    public Type getType() {
+    public int getType() {
         return type;
     }
 

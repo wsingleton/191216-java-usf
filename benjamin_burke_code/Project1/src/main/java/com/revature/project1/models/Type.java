@@ -12,7 +12,7 @@ public enum Type {
         this.name = name;
     }
 
-    public Type getById() {
+    public  Type getTypeById() {
         for (Type type : Type.values()) {
             if(type.id == id) {
                 return type;
