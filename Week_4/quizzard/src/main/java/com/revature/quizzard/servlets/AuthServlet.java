@@ -7,6 +7,9 @@ import com.revature.quizzard.exceptions.AuthenticationException;
 import com.revature.quizzard.models.User;
 import com.revature.quizzard.repos.UserRepository;
 import com.revature.quizzard.services.UserService;
+import com.revature.quizzard.util.ErrorResponseFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +23,9 @@ import java.io.PrintWriter;
 @WebServlet("/auth")
 public class AuthServlet extends HttpServlet {
 
-    public final UserService userService = new UserService(new UserRepository());
+    public final UserService userService = UserService.getInstance();
+    private final ErrorResponseFactory errRespFactory = ErrorResponseFactory.getInstance();
+    private static final Logger LOG = LogManager.getLogger(UserServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,7 +39,7 @@ public class AuthServlet extends HttpServlet {
 
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = resp.getWriter();
-        resp.setContentType("application/json");
+
 
         try {
 
