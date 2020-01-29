@@ -27,7 +27,7 @@ public class UserService {
         if (userRepo.findUserByUsername(newUser.getUsername()).isPresent()) {
             throw new ResourcePersistenceException("Username is already in use!");
         }
-        newUser.setRole(UserRole.EMPLOYEE);
+        newUser.setUserRole(UserRole.EMPLOYEE);
         userRepo.save(newUser);
         return newUser;
     }

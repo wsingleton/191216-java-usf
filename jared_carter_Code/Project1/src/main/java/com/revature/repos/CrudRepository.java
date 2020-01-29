@@ -8,7 +8,9 @@ public interface CrudRepository<T> {
 
     Set<T> findAll();
 
-    Optional<T> findById(Integer id);
+    Optional<T> findById(int id);
 
-    Boolean update(T updatedObj);
+    //boolean update(T updatedObj);
+
+    //boolean deleteById(int id);
 }

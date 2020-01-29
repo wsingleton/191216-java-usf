@@ -1,33 +1,29 @@
 package com.revature.models;
 
 public enum ReimbursementStatus {
-    PENDING(1,"Pending"),APPROVED(2,"Approved"),
+    APPROVED(1, "Approved"), PENDING(2, "Pending"),
 
-    DENIED(3,"Denied");
+    DENIED(3, "Denied"), LOCKED(4, "Locked");
 
     private Integer id;
-    private String reimbursementStatus;
+    private String name;
 
-    ReimbursementStatus(Integer id, String reimbursementStatus) {
+    ReimbursementStatus(Integer id, String name) {
         this.id = id;
-        this.reimbursementStatus = reimbursementStatus;
+        this.name = name;
     }
 
-    public static ReimbursementStatus getReimbursementStatusById(Integer id) {
+    public static ReimbursementStatus getReimbursementStatusById(int id) {
         for (ReimbursementStatus reimbursementStatus : ReimbursementStatus.values()) {
             if (reimbursementStatus.id == id) {
                 return reimbursementStatus;
             }
         }
-        return ReimbursementStatus.PENDING;
+        return ReimbursementStatus.LOCKED;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return reimbursementStatus;
-    }
 }
