@@ -11,6 +11,16 @@ import java.util.Set;
 
 public class UserRepository implements CrudRepository<User> {
 
+    private static final UserRepository userRepo = new UserRepository();
+
+    private UserRepository() {
+        super();
+    }
+
+    public static UserRepository getInstance() {
+        return userRepo;
+    }
+
     public Set<User> findUsersByRole(Role role) {
 
         Set<User> users = new HashSet<>();
@@ -148,9 +158,7 @@ public class UserRepository implements CrudRepository<User> {
     }
 
     @Override
-    public boolean update(User updatedObj) {
-
-        boolean updateSuccessful = false;
+    public void update(User updatedObj) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 
@@ -162,44 +170,28 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.setString(3, updatedObj.getFirstName());
             pstmt.setString(4, updatedObj.getLastName());
             pstmt.setInt(5, updatedObj.getId());
-
-            int rowsUpdated = pstmt.executeUpdate();
-
-            if (rowsUpdated > 0) {
-                updateSuccessful = true;
-            }
-
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return updateSuccessful;
-
     }
 
     @Override
-    public boolean deleteById(int id) {
-
-        boolean deleteSuccessful = false;
+    public void deleteById(int id) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 
             String sql = "DELETE FROM quizzard.app_user WHERE user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
+            pstmt.executeUpdate();
 
-            int rowsDeleted = pstmt.executeUpdate();
-
-            if (rowsDeleted > 0) {
-                deleteSuccessful = true;
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return deleteSuccessful;
 
     }
 
