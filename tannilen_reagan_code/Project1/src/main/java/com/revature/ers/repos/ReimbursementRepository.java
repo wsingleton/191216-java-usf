@@ -3,10 +3,7 @@ package com.revature.ers.repos;
 import com.revature.ers.models.Reimbursement;
 import com.revature.ers.util.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -81,27 +78,23 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public boolean update(Reimbursement reimb) {
-//        boolean updateSuccessful = false;
-////        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
-////            String sql = "UPDATE proj_1_adamin.ers_users SET ers_username=?, ers_password=?, user_first_name=?, user_last_name=?, user_email=?, user_role_id=? " +
-////                    "WHERE ers_users_id = ?";
-////            PreparedStatement pstmt = conn.prepareStatement(sql);
-////            pstmt.setString(1, user.getUsername());
-////            pstmt.setString(2, user.getPassHash());
-////            pstmt.setString(3, user.getFirst());
-////            pstmt.setString(4, user.getLast());
-////            pstmt.setString(5, user.getEmail());
-////            pstmt.setInt(6, user.getRole());
-////            pstmt.setInt(7, user.getUserID());
-////            int rowsUpdated = pstmt.executeUpdate();
-////            if (rowsUpdated > 0) {
-////                updateSuccessful = true;
-////            }
-////        } catch (SQLException e) {
-////            e.printStackTrace();
-////        }
-////        return updateSuccessful;
-        return false;
+        boolean updateSuccessful = false;
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+            String sql = "UPDATE proj_1_admin.ers_reimbursement SET reimb_resolved=?, reimb_resolver=?, reimb_status_id" +
+                    "WHERE reimb_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, reimb.getResolved());
+            pstmt.setInt(2, reimb.getResID());
+            pstmt.setInt(3, reimb.getStatus());
+            pstmt.setInt(4, reimb.getReimbID());
+            int rowsUpdated = pstmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                updateSuccessful = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return updateSuccessful;
     }
 
     @Override
@@ -109,7 +102,6 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
         return false;
     }
     private Set<Reimbursement> mapResultSet(ResultSet rs) throws SQLException {
-
         Set<Reimbursement> reimbs = new HashSet<>();
         while (rs.next()) {
             Reimbursement tempReimb = new Reimbursement();
@@ -124,6 +116,31 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             tempReimb.setStatus(rs.getInt("reimb_status_id"));
             tempReimb.setType(rs.getInt("reimb_type_id"));
             reimbs.add(tempReimb);
+        }
+        return reimbs;
+    }
+    public Set<Reimbursement> findByAuthor(int id) {
+        Set<Reimbursement> reimbs=new HashSet<>();
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+            String sql = "SELECT * FROM proj_1_admin.ers_reimbursement WHERE auth_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            reimbs = mapResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reimbs;
+    }
+    public Set<Reimbursement> findAll() {
+        Set<Reimbursement> reimbs=new HashSet<>();
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+            String sql = "SELECT * FROM proj_1_admin.ers_reimbursement";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            reimbs = mapResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return reimbs;
     }

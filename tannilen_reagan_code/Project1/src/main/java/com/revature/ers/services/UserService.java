@@ -16,4 +16,5 @@ public class UserService {
         }
        return userRepo.findUserByCredentials(username, pw).orElseThrow(AuthenticationException::new);
     }
+    //maybe add a process to update your password?
 }
