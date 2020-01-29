@@ -29,7 +29,8 @@ public class UserRepository implements CrudRepository<User> {
         return user;
     }
     @Override
-    public void save(User newUser) {
+    public boolean save(User newUser) {
+        boolean successful=false;
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "INSERT INTO proj_1_admin.ers_users VALUES (0, ?, ?, ?, ?, ?, ?)";
@@ -43,6 +44,7 @@ public class UserRepository implements CrudRepository<User> {
 
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted != 0) {
+                successful=true;
                 ResultSet rs = pstmt.getGeneratedKeys();
                 while (rs.next()) {
                     newUser.setUserID(rs.getInt(1));
@@ -51,6 +53,7 @@ public class UserRepository implements CrudRepository<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return successful;
     }
 
     @Override

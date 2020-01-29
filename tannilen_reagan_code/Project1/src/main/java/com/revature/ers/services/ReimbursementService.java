@@ -13,7 +13,8 @@ public class ReimbursementService {
     public ReimbursementService(ReimbursementRepository repo) {
         this.reimbRepo=repo;
     }
-    public void submitNewReimbursement(double amt, int type, int uID) {
+    public boolean submitNewReimbursement(double amt, int type, int uID) {
+        boolean successful=false;
         Reimbursement reimb=new Reimbursement();
         BigDecimal bd = new BigDecimal(amt).setScale(2, RoundingMode.HALF_UP);
         amt=bd.doubleValue();
@@ -27,14 +28,16 @@ public class ReimbursementService {
                 reimb.setAuthID(uID);
                 reimb.setSubmitted(System.currentTimeMillis());
                 reimb.setStatus(1);
-                reimbRepo.save(reimb);
+                successful=reimbRepo.save(reimb);
             }
         }
         catch (InvalidInputException e) {
             e.printStackTrace();
         }
+        return successful;
     }
-    public void submitNewReimbursement(double amt, int type, String desc, int uID) {
+    public boolean submitNewReimbursement(double amt, int type, String desc, int uID) {
+        boolean successful=false;
         Reimbursement reimb=new Reimbursement();
         BigDecimal bd = new BigDecimal(amt).setScale(2, RoundingMode.HALF_UP);
         amt=bd.doubleValue();
@@ -49,12 +52,13 @@ public class ReimbursementService {
                 reimb.setSubmitted(System.currentTimeMillis());
                 reimb.setStatus(1);
                 reimb.setDesc(desc);
-                reimbRepo.save(reimb);
+                successful=reimbRepo.save(reimb);
             }
         }
         catch (InvalidInputException e) {
             e.printStackTrace();
         }
+        return successful;
     }
     public Set<Reimbursement> viewSubmitted(int uID) {
         Set<Reimbursement> reimbs=reimbRepo.findByAuthor(uID);

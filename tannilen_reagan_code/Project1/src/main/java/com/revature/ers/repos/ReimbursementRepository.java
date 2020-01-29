@@ -10,7 +10,9 @@ import java.util.Set;
 
 public class ReimbursementRepository implements CrudRepository<Reimbursement> {
     @Override
-    public void save(Reimbursement reimb) {
+    public boolean save(Reimbursement reimb) {
+        boolean successful=false;
+        int rowsInserted=0;
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
             if (reimb.getReceipt()!=null && reimb.getDesc()!=null) {
                 String sql = "INSERT INTO proj_1_admin.ers_reimbursement (REIMB_ID, REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_DESCRIPTION, REIMB_RECEIPT, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) VALUES (0, ?, ?, ?, ?, ?, ?, ?)";
@@ -22,7 +24,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                 pstmt.setInt(5, reimb.getAuthID());
                 pstmt.setInt(6, reimb.getStatus());
                 pstmt.setInt(7,reimb.getType());
-                pstmt.executeUpdate();
+                rowsInserted=pstmt.executeUpdate();
             }
             else if (reimb.getReceipt()!=null) {
                 String sql = "INSERT INTO proj_1_admin.ers_reimbursement (REIMB_ID, REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_RECEIPT, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) VALUES (0, ?, ?, ?, ?, ?, ?, ?)";
@@ -33,7 +35,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                 pstmt.setInt(4, reimb.getAuthID());
                 pstmt.setInt(5, reimb.getStatus());
                 pstmt.setInt(6,reimb.getType());
-                pstmt.executeUpdate();
+                rowsInserted=pstmt.executeUpdate();
             }
             else if (reimb.getDesc()!=null) {
                 String sql = "INSERT INTO proj_1_admin.ers_reimbursement (REIMB_ID, REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_DESCRIPTION, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) VALUES (0, ?, ?, ?, ?, ?, ?, ?)";
@@ -44,7 +46,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                 pstmt.setInt(4, reimb.getAuthID());
                 pstmt.setInt(5, reimb.getStatus());
                 pstmt.setInt(6,reimb.getType());
-                pstmt.executeUpdate();
+                rowsInserted=pstmt.executeUpdate();
             }
             else {
                 String sql = "INSERT INTO proj_1_admin.ers_reimbursement (REIMB_ID, REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) VALUES (0, ?, ?, ?, ?, ?, ?, ?)";
@@ -54,11 +56,15 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                 pstmt.setInt(3, reimb.getAuthID());
                 pstmt.setInt(4, reimb.getStatus());
                 pstmt.setInt(5,reimb.getType());
-                pstmt.executeUpdate();
+                rowsInserted=pstmt.executeUpdate();
+            }
+            if (rowsInserted>0) {
+                successful=true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return successful;
     }
 
     @Override
