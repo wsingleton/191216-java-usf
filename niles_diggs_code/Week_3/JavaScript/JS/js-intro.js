@@ -569,6 +569,125 @@ console.log(typeof(hotelJSON), hotelJSON);
 
 let newHotel = new Object();
 console.dir(newHotel);
+newHotel.name = 'Four Seasons';
+newHotel.rooms = 300;
+newHotel.booked = 190;
+newHotel.available = () => {
+    return this.rooms = this.booked;
+};
+console.dir(newHotel);
+
+// "Class function"
+function Hotel(name, rooms, booked) {
+    this.name = name;
+    this.rooms = rooms;
+    this.booked = booked;
+    this.available  = () => {
+        return this.rooms - this.booked;
+    }
+}
+
+let yourHotel = new Hotel('Holiday Inn', 100, 75);
+console.dir(yourHotel);
+console.log(yourHotel.name, yourHotel.available());
+
+// Class syntax
+class Animal {
+    static x = 5;
+
+    // no constructor overloading ins JS (there can only be one!)
+    constructor(name) {
+        this.name = name;
+    }
+
+    speak() {
+        console.log(this);
+        console.log(this.name + ' speaks...');
+
+    }
+}
+
+class Dog extends Animal {
+    constructor(name) {
+        super(name);
+    }
+
+    speak() {
+        console.log(this);
+        console.log(this.name + ' barks.')
+    }
+
+    wagTail = () => {
+        console.log(this);
+        console.log('The good boy is wagging his tail.');
+    }
+}
+
+let spot = new Dog('Spot');
+spot.speak();
+spot.wagTail();
+console.log(Animal.x);
+
+let fido = new Animal('Fido');
+fido.speak();
+
+//--------------------------------
+function sum(x,y,z) {
+    return x + y + z;
+}
+let numbers = [1,2,3];
+let mySum = sum(numbers[0], numbers[1], numbers[2]);
+console.log(mySum);
+let yourSum = sum(...numbers);
+console.log(yourSum);
+
+//Destructuring operator
+let j, k, rest;
+[j, k] = [10, 20];
+console.log(j); // 10
+console.log(k); // 20
+
+// COmbining the rest operator with the destructuring operator
+[j, k, ...rest] = [10, 20, 30, 40, 50];
+console.log(j); // 10
+console.log(k); // 20
+console.log(rest); // [30, 40, 50]
+
+// Using the destructuring with objects
+let obj = {
+    p: 42,
+    q: true
+};
+
+let {p, q} = obj;
+console.log(p);
+console.log(q);
+
+//---------------------------------
+
+// Error Handling
+
+function throwsError() {
+    throw new Error('oops.there was an error');
+}
+
+try {
+    throwsError();
+} catch (Error) {
+    console.log('the error was caught');
+}
+
+class CustomError extends Error {
+    constructor() {
+        super('hey look! a custom error.')
+    }
+}
+
+let myError = new CustomError();
+console.dir(myError);
+
+/*
+    Spread/Rest Operator
 
 // add in the notes from wednesday
 
@@ -584,3 +703,33 @@ console.dir(newHotel);
 
         - Methods can be added to objects as properties
 */
+
+/*
+
+    for..of && for..in
+
+        - for..of
+            + uses an object-specific iterator and loops over its generated value
+
+        - for..in
+            + loop over enumerated property names of an object
+
+*/
+
+// for..of
+const myArray = [10, 20, 30];
+
+for (const value of myArray) {
+    console.log(value);
+}
+
+// for..in
+let myObject = {
+    'my prop': 1,
+    y: 2,
+    z: 3
+};
+
+for (const property in myObject) {
+    console.log(`myObject.${property} = ${myObject[property]}`);
+}

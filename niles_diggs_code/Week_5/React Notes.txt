@@ -1,0 +1,86 @@
+Notes on React
+
+What is it?
+
+- single page application
+
+- library for rendering, mostly HTML (not a framework)
+
+--------------------------------------------------------
+
+Composition (has-a relationship) vs Inheritance(is-a relationship)
+
+React uses composition
+
+--------------------------------------------------------
+
+JSX
+	Version of JS with HTML inside used within react
+	
+	HTML props now follows JS naming conventions (e.g onClick, className)
+
+(There is also TSX)
+
+---------------------------------------------------------
+
+NPX
+	special tool built on top of npm, hits 
+
+---------------------------------------------------------
+
+App.tsx
+	becomes the root of out applications
+
+---------------------------------------------------------
+
+React Breakdown 
+
+React has both a DOM and Virtual Dom
+
+	- makes the updates on the virtual dom, compares the new virtual dom to the older in order to check for changes
+
+	- will only change the elements that have changed on the real DOM, no need to re-render the entire page
+
+------------------------------------------------------------
+
+React Lifecycle
+
+1. Mounting 
+	
+	- going from not being in the HTML to being in the HTML
+
+	- going from non-existence to existence
+
+		Steps for mounting
+
+			* Call the constructor
+			* Get derived state from props, getting all the necessary info from props
+			* Call render
+			* Update the DOM
+			* ComponentDidMount -> lifecycle component, a function you can put inside a component and React will call it at this stage
+
+2. Updating
+
+	- the component is in use, being updated, changes are being made to it
+
+	- calling this.setState, changing the set state
+
+	- changing the props will also cause an update
+
+	- calling forceUpdate() -> this will skip the following steps because it assuming you have reason to force the update, probably won't need to use this
+
+		Steps for updating
+
+			* Get the derived state from props
+			* Write ShouldComponentUpdate, by default the return is true
+			* Call Render
+			* Get SnapShotBeforeUpdate, if the snapshot is different the DOM is updated, otherwise not
+			* ComponentDidUpdate
+
+3. Un-mounting 
+
+	- going from existence to non-existence
+
+		Steps for un-mounting
+
+			* ComponentWillUnMount

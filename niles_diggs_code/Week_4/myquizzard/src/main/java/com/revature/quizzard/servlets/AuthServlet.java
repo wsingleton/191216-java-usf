@@ -8,10 +8,12 @@ import com.revature.quizzard.repos.UserRepository;
 import com.revature.quizzard.services.UserService;
 
 import javax.security.sasl.AuthenticationException;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.rmi.ServerException;
@@ -35,6 +37,9 @@ public class AuthServlet extends HttpServlet {
             String authUserJSON = mapper.writeValueAsString(authUser);
             writer.write(authUserJSON);
 
+            HttpSession session = req.getSession(); // letting TOMCAT keep track of the session and giving the user a cookie
+            session.setAttribute("this-user", authUser);
+
         } catch (MismatchedInputException e) {
             resp.setStatus(400);
         } catch (AuthenticationException e) {
@@ -42,6 +47,13 @@ public class AuthServlet extends HttpServlet {
         }catch (Exception e) {
             resp.setStatus(500);
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getSession(false) != null) {
+            req.getSession().invalidate();
         }
     }
 }

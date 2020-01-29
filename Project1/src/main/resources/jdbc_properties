@@ -1,0 +1,3 @@
+url=jdbc:oracle:thin:@niles-db.cgbvd9f8ntqe.us-east-2.rds.amazonaws.com:1521:ORCL
+usr=xnd_inc
+pw=p4ssw0rd

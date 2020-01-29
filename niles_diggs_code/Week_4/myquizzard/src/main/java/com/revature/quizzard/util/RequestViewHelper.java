@@ -6,7 +6,7 @@ public class RequestViewHelper {
 
         switch (uri) {
             case "/quizzard/login.view":
-                return "partials/login/html";
+                return "partials/login.html";
             case "/quizzard/register.view":
                 return "partials/register.html";
             case "/quizzard/login/dashboard":
