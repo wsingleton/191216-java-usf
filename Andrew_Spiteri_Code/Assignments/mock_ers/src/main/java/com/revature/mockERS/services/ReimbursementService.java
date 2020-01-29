@@ -1,5 +1,6 @@
 package com.revature.mockERS.services;
 
+import com.revature.mockERS.dto.ChangeStatusIn;
 import com.revature.mockERS.dto.ReimbursementIn;
 import com.revature.mockERS.dto.ReimbursementOut;
 import com.revature.mockERS.models.ERS_Reimbursement;
@@ -41,10 +42,10 @@ public class ReimbursementService {
         return rr.getReimbursementByUser(id);
     }
 
-    public Boolean updateStatus(ReimbursementIn ri){
-
+    public Boolean updateStatus(ChangeStatusIn csi){
         ERS_Reimbursement ers = ERS_Reimbursement.makeReimbursement();
-        ers.setStatus(ERS_Reimbursement_Status.getStatusByName(ri.getStatus()));
+        ers.setStatus(ERS_Reimbursement_Status.getStatusByName(csi.getStatus()));
+        ers.setReimbId(csi.getId());
         return rr.updateReimbStatus(ers);
     }
 

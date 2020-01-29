@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import com.revature.mockERS.dto.ChangeStatusIn;
 import com.revature.mockERS.dto.ErrorResponse;
 import com.revature.mockERS.dto.ReimbursementIn;
 import com.revature.mockERS.dto.ReimbursementOut;
@@ -120,7 +121,7 @@ public class ReimbursementServlet extends HttpServlet {
             ObjectMapper inmapper = new ObjectMapper();
             PrintWriter writer = resp.getWriter();
             try{
-                ReimbursementIn updateReimb = inmapper.readValue(req.getInputStream(), ReimbursementIn.class);
+                ChangeStatusIn updateReimb = inmapper.readValue(req.getInputStream(), ChangeStatusIn.class);
                 Boolean created = rs.updateStatus(updateReimb);
                 String newReimbJSON = inmapper.writeValueAsString(updateReimb);
                 writer.write(newReimbJSON);

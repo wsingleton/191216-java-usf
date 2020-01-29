@@ -234,7 +234,11 @@ function loadDashboard(){
         if(xhttp.readyState === 4){
             if(xhttp.status === 200){
                 document.getElementById('container').innerHTML = xhttp.responseText;
-                document.getElementById('reimb_submit').addEventListener('click', createReimb);
+                if(document.getElementById('reimb_submit')){
+                    document.getElementById('reimb_submit').addEventListener('click', createReimb);
+                }else{
+                    document.getElementById('admin_reimb_submit').addEventListener('click', alterReimb);
+                }
                 returnReimb();
             }
         }
@@ -306,5 +310,20 @@ function createReimb(){
     }
 }
 
-
+alterReimb = () => {
+    let xhttp = new XMLHttpRequest();
+    let id = document.getElementById('choose_id').value;
+    let status = document.getElementById('status').value;
+    if(id){
+        xhttp.open('PUT', 'reimb', true);
+        let data = JSON.stringify({'id':id,'status':status});
+        xhttp.send(data);
+        xhttp.onreadystatechange = () => {
+            if(xhttp.onreadystatechange === 4 && xhttp.status === 200){
+                alert('Successfully updated');
+                loadDashboard();
+            }
+        }
+    }
+}
 

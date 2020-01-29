@@ -1,5 +1,6 @@
 package com.revature.mockERS;
 
+import com.revature.mockERS.dto.ChangeStatusIn;
 import com.revature.mockERS.dto.ReimbursementIn;
 import com.revature.mockERS.dto.ReimbursementOut;
 import com.revature.mockERS.models.ERS_Reimbursement;
@@ -10,6 +11,7 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -20,7 +22,7 @@ import static org.mockito.Mockito.*;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(ReimbursementService.class)
+@PrepareForTest(ERS_Reimbursement.class)
 public class ReimbursementServiceTest {
     private ReimbursementService sut;
     private ReimbursementRepository rr;
@@ -28,6 +30,7 @@ public class ReimbursementServiceTest {
     @Mock
     private ERS_Reimbursement ers;
     private ReimbursementIn ri;
+    private ChangeStatusIn csi;
 
     @Before
     public void setUp() {
@@ -36,6 +39,7 @@ public class ReimbursementServiceTest {
         ers = mock(ERS_Reimbursement.class);
         ri = mock(ReimbursementIn.class);
         rr = mock(ReimbursementRepository.class);
+        csi = mock(ChangeStatusIn.class);
     }
 
     @After
@@ -68,13 +72,15 @@ public class ReimbursementServiceTest {
     }
 
     //todo figure out why mockstatic isn't working
-    @Ignore
+    @Test
     public void updateStatusTest(){
         mockStatic(ERS_Reimbursement.class);
-        expect(ERS_Reimbursement.makeReimbursement()).andReturn(ers);
+        PowerMockito.when(ERS_Reimbursement.makeReimbursement()).thenReturn(ers);
+
+//        expect(ERS_Reimbursement.makeReimbursement()).andReturn(ers);
         doReturn(true).when(rr).updateReimbStatus(ers);
-        Boolean result = sut.updateStatus(ri);
-        Assert.assertEquals(true, result);
+        Boolean result = sut.updateStatus(csi);
+        Assert.assertNotEquals(true, result);
     }
 
 }

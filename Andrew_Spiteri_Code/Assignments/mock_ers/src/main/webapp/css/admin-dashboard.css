@@ -36,10 +36,10 @@ tr{
     transform: translate(-50%,-50%);
 }
 
-#reimb_submit{
+#admin_reimb_submit{
     position: relative;
-    top: 110px;
-    left: 28%;
+    margin-top: 6rem;
+    margin-left: 28%;
     -ms-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
@@ -48,7 +48,7 @@ tr{
 #reimb_table{
     background-color: white;
     position: relative;
-    margin-top: 10rem;
+    margin-top: 3rem;
     top: 120px;
     left: 50%;
     -ms-transform: translateX(-50%) translateY(-50%);
