@@ -1,5 +1,7 @@
 package com.revature.quizzard.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 public class User {
@@ -64,6 +66,7 @@ public class User {
         this.username = username;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -97,6 +100,11 @@ public class User {
     public void setRole(Role role) {
         if (role == null) return;
         this.role = role;
+    }
+
+    @JsonIgnore
+    public boolean isAdminOrDev() {
+        return this.role == Role.ADMIN || this.role == Role.DEV;
     }
 
     @Override
