@@ -5,15 +5,12 @@ import com.revature.models.ReimbursementStatus;
 import com.revature.models.ReimbursementType;
 import com.revature.util.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class ReimbursementRepository implements CrudRepository {
+public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
 
     public Set<Reimbursement> findAllById(int id) {
@@ -48,7 +45,6 @@ public class ReimbursementRepository implements CrudRepository {
             pstmt.setInt(5, newObj.getReimbursementTypeId().getId());
 
 
-
             int rowsInserted = pstmt.executeUpdate();
 
             if (rowsInserted != 0) {
@@ -63,6 +59,17 @@ public class ReimbursementRepository implements CrudRepository {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public Set<Reimbursement> findAll() {
+        Set<Reimbursement> reimbursement = new HashSet<>();
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()){
+            String sql = "SELECT * FROM ers.ers_reimbursement";
+            Statement stmt = conn.createStatement();
+
+        }
+    }
+
 
     @Override
     public boolean update(Reimbursement updatedObj) {
@@ -103,6 +110,11 @@ public class ReimbursementRepository implements CrudRepository {
 
         return reimbursement;
 
+    }
+
+    @Override
+    public Optional<Reimbursement> findById(int id) {
+        return Optional.empty();
     }
 
 }
