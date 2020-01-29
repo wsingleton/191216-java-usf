@@ -1,9 +1,13 @@
 window.onload = () => {
     console.log('homescreen loaded?');
     loadHome();
-    document.getElementById('homebutton').addEventListener('click', loadHome);
-    document.getElementById('navdashboard').addEventListener('click', loadDashboard);
+    document.getElementById('homebutton').addEventListener('click', logout);
+    document.getElementById('signout').addEventListener('click', logout);
 }
+
+
+// +----------- Combined -----------+
+
 
 function loadHome() {
 
@@ -29,9 +33,9 @@ function logout() {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log('Logout successful!');
+            loadHome();
         }
     }
-    loadHome();
 }
 
 function loadPolicy() {
@@ -41,29 +45,10 @@ function loadPolicy() {
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById('root').innerHTML = xhr.responseText;
-            document.getElementById('navdashboard').addEventListener('click', loadDashboard); 
+            document.getElementById('root').innerHTML = xhr.responseText; 
         }
     }
 }
-
-function loadDashboard() {
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'dashboard.view', true);
-    xhr.send();
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById('root').innerHTML = xhr.responseText;
-            document.getElementById('newreimbbutton').addEventListener('click', loadNewReimb);
-            document.getElementById('viewreimbbutton').addEventListener('click', loadReimbs);
-            document.getElementById('navdashboard').addEventListener('click', loadDashboard);
-            document.getElementById('policy').addEventListener('click', loadPolicy);  
-        }
-    }
-}
-
-// +----------- Login -----------+
 
 function loadLogin() {
 
@@ -102,8 +87,12 @@ function login() {
             if (xhr.status === 200) {
 
                 let user = JSON.parse(xhr.responseText);
-                console.log(user);
-                loadDashboard();
+
+                if (user.role === 'EMPLOYEE'){
+                    loadDashboard();
+                }else {
+                    loadAdminDash();
+                }
             }
 
             if (xhr.status === 401) {
@@ -113,7 +102,216 @@ function login() {
     }
 }
 
-// +----------- Register -----------+
+
+
+// +----------- Admin/Manager -----------+
+
+function loadAdminDash() {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'admindash.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('root').innerHTML = xhr.responseText;
+            document.getElementById('navdashboard').addEventListener('click', loadAdminDash);
+            getReimbsForAdmin(); 
+
+            document.onclick = function(event) {
+                var target = event.target || event.srcElement;
+                if(target.getAttribute('class') === 'admintableId') {
+                    let elementId = target.innerHTML; 
+                    console.log(elementId);
+                    loadAdminInfo(elementId); 
+                }            
+            }
+        }
+    }
+}
+
+function getReimbsForAdmin() {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'reimbs', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let reimbList = JSON.parse(xhr.responseText);
+                console.log(reimbList);
+
+                for(let i = 0; i < reimbList.length; i++) {
+                    addRows(reimbList[i]);
+                }
+                
+            }
+        }
+    }
+}
+
+function loadAdminInfo(id) {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'admininfo.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('root').innerHTML = xhr.responseText;
+            document.getElementById('navdashboard').addEventListener('click', loadAdminDash);
+            document.getElementById('updatereimb').addEventListener('click', updateReimb);
+            getAdminInfo(id);
+            
+            
+        }
+    }
+}
+
+function getAdminInfo(id) {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'reimbs?reimbId=' + id, true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let reimb = JSON.parse(xhr.responseText);
+                console.log(reimb);
+                addAdminInfo(reimb);
+            }
+        }
+    }  
+}
+
+
+
+function addAdminInfo(object) {
+
+    let id = object.reimbId;
+    let userId = object.authorId;
+    let subDate = object.submitted;
+    let newSub = subDate.substring(0, 10);
+    let amount = object.amount;
+    let type = object.type;
+    let status = object.status;
+    let description = object.description;
+    let receipt = object.receipt;
+
+    let pId = document.getElementById('reimbId');
+    pId.setAttribute('value', id);
+    let pUserId = document.getElementById('reimbAuthor');
+    let pAmount = document.getElementById('reimbamount');
+    let pSubmitted = document.getElementById('reimbsubmitted');
+    let pDescription = document.getElementById('reimbdescription');
+    let pReceipt = document.getElementById('reimbreceipt');
+    let pType = document.getElementById('reimbtype');
+
+    pId.innerText = id;
+    pUserId.innerText = userId;
+    pAmount.innerText = amount;
+    pSubmitted.innerHTML = newSub;
+    pDescription.innerText = description;
+    pReceipt.innerText = 'null';
+    pType.innerText = type;
+
+}
+
+function updateReimb() {
+
+    let updReimbId = document.getElementById('reimbId').innerHTML;
+    let select = document.getElementById('reimbstatus');
+    let updStatus = select.options[select.selectedIndex].innerHTML;
+
+    if(updStatus === 'PENDING') {
+        document.getElementById('update-message').innerText = 'Must approve or deny request!!';
+        loadAdminDash();
+    }
+
+    let updated = {
+        reimbId: updReimbId,
+        status: updStatus
+    };
+
+    let updatedJSON = JSON.stringify(updated);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'reimbs', true);
+    xhr.send(updatedJSON);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 202 || xhr.status === 200) {
+                loadAdminDash();
+            }
+        }
+    }   
+}
+
+function addRows(object) {
+
+    let id = object.reimbId;
+    let userId = object.authorId;
+    let subDate = object.submitted;
+    let newSub = subDate.substring(0,10);
+    let amount = object.amount;
+    let type = object.type;
+    let status = object.status;
+
+    let row = document.createElement('tr');
+    let idCell = document.createElement('td');
+    let userIdCell = document.createElement('td');
+    let subDateCell = document.createElement('td');
+    let amtCell = document.createElement('td');
+    let typeCell = document.createElement('td');
+    let statusCell = document.createElement('td');
+
+    row.appendChild(idCell);
+    row.appendChild(userIdCell);
+    row.appendChild(subDateCell);
+    row.appendChild(amtCell);
+    row.appendChild(typeCell);
+    row.appendChild(statusCell);
+
+    document.getElementById('adminreimbtable').appendChild(row);
+    let link = document.createElement('a');
+    link.setAttribute('class', 'admintableId');
+    link.setAttribute('href', '#');
+    link.setAttribute('id', id);
+    link.innerText = id;
+
+    idCell.append(link);
+    userIdCell.innerText = userId;
+    subDateCell.innerText = newSub;
+    amtCell.innerText = amount;
+    typeCell.innerText = type;
+    statusCell.innerText = status;
+
+}
+
+// +----------- Employee -----------+
+
+function loadDashboard() {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'dashboard.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('root').innerHTML = xhr.responseText;
+            document.getElementById('newreimbbutton').addEventListener('click', loadNewReimb);
+            document.getElementById('navdashboard').addEventListener('click', loadDashboard);
+            document.getElementById('policy').addEventListener('click', loadPolicy); 
+            getReimbs(); 
+
+            document.onclick = function(event) {
+                var target = event.target || event.srcElement;
+                if(target.getAttribute('class') === 'tableId') {
+                    let elementId = target.innerHTML; 
+                    console.log(elementId);
+                    loadInfo(elementId); 
+                }            
+            }
+        }
+    }
+}
 
 function loadRegister() {
 
@@ -155,8 +353,6 @@ function register() {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 || xhr.status === 200) {
                 console.log('success');
-                // let user = JSON.parse(xhr.responseText);
-                // console.log(user);
                 loadDashboard();
             }
 
@@ -167,12 +363,10 @@ function register() {
     }
 }
 
-// +----------- Reimbursements -----------+
-
 function loadNewReimb() {
 
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'newreimb.view', true);
+    xhr.open('GET', 'request.view', true);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -210,9 +404,6 @@ function submitNewReimb() {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 || xhr.status === 200) {
-
-                // let newReimb = JSON.parse(xhr.responseText);
-                // console.log(newReimb);
                 loadDashboard();
             }
 
@@ -223,32 +414,7 @@ function submitNewReimb() {
     }
 }
 
-function loadReimbs() {
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'reimbs.view', true);
-    xhr.send();
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById('root').innerHTML = xhr.responseText;
-            document.getElementById('navdashboard').addEventListener('click', loadDashboard);
-            document.getElementById('policy').addEventListener('click', loadPolicy);
-            document.getElementById('signout').addEventListener('click', logout);
-            getReimbs();
-
-            document.onclick = function(event) {
-                var target = event.target || event.srcElement;
-                if(target.getAttribute('class') === 'tableId') {
-                    let elementId = target.innerHTML; 
-                    console.log(elementId);
-                    loadInfo(elementId); 
-                }
-                          
-               
-            }
-        }
-    }
-} 
+// +----------- Reimbursements -----------+ 
 
 function getReimbs() {
 
@@ -284,12 +450,13 @@ function getInfo(id) {
             }
         }
     }
+    
 }
 
 function loadInfo(id) {
 
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'reimbupdate.view', true);
+    xhr.open('GET', 'info.view', true);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -297,42 +464,11 @@ function loadInfo(id) {
             document.getElementById('navdashboard').addEventListener('click', loadDashboard);
             document.getElementById('policy').addEventListener('click', loadPolicy);
             document.getElementById('signout').addEventListener('click', logout); 
-            document.getElementById('updatereimb').addEventListener('click', updateReimb);
             getInfo(id);
+            
             
         }
     }
-
-}
-
-function updateReimb() {
-
-    let updReimbId = document.getElementById('reimbId').value;
-    let select = document.getElementById('reimbstatus');
-    let updStatus = select.options[select.selectedIndex].innerHTML;
-
-    if(updStatus === 'PENDING') {
-        document.getElementById('update-message').innerText = 'Must approve or deny request!!';
-        loadDashboard();
-    }
-
-    let updated = {
-        reimbId: updReimbId,
-        status: updStatus
-    };
-
-    let updatedJSON = JSON.stringify(updated);
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'reimbs', true);
-    xhr.send(updatedJSON);
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 202 || xhr.status === 200) {
-                loadDashboard();
-            }
-        }
-    }   
 }
 
 function addRow(object) {
@@ -395,6 +531,7 @@ function addInfo(object) {
     let pSubmitted = document.getElementById('reimbsubmitted');
     let pDescription = document.getElementById('reimbdescription');
     let pReceipt = document.getElementById('reimbreceipt');
+    let pStatus = document.getElementById('reimbstatus')
     let pType = document.getElementById('reimbtype');
 
     pId.innerText = id;
@@ -403,6 +540,7 @@ function addInfo(object) {
     pSubmitted.innerHTML = newSub;
     pDescription.innerText = description;
     pReceipt.innerText = 'null';
+    pStatus.innerText = status;
     pType.innerText = type;
 
 }

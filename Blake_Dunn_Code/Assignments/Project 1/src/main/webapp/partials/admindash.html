@@ -1,14 +1,34 @@
-<div class="jumbotron text-center">
+<div class="jumbotron text-center" id="dashboard-component">
     <div>
-    <h3 class="display-4">
-        <strong>Reimbursements</strong>
-    </h3>
+      <br> <br>
+      <h2 class="display-4">
+        <strong>Buhlakify</strong>
+    </h2>
+      <p class="lead">
+        <strong>Buhlakify Expense Management</strong>
+      </p>
     </div>
+
+    <br> <br>
+    
+    <button type="button" class="btn btn-lg btn-primary col-md-4" id="review">Review Requests</button>
+    <br> <br>
+      
+    <br> <br>
+    <div class="alert alert-danger" id="login-message col-md-6"></div>
 </div>
+<br> <br> <br>
+
+<div style="text-align: center;">
+    <h3 class="display-4" >
+        <strong>Reimbursements Requests</strong>
+    </h3>
+</div>
+
 <br>
 <br>
 <div id="table-div" style="width: 90%; margin: auto;">
-    <table id="reimbtable" class="table table-secondary table-striped table-bordered table-hover table-sm" >
+    <table id="adminreimbtable" class="table table-secondary table-striped table-bordered table-hover table-sm" >
         <thead class="thead-dark">
             <tr>
                 <th scope="col" style="text-align: center; width: 10%;">
@@ -32,6 +52,3 @@
             </tr>
         </thead>
 </div>
-
-
-    

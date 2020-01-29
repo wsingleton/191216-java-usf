@@ -1,0 +1,71 @@
+<div class="jumbotron text-center" id="new-component">
+    <div>
+        <br> <br>
+      <h3 class="display-5">
+          <strong>Reimbursement Information</strong>
+      </h3>
+      <br>
+      <br>
+    </div>      
+</div>
+<div class="container text-center" id="infodisplay">
+    <div>
+        <label for="reimbId">
+            <h4>Id</h4>
+        </label>
+        <p id="reimbId"></p>
+    </div>
+    <div>
+        <label for="reimbAuthor">
+            <h4>Author Id</h4>
+        </label>
+        <p id="reimbAuthor"></p>
+    </div>
+    <div>
+        <label for="reimbamount">
+            <h4>Amount</h4>
+        </label>
+        <p id="reimbamount"></p>
+    </div>
+    <div>
+        <label for="reimbsubmitted">
+            <h4>Date Submitted</h4>
+        </label>
+        <p id="reimbsubmitted"></p>
+    </div>
+    <div>
+        <label for="reimbdescription">
+            <h4>Description</h4>
+        </label>
+        <p id="reimbdescription"></p>
+    </div>
+    <div>
+        <label for="reimbreceipt">
+            <h4>Receipt</h4>
+        </label>
+        <p id="reimbreceipt"></p>
+    </div>
+    <div>
+        <label for="reimbstatus">
+            <h4>Status</h4>
+        </label>
+        <select name="status" id="reimbstatus">
+            <option value="pending">PENDING</option>
+            <option value="approved">APPROVED</option>
+            <option value="denied">DENIED</option>
+        </select>
+    </div>
+    <div>
+        <label for="reimbtype">
+            <h4>Reimbursement Type</h4>
+        </label>
+        <p id="reimbtype"></p>
+    </div>
+    <br><br>
+    <div>
+        <button type="submit" class="btn btn-lg btn-primary" id="updatereimb">Submit</button>
+    </div>
+</div>
+
+<br> <br>
+<div class="alert alert-danger" id="update-message"></div>

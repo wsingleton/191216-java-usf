@@ -1,15 +1,20 @@
 body {
-    background-color: dimgrey;
+    background-color: slategray;
     color: darkorange;
 }
 
 .jumbotron {
-    background-color: slategrey;
+    background-color: navy;
     color: darkorange;
 }
 
 #infodisplay {
     align-content: center;
+}
+
+#policydiv {
+    margin: auto;
+    font-size: 1.25em;
 }
 
 

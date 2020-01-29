@@ -34,19 +34,22 @@ public class ReimbServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute("this-user");
         System.out.println(user);
         if (reimbParam == null) {
+            System.out.println("reimbParam null");
             if (user.getRole() == Role.ADMIN || user.getRole() == Role.MANAGER){
 
                 Set<Reimbursement> reimbs = reimbService.getAllReimbs();
                 String reimbsJSON = mapper.writeValueAsString(reimbs);
                 resp.getWriter().write(reimbsJSON);
 
-            }else {
-
+            }
+            else {
+                System.out.println("not an admin");
                 Set<Reimbursement> reimbs = reimbService.getReimbByUser(user.getUserId());
                 String reimbsJSON = mapper.writeValueAsString(reimbs);
                 resp.getWriter().write(reimbsJSON);
             }
-        }else {
+        }
+        else {
             try {
                 Reimbursement reimb = reimbService.getReimbById((Integer.parseInt(reimbParam)));
                 String reimbJSON = mapper.writeValueAsString(reimb);
@@ -89,6 +92,7 @@ public class ReimbServlet extends HttpServlet {
             err.setMessage(e.getMessage());
             writer.write(mapper.writeValueAsString(err));
         } catch(Exception e) {
+            e.printStackTrace();
             resp.setStatus(500); // internal server error
         }
 

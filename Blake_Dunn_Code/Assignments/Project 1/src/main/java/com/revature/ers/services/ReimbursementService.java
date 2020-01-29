@@ -77,11 +77,9 @@ public class ReimbursementService {
         return reimbs;
     }
 
-    public Set<Reimbursement> getReimbByUser(int typeId) {
+    public Set<Reimbursement> getReimbByUser(int userId) {
 
-        Set<Reimbursement> reimbs;
-
-        reimbs = reimbRepo.findByUserId(typeId);
+        Set<Reimbursement> reimbs = reimbRepo.findByUserId(userId);
 
         if (reimbs.isEmpty()) {
             throw new ResourceNotFoundException();

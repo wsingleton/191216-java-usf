@@ -13,14 +13,16 @@ public class RequestViewHelper {
                 return "partials/register.html";
             case "/project_1_ERS/dashboard.view":
                 return "partials/dashboard.html";
-            case "/project_1_ERS/reimbs.view":
-                return "partials/reimb-table.html";
-            case "/project_1_ERS/newreimb.view":
-                return "partials/newreimb.html";
-            case "/project_1_ERS/reimbupdate.view":
-                return "partials/reimb-info.html";
+            case "/project_1_ERS/request.view":
+                return "partials/request.html";
             case "/project_1_ERS/policy.view":
                 return "partials/policy.html";
+            case "/project_1_ERS/info.view":
+                return "partials/info.html";
+            case "/project_1_ERS/admininfo.view":
+                return "partials/adminupdate.html";
+            case "/project_1_ERS/admindash.view":
+                return "partials/admindash.html";
             default:
                 return "";
         }

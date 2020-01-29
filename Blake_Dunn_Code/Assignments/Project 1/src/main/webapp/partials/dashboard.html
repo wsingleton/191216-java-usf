@@ -1,5 +1,6 @@
 <div class="jumbotron text-center" id="dashboard-component">
     <div>
+      <br> <br>
       <h2 class="display-4">
         <strong>Buhlakify</strong>
     </h2>
@@ -10,11 +11,43 @@
 
     <br> <br>
     
-    <button type="button" class="btn btn-lg btn-primary col-md-6" id="newreimbbutton" placeholder>New Reimbursement Request</button>
-    <br> <br>
-    <button type="button" class="btn btn-lg btn-primary col-md-6" id="viewreimbbutton">View Reimbursements</button>
+    <button type="button" class="btn btn-lg btn-primary col-md-4" id="newreimbbutton">New Reimbursement Request</button>
   
     <br> <br>
     <div class="alert alert-danger" id="login-message col-md-6"></div>
   
+</div>
+
+<div style="text-align: center;">
+  <h3 class="display-4">
+      <strong>Reimbursements</strong>
+  </h3>
+</div>
+<br>
+<br>
+
+<div id="table-div" style="width: 90%; margin: auto;">
+  <table id="reimbtable" class="table table-secondary table-striped table-bordered table-hover table-sm" >
+      <thead class="thead-dark">
+          <tr>
+              <th scope="col" style="text-align: center; width: 10%;">
+                  <h5>ID</h5>
+              </th>
+              <th scope="col" style="text-align: center; width: 18%;">
+                  <h5>Submitted By</h5>
+              </th>
+              <th scope="col" style="text-align: center; width: 18%;">
+                  <h5>Submit Date</h5>
+              </th>
+              <th scope="col" style="text-align: center; width: 18%;">
+                  <h5>Amount</h5>
+              </th>
+              <th scope="col" style="text-align: center; width: 18%;">
+                  <h5>Type</h5>
+              </th>
+              <th scope="col" style="text-align: center; width: 18%;">
+                  <h5>Status</h5>
+              </th>
+          </tr>
+      </thead>
 </div>
