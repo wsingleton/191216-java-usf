@@ -4,18 +4,25 @@ import com.revature.quizzard.exceptions.*;
 import com.revature.quizzard.models.Role;
 import com.revature.quizzard.models.User;
 import com.revature.quizzard.repos.UserRepository;
-import com.revature.quizzard.util.ConnectionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class UserService {
 
+    private static final UserService userService = new UserService(UserRepository.getInstance());
+    private static final Logger LOG = LogManager.getLogger(UserService.class);
     private UserRepository userRepo;
 
-    public UserService(UserRepository repo) {
+    private UserService(UserRepository repo) {
         super();
         this.userRepo = repo;
+    }
+
+    public static UserService getInstance() {
+        return userService;
     }
 
     public User getUserById(int id) {
@@ -126,9 +133,7 @@ public class UserService {
 
     }
 
-    public Boolean updateProfile(User updatedUser) {
-
-        Boolean profileUpdated;
+    public void updateProfile(User updatedUser) {
 
         if (!isUserValid(updatedUser)) {
             throw new InvalidRequestException();
@@ -139,9 +144,7 @@ public class UserService {
             throw new ResourcePersistenceException("That username is taken by someone else!");
         }
 
-        profileUpdated = userRepo.update(updatedUser);
-
-        return profileUpdated;
+        userRepo.update(updatedUser);
 
     }
 
