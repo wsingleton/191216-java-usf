@@ -30,7 +30,7 @@ public class Credentials {
         return password;
     }
 
-    public Credentials setPassword(String password) {
+     public Credentials setPassword(String password) {
         this.password = password;
         return this;
     }
