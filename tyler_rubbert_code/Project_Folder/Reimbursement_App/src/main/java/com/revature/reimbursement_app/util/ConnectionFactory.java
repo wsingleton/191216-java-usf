@@ -1,9 +1,5 @@
-package com.revature.quizzard.util;
+package com.revature.reimbursement_app.util;
 
-import com.revature.quizzard.models.Role;
-import com.revature.quizzard.models.User;
-
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -39,6 +35,7 @@ public class ConnectionFactory {
         Connection conn = null;
 
         try {
+
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
             conn = DriverManager.getConnection(
@@ -47,7 +44,6 @@ public class ConnectionFactory {
                     props.getProperty("pw")
             );
 
-
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -55,5 +51,4 @@ public class ConnectionFactory {
         return conn;
 
     }
-
 }

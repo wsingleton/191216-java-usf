@@ -1,13 +1,15 @@
-package com.revature.quizzard.services;
+package com.revature.reimbursement_app.services;
 
-import com.revature.quizzard.exceptions.*;
-import com.revature.quizzard.models.Role;
-import com.revature.quizzard.models.User;
-import com.revature.quizzard.repos.UserRepository;
-import com.revature.quizzard.util.ConnectionFactory;
+import com.revature.reimbursement_app.exceptions.AuthenticationException;
+import com.revature.reimbursement_app.exceptions.InvalidRequestException;
+import com.revature.reimbursement_app.exceptions.ResourceNotFoundException;
+import com.revature.reimbursement_app.exceptions.ResourcePersistenceException;
+import com.revature.reimbursement_app.models.Role;
+import com.revature.reimbursement_app.models.User;
+import com.revature.reimbursement_app.repos.UserRepository;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Optional;
+import java.util.Set;
 
 public class UserService {
 
@@ -27,7 +29,7 @@ public class UserService {
         if (!isUserValid(newUser)) throw new InvalidRequestException();
 
         if (userRepo.findUserByUsername(newUser.getUsername()).isPresent()) {
-            throw new ResourcePersistenceException("Username is already in use!");
+            throw new ResourcePersistenceException("Username already in use!");
         }
 
         newUser.setRole(Role.BASIC_USER);
@@ -75,45 +77,6 @@ public class UserService {
 
         return userRepo.findUserByUsername(username).orElseThrow(ResourceNotFoundException::new);
 
-
-    }
-
-    public SortedSet<User> sortUsers(String sortCriterion, Set<User> usersForSorting) {
-
-        SortedSet<User> users = new TreeSet<>(usersForSorting);
-
-        switch (sortCriterion.toLowerCase()) {
-            case "username":
-                users = users.stream()
-                        .collect(Collectors.toCollection(() -> {
-                            return new TreeSet<>(Comparator.comparing(User::getUsername, String::compareTo));
-                        }));
-                break;
-            case "first":
-                users = users.stream()
-                        .collect(Collectors.toCollection(() -> {
-                            return new TreeSet<>(Comparator.comparing(User::getFirstName, String::compareTo));
-                        }));
-                break;
-            case "last":
-                users = users.stream()
-                        .collect(Collectors.toCollection(() -> {
-                            return new TreeSet<>(Comparator.comparing(User::getLastName, String::compareTo));
-                        }));
-                break;
-            case "role":
-                users = users.stream()
-                        .collect(Collectors.toCollection(() -> {
-                            return new TreeSet<>(Comparator.comparing(User::getRole, Enum::compareTo));
-                        }));
-                break;
-            default:
-                throw new InvalidRequestException();
-
-        }
-
-        return users;
-
     }
 
     public User authenticate(String username, String password) {
@@ -130,7 +93,7 @@ public class UserService {
 
         Boolean profileUpdated;
 
-        if (!isUserValid(updatedUser)) {
+        if (!isUserValid(updatedUser)){
             throw new InvalidRequestException();
         }
 
@@ -151,6 +114,7 @@ public class UserService {
         if (user.getLastName() == null || user.getLastName().trim().equals("")) return false;
         if (user.getUsername() == null || user.getUsername().trim().equals("")) return false;
         if (user.getPassword() == null || user.getPassword().trim().equals("")) return false;
+        if (user.getEmail() == null || user.getEmail().trim().equals("")) return false;
         return true;
     }
 

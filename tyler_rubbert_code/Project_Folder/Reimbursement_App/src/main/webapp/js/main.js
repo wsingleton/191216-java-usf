@@ -1,6 +1,6 @@
 window.onload = () => {
+    console.log('did the js load?');
     loadLogin();
-    document.getElementById('logout').addEventListener('click', logout);
 }
 
 function loadLogin() {
@@ -12,41 +12,39 @@ function loadLogin() {
     xhr.send();
     xhr.onreadystatechange = () => {
         if(xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById("root").innerHTML = xhr.responseText;
-            document.getElementById("login").addEventListener('click', login);
+            document.getElementById('root').innerHTML = xhr.responseText;
+            document.getElementById('login').addEventListener('click', login);
         }
     }
+
 }
 
 function login() {
 
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
-
+    
     let creds = {
         username: username,
         password: password
-    };
+    }
 
     let credJSON = JSON.stringify(creds);
 
     let xhr = new XMLHttpRequest();
-    xhr.open('Post', 'auth', true);
+    xhr.open('POST', 'auth', true);
     xhr.send(credJSON);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                
                 let user = JSON.parse(xhr.responseText);
                 console.log(user);
-                // load dashboard
-
             }
-            if (xhr.status === 401) {
 
-                document.getElementById('login-message').innerText = "Login failed!";
-
+            if (xhr.status === 400) {
+                document.getElementById('login-message').innerText = 'Login failed!';
             }
+
         }
     }
 
@@ -58,7 +56,7 @@ function logout() {
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log('logout successful')
+            console.log('logout successful!')
         }
     }
 }
