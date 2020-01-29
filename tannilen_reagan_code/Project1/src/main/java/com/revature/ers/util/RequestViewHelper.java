@@ -9,6 +9,10 @@ public class RequestViewHelper {
                 return "partials/dash.html";
             case "/ers/about.view":
                 return "partials/about.html";
+            case "/ers/createReq.view":
+                return "partials/create.html";
+            case "/ers/review.view":
+                return "partials/review.html";
             default:
                 return "";
         }

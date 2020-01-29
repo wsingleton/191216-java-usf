@@ -109,6 +109,19 @@ function createReq(user) {
     xhr.onreadystatechange=()=>{
         if (xhr.readyState===4 && xhr.status===200) {
             document.getElementById("main").innerHTML=xhr.responseText;
+            document.getElementById("back2Dash").addEventListener("click", loadDash(user));
+        }
+    }
+}
+
+function reviewReqs(user) {
+    let xhr=new XMLHttpRequest();
+    xhr.open("GET", "review.view", true);
+    xhr.send();
+    xhr.onreadystatechange=()=>{
+        if (xhr.readyState===4 && xhr.status===200) {
+            document.getElementById("main").innerHTML=xhr.responseText;
+            document.getElementById("back2Dash").addEventListener("click", loadDash(user));
         }
     }
 }
