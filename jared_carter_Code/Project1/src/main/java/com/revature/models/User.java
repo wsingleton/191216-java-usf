@@ -13,7 +13,6 @@ public class User {
     private UserRole userRole;
 
 
-
     public User() {
         id = 0;
         username = "";

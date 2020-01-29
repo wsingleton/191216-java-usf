@@ -15,11 +15,12 @@ public class ReimbursementService {
         this.reimbursementRepository = repo;
     }
 
-    public Reimbursement getReimbursementById(int id) throws ResourceNotFoundException {
+    public Reimbursement getReimbursementById(int id) {
         return reimbursementRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
-    public Reimbursement createReimbursement(Reimbursement reimbursement) {
+    public Reimbursement newReimbursement(Reimbursement reimbursement) {
+        //if (!isUserValid(newReimbursement)) throw new InvalidRequestException();
         reimbursementRepository.save(reimbursement);
         return reimbursement;
     }

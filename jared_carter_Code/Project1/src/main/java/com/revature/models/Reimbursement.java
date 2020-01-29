@@ -19,6 +19,11 @@ public class Reimbursement {
     }
 
 
+    public Reimbursement(int id, ReimbursementType reimbursementTypeId) {
+        this.id = id;
+        this.reimbursementTypeId = reimbursementTypeId;
+    }
+
     public Reimbursement(int id, String amount, String timeSubmitted, String timeResolved, String description, String receipt, int authorById, int resolverById, ReimbursementStatus reimbursementStatusId, ReimbursementType reimbursementTypeId) {
         this.id = id;
         this.amount = amount;
@@ -31,6 +36,15 @@ public class Reimbursement {
         this.reimbursementStatusId = reimbursementStatusId;
         this.reimbursementTypeId = reimbursementTypeId;
     }
+
+    public Reimbursement (String amount, String description, int authorById, ReimbursementStatus reimbursementStatusId, ReimbursementType reimbursementTypeId) {
+        this.amount = amount;
+        this.description = description;
+        this.authorById = authorById;
+        this.reimbursementStatusId = reimbursementStatusId;
+        this.reimbursementTypeId = reimbursementTypeId;
+    }
+
 
     public Reimbursement(int id, String amount, int authorById, ReimbursementStatus reimbursementStatusId, ReimbursementType reimbursementTypeId) {
         this.id = id;

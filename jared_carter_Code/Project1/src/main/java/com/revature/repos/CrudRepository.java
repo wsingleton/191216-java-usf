@@ -10,7 +10,7 @@ public interface CrudRepository<T> {
 
     Optional<T> findById(int id);
 
-    //boolean update(T updatedObj);
+    boolean update(T updatedObj);
 
     //boolean deleteById(int id);
 }
