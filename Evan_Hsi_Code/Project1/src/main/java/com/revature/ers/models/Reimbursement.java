@@ -1,17 +1,20 @@
 package com.revature.ers.models;
 
+import java.sql.Blob;
+import java.sql.Timestamp;
+
 import java.util.Objects;
 
 public class Reimbursement {
 
     private int id;
     private int submitId;
-    private String submitTime;
+    private Timestamp submitTime;
     private int resolveId;
-    private String resolveTime;
+    private Timestamp resolveTime;
     private double amount;
     private String description;
-    private String receipt;
+    private Blob receipt;
     private Type type;
     private Status status;
 
@@ -28,7 +31,7 @@ public class Reimbursement {
         this.status = null;
     }
 
-    public Reimbursement(int submitId, String submitTime, int resolveId, String resolveTime, double amount, String description, String receipt) {
+    public Reimbursement(int submitId, Timestamp submitTime, int resolveId, Timestamp resolveTime, double amount, String description) {
         this.id = 0;
         this.submitId = submitId;
         this.submitTime = submitTime;
@@ -36,12 +39,12 @@ public class Reimbursement {
         this.resolveTime = resolveTime;
         this.amount = amount;
         this.description = description;
-        this.receipt = receipt;
+        this.receipt = null;
         this.type = Type.OTHER;
         this.status = Status.PENDING;
     }
 
-    public Reimbursement(int id, int submitId, String submitTime, int resolveId, String resolveTime, double amount, String description, String receipt, Type type, Status status) {
+    public Reimbursement(int id, int submitId, Timestamp submitTime, int resolveId, Timestamp resolveTime, double amount, String description, Type type, Status status) {
         this.id = id;
         this.submitId = submitId;
         this.submitTime = submitTime;
@@ -49,7 +52,7 @@ public class Reimbursement {
         this.resolveTime = resolveTime;
         this.amount = amount;
         this.description = description;
-        this.receipt = receipt;
+        this.receipt = null;
         this.type = type;
         this.status = status;
     }
@@ -70,11 +73,11 @@ public class Reimbursement {
         this.submitId = submitId;
     }
 
-    public String getSubmitTime() {
+    public Timestamp getSubmitTime() {
         return submitTime;
     }
 
-    public void setSubmitTime(String submitTime) {
+    public void setSubmitTime(Timestamp submitTime) {
         this.submitTime = submitTime;
     }
 
@@ -86,11 +89,11 @@ public class Reimbursement {
         this.resolveId = resolveId;
     }
 
-    public String getResolveTime() {
+    public Timestamp getResolveTime() {
         return resolveTime;
     }
 
-    public void setResolveTime(String resolveTime) {
+    public void setResolveTime(Timestamp resolveTime) {
         this.resolveTime = resolveTime;
     }
 
@@ -110,11 +113,11 @@ public class Reimbursement {
         this.description = description;
     }
 
-    public String getReceipt() {
+    public Blob getReceipt() {
         return receipt;
     }
 
-    public void setReceipt(String receipt) {
+    public void setReceipt(Blob receipt) {
         this.receipt = receipt;
     }
 

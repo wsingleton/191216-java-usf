@@ -1,0 +1,112 @@
+#block {
+    padding: 0 0 0 0;
+}
+
+.container {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    height: 100%;
+    display: flex;
+}
+
+#logout-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10vw;
+    font-style: oblique;
+    color: white;
+    height: 100%
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+img {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    max-width: 100%;
+    height: auto;
+}
+
+#fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+  }
+
+main {
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+#login-component {
+    height: 100%;
+    background-color:rgb(27, 27, 27);
+}
+
+#login-row {
+    height: 100%;
+}
+
+#register-component {
+height: 100%;
+width: 120vw;
+background-color:rgb(27, 27, 27);
+color: white;
+}
+
+#register-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100vw;
+}
+
+#register-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    min-width: 250px;
+}
+
+.register-sidebar {
+    background: url(../img/catalina_mountain.jpg);
+    background-size: cover;
+    overflow: hidden;
+}
+
+.delin {
+    border-top: 1px solid #007bff;
+    min-width:300px;
+    max-width:600px;
+}
+
+#login, #register, .form-control, #register-message {
+    min-width:300px;
+    max-width:600px;
+}
+
+@media only screen and (max-width: 768px) {
+    .register-sidebar {
+        display: none;
+    }
+}

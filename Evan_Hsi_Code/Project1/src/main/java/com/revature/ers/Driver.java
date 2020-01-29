@@ -1,13 +1,17 @@
 package com.revature.ers;
 
+import com.revature.ers.repositories.ReimbursementRepository;
 import com.revature.ers.repositories.UserRepository;
+import com.revature.ers.services.ReimbursementService;
 import com.revature.ers.services.UserService;
 
-public class Driver {
+class Driver{
 
     public static void main(String[] args) {
+        /*
         UserRepository repo = new UserRepository();
         UserService serv = new UserService(repo);
+
 
         System.out.println("find all: ");
         System.out.println(repo.findAll());
@@ -26,5 +30,20 @@ public class Driver {
 
         System.out.println("find by creds service");
         System.out.println(serv.authenticate("ehsi", "password"));
+
+         */
+        ReimbursementRepository reimbRepo = new ReimbursementRepository();
+        ReimbursementService reimbServ = new ReimbursementService(reimbRepo);
+
+        System.out.println("find all:");
+        System.out.println(reimbServ.getAllReimbursements());
+
+        System.out.println("find by id");
+        System.out.println(reimbServ.getById(1));
+
+        System.out.println("find by Author");
+        System.out.println(reimbServ.getByAuthorId(1));
+
     }
 }
+

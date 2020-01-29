@@ -2,9 +2,7 @@ package com.revature.ers.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
-import com.revature.ers.dtos.Credentials;
-import com.revature.ers.exceptions.AuthenticationException;
-import com.revature.ers.exceptions.InvalidRequestException;
+import com.revature.ers.exceptions.ResourcePersistenceException;
 import com.revature.ers.models.User;
 import com.revature.ers.repositories.UserRepository;
 import com.revature.ers.services.UserService;
@@ -17,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class AuthServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
     private final UserService userService = new UserService(new UserRepository());
 
     @Override
@@ -29,30 +27,28 @@ public class AuthServlet extends HttpServlet {
 
         try {
 
-            Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
-            User authUser = userService.authenticate(creds.getUsername(), creds.getPassword());
-            String authUserJSON = mapper.writeValueAsString(authUser);
+            User user = mapper.readValue(req.getInputStream(), User.class);
+            userService.register(user);
+            String authUserJSON = mapper.writeValueAsString(user);
             writer.write(authUserJSON);
             System.out.println(authUserJSON);
             HttpSession session = req.getSession();
-            session.setAttribute("this-user", authUser);
-            //resp.sendRedirect("dashemp.view");
+            session.setAttribute("this-user", user);
 
 
         } catch (MismatchedInputException e) {
             resp.setStatus(400);
-        } catch (AuthenticationException e) {
+        } catch (ResourcePersistenceException e) {
             resp.setStatus(401);
         } catch (Exception e) {
             resp.setStatus(500);
         }
+        resp.setStatus(201);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getSession(false) != null) {
-            req.getSession().invalidate();
 
-        }
     }
+
 }

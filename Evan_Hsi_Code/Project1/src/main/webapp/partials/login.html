@@ -1,23 +1,37 @@
-<div class="container" id="login-component">
-    <h2>Project1</h2>
-    <hr>
-    <h3>Sign Into Project1</h3>
+<div class="container-fluid" id="login-component">
+    <div class='row' id='login-row'>
 
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="email" class="form-control"
-               id="username" placeholder="Username">
+        <div class='col-4' id="block"></div>
+        <!--
+        <div class='col-2 login-sidebar'></div>
+        -->
+
+        <div class='col-8' id='login-form'>
+            <h2>Project1</h2>
+            <hr>
+            <h3>Sign Into Project1</h3>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="email" class="form-control"
+                    id="username" placeholder="Username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control"
+                    id="password" placeholder="Password">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" id="login">Login</button>
+            <br>
+            <button type="submit" class="btn btn-outline-primary" id="register">Register</button>
+
+            <br>
+            <div class="alert alert-danger" id="login-message"></div>
+        </div>
+        <!--
+        <div class='col-2 login-sidebar'></div>
+        -->
+
     </div>
-
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control"
-               id="password" placeholder="Password">
-    </div>
-
-    <button type="submit" class="btn btn-block btn-primary" id="login">Login</button>
-
-    <br> <br>
-
-    <div class="alert alert-danger" id="login-message"></div>
 </div>

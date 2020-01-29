@@ -87,7 +87,7 @@ public class UserRepository implements CrudRepository<User> {
 
         Set<User> users = new HashSet<>();
 
-        try (Connection conn = ConnectionFactory.getInstance().getConnection(); ) {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection() ) {
 
             String sql = "SELECT * FROM ERS_APP.ERS_USERS";
             Statement stmt = conn.createStatement();
@@ -126,16 +126,19 @@ public class UserRepository implements CrudRepository<User> {
         boolean updateSuccessful = false;
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
-
             String sql = "UPDATE ERS_APP.ERS_USERS SET ERS_USERNAME = ?, ERS_PASSWORD = ?, " +
                     "USER_FIRST_NAME = ?, USER_LAST_NAME = ?, USER_EMAIL = ? WHERE ERS_USERS_ID = ?";
-
             PreparedStatement pstmt = conn.prepareStatement(sql);
-
+            pstmt.setString(1, updatedObj.getUsername());
+            pstmt.setString(2, updatedObj.getPassword());
+            pstmt.setString(3, updatedObj.getFirstname());
+            pstmt.setString(4, updatedObj.getLastname());
+            pstmt.setString(5, updatedObj.getEmail());
+            pstmt.setInt(6, updatedObj.getId());
+            updateSuccessful = pstmt.execute();
         } catch(SQLException e) {
             e.printStackTrace();
         }
-
         return updateSuccessful;
     }
 
@@ -145,9 +148,7 @@ public class UserRepository implements CrudRepository<User> {
     }
 
     public Set<User> mapResultSet(ResultSet rs) throws SQLException {
-
         Set<User> users = new HashSet<>();
-
         while (rs.next()) {
             User temp = new User();
             temp.setId(rs.getInt("ERS_USERS_ID"));
@@ -158,10 +159,7 @@ public class UserRepository implements CrudRepository<User> {
             temp.setEmail(rs.getString("USER_EMAIL"));
             temp.setRole(Role.getById(rs.getInt("USER_ROLE_ID")));
             users.add(temp);
-
         }
-
         return users;
-
     }
 }

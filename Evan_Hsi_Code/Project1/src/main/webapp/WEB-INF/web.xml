@@ -49,4 +49,34 @@
         <url-pattern>/auth</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.revature.ers.servlets.RegisterServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/reg</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DashEmpServlet</servlet-name>
+        <servlet-class>com.revature.ers.servlets.DashEmpServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DashEmpServlet</servlet-name>
+        <url-pattern>/dashemp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DashManServlet</servlet-name>
+        <servlet-class>com.revature.ers.servlets.DashManServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DashManServlet</servlet-name>
+        <url-pattern>/dashman</url-pattern>
+    </servlet-mapping>
+
 </web-app>
