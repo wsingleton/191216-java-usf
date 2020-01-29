@@ -19,8 +19,9 @@ function loadLogin() {
             document.getElementById('root').innerHTML = xhr.responseText;
             document.getElementById('login').addEventListener('click', login);
             document.getElementById('register').addEventListener('click', loadRegister);
-            document.getElementById('login').addEventListener('keyup', function(event) {
-                if(event.code == 'Enter') {
+            document.getElementById('password').addEventListener('keyup', function(event) {
+                console.log(event.keyCode);
+                if(event.keyCode === 13) {
                     document.getElementById('login').click();
                     console.log('enter');
                 }
