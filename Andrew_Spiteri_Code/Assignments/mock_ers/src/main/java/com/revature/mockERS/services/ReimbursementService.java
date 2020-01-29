@@ -41,6 +41,13 @@ public class ReimbursementService {
         return rr.getReimbursementByUser(id);
     }
 
+    public Boolean updateStatus(ReimbursementIn ri){
+
+        ERS_Reimbursement ers = ERS_Reimbursement.makeReimbursement();
+        ers.setStatus(ERS_Reimbursement_Status.getStatusByName(ri.getStatus()));
+        return rr.updateReimbStatus(ers);
+    }
+
 }
 
 

@@ -8,6 +8,7 @@ import java.sql.Blob;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+
 public class ERS_Reimbursement {
     private Integer reimbId;
     private BigDecimal reimb_amount;
@@ -37,6 +38,10 @@ public class ERS_Reimbursement {
         this.reimb_resolved = reimb_resolved;
         this.reimb_description = reimb_description;
         this.reimb_receipt = reimb_receipt;
+    }
+
+    public static ERS_Reimbursement makeReimbursement(){
+        return new ERS_Reimbursement();
     }
 
     public BigDecimal getReimb_amount() {

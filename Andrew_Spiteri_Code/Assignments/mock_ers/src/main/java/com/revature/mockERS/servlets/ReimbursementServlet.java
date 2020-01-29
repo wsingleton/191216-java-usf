@@ -109,6 +109,7 @@ public class ReimbursementServlet extends HttpServlet {
         }
     }
 
+    //todo finish method
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ERS_Users authUser = (ERS_Users) req.getSession(false).getAttribute("this-user");
@@ -116,14 +117,29 @@ public class ReimbursementServlet extends HttpServlet {
         if(authUser.getRole().equals(ERS_User_Roles.FINANCE_MANAGER)){
             System.out.println("Finance ReimbursementServlet doPut()");
             resp.setContentType("application/json");
-            ObjectMapper mapper = new ObjectMapper();
+            ObjectMapper inmapper = new ObjectMapper();
             PrintWriter writer = resp.getWriter();
             try{
-
-            }catch (ResourceNotFoundException e){
-
+                ReimbursementIn updateReimb = inmapper.readValue(req.getInputStream(), ReimbursementIn.class);
+                Boolean created = rs.updateStatus(updateReimb);
+                String newReimbJSON = inmapper.writeValueAsString(updateReimb);
+                writer.write(newReimbJSON);
+                if(created) {
+                    resp.setStatus(201);
+                }else{
+                    throw new ResourcePersistenceException();
+                }
+            }catch (MismatchedInputException e){
+                resp.setStatus(400);
+                writer.write(e.getMessage());
+            }catch (ResourcePersistenceException e){
+                resp.setStatus(409);
+                ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());
+                err.setMessage(e.getMessage());
+                writer.write(inmapper.writeValueAsString(err));
             }catch (Exception e){
-
+                resp.setStatus(500);
+                e.printStackTrace();
             }
         }
     }

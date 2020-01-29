@@ -1,5 +1,6 @@
 package com.revature.mockERS.repositories;
 
+import com.revature.mockERS.dto.ReimbursementIn;
 import com.revature.mockERS.dto.ReimbursementOut;
 import com.revature.mockERS.models.ERS_Reimbursement;
 import com.revature.mockERS.models.ERS_Reimbursement_Status;
@@ -7,10 +8,7 @@ import com.revature.mockERS.models.ERS_Reimbursement_Type;
 import com.revature.mockERS.models.ERS_Users;
 import com.revature.mockERS.util.UserSession;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.*;
 
 import static com.revature.mockERS.util.ConnectionFactory.getCon;
@@ -141,5 +139,19 @@ public class ReimbursementRepository {
         }
         //TODO replace null with an Optional
         return null;
+    }
+
+    public Boolean updateReimbStatus(ERS_Reimbursement ers){
+        Boolean outcome = false;
+        System.out.println("res value: "+ ers);
+        String sql = "{CALL ers_app.update_reimbs(?)}";
+        try {
+            CallableStatement cs = getCon().prepareCall(sql);
+            cs.setInt(1, ers.getStatus().getId());
+            outcome = cs.execute();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return outcome;
     }
 }

@@ -31,6 +31,24 @@ public enum ERS_Reimbursement_Status {
         return status;
     }
 
+    public static ERS_Reimbursement_Status getStatusByName(String name){
+        ERS_Reimbursement_Status status = null;
+        switch (name){
+            case "Pre-Processing":
+                status = ERS_Reimbursement_Status.PRESPROCESSING;
+                break;
+            case "Processing":
+                status = ERS_Reimbursement_Status.PROCESSING;
+                break;
+            case "Rejected":
+                status = ERS_Reimbursement_Status.REJECTED;
+                break;
+            case "Accepted":
+                status = ERS_Reimbursement_Status.ACCEPTED;
+        }
+        return status;
+    }
+
     public String getStatus() {
         return status;
     }
