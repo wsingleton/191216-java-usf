@@ -1,6 +1,7 @@
 package com.revature.ers.services;
 
 import com.revature.ers.exceptions.InvalidInputException;
+import com.revature.ers.exceptions.InvalidRequestException;
 import com.revature.ers.models.Reimbursement;
 import com.revature.ers.repos.ReimbursementRepository;
 
@@ -68,14 +69,20 @@ public class ReimbursementService {
         Set<Reimbursement> reimbs=reimbRepo.findAll();
         return reimbs;
     }
-    public boolean updateReimb(Reimbursement reimb,boolean approved) {
-        if (approved==true){
-            reimb.setStatus(2);
+    public boolean updateReimb(int reimbID,boolean approved) {
+        try {
+            Reimbursement reimb = reimbRepo.findById(reimbID).orElseThrow(InvalidRequestException::new);
+            if (approved == true) {
+                reimb.setStatus(2);
+            } else {
+                reimb.setStatus(3);
+            }
+            boolean updated = reimbRepo.update(reimb);
+            return updated;
         }
-        else {
-            reimb.setStatus(3);
+        catch (InvalidRequestException e) {
+            e.printStackTrace();
         }
-        boolean updated=reimbRepo.update(reimb);
-        return updated;
+        return false;
     }
 }
