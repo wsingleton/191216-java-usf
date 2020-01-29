@@ -26,13 +26,13 @@ role           VARCHAR2(10) NOT NULL
 );
 
 CREATE TABLE ers_users (
-userId         NUMBER CONSTRAINT ers_users_pk PRIMARY KEY,
+userId          NUMBER CONSTRAINT ers_users_pk PRIMARY KEY,
 username        VARCHAR2(50) UNIQUE NOT NULL,
 password        VARCHAR2(50) NOT NULL,
-firstName     VARCHAR2(100) NOT NULL,
-lastName      VARCHAR2(100) NOT NULL,
-email          VARCHAR2(150) UNIQUE NOT NULL,
-roleId        NUMBER NOT NULL,
+firstName       VARCHAR2(100) NOT NULL,
+lastName        VARCHAR2(100) NOT NULL,
+email           VARCHAR2(150) UNIQUE NOT NULL,
+roleId          NUMBER NOT NULL,
 
 CONSTRAINT user_role_fk 
 FOREIGN KEY (roleId)
@@ -41,16 +41,16 @@ REFERENCES ers_user_roles (roleId)
 
 CREATE TABLE ers_reimbursement (
 reimbId            NUMBER CONSTRAINT ers_reimbursement_pk PRIMARY KEY,
-amount        NUMBER NOT NULL,
+amount             NUMBER NOT NULL,
 expenseDate        DATE NOT NULL,
-submitted     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-resolved      DATE,
-description   VARCHAR2(250),
-receipt       BLOB,
-author        NUMBER NOT NULL,
-resolver      NUMBER,
-statusId     NUMBER NOT NULL,
-typeId       NUMBER NOT NULL,
+submitted          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+resolved           DATE,
+description        VARCHAR2(250),
+receipt            BLOB,
+author             NUMBER NOT NULL,
+resolver           NUMBER,
+statusId           NUMBER NOT NULL,
+typeId             NUMBER NOT NULL,
 
 CONSTRAINT ers_users_fk_author
 FOREIGN KEY (author)
@@ -182,3 +182,15 @@ COMMIT;
 select * from ers_users;
 
 delete from ers_users where userId = 21;
+
+select * from ers_users where username = 'buhlakay' and password = 'boatsnhoes';
+
+INSERT INTO ers_reimbursement (reimbId, amount, expenseDate, description, author, statusId, typeId)
+VALUES (0, 25.00, TO_DATE('01-10-2020','mm-dd-yyyy'), 'TEST', 41, 1, 1);
+INSERT INTO ers_reimbursement (reimbId, amount, expenseDate, description, author, statusId, typeId)
+VALUES (0, 25.00, TO_DATE('2020-01-02','yyyy-mm-dd'), 'TEST', 41, 1, 1);
+
+select * from ers_reimbursement;
+
+update ers_reimbursement
+set resolved = current_date, resolver = 1, statusId = 2 where reimbId = 2;

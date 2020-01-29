@@ -1,9 +1,8 @@
 window.onload = () => {
     console.log('homescreen loaded?');
     loadHome();
+    document.getElementById('homebutton').addEventListener('click', loadHome);
     document.getElementById('navdashboard').addEventListener('click', loadDashboard);
-    document.getElementById('signout').addEventListener('click', logout);
-    
 }
 
 function loadHome() {
@@ -18,9 +17,53 @@ function loadHome() {
             document.getElementById('root').innerHTML = xhr.responseText;
             document.getElementById('home-login').addEventListener('click', loadLogin);
             document.getElementById('home-register').addEventListener('click', loadRegister);
+            document.getElementById('policy').addEventListener('click', loadPolicy);
         }
     }
 }
+
+function logout() {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'auth', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('Logout successful!');
+        }
+    }
+    loadHome();
+}
+
+function loadPolicy() {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'policy.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('root').innerHTML = xhr.responseText;
+            document.getElementById('navdashboard').addEventListener('click', loadDashboard); 
+        }
+    }
+}
+
+function loadDashboard() {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'dashboard.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('root').innerHTML = xhr.responseText;
+            document.getElementById('newreimbbutton').addEventListener('click', loadNewReimb);
+            document.getElementById('viewreimbbutton').addEventListener('click', loadReimbs);
+            document.getElementById('navdashboard').addEventListener('click', loadDashboard);
+            document.getElementById('policy').addEventListener('click', loadPolicy);  
+        }
+    }
+}
+
+// +----------- Login -----------+
 
 function loadLogin() {
 
@@ -36,7 +79,6 @@ function loadLogin() {
                 event.preventDefault();
                 login();
             });
-            
         }
     }
 }
@@ -70,6 +112,8 @@ function login() {
         }
     }
 }
+
+// +----------- Register -----------+
 
 function loadRegister() {
 
@@ -109,10 +153,10 @@ function register() {
     xhr.send(credJSON);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-
-                let user = JSON.parse(xhr.responseText);
-                console.log(user);
+            if (xhr.status === 201 || xhr.status === 200) {
+                console.log('success');
+                // let user = JSON.parse(xhr.responseText);
+                // console.log(user);
                 loadDashboard();
             }
 
@@ -123,34 +167,7 @@ function register() {
     }
 }
 
-
-
-function logout() {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'auth', true);
-    xhr.send();
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log('Logout successful!');
-        }
-    }
-
-    loadHome();
-}
-
-function loadDashboard() {
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'dashboard.view', true);
-    xhr.send();
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById('root').innerHTML = xhr.responseText;
-            document.getElementById('newreimbbutton').addEventListener('click', loadNewReimb);
-            document.getElementById('viewreimbbutton').addEventListener('click', loadReimbs);  
-        }
-    }
-}
+// +----------- Reimbursements -----------+
 
 function loadNewReimb() {
 
@@ -160,7 +177,48 @@ function loadNewReimb() {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
-            document.getElementById('newreimb').addEventListener('click', submitNewReimb);  
+            document.getElementById('newreimb').addEventListener('click', submitNewReimb);
+            document.getElementById('navdashboard').addEventListener('click', loadDashboard);
+            document.getElementById('policy').addEventListener('click', loadPolicy); 
+            document.getElementById('signout').addEventListener('click', logout); 
+        }
+    }
+}
+
+function submitNewReimb() {
+
+    let amount = document.getElementById('amountinput').value;
+    let select = document.getElementById('reimbtypeinput');
+    let type = select.options[select.selectedIndex].innerHTML;
+    let description = document.getElementById('descriptioninput').value;
+    let receipt = document.getElementById('receiptinput').value;
+
+    let reimbs = {
+        amount: amount,
+        description: description,
+        receipt: null,
+        type: type
+        
+    };
+
+    let reimbsJSON = JSON.stringify(reimbs);
+    console.log(reimbsJSON);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'reimbs', true);
+    xhr.send(reimbsJSON);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 201 || xhr.status === 200) {
+
+                // let newReimb = JSON.parse(xhr.responseText);
+                // console.log(newReimb);
+                loadDashboard();
+            }
+
+            if (xhr.status === 401) {
+                document.getElementById('reimb-message').innerText = 'New Submission Failed!';
+            }
         }
     }
 }
@@ -173,66 +231,24 @@ function loadReimbs() {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
+            document.getElementById('navdashboard').addEventListener('click', loadDashboard);
+            document.getElementById('policy').addEventListener('click', loadPolicy);
+            document.getElementById('signout').addEventListener('click', logout);
             getReimbs();
-            // document.getElementsByTagName('a')[5].addEventListener('click', valueOfTable);
-            
-            // let link = document.getElementsByTagName('a');
-            // for (let i = 0; i < link.length; i++) {
-            //     let value = link[i].innerHTML;
-            // }
-            
-            // link.addEventListener('click', () => {
-            //     loadInfo(value);
-            //     console.log('this function works');
-            //     console.log(value);
-            // })
-            
-        }
-    }
-}
 
-// function valueOfTable() {
-//     document.getElementsByTagName('a').getAttribute('id')
-//     console.log(document.getElementsByTagName('a').getAttribute('id'));
-// }
-
-
-function submitNewReimb() {
-
-    let amount = getElementById('amount').value;
-    let date = getElementById('expensedate').value;
-    let select = getElementById('reimbtype');
-    let type = select.options[select.selectedIndex].innerHTML;
-    let description = getElementById('description').innerHTML;
-    let receipt = getElementById('receipt').value;
-
-    let creds = {
-        amount: amount,
-        expenseDate: date,
-        type: type,
-        description: description,
-        receipt: receipt
-    };
-
-    let credJSON = JSON.stringify(creds);
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'reimbs', true);
-    xhr.send(credJSON);
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-
-                let newReimb = JSON.parse(xhr.responseText);
-                console.log(newReimb);
-            }
-
-            if (xhr.status === 401) {
-                document.getElementById('reimb-message').innerText = 'New Submission Failed!';
+            document.onclick = function(event) {
+                var target = event.target || event.srcElement;
+                if(target.getAttribute('class') === 'tableId') {
+                    let elementId = target.innerHTML; 
+                    console.log(elementId);
+                    loadInfo(elementId); 
+                }
+                          
+               
             }
         }
     }
-}
+} 
 
 function getReimbs() {
 
@@ -248,90 +264,10 @@ function getReimbs() {
                 for(let i = 0; i < reimbList.length; i++) {
                     addRow(reimbList[i]);
                 }
+                
             }
         }
     }
-}
-
-function addRow(object) {
-
-    let id = object.reimbId;
-    let userId = object.authorId;
-    let subDate = object.submitted;
-    let newSub = subDate.substring(0,10);
-    let expDate = object.expenseDate;
-    let newExp = expDate.substring(0,10);
-    let amount = object.amount;
-    let type = object.type;
-    let status = object.status;
-
-    let row = document.createElement('tr');
-    let idCell = document.createElement('td');
-    let userIdCell = document.createElement('td');
-    let subDateCell = document.createElement('td');
-    let expDateCell = document.createElement('td');
-    let amtCell = document.createElement('td');
-    let typeCell = document.createElement('td');
-    let statusCell = document.createElement('td');
-
-    row.appendChild(idCell);
-    row.appendChild(userIdCell);
-    row.appendChild(subDateCell);
-    row.appendChild(expDateCell);
-    row.appendChild(amtCell);
-    row.appendChild(typeCell);
-    row.appendChild(statusCell);
-
-    document.getElementById('reimbtable').appendChild(row);
-    let link = document.createElement('a');
-    link.setAttribute('href', '#');
-    link.setAttribute('id', id);
-    link.innerText = id;
-
-    idCell.append(link);
-    userIdCell.innerText = userId;
-    subDateCell.innerText = newSub;
-    expDateCell.innerText = newExp;
-    amtCell.innerText = amount;
-    typeCell.innerText = type;
-    statusCell.innerText = status;
-
-}
-
-function addInfo(object) {
-
-    let id = object.reimbId;
-    let userId = object.authorId;
-    let subDate = object.submitted;
-    let newSub = subDate.substring(0, 10);
-    console.log(newSub);
-    let expDate = object.expenseDate;
-    let newExp = expDate.substring(0, 10);
-    console.log(newExp);
-    let amount = object.amount;
-    let type = object.type;
-    let status = object.status;
-    let description = object.description;
-    let receipt = object.receipt;
-
-    let pId = document.getElementById('reimbId');
-    let pUserId = document.getElementById('reimbAuthor');
-    let pAmount = document.getElementById('reimbamount');
-    let pDate = document.getElementById('reimbdate');
-    let pSubmitted = document.getElementById('reimbsubmitted');
-    let pDescription = document.getElementById('reimbdescription');
-    let pReceipt = document.getElementById('reimbreceipt');
-    let pType = document.getElementById('reimbtype');
-
-    pId.innerText = id;
-    pUserId.innerText = userId;
-    pAmount.innerText = amount;
-    pDate.innerHTML = newSub;
-    pSubmitted.innerHTML = newExp;
-    pDescription.innerText = description;
-    pReceipt.innerText = 'null';
-    pType.innerText = type;
-
 }
 
 function getInfo(id) {
@@ -358,10 +294,116 @@ function loadInfo(id) {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
+            document.getElementById('navdashboard').addEventListener('click', loadDashboard);
+            document.getElementById('policy').addEventListener('click', loadPolicy);
+            document.getElementById('signout').addEventListener('click', logout); 
+            document.getElementById('updatereimb').addEventListener('click', updateReimb);
             getInfo(id);
             
         }
     }
+
+}
+
+function updateReimb() {
+
+    let updReimbId = document.getElementById('reimbId').value;
+    let select = document.getElementById('reimbstatus');
+    let updStatus = select.options[select.selectedIndex].innerHTML;
+
+    if(updStatus === 'PENDING') {
+        document.getElementById('update-message').innerText = 'Must approve or deny request!!';
+        loadDashboard();
+    }
+
+    let updated = {
+        reimbId: updReimbId,
+        status: updStatus
+    };
+
+    let updatedJSON = JSON.stringify(updated);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'reimbs', true);
+    xhr.send(updatedJSON);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 202 || xhr.status === 200) {
+                loadDashboard();
+            }
+        }
+    }   
+}
+
+function addRow(object) {
+
+    let id = object.reimbId;
+    let userId = object.authorId;
+    let subDate = object.submitted;
+    let newSub = subDate.substring(0,10);
+    let amount = object.amount;
+    let type = object.type;
+    let status = object.status;
+
+    let row = document.createElement('tr');
+    let idCell = document.createElement('td');
+    let userIdCell = document.createElement('td');
+    let subDateCell = document.createElement('td');
+    let amtCell = document.createElement('td');
+    let typeCell = document.createElement('td');
+    let statusCell = document.createElement('td');
+
+    row.appendChild(idCell);
+    row.appendChild(userIdCell);
+    row.appendChild(subDateCell);
+    row.appendChild(amtCell);
+    row.appendChild(typeCell);
+    row.appendChild(statusCell);
+
+    document.getElementById('reimbtable').appendChild(row);
+    let link = document.createElement('a');
+    link.setAttribute('class', 'tableId');
+    link.setAttribute('href', '#');
+    link.setAttribute('id', id);
+    link.innerText = id;
+
+    idCell.append(link);
+    userIdCell.innerText = userId;
+    subDateCell.innerText = newSub;
+    amtCell.innerText = amount;
+    typeCell.innerText = type;
+    statusCell.innerText = status;
+
+}
+
+function addInfo(object) {
+
+    let id = object.reimbId;
+    let userId = object.authorId;
+    let subDate = object.submitted;
+    let newSub = subDate.substring(0, 10);
+    let amount = object.amount;
+    let type = object.type;
+    let status = object.status;
+    let description = object.description;
+    let receipt = object.receipt;
+
+    let pId = document.getElementById('reimbId');
+    pId.setAttribute('value', id);
+    let pUserId = document.getElementById('reimbAuthor');
+    let pAmount = document.getElementById('reimbamount');
+    let pSubmitted = document.getElementById('reimbsubmitted');
+    let pDescription = document.getElementById('reimbdescription');
+    let pReceipt = document.getElementById('reimbreceipt');
+    let pType = document.getElementById('reimbtype');
+
+    pId.innerText = id;
+    pUserId.innerText = userId;
+    pAmount.innerText = amount;
+    pSubmitted.innerHTML = newSub;
+    pDescription.innerText = description;
+    pReceipt.innerText = 'null';
+    pType.innerText = type;
 
 }
 

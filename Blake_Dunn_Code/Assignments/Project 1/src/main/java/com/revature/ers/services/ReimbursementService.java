@@ -132,7 +132,11 @@ public class ReimbursementService {
 
     public Boolean updateReimbursement(Reimbursement updatedReimb) {
 
-        Boolean reimbUpdated;
+        if (updatedReimb.getStatus() == ReimbursementStatus.PENDING) {
+            throw new InvalidRequestException();
+        }
+
+        reimbRepo.update(updatedReimb);
         return true;
     }
 

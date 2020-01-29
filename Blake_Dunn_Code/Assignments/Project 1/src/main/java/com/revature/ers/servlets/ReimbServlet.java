@@ -32,7 +32,7 @@ public class ReimbServlet extends HttpServlet {
         String reimbParam = req.getParameter("reimbId");
         resp.setContentType("application/JSON");
         User user = (User) req.getSession().getAttribute("this-user");
-
+        System.out.println(user);
         if (reimbParam == null) {
             if (user.getRole() == Role.ADMIN || user.getRole() == Role.MANAGER){
 
@@ -65,22 +65,23 @@ public class ReimbServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute("this-user");
 
         try {
+            Reimbursement newReimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
             if (user.getRole() == Role.EMPLOYEE) {
-                Reimbursement newReimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
                 newReimb.setAuthorId(user.getUserId());
+                System.out.println(newReimb);
                 reimbService.saveReimb(newReimb);
                 String newReimbJSON = mapper.writeValueAsString(newReimb);
                 resp.setStatus(201); // created
             }
             else {
-                Reimbursement reimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
-                reimb.setResolverId(user.getUserId());
-                reimbService.updateReimbursement(reimb);
-                String updatedReimbJSON = mapper.writeValueAsString(reimb);
+                newReimb.setResolverId(user.getUserId());
+                reimbService.updateReimbursement(newReimb);
+                String updatedReimbJSON = mapper.writeValueAsString(newReimb);
                 resp.setStatus(202); // accepted
             }
 
         }catch (MismatchedInputException e) {
+            e.printStackTrace();
             resp.setStatus(400); // bad request
         } catch(ResourceNotFoundException e) {
             resp.setStatus(409); // conflict

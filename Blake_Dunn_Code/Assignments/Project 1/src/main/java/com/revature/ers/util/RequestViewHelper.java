@@ -19,6 +19,8 @@ public class RequestViewHelper {
                 return "partials/newreimb.html";
             case "/project_1_ERS/reimbupdate.view":
                 return "partials/reimb-info.html";
+            case "/project_1_ERS/policy.view":
+                return "partials/policy.html";
             default:
                 return "";
         }
