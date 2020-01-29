@@ -11,7 +11,15 @@ public class User {
     private String user_email;
     private Role role;
 
-    public User(){ super(); }
+    public User(){
+        user_id = 0;
+        user_name = "";
+        pass_word = "";
+        first_name = "";
+        last_name = "";
+        user_email = "";
+        role = Role.EMPLOYEE;
+    }
 
     public User(String user_name, String pass_word, String first_name,
                 String last_name, String user_email) {
@@ -19,7 +27,7 @@ public class User {
         this.pass_word = pass_word;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.user_email = user_email;
+        this.user_email = user_email; // do i even need this for return login?
     }
 
     public User(Integer user_id, String user_name, String pass_word,

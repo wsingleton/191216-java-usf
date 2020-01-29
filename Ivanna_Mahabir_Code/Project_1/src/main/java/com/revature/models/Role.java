@@ -1,11 +1,15 @@
 package com.revature.models;
 
 public enum Role {
-    FINANCE_MANAGER("Finance Manager"), EMPLOYEE("Employee");
+    FINANCE_MANAGER(1, "Finance Manager"), EMPLOYEE(2, "Employee");
 
+    private int id;
     private String roleName;
 
-    Role(String name) {this.roleName = name;}
+    Role(Integer id, String name) {
+        this.id = id;
+        this.roleName = name;
+    }
 
     public static Role getRoleById(int id){
         Role role = null;
@@ -19,6 +23,10 @@ public enum Role {
                 role = Role.EMPLOYEE;
         }
         return role;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override

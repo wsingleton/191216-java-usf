@@ -4,7 +4,6 @@ import com.revature.quizzard.exceptions.*;
 import com.revature.quizzard.models.Role;
 import com.revature.quizzard.models.User;
 import com.revature.quizzard.repos.UserRepository;
-import com.revature.quizzard.util.ConnectionFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,39 +1,47 @@
 package com.revature.models;
 
-import java.util.Arrays;
+import java.util.Date;
 import java.util.Objects;
 
 public class Reimburstment {
     private Integer id;
     private Double amount;
-    private long submitted;
-    private long resolved;
+    private Date submitted;
+    private Date resolved;
     private String description;
-    private Byte[] receipt;
+
     private Integer author;
     private Integer resolver;
     private Integer status;
     private Integer type;
 
-    public Reimburstment() { super(); }
+    public Reimburstment() {
+        id = 0;
+        amount = 0.0;
+        submitted = new Date();
+        resolved = new Date();
+        description = "";
+        author = 0;
+        resolver = 0;
+        status = 0;
+        type = 0;
+    }
 
-    public Reimburstment(Double amount, long submitted, String description, Byte[] receipt, Integer author, Integer status, Integer type) {
+    public Reimburstment(Double amount, Date submitted, String description, Integer author, Integer status, Integer type) {
         this.amount = amount;
         this.submitted = submitted;
         this.description = description;
-        this.receipt = receipt;
         this.author = author;
         this.status = status;
         this.type = type;
     }
 
-    public Reimburstment(Integer id, Double amount, long submitted, long resolved, String description, Byte[] receipt, Integer author, Integer resolver, Integer status, Integer type) {
+    public Reimburstment(Integer id, Double amount, Date submitted, Date resolved, String description, Integer author, Integer resolver, Integer status, Integer type) {
         this.id = id;
         this.amount = amount;
         this.submitted = submitted;
         this.resolved = resolved;
         this.description = description;
-        this.receipt = receipt;
         this.author = author;
         this.resolver = resolver;
         this.status = status;
@@ -56,19 +64,19 @@ public class Reimburstment {
         this.amount = amount;
     }
 
-    public long getSubmitted() {
+    public Date getSubmitted() {
         return submitted;
     }
 
-    public void setSubmitted(long submitted) {
+    public void setSubmitted(Date submitted) {
         this.submitted = submitted;
     }
 
-    public long getResolved() {
+    public Date getResolved() {
         return resolved;
     }
 
-    public void setResolved(long resolved) {
+    public void setResolved(Date resolved) {
         this.resolved = resolved;
     }
 
@@ -79,15 +87,6 @@ public class Reimburstment {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Byte[] getReceipt() {
-        return receipt;
-    }
-
-    public void setReceipt(Byte[] receipt) {
-        this.receipt = receipt;
-    }
-
     public Integer getAuthor() {
         return author;
     }
@@ -130,7 +129,6 @@ public class Reimburstment {
                 Objects.equals(id, that.id) &&
                 Objects.equals(amount, that.amount) &&
                 Objects.equals(description, that.description) &&
-                Arrays.equals(receipt, that.receipt) &&
                 Objects.equals(author, that.author) &&
                 Objects.equals(resolver, that.resolver) &&
                 Objects.equals(status, that.status) &&
@@ -139,9 +137,7 @@ public class Reimburstment {
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, amount, submitted, resolved, description, author, resolver, status, type);
-        result = 31 * result + Arrays.hashCode(receipt);
-        return result;
+        return Objects.hash(id, amount, submitted, resolved, description, author, resolver, status, type);
     }
 
     @Override
@@ -152,7 +148,6 @@ public class Reimburstment {
                 ", submitted=" + submitted +
                 ", resolved=" + resolved +
                 ", description='" + description + '\'' +
-                ", receipt=" + Arrays.toString(receipt) +
                 ", author=" + author +
                 ", resolver=" + resolver +
                 ", status=" + status +
@@ -160,4 +155,3 @@ public class Reimburstment {
                 '}';
     }
 }
-

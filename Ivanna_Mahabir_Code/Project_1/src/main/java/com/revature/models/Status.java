@@ -1,11 +1,15 @@
 package com.revature.models;
 
 public enum Status {
-    SUBMITTED("Submitted"), APPROVED("Approved"), DENIED("Denied");
+    APPROVED(1, "Approved"), DENIED(2, "Denied"), SUBMITTED(3, "Submitted");
 
+    private int id;
     private String statusName;
 
-    Status(String stat) { this.statusName = stat; }
+    Status(Integer id, String stat) {
+        this.id = id;
+        this.statusName = stat;
+    }
 
     public static Status getStatusbyId(int id){
 
@@ -25,6 +29,11 @@ public enum Status {
         }
         return status;
     }
+
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() { return statusName; }
 }

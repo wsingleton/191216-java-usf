@@ -1,12 +1,12 @@
-package com.revature.quizzard.servlets;
+package com.revature.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
-import com.revature.quizzard.dtos.Credentials;
-import com.revature.quizzard.exceptions.AuthenticationException;
-import com.revature.quizzard.models.User;
-import com.revature.quizzard.repos.UserRepository;
-import com.revature.quizzard.services.UserService;
+import com.revature.dtos.Credentials;
+import com.revature.exceptions.AuthenticationException;
+import com.revature.models.User;
+import com.revature.repos.UserRepository;
+import com.revature.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,27 +30,30 @@ public class AuthServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = resp.getWriter();
         resp.setContentType("application/json");
-        //User authUser = null;
 
-        //authentication method or login method
         try{
             Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
-            User authUser = userService.authenticate(creds.getUsername(),creds.getPassword());
+            if(!userService.validate(creds.getUsername()) &&  !userService.validate(creds.getPassword())){
+                return;
+            }
+            User authUser = userService.authenticate(creds.getUsername(), creds.getPassword());
             String authUserJSON = mapper.writeValueAsString(authUser);
             writer.write(authUserJSON);
             HttpSession session = req.getSession();
-            session.setAttribute("this-user", authUser);
-
-        }catch (MismatchedInputException e){
+            session.setAttribute("this.user", authUser);
+        }
+        catch (MismatchedInputException e){
             resp.setStatus(400);
-        }catch (AuthenticationException e){
+        }
+        catch (AuthenticationException e){
             resp.setStatus(401);
-        }catch (Exception e){
+        }
+        catch (Exception e){
             resp.setStatus(500);
         }
     }

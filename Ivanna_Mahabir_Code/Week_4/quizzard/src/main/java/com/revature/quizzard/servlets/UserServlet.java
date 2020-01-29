@@ -29,6 +29,12 @@ public class UserServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         resp.setContentType("application/json"); //looks pretty in postman. w/o it looks like text
         String userIdParam = req.getParameter("userId");
+
+        if(req.getSession(false) != null){
+            User thisUser = (User) req.getSession().getAttribute("this-user");
+            System.out.println(thisUser);
+        }
+
         if(userIdParam == null) {
             Set<User> users = userService.getAllUsers();
             String usersJSON = mapper.writeValueAsString(users);

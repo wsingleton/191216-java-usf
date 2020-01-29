@@ -1,11 +1,14 @@
 package com.revature.models;
 
 public enum Type {
-    LODGING("Lodging"), TRAVEL("Travel"), FOOD("Food"), OTHER("Other");
+    LODGING(1, "Lodging"), TRAVEL(2, "Travel"), FOOD(3, "Food"), OTHER(4, "Other");
 
+    private int id;
     private String typeName;
 
-    Type(String type) { this.typeName = type; }
+    Type(Integer id, String type) {
+        this.id = id;
+        this.typeName = type; }
 
     public static Type getTypeById(int id){
         Type type = null;
@@ -28,6 +31,11 @@ public enum Type {
         }
         return type;
     }
+
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() { return typeName; }
 }
