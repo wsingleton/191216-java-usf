@@ -21,14 +21,19 @@ public class UserService {
         this.userRepo = repo;
     }
 
-    public void register(User newUser) {
+    public User register(User newUser) {
         if (!isUserValid(newUser)) throw new InvalidRequestException();
 
         if (userRepo.findUserByUsername(newUser.getUsername()).isPresent()) {
             throw new ResourcePersistenceException("Username is already in use!");
         }
         newUser.setRole(Role.EMPLOYEE);
-        userRepo.save(newUser);
+
+        User currentUser = userRepo.save(newUser);
+//        userRepo.save(newUser);
+        System.out.println(currentUser);
+
+        return currentUser;
     }
 
     public Set<User> getAllUsers() {

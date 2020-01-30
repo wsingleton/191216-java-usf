@@ -80,17 +80,19 @@ public class UserRepository  implements CrudRepository<User>{
     }
 
 
-    public void save(User newObj) {
+    @Override
+    public User save(User newObj) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO ers_users VALUES (0, ?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
+            String sql = "INSERT INTO ers_users VALUES (0, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"ers_user_id"});
             pstmt.setString(1, newObj.getUsername());
             pstmt.setString(2, newObj.getPassword());
             pstmt.setString(3, newObj.getFirstName());
             pstmt.setString(4, newObj.getLastName());
-            pstmt.setInt(5, newObj.getRole().getId());
+            pstmt.setString(5, newObj.getEmail());
+            pstmt.setInt(6, newObj.getRole().getId());
 
             int rowsInserted = pstmt.executeUpdate();
 
@@ -107,6 +109,8 @@ public class UserRepository  implements CrudRepository<User>{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return newObj;
     }
 
 
@@ -221,6 +225,7 @@ public class UserRepository  implements CrudRepository<User>{
             temp.setPassword(rs.getString("ers_password"));
             temp.setFirstName(rs.getString("user_first_name"));
             temp.setLastName(rs.getString("user_last_name"));
+            temp.setEmail(rs.getString("user_email"));
             //need to add email
             temp.setRole(Role.getById(rs.getInt("user_role_id")));
             users.add(temp);

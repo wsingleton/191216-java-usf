@@ -3,6 +3,7 @@ package repos;
 import com.revature.project1.models.Reimbursement;
 import com.revature.project1.models.Status;
 import com.revature.project1.models.Type;
+import com.revature.project1.models.User;
 import com.revature.project1.util.ConnectionFactory;
 
 import java.sql.*;
@@ -12,19 +13,16 @@ import java.util.Set;
 
 public class ReimbursementRepository implements CrudRepository<Reimbursement> {
     @Override
-    public void save(Reimbursement reimb) {
+    public Reimbursement save(Reimbursement reimb) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()){
-            if (reimb.getReceipt() !=null) {
-                //figure out what to pass in
-                String sql = "insert into ers_reimbursement() VALUES ()";
-                PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"reimb_id"});
+
+
+                String sql = "insert into ers_reimbursement VALUES (0, ?, null ,null, ?, null, ?, null, 1, ?, CURRENT_TIMESTAMP)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setDouble(1, reimb.getAmount());
-                //made it change to set date?
-                pstmt.setString(2, reimb.getSubmitted());
-                pstmt.setString(3, reimb.getDescription());
-                pstmt.setInt(4, reimb.getAuthorId());
-                pstmt.setInt(5, reimb.getStatus().getStatusId());
-                pstmt.setInt(6, reimb.getType().getTypeId());
+                pstmt.setString(2, reimb.getDescription());
+                pstmt.setInt(3, reimb.getAuthorId());
+                pstmt.setInt(4, reimb.getType().getTypeId());
 
                 int rowsInserted = pstmt.executeUpdate();
 
@@ -34,11 +32,12 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                     while(rs.next()){
                         reimb.setId(rs.getInt(1));
                     }
-                }
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return reimb;
     }
 
     @Override
@@ -101,6 +100,28 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
         }
         return _reimb;
     }
+
+
+    public Set<Reimbursement> findByUserId(Integer id) {
+
+        Set<Reimbursement> reimb = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            reimb = mapResultSet(pstmt.executeQuery());
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reimb;
+    }
+
+
+
+
 
 
     @Override

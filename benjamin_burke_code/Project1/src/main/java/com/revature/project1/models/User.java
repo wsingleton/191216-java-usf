@@ -18,6 +18,7 @@ public class User {
         password="";
         firstName="";
         lastName="";
+        email="";
         role = Role.EMPLOYEE;
     }
 
@@ -29,11 +30,12 @@ public class User {
         role = Role.EMPLOYEE;
     }
 
-    public User(String username, String password, String firstName, String lastName, Role role) {
+    public User(String username, String password, String firstName, String lastName, String email, Role role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email=email;
         this.role = role;
     }
 
@@ -43,6 +45,16 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
+    }
+
+    public User(Integer id, String username, String password, String firstName, String lastName, String email, Role role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
         this.role = role;
     }
 
@@ -86,6 +98,14 @@ public class User {
         this.lastName = lastName;
     }
 
+    public String getEmail(){
+        return email;
+    }
+
+    public void setEmail(String email){
+        this.email=email;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -121,6 +141,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
                 ", role=" + role +
                 '}';
     }

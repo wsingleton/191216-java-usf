@@ -41,11 +41,12 @@ public class Reimbursement {
         this.type = type;
     }
 
-
-
-
-
-
+    public Reimbursement(Double amount, String description, int authorId, Type type) {
+        this.amount = amount;
+        this.description = description;
+        this.authorId = authorId;
+        this.type = type;
+    }
 
     public Integer getId() {
         return id;

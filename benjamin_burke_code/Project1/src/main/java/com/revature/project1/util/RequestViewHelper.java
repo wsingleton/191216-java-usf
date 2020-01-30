@@ -13,10 +13,13 @@ public class RequestViewHelper {
                 return "partials/register.html";
             case "/Project1/dashboard.view":
                 return "partials/dashboard.html";
-            case "/Project1/reimbs.view":
-                return "partials/reimb-table";
-            case "/Project1/newreimb.view":
-                return "Project1/newreimb.html";
+            case "/Project1/manager.view":
+                return "/partials/manager.html";
+            case "/Project1/new.view":
+                return "partials/new.html";
+            case "/Project1/reimb.view":
+                return  "partials/reimb.html";
+
             default:
                 return "";
         }
