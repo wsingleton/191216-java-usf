@@ -73,7 +73,7 @@ function login() {
                 if(user.role==="EMPLOYEE"){
                        loadDashboard(user);
                 }else{
-                    loadManager();
+                    loadManager(user);
                 }
 
                 console.log(user);
@@ -133,9 +133,9 @@ function register() {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 || xhr.status === 200) {
                 console.log('test');
-                // let user = JSON.parse(xhr.responseText);
-                // console.log(user);
-                loadDashboard();
+                 let user = JSON.parse(xhr.responseText);
+                 console.log(user);
+                loadDashboard(user);
             }
 
             if (xhr.status === 401) {
@@ -161,13 +161,15 @@ function loadDashboard(user) {
             document.getElementById('newreimbbutton').addEventListener('click', () =>{
                 loadNew(user);
             });
-            document.getElementById('reimbbutton').addEventListener('click', loadReimb);
+            document.getElementById('reimbbutton').addEventListener('click', ()=>{
+                loadReimb(user)
+            });
 
         }
     }
 }
 
-function loadManager(){
+function loadManager(user){
   console.log('in loadHome');
 
      let xhr = new XMLHttpRequest();
@@ -229,6 +231,8 @@ function newReimbursement(user) {
 
     };
 
+
+
     let reimbsJSON = JSON.stringify(reimbs);
     console.log(reimbsJSON);
 
@@ -239,9 +243,10 @@ function newReimbursement(user) {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 || xhr.status === 200) {
 
-                // let newReimb = JSON.parse(xhr.responseText);
-                // console.log(newReimb);
-                loadDashboard();
+                 let newReimb = JSON.parse(xhr.responseText);
+                 console.log(newReimb + 'here is the entry');
+                 console.log(user + 'test');
+                loadDashboard(user);
             }
 
             if (xhr.status === 401) {
