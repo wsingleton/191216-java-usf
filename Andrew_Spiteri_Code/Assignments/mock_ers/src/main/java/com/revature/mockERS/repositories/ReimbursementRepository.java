@@ -36,7 +36,7 @@ public class ReimbursementRepository {
                 return true;
             }
         }catch (SQLException e){
-
+            LOGGER.debug(e.getMessage());
             e.printStackTrace();
         }
         return false;
@@ -80,14 +80,15 @@ public class ReimbursementRepository {
                 ro.setCompleted(completed);
                 bool = reimbs.add(ro);
                 if(reimbs.contains(ro)){
-                    System.out.println("Repository RO: "+ bool);
+                    LOGGER.info("Repository RO: "+ bool);
                 }
             }
             for(int i = 0; i < reimbs.size(); i++){
-                System.out.println("Repository 2: ");
+                LOGGER.info("Repository 2: ");
             }
             return reimbs;
         }catch (SQLException e){
+            LOGGER.debug(e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -141,6 +142,7 @@ public class ReimbursementRepository {
             }
             return reimbs;
         }catch (SQLException e){
+            LOGGER.debug(e.getMessage());
             e.printStackTrace();
         }
         //TODO replace null with an Optional

@@ -16,6 +16,8 @@ import com.revature.mockERS.models.ERS_Users;
 import com.revature.mockERS.repositories.ReimbursementRepository;
 import com.revature.mockERS.services.ReimbursementService;
 import com.revature.mockERS.util.UserSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +35,7 @@ import java.util.Set;
 @WebServlet("/reimb")
 public class ReimbursementServlet extends HttpServlet {
     ReimbursementService rs = new ReimbursementService(new ReimbursementRepository());
+    private static final Logger LOGGER = LogManager.getLogger(ReimbursementServlet.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -51,6 +54,7 @@ public class ReimbursementServlet extends HttpServlet {
                 throw new ResourcePersistenceException();
             }
         }catch (MismatchedInputException e){
+            LOGGER.error(e.getMessage());
             resp.setStatus(400);
             writer.write(e.getMessage());
         }catch (ResourcePersistenceException e){
@@ -59,6 +63,7 @@ public class ReimbursementServlet extends HttpServlet {
             err.setMessage(e.getMessage());
             writer.write(mapper.writeValueAsString(err));
         }catch (Exception e){
+            LOGGER.error(e.getMessage());
             resp.setStatus(500);
             e.printStackTrace();
         }
@@ -78,11 +83,13 @@ public class ReimbursementServlet extends HttpServlet {
                 mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
                 writer.print(mapper.writeValueAsString(reimbs));
             }catch (ResourceNotFoundException e){
+                LOGGER.error(e.getMessage(), new ResourceNotFoundException());
                 resp.setStatus(409);
                 ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());
                 err.setMessage(e.getMessage());
                 writer.write(mapper.writeValueAsString(err));
             }catch (Exception e){
+                LOGGER.error(e.getMessage());
                 resp.setStatus(500);
                 e.printStackTrace();
             }
@@ -96,13 +103,15 @@ public class ReimbursementServlet extends HttpServlet {
                 Set<ReimbursementOut> reimbs = rs.returnReimbursementByUser(authUser.getId());
                 mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
                 writer.print(mapper.writeValueAsString(reimbs));
-                System.out.println("Basic Reimbs: " + reimbs);
+                LOGGER.info("Basic Reimbs: " + reimbs);
             }catch (ResourceNotFoundException e){
+                LOGGER.error(e.getMessage(), new ResourceNotFoundException());
                 resp.setStatus(409);
                 ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());
                 err.setMessage(e.getMessage());
                 writer.write(mapper.writeValueAsString(err));
             }catch (Exception e){
+                LOGGER.error(e.getMessage());
                 resp.setStatus(500);
                 e.printStackTrace();
             }
@@ -110,7 +119,7 @@ public class ReimbursementServlet extends HttpServlet {
         }
     }
 
-    //todo finish method
+
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ERS_Users authUser = (ERS_Users) req.getSession(false).getAttribute("this-user");
@@ -131,14 +140,17 @@ public class ReimbursementServlet extends HttpServlet {
                     throw new ResourcePersistenceException();
                 }
             }catch (MismatchedInputException e){
+                LOGGER.error(e.getMessage());
                 resp.setStatus(400);
                 writer.write(e.getMessage());
             }catch (ResourcePersistenceException e){
+                LOGGER.error(e.getMessage(), new ResourcePersistenceException());
                 resp.setStatus(409);
                 ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());
                 err.setMessage(e.getMessage());
                 writer.write(inmapper.writeValueAsString(err));
             }catch (Exception e){
+                LOGGER.error(e.getMessage());
                 resp.setStatus(500);
                 e.printStackTrace();
             }

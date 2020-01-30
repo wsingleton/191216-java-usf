@@ -2,6 +2,8 @@ package com.revature.mockERS.repositories;
 
 import com.revature.mockERS.models.ERS_User_Roles;
 import com.revature.mockERS.models.ERS_Users;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +14,8 @@ import java.util.Optional;
 import static com.revature.mockERS.util.ConnectionFactory.getCon;
 
 public class UserRepository {
+    private static final Logger LOGGER = LogManager.getLogger(UserRepository.class.getName());
+
 
     public Boolean addUser(ERS_Users user){
         String sql = "INSERT INTO ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) VALUES (?,?,?,?,?,?)";
@@ -28,7 +32,7 @@ public class UserRepository {
                 return true;
             }
         }catch (SQLException e){
-            //todo get rid of stacktrace
+            LOGGER.debug(e.getMessage());
             e.printStackTrace();
         }
         return false;
@@ -51,15 +55,16 @@ public class UserRepository {
                     Integer role = rs.getInt("user_role_id");
                     ERS_Users user = new ERS_Users(id, un, pw, fn, ln, email);
                     user.setRole(ERS_User_Roles.getRoleById(role));
-                    System.out.println("Username: " + user.getErsUsername());
+                    LOGGER.info("Username: " + user.getErsUsername());
                     Integer passwInt = Integer.parseInt(pw);
-                    System.out.println("Password: " + user.getErsPassword());
+                    LOGGER.info("Password: " + user.getErsPassword());
                     if(user.getErsUsername().equals(username) && user.getErsPassword().equals(String.valueOf(Objects.hash(password)))) {
                         return Optional.of(user);
                     }
                 }
             }
         }catch (SQLException e){
+            LOGGER.debug(e.getMessage());
             e.printStackTrace();
         }
         return Optional.empty();
@@ -84,6 +89,7 @@ public class UserRepository {
                 }
             }
         }catch (SQLException e){
+            LOGGER.debug(e.getMessage());
             e.printStackTrace();
         }
         return Optional.empty();
@@ -107,7 +113,7 @@ public class UserRepository {
                 }
             }
         }catch (SQLException e){
-            System.out.println("Exception in findByUsername.");
+            LOGGER.debug("Exception in findByUsername.");
             e.printStackTrace();
         }
         return Optional.empty();
