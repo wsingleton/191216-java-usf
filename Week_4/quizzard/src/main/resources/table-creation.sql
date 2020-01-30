@@ -13,6 +13,8 @@ CREATE TABLE app_user (
     first_name	VARCHAR2(25) NOT NULL,
     last_name	VARCHAR(25) NOT NULL,
     role_id		NUMBER NOT NULL,
+    email       VARCHAR2(255) NOT NULL UNIQUE,
+    confirmed   NUMBER(1) DEFAULT 0,
 
     CONSTRAINT pk_app_user
     PRIMARY KEY (user_id),
