@@ -12,9 +12,14 @@ import java.sql.*;
 import java.util.*;
 import java.util.Date;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import static com.revature.mockERS.util.ConnectionFactory.getCon;
 
 public class ReimbursementRepository {
+    private static final Logger LOGGER = LogManager.getLogger(ReimbursementRepository.class.getName());
+
     public Boolean addReimbursement(ERS_Reimbursement reimb){
 
         String sql = "INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted, reimb_description,reimb_author, reimb_status_id, reimb_type_id) VALUES (?,?,?,?,?,?)";
@@ -170,6 +175,7 @@ public class ReimbursementRepository {
                 return true;
             }
         }catch (SQLException e){
+            LOGGER.debug(e.getMessage());
             e.printStackTrace();
         }
         return outcome;
