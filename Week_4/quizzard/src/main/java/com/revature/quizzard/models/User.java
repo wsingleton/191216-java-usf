@@ -9,9 +9,11 @@ public class User {
     private int id;
     private String username;
     private String password;
+    private String email;
     private String firstName;
     private String lastName;
     private Role role;
+    private boolean accountConfirmed;
 
     public User() {
         id = 0;
@@ -20,33 +22,40 @@ public class User {
         firstName = "";
         lastName = "";
         role = Role.BASIC_USER;
+        accountConfirmed = false;
     }
 
-    public User(String username, String password, String firstName, String lastName) {
+    public User(String username, String password, String email, String firstName, String lastName) {
         id = 0;
         this.username = (username != null) ? username : "";
         this.password = (password != null) ? password : "";
+        this.email = (email != null) ? email : "";
         this.firstName = (firstName != null) ? firstName : "";
         this.lastName = (lastName != null) ? lastName : "";
         role = Role.BASIC_USER;
+        accountConfirmed = false;
     }
 
-    public User(String username, String password, String firstName, String lastName, Role role) {
+    public User(String username, String password, String email, String firstName, String lastName, Role role) {
         id = 0;
         this.username = (username != null) ? username : "";
         this.password = (password != null) ? password : "";
+        this.email = (email != null) ? email : "";
         this.firstName = (firstName != null) ? firstName : "";
         this.lastName = (lastName != null) ? lastName : "";
         this.role = role;
+        accountConfirmed = false;
     }
 
-    public User(Integer id, String username, String password, String firstName, String lastName, Role role) {
+    public User(Integer id, String username, String password, String email, String firstName, String lastName, Role role, boolean conf) {
         this.id = id;
         this.username = (username != null) ? username : "";
         this.password = (password != null) ? password : "";
+        this.email = (email != null) ? email : "";
         this.firstName = (firstName != null) ? firstName : "";
         this.lastName = (lastName != null) ? lastName : "";
         this.role = (role != null) ? role : Role.BASIC_USER;
+        accountConfirmed = conf;
     }
 
     public int getId() {
@@ -66,13 +75,20 @@ public class User {
         this.username = username;
     }
 
-    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -103,9 +119,20 @@ public class User {
     }
 
     @JsonIgnore
+    public boolean accountConfirmed() {
+        return this.accountConfirmed;
+    }
+
+    public void setAccountConfirmed(int confValue) {
+        this.accountConfirmed = (confValue == 1);
+    }
+
+    @JsonIgnore
     public boolean isAdminOrDev() {
         return this.role == Role.ADMIN || this.role == Role.DEV;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
