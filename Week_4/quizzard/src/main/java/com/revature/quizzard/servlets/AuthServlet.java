@@ -46,6 +46,7 @@ public class AuthServlet extends HttpServlet {
 
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = resp.getWriter();
+        resp.setContentType("application/json");
 
         try {
 
@@ -65,7 +66,7 @@ public class AuthServlet extends HttpServlet {
             writer.write(errRespFactory.generateErrorResponse(HttpStatus.BAD_REQUEST).toJSON());
         } catch (AuthenticationException e) {
             resp.setStatus(401);
-            writer.write(errRespFactory.generateErrorResponse(401, "Authentication failed").toJSON());
+            writer.write(errRespFactory.generateErrorResponse(401, e.getMessage()).toJSON());
         } catch (Exception e) {
             LOG.error(e.getMessage());
             resp.setStatus(500);
