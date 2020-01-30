@@ -3,6 +3,7 @@ package com.revature.quizzard.servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.revature.quizzard.dtos.Credentials;
+import com.revature.quizzard.dtos.HttpStatus;
 import com.revature.quizzard.exceptions.AuthenticationException;
 import com.revature.quizzard.models.User;
 import com.revature.quizzard.repos.UserRepository;
@@ -29,9 +30,15 @@ public class AuthServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getSession(false) != null) {
+
+        HttpSession session = req.getSession(false);
+
+        if (session != null) {
+            String username = ((User) session.getAttribute("this-user")).getUsername();
+            LOG.info("Invalidating session for user, {}", username);
             req.getSession().invalidate();
         }
+
     }
 
     @Override
@@ -40,23 +47,31 @@ public class AuthServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = resp.getWriter();
 
-
         try {
 
             Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
+
+            LOG.info("Attempting to authenticate user, {}, with provided credentials", creds.getUsername());
             User authUser = userService.authenticate(creds.getUsername(), creds.getPassword());
-            String authUserJSON = mapper.writeValueAsString(authUser);
-            writer.write(authUserJSON);
-            HttpSession session = req.getSession();
-            session.setAttribute("this-user", authUser);
+
+            writer.write(mapper.writeValueAsString(authUser));
+
+            LOG.info("Establishing a session for user, {}", creds.getUsername());
+            req.getSession().setAttribute("this-user", authUser);
 
         } catch (MismatchedInputException e) {
+            LOG.warn(e.getMessage());
             resp.setStatus(400);
+            writer.write(errRespFactory.generateErrorResponse(HttpStatus.BAD_REQUEST).toJSON());
         } catch (AuthenticationException e) {
             resp.setStatus(401);
+            writer.write(errRespFactory.generateErrorResponse(401, "Authentication failed").toJSON());
         } catch (Exception e) {
+            LOG.error(e.getMessage());
             resp.setStatus(500);
-            e.printStackTrace();
+            writer.write(errRespFactory.generateErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR).toJSON());
         }
+
     }
+
 }
