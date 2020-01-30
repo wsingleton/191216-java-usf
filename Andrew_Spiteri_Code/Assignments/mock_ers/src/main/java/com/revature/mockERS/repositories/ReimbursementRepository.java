@@ -10,6 +10,7 @@ import com.revature.mockERS.util.UserSession;
 
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 import static com.revature.mockERS.util.ConnectionFactory.getCon;
 
@@ -154,6 +155,17 @@ public class ReimbursementRepository {
             ps.setInt(1, ers.getStatus().getId());
             ps.setInt(2, ers.getReimbId());
             Integer result = ps.executeUpdate();
+            if(ers.getStatus().getId().equals(3)  || ers.getStatus().getId().equals(4)){
+                Date date = new Date();
+                sql = "UPDATE ers_reimbursement SET reimb_resolved = ? WHERE reimb_id = ?";
+                ps = getCon().prepareStatement(sql);
+                ps.setTimestamp(1, new Timestamp(date.getTime()));
+                ps.setInt(2, ers.getReimbId());
+                result += ps.executeUpdate();
+                if(result == 2){
+                    return true;
+                }
+            }
             if(result == 1){
                 return true;
             }

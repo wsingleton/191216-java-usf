@@ -1,20 +1,19 @@
-<title>Dashboard</title>
-
-<link rel="stylesheet" href="css/admin-dashboard.css">
 
 
-<div class="container" id="admin-dashboard-component">
+
+<div class="container" id="subcontainer">
+    <link rel="stylesheet" href="css/admin-dashboard.css">
     <h2>Management Dashboard</h2>
     <hr>
     <h3>Welcome!</h3>
 
     <div class="form-group text-center">
-        <label for="choose_id" class="form-label">Choose By ID</label>
+        <h6 for="choose_id"><span class="label label-default">Choose By ID</span></h6>
         <input type="text" class="form-control" id="choose_id" placeholder="ID">
     </div>
 
     <div class="form-group text-center">
-        <label for="status" class="form-label">Type</label>
+        <h6 ><span class="label label-default">Type</span></h6>
         <select id="status">
             <option>Processing</option>
             <option>Accepted</option>
@@ -25,7 +24,7 @@
     
     <br>
 
-    <button type="submit" id="admin_reimb_submit">Submit</button>
+    <button type="submit" class="btn btn-secondary" id="admin_reimb_submit">Submit</button>
     <br> <br>
     <hr>
 

@@ -18,7 +18,7 @@ tr{
     transform: translate(-50%,-50%);    
 }
 
-.form-label{
+h6{
     position: relative;
     top: 90px;
     left: 28%;

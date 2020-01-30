@@ -2,12 +2,13 @@ window.onload = () => {
     homePage();
 
     this.document.getElementById('login').addEventListener('click', login);
-    this.document.getElementById('register').addEventListener('click', registerPage);
+    this.document.getElementById('register').addEventListener('click', registerPage); 
+    this.document.getElementById('logout').addEventListener('click', logout);
 
 }
 
 function homePage(){
-    let divContainer = document.getElementById('container');        
+    let divContainer = document.getElementById('container');           
 
     let header1 = document.createElement('i');
     header1.setAttribute('id', 'header1');
@@ -22,7 +23,12 @@ function homePage(){
     let unLabel = document.createElement('label');
     unLabel.setAttribute('for', 'un');
     unLabel.setAttribute('class', 'form-label');
-    unLabel.innerText = "Username";
+
+    let spanUn = document.createElement('span');
+    spanUn.setAttribute('class', 'label label-default');
+    spanUn.innerText = 'Username';
+
+    unLabel.appendChild(spanUn);
 
     let unInput = document.createElement('input');
     unInput.setAttribute('type', 'text');
@@ -35,7 +41,12 @@ function homePage(){
     let pwLabel = document.createElement('label');
     pwLabel.setAttribute('for', 'passw');
     pwLabel.setAttribute('class', 'form-label');
-    pwLabel.innerText = "Password";
+
+    let spanPw = document.createElement('span');
+    spanPw.setAttribute('class', 'label label-default');
+    spanPw.innerText = 'Password';
+
+    pwLabel.appendChild(spanPw);
 
     let pwInput = document.createElement('input');
     pwInput.setAttribute('type', 'password');
@@ -47,11 +58,14 @@ function homePage(){
 
     let loginBtn = document.createElement('button');
     loginBtn.setAttribute('id', 'login');
+    loginBtn.setAttribute('class', 'btn btn-secondary');
     loginBtn.innerText = 'Login';
 
     let regA = document.createElement('button');
     regA.setAttribute('id', 'register');
+    regA.setAttribute('class', 'btn btn-secondary');
     regA.innerText = "Register";
+
 
     divContainer.appendChild(header1);
     divContainer.appendChild(formDiv);
@@ -62,7 +76,7 @@ function homePage(){
     formDiv.appendChild(pwInput);
     formDiv.appendChild(loginBtn);
     formDiv.appendChild(regA);
-    
+    this.document.getElementById('login').addEventListener('click', login);
 }
 
 function registerPage(){
@@ -146,6 +160,7 @@ function registerPage(){
 
     let regBtn = document.createElement('button');
     regBtn.setAttribute('id', 'registerFormBtn')
+    regBtn.setAttribute('class', 'btn-secondary')
     regBtn.innerText = "Register"
 
 
@@ -180,7 +195,6 @@ function register(){
         xhttp.send(data);
         xhttp.onreadystatechange = () =>{
             if(xhttp.readyState === 4 && xhttp.status === 200){
-                alert('Successfully registered!');
                 let divContainer = document.getElementById('container');        
                 let formRegister = document.getElementById('registerForm')
                 let header1 = document.getElementById('header1');
@@ -221,7 +235,8 @@ function logout(){
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log('logout successful!')
+            document.getElementById('container').removeChild(document.getElementById('subcontainer'));
+            homePage();
         }
     }
 }
@@ -318,10 +333,10 @@ alterReimb = () => {
         xhttp.open('PUT', 'reimb', true);
         let data = JSON.stringify({'id':id,'status':status});
         xhttp.send(data);
-        xhttp.onreadystatechange = () => {
-            if(xhttp.onreadystatechange === 4 && xhttp.status === 200){
+        xhttp.onreadystatechange = () => {            
+            if(xhttp.readyState === 4 && xhttp.status === 201){
                 alert('Successfully updated');
-                loadDashboard();
+                loadDashboard();    
             }
         }
     }
