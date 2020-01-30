@@ -1,0 +1,23 @@
+App.tsx
+	
+	route -> login
+	route -> reimbursment 
+	route -> users
+
+One component that uses state, get and manage all of the data
+
+stateful			
+smart				
+controller 			
+container 
+------------------------------------------------------
+Many components with no state, take data for one object, configure the display
+all data from props
+
+	- these are faster because they have an implementation of should component update
+stateless
+dumb (components that dont care about state or where the data comes from)
+view
+functional	
+display
+pure		
