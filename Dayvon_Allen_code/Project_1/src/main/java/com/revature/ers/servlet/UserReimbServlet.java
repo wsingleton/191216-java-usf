@@ -40,8 +40,6 @@ public class UserReimbServlet extends HttpServlet {
             res.setStatus(500);
             System.out.println("[ERR] Error");
         }
-
-
     }
 
 }
