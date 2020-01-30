@@ -82,6 +82,15 @@ public class UserService {
 
         return userRepo.findUserByUsername(username).orElseThrow(ResourceNotFoundException::new);
 
+    }
+
+    public void confirmAccount(int userId) {
+
+        if (userId <= 0) {
+            throw new InvalidRequestException();
+        }
+
+        userRepo.confirmAccount(userId);
 
     }
 
@@ -129,7 +138,13 @@ public class UserService {
             throw new InvalidRequestException();
         }
 
-        return userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+        User authUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+
+        if (authUser.accountConfirmed()) {
+            return authUser;
+        } else {
+            throw new AuthenticationException("Account not confirmed.");
+        }
 
     }
 
@@ -149,6 +164,7 @@ public class UserService {
     }
 
     public Boolean isUserValid(User user) {
+        System.out.println(user);
         if (user == null) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;
         if (user.getLastName() == null || user.getLastName().trim().equals("")) return false;
