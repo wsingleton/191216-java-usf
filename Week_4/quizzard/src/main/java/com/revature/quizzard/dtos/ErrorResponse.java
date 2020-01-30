@@ -15,11 +15,6 @@ public class ErrorResponse {
         super();
     }
 
-    public ErrorResponse(int status, long timestamp) {
-        this.status = status;
-        this.timestamp = timestamp;
-    }
-
     public ErrorResponse(int status, String message, long timestamp) {
         this.status = status;
         this.message = message;
