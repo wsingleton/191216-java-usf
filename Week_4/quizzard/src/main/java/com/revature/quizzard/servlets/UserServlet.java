@@ -6,7 +6,7 @@ import com.revature.quizzard.dtos.HttpStatus;
 import com.revature.quizzard.exceptions.ResourceNotFoundException;
 import com.revature.quizzard.exceptions.ResourcePersistenceException;
 import com.revature.quizzard.models.User;
-import com.revature.quizzard.repos.UserRepository;
+import com.revature.quizzard.services.MailService;
 import com.revature.quizzard.services.UserService;
 import com.revature.quizzard.util.ErrorResponseFactory;
 
@@ -27,6 +27,7 @@ import org.apache.logging.log4j.Logger;
 public class UserServlet extends HttpServlet {
 
     private final UserService userService = UserService.getInstance();
+    private final MailService mailService = MailService.getInstance();
     private final ErrorResponseFactory errRespFactory = ErrorResponseFactory.getInstance();
     private static final Logger LOG = LogManager.getLogger(UserServlet.class);
 
@@ -37,6 +38,7 @@ public class UserServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         HttpSession session = req.getSession(false);
         User rqstr = (session == null) ? null : (User) req.getSession(false).getAttribute("this-user");
+        resp.setContentType("application/json");
 
         String userIdParam = req.getParameter("userId");
 
@@ -95,6 +97,7 @@ public class UserServlet extends HttpServlet {
 
         PrintWriter writer = resp.getWriter();
         ObjectMapper mapper = new ObjectMapper();
+        resp.setContentType("application/json");
 
         try {
 
@@ -103,6 +106,7 @@ public class UserServlet extends HttpServlet {
             String newUserJSON = mapper.writeValueAsString(newUser);
             writer.write(newUserJSON);
             resp.setStatus(201); // created
+            mailService.sendAccountConfirmationEmail(newUser);
 
         } catch (MismatchedInputException e) {
             LOG.warn(e.getMessage());
@@ -113,6 +117,7 @@ public class UserServlet extends HttpServlet {
             resp.setStatus(409); // conflict
             writer.write(errRespFactory.generateErrorResponse(HttpStatus.CONFLICT).toJSON());
         } catch (Exception e) {
+            e.printStackTrace();
             LOG.error(e.getMessage());
             resp.setStatus(500); // internal server error
             writer.write(errRespFactory.generateErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR).toJSON());
@@ -127,6 +132,7 @@ public class UserServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         HttpSession session = req.getSession(false);
         User rqstr = (session == null) ? null : (User) req.getSession(false).getAttribute("this-user");
+        resp.setContentType("application/json");
 
         try {
 
