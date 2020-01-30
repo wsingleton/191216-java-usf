@@ -42,7 +42,6 @@ REFERENCES ers_user_roles (roleId)
 CREATE TABLE ers_reimbursement (
 reimbId            NUMBER CONSTRAINT ers_reimbursement_pk PRIMARY KEY,
 amount             NUMBER NOT NULL,
-expenseDate        DATE NOT NULL,
 submitted          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 resolved           DATE,
 description        VARCHAR2(250),
@@ -185,12 +184,12 @@ delete from ers_users where userId = 21;
 
 select * from ers_users where username = 'buhlakay' and password = 'boatsnhoes';
 
-INSERT INTO ers_reimbursement (reimbId, amount, expenseDate, description, author, statusId, typeId)
-VALUES (0, 25.00, TO_DATE('01-10-2020','mm-dd-yyyy'), 'TEST', 41, 1, 1);
-INSERT INTO ers_reimbursement (reimbId, amount, expenseDate, description, author, statusId, typeId)
-VALUES (0, 25.00, TO_DATE('2020-01-02','yyyy-mm-dd'), 'TEST', 41, 1, 1);
+INSERT INTO ers_reimbursement (reimbId, amount, description, author, statusId, typeId)
+VALUES (0, 25.00, 'TEST', 41, 1, 1);
+INSERT INTO ers_reimbursement (reimbId, amount, description, author, statusId, typeId)
+VALUES (0, 25.00, 'TEST', 41, 1, 1);
 
-select * from ers_reimbursement;
+select * from ers_reimbursement where statusId = 1;
 
 update ers_reimbursement
 set resolved = current_date, resolver = 1, statusId = 2 where reimbId = 2;

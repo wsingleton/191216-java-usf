@@ -234,7 +234,7 @@ function updateReimb() {
     let updatedJSON = JSON.stringify(updated);
 
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'reimbs', true);
+    xhr.open('PUT', 'reimbs', true);
     xhr.send(updatedJSON);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {

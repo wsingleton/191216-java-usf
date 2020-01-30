@@ -3,6 +3,7 @@ package com.revature.ers.servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.revature.ers.dtos.ErrorResponse;
+import com.revature.ers.exceptions.InvalidRequestException;
 import com.revature.ers.exceptions.ResourceNotFoundException;
 import com.revature.ers.models.Reimbursement;
 import com.revature.ers.models.ReimbursementStatus;
@@ -77,10 +78,7 @@ public class ReimbServlet extends HttpServlet {
                 resp.setStatus(201); // created
             }
             else {
-                newReimb.setResolverId(user.getUserId());
-                reimbService.updateReimbursement(newReimb);
-                String updatedReimbJSON = mapper.writeValueAsString(newReimb);
-                resp.setStatus(202); // accepted
+
             }
 
         }catch (MismatchedInputException e) {
@@ -96,6 +94,28 @@ public class ReimbServlet extends HttpServlet {
             resp.setStatus(500); // internal server error
         }
 
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req ,HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.setContentType("application/json");
+        ObjectMapper mapper = new ObjectMapper();
+        PrintWriter writer = resp.getWriter();
+        User user = (User) req.getSession().getAttribute("this-user");
+
+        try {
+            Reimbursement updateReimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
+            updateReimb.setResolverId(user.getUserId());
+            reimbService.updateReimbursement(updateReimb);
+            String updatedReimbJSON = mapper.writeValueAsString(updateReimb);
+            resp.setStatus(202); // accepted
+
+        } catch (MismatchedInputException e) {
+            resp.setStatus(400);
+        } catch (InvalidRequestException e) {
+
+        }
     }
 
 }
