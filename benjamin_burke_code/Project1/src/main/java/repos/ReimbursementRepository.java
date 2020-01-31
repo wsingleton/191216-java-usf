@@ -3,7 +3,9 @@ package repos;
 import com.revature.project1.models.Reimbursement;
 import com.revature.project1.models.Status;
 import com.revature.project1.models.Type;
+import com.revature.project1.models.User;
 import com.revature.project1.util.ConnectionFactory;
+
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Optional;
