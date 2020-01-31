@@ -4,8 +4,8 @@ body {
 }
 
 .jumbotron {
-    background-color: navy;
-    color: darkorange;
+    background-color: darkorange;
+    color: grey;
 }
 
 #infodisplay {

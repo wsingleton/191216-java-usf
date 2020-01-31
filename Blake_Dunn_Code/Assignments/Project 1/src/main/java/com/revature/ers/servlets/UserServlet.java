@@ -7,6 +7,8 @@ import com.revature.ers.exceptions.ResourceNotFoundException;
 import com.revature.ers.models.User;
 import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +24,7 @@ import java.util.Set;
 public class UserServlet extends HttpServlet {
 
     private final UserService userService = new UserService(new UserRepository());
+    private static final Logger LOG = LogManager.getLogger(UserServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,6 +35,7 @@ public class UserServlet extends HttpServlet {
 
         if (req.getSession(false) != null) {
             User thisUser = (User) req.getSession().getAttribute("this-user");
+
         }
 
         if (userIdParam == null) {
@@ -59,23 +63,25 @@ public class UserServlet extends HttpServlet {
         try {
 
             User newUser = mapper.readValue(req.getInputStream(), User.class);
+            LOG.info("Attempting to register a new user.");
             User authUser = userService.register(newUser);
             String newUserJSON = mapper.writeValueAsString(newUser);
             resp.setStatus(201); // created
+            LOG.info("New user, {}, created.", authUser.getUsername());
             HttpSession session = req.getSession();
             session.setAttribute("this-user", authUser);
 
         }catch (MismatchedInputException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
             resp.setStatus(400); // bad request
         } catch(ResourceNotFoundException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
             resp.setStatus(409); // conflict
             ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());
             err.setMessage(e.getMessage());
             writer.write(mapper.writeValueAsString(err));
         } catch(Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage());
             resp.setStatus(500); // internal server error
         }
 

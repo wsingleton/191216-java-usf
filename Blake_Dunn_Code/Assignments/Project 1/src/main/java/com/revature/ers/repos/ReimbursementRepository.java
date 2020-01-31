@@ -2,6 +2,8 @@ package com.revature.ers.repos;
 
 import com.revature.ers.models.*;
 import com.revature.ers.util.ConnectionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -10,11 +12,14 @@ import java.util.Set;
 
 public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
+    private static final Logger LOG = LogManager.getLogger(ReimbursementRepository.class);
+
     @Override
     public Reimbursement save(Reimbursement newReimb) {
-
+            LOG.info("Establishing connection with database.");
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+                LOG.info("Connection made. Saving new reimbursement request made by, {}", newReimb.getAuthorId());
                 String sql = "INSERT INTO ers_reimbursement (reimbId, amount, " +
                         "description, author, statusId, typeId) " +
                         "VALUES (0, ?, ?, ?, 1, ?)";
@@ -27,6 +32,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                 int rowsInserted = pstmt.executeUpdate();
 
                 if (rowsInserted != 0) {
+                    LOG.info("New reimbursement entry was successfully inserted!");
                     ResultSet rs = pstmt.getGeneratedKeys();
 
                     while(rs.next()) {
@@ -35,9 +41,9 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                 }
 
         } catch(SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
 
         return newReimb;
@@ -49,14 +55,18 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         Set<Reimbursement> reimbs = new HashSet<>();
 
+        LOG.info("Establishing connection with database.");
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+            LOG.info("Retrieving all pending requests.");
             String sql = "SELECT * FROM ers_reimbursement WHERE statusId = 1";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             reimbs = mapResultSet(rs);
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
+
+        LOG.info("Retrieval was a success!");
         return reimbs;
     }
 
@@ -65,8 +75,10 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         Optional<Reimbursement> _reimb = Optional.empty();
 
+        LOG.info("Establishing connection with database.");
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            LOG.info("Retrieving reimbursement by id, {}", id);
             String sql = "SELECT * FROM ers_reimbursement WHERE reimbId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
@@ -75,14 +87,16 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             if (!set.isEmpty()) _reimb = set.stream().findFirst();
 
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
+        LOG.info("Reimbursement retrieved!");
         return _reimb;
     }
 
     @Override
     public Boolean update(Reimbursement updatedReimb) {
 
+        LOG.info("Establishing connection with database.");
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "UPDATE ers_reimbursement SET resolved = CURRENT_DATE, " +
@@ -97,18 +111,21 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             if (rowsInserted == 0) return false;
 
         } catch(SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
+        LOG.info("Reimbursement has been updated!");
         return true;
     }
 
     @Override
     public Boolean deleteById(Integer id) {
 
+        LOG.info("Establishing connection with database.");
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            LOG.info("Deleting reimbursement with id, {}", id);
             String sql = "DELETE FROM ers_reimbursement WHERE reimbId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
@@ -118,8 +135,9 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                 return false;
             }
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
+        LOG.info("Reimbursement successfully deleted!");
         return true;
     }
 
@@ -127,8 +145,10 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         Set<Reimbursement> reimbs = new HashSet<>();
 
+        LOG.info("Establishing connection with database.");
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            LOG.info("Retrieving reimbursements by, {}", ReimbursementType.getTypeById(typeId));
             String sql = "SELECT * FROM ers_reimbursement WHERE typeId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, typeId);
@@ -137,9 +157,9 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             reimbs = mapResultSet(rs);
 
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
-
+        LOG.info("Reimbursements retrieved!");
         return reimbs;
     }
 
@@ -147,8 +167,10 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         Set<Reimbursement> reimbs = new HashSet<>();
 
+        LOG.info("Establishing connection with database.");
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            LOG.info("Retrieving requests by, {}", ReimbursementStatus.getStatusById(statusId));
             String sql = "SELECT * FROM ers_reimbursement WHERE typeId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, statusId);
@@ -157,9 +179,9 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             reimbs = mapResultSet(rs);
 
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
-
+        LOG.info("Reimbursements retrieved by status, {}", ReimbursementStatus.getStatusById(statusId));
         return reimbs;
     }
 
@@ -167,20 +189,24 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         Set<Reimbursement> reimb = new HashSet<>();
 
+        LOG.info("Establishing connection with database.");
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            LOG.info("Retrieving requests by user id, {}", id);
             String sql = "SELECT * FROM ers_reimbursement WHERE author = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             reimb = mapResultSet(pstmt.executeQuery());
 
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
+
         return reimb;
     }
 
     private Set<Reimbursement> mapResultSet(ResultSet rs) throws SQLException {
+
         Set<Reimbursement> reimbs = new HashSet<>();
 
         while (rs.next()) {

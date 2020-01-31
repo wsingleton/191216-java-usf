@@ -2,6 +2,8 @@ package com.revature.ers.util;
 
 import com.revature.ers.models.Role;
 import com.revature.ers.models.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +15,7 @@ import java.util.Properties;
 public class ConnectionFactory {
 
     private static ConnectionFactory connFactory = new ConnectionFactory();
-
+    private static final Logger LOG = LogManager.getLogger(ConnectionFactory.class);
     private Properties props = new Properties();
 
     private ConnectionFactory() {
@@ -24,7 +26,7 @@ public class ConnectionFactory {
             InputStream input = loader.getResourceAsStream("application.properties");
             props.load(input);
         }catch (IOException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
     }
 
@@ -61,7 +63,7 @@ public class ConnectionFactory {
 //    }
 
     public Connection getConnection() {
-
+        LOG.info("Attempting to establish connection to the database.");
         Connection conn = null;
 
         try {
@@ -75,9 +77,9 @@ public class ConnectionFactory {
 
 
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage());
         }
-
+        LOG.info("Connection to database was successful!");
         return conn;
     }
 }

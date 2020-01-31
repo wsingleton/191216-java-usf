@@ -27,6 +27,9 @@ public class ReimbursementService {
 
     public void saveReimb (Reimbursement reimb) {
 
+        if (reimb.getAmount() <= 0) {
+            throw new InvalidRequestException();
+        }
         try{
             if (reimb.getReceipt() == null) {
                 reimbRepo.save(reimb);

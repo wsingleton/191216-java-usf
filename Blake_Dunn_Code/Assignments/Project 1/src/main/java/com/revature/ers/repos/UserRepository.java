@@ -4,6 +4,8 @@ import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.models.Role;
 import com.revature.ers.models.User;
 import com.revature.ers.util.ConnectionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -12,11 +14,15 @@ import java.util.Set;
 
 public class UserRepository implements CrudRepository<User> {
 
+    private static final Logger LOG = LogManager.getLogger(UserRepository.class);
+
     @Override
     public User save(User newUser) {
 
+        LOG.info("Establishing connection with database.");
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            LOG.info("Saving new user, {}, to database", newUser.getUsername());
             String sql = "INSERT INTO ers_users VALUES (0, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"userId"});
             pstmt.setString (1, newUser.getUsername());
@@ -29,6 +35,7 @@ public class UserRepository implements CrudRepository<User> {
             int rowsInserted = pstmt.executeUpdate();
 
             if (rowsInserted != 0) {
+                LOG.info("New user saved successfully");
                 ResultSet rs = pstmt.getGeneratedKeys();
 
                 while(rs.next()) {
@@ -36,9 +43,9 @@ public class UserRepository implements CrudRepository<User> {
                 }
             }
         } catch(SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
 
         return newUser;
@@ -49,14 +56,18 @@ public class UserRepository implements CrudRepository<User> {
 
         Set<User> users = new HashSet<>();
 
+        LOG.info("Establishing connection with database.");
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+            LOG.info("Retrieving all users from database.");
             String sql = "SELECT * FROM ers_users";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             users = mapResultSet(rs);
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
+        LOG.info("All users retrieved.");
         return users;
     }
 
@@ -65,8 +76,10 @@ public class UserRepository implements CrudRepository<User> {
 
         Optional<User> _user = Optional.empty();
 
+        LOG.info("Establishing connection with database.");
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            LOG.info("Retrieving user by id, {}", id);
             String sql = "SELECT * FROM ers_users WHERE userId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
@@ -76,38 +89,45 @@ public class UserRepository implements CrudRepository<User> {
             if (!set.isEmpty()) _user = set.stream().findFirst();
 
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
+
+        LOG.info("User found.");
         return _user;
     }
 
     @Override
     public Boolean update(User user) {
 
+        LOG.info("Establishing connection with database.");
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            LOG.info("Updating, {}, password", user.getUsername());
             String sql = "UPDATE ers_users SET password = ? WHERE userId = ?";
             PreparedStatement pstmt = conn.prepareCall(sql);
             pstmt.setString (1, user.getPassword());
             pstmt.setInt(2, user.getUserId());
 
-            int rowsInserted = pstmt.executeUpdate();
+            int rowsUpdated = pstmt.executeUpdate();
 
-            if (rowsInserted == 0) return false;
+            if (rowsUpdated == 0) return false;
 
         } catch(SQLIntegrityConstraintViolationException e) {
             e.printStackTrace();
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
+        LOG.info("Password updated!");
         return true;
     }
 
     @Override
     public Boolean deleteById(Integer id) {
 
+        LOG.info("Establishing connection with database.");
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            LOG.info("Deleting user from database.");
             String sql = "DELETE FROM ers_users WHERE userId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
@@ -118,8 +138,10 @@ public class UserRepository implements CrudRepository<User> {
             }
 
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
+
+        LOG.info("User has been deleted.");
         return true;
     }
 
@@ -127,8 +149,10 @@ public class UserRepository implements CrudRepository<User> {
 
         Optional<User> _user = Optional.empty();
 
+        LOG.info("Establishing connection with database.");
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            LOG.info("Checking user credentials");
             String sql = "SELECT * FROM ers_users WHERE username = ? AND password = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -140,12 +164,15 @@ public class UserRepository implements CrudRepository<User> {
            _user =  mapResultSet(rs).stream().findFirst();
 
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
+
+        LOG.info("User was found!");
         return _user;
     }
 
     public User getUser(String username, String password) {
+
         User user = new User();
         Optional<User> _user = findUserByCredentials(username, password);
         if (_user.isPresent()){
@@ -161,6 +188,7 @@ public class UserRepository implements CrudRepository<User> {
 
         Optional<User> _user = Optional.empty();
 
+        LOG.info("Establishing connection with database.");
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM ers_users WHERE username = ?";
@@ -171,8 +199,10 @@ public class UserRepository implements CrudRepository<User> {
             if (!set.isEmpty()) _user = set.stream().findFirst();
 
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
+
+        LOG.info("User found by, {}", username);
         return _user;
     }
 
@@ -180,8 +210,10 @@ public class UserRepository implements CrudRepository<User> {
 
         Set<User> users = new HashSet<>();
 
+        LOG.info("Establishing connection with database.");
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            LOG.info("Searching for users by, {}", role);
             String sql = "SELECT * FROM ers_users WHERE roleId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, role.getRoleId());
@@ -190,9 +222,10 @@ public class UserRepository implements CrudRepository<User> {
             users = mapResultSet(rs);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
         }
 
+        LOG.info("Users have been successfully retrieved.");
         return users;
 
     }

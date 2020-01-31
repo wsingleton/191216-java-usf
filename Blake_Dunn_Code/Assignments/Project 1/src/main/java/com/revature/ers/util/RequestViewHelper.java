@@ -1,9 +1,14 @@
 package com.revature.ers.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class RequestViewHelper {
 
-    public static String process(String uri) {
+    private static final Logger LOG = LogManager.getLogger(RequestViewHelper.class);
 
+    public static String process(String uri) {
+        LOG.info("URI received, attempting to redirect");
         switch (uri) {
             case "/project_1_ERS/home.view":
                 return "partials/home.html";
@@ -24,6 +29,7 @@ public class RequestViewHelper {
             case "/project_1_ERS/admindash.view":
                 return "partials/admindash.html";
             default:
+                LOG.warn("URI, {}, was invalid!", uri);
                 return "";
         }
     }

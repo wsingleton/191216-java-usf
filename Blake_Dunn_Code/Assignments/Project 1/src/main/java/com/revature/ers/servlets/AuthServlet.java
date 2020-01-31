@@ -7,6 +7,8 @@ import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.models.User;
 import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,12 +22,17 @@ import java.io.PrintWriter;
 @WebServlet("/auth")
 public class AuthServlet extends HttpServlet {
 
-    public final
-    UserService userService = new UserService(new UserRepository());
+    private final UserService userService = new UserService(new UserRepository());
+    private static final Logger LOG = LogManager.getLogger(AuthServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getSession(false) != null) {
+
+        HttpSession session = req.getSession(false);
+
+        if (session != null) {
+            String username = ((User) session.getAttribute("this-user")).getUsername();
+            LOG.info("Invalidating session for user, {}", username);
             req.getSession().invalidate();
         }
     }
@@ -40,20 +47,25 @@ public class AuthServlet extends HttpServlet {
         try {
 
             Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
+
+            LOG.info("Attempting to authenticate user, {}, with provided credentials", creds.getUsername());
             User authUser = userService.authenticate(creds.getUsername(), creds.getPassword());
-            String authUserJSON = mapper.writeValueAsString(authUser);
-            resp.setStatus(200);
-            writer.write(authUserJSON);
-            HttpSession session = req.getSession();
-            session.setAttribute("this-user", authUser);
+
+
+            writer.write(mapper.writeValueAsString(authUser));
+
+            LOG.info("Establishing a session for user, {}", creds.getUsername());
+            req.getSession().setAttribute("this-user", authUser);
 
         } catch (MismatchedInputException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
             resp.setStatus(400);
+            // create Error response factory
         }catch (AuthenticationException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage());
             resp.setStatus(401);
         }catch (Exception e) {
+            LOG.error(e.getMessage());
             resp.setStatus(500);
             e.printStackTrace();
         }
