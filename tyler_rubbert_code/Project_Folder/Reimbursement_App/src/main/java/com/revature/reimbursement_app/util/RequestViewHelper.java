@@ -11,6 +11,8 @@ public class RequestViewHelper {
                 return "partials/register.html";
             case "/reimbursements/login/dashboard":
                 return "partials/dashboard.html";
+            case "/reimbursements/home.view":
+                return "partials/home.html";
             default:
                 return "";
 
