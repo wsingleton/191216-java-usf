@@ -195,7 +195,6 @@ function loadDashboard(user) {
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log("ran")
             document.getElementById("root").innerHTML = xhr.responseText;
             document.getElementById("logOut").addEventListener("click", logout)
             if (currentUser["role"] === "EMPLOYEE") {
@@ -270,7 +269,6 @@ function loadDashboard(user) {
                         authId: currentUser["id"],
                         typeId: parseInt(type)
                     };
-                    console.log(reimbursement)
                     let reimbJSON = JSON.stringify(reimbursement);
                     console.log(reimbJSON)
                     document.getElementById("amount").value = "";
@@ -444,7 +442,6 @@ function loadHome() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById("root").innerHTML = xhr.responseText;
             if (loggedOut === true) {
-                console.log("Successfully Logged out!")
                 document.getElementById("message").innerText = "Successfully Logged Out!";
                 document.getElementById("message").style.display = "flex";
                 loggedOut = false;
