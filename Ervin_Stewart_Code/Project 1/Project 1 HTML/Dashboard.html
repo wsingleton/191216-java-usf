@@ -28,7 +28,8 @@
         <div>
             <h4>CURRENTLY OPEN REIMBURSEMENT REQUESTS</h4>
             </div>
-        <table class="content-table">
+    <div class="content">
+        <table id="open-reimb" class="content-table">
             <thead>
                 <tr>
                     <th scope="col">
@@ -58,7 +59,12 @@
                     <th scope="col">
                         <h4>AUTHOR</h4>
                     </th>
-               
+                    <th scope="col">
+                        <h4>ACTION</h4>
+                   </th>
+                   <th scope="col">
+                    
+                    </th>
                 </tr>
             </thead>
             <div><p>Please navigate to the REIMBURSEMENT window above to make a new request or view old requests</p></div>
@@ -120,9 +126,16 @@
                         <td>
                          You
                         </td>
+                        <td>
+                        <button class="btn btn-outline-primary" id="Approve">Approve</button>
+                        </td>
+                        <td>
+                        <button class="btn btn-outline-primary" id="Denie">Denie</button>
+                        </td>
                     </tr>
             </tbody>
         </table>
+    </div>
     </div>
 </div>
 

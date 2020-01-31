@@ -11,6 +11,34 @@ import java.util.Set;
 
 public class UserRepository implements CrudRepository<User>{
 
+    public Boolean updateAdmin(User updatedObj) {
+
+        boolean updateSuccessful = false;
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+
+            String sql = "UPDATE ers_users SET user_role_id = ? " +
+                    "WHERE ers_users_id = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, updatedObj.getRole().getId());
+            pstmt.setInt(2, updatedObj.getId());
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                updateSuccessful = true;
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return updateSuccessful;
+
+    }
+
     public Set<User> findUsersByRole(Role role) {
 
         Set<User> users = new HashSet<>();

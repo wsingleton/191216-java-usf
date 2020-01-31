@@ -77,7 +77,7 @@ box-shadow: 0 0 20px rgb(0 , 0 ,0.15)
 .content-table:last-of-type{
     border-bottom: 2px solid gold;
 }
-
+.form-control{width:100px;}
 #email{margin-right:25px;}
 .form-control{width: 15%;
 display: inline-block;

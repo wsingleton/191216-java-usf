@@ -57,7 +57,7 @@ public class UserService {
     }
 
     public boolean checkUserNameLength(String username){
-        int maxLength =26;
+        int maxLength =50;
 
         if (username.length() >= maxLength) {
             return true;

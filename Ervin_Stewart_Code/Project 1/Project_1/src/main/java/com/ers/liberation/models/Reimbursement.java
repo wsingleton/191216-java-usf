@@ -21,6 +21,28 @@ public class Reimbursement {
     private ReimbursementStatus status;
     private ReimbursementType type;
 
+    public Reimbursement(){
+        super();
+    }
+
+    public Reimbursement(Double amount, String description, ReimbursementType type ){
+        this.amount = amount;
+        this.type = type;
+        this.description = description;
+    }
+
+    public Reimbursement(Integer reimbId, Integer resolverId,ReimbursementType type, ReimbursementStatus status){
+        this.reimbId = reimbId;
+        this.resolverId = resolverId;
+        this.type = type;
+        this.status = status;
+    }
+
+    public Reimbursement(Double amount, Timestamp submittedDate, String description,ReimbursementType type){
+        this.amount = amount;
+        this.type = type;
+        this.description = description;
+    }
 
     public Reimbursement(Integer reimbId, Double amount, Timestamp submittedDate, Timestamp resolvedDate, String description, InputStream receipt, Integer authorId, Integer resolverId, ReimbursementStatus status, ReimbursementType type) {
         this.reimbId = reimbId;

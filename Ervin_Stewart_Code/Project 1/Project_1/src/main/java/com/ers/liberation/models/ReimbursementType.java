@@ -1,7 +1,8 @@
 package com.ers.liberation.models;
 
 public enum ReimbursementType {
-    LODGING(1,"Lodging"),TRAVEL(2,"Travel"),FOOD(3,"Food"),OTHER(4,"Other");
+    LODGING(1,"Lodging"),TRAVEL(2,"Travel"),
+    FOOD(3,"Food"),OTHER(4,"Other");
     private Integer id;
     private String reimbursementType;
 
