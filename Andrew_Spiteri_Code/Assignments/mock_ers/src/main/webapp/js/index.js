@@ -10,7 +10,7 @@ window.onload = () => {
 function homePage(){
     let divContainer = document.getElementById('container');           
 
-    let header1 = document.createElement('i');
+    let header1 = document.createElement('h1');
     header1.setAttribute('id', 'header1');
     header1.setAttribute('class', 'fa fa-angle-right');
     header1.setAttribute('aria-hidden', 'true');

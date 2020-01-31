@@ -152,29 +152,27 @@ public class ReimbursementRepository {
     public Boolean updateReimbStatus(ERS_Reimbursement ers){
         Boolean outcome = false;
         System.out.println("res value: "+ ers.getReimbId());
-        //String sql = "{CALL ers_app.update_reimbs(?)}";
-        String sql = "UPDATE ers_reimbursement SET reimb_status_id = ? WHERE reimb_id = ?";
+        String sql = "{CALL ers_app.update_reimbs(?)}";
+        //String sql = "UPDATE ers_reimbursement SET reimb_status_id = ? WHERE reimb_id = ?";
         try {
-//            CallableStatement cs = getCon().prepareCall(sql);
-//            cs.setInt(1, ers.getStatus().getId());
-//            outcome = cs.execute();
-            PreparedStatement ps = getCon().prepareStatement(sql);
-            ps.setInt(1, ers.getStatus().getId());
-            ps.setInt(2, ers.getReimbId());
-            Integer result = ps.executeUpdate();
+            CallableStatement cs = getCon().prepareCall(sql);
+            cs.setInt(1, ers.getStatus().getId());
+            cs.setInt(2, ers.getReimbId());
+            outcome = cs.execute();
+            //PreparedStatement ps = getCon().prepareStatement(sql);
+//            ps.setInt(1, ers.getStatus().getId());
+//            ps.setInt(2, ers.getReimbId());
+//            Integer result = ps.executeUpdate();
             if(ers.getStatus().getId().equals(3)  || ers.getStatus().getId().equals(4)){
                 Date date = new Date();
                 sql = "UPDATE ers_reimbursement SET reimb_resolved = ? WHERE reimb_id = ?";
-                ps = getCon().prepareStatement(sql);
+                PreparedStatement ps = getCon().prepareStatement(sql);
                 ps.setTimestamp(1, new Timestamp(date.getTime()));
                 ps.setInt(2, ers.getReimbId());
-                result += ps.executeUpdate();
-                if(result == 2){
+                Integer result = ps.executeUpdate();
+                if(result == 1 && outcome){
                     return true;
                 }
-            }
-            if(result == 1){
-                return true;
             }
         }catch (SQLException e){
             LOGGER.debug(e.getMessage());

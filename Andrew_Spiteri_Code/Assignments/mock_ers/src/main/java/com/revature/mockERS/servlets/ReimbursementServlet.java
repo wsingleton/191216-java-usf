@@ -72,9 +72,11 @@ public class ReimbursementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ERS_Users authUser = (ERS_Users) req.getSession(false).getAttribute("this-user");
-
-        if(authUser.getRole().equals(ERS_User_Roles.FINANCE_MANAGER)){
-            System.out.println("Finance ReimbursementServlet doPost()");
+        System.out.println(authUser);
+        System.out.println(authUser.getRole());
+        ERS_User_Roles role = authUser.getRole();
+        if(role.equals(ERS_User_Roles.FINANCE_MANAGER)){
+            System.out.println("Finance ReimbursementServlet doGet()");
             resp.setContentType("application/json");
             ObjectMapper mapper = new ObjectMapper();
             PrintWriter writer = resp.getWriter();
@@ -95,7 +97,7 @@ public class ReimbursementServlet extends HttpServlet {
             }
         }//TODO Create else statement that returns ReimbursementOut objects to Basic Users
         else{
-            System.out.println("Finance ReimbursementServlet doPost()");
+            System.out.println("Finance ReimbursementServlet doGet()");
             resp.setContentType("application/json");
             ObjectMapper mapper = new ObjectMapper();
             PrintWriter writer = resp.getWriter();

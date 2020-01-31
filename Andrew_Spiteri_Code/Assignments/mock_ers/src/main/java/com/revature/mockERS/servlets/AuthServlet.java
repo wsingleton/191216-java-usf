@@ -38,7 +38,6 @@ public class AuthServlet extends HttpServlet {
             Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
             authUser = us.login(creds.getUsername(), creds.getPassword());
             String authUserJSON = "{'ersUsername':"+authUser.getErsUsername()+"}";
-            UserSession userSession = new UserSession(authUser, getCon());
             writer.write(authUserJSON);
             HttpSession session = req.getSession();
             session.setAttribute("this-user", authUser);
@@ -57,8 +56,7 @@ public class AuthServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getSession(false) != null){
-            req.getSession().invalidate();
-        }
+        System.out.println("invalidating session...");
+        req.getSession().invalidate();
     }
 }

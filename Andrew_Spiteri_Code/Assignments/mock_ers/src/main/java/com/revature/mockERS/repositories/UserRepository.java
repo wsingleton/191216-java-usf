@@ -2,6 +2,7 @@ package com.revature.mockERS.repositories;
 
 import com.revature.mockERS.models.ERS_User_Roles;
 import com.revature.mockERS.models.ERS_Users;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,6 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static com.revature.mockERS.util.ConnectionFactory.getCon;
+import static org.apache.commons.codec.digest.MessageDigestAlgorithms.SHA3_256;
 
 public class UserRepository {
     private static final Logger LOGGER = LogManager.getLogger(UserRepository.class.getName());
@@ -22,7 +24,7 @@ public class UserRepository {
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
             ps.setString(1,user.getErsUsername());
-            ps.setInt(2, user.hashCode());
+            ps.setString(2, DigestUtils.sha256Hex(user.getErsPassword()));
             ps.setString(3, user.getUser_first_name());
             ps.setString(4, user.getUser_last_name());
             ps.setString(5,user.getUser_email());
@@ -56,9 +58,9 @@ public class UserRepository {
                     ERS_Users user = new ERS_Users(id, un, pw, fn, ln, email);
                     user.setRole(ERS_User_Roles.getRoleById(role));
                     LOGGER.info("Username: " + user.getErsUsername());
-                    Integer passwInt = Integer.parseInt(pw);
+
                     LOGGER.info("Password: " + user.getErsPassword());
-                    if(user.getErsUsername().equals(username) && user.getErsPassword().equals(String.valueOf(Objects.hash(password)))) {
+                    if(user.getErsUsername().equals(username) && user.getErsPassword().equals(DigestUtils.sha256Hex(password))) {
                         return Optional.of(user);
                     }
                 }

@@ -108,6 +108,7 @@ public class ERS_Users {
                 ", user_first_name='" + user_first_name + '\'' +
                 ", user_last_name='" + user_last_name + '\'' +
                 ", user_email='" + user_email + '\'' +
+                ", user_role='" + role + '\'' +
                 '}';
     }
 }
