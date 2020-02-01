@@ -107,7 +107,7 @@ function addNewRow() {
         activitiesCell.appendChild(actList);
       
     }
-    document.getElementById('firstname').value = '';
+        document.getElementById('firstname').value = '';
         document.getElementById('lastname').value = '';
         document.getElementById('email').value = '';
         document.getElementById('phone').value = '';

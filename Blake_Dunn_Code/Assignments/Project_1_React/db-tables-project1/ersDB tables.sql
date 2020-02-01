@@ -11,61 +11,62 @@
 ----+---------------------------------------------------------------
 
 CREATE TABLE ers_reimb_status (
-statusId     NUMBER CONSTRAINT reimb_status_pk PRIMARY KEY,
-status        VARCHAR2(10) NOT NULL
+reimb_status_id     NUMBER CONSTRAINT reimb_status_pk PRIMARY KEY,
+reimb_status        VARCHAR2(10) NOT NULL
 );
 
 CREATE TABLE ers_reimb_type (
-typeId       NUMBER CONSTRAINT reimb_type_pk PRIMARY KEY,
-type          VARCHAR2(10) NOT NULL
+reimb_type_id       NUMBER CONSTRAINT reimb_type_pk PRIMARY KEY,
+reimb_type          VARCHAR2(10) NOT NULL
 );
 
 CREATE TABLE ers_user_roles (
-roleId         NUMBER CONSTRAINT user_role_id PRIMARY KEY,
-role           VARCHAR2(10) NOT NULL
+ers_user_role_id    NUMBER CONSTRAINT ers_user_role_id PRIMARY KEY,
+user_role           VARCHAR2(10) NOT NULL
 );
 
 CREATE TABLE ers_users (
-userId          NUMBER CONSTRAINT ers_users_pk PRIMARY KEY,
-username        VARCHAR2(50) UNIQUE NOT NULL,
-password        VARCHAR2(50) NOT NULL,
-firstName       VARCHAR2(100) NOT NULL,
-lastName        VARCHAR2(100) NOT NULL,
-email           VARCHAR2(150) UNIQUE NOT NULL,
-roleId          NUMBER NOT NULL,
+ers_user_id         NUMBER CONSTRAINT ers_users_pk PRIMARY KEY,
+ers_username        VARCHAR2(50) UNIQUE NOT NULL,
+ers_password        VARCHAR2(50) NOT NULL,
+user_first_name     VARCHAR2(100) NOT NULL,
+user_last_name      VARCHAR2(100) NOT NULL,
+user_email          VARCHAR2(150) UNIQUE NOT NULL,
+user_role_id        NUMBER NOT NULL,
 
 CONSTRAINT user_role_fk 
-FOREIGN KEY (roleId)
-REFERENCES ers_user_roles (roleId)
+FOREIGN KEY (user_role_id)
+REFERENCES ers_user_roles (ers_user_role_id)
 );
 
 CREATE TABLE ers_reimbursement (
-reimbId            NUMBER CONSTRAINT ers_reimbursement_pk PRIMARY KEY,
-amount             NUMBER NOT NULL,
-submitted          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-resolved           DATE,
-description        VARCHAR2(250),
-receipt            BLOB,
-author             NUMBER NOT NULL,
-resolver           NUMBER,
-statusId           NUMBER NOT NULL,
-typeId             NUMBER NOT NULL,
+reimb_id            NUMBER CONSTRAINT ers_reimbursement_pk PRIMARY KEY,
+reimb_amount        NUMBER NOT NULL,
+expense_date        DATE,
+reimb_submitted     DATE NOT NULL,
+reimb_resolved      DATE,
+reimb_description   VARCHAR2(250),
+reimb_receipt       BLOB,
+reimb_author        NUMBER NOT NULL,
+reimb_resolver      NUMBER,
+reimb_status_id     NUMBER NOT NULL,
+reimb_type_id       NUMBER NOT NULL,
 
 CONSTRAINT ers_users_fk_author
-FOREIGN KEY (author)
-REFERENCES ers_users (userId),
+FOREIGN KEY (reimb_author)
+REFERENCES ers_users (ers_user_id),
 
 CONSTRAINT ers_users_fk_resolver
-FOREIGN KEY (resolver)
-REFERENCES ers_users (userId),
+FOREIGN KEY (reimb_resolver)
+REFERENCES ers_users (ers_user_id),
 
 CONSTRAINT ers_reimbursment_status_fk
-FOREIGN KEY (statusId)
-REFERENCES ers_reimb_status (statusId),
+FOREIGN KEY (reimb_status_id)
+REFERENCES ers_reimb_status (reimb_status_id),
 
 CONSTRAINT ers_reimbursement_type_fk
-FOREIGN KEY (typeId)
-REFERENCES ers_reimb_type (typeId)
+FOREIGN KEY (reimb_type_id)
+REFERENCES ers_reimb_type (reimb_type_id)
 );
 
 --+----------SEQUENCES AND TRIGGERS------------+
@@ -83,7 +84,7 @@ FOR EACH ROW
 
 BEGIN
     SELECT reimb_types_pk_seq.NEXTVAL
-    INTO :new.typeId
+    INTO :new.reimb_type_id
     FROM dual;
 END;
 /
@@ -101,7 +102,7 @@ FOR EACH ROW
 
 BEGIN
     SELECT reimb_status_pk_seq.NEXTVAL
-    INTO :new.statusId
+    INTO :new.reimb_status_id
     FROM dual;
 END;
 /
@@ -119,7 +120,7 @@ FOR EACH ROW
 
 BEGIN
     SELECT user_role_pk_seq.NEXTVAL
-    INTO :new.roleId
+    INTO :new.ers_user_role_id
     FROM dual;
 END;
 /
@@ -137,7 +138,7 @@ FOR EACH ROW
 
 BEGIN
     SELECT users_pk_seq.NEXTVAL
-    INTO :new.userId
+    INTO :new.ers_user_id
     FROM dual;
 END;
 /
@@ -155,7 +156,7 @@ FOR EACH ROW
 
 BEGIN
     SELECT reimb_pk_seq.NEXTVAL
-    INTO :new.reimbId
+    INTO :new.reimb_id
     FROM dual;
 END;
 /
@@ -173,23 +174,4 @@ INSERT INTO ers_user_roles VALUES (0, 'ADMIN');
 INSERT INTO ers_user_roles VALUES (0, 'MANAGER');
 INSERT INTO ers_user_roles VALUES (0, 'EMPLOYEE');
 
-INSERT INTO ers_users VALUES (0, 'buhlakay', 'boatsnhoes', 'Blake', 'Dunn', 'bdunn@buhlakify.com', 1);
-INSERT INTO ers_users VALUES (0, 'spacemvn', 'nevergonnascore', 'Ervin', 'Stewart', 'estewart@buhlakify.com', 2);
-
 COMMIT;
-
-select * from ers_users;
-
-delete from ers_users where userId = 21;
-
-select * from ers_users where username = 'buhlakay' and password = 'boatsnhoes';
-
-INSERT INTO ers_reimbursement (reimbId, amount, description, author, statusId, typeId)
-VALUES (0, 25.00, 'TEST', 41, 1, 1);
-INSERT INTO ers_reimbursement (reimbId, amount, description, author, statusId, typeId)
-VALUES (0, 25.00, 'TEST', 41, 1, 1);
-
-select * from ers_reimbursement where statusId = 1;
-
-update ers_reimbursement
-set resolved = current_date, resolver = 1, statusId = 2 where reimbId = 2;
