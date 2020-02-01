@@ -176,6 +176,10 @@ function register(e) {
 
 function logout(e) {
     e.preventDefault();
+    all = true;
+    approvedData = false;
+    pendingData = false;
+    deniedData = false;
     loggedOut = true;
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'auth', true);
@@ -216,10 +220,7 @@ function loadDashboard(user) {
                         if (xhr4.status === 201) {
 
                             let userReimbInfo = JSON.parse(xhr4.responseText);
-                            console.log(userReimbInfo["subTime"]);
-                            console.log(userReimbInfo);
                             sortedInfo = userReimbInfo.sort((a, b) => b["id"] - a["id"])
-                            console.log(sortedInfo);
                             for (let i = 0; i < sortedInfo.length; i++) {
                                 sorterUserManager(sortedInfo[i], currentUser);
                             }
@@ -227,28 +228,32 @@ function loadDashboard(user) {
                         }
                     }
                 }
-                document.getElementById("all").addEventListener("click", () => {
+                document.getElementById("all").addEventListener("click", (e) => {
+                    e.preventDefault();
                     all = true;
                     approvedData = false;
                     pendingData = false;
                     deniedData = false;
                     loadDashboard(currentUser)
                 })
-                document.getElementById("approved").addEventListener("click", () => {
+                document.getElementById("approved").addEventListener("click", (e) => {
+                    e.preventDefault();
                     all = false;
                     approvedData = true;
                     pendingData = false;
                     deniedData = false;
                     loadDashboard(currentUser)
                 })
-                document.getElementById("denied").addEventListener("click", () => {
+                document.getElementById("denied").addEventListener("click", (e) => {
+                    e.preventDefault();
                     all = false;
                     approvedData = false;
                     pendingData = false;
                     deniedData = true;
                     loadDashboard(currentUser)
                 })
-                document.getElementById("pending").addEventListener("click", () => {
+                document.getElementById("pending").addEventListener("click", (e) => {
+                    e.preventDefault();
                     all = false;
                     approvedData = false;
                     pendingData = true;
@@ -302,28 +307,32 @@ function loadDashboard(user) {
             else {
                 document.getElementById("expenseButton").style.display = "none";
 
-                document.getElementById("all").addEventListener("click", () => {
+                document.getElementById("all").addEventListener("click", (e) => {
+                    e.preventDefault();
                     all = true;
                     approvedData = false;
                     pendingData = false;
                     deniedData = false;
                     loadDashboard(currentUser)
                 })
-                document.getElementById("approved").addEventListener("click", () => {
+                document.getElementById("approved").addEventListener("click", (e) => {
+                    e.preventDefault();
                     all = false;
                     approvedData = true;
                     pendingData = false;
                     deniedData = false;
                     loadDashboard(currentUser)
                 })
-                document.getElementById("denied").addEventListener("click", () => {
+                document.getElementById("denied").addEventListener("click", (e) => {
+                    e.preventDefault();
                     all = false;
                     approvedData = false;
                     pendingData = false;
                     deniedData = true;
                     loadDashboard(currentUser)
                 })
-                document.getElementById("pending").addEventListener("click", () => {
+                document.getElementById("pending").addEventListener("click", (e) => {
+                    e.preventDefault();
                     all = false;
                     approvedData = false;
                     pendingData = true;
@@ -341,7 +350,6 @@ function loadDashboard(user) {
                             let reimbInfo = JSON.parse(xhr2.responseText);
                             let sortedInfo2 = reimbInfo[0].sort((a, b) => b["id"] - a["id"])
 
-                            console.log(reimbInfo);
                             document.getElementById("expenseButton").style.display = "none";
                             for (let i = 0; i < sortedInfo2.length; i++) {
                                 sorterFunctionManager(sortedInfo2[i], currentUser, reimbInfo[1])
@@ -491,7 +499,8 @@ function makeContent(id, type, amount, author, resolver, status, descContent, ti
     let but3 = document.createElement("a")
 
     parentDiv.classList.add("mt-4");
-
+    let dateArray = time.split(' ');
+    let date = dateArray[0].split('-');
 
     but1.innerText = "Approve"
     but2.innerText = "Deny"
@@ -518,7 +527,7 @@ function makeContent(id, type, amount, author, resolver, status, descContent, ti
     title.innerText = "Reimbursement Type: " + type;
     amountText.innerText = "Author: " + author;
     authorText.innerText = "Amount: $" + amount;
-    resolvedText.innerText = "Time submitted: " + time;
+    resolvedText.innerText = `Time submitted:  ${date[1]}-${date[2]}-${date[0]}`;
     let span = document.createElement("span");
     if (status === "PENDING") {
         span.style.backgroundColor = "gold"
@@ -594,7 +603,8 @@ function makeContent(id, type, amount, author, resolver, status, descContent, ti
     modalDiv1.appendChild(modalDiv2);
     document.getElementById("mainContent").appendChild(modalDiv1);
 
-    document.getElementById(`approveBut${modalIdGenerator}`).addEventListener("click", () => {
+    document.getElementById(`approveBut${modalIdGenerator}`).addEventListener("click", (e) => {
+        e.preventDefault();
         let data = {
             id: id
         };
@@ -609,7 +619,8 @@ function makeContent(id, type, amount, author, resolver, status, descContent, ti
             }
         }
     })
-    document.getElementById(`denyBut${modalIdGenerator}`).addEventListener("click", () => {
+    document.getElementById(`denyBut${modalIdGenerator}`).addEventListener("click", (e) => {
+        e.preventDefault();
         let data = {
             id: id
         };
@@ -626,13 +637,14 @@ function makeContent(id, type, amount, author, resolver, status, descContent, ti
     modalIdGenerator++
 }
 
-function makeUserContent(id, type, amount, author, resolver, status, descContent, currentUser) {
+function makeUserContent(id, type, amount, author, resolver, status, descContent, time, currentUser) {
     let parentDiv = document.createElement("div");
     let secondDiv = document.createElement("div");
     let thirdDiv = document.createElement("div");
     let title = document.createElement("h5");
     let amountText = document.createElement("p")
     let authorText = document.createElement("p")
+    let submitted = document.createElement("p")
     let resolvedText = document.createElement("p")
     let statusText = document.createElement("p")
     let hr = document.createElement("hr")
@@ -640,6 +652,10 @@ function makeUserContent(id, type, amount, author, resolver, status, descContent
     let hr3 = document.createElement("hr")
     let hr4 = document.createElement("hr")
     let hr5 = document.createElement("hr")
+    let hr6 = document.createElement("hr")
+
+    let dateArray = time.split(' ');
+    let date = dateArray[0].split('-');
 
 
     parentDiv.classList.add("mt-4");
@@ -652,9 +668,11 @@ function makeUserContent(id, type, amount, author, resolver, status, descContent
     authorText.classList.add("card-text");
     resolvedText.classList.add("card-text");
     statusText.classList.add("card-text");
+    submitted.classList.add("card-text");
     title.innerText = "Reimbursement Type: " + type;
     amountText.innerText = "Author: " + author;
     authorText.innerText = "Amount: $" + amount;
+    submitted.innerText = `Time submitted:  ${date[1]}-${date[2]}-${date[0]}`;
     let span = document.createElement("span");
     if (status === "PENDING") {
         span.style.backgroundColor = "gold"
@@ -679,10 +697,12 @@ function makeUserContent(id, type, amount, author, resolver, status, descContent
     thirdDiv.appendChild(hr2);
     thirdDiv.appendChild(authorText);
     thirdDiv.appendChild(hr3);
-    thirdDiv.appendChild(resolvedText);
+    thirdDiv.appendChild(submitted);
     thirdDiv.appendChild(hr4);
+    thirdDiv.appendChild(resolvedText);
+    thirdDiv.appendChild(hr5)
     thirdDiv.appendChild(statusText);
-    thirdDiv.appendChild(hr5);
+    thirdDiv.appendChild(hr6);
     secondDiv.innerText = "Reimbursement ID: " + id;
 
     parentDiv.appendChild(secondDiv);
@@ -741,8 +761,8 @@ function bufferFunction(user) {
 function sorterFunctionManager(sortedInfo2, currentUser, users) {
 
     let username = "";
-    for (let i = 0; i < users.length; i++){
-        if(users[i]["id"] === sortedInfo2["authId"]){
+    for (let i = 0; i < users.length; i++) {
+        if (users[i]["id"] === sortedInfo2["authId"]) {
             username = users[i]["firstName"] + " " + users[i]["lastName"]
         }
     }
@@ -770,7 +790,7 @@ function sorterFunctionManager(sortedInfo2, currentUser, users) {
 function sorterUserManager(sortedInfo2, currentUser) {
 
     let fullname = currentUser["firstName"] + " " + currentUser["lastName"];
-   
+
 
     if (all === true) {
         makeUserContent(sortedInfo2["id"], sortedInfo2["typeId"], sortedInfo2["amount"], fullname, sortedInfo2["resId"], sortedInfo2["statusId"], sortedInfo2["desc"], sortedInfo2["subTime"], currentUser)

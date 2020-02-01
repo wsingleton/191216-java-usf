@@ -41,7 +41,19 @@ body, html {
     align-items: center;
     flex-direction: column;
 }
+.footer {
+display: flex;
+height: 7vh;
+justify-content: center;
+align-items: center;
+  width: 100vw;
 
+    background: linear-gradient(120deg, #3498db, #4eb1b8) !important;
+}
+
+#footer-text{
+color:white;
+}
 #registerBut {
     font-size: 2.3rem;
     font-weight: 300;
@@ -118,6 +130,7 @@ nav {
 #dashboardBody{
     min-height: 100vh;
     background: linear-gradient(120deg, #3498db, #4eb1b8) !important;
+    padding-bottom: 2.5rem;
 }
 
 #expenseButton{
