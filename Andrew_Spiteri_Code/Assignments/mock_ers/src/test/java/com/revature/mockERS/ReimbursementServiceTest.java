@@ -48,7 +48,7 @@ public class ReimbursementServiceTest {
     }
 
 
-    //todo ask wezley about NullPointerException
+
     @Test
     public void createNewTest(){
         when(rr.addReimbursement(ers)).thenReturn(true);
@@ -80,7 +80,7 @@ public class ReimbursementServiceTest {
 //        expect(ERS_Reimbursement.makeReimbursement()).andReturn(ers);
         doReturn(true).when(rr).updateReimbStatus(ers);
         Boolean result = sut.updateStatus(csi);
-        Assert.assertNotEquals(true, result);
+        Assert.assertNotEquals(false, result);
     }
 
 }

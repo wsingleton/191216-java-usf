@@ -85,6 +85,7 @@ public class ReimbursementServlet extends HttpServlet {
                 mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
                 writer.print(mapper.writeValueAsString(reimbs));
             }catch (ResourceNotFoundException e){
+                System.out.println("In ResourceNotFoundException... ReimbursementServlet doGet admin");
                 LOGGER.error(e.getMessage(), new ResourceNotFoundException());
                 resp.setStatus(409);
                 ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());
@@ -146,6 +147,7 @@ public class ReimbursementServlet extends HttpServlet {
                 resp.setStatus(400);
                 writer.write(e.getMessage());
             }catch (ResourcePersistenceException e){
+                e.printStackTrace();
                 LOGGER.error(e.getMessage(), new ResourcePersistenceException());
                 resp.setStatus(409);
                 ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());

@@ -12,6 +12,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.Date;
 
+import org.apache.catalina.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -150,15 +151,18 @@ public class ReimbursementRepository {
     }
 
     public Boolean updateReimbStatus(ERS_Reimbursement ers){
-        Boolean outcome = false;
+        Boolean outcome = true;
         System.out.println("res value: "+ ers.getReimbId());
-        String sql = "{CALL ers_app.update_reimbs(?)}";
+        String sql = "{CALL ers_app.update_reimbs(?,?,?)}";
+        Integer result = 0;
         //String sql = "UPDATE ers_reimbursement SET reimb_status_id = ? WHERE reimb_id = ?";
         try {
             CallableStatement cs = getCon().prepareCall(sql);
             cs.setInt(1, ers.getStatus().getId());
             cs.setInt(2, ers.getReimbId());
-            outcome = cs.execute();
+            cs.setInt(3, UserSession.getSessionUser().getId());
+            result = cs.executeUpdate();
+            System.out.println("Reimbursement Repository updateReimbStatus result = " + result);
             //PreparedStatement ps = getCon().prepareStatement(sql);
 //            ps.setInt(1, ers.getStatus().getId());
 //            ps.setInt(2, ers.getReimbId());
@@ -169,8 +173,8 @@ public class ReimbursementRepository {
                 PreparedStatement ps = getCon().prepareStatement(sql);
                 ps.setTimestamp(1, new Timestamp(date.getTime()));
                 ps.setInt(2, ers.getReimbId());
-                Integer result = ps.executeUpdate();
-                if(result == 1 && outcome){
+                result += ps.executeUpdate();
+                if(result == 2){
                     return true;
                 }
             }
@@ -178,6 +182,10 @@ public class ReimbursementRepository {
             LOGGER.debug(e.getMessage());
             e.printStackTrace();
         }
-        return outcome;
+        if(result == 1){
+            return true;
+        }else {
+            return false;
+        }
     }
 }

@@ -23,8 +23,8 @@ public class UserSession {
         return sessionUser;
     }
 
-    public void setSessionUser(ERS_Users sessionUser) {
-        this.sessionUser = sessionUser;
+    public static void setSessionUser(ERS_Users user) {
+        sessionUser = user;
     }
 
     public Connection getConnection() {
