@@ -84,7 +84,6 @@ function login(e) {
                 if (xhr.status === 200) {
                     let user = JSON.parse(xhr.responseText);
                     loadDashboard(user);
-                    console.clear();
                 }
                 if (xhr.status === 401) {
                     console.log("Login Failed!")
@@ -476,10 +475,6 @@ function showFormFunc() {
     }
 }
 
-document.getElementById("expenseButton").addEventListener('click', showFormFunc);
-
-
-
 function makeContent(id, type, amount, author, resolver, status, descContent, time, currentUser) {
     let parentDiv = document.createElement("div");
     let secondDiv = document.createElement("div");
@@ -527,7 +522,7 @@ function makeContent(id, type, amount, author, resolver, status, descContent, ti
     title.innerText = "Reimbursement Type: " + type;
     amountText.innerText = "Author: " + author;
     authorText.innerText = "Amount: $" + amount;
-    resolvedText.innerText = `Time submitted:  ${date[1]}-${date[2]}-${date[0]}`;
+    resolvedText.innerText = `Date submitted:  ${date[1]}-${date[2]}-${date[0]}`;
     let span = document.createElement("span");
     if (status === "PENDING") {
         span.style.backgroundColor = "gold"
@@ -672,7 +667,7 @@ function makeUserContent(id, type, amount, author, resolver, status, descContent
     title.innerText = "Reimbursement Type: " + type;
     amountText.innerText = "Author: " + author;
     authorText.innerText = "Amount: $" + amount;
-    submitted.innerText = `Time submitted:  ${date[1]}-${date[2]}-${date[0]}`;
+    submitted.innerText = `Date submitted:  ${date[1]}-${date[2]}-${date[0]}`;
     let span = document.createElement("span");
     if (status === "PENDING") {
         span.style.backgroundColor = "gold"
