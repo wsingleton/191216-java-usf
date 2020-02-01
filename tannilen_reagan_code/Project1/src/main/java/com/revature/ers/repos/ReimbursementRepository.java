@@ -18,7 +18,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                 String sql = "INSERT INTO proj_1_admin.ers_reimbursement (REIMB_ID, REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_DESCRIPTION, REIMB_RECEIPT, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) VALUES (0, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setDouble(1, reimb.getAmt());
-                pstmt.setLong(2, reimb.getSubmitted());
+                pstmt.setTimestamp(2, new Timestamp(reimb.getSubmitted()));
                 pstmt.setString(3,reimb.getDesc());
                 pstmt.setBytes(4,reimb.getReceipt());
                 pstmt.setInt(5, reimb.getAuthID());
@@ -27,10 +27,10 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                 rowsInserted=pstmt.executeUpdate();
             }
             else if (reimb.getReceipt()!=null) {
-                String sql = "INSERT INTO proj_1_admin.ers_reimbursement (REIMB_ID, REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_RECEIPT, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) VALUES (0, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO proj_1_admin.ers_reimbursement (REIMB_ID, REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_RECEIPT, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) VALUES (0, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setDouble(1, reimb.getAmt());
-                pstmt.setLong(2, reimb.getSubmitted());
+                pstmt.setTimestamp(2, new Timestamp(reimb.getSubmitted()));
                 pstmt.setBytes(3,reimb.getReceipt());
                 pstmt.setInt(4, reimb.getAuthID());
                 pstmt.setInt(5, reimb.getStatus());
@@ -38,21 +38,22 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
                 rowsInserted=pstmt.executeUpdate();
             }
             else if (reimb.getDesc()!=null) {
-                String sql = "INSERT INTO proj_1_admin.ers_reimbursement (REIMB_ID, REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_DESCRIPTION, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) VALUES (0, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO proj_1_admin.ers_reimbursement (REIMB_ID, REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_DESCRIPTION, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) VALUES (0, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setDouble(1, reimb.getAmt());
-                pstmt.setLong(2, reimb.getSubmitted());
+                pstmt.setTimestamp(2, new Timestamp(reimb.getSubmitted()));
                 pstmt.setString(3,reimb.getDesc());
                 pstmt.setInt(4, reimb.getAuthID());
                 pstmt.setInt(5, reimb.getStatus());
                 pstmt.setInt(6,reimb.getType());
+                System.out.println(pstmt.toString());
                 rowsInserted=pstmt.executeUpdate();
             }
             else {
-                String sql = "INSERT INTO proj_1_admin.ers_reimbursement (REIMB_ID, REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) VALUES (0, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO proj_1_admin.ers_reimbursement (REIMB_ID, REIMB_AMOUNT, REIMB_SUBMITTED, REIMB_AUTHOR, REIMB_STATUS_ID, REIMB_TYPE_ID) VALUES (0, ?, ?, ?, ?, ?)";
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setDouble(1, reimb.getAmt());
-                pstmt.setLong(2, reimb.getSubmitted());
+                pstmt.setTimestamp(2, new Timestamp(reimb.getSubmitted()));
                 pstmt.setInt(3, reimb.getAuthID());
                 pstmt.setInt(4, reimb.getStatus());
                 pstmt.setInt(5,reimb.getType());

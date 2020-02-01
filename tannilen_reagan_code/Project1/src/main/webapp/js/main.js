@@ -75,8 +75,8 @@ function loadDash(user) {
             document.getElementById("main").innerHTML=xhr.responseText;
             document.getElementById("fName").innerText=user.first;
             document.getElementById("lName").innerText=user.last;
-            document.getElementById("createReq").addEventListener("click", createReq(user));
-            document.getElementById("reviewReqs").addEventListener("click", reviewReqs(user));
+            document.getElementById("createBtn").addEventListener("click", ()=>createReq(user));
+            document.getElementById("reviewBtn").addEventListener("click", ()=>reviewReqs(user));
         }
     }
     console.log("pepping Nav.")
@@ -109,11 +109,11 @@ function createReq(user) {
     xhr.onreadystatechange=()=>{
         if (xhr.readyState===4 && xhr.status===200) {
             document.getElementById("main").innerHTML=xhr.responseText;
-            document.getElementById("back2Dash").addEventListener("click", loadDash(user));
+            document.getElementById("back2Dash").addEventListener("click", ()=>loadDash(user));
+            document.getElementById("submitNew").addEventListener("click", ()=>submit(user));
         }
     }
 }
-
 function reviewReqs(user) {
     let xhr=new XMLHttpRequest();
     xhr.open("GET", "review.view", true);
@@ -121,7 +121,43 @@ function reviewReqs(user) {
     xhr.onreadystatechange=()=>{
         if (xhr.readyState===4 && xhr.status===200) {
             document.getElementById("main").innerHTML=xhr.responseText;
-            document.getElementById("back2Dash").addEventListener("click", loadDash(user));
+            document.getElementById("back2Dash").addEventListener("click", ()=>loadDash(user));
+        }
+    }
+}
+function reqBuilder(uID, typeID, amt, desc) {
+    this.userID=uID;
+    this.amt=amt;
+    this.desc=desc;
+    this.type=typeID;
+}
+function submit(user){
+    let uID=user.userID;
+    console.log(uID);
+    let amt=document.getElementById("amt").value;
+    console.log(amt);
+    let typeID=document.getElementById("type").options[document.getElementById("type").selectedIndex].value;
+    console.log(typeID);
+    let desc=document.getElementById("desc").value || "";
+    console.log(desc);
+    let newReq=new reqBuilder(uID, typeID, amt, desc);
+    console.log(newReq);
+    let reqJSON=JSON.stringify(newReq);
+    console.log(reqJSON);
+    let xhr=new XMLHttpRequest();
+    xhr.open("POST", "req", true);
+        xhr.send(reqJSON);
+        xhr.onreadystatechange=()=> {
+            if (xhr.readyState===4) {
+                if (xhr.status===201) {
+                    console.log("New Req submitted!")
+                }
+                if (xhr.status===400) {
+                    console.log("Something went wrong on the user end.")
+                }
+                if (xhr.status===500) {
+                    console.log("Something went wrong on the system end.")
+            }
         }
     }
 }

@@ -1,2 +1,16 @@
-<h3>This is where the creation form will go!</h3><br/><br/>
-<input type="button" id="back2Dash" value="return to dashboard" class="btn btn-secondary"/>
+<h2>submit new reimbursement request</h2>
+<input type="button" id="back2Dash" value="←" class="btn-circle" title="return to dashboard main"/>
+<div class="form-group w-75 form-horizontal">
+    <label for="amt"><h4>Reimbursement amount:</h4></label><br/>$<input required type="number" id="amt" placeholder="0.00" class="form-control" display="inline"/><br/>
+    <label for="type"><h4>Reimbursement type: </h4></label>&nbsp;&nbsp;&nbsp;
+    <select required id="type">
+        <option value="1">travel expense</option>
+        <option value="2">supply expense</option>
+        <option value="3">public relations</option>
+        <option value="4">recurring charge</option>
+        <option value="5">other expense</option>
+    </select><br/>
+    <label for="desc"><h4>Description of Request: </h4></label>&nbsp;&nbsp;&nbsp;<input type="textarea" maxlength="250" id="desc"/><br/>
+    <label for="receipt" hidden><h4>Supporting Documentation:</h4></label><br/><input type="file" id="receipt" disabled hidden/>
+</div>
+<table><tr><td><input type="button" id="submitNew" value="✓" class="btn-circle"/></td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><h4><b>Submit Request</b></h4></td></tr></table>
