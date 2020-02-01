@@ -14,7 +14,7 @@ public class EmployeeServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        req.getRequestDispatcher("partials/employee.html").forward(req, resp);
+//        req.getRequestDispatcher("partials/employee.html").forward(req, resp);
 
     }
 

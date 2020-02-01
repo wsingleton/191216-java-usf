@@ -1,6 +1,5 @@
 
 window.onload = () => {
-    console.log('did the JS load?');
     loadLogin();
     document.getElementById('logout').addEventListener('click', logout);
 }
@@ -15,10 +14,9 @@ function loadLogin() {
     xhr.onreadystatechange = () => {
         if(xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
-            document.getElementById('login').addEventListener('click', login);
+//            document.getElementById('login').addEventListener('click', login);
         }
     }
-document.getElementById().append
 }
 
 function login() {
@@ -41,6 +39,11 @@ function login() {
             if (xhr.status === 200) {
 
                 let user = JSON.parse(xhr.responseText);
+                console.log(user);
+                if(user.userRole == "MANAGER") {
+                    loadManagerView();
+                }
+                else loadEmployeeView();
                
 
             }
@@ -50,38 +53,46 @@ function login() {
             }
         }
     }
+
+    
+
+    
+        
+    
     function loadManagerView () {
-	
+
+        console.log('in loadManager()');
         let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            
+        xhr.open("GET", "manager.view", true);
+        xhr.send();
+        xhr.onreadystatechange = () => {
             if(xhr.readyState == 4 && xhr.status == 200) {
-                
-                
+                document.getElementById('root').innerHTML = xhr.responseText
+                // document.getElementById('login').addEventListener('click', login);
                 
             }
             
         }
         
-        xhr.open("GET", "manager.view", true);
-        xhr.send();
+
         
     }
     
     function loadEmployeeView () {
-        
+        console.log('in loadM()');
         let xhr = new XMLHttpRequest();
+        xhr.open("GET", "employee.view", true);
+        xhr.send();
         xhr.onreadystatechange = function () {
             
             if(xhr.readyState == 4 && xhr.status == 200) {
-                
+             document.getElementById('root').innerHTML = xhr.responseText
                 
             }
             
         }
         
-        xhr.open("GET", "employee.view", true);
-        xhr.send();
+
         
     }
 }

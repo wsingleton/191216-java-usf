@@ -43,41 +43,41 @@ public class LoginServlet extends HttpServlet{
         ObjectMapper mapper = new ObjectMapper();
         User u = mapper.readValue(req.getInputStream(), User.class);
         u = userServ.authenticate(u.getUsername(), u.getPassword());
-
-        if(u == null) {
-
-            req.getRequestDispatcher("partials/error-login.html").forward(req, resp);
-
-        }
-
-        else {
-
-            HttpSession session = req.getSession();
-            session.setAttribute("user", u);
-
-            if(u.getId() == 2) {
-
-                resp.sendRedirect("partials/employee.html");
-
-            }
-            else {
-
-                resp.sendRedirect("partials/manager.html");
-
-            }
-
-
-        }
-
+//
+//        if(u == null) {
+//
+//            req.getRequestDispatcher("partials/error-login.html").forward(req, resp);
+//
+//        }
+//
+//        else {
+//
+//            HttpSession session = req.getSession();
+//            session.setAttribute("user", u);
+//
+//            if(u.getId() == 2) {
+//
+//                resp.sendRedirect("partials/employee.html");
+//
+//            }
+//            else {
+//
+//                resp.sendRedirect("partials/manager.html");
+//
+//            }
+//
+//
+//        }
+//
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ObjectMapper mapper = new ObjectMapper();
-
-        Reimbursement r = mapper.readValue(req.getInputStream(), Reimbursement.class);
-        //want to update status
+//        ObjectMapper mapper = new ObjectMapper();
+//
+//        Reimbursement r = mapper.readValue(req.getInputStream(), Reimbursement.class);
+//        //want to update status
 
 
 
