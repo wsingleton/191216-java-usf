@@ -8,10 +8,12 @@ public class RequestViewHelper {
                 return "partials/dashboard.html";
             case "/ers/login.view":
                 return "partials/login.html";
-            case "/ers/registe.view":
-                return "partials/registe.html";
+            case "/ers/regist.view":
+                return "partials/regist.html";
             case"/ers/reimbursement.view":
                 return "partials/reimbursement.html";
+            case"/ers/manager.view":
+                return "partials/manager.html";
             default:
                 return "";
         }

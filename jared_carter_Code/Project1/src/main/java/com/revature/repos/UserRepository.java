@@ -143,6 +143,7 @@ public class UserRepository implements CrudRepository<User> {
         return user;
     }
 
+
     private Set<User> mapResultSet(ResultSet rs) throws SQLException {
 
         Set<User> users = new HashSet<>();
@@ -162,5 +163,10 @@ public class UserRepository implements CrudRepository<User> {
         return users;
 
 
+    }
+
+    @Override
+    public boolean update(User updatedObj) {
+        return false;
     }
 }

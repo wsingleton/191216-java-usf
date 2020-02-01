@@ -62,12 +62,21 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public Set<Reimbursement> findAll() {
-        Set<Reimbursement> reimbursement = new HashSet<>();
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+        Set<Reimbursement> reimbursements = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
             String sql = "SELECT * FROM ers.ers_reimbursement";
             Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            reimbursements = mapResultSet(rs);
 
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return reimbursements;
     }
 
 
