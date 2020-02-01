@@ -58,8 +58,8 @@ function loadLogin(e) {
 
 function login(e) {
     e.preventDefault();
-    let username = document.getElementById('username').value;
-    let password = document.getElementById('password').value;
+    let username = document.getElementById('username').value.trim();
+    let password = document.getElementById('password').value.trim();
 
     if (username.length < 1 || password.length < 1) {
         console.log("No input!")
