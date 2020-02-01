@@ -17,7 +17,7 @@ import java.util.Set;
 
 
 @WebServlet("/userreimb")
-public class UserReimbursementServlet extends HttpServlet {
+public class _UserReimbursementServlet extends HttpServlet {
 
     public final ReimbursementRepository reimbursementRepository = new ReimbursementRepository();
 
@@ -33,14 +33,14 @@ public class UserReimbursementServlet extends HttpServlet {
             resp.setStatus(201);
         } catch (MismatchedInputException e) {
             resp.setStatus(400);
-            System.out.println("[ERR] Error");
+
         } catch (AuthenticationException e) {
             resp.setStatus(401);
-            System.out.println("[ERR] Error");
+
         }
         catch (Exception e) {
             resp.setStatus(500);
-            System.out.println("[ERR] Error");
+
         }
 
 

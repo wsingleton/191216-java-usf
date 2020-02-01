@@ -21,7 +21,7 @@ import java.io.PrintWriter;
 
 
 @WebServlet("/auth")
-public class AuthServlet extends HttpServlet {
+public class _AuthServlet extends HttpServlet {
 
     public final UserService userService = new UserService(new UserRepository());
 
@@ -45,11 +45,11 @@ public class AuthServlet extends HttpServlet {
             writer.write(authUserJSON);
             HttpSession session = req.getSession();
             session.setAttribute("this-user", authUser);
-            System.out.println("[LOG] Authenticated successfully");
+
 
         } catch (MismatchedInputException e) {
             resp.setStatus(400);
-            System.out.println("[ERR] Error");
+
         } catch (AuthenticationException e) {
             resp.setStatus(401);
         } catch (Exception e) {

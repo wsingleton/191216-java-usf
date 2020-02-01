@@ -1,0 +1,221 @@
+<style>
+    #employees {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    #employees td, #employees th {
+        border: 1px solid rgb(85, 82, 82);
+        padding: 8px;
+    }
+    
+    #employees tr:hover {background-color: gray;}
+    
+    #employees th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color:gray;
+        color: white;
+    }
+    </style>
+
+
+<div class = "Main-emp">
+
+    <h1>Kannon Employee</h1>
+    <div class="form-group">
+        <label for="reim_amount">Reimbursement Amount</label>
+        <br>
+        <input type="number" id="reimb_amount">
+        <br>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="reim_type">Reimbursement Type</label>
+        <br>
+        <select class="form-control" id="dataType">
+            <option value="1">Loding</option>
+            <option value="2">Food</option>
+            <option value="3">Travel</option>
+            <option value="4">Other</option>
+        </select>
+
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="reimb_desc">Reimbursement Description</label><br>
+        <textarea class="form-control" id="reimb_desc" rows="5"></textarea>
+        <br>
+    </div>
+    <br>
+    <div class ="form-group">
+        <button class = "btn btn-lg btn-primary btn-block" id = "submit_reim">Submit</button>
+    </div>
+
+    <h2>Reimbursements</h2>
+    <table id = "employees" class = "table table-dark table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Submitted</th>
+            <th scope="col">Resolved</th>
+            <th scope="col">Description</th>
+            <th scope="col">Author</th>
+            <th scope="col">Status</th>
+            <th scope="col">Type</th>
+
+        </tr>
+        </thead>
+        <tbody id='reimInfo'>
+
+        </tbody>
+    </table>
+    <br><button id = "logout">Log out</button>
+    <script>
+        
+
+            loadReimbursements();
+
+
+        
+        function createReim() {
+        
+            
+            let obj = {
+                
+                amount:
+                description:
+                submitted: null,
+                resolved: null,
+                author:
+                resolver:
+                status_id:
+                type_id:
+        
+            }
+            
+            let toSend = JSON.stringify(obj);
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                
+                if(xhr.readyState == 4) {
+                    
+
+                    loadEmployeeReims();
+                    
+                }
+                
+            }
+            
+            xhr.open("POST", "", true);
+            xhr.send(toSend);
+            
+        
+        }
+        function loadReimbursements() {
+            
+            
+            
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    
+    
+                    let reimbursements = JSON.parse(xhr.responseText);
+
+                    for(let reims of reimbursements) {
+                        
+
+
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            xhr.open("GET", "", true);
+            xhr.send();
+            
+        }
+        
+        function loadEmployeeReims() {
+            
+           
+            
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    
+                    let reimbursements = JSON.parse(xhr.responseText);
+
+                    
+                }
+                
+            }
+            
+            xhr.open("GET", "manager", true);
+            xhr.send();
+            
+        }
+        
+        
+        function reimburseLists(reims){
+            
+            let status = "";
+            let type = "";
+            
+            switch(reims.status_id) {
+                case 1:
+                    status = "Approved";
+                    break;
+                    
+                case 2:
+                    status = "Denied";
+                    break;
+                
+                case 3:
+                    status = "Pending";
+                    break;
+                 
+                default:
+                    break;
+            
+            }
+    
+             switch(reims.type_id) {
+             
+                case 1:
+                    type = "Loding";
+                    break;
+                    
+                case 2:
+                    type = "Food";
+                    break;
+                
+                case 3:
+                    type = "Travel";
+                    break;
+                
+                case 4:
+                    type = "Other";
+                    break;
+                    
+                default:
+                    break;
+                
+             
+            }
+            //append reimb info
+
+            
+        }
+    
+    
+    </script>
+</div>

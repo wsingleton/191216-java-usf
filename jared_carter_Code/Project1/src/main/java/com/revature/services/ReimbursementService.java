@@ -15,6 +15,10 @@ public class ReimbursementService {
         this.reimbursementRepository = repo;
     }
 
+    public ReimbursementService() {
+
+    }
+
     public Reimbursement getReimbursementById(int id) {
         return reimbursementRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
@@ -31,3 +35,5 @@ public class ReimbursementService {
 
 
 }
+
+

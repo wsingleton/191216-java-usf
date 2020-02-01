@@ -1,3 +1,4 @@
+
 window.onload = () => {
     console.log('did the JS load?');
     loadLogin();
@@ -17,7 +18,7 @@ function loadLogin() {
             document.getElementById('login').addEventListener('click', login);
         }
     }
-
+document.getElementById().append
 }
 
 function login() {
@@ -40,8 +41,7 @@ function login() {
             if (xhr.status === 200) {
 
                 let user = JSON.parse(xhr.responseText);
-                console.log(user);
-                // loadDashboard();
+               
 
             }
 
@@ -50,7 +50,40 @@ function login() {
             }
         }
     }
-
+    function loadManagerView () {
+	
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                
+                
+                
+            }
+            
+        }
+        
+        xhr.open("GET", "manager.view", true);
+        xhr.send();
+        
+    }
+    
+    function loadEmployeeView () {
+        
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                
+                
+            }
+            
+        }
+        
+        xhr.open("GET", "employee.view", true);
+        xhr.send();
+        
+    }
 }
 
 function logout() {
@@ -63,3 +96,9 @@ function logout() {
         }
     }
 }
+
+	
+
+
+
+

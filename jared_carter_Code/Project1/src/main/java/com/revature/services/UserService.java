@@ -18,6 +18,10 @@ public class UserService {
         this.userRepo = repo;
     }
 
+    public UserService() {
+
+    }
+
     public User getUserById(int id) {
         return userRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
