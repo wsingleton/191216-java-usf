@@ -122,7 +122,33 @@ function reviewReqs(user) {
         if (xhr.readyState===4 && xhr.status===200) {
             document.getElementById("main").innerHTML=xhr.responseText;
             document.getElementById("back2Dash").addEventListener("click", ()=>loadDash(user));
+            getReqs(user);
         }
+    }
+}
+function getReqs(user) {
+    let xhr=new XMLHttpRequest();
+    xhr.open("GET", "review", true);
+    xhr.send()
+    xhr.onreadystatechange=()=>{
+        if (xhr.readyState===4 && xhr.status===200) {
+            let reqs[]=JSON.parse(xhr.responseText);
+            console.log{"Reimbursement requests list populated."}
+            populateReqs(user, reqs);
+        }
+        else if (xhr.readyState===4 && !xhr.status===200) {
+            console.log(xhr.status + ": Unexpected error.")
+        }
+   }
+}
+function populateReqs(user, reqs) {
+    if (user.role===1) {
+        let xhr=new XMLHttpRequest();
+        xhr.open("GET", "users", true)
+        //call a function that will take all users and all reqs and build a table for each req
+    }
+    else {
+        //call a function that takes all reqs and builds a table for each req
     }
 }
 function reqBuilder(uID, typeID, amt, desc) {

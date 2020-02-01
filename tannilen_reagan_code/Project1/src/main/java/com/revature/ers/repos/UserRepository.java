@@ -3,10 +3,7 @@ package com.revature.ers.repos;
 import com.revature.ers.models.User;
 import com.revature.ers.util.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -112,6 +109,18 @@ public class UserRepository implements CrudRepository<User> {
             tempUser.setEmail(rs.getString("user_email"));
             tempUser.setRole(rs.getInt("user_role_id"));
             users.add(tempUser);
+        }
+        return users;
+    }
+    public Set<User> findAll() {
+        Set<User> users=new HashSet<>();
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+            String sql = "SELECT * FROM proj_1_admin.ers_users";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            users = mapResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return users;
     }

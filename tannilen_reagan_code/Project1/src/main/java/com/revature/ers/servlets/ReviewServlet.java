@@ -33,7 +33,7 @@ public class ReviewServlet extends HttpServlet {
         }
     }
     protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User u= (User) req.getSession().getAttribute("this-user");
+        User u=(User) req.getSession().getAttribute("this-user");
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = resp.getWriter();
         resp.setContentType("application/json");
