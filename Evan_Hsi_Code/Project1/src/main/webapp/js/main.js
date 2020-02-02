@@ -93,20 +93,23 @@ function register() {
 
     let infoJSON = JSON.stringify(info);
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", 'reg', true);
-    xhr.send(infoJSON);
-    xhr.onreadystatechange = () => {
-        if(xhr.readyState === 4) {
-            if(xhr.status === 201) {
-                let user = JSON.parse(xhr.responseText);
-                loadLogin();
-            }
-            else if(xhr.status === 401) {
-                document.getElementById('register-message').innerText = "Invalid Input";
+    if(registerValidation(info)) {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", 'reg', true);
+        xhr.send(infoJSON);
+        xhr.onreadystatechange = () => {
+            if(xhr.readyState === 4) {
+                if(xhr.status === 201) {
+                    let user = JSON.parse(xhr.responseText);
+                    loadLogin();
+                }
+                else if(xhr.status === 401) {
+                    document.getElementById('register-message').innerText = "Invalid Input";
+                }
             }
         }
     }
+    else document.getElementById('register-message').innerText = "Invalid Input";
 
 }
 
@@ -132,6 +135,8 @@ function loadDashEmp() {
                 if(xhr2.readyState === 4 && xhr2.status === 200) {
                     let reimbs = JSON.parse(xhr2.responseText);
                     let tag = document.getElementById('reimbursements');
+                    
+
                     empTable(reimbs, tag);
                 }
             }
@@ -182,6 +187,7 @@ function loadManage () {
         if(xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
             document.getElementById('logout').addEventListener('click', logout);
+            document.getElementById('back').addEventListener('click', loadDashMan);
 
             let xhr2 = new XMLHttpRequest();
             xhr2.open('GET', 'reimb', true);
@@ -190,6 +196,8 @@ function loadManage () {
                 if(xhr2.readyState === 4 && xhr2.status === 200) {
                     let reimbs = JSON.parse(xhr2.responseText);
                     let tag = document.getElementById('manage');
+                    document.getElementById('status-sort').addEventListener('click', function () {manstatusSort(reimbs, tag)});
+                    document.getElementById('id-sort').addEventListener('click', function () {manuserSort(reimbs, tag)});
                     manTable(reimbs, tag);
                 }
             }
@@ -216,6 +224,7 @@ function empTable(arr, tag) {
         let receiptcol = document.createElement('td');
         let typecol = document.createElement('td');
         let statuscol = document.createElement('td');
+
 
         let id = (arr[i])['id'];
         let amount = (arr[i])['amount'];
@@ -282,11 +291,18 @@ function hexToBase64(str) {
 }
 
 function manTable(arr, tag) {
+    console.log('manTable');
+    let elements = document.getElementsByClassName('table-entry');
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
 
     for(let i = 0; i < arr.length; i++) {
+        console.log(arr[i]);
 
         let row = document.createElement('tr');
         row.setAttribute('id', ('row-'+i));
+        row.setAttribute('class', 'table-entry');
 
         let idcol = document.createElement('td');
         let amountcol = document.createElement('td');
@@ -507,4 +523,69 @@ function logout() {
         loadLogin();
         }
     }
+}
+
+function registerValidation(info) {
+    let username = info.username;
+    let password = info.password;
+    let firstname = info.firstname;
+    let lastname = info.lastname;
+    let email = info.email;
+
+    let nameregex = /^[a-zA-Z\-]+$/;
+    if(!firstname.match(nameregex)){
+        return false;
+    }
+
+    if(!lastname.match(nameregex)){
+        return false;
+    }
+
+    let usernameregex = /^[a-zA-Z0-9\-\!\@\#\$\%\^\&\*]+$/;
+    if(!username.match(usernameregex)) {
+        return false;
+    }
+
+    let passwordregex = /^[a-zA-Z0-9\-\!\@\#\$\%\^\&\*]+$/;
+
+    if(!password.match(passwordregex)) {
+        return false;
+    }
+
+    let emailregex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(!email.match(emailregex)){
+        return false;
+    }
+
+    return true;
+}
+
+function statusCompare(a, b) {
+
+    if(a.status == "PENDING" && b.status ==  "APPROVED") {
+        return -1;
+    } else if(a.status == "PENDING" && b.status == "DENIED") {
+        return -1;
+    }else if(a.status == "DENIED" && b.status == "APPROVED") {
+        return -1
+    }else return 1;
+}
+
+function userCompare(a,b) {
+    return (a.submitId - b.submitId)
+}
+
+function empstatusSort(arr, tag) {
+    arr.sort(statusCompare);
+    empTable(arr, tag);
+}
+
+function manstatusSort(arr, tag) {
+    arr.sort(statusCompare);
+    manTable(arr, tag);
+}
+
+function manuserSort(arr, tag) {
+    arr.sort(userCompare);
+    manTable(arr, tag)
 }

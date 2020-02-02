@@ -6,7 +6,7 @@
     overflow: hidden;
 }
 
-#logout-div {
+#logout-div, #back-div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,6 +60,13 @@ main {
     height: 100%;
     background-color:rgb(27, 27, 27);
     color:white;
+}
+
+#reimbursement-header, #manage-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white
 }
 
 #login-row {

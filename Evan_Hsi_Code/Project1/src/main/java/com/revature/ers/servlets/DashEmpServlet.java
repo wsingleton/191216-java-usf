@@ -3,6 +3,8 @@ package com.revature.ers.servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.models.Role;
 import com.revature.ers.models.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +15,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class DashEmpServlet extends HttpServlet {
+    private static final Logger LOG = LogManager.getLogger(DashEmpServlet.class);
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

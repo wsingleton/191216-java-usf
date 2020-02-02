@@ -34,6 +34,7 @@ class Driver{
         System.out.println(serv.authenticate("ehsi", "password"));
 
          */
+        /*
         ReimbursementRepository reimbRepo = new ReimbursementRepository();
         ReimbursementService reimbServ = new ReimbursementService(reimbRepo);
 
@@ -51,6 +52,7 @@ class Driver{
         reimbServ.update(new Reimbursement(21, Status.APPROVED));
 
         System.out.println(reimbServ.getAllReimbursements());
+        */
 
     }
 }

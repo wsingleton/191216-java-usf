@@ -9,6 +9,8 @@ import com.revature.ers.models.Role;
 import com.revature.ers.models.User;
 import com.revature.ers.repositories.UserRepository;
 import com.revature.ers.services.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +22,7 @@ import java.io.PrintWriter;
 
 public class AuthServlet extends HttpServlet {
     private final UserService userService = new UserService(new UserRepository());
+    private static final Logger LOG = LogManager.getLogger(AuthServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,23 +35,35 @@ public class AuthServlet extends HttpServlet {
 
             Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
             User authUser = userService.authenticate(creds.getUsername(), creds.getPassword());
-            if(authUser.getRole().equals(Role.LOCKED)) throw new InvalidRequestException();
+
+            LOG.info("Attempting to validate user credentials");
+
+            if(authUser.getRole().equals(Role.LOCKED)) {
+
+                LOG.info("Attempted login by user with role UNCONFIRMED");
+
+                throw new InvalidRequestException();
+            }
             else {
                 String authUserJSON = mapper.writeValueAsString(authUser);
                 writer.write(authUserJSON);
-                System.out.println(authUserJSON);
                 authUser.setPassword("**********");
                 HttpSession session = req.getSession();
                 session.setAttribute("this-user", authUser);
+                LOG.info("Establishing session for user {}", authUser.getUsername());
             }
 
         } catch (MismatchedInputException e) {
+            LOG.warn(e.getMessage());
             resp.setStatus(400);
         } catch (AuthenticationException e) {
+            LOG.warn(e.getMessage());
             resp.setStatus(401);
         } catch (InvalidRequestException e) {
+            LOG.warn(e.getMessage());
             resp.setStatus(402);
         } catch (Exception e) {
+            LOG.warn(e.getMessage());
             resp.setStatus(500);
         }
     }
@@ -57,7 +72,7 @@ public class AuthServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(req.getSession(false) != null) {
             req.getSession().invalidate();
-
+            LOG.info("Invalidating user session");
         }
     }
 }

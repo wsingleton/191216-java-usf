@@ -2,8 +2,11 @@ package com.revature.ers.repositories;
 
 import com.revature.ers.models.Role;
 import com.revature.ers.models.User;
+import com.revature.ers.servlets.AuthServlet;
 import com.revature.ers.utils.ConnectionFactory;
 import oracle.jdbc.proxy.annotation.Pre;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -11,11 +14,14 @@ import java.util.Optional;
 import java.util.Set;
 
 public class UserRepository implements CrudRepository<User> {
+    private static final Logger LOG = LogManager.getLogger(UserRepository.class);
+
+
     @Override
-    public void save(User newObj) {
+    public void save(User newObj, User user) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-            System.out.println("save");
+            LOG.info("DAO layer saving user");
 
             String sql = "INSERT INTO ERS_APP.ERS_USERS VALUES (0, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"ERS_USERS_ID"});
@@ -40,11 +46,13 @@ public class UserRepository implements CrudRepository<User> {
             }
 
         } catch (SQLException e) {
+            LOG.warn(e.getMessage());
             e.printStackTrace();
         }
     }
 
     public Optional<User> findUserByUsername(String username) {
+        LOG.info("DAO Layer findUserByName");
 
         Optional<User> _user = Optional.empty();
 
@@ -58,6 +66,7 @@ public class UserRepository implements CrudRepository<User> {
             _user = mapResultSet(rs).stream().findFirst();
 
         } catch (SQLException e) {
+            LOG.warn(e.getMessage());
             e.printStackTrace();
         }
 
@@ -66,6 +75,7 @@ public class UserRepository implements CrudRepository<User> {
     }
 
     public Optional<User> findUserByCredentials(String username, String password) {
+        LOG.info("DAO Layer findUserByCredentials");
         Optional<User> _user = Optional.empty();
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -79,17 +89,19 @@ public class UserRepository implements CrudRepository<User> {
             _user = mapResultSet(rs).stream().findFirst();
 
         } catch (SQLException e) {
+            LOG.warn(e.getMessage());
             e.printStackTrace();
         }
 
         return _user;
     }
     @Override
-    public Set<User> findAll() {
+    public Set<User> findAll(User user) {
+        LOG.info("DAO Layer findAll users");
 
         Set<User> users = new HashSet<>();
 
-        try (Connection conn = ConnectionFactory.getInstance().getConnection() ) {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection(user.getRole()) ) {
 
             String sql = "SELECT * FROM ERS_APP.ERS_USERS";
             Statement stmt = conn.createStatement();
@@ -97,6 +109,7 @@ public class UserRepository implements CrudRepository<User> {
             users = mapResultSet(rs);
 
         } catch (SQLException e) {
+            LOG.warn(e.getMessage());
             e.printStackTrace();
         }
 
@@ -104,10 +117,11 @@ public class UserRepository implements CrudRepository<User> {
     }
 
     @Override
-    public Optional<User> findById(int id) {
+    public Optional<User> findById(int id, User user) {
+        LOG.info("DAO Layer find User by Id");
         Optional<User> _user = Optional.empty();
 
-        try (Connection conn = ConnectionFactory.getInstance().getConnection(); ) {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection(user.getRole()); ) {
 
             String sql = "SELECT * FROM ERS_APP.ERS_USERS WHERE ERS_USERS_ID = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -117,6 +131,7 @@ public class UserRepository implements CrudRepository<User> {
             _user = mapResultSet(rs).stream().findFirst();
 
         } catch (SQLException e) {
+            LOG.warn(e.getMessage());
             e.printStackTrace();
         }
 
@@ -124,6 +139,7 @@ public class UserRepository implements CrudRepository<User> {
     }
 
     public void confirmAccount(int id) {
+        LOG.info("DAO Layer account confirmation");
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -133,15 +149,17 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.execute();
 
         } catch (SQLException e) {
+            LOG.warn(e.getMessage());
             e.printStackTrace();
         }
     }
 
     @Override
-    public boolean update(User updatedObj) {
+    public boolean update(User updatedObj, User user) {
+        LOG.info("DAO Layer update user");
         boolean updateSuccessful = false;
 
-        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection(user.getRole());) {
             String sql = "UPDATE ERS_APP.ERS_USERS SET ERS_USERNAME = ?, ERS_PASSWORD = ?, " +
                     "USER_FIRST_NAME = ?, USER_LAST_NAME = ?, USER_EMAIL = ? WHERE ERS_USERS_ID = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -153,13 +171,15 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.setInt(6, updatedObj.getId());
             updateSuccessful = pstmt.execute();
         } catch(SQLException e) {
+            LOG.warn(e.getMessage());
             e.printStackTrace();
         }
         return updateSuccessful;
     }
 
     @Override
-    public boolean deleteById(int id) {
+    public boolean deleteById(int id, User user) {
+        LOG.info("DAO Layer delete by Id");
         return false;
     }
 
