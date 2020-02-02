@@ -62,19 +62,25 @@ public class ReimbursementService {
         return successful;
     }
     public Set<Reimbursement> viewSubmitted(int uID) {
+        System.out.println("View submitted request for User ID " + uID + " in process.");
         Set<Reimbursement> reimbs=reimbRepo.findByAuthor(uID);
         return reimbs;
     }
     public Set<Reimbursement> viewAll(){
+        System.out.println("View submitted request for all reimbursements in process.");
         Set<Reimbursement> reimbs=reimbRepo.findAll();
         return reimbs;
     }
-    public boolean updateReimb(int reimbID,boolean approved) {
+    public boolean updateReimb(int reimbID,boolean approved, int resolver) {
+        System.out.println("Service request for reimbursement update received.");
         try {
             Reimbursement reimb = reimbRepo.findById(reimbID).orElseThrow(InvalidRequestException::new);
+            reimb.setResID(resolver);
             if (approved == true) {
+                System.out.println("Reimbursement "+reimbID+" obtained.  Updating status to approved.");
                 reimb.setStatus(2);
             } else {
+                System.out.println("Reimbursement "+reimbID+" obtained.  Updating status to denied.");
                 reimb.setStatus(3);
             }
             boolean updated = reimbRepo.update(reimb);

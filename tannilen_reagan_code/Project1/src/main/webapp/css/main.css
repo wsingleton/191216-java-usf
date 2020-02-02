@@ -20,3 +20,6 @@ body::-webkit-scrollbar-thumb{background:#fff;box-shadow:inset 0px 0px 5px #333;
 .btn-circle {border-radius:15px;width:30px;height:30px;text-align:center;padding: 6px 0px;font-size:10px;color:#fff;background:#aaa;border-left:solid 1px #ddd;border-top:solid 1px #ddd;border-bottom:solid 1px #bbb;border-right:solid 1px #bbb;box-shadow:inset #777 0px 0px 10px;}
 .btn-circle:hover {font-weight:bold;}
 h4 {font-family: 'Cinzel', serif;font-size:.8em;color:#444;font-weight:bold;}
+.submitted {border-radius:15px;width:30px;height:30px;text-align:center;padding: 6px 0px;font-size:10px;color:#ff0;background:#cc0;border:double 3px #ff0;}
+.accepted {border-radius:15px;width:30px;height:30px;text-align:center;padding: 6px 0px;font-size:10px;color:#0f0;background:#0c0;border:double 3px #0f0;}
+.rejected {border-radius:15px;width:30px;height:30px;text-align:center;padding: 6px 0px;font-size:10px;color:#f00;background:#c00;border:double 3px #f00;}

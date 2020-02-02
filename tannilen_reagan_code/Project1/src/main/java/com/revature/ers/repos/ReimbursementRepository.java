@@ -70,6 +70,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public Optional<Reimbursement> findById(int id) {
+        System.out.println("Locating reimbursement "+id);
         Optional<Reimbursement> reimb = Optional.empty();
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
             String sql = "SELECT * FROM proj_1_admin.ers_reimbursement WHERE reimb_id = ?";
@@ -86,16 +87,18 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
     @Override
     public boolean update(Reimbursement reimb) {
         boolean updateSuccessful = false;
+        System.out.println("Submitting update for reimbursement "+reimb.getReimbID());
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
-            String sql = "UPDATE proj_1_admin.ers_reimbursement SET reimb_resolved=?, reimb_resolver=?, reimb_status_id" +
+            String sql = "UPDATE proj_1_admin.ers_reimbursement SET reimb_resolved=?, reimb_resolver=?, reimb_status_id=?" +
                     "WHERE reimb_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setLong(1, reimb.getResolved());
+            pstmt.setTimestamp(1, new Timestamp(reimb.getResolved()));
             pstmt.setInt(2, reimb.getResID());
             pstmt.setInt(3, reimb.getStatus());
             pstmt.setInt(4, reimb.getReimbID());
             int rowsUpdated = pstmt.executeUpdate();
             if (rowsUpdated > 0) {
+                System.out.println("Reimbursement updated successfully.");
                 updateSuccessful = true;
             }
         } catch (SQLException e) {
@@ -109,27 +112,41 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
         return false;
     }
     private Set<Reimbursement> mapResultSet(ResultSet rs) throws SQLException {
+        System.out.println("In mapResultSet-Reimbursements");
+        int i=0;
         Set<Reimbursement> reimbs = new HashSet<>();
         while (rs.next()) {
+            System.out.println("Processing result "+(++i));
             Reimbursement tempReimb = new Reimbursement();
             tempReimb.setReimbID(rs.getInt("reimb_id"));
             tempReimb.setAmt(rs.getDouble("reimb_amount"));
-            tempReimb.setSubmitted(rs.getLong("reimb_submitted"));
-            tempReimb.setResolved(rs.getLong("reimb_resolved"));
-            tempReimb.setDesc(rs.getString("reimb_description"));
-            tempReimb.setReceipt(rs.getBytes("reimb_receipt"));
+            tempReimb.setSubmitted(rs.getTimestamp("reimb_submitted").getTime());
+            if (rs.getTimestamp("reimb_resolved")!=null) {
+                tempReimb.setResolved(rs.getTimestamp("reimb_resolved").getTime());
+            }
+            if (rs.getString("reimb_description")!=null) {
+                tempReimb.setDesc(rs.getString("reimb_description"));
+            }
+            if (rs.getBytes("reimb_receipt")!=null) {
+                tempReimb.setReceipt(rs.getBytes("reimb_receipt"));
+            }
             tempReimb.setAuthID(rs.getInt("reimb_author"));
-            tempReimb.setResID(rs.getInt("reimb_resolver"));
+            if (rs.getInt("reimb_resolver")!=0) {
+                tempReimb.setResID(rs.getInt("reimb_resolver"));
+            }
             tempReimb.setStatus(rs.getInt("reimb_status_id"));
             tempReimb.setType(rs.getInt("reimb_type_id"));
+            System.out.println(tempReimb.toString());
             reimbs.add(tempReimb);
+            System.out.println(reimbs.size());
         }
         return reimbs;
     }
     public Set<Reimbursement> findByAuthor(int id) {
+        System.out.println("Repository has recieved request for reimbursements by user with ID "+id+".");
         Set<Reimbursement> reimbs=new HashSet<>();
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
-            String sql = "SELECT * FROM proj_1_admin.ers_reimbursement WHERE auth_id = ?";
+            String sql = "SELECT * FROM proj_1_admin.ers_reimbursement WHERE reimb_author = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();

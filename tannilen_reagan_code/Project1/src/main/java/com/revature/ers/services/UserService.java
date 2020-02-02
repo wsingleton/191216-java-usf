@@ -21,11 +21,13 @@ public class UserService {
        return userRepo.findUserByCredentials(username, pw).orElseThrow(AuthenticationException::new);
     }
     public Set<User> findAllUsers(int role){
+        System.out.println("Find all users called by user with role "+role);
         Set<User> users=new HashSet<>();
         if (role!=1) {
             throw new UnauthorizedRequestException();
         }
         users=userRepo.findAll();
+        System.out.println("Users received from repo.  Total count: " +users.size());
         return users;
     }
     //maybe add a process to update your password?

@@ -97,9 +97,10 @@ public class UserRepository implements CrudRepository<User> {
         return false;
     }
     private Set<User> mapResultSet(ResultSet rs) throws SQLException {
-
+        int i=0;
         Set<User> users = new HashSet<>();
         while (rs.next()) {
+            System.out.println("Currently mapping user result "+(++i));
             User tempUser = new User();
             tempUser.setUserID(rs.getInt("ers_users_id"));
             tempUser.setUsername(rs.getString("ers_username"));
@@ -109,10 +110,12 @@ public class UserRepository implements CrudRepository<User> {
             tempUser.setEmail(rs.getString("user_email"));
             tempUser.setRole(rs.getInt("user_role_id"));
             users.add(tempUser);
+            System.out.println("Current user count: "+users.size());
         }
         return users;
     }
     public Set<User> findAll() {
+        System.out.println("Find all users called.");
         Set<User> users=new HashSet<>();
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
             String sql = "SELECT * FROM proj_1_admin.ers_users";
@@ -122,6 +125,7 @@ public class UserRepository implements CrudRepository<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("Total users found: "+ users.size());
         return users;
     }
 }

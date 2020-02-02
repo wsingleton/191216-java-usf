@@ -33,7 +33,6 @@ function login() {
         password: password
     };
     let credJSON=JSON.stringify(creds);
-    console.log(credJSON);
     let xhr=new XMLHttpRequest();
     xhr.open("POST", "auth", true);
     xhr.send(credJSON);
@@ -129,11 +128,11 @@ function reviewReqs(user) {
 function getReqs(user) {
     let xhr=new XMLHttpRequest();
     xhr.open("GET", "review", true);
-    xhr.send()
+    xhr.send();
     xhr.onreadystatechange=()=>{
         if (xhr.readyState===4 && xhr.status===200) {
-            let reqs[]=JSON.parse(xhr.responseText);
-            console.log{"Reimbursement requests list populated."}
+            let reqs=JSON.parse(xhr.responseText);
+            console.log("Reimbursement requests list populated.");
             populateReqs(user, reqs);
         }
         else if (xhr.readyState===4 && !xhr.status===200) {
@@ -143,12 +142,252 @@ function getReqs(user) {
 }
 function populateReqs(user, reqs) {
     if (user.role===1) {
+        console.log("In populateReqs - Mgr subsection.")
+        let users;
         let xhr=new XMLHttpRequest();
         xhr.open("GET", "users", true)
-        //call a function that will take all users and all reqs and build a table for each req
+        xhr.send();
+        console.log("Mgr request for users placed.")
+        xhr.onreadystatechange=()=>{
+            if (xhr.readyState===4 && xhr.status===200) {
+                users=JSON.parse(xhr.responseText);
+                console.log(users.length);
+                console.log("User list populated.");
+                console.log("Passing users: "+users.length);
+                console.log("Passing reqs: "+reqs.length);
+                tblMakerAdmin(reqs, users);
+            }
+        }
+    }
+
+    else {
+        tblMakerStandard(reqs);
+    }
+}
+let allUsers;
+function tblMakerAdmin(reqs, users) {
+    console.log(reqs.length);
+    console.log(users.length);
+    allUsers=users;
+    reqs.forEach(makeMgrTable)
+}
+function makeMgrTable(req) {
+    if (req.status===1) {
+        //create table elements
+        let reimbID=document.createElement("p");
+        let reimbTbl=document.createElement("table");
+        let reimbAmtRow=document.createElement("tr");
+        let reimbAmtLbl=document.createElement("td");
+        let reimbAmt=document.createElement("td");
+        let reimbSubmitRow=document.createElement("tr");
+        let reimbSubmitLbl=document.createElement("td");
+        let reimbSubmit=document.createElement("td");
+        let reimbDescRow=document.createElement("tr");
+        let reimbDescLbl=document.createElement("td");
+        let reimbDesc=document.createElement("td");
+        let reimbTypeRow=document.createElement("tr");
+        let reimbTypeLbl=document.createElement("td");
+        let reimbType=document.createElement("td");
+        let reimbAuthRow=document.createElement("tr");
+        let reimbAuthLbl=document.createElement("td");
+        let reimbAuth=document.createElement("td");
+        let approveDenyRow=document.createElement("tr");
+        let approve=document.createElement("td");
+        let deny=document.createElement("td");
+        //attach elements to one another
+        reimbTypeRow.appendChild(reimbTypeLbl);
+        reimbTypeRow.appendChild(reimbType);
+        reimbDescRow.appendChild(reimbDescLbl);
+        reimbDescRow.appendChild(reimbDesc);
+        reimbSubmitRow.appendChild(reimbSubmitLbl);
+        reimbSubmitRow.appendChild(reimbSubmit);
+        reimbAmtRow.appendChild(reimbAmtLbl);
+        reimbAmtRow.appendChild(reimbAmt);
+        reimbAuthRow.appendChild(reimbAuthLbl);
+        reimbAuthRow.appendChild(reimbAuth);
+        approveDenyRow.appendChild(approve);
+        approveDenyRow.appendChild(deny);
+        reimbTbl.appendChild(reimbAuthRow);
+        reimbTbl.appendChild(reimbSubmitRow);
+        reimbTbl.appendChild(reimbTypeRow);
+        reimbTbl.appendChild(reimbAmtRow);
+        reimbTbl.appendChild(reimbDescRow);
+        reimbTbl.appendChild(approveDenyRow);
+        //insert elements onto document
+        console.log(document.getElementById("requests").nodeType);
+        let rule=document.createElement("hr")
+        document.getElementById("requests").appendChild(rule).setAttribute("class",req.reimbID);
+        document.getElementById("requests").appendChild(reimbID).setAttribute("class",req.reimbID);
+        document.getElementById("requests").appendChild(rule).setAttribute("class",req.reimbID);
+        document.getElementById("requests").appendChild(reimbTbl).setAttribute("class",req.reimbID);
+        document.getElementById("requests").appendChild(rule).setAttribute("class",req.reimbID);
+        //populate data
+        reimbID.innerHTML="<b>REIMBURSEMENT REQUEST " + req.reimbID +"</b>";
+        reimbAuthLbl.innerHTML="<b>REQUESTER:</b>";
+        let auth=allUsers.find(user=>user.userID===req.authID);
+        reimbAuth.innerText=auth.first+" "+auth.last;
+        reimbSubmitLbl.innerHTML="<b>SUBMITTED ON:</b>";
+        reimbSubmit.innerText=new Date(req.submitted);
+        reimbTypeLbl.innerHTML="<b>REIMBURSEMENT TYPE:</b>";
+        if (req.type==1) {
+            reimbType.innerText="travel";
+        }
+        if (req.type==2) {
+            reimbType.innerText="supplies";
+        }
+        if (req.type==3) {
+            reimbType.innerText="public relations";
+        }
+        if (req.type==4) {
+            reimbType.innerText="recurring expense";
+        }
+        if (req.type==5) {
+            reimbType.innerText="other";
+        }
+        reimbAmtLbl.innerHTML="<b>REIMBURSEMENT AMOUNT:</b>";
+        reimbAmt.innerText="$"+req.amt;
+        reimbDescLbl.innerHTML="<b>DESCRIPTION OF EXPENSE:</b>";
+        reimbDesc.innerText=req.desc;
+        let appID="approve"+req.reimbID;
+        let denID="deny"+req.reimbID;
+        approve.innerHTML="<button id=\""+appID+"\" class=\"approved\" title=\"Approve request\">✓</button>"
+        deny.innerHTML="<button id=\""+denID+"\" class=\"denied\" title=\"Deny request\">X</button>"
+        document.getElementById(appID).addEventListener("click", ()=>resolve(req.reimbID, true));
+        document.getElementById(denID).addEventListener("click", ()=>resolve(req.reimbID, false));
+    }
+}
+function resolve(reimbID, approved) {
+    let approval={
+        reimbID: reimbID,
+        approved: approved
+    };
+    let approvalJSON=JSON.stringify(approval);
+    console.log(approvalJSON);
+    let xhr=new XMLHttpRequest();
+    xhr.open("POST", "review", true);
+    xhr.send(approvalJSON);
+    console.log("Submitting reimbursement request.")
+    xhr.onreadystatechange=()=> {
+        if (xhr.readyState===4) {
+            if (xhr.status===200) {
+                console.log("Reimbursement updated.  Beginning cleanup process.")
+                removeReimb(reimbID);
+            }
+            if (xhr.status===400) {
+                //some logic?
+            }
+        }
+    }
+}
+function removeReimb(reimbID) {
+    console.log("Reimbursement cleanup begun for "+reimbID+".")
+    let reimbElements=document.getElementsByClassName(reimbID);
+    while (reimbElements.length>0) {
+        console.log(reimbElements[0]);
+        document.getElementById("requests").removeChild(reimbElements[0]);
+    }
+} //Special thanks to Veikko Karsikko on StackOverflow for the sytnax for this!
+function tblMakerStandard(reqs) {
+    if (reqs.length===0) {
+        document.getElementById("requests").innerHTML="<p>There are no existing reimbursement requests.</p>";
     }
     else {
-        //call a function that takes all reqs and builds a table for each req
+        reqs.forEach(makeStandardTable)
+    }
+}
+function makeStandardTable(req) {
+    //create table elements
+    let reimbID=document.createElement("p");
+    let reimbStatus=document.createElement("div");
+    let reimbTbl=document.createElement("table");
+    let reimbAmtRow=document.createElement("tr");
+    let reimbAmtLbl=document.createElement("td");
+    let reimbAmt=document.createElement("td");
+    let reimbSubmitRow=document.createElement("tr");
+    let reimbSubmitLbl=document.createElement("td");
+    let reimbSubmit=document.createElement("td");
+    let reimbResRow=document.createElement("tr");
+    let reimbReslbl=document.createElement("td");
+    let reimbRes=document.createElement("td");
+    let reimbDescRow=document.createElement("tr");
+    let reimbDescLbl=document.createElement("td");
+    let reimbDesc=document.createElement("td");
+    let reimbTypeRow=document.createElement("tr");
+    let reimbTypeLbl=document.createElement("td");
+    let reimbType=document.createElement("td");
+    //attach elements to one another
+    reimbTypeRow.appendChild(reimbTypeLbl);
+    reimbTypeRow.appendChild(reimbType);
+    reimbDescRow.appendChild(reimbDescLbl);
+    reimbDescRow.appendChild(reimbDesc);
+    reimbResRow.appendChild(reimbReslbl);
+    reimbResRow.appendChild(reimbRes);
+    reimbSubmitRow.appendChild(reimbSubmitLbl);
+    reimbSubmitRow.appendChild(reimbSubmit);
+    reimbAmtRow.appendChild(reimbAmtLbl);
+    reimbAmtRow.appendChild(reimbAmt);
+    reimbTbl.appendChild(reimbSubmitRow);
+    reimbTbl.appendChild(reimbTypeRow);
+    reimbTbl.appendChild(reimbAmtRow);
+    reimbTbl.appendChild(reimbDescRow);
+    reimbTbl.appendChild(reimbResRow);
+    //insert elements onto document
+    console.log(document.getElementById("requests").nodeType);
+    let rule=document.createElement("hr")
+    document.getElementById("requests").appendChild(rule);
+    document.getElementById("requests").appendChild(reimbStatus);
+    document.getElementById("requests").appendChild(reimbID);
+    document.getElementById("requests").appendChild(rule);
+    document.getElementById("requests").appendChild(reimbTbl);
+    document.getElementById("requests").appendChild(rule);
+    //populate data
+    reimbID.innerHTML="<b>REIMBURSEMENT REQUEST " + req.reimbID +"</b>";
+    if (req.status==1) {
+        reimbStatus.innerText="?";
+        reimbStatus.setAttribute("class","submitted");
+        reimbStatus.setAttribute("alt", "Request pending.");
+        reimbStatus.setAttribute("title", "Request pending.");
+    }
+    if (req.status==2){
+        reimbStatus.innerText="✓";
+        reimbStatus.setAttribute("class","approved");
+        reimbStatus.setAttribute("alt", "Request approved.");
+        reimbStatus.setAttribute("title", "Request approved.");
+    }
+    if (req.status==3){
+        reimbStatus.innerText="X";
+        reimbStatus.setAttribute("class","rejected");
+        reimbStatus.setAttribute("alt", "Request denied.");
+        reimbStatus.setAttribute("title", "Request denied.");
+    }
+    reimbSubmitLbl.innerHTML="<b>SUBMITTED ON:</b>";
+    reimbSubmit.innerText=new Date(req.submitted);
+    reimbTypeLbl.innerHTML="<b>REIMBURSEMENT TYPE:</b>";
+    if (req.type==1) {
+        reimbType.innerText="travel";
+    }
+    if (req.type==2) {
+        reimbType.innerText="supplies";
+    }
+    if (req.type==3) {
+        reimbType.innerText="public relations";
+    }
+    if (req.type==4) {
+        reimbType.innerText="recurring expense";
+    }
+    if (req.type==5) {
+        reimbType.innerText="other";
+    }
+    reimbAmtLbl.innerHTML="<b>REIMBURSEMENT AMOUNT:</b>";
+    reimbAmt.innerText="$"+req.amt;
+    reimbDescLbl.innerHTML="<b>DESCRIPTION OF EXPENSE:</b>";
+    reimbDesc.innerText=req.desc;
+    reimbReslbl.innerHTML="<b>REQUEST RESOLVED: </b>";
+    if (req.status==1) {
+        reimbRes.innerText="";
+    }
+    if (req.status!=1) {
+        reimbRes.innerText=new Date(req.resolved);
     }
 }
 function reqBuilder(uID, typeID, amt, desc) {
