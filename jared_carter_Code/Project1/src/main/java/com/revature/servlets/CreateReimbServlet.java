@@ -30,13 +30,18 @@ public class CreateReimbServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         resp.setContentType("application/json");
         HttpSession session = req.getSession();
-        User u = (User) session.getAttribute("user");
+        User u = (User) session.getAttribute("this-user");
+        System.out.println(u);
         System.out.println("in create");
         try {
             System.out.println("in create 2");
+            System.out.println(u.getId());
             Reimbursement reimbursement = mapper.readValue(req.getInputStream(), Reimbursement.class);
+            System.out.println("binding");
+
             reimbursement.setAuthorById(u.getId());
             System.out.println("in create 3");
+            System.out.println(reimbursement);
             reimbursement = reimbursementService.newReimbursement(reimbursement);
             System.out.println("in create 4");
             resp.setStatus(201);
@@ -46,6 +51,7 @@ public class CreateReimbServlet extends HttpServlet {
             resp.setStatus(401);
         }
         catch (Exception e) {
+            e.printStackTrace();
             resp.setStatus(500);
         }
     }

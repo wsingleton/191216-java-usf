@@ -36,13 +36,12 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
     public void save(Reimbursement newObj) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO ers.ers_reimbursement VALUES (0, ?, CURRENT_TIMESTAMP, null, ?, null, ?,null, ?, ?)";
+            String sql = "INSERT INTO ers.ers_reimbursement VALUES (0, ?, CURRENT_TIMESTAMP, null, ?, null, ?,null, 2, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, newObj.getAmount());
+            pstmt.setDouble(1, Double.parseDouble(newObj.getAmount()));
             pstmt.setString(2, newObj.getDescription());
             pstmt.setInt(3, newObj.getAuthorById());
-            pstmt.setInt(4, newObj.getReimbursementStatusId().getId());
-            pstmt.setInt(5, newObj.getReimbursementTypeId().getId());
+            pstmt.setInt(4, newObj.getReimbursementTypeId().getId());
 
 
             int rowsInserted = pstmt.executeUpdate();

@@ -134,15 +134,15 @@ function loadEmployeeReimb() {
 
 	
 function createReimb() {
+    let reimb = getNewReimb()
     
     let xhr = new XMLHttpRequest();
     xhr.open("POST", 'createNew', true);
-    xhr.send();        
+    xhr.send(reimb);        
     xhr.onreadystatechange = () => {
         if(xhr.readyState == 4 && xhr.status == 200) {
             let reimbursements = JSON.parse(xhr.responseText);
             console.log('in createReimb!')
-            getNewReimb ()
         }
         
     }
@@ -153,11 +153,13 @@ function createReimb() {
 function getNewReimb () { 
     let obj = {
 			
-        amount: document.getElementById('reimbamount').val(),
-        description: document.getElementById('reimbDescr').val(),
-        type_id: document.getElementById('reimbType').val()
+        amount: document.getElementById('reimbamount').value,
+        description: document.getElementById('reimbDesc').value,
+        reimbursementTypeId: parseInt(document.getElementById('reimbType').value)
     
     }
+    console.log(obj)
+    return JSON.stringify(obj);
 }
 
 
