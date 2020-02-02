@@ -37,10 +37,13 @@ public class _AuthServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = resp.getWriter();
         resp.setContentType("application/json");
+        System.out.println("AUTHSERVLET");
 
         try {
             Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
+            System.out.println(creds);
             User authUser = userService.authenticate(creds.getUsername(), creds.getPassword());
+            System.out.println(authUser);
             String authUserJSON = mapper.writeValueAsString(authUser);
             writer.write(authUserJSON);
             HttpSession session = req.getSession();

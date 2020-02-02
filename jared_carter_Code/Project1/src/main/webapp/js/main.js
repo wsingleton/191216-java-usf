@@ -1,7 +1,6 @@
 
 window.onload = () => {
     loadLogin();
-    document.getElementById('logout').addEventListener('click', logout);
 }
 
 function loadLogin() {
@@ -14,7 +13,7 @@ function loadLogin() {
     xhr.onreadystatechange = () => {
         if(xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
-//            document.getElementById('login').addEventListener('click', login);
+            document.getElementById('loginbtn').addEventListener('click', login);
         }
     }
 }
@@ -30,6 +29,8 @@ function login() {
     };
 
     let credJSON = JSON.stringify(creds);
+
+    console.log(credJSON);
 
     let xhr = new XMLHttpRequest();
     xhr.open('POST', 'auth', true);
@@ -54,16 +55,16 @@ function login() {
         }
     }
 
-    
+}
 
     
         
     
     function loadManagerView () {
 
-        console.log('in loadManager()');
+        console.log('in loadManagerView()');
         let xhr = new XMLHttpRequest();
-        xhr.open("GET", "manager.view", true);
+        xhr.open("GET", 'manager.view', true);
         xhr.send();
         xhr.onreadystatechange = () => {
             if(xhr.readyState == 4 && xhr.status == 200) {
@@ -79,9 +80,9 @@ function login() {
     }
     
     function loadEmployeeView () {
-        console.log('in loadM()');
+        console.log('in loadEmployeeView()');
         let xhr = new XMLHttpRequest();
-        xhr.open("GET", "employee.view", true);
+        xhr.open("GET", 'employee.view', true);
         xhr.send();
         xhr.onreadystatechange = function () {
             
@@ -95,11 +96,11 @@ function login() {
 
         
     }
-}
+
 
 function logout() {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'auth', true);
+    xhr.open('GET', 'login.view', true);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {

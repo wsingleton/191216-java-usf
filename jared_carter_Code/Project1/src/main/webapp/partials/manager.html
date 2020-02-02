@@ -26,7 +26,7 @@
 <div>
 
     <h2>Reimbursements</h2>
-    <table id = "#employee" class = "table table-dark table-hover">
+    <table id = "#employees" class = "table table-dark table-hover">
         <thead>
         <tr class="success">
             <th scope="col">Id</th>
@@ -49,32 +49,32 @@
     <br><button id = "logout btn">Log out</button>
     <script>
         $(() =>{
-
+            
             loadReimbursements();
-
+            
         })
         function loadReimbursements() {
-
-
+            
+            
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
-
+                
                 if(xhr.readyState == 4 && xhr.status == 200) {
-
+                    
                     let reimbursements = JSON.parse(xhr.responseText);
-
+    
                     //load al reimbursements
 
-
+                    
                 }
-
+                
             }
-
+            
             xhr.open("GET", "manager", true);
             xhr.send();
-
+            
         }
-
+        
         function refreshStatus() {
 
 
@@ -104,63 +104,63 @@
             xhr.send();
 
         }
-
+        
         function reimburseLists(reims){
-
+            
             let status = "";
             let type = "";
-
+            
             switch(reims.status_id) {
                 case 1:
                     status = "Approved";
                     break;
-
+                    
                 case 2:
                     status = "Denied";
                     break;
-
+                
                 case 3:
                     status = "Pending";
                     break;
-
+                 
                 default:
                     break;
-
+            
             }
-
-
-
+    
+            
+            
         }
-
+        
         function updateStatus(reimb_id, status) {
-
+            
             let reimb_stat = {
-
+                    
                 id: reimb_id,
                 status_id: status
-
+                    
             }
-
+            
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
-
+                
                 if(xhr.readyState == 4 && xhr.status == 200) {
-
+                    
 
                     refreshStatus();
-
+                    
                 }
-
+                
             }
-
+            
             xhr.open("PUT", "login", true);
             xhr.setRequestHeader("Content-type", "application/json");
             let toSend = JSON.stringify(stat);
             xhr.send(toSend);
-
+            
         }
-
-
+    
+    
     </script>
 
 </div>
