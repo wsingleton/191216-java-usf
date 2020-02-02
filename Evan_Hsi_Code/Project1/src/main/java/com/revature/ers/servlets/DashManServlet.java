@@ -32,7 +32,6 @@ public class DashManServlet extends HttpServlet {
             HttpSession session = req.getSession(false);
             LOG.info("Retrieving user from session");
             User user = (User) session.getAttribute("this-user");
-            System.out.println(user.getRole());
             LOG.info("Retrieving all reimbursements for user {}", user.getUsername());
             Set<Reimbursement> reimbs = rServ.getByAuthorId(user.getId(), user);
             String reimbJSON = mapper.writeValueAsString(reimbs);

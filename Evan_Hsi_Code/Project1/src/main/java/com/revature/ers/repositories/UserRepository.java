@@ -1,5 +1,6 @@
 package com.revature.ers.repositories;
 
+import com.revature.ers.exceptions.ResourceNotFoundException;
 import com.revature.ers.models.Role;
 import com.revature.ers.models.User;
 import com.revature.ers.servlets.AuthServlet;
@@ -143,12 +144,16 @@ public class UserRepository implements CrudRepository<User> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE ERS_APP.ERS_USERS SET USER_ROLE_ID = 1 WHERE ERS_USERS_ID = ?";
+            String sql = "UPDATE ERS_APP.ERS_USERS SET USER_ROLE_ID = 1 WHERE ERS_USERS_ID = ? AND USER_ROLE = 3";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
-            pstmt.execute();
+            int rowsUpdated = pstmt.executeUpdate();
+            if(rowsUpdated == 0) throw new ResourceNotFoundException();
 
         } catch (SQLException e) {
+            LOG.warn(e.getMessage());
+            e.printStackTrace();
+        } catch (ResourceNotFoundException e) {
             LOG.warn(e.getMessage());
             e.printStackTrace();
         }

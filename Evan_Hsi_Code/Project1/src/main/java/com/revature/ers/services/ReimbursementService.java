@@ -49,9 +49,6 @@ public class ReimbursementService {
         if(reimbursements.isEmpty()) {
             throw new ResourceNotFoundException();
         }
-        for(Reimbursement a : reimbursements) {
-            System.out.println(a.getId());
-        }
         return reimbursements;
     }
 

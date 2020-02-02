@@ -98,11 +98,7 @@ public class ReimbursementServlet extends HttpServlet {
             LOG.info("Retrieving all reimbursements");
 
             Set<Reimbursement> reimbs = rServ.getAllBut(userid, user);
-            for(Reimbursement a : reimbs) {
-                System.out.println(a.getId());
-            }
             String reimbJSON = mapper.writeValueAsString(reimbs);
-            System.out.println(reimbJSON);
             writer.write(reimbJSON);
 
         } catch (Exception e) {

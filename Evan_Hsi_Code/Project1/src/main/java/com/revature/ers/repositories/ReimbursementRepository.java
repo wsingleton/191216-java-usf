@@ -29,7 +29,6 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             String sql = "INSERT INTO ERS_APP.ERS_REIMBURSEMENT " +
                     "VALUES (0, ?, null, null, ?, ?, ?, 0, 1, ?)";
             String[] keys = {"REIMB_ID", "REIMB_SUBMITTED"};
-            System.out.println(newObj);
             PreparedStatement pstmt = conn.prepareStatement(sql, keys);
             pstmt.setDouble(1, newObj.getAmount());
             pstmt.setString(2, newObj.getDescription());
@@ -93,10 +92,6 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             reimbursements = mapResultSet(rs);
-
-            for(Reimbursement a : reimbursements) {
-                System.out.println(a.getId());
-            }
 
         } catch (SQLException e) {
             LOG.warn(e.getMessage());
