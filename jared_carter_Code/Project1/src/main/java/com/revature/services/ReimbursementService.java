@@ -33,6 +33,10 @@ public class ReimbursementService {
         return reimbursementRepository.findAll();
     }
 
+    public Set<Reimbursement> getByAuthorId(int id){
+        return reimbursementRepository.findAllById(id);
+    }
+
 
 }
 

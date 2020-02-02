@@ -69,6 +69,7 @@ function login() {
         xhr.onreadystatechange = () => {
             if(xhr.readyState == 4 && xhr.status == 200) {
                 document.getElementById('root').innerHTML = xhr.responseText
+                loadEmployeeReims()
                 // document.getElementById('login').addEventListener('click', login);
                 
             }
@@ -110,7 +111,22 @@ function logout() {
 }
 
 	
-
+function loadEmployeeReims() {
+    
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "manager", true);
+    xhr.send();        
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            let reimbursements = JSON.parse(xhr.responseText);
+            console.log('in get all reimbursements!')
+        }
+        
+    }
+    
+    
+    
+}
 
 
 
