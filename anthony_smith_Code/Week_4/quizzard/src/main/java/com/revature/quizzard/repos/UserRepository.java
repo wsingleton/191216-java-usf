@@ -110,7 +110,7 @@ public class UserRepository implements CrudRepository<User> {
 
         Set<User> users = new HashSet<>();
 
-        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM app_user";
             Statement stmt = conn.createStatement();

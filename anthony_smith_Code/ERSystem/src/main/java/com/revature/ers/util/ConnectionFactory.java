@@ -1,9 +1,9 @@
-package com.util;
+package com.revature.ers.util;
 
 import javax.imageio.IIOException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -21,7 +21,7 @@ public class ConnectionFactory {
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             InputStream input = loader.getResourceAsStream("application.properties");
             props.load(input);
-        } catch (IIOException e){
+        }  catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -47,4 +47,5 @@ public class ConnectionFactory {
 
         return  conn;
     }
+
 }
