@@ -33,7 +33,7 @@ function login() {
     console.log(credJSON);
 
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'auth', true);
+    xhr.open('POST', 'auths', true);
     xhr.send(credJSON);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
@@ -69,8 +69,8 @@ function login() {
         xhr.onreadystatechange = () => {
             if(xhr.readyState == 4 && xhr.status == 200) {
                 document.getElementById('root').innerHTML = xhr.responseText
+                document.getElementById('logout').addEventListener('click', logout)
                 loadEmployeeReimb()
-                // document.getElementById('login').addEventListener('click', login);
                 
             }
             
@@ -89,6 +89,8 @@ function login() {
             
             if(xhr.readyState == 4 && xhr.status == 200) {
              document.getElementById('root').innerHTML = xhr.responseText
+             document.getElementById('submitReimb').addEventListener('click', createReimb)
+             document.getElementById('logout').addEventListener('click', logout)
              loadEmployeeReimb()
              
             }
@@ -107,6 +109,7 @@ function logout() {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log('logout successful!')
+            loadLogin()
         }
     }
 }
@@ -130,15 +133,16 @@ function loadEmployeeReimb() {
 }
 
 	
-function loadEachEmployeeReimb() {
+function createReimb() {
     
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", 'userreimbursement', true);
+    xhr.open("POST", 'createNew', true);
     xhr.send();        
     xhr.onreadystatechange = () => {
         if(xhr.readyState == 4 && xhr.status == 200) {
             let reimbursements = JSON.parse(xhr.responseText);
-            console.log('in get each reimbursements!')
+            console.log('in createReimb!')
+            getNewReimb ()
         }
         
     }
@@ -146,4 +150,16 @@ function loadEachEmployeeReimb() {
     
     
 }
+function getNewReimb () { 
+    let obj = {
+			
+        amount: document.getElementById('reimbamount').val(),
+        description: document.getElementById('reimbDescr').val(),
+        type_id: document.getElementById('reimbType').val()
+    
+    }
+}
+
+
+
 

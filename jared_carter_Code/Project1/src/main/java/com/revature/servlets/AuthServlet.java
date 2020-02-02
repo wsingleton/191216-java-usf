@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-@WebServlet("/auth")
+@WebServlet("/auths")
 public class AuthServlet extends HttpServlet {
 
     public final UserService userService = new UserService(new UserRepository());
