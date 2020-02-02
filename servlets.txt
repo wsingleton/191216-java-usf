@@ -1,0 +1,80 @@
+Apache Tomcat? -> a HTTP web server environment for pure java-> Java code 
+		packaged within a web archive file (WAR)
+		->Services include -> Several Jakarta EE specifications,
+				Java Servlet,JavaServer Pages,Java EL,
+				WebSocket.
+
+Web Server? Software that can process the client request and send a response
+	back to the client. TomCat is the most popular....
+	Other examples -> Apache tomcat, Apache Geronimo, Red Hat WildFly,
+			Eclipse Jetty, Niginx
+
+Web Client? Software that helps in communicating with the server. We request
+	something from the server(URL), web client creates the request sends
+	to the server, then it receives the response from the server, parsing
+	the response and presents it to the user.
+	examples -> Chrome, Firefox, Safari etc
+
+
+Components of Tomcat?
+	Catalina, Coyote, Jasper
+
+	Catalina---> Tomcats servlet container for servlet and 
+			javaServer pages(JSP)
+
+	Coyote---> A connector component for tomCat->supports HTTP 1.1 protocol
+			as web Server. It allows catalina to act as a web server
+			that serves local files as HTTP docs
+			
+		---> Coyote listens for incoming connects to the server on a 
+			specific tcp port and forwards the request to the tomcat
+			engine to process the request and send back a response to
+			the requesting client. CoyoteJK forwards its requests
+			to another web server apache. helps with performance.
+
+	Jasper ---> Tomcats JSP engine. Jasper parses JSP files to compile them into java
+			codes as servlets(handled by catalina). Jasper recompiles JSP files
+			at runtime.
+
+
+Deployment Descriptor --> A deployment descriptor refers to a configuration file for an artifact that is 
+			deployed to some container/engine. Describes how a component, module or 
+			application should be deployed. It directs a deployment tool to deploy a module
+			or application with specific container options, security settings/specific 
+			configuration requirements. XML syntax used for descriptor files. for web apps
+			deployment descriptor called web.xml ->must be in the WEB-INF directory
+
+
+Annotations ---> Since javax.servlet API version 3, XML configuration for servlet containers is optional.
+			Annotations to servlet registration/configuration simplifies the process by 
+			allowing developers the ability to configure their servlets and filters using 
+			annotations in place of the former xml configuration. Web.xml is required
+			to be present
+			eg of annotations
+			@WebServlet->declare a servlet->servlet available at specified URL pattern
+			
+			@WebInitParam->Used on a servlet or filter implementation class to specify an 
+					initialization parameter
+
+			
+
+Servlet interface            Generic Servlet(implement
+
+
+
+s Servlet)			HttpServlet(extends generic servliet)
+
+servletConfig
+servletContext
+requestDispatcher
+
+servletResponse
+servletRequest
+
+
+
+0, ?, null, CURRENT_TIMESTAMP,null, ?, null, ?, null, 1, ?
+
+
+service->delegates with do get do put do etc....
+			
