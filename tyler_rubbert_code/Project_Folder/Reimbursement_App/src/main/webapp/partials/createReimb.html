@@ -1,0 +1,26 @@
+<div>
+    <div class="form-group">
+        <label for="username">Reimbursement Type:</label>
+        <select type="text" class="form-control" id="type" placeholder="type">
+            <option value="LODGING">Lodging</option>
+            <option value="TRAVEL">Travel</option>
+            <option value="FOOD">Food</option>
+            <option value="OTHER">Other</option>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Discription:</label>
+        <input type="text" class="form-control" id="description" placeholder="description">
+    </div>
+
+    <div class="form-group">
+        <label for="amount">Amount</label>
+        <input type="number" step=".01" min=".01" max="9999.99" class="form-control" id="amount" placeholder="amount">
+    </div>
+
+    <button type="submit" class="btn btn-block btn-primary" id="submitReimb">Submit Reimbursement</button>
+
+    <br/><br/>
+
+    <div class="alert alert-danger" id="newReimb-message"></div>
+</div>

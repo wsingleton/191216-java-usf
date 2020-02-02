@@ -1,5 +1,6 @@
 package com.revature.reimbursement_app.models;
 
+import java.io.InputStream;
 import java.util.Objects;
 
 public class Reimbursement {
@@ -9,7 +10,7 @@ public class Reimbursement {
     private String timeSubmitted;
     private String timeResolved;
     private String description;
-    private String receipt;
+    private InputStream receipt;
     private Integer authorId;
     private Integer resolverId;
     private ReimbursementStatus status;
@@ -68,10 +69,10 @@ public class Reimbursement {
     }
 
     public String getReceipt() {
-        return receipt;
+        return receipt.toString();
     }
 
-    public void setReceipt(String receipt) {
+    public void setReceipt(InputStream receipt) {
         this.receipt = receipt;
     }
 

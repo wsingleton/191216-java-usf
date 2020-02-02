@@ -65,14 +65,28 @@ public class ReimbursementRepo implements CrudRepository<Reimbursement> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO ers_reimbursement (reimb_id, reimb_amount, reimb_submitted, reimb_author," +
-                    "reimb_status_id, reimb_type_id) VALUES (0, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO ers_reimbursement (reimb_id, reimb_amount, reimb_submitted, reimb_author, " +
+                    "reimb_description, reimb_status_id, reimb_type_id) VALUES (0, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"reimb_id"});
             pstmt.setDouble(1, newObj.getAmount());
             pstmt.setTimestamp(2, new Timestamp(time));
             pstmt.setInt(3, newObj.getAuthorId());
-            pstmt.setInt(4, newObj.getStatus().getId());
-            pstmt.setInt(5, newObj.getType().getId());
+            pstmt.setString(4, newObj.getDescription());
+            pstmt.setInt(5, newObj.getStatus().getId());
+            pstmt.setInt(6, newObj.getType().getId());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted != 0) {
+
+                ResultSet rs = pstmt.getGeneratedKeys();
+
+                while (rs.next()) {
+                    newObj.setId(rs.getInt(1));
+                }
+
+            }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,15 +147,14 @@ public class ReimbursementRepo implements CrudRepository<Reimbursement> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE ers_reimbursement SET reimb_resolved = ?, reimb_description = ?, reimb_receipt =?, " +
+            String sql = "UPDATE ers_reimbursement SET reimb_resolved = ?, reimb_description = ?, " +
                     "reimb_resolver = ?, reimb_status_id = ? WHERE reimb_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setTimestamp(1, new Timestamp(time));
             pstmt.setString(2, updatedObj.getDescription());
-            pstmt.setString(3, updatedObj.getReceipt());
-            pstmt.setInt(4, updatedObj.getResolverId());
-            pstmt.setInt(5, updatedObj.getStatus().getId());
-            pstmt.setInt(6, updatedObj.getId());
+            pstmt.setInt(3, updatedObj.getResolverId());
+            pstmt.setInt(4, updatedObj.getStatus().getId());
+            pstmt.setInt(5, updatedObj.getId());
 
             int rowsUpdated = pstmt.executeUpdate();
 
@@ -191,9 +204,9 @@ public class ReimbursementRepo implements CrudRepository<Reimbursement> {
             temp.setId(rs.getInt("reimb_id"));
             temp.setAmount(rs.getDouble("reimb_amount"));
             temp.setTimeSubmitted(rs.getString("reimb_submitted"));
-            temp.setTimeResolved(rs.getString("reimb_resovled"));
+            temp.setTimeResolved(rs.getString("reimb_resolved"));
             temp.setDescription(rs.getString("reimb_description"));
-            temp.setReceipt(rs.getString("reimb_receipt"));
+            temp.setReceipt(rs.getBinaryStream("reimb_receipt"));
             temp.setAuthorId(rs.getInt("reimb_author"));
             temp.setResolverId(rs.getInt("reimb_resolver"));
             temp.setStatus(ReimbursementStatus.getById(rs.getInt("reimb_status_id")));
