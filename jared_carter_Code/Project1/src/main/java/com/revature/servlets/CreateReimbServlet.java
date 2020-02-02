@@ -42,7 +42,7 @@ public class CreateReimbServlet extends HttpServlet {
             reimbursement.setAuthorById(u.getId());
             System.out.println("in create 3");
             System.out.println(reimbursement);
-            reimbursement = reimbursementService.newReimbursement(reimbursement);
+            reimbursementService.newReimbursement(reimbursement);
             System.out.println("in create 4");
             resp.setStatus(201);
         } catch (MismatchedInputException e) {

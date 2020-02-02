@@ -1,9 +1,9 @@
 package com.revature.models;
 
 public enum ReimbursementStatus {
-    APPROVED(1, "Approved"), PENDING(2, "Pending"),
+    APPROVED(2, "Approved"), PENDING(1, "Pending"),
 
-    DENIED(3, "Denied"), LOCKED(4, "Locked");
+    DENIED(3, "Denied");
 
     private Integer id;
     private String name;
@@ -19,7 +19,7 @@ public enum ReimbursementStatus {
                 return reimbursementStatus;
             }
         }
-        return ReimbursementStatus.LOCKED;
+        return ReimbursementStatus.PENDING;
     }
 
     public int getId() {

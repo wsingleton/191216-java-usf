@@ -1,7 +1,7 @@
 package com.revature.models;
 
 public enum ReimbursementType {
-    LODGING(1, "Lodging"), TRAVEL(2, "Travel"), FOOD(3, "Food"), OTHER(4, "Other"), LOCKED(5, "Locked");
+    LODGING(3, "Lodging"), TRAVEL(2, "Travel"), FOOD(4, "Food"), OTHER(1, "Other");
     private int id;
     private String name;
 
@@ -16,7 +16,7 @@ public enum ReimbursementType {
                 return reimbursementType;
             }
         }
-        return ReimbursementType.LOCKED;
+        return ReimbursementType.OTHER;
     }
 
     public Integer getId() {
