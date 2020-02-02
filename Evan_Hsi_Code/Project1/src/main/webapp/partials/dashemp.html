@@ -1,2 +1,72 @@
-<p>DASHBOARD</p>
-<div id='insert'></div>
+<div id='row' class='row'>
+    <div class='col-6'></div>
+    <div class='col-1'></div>
+    <div class='col-4' id='logout-div'>
+        <button id="logout" class="btn btn-primary">Log Out</button>
+    </div>
+    <div class='col-1'></div>
+</div>
+<div id='reimbursement-component' class='container-fluid'>
+
+    <br>
+    <br>
+    <br>
+    <div class='row' id='reimbursement-form-div'>
+        <div class='col-4'></div>
+        <div id='reimbursement-form' class='col-4'>
+            <div class='form-group reimbursement-form-elt'>
+                <label for='amount'>Amount</label>
+                <input type='number' min='0' value='0' 
+                    class='form-control'
+                    id='amount' placeholder='Amount'>
+            </div>
+            <div class='form-group reimbursement-form-elt'>
+                <label for='description'>Description</label>
+                <textarea class='form-control'
+                    id='description' rows='3'
+                    placeholder='Enter Description Here'>
+                </textarea>
+            </div>
+            <div class='form-group reimbursement-form-elt'>
+                <label for='type'>Type</label>
+                <select class='form-control' id='type'>
+                    <option value='1'>Lodging</option>
+                    <option value='2'>Travel</option>
+                    <option value='3'>Food</option>
+                    <option value='4'>Other</option>
+                </select>
+            </div>
+            <div class='form-group reimbursement-form-elt'>
+                <label for='receipt'>Receipt</label>
+                <input type='file' class='form-control-file'
+                    id='receipt' placeholder='Choose File'>
+            </div>
+            <br>
+            <button type='submit' class='btn btn-primary reimbursement-form-elt' 
+            id='create-reimbursement'>Create</button>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div class='col-4'></div>
+    </div>
+
+    <div class='row' id='reimbursement-table'>
+        <div id='reimbursement-table-div' class='col-12'>
+            <table id='reimbursements' class='table'>
+                <tr>
+                    <th>Ticket ID</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Time Submitted</th>
+                    <th>Time Resolved</th>
+                    <th>Resolver</th>
+                    <th>Receipt</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

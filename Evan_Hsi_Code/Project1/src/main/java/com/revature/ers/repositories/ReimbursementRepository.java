@@ -5,10 +5,9 @@ import com.revature.ers.models.Status;
 import com.revature.ers.models.Type;
 import com.revature.ers.utils.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.sql.rowset.serial.SerialBlob;
+import java.io.InputStream;
+import java.sql.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -19,16 +18,20 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
             String sql = "INSERT INTO ERS_APP.ERS_REIMBURSEMENT " +
-                    "VALUES (0, ?, 0, null, ?, ?, ?, ?, ?, ?";
+                    "VALUES (0, ?, null, null, ?, ?, ?, 0, 1, ?)";
             String[] keys = {"REIMB_ID", "REIMB_SUBMITTED"};
+            System.out.println(newObj);
             PreparedStatement pstmt = conn.prepareStatement(sql, keys);
             pstmt.setDouble(1, newObj.getAmount());
             pstmt.setString(2, newObj.getDescription());
-            pstmt.setBlob(3, newObj.getReceipt());
+            if(newObj.getReceipt() != null) {
+                Blob bloblaw = new SerialBlob(newObj.getReceipt().getBytes());
+                InputStream in = bloblaw.getBinaryStream();
+                pstmt.setBinaryStream(3, in, bloblaw.length());
+            }
+            else pstmt.setBinaryStream(3, null);
             pstmt.setInt(4, newObj.getSubmitId());
-            pstmt.setInt(5, newObj.getResolveId());
-            pstmt.setInt(6, newObj.getStatus().getId());
-            pstmt.setInt(7, newObj.getType().getId());
+            pstmt.setInt(5, newObj.getType().getId());
 
             int rowsInserted = pstmt.executeUpdate();
 
@@ -37,7 +40,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
                 while (rs.next()) {
                     newObj.setId(rs.getInt(1));
-                    newObj.setSubmitTime(rs.getTimestamp(2));
+                    newObj.setSubmitTime(rs.getTimestamp(2).toLocalDateTime());
                 }
             }
         } catch(SQLException e) { e.printStackTrace(); }
@@ -81,7 +84,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
         boolean updateSuccessful = false;
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-            String sql = "UPDATE ERS_REIMBURSEMENT SET REIMB_STATUS_ID = ?" +
+            String sql = "UPDATE ERS_APP.ERS_REIMBURSEMENT SET REIMB_STATUS_ID = ?" +
                     " WHERE REIMB_ID = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, updatedObj.getStatus().getId());
@@ -115,12 +118,17 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             Reimbursement temp = new Reimbursement();
             temp.setId(rs.getInt("REIMB_ID"));
             temp.setSubmitId(rs.getInt("REIMB_AUTHOR"));
-            temp.setSubmitTime(rs.getTimestamp("REIMB_SUBMITTED"));
+            temp.setSubmitTime(rs.getTimestamp("REIMB_SUBMITTED").toLocalDateTime());
             temp.setResolveId(rs.getInt("REIMB_RESOLVER"));
-            temp.setResolveTime(rs.getTimestamp("REIMB_RESOLVED"));
+            if(rs.getTimestamp("REIMB_RESOLVED") != null) {
+                temp.setResolveTime(rs.getTimestamp("REIMB_RESOLVED").toLocalDateTime());
+            } else temp.setResolveTime(null);
             temp.setAmount(rs.getDouble("REIMB_AMOUNT"));
             temp.setDescription(rs.getString("REIMB_DESCRIPTION"));
-            temp.setReceipt(rs.getBlob("REIMB_RECEIPT"));
+            if(rs.getBlob("REIMB_RECEIPT") != null) {
+                temp.setReceipt(new String (new SerialBlob(rs.getBlob("REIMB_RECEIPT"))
+                        .getBytes(1, (int) rs.getBlob("REIMB_RECEIPT").length())));
+            } else temp.setReceipt(null);
             temp.setType(Type.getById(rs.getInt("REIMB_TYPE_ID")));
             temp.setStatus(Status.getById(rs.getInt("REIMB_STATUS_ID")));
             reimbursements.add(temp);

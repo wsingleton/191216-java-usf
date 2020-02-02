@@ -45,6 +45,7 @@ img {
     bottom: 0;
     right: 0;
     overflow: auto;
+    background-color:rgb(27, 27, 27);
   }
 
 main {
@@ -55,9 +56,10 @@ main {
     height: 100%;
 }
 
-#login-component {
+#login-component, #reimbursement-component, #manage-component{
     height: 100%;
     background-color:rgb(27, 27, 27);
+    color:white;
 }
 
 #login-row {
@@ -105,7 +107,67 @@ main {
     min-width:300px;
     max-width:600px;
 }
+
+
+
+#reimbursement-form-div {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
     
+#reimbursement-form {
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+.reimbursement-form-elt {
+    min-width:30vw;
+}
+
+#reimbursements {
+    max-width: 80vw;
+    color: white;
+}
+
+#create-reimbursement, #manage-requests {
+    min-width:30vw;
+}
+
+#reimbursement-table-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.approved {
+    color: green !important;
+    
+}
+
+.denied {
+    color: red !important;
+}
+
+.pending {
+    color:white;
+}
+
+#manage {
+    color:white;
+}
+
+.approve-button {
+    background-color: green;
+}
+
+.deny-button {
+    background-color: red;
+}
+
 @media only screen and (max-width: 768px) {
     .register-sidebar {
         display: none;

@@ -1,5 +1,7 @@
 package com.revature.ers;
 
+import com.revature.ers.models.Reimbursement;
+import com.revature.ers.models.Status;
 import com.revature.ers.repositories.ReimbursementRepository;
 import com.revature.ers.repositories.UserRepository;
 import com.revature.ers.services.ReimbursementService;
@@ -43,6 +45,12 @@ class Driver{
 
         System.out.println("find by Author");
         System.out.println(reimbServ.getByAuthorId(1));
+
+        System.out.println("update id 21 to approved and 1 to denied");
+        reimbServ.update(new Reimbursement(1, Status.DENIED));
+        reimbServ.update(new Reimbursement(21, Status.APPROVED));
+
+        System.out.println(reimbServ.getAllReimbursements());
 
     }
 }

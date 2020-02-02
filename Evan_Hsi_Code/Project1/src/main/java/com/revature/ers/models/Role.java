@@ -2,7 +2,7 @@ package com.revature.ers.models;
 
 public enum Role {
 
-    EMPLOYEE(1, "Employee"), MANAGER(2, "Manager");
+    EMPLOYEE(1, "Employee"), MANAGER(2, "Manager"), LOCKED(3, "Locked");
 
     private int id;
     private String name;

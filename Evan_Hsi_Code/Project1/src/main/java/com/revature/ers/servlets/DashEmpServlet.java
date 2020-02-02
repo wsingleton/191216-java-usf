@@ -27,12 +27,6 @@ public class DashEmpServlet extends HttpServlet {
             User user = (User) session.getAttribute("this-user");
 
             writer.write("<p> Current User is: " + user + "!</p>");
-            /*
-            if(user.getRole() == Role.MANAGER) {
-                req.getRequestDispatcher("/dashman").forward(req, resp);
-            }
-
-             */
 
         } catch (Exception e) {
             resp.setStatus(400);

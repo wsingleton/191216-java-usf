@@ -28,16 +28,9 @@ public class DashManServlet extends HttpServlet {
 
             HttpSession session = req.getSession(false);
             User user = (User) session.getAttribute("this-user");
-
-            //writer.write("<p> Current User is: " + user + "!</p>");
-
             Set<Reimbursement> reimbs = rServ.getByAuthorId(user.getId());
-
             String reimbJSON = mapper.writeValueAsString(reimbs);
             writer.write(reimbJSON);
-            System.out.println(reimbJSON);
-
-            session.setAttribute("reimbursements", reimbs);
 
         } catch (Exception e) {
             resp.setStatus(400);

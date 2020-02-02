@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.revature.ers.dtos.Credentials;
 import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.exceptions.InvalidRequestException;
+import com.revature.ers.models.Role;
 import com.revature.ers.models.User;
 import com.revature.ers.repositories.UserRepository;
 import com.revature.ers.services.UserService;
@@ -31,18 +32,22 @@ public class AuthServlet extends HttpServlet {
 
             Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
             User authUser = userService.authenticate(creds.getUsername(), creds.getPassword());
-            String authUserJSON = mapper.writeValueAsString(authUser);
-            writer.write(authUserJSON);
-            System.out.println(authUserJSON);
-            HttpSession session = req.getSession();
-            session.setAttribute("this-user", authUser);
-            //resp.sendRedirect("dashemp.view");
-
+            if(authUser.getRole().equals(Role.LOCKED)) throw new InvalidRequestException();
+            else {
+                String authUserJSON = mapper.writeValueAsString(authUser);
+                writer.write(authUserJSON);
+                System.out.println(authUserJSON);
+                authUser.setPassword("**********");
+                HttpSession session = req.getSession();
+                session.setAttribute("this-user", authUser);
+            }
 
         } catch (MismatchedInputException e) {
             resp.setStatus(400);
         } catch (AuthenticationException e) {
             resp.setStatus(401);
+        } catch (InvalidRequestException e) {
+            resp.setStatus(402);
         } catch (Exception e) {
             resp.setStatus(500);
         }

@@ -21,15 +21,17 @@ public class UserService {
     }
 
     public void register(User newUser) {
+        System.out.println(newUser);
 
         if( !isUserValid(newUser)) throw new InvalidRequestException();
+        System.out.println("valid");
 
         if (userRepository.findUserByUsername(newUser.getUsername()).isPresent()) {
+            System.out.println("username");
             throw new ResourcePersistenceException("Username is already in use!");
-
         }
-
-        newUser.setRole(Role.EMPLOYEE);
+        System.out.println("wtf");
+        newUser.setRole(Role.LOCKED);
         userRepository.save(newUser);
     }
 
@@ -44,6 +46,10 @@ public class UserService {
         }
 
         return users;
+    }
+
+    public void confirmAccount(int id) {
+        userRepository.confirmAccount(id);
     }
 
     public User getUserByUsername(String username) {

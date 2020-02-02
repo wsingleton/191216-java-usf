@@ -17,8 +17,8 @@ public class RequestViewHelper {
                 return "partials/dashman.html";
             case "/project1/newreimbursment.view":
                 return "partials/newreimbursment.html";
-            case "/project1/approvereimbursment.view":
-                return "partials/approvereimbursement.html";
+            case "/project1/manage.view":
+                return "partials/manage.html";
             default:
                 return "";
         }

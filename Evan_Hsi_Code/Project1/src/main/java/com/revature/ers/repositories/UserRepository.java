@@ -15,6 +15,7 @@ public class UserRepository implements CrudRepository<User> {
     public void save(User newObj) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+            System.out.println("save");
 
             String sql = "INSERT INTO ERS_APP.ERS_USERS VALUES (0, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"ERS_USERS_ID"});
@@ -24,8 +25,10 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.setString(4, newObj.getLastname());
             pstmt.setString(5, newObj.getEmail());
             pstmt.setInt(6, newObj.getRole().getId());
+            System.out.println("help");
 
             int rowsInserted = pstmt.executeUpdate();
+            System.out.println("executed");
 
             if (rowsInserted != 0 ) {
 
@@ -39,7 +42,6 @@ public class UserRepository implements CrudRepository<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public Optional<User> findUserByUsername(String username) {
@@ -119,6 +121,20 @@ public class UserRepository implements CrudRepository<User> {
         }
 
         return _user;
+    }
+
+    public void confirmAccount(int id) {
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "UPDATE ERS_APP.ERS_USERS SET USER_ROLE_ID = 1 WHERE ERS_USERS_ID = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

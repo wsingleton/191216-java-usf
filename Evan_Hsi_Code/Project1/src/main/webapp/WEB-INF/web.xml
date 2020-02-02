@@ -79,4 +79,14 @@
         <url-pattern>/dashman</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ReimbursementServlet</servlet-name>
+        <servlet-class>com.revature.ers.servlets.ReimbursementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReimbursementServlet</servlet-name>
+        <url-pattern>/reimb</url-pattern>
+    </servlet-mapping>
+
 </web-app>
