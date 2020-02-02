@@ -69,7 +69,7 @@ function login() {
         xhr.onreadystatechange = () => {
             if(xhr.readyState == 4 && xhr.status == 200) {
                 document.getElementById('root').innerHTML = xhr.responseText
-                loadEmployeeReims()
+                loadEmployeeReimb()
                 // document.getElementById('login').addEventListener('click', login);
                 
             }
@@ -89,7 +89,8 @@ function login() {
             
             if(xhr.readyState == 4 && xhr.status == 200) {
              document.getElementById('root').innerHTML = xhr.responseText
-                
+             loadEmployeeReimb()
+             
             }
             
         }
@@ -111,15 +112,15 @@ function logout() {
 }
 
 	
-function loadEmployeeReims() {
+function loadEmployeeReimb() {
     
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", "manager", true);
+    xhr.open("GET", 'reimb', true);
     xhr.send();        
     xhr.onreadystatechange = () => {
         if(xhr.readyState == 4 && xhr.status == 200) {
             let reimbursements = JSON.parse(xhr.responseText);
-            console.log('in get all reimbursements!')
+            console.log(reimbursements)
         }
         
     }
@@ -128,5 +129,21 @@ function loadEmployeeReims() {
     
 }
 
-
+	
+function loadEachEmployeeReimb() {
+    
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", 'userreimbursement', true);
+    xhr.send();        
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            let reimbursements = JSON.parse(xhr.responseText);
+            console.log('in get each reimbursements!')
+        }
+        
+    }
+    
+    
+    
+}
 

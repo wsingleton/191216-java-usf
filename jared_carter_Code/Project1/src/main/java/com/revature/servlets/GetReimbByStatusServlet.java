@@ -20,8 +20,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
-@WebServlet("/reimb")
-public class ReimbursementServlet extends HttpServlet {
+@WebServlet("/getreimbbystatus")
+public class GetReimbByStatusServlet extends HttpServlet {
     public final ReimbursementService reimbursementService = new ReimbursementService(new ReimbursementRepository());
     public final UserRepository userRepository = new UserRepository();
 
@@ -47,17 +47,5 @@ public class ReimbursementServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        ObjectMapper mapper = new ObjectMapper();
-        resp.setContentType("application/json");
-        try {
-            Reimbursement reimbursement = mapper.readValue(req.getInputStream(), Reimbursement.class);
-            resp.setStatus(201);
-        } catch (MismatchedInputException e) {
-            resp.setStatus(400);
-        } catch (Exception e) {
-            resp.setStatus(500);
-        }
-    }
+
 }

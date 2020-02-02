@@ -121,6 +121,21 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
     }
 
+    public Set<Reimbursement> findAllByStatus(int id) {
+        Set<Reimbursement> reimbursements = new HashSet<>();
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+            String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            reimbursements = mapResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reimbursements;
+    }
+
+
     @Override
     public Optional<Reimbursement> findById(int id) {
         return Optional.empty();

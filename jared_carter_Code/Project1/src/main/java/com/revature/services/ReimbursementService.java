@@ -1,10 +1,15 @@
 package com.revature.services;
 
+import com.revature.expections.InvalidRequestException;
 import com.revature.expections.ResourceNotFoundException;
 import com.revature.models.Reimbursement;
 import com.revature.repos.ReimbursementRepository;
 
+import java.util.Comparator;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class ReimbursementService {
 
@@ -33,11 +38,13 @@ public class ReimbursementService {
         return reimbursementRepository.findAll();
     }
 
-    public Set<Reimbursement> getByAuthorId(int id){
+    public Set<Reimbursement> getByAuthorId(int id) {
         return reimbursementRepository.findAllById(id);
     }
-
-
 }
+
+
+
+
 
 

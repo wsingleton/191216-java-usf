@@ -21,7 +21,7 @@ import java.io.PrintWriter;
 
 
 @WebServlet("/auth")
-public class _AuthServlet extends HttpServlet {
+public class AuthServlet extends HttpServlet {
 
     public final UserService userService = new UserService(new UserRepository());
 
