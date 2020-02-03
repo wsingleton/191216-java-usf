@@ -47,7 +47,8 @@ public class CreateReimbServlet extends HttpServlet {
 
             Status status = Status.getById(creds.getStatusID());
             Type type =Type.getById(creds.getTypeId());
-            if(creds.getAmount() == null || creds.getAmount().equalsIgnoreCase("0") || creds.getAmount().equalsIgnoreCase("")){
+            if(creds.getAmount() == null || creds.getAmount().equalsIgnoreCase("0")
+                    || creds.getAmount().equalsIgnoreCase("") || Integer.parseInt(creds.getAmount()) <0){
                 resp.setStatus(400);
             }else {
                 Reimbursement reimb = new Reimbursement(creds.getAmount(),creds.getSubTime(),creds.getResTime(),creds.getDesc(),
