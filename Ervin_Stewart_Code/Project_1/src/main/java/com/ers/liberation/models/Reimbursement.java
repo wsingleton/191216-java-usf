@@ -12,8 +12,8 @@ public class Reimbursement {
 
     private Integer reimbId;
     private Double amount;
-    private Timestamp submittedDate;
-    private Timestamp resolvedDate;
+    private String submittedDate;
+    private String resolvedDate;
     private String description;
     private InputStream receipt;
     private Integer authorId;
@@ -43,7 +43,7 @@ public class Reimbursement {
         this.description = description;
     }
 
-    public Reimbursement(Integer reimbId, Double amount, Timestamp submittedDate, String description, Integer authorId, ReimbursementStatus status, ReimbursementType type){
+    public Reimbursement(Integer reimbId, Double amount, String submittedDate, String description, Integer authorId, ReimbursementStatus status, ReimbursementType type){
         this.reimbId = reimbId;
         this.amount = amount;
         this.submittedDate = submittedDate;
@@ -54,7 +54,7 @@ public class Reimbursement {
     }
 
 
-    public Reimbursement(Integer reimbId, Double amount, Timestamp submittedDate, Timestamp resolvedDate, String description, Integer authorId, Integer resolverId, ReimbursementStatus status, ReimbursementType type) {
+    public Reimbursement(Integer reimbId, Double amount, String submittedDate, String resolvedDate, String description, Integer authorId, Integer resolverId, ReimbursementStatus status, ReimbursementType type) {
         this.reimbId = reimbId;
         this.amount = amount;
         this.submittedDate = submittedDate;
@@ -67,7 +67,7 @@ public class Reimbursement {
     }
 
 
-    public Reimbursement(Integer reimbId, Double amount, Timestamp submittedDate, Timestamp resolvedDate, String description, InputStream receipt, Integer authorId, Integer resolverId, ReimbursementStatus status, ReimbursementType type) {
+    public Reimbursement(Integer reimbId, Double amount, String submittedDate, String resolvedDate, String description, InputStream receipt, Integer authorId, Integer resolverId, ReimbursementStatus status, ReimbursementType type) {
         this.reimbId = reimbId;
         this.amount = amount;
         this.submittedDate = submittedDate;
@@ -96,19 +96,19 @@ public class Reimbursement {
         this.amount = amount;
     }
 
-    public Timestamp getSubmittedDate() {
+    public String getSubmittedDate() {
         return submittedDate;
     }
 
-    public void setSubmittedDate(Timestamp submittedDate) {
+    public void setSubmittedDate(String submittedDate) {
         this.submittedDate = submittedDate;
     }
 
-    public Timestamp getResolvedDate() {
+    public String getResolvedDate() {
         return resolvedDate;
     }
 
-    public void setResolvedDate(Timestamp resolvedDate) {
+    public void setResolvedDate(String resolvedDate) {
         this.resolvedDate = resolvedDate;
     }
 

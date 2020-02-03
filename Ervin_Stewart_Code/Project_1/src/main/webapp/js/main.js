@@ -2,7 +2,7 @@ window.onload = () =>{
     loadLogin();
      }
  var rows =0;
-
+let currentUser ={};
     function loadLogin(){
 
 
@@ -47,12 +47,12 @@ window.onload = () =>{
 
 
         console.log('in loadDashboard()');
-        createEmployeeReimbursementTable();
+        createManagerReimbursementTable();
         setTimeout(()=>{
-            console.log("the rows are " +rows + " after the 500 miliseconds")
+            console.log("the rows are " +rows + " after the 5000 miliseconds")
             accesstable();
 
-        }, 10000);
+        }, 5000);
 
 
 
@@ -75,6 +75,36 @@ console.log( 'the row lenght is ' + rows);
 console.log('please' +rows);
 
     }
+
+
+    function loadEmployeeDashboard(){
+
+
+            console.log('in loadEmployeeDashboard()');
+            createEmployeeReimbursementTable();
+
+
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET','employee_dashboard.view',true);
+            xhr.send();
+            xhr.onreadystatechange = () =>{
+                if(xhr.readyState === 4 && xhr.status ===200){
+                    document.getElementById("root").innerHTML = xhr.responseText;
+                    //implement all button functionality
+                     document.getElementById("logout").addEventListener("click", logout);
+                    document.getElementById("dashboard").addEventListener("click", loadDashboard);
+                    document.getElementById("new-expense").addEventListener("click", loadReimbursement);
+                    document.getElementById("help").addEventListener("click", loadHelpScreen);
+
+    console.log( 'the row lenght is ' + rows);
+
+                }
+            }
+    console.log('please' +rows);
+
+        }
+
 
 
     function loadReimbursement(){
@@ -189,10 +219,15 @@ function newReimbursement(){
         if(xhr.readyState ===4){
              if(xhr.status===201){
 
-                let user = JSON.parse(xhr.responseText);
+
                     document.getElementById('reimb-message').innerText ='reimbursement created!';
                     console.log(newReimb);
-                    loadDashboard();
+                    if(currentUser.role === "FINANCE_MANAGER" || currentUser === "CFO"){
+                                        loadDashboard();
+                                        }else{
+                                        loadEmployeeDashboard();
+
+                                    }
 
                 }
 
@@ -224,9 +259,13 @@ function newReimbursement(){
         if(xhr.readyState ===4){
              if(xhr.status===200){
 
-                let user = JSON.parse(xhr.responseText);
-                    console.log(user);
+                 let user = JSON.parse(xhr.responseText);
+                 currentUser = user;
+                    console.log(currentUser);
+                    if(currentUser.role === "FINANCE_MANAGER" || currentUser === "CFO"){
                     loadDashboard();
+                    }else{
+                    loadEmployeeDashboard();
 
                 }
 
@@ -236,7 +275,7 @@ function newReimbursement(){
             }
         }
 
-}
+}}
 
 
 function logout() {
@@ -245,6 +284,7 @@ function logout() {
         xhr.send();
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4 && xhr.status === 200) {
+                loadLogin();
                 console.log('logout successful!')
             }
         }
@@ -309,7 +349,7 @@ function logout() {
 
     }
 
-    function createEmployeeReimbursementTable(){
+    function createManagerReimbursementTable(){
 
             let xhttp = new XMLHttpRequest();
             xhttp.open("GET", 'reimbursements', true);
@@ -357,10 +397,10 @@ function accesstable(){
 
             let xhr = new XMLHttpRequest();
             xhr.open('PUT', 'reimbursements', true);
-            xhr.send(uReimbJSON)
+            xhr.send(uReimbJSON);
             xhr.onreadystatechange = () => {
                 if(xhr.readyState ===4){
-                     if(xhr.status===200){
+                     if(xhr.status===201){
 
 
                             loadDashboard();
@@ -375,4 +415,83 @@ function accesstable(){
 
 
 
+        }
+
+        function setEmployeeValues(reimbSet){
+                let reimbId = reimbSet.reimbId;
+                let amount = reimbSet.amount;
+                let submittedDate = reimbSet.submittedDate;
+                let type = reimbSet.type;
+                let status = reimbSet.status;
+                let description = reimbSet.description;
+                let receipt = reimbSet.receipt;
+                let resolverId = reimbSet.resolverId;
+                let resolvedDate = reimbSet.resolvedDate;
+
+
+                let row = document.createElement('tr');
+                let reimbIdCell = document.createElement('td');
+                let typeCell = document.createElement('td');
+                let statusCell = document.createElement('td');
+                let totalAmountCell = document.createElement('td');
+                let dateCreatedCell = document.createElement('td');
+                let resolvedDateCell = document.createElement('td');
+                let descriptionCell = document.createElement('td');
+                let receiptCell = document.createElement('td');
+                let resolverCell = document.createElement('td');
+
+
+
+                    row.appendChild(reimbIdCell);//1
+                    row.appendChild(typeCell);//2
+                    row.appendChild(statusCell);//3
+                    row.appendChild(totalAmountCell);//4
+                    row.appendChild(dateCreatedCell);//5
+                    row.appendChild(descriptionCell);//7
+                    row.appendChild(receiptCell);//8
+                    row.appendChild(resolverCell);//9
+                    row.appendChild(resolvedDateCell);//6
+
+
+
+
+                    reimbIdCell.innerText = reimbId;
+                    typeCell.innerText = type;
+                    statusCell.innerText = status;
+                    totalAmountCell.innerText = amount;
+                    dateCreatedCell.innerText = submittedDate;
+                    resolvedDateCell.innerText =  resolvedDate;
+                    descriptionCell.innerText = description;
+                    receiptCell.innerText = receipt;
+                    resolverCell.innerText = resolverId;
+
+
+
+                    document.getElementById('open-reimb').appendChild(row);
+
+
+
+
+
+            }
+
+            function createEmployeeReimbursementTable(){
+
+                    let xhttp = new XMLHttpRequest();
+                    xhttp.open("GET", 'reimbursements', true);
+                    xhttp.send();
+                    xhttp.onreadystatechange = function(){
+
+                    if(xhttp.readyState == 4 && xhttp.status == 200){
+                        let reimbSet = JSON.parse(xhttp.responseText);
+                            console.log(reimbSet);
+                        for(let i = 0;i<reimbSet.length; i++ ){
+                            setEmployeeValues(reimbSet[i]);
+                        }
+                        rows = reimbSet.length;
+                        console.log( 'the row length is' + rows);
+
+
+                }
+                }
         }

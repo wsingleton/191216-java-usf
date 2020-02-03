@@ -11,7 +11,8 @@ public class RequestViewHelper {
                 return "partials/dashboard.html";
             case "/Project_1/reimbursement.view":
                 return "partials/reimbursement.html";
-
+            case"/Project_1/employee_dashboard.view":
+                return "partials/employee_dashboard.html";
             default:
                 return "";
         }

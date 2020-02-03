@@ -83,7 +83,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "INSERT INTO ers_reimbursement (reimb_id, reimb_amount,reimb_description, " +
-                    ",reimb_author,reimb_status_id,reimb_type_id)" +
+                    "reimb_author, reimb_status_id, reimb_type_id)" +
                     " VALUES (0, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"reimb_id"});
             pstmt.setDouble(1, newObj.getAmount());
@@ -196,8 +196,8 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             Reimbursement temp = new Reimbursement();
             temp.setReimbId(rs.getInt("reimb_id"));
             temp.setAmount(rs.getDouble("reimb_amount"));
-            temp.setSubmittedDate(rs.getTimestamp("reimb_submitted"));
-            temp.setResolvedDate(rs.getTimestamp("reimb_resolved"));
+            temp.setSubmittedDate(rs.getString("reimb_submitted"));
+            temp.setResolvedDate(rs.getString("reimb_resolved"));
             temp.setDescription(rs.getString("reimb_description"));
             temp.setReceipt(rs.getBinaryStream("reimb_receipt"));
             temp.setAuthorId(rs.getInt("reimb_author"));

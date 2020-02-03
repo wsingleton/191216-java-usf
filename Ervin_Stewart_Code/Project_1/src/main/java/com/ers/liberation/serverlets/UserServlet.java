@@ -10,6 +10,8 @@ import com.ers.liberation.repos.UserRepository;
 import com.ers.liberation.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +26,7 @@ import java.util.Set;
 @WebServlet("/users/*")
 public class UserServlet extends HttpServlet {
 private final UserService userService = new UserService(new UserRepository());
+    private static final Logger LOG = LogManager.getLogger(UserServlet.class);
 
 @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
@@ -45,7 +48,9 @@ private final UserService userService = new UserService(new UserRepository());
         try{User user = userService.getUserById(Integer.parseInt(userIdParam));
         String userJSON = mapper.writeValueAsString(user);
         resp.getWriter().write(userJSON);
-        }catch(Exception e){resp.setStatus(400);}
+        }catch(Exception e){
+            LOG.warn(e.getMessage());
+        resp.setStatus(400);}
     }
 }
 
@@ -86,12 +91,17 @@ private final UserService userService = new UserService(new UserRepository());
         }else
         resp.setStatus(200);
     }catch(MismatchedInputException e){
+            LOG.warn(e.getMessage());
     resp.setStatus(400);
     }catch(AuthorizationException e){
+            LOG.warn(e.getMessage());
     resp.setStatus(401);
+
     ErrorResponse err= new ErrorResponse(401,System.currentTimeMillis());
     err.setMessage(err.getMessage());
-    }catch(Exception e){resp.setStatus(500);}
+    }catch(Exception e){
+            LOG.error(e.getMessage());
+            resp.setStatus(500);}
 
     }
 

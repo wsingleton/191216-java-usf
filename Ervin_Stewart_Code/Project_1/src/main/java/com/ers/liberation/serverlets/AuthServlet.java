@@ -6,6 +6,8 @@ import com.ers.liberation.repos.UserRepository;
 import com.ers.liberation.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.security.sasl.AuthenticationException;
 import javax.servlet.ServletException;
@@ -20,7 +22,7 @@ import java.io.PrintWriter;
 
 @WebServlet("/auth")
     public  class AuthServlet extends HttpServlet {
-
+    private static final Logger LOG = LogManager.getLogger(AuthServlet.class);
     public final UserService userService = new UserService(new UserRepository());
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
@@ -44,9 +46,12 @@ import java.io.PrintWriter;
         session.setAttribute("this-user",authUser);
 
     }catch(MismatchedInputException e){
+        LOG.warn(e.getMessage());
         resp.setStatus(400);
-    }catch(AuthenticationException e){resp.setStatus(404);
-    }catch(Exception e){e.printStackTrace(); resp.setStatus(500);}
+    }catch(AuthenticationException e){
+        LOG.warn(e.getMessage());
+    resp.setStatus(404);
+    }catch(Exception e){LOG.warn(e.getMessage()); resp.setStatus(500);}
 }
 
 
