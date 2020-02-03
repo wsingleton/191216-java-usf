@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Set;
@@ -27,12 +28,16 @@ public class ReimbServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ObjectMapper mapper = new ObjectMapper();
+        PrintWriter writer = resp.getWriter();
         resp.setContentType("application/json");
+        HttpSession session = req.getSession();
+        User currentUser = (User) session.getAttribute("this-user");
 
         try {
 
-            User currentUser = (User) req.getSession().getAttribute("this-user");
-            Set<Reimbursement> reimbursements = reimbService.getReimbursementsByUser(currentUser);
+            Set<Reimbursement> reimbursements = reimbService.getReimbursementsByUserId(currentUser.getId());
+            String reimbursementsJSON = mapper.writeValueAsString(reimbursements);
+            writer.write(reimbursementsJSON);
 
         } catch (Exception e) {
             resp.setStatus(400);

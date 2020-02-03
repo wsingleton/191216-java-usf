@@ -68,9 +68,9 @@ public class Reimbursement {
         this.description = description;
     }
 
-    public String getReceipt() {
-        return receipt.toString();
-    }
+//    public String getReceipt() {
+//        return receipt.toString();
+//    }
 
     public void setReceipt(InputStream receipt) {
         this.receipt = receipt;

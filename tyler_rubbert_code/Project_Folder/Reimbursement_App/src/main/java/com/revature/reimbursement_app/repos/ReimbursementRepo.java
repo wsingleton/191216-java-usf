@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class ReimbursementRepo implements CrudRepository<Reimbursement> {
 
-    public Set<Reimbursement> findReimbursementsByAuthorId(User author) {
+    public Set<Reimbursement> findReimbursementsByAuthorId(int id) {
 
         Set<Reimbursement> reimbursements = new HashSet<>();
 
@@ -22,7 +22,7 @@ public class ReimbursementRepo implements CrudRepository<Reimbursement> {
 
             String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, author.getId());
+            pstmt.setInt(1, id);
 
             ResultSet rs = pstmt.executeQuery();
             reimbursements = mapResultSet(rs);

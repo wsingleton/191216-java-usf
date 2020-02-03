@@ -46,15 +46,15 @@ public class ReimbursementService {
 
     }
 
-    public Set<Reimbursement> getReimbursementsByUser(User user) {
+    public Set<Reimbursement> getReimbursementsByUserId(int id) {
 
         Set<Reimbursement> reimbursements;
 
-        if (user == null) {
+        if (id <= 0) {
             throw new InvalidRequestException();
         }
 
-        reimbursements = reimbRepo.findReimbursementsByAuthorId(user);
+        reimbursements = reimbRepo.findReimbursementsByAuthorId(id);
 
         if (reimbursements.isEmpty()) {
             throw new ResourceNotFoundException();
