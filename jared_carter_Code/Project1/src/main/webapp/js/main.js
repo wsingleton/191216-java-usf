@@ -234,13 +234,43 @@ function reimburseListsManager(reimbursements){
                 <td>${reimbursements[i].authorById}</td>
                 <td>${reimbursements[i].reimbursementStatusId}</td>
                 <td>${reimbursements[i].reimbursementTypeId}</td>
-                <td>
-                <button class = "button1" onclick = "update(${reimbursements[i].reimbursementStatusId}, 1)">Approve</button>
-                <button class = "button2" onclick = "update(${reimbursements[i].reimbursementStatusId}, 2)">Deny</button>
-                </td>
                 `
               )
+/*
+              <td>
+                <button id='approve-button">Approve</button>
+                <button id='deny-button">Deny</button>
+                </td>
+*/
+              //onclick = "updateStatus(${reimbursements[i].reimbursementStatusId}"
+                //= "updateStatus(${reimbursements[i].reimbursementStatusId}"
+                
+
+    
+
+    let buttonentry = document.createElement('td');
+    
+
+    let approve = document.createElement('button');
+    let deny = document.createElement('button');
+    approve.setAttribute('id', 'approve-button');
+    deny.setAttribute('id', 'deny-button');
+    approve.innerText = 'approve';
+    deny.innerText = 'deny';
+
+
+    approve.addEventListener('click', () =>{updateStatus(reimbursements[i].reimbursementStatusId, 2) });
+    deny.addEventListener('click', () =>{updateStatus(reimbursements[i].reimbursementStatusId, 3) });
+
+    buttonentry.appendChild(approve);
+    buttonentry.appendChild(deny);
+
+    
+
     info.innerHTML = te;
+
+    info.appendChild(buttonentry);
+            
     table.appendChild(info);
     }
     
@@ -251,7 +281,7 @@ function approveReimbursement(reimbursements) {
     let reimbJSON = JSON.stringify(reimbursements);
 
     let xhr = new XMLHttpRequest();
-    xhr.open('PUT', 'approves', send)
+    xhr.open('PUT', 'reimb', send)
     xhr.send(reimbJSON);
     xhr.onreadystatechange = () => {
         if(xhr.readyState === 4 && xhr.status === 201) {
@@ -269,7 +299,7 @@ function denyReimbursement(reimbursements) {
     let reimbJSON = JSON.stringify(reimbursements);
 
     let xhr = new XMLHttpRequest();
-    xhr.open('PUT', 'denied', true)
+    xhr.open('PUT', 'reimb', true)
     xhr.send(reimbJSON);
     xhr.onreadystatechange = () => {
         if(xhr.readyState === 4 && xhr.status === 201) {
@@ -281,3 +311,30 @@ function denyReimbursement(reimbursements) {
 }
 
 	
+function updateStatus(r_id, status) {
+		
+    let stat = {
+            
+        id: r_id,
+        reimbursementStatusId: status
+            
+    }
+    
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            
+            $(`status${r_id}`).html(status);
+            refreshStatus();
+            
+        }
+        
+    }
+    
+    xhr.open("PUT", "reimb", true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    let toSend = JSON.stringify(stat);
+    xhr.send(toSend);
+    
+}
