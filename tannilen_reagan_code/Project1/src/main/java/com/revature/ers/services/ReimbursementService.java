@@ -75,6 +75,7 @@ public class ReimbursementService {
         System.out.println("Service request for reimbursement update received.");
         try {
             Reimbursement reimb = reimbRepo.findById(reimbID).orElseThrow(InvalidRequestException::new);
+            System.out.println(reimb);
             reimb.setResID(resolver);
             if (approved == true) {
                 System.out.println("Reimbursement "+reimbID+" obtained.  Updating status to approved.");
