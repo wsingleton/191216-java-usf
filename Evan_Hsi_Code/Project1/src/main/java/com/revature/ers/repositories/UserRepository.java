@@ -32,10 +32,8 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.setString(4, newObj.getLastname());
             pstmt.setString(5, newObj.getEmail());
             pstmt.setInt(6, newObj.getRole().getId());
-            System.out.println("help");
 
             int rowsInserted = pstmt.executeUpdate();
-            System.out.println("executed");
 
             if (rowsInserted != 0 ) {
 

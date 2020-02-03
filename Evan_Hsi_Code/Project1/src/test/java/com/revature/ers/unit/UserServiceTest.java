@@ -29,10 +29,9 @@ import static org.mockito.Mockito.*;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ReimbursementService.class)
-@PowerMockIgnore({"org.mockito.*"})
+@PowerMockIgnore({"org.mockito.*","javax.management.*","javax.script.*"})
 
 public class UserServiceTest {
-    /*
 
     UserService sut;
     UserRepository userRepository = mock(UserRepository.class);
@@ -105,11 +104,6 @@ public class UserServiceTest {
     public void confirmAccount1() {
         doThrow().when(userRepository).confirmAccount(6);
     }
-
-
-
-
-     */
 
     @Test
     public void placeholder() {

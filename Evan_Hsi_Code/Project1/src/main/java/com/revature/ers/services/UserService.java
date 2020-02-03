@@ -26,7 +26,6 @@ public class UserService {
     }
 
     public void register(User newUser, User user) {
-        System.out.println(newUser);
         LOG.info("Service layer validation for user registration");
 
         if( !isUserValid(newUser)) {

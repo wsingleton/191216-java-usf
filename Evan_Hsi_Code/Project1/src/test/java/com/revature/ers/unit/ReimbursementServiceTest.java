@@ -29,10 +29,9 @@ import static org.mockito.Mockito.*;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ReimbursementService.class)
-@PowerMockIgnore({"org.mockito.*"})
+@PowerMockIgnore({"org.mockito.*","javax.management.*","javax.script.*"})
 
 public class ReimbursementServiceTest {
-    /*
 
 
     ReimbursementService sut;
@@ -97,7 +96,7 @@ public class ReimbursementServiceTest {
         assertEquals(2, results.size());
     }
 
-*/
+
 
     @Test
     public void placeholder() {
