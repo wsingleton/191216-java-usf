@@ -1,8 +1,13 @@
+-- Drop Table
+--DROP TABLE ers.ers_reimburstment;
+--DROP TABLE ers.ers_reimburstment_type;
+
 CREATE TABLE ers_reimburstment(
     reimb_id          NUMBER(5),
     reimb_amount      NUMBER(7, 2),
     reimb_submitted   TIMESTAMP,
     reimb_resolved    TIMESTAMP,
+--  reimb_receipt	BLOB,
     reimb_description   VARCHAR(250),
     reimb_author        NUMBER,
     reimb_resolver      NUMBER,
@@ -26,6 +31,11 @@ CREATE TABLE ers_reimburstment(
     
     CONSTRAINT  fk_ers_reimburstment_type
     FOREIGN KEY (reimb_type_id)
-    REFERENCES ers.ers_reimburstment_type (reim_typr_id)
+    REFERENCES ers.ers_reimburstment_type (reimb_type_id)
     
     );
+
+
+
+INSERT INTO ers_user_roles VALUES (1, 'Finance Manager');
+INSERT INTO ers_user_roles VALUES (2, 'Employee');

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.revature.dtos.Credentials;
 import com.revature.exceptions.AuthenticationException;
+import com.revature.exceptions.InvalidRequestException;
 import com.revature.models.User;
 import com.revature.repos.UserRepository;
 import com.revature.services.UserService;
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import static com.revature.utils.PageRouter.process;
 
 @WebServlet("/auth")
 public class AuthServlet extends HttpServlet {
@@ -38,14 +41,18 @@ public class AuthServlet extends HttpServlet {
 
         try{
             Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
-            if(!userService.validate(creds.getUsername()) &&  !userService.validate(creds.getPassword())){
-                return;
+            //System.out.println("I'm here");
+            if(!userService.validate(creds.getUsername()) ||  !userService.validate(creds.getPassword())){
+                throw new InvalidRequestException();
             }
+            //System.out.println("validated");
             User authUser = userService.authenticate(creds.getUsername(), creds.getPassword());
             String authUserJSON = mapper.writeValueAsString(authUser);
             writer.write(authUserJSON);
             HttpSession session = req.getSession();
-            session.setAttribute("this.user", authUser);
+            session.setAttribute("this-user", authUser);
+            process("/reimb.view");
+
         }
         catch (MismatchedInputException e){
             resp.setStatus(400);

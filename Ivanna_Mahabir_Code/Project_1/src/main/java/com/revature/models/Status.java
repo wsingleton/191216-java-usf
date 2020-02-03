@@ -23,9 +23,11 @@ public enum Status {
             case 2:
                 status = Status.DENIED;
                 break;
-
-            default:
+            case 3:
                 status = Status.SUBMITTED;
+                break;
+            default:
+
         }
         return status;
     }

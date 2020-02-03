@@ -44,13 +44,15 @@ public class UserService {
                 char ch = arg.charAt(i);
                 if (uCase(ch)) {
                     if (nCase(arg)) {
+                        System.out.println("Valid Input");
                         return true;
                     }
                     //break;
                 }
             }
         }
-        //System.out.println("Invalid Input");
+
+        System.out.println("Invalid Input");
         return false;
     }
 

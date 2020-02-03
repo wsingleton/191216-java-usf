@@ -37,7 +37,7 @@ public class UserRepository implements CrudRepository<User> {
             String sql = "SELECT * FROM ers.ers_users WHERE ers_username = ? AND ers_password = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,username);
+            pstmt.setString(1, username);
             pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
@@ -191,7 +191,7 @@ public class UserRepository implements CrudRepository<User> {
         Set<User> users = new HashSet<>();
         while(rs.next()){
             User temp = new User();
-            temp.setUser_id(rs.getInt("user_id"));
+            temp.setUser_id(rs.getInt("ers_user_id"));
             temp.setUser_name(rs.getString("ers_username"));
             temp.setPass_word(rs.getString("ers_password"));
             temp.setFirst_name(rs.getString("user_first_name"));

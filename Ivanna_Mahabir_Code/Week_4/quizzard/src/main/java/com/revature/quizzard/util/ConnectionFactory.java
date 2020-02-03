@@ -35,12 +35,9 @@ public class ConnectionFactory {
     }
 
     public Connection getConnection() {
-
         Connection conn = null;
-
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-
             conn = DriverManager.getConnection(
                     props.getProperty("url"),
                     props.getProperty("usr"),

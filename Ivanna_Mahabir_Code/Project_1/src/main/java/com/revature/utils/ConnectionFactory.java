@@ -1,6 +1,5 @@
 package com.revature.utils;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -31,11 +30,11 @@ public class ConnectionFactory {
     public Connection getConnection(){
         Connection conn = null;
         try{
-            Class.forName("oracle.jdbc.driver.OracleDrive");
+            Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DriverManager.getConnection(
                     props.getProperty("url"),
-                    props.getProperty("admin-usr"),
-                    props.getProperty("admin-pw")
+                    props.getProperty("usr"),
+                    props.getProperty("pw")
             );
 
         }
