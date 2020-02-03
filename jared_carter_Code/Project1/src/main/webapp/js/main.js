@@ -71,7 +71,6 @@ function login() {
                 document.getElementById('root').innerHTML = xhr.responseText
                 document.getElementById('logout').addEventListener('click', logout)
                 loadEmployeeReimb()
-                
             }
             
         }
@@ -79,6 +78,7 @@ function login() {
 
         
     }
+
     
     function loadEmployeeView () {
         console.log('in loadEmployeeView()');
@@ -92,7 +92,7 @@ function login() {
              document.getElementById('submitReimb').addEventListener('click', createReimb)
              document.getElementById('logout').addEventListener('click', logout)
              loadEmployeeReimb()
-             
+            
             }
             
         }
@@ -124,6 +124,7 @@ function loadEmployeeReimb() {
         if(xhr.readyState == 4 && xhr.status == 200) {
             let reimbursements = JSON.parse(xhr.responseText);
             console.log(reimbursements)
+            reimburseLists(reimbursements)
         }
         
     }
@@ -163,5 +164,63 @@ function getNewReimb () {
 }
 
 
+function updateStatus(reimb_id, status) {
+            
+    let obj = {
+            
+        id: reimb_id,
+        status_id: status
+            
+    }
+    
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            
+
+            refreshStatus();
+            
+        }
+        
+    }
+    
+    xhr.open("PUT", "login", true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    let toSend = JSON.stringify(stat);
+    xhr.send(toSend);
+    
+}
 
 
+
+
+
+function reimburseLists(reimbursements){
+    let table = document.getElementById('reimInfo');
+    let info
+    for(let i = 0; i < reimbursements.length; i++) {
+
+        info = document.createElement('tr');
+  
+    
+              let te = ( `
+               <th>${reimbursements[i].id}</th>
+                <td>${reimbursements[i].amount}</td>
+                <td>${reimbursements[i].timeSubmitted}</td>
+                <td>${reimbursements[i].description}</td>
+                <td>${reimbursements[i].authorById}</td>
+                <td>${reimbursements[i].resolverById}</td>
+                <td>${reimbursements[i].reimbursementStatusId}</td>
+                <td>${reimbursements[i].reimbursementTypeId}</td>
+                `
+              )
+    info.innerHTML = te;
+    table.appendChild(info);
+    }
+    
+}
+
+
+
+	

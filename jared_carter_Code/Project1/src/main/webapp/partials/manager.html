@@ -1,18 +1,18 @@
 <style>
-    #employees {
+    #employee {
         font-family: Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         width: 100%;
     }
     
-    #employees td, #employees th {
+    #employee td, #employee th {
         border: 1px solid rgb(85, 82, 82);
         padding: 8px;
     }
     
-    #employees tr:hover {background-color: gray;}
+    #employee tr:hover {background-color: gray;}
     
-    #employees th {
+    #employee th {
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: left;
@@ -26,15 +26,15 @@
 <div>
 
     <h2>Reimbursements</h2>
-    <table id = "#employees" class = "table table-dark table-hover">
+    <table id = "employee" class = "table table-dark table-hover">
         <thead>
-        <tr class="success">
+        <tr>
             <th scope="col">Id</th>
             <th scope="col">Amount</th>
             <th scope="col">Submitted</th>
-            <th scope="col">Resolved</th>
             <th scope="col">Description</th>
             <th scope="col">Author</th>
+            <th scope="col">Resolver</th>
             <th scope="col">Status</th>
             <th scope="col">Type</th>
             <th scope="col">Approve/Deny</th>
@@ -47,6 +47,10 @@
     </table>
 
     <br><button id = "logout">Log out</button>
+
+    
+
+    
     <script>
         $(() =>{
             
@@ -55,16 +59,21 @@
         })
         function loadReimbursements() {
             
+            console.log('inside reimburse');
             
-            let xhr = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 
                 if(xhr.readyState == 4 && xhr.status == 200) {
                     
                     let reimbursements = JSON.parse(xhr.responseText);
     
-                    //load al reimbursements
-
+                    for(let reims of reimbursements) {
+                        
+                        console.log(reims);
+                        reimburseLists(reims);
+                        
+                    }
                     
                 }
                 
@@ -76,33 +85,34 @@
         }
         
         function refreshStatus() {
-
-
-
-            let xhr = new XMLHttpRequest();
+            
+            console.log('inside refresh');
+            
+            var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
-
+                
                 if(xhr.readyState == 4 && xhr.status == 200) {
-
+                    
                     let reimbursements = JSON.parse(xhr.responseText);
-
+                    console.log('1', xhr.responseText);
                     for(let reims of reimbursements) {
-
-
+                        
+                        
+                         console.log(reims);
                         reimburseLists(reims);
-
-
+                        
+                        
                     }
-
+                    $("#reimInfo tr").remove(); 
                     loadReimbursements();
-
+                    
                 }
-
+                
             }
-
+            
             xhr.open("GET", "manager", true);
             xhr.send();
-
+            
         }
         
         function reimburseLists(reims){
@@ -128,25 +138,68 @@
             
             }
     
+             switch(reims.type_id) {
+             
+                case 1:
+                    type = "Other";
+                    break;
+                    
+                case 2:
+                    type = "Lodging";
+                    break;
+                
+                case 3:
+                    type = "Food";
+                    break;
+                
+                case 4:
+                    type = "Travel";
+                    break;
+                    
+                default:
+                    break;
+                
+             
+            }
             
+            var submitTime = new Date(reims.submitted);
+            console.log(submitTime);
+            var info = $(`
+                    <tr>
+                        <th>${reims.id}</th>
+                        <td>${reims.amount}</td>
+                        <td>${submitTime}</td>
+                        <td>${reims.resolved}</td>
+                        <td>${reims.description}</td>
+                        <td>${reims.author}</td>
+                        <td id = "status${reims.id}">${status}</td>
+                        <td>${type}</td>
+                        <td>
+                            <button class = "button1" onclick = "updateStatus(${reims.id}, 1)">Approve</button>
+                            <button class = "button2" onclick = "updateStatus(${reims.id}, 2)">Deny</button>
+                        </td>
+                    </tr>`
+                    )
+            
+            $('#reimInfo').append(info);
             
         }
         
-        function updateStatus(reimb_id, status) {
+        function updateStatus(r_id, status) {
             
-            let reimb_stat = {
+            var stat = {
                     
-                id: reimb_id,
+                id: r_id,
                 status_id: status
                     
             }
             
-            let xhr = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 
                 if(xhr.readyState == 4 && xhr.status == 200) {
                     
-
+                    $(`status${r_id}`).html(status);
                     refreshStatus();
                     
                 }
@@ -155,12 +208,14 @@
             
             xhr.open("PUT", "login", true);
             xhr.setRequestHeader("Content-type", "application/json");
-            let toSend = JSON.stringify(stat);
+            var toSend = JSON.stringify(stat);
             xhr.send(toSend);
             
         }
     
     
     </script>
+        
+    </div>
 
 </div>
