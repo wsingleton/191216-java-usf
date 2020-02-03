@@ -81,6 +81,7 @@ function login() {
 
     
     function loadEmployeeView () {
+        
         console.log('in loadEmployeeView()');
         let xhr = new XMLHttpRequest();
         xhr.open("GET", 'employee.view', true);
@@ -88,9 +89,13 @@ function login() {
         xhr.onreadystatechange = function () {
             
             if(xhr.readyState == 4 && xhr.status == 200) {
+             
              document.getElementById('root').innerHTML = xhr.responseText
+             
              document.getElementById('submitReimb').addEventListener('click', createReimb)
+             document.getElementById('refreshReimb').addEventListener('click', loadEmployeeView)
              document.getElementById('logout').addEventListener('click', logout)
+            
              loadEmployeeReimb()
             
             }
@@ -100,6 +105,7 @@ function login() {
 
         
     }
+
 
 
 function logout() {
@@ -220,6 +226,7 @@ function reimburseLists(reimbursements){
     }
     
 }
+
 
 
 

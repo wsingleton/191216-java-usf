@@ -6,17 +6,17 @@
     }
     
     #employees td, #employees th {
-        border: 1px solid rgb(85, 82, 82);
+        border: 1px black;
         padding: 8px;
     }
     
-    #employees tr:hover {background-color: gray;}
+    #employees tr:hover {background-color: gray}
     
     #employees th {
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: left;
-        background-color:gray;
+        background-color: black;
         color: white;
     }
     </style>
@@ -53,7 +53,10 @@
     <div class ="form-group">
         <button class = "btn btn-lg btn-primary btn-block" id = "submitReimb">Submit</button>
     </div>
-
+    <br>
+    <div class ="form-group">
+        <button class = "btn btn-lg btn-primary btn-block" id = "refreshReimb">Refresh page</button>
+    </div>
     <h2>Reimbursements</h2>
     <table id = "employees" class = "table table-dark table-hover">
         <thead>
@@ -77,145 +80,3 @@
     <script>
         
 
-            loadReimbursements();
-
-
-        
-        function createReim() {
-        
-            
-            let obj = {
-                
-                // amount:
-                // description:
-                // submitted: null,
-                // resolved: null,
-                // author:
-                // resolver:
-                // status_id:
-                // type_id:
-        
-            }
-            
-            let toSend = JSON.stringify(obj);
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                
-                if(xhr.readyState == 4) {
-                    
-
-                    loadEmployeeReims();
-                    
-                }
-                
-            }
-            
-            xhr.open("POST", "", true);
-            xhr.send(toSend);
-            
-        
-        }
-        function loadReimbursements() {
-            
-            
-            
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                
-                if(xhr.readyState == 4 && xhr.status == 200) {
-                    
-    
-                    let reimbursements = JSON.parse(xhr.responseText);
-
-                    for(let reims of reimbursements) {
-                        
-
-
-                        
-                    }
-                    
-                }
-                
-            }
-            
-            xhr.open("GET", "", true);
-            xhr.send();
-            
-        }
-        
-        function loadEmployeeReims() {
-            
-           
-            
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                
-                if(xhr.readyState == 4 && xhr.status == 200) {
-                    
-                    let reimbursements = JSON.parse(xhr.responseText);
-
-                    
-                }
-                
-            }
-            
-            xhr.open("GET", "manager", true);
-            xhr.send();
-            
-        }
-        
-        
-        function reimburseLists(reims){
-            
-            let status = "";
-            let type = "";
-            
-            switch(reims.status_id) {
-                case 1:
-                    status = "Approved";
-                    break;
-                    
-                case 2:
-                    status = "Denied";
-                    break;
-                
-                case 3:
-                    status = "Pending";
-                    break;
-                 
-                default:
-                    break;
-            
-            }
-    
-             switch(reims.type_id) {
-             
-                case 1:
-                    type = "Loding";
-                    break;
-                    
-                case 2:
-                    type = "Food";
-                    break;
-                
-                case 3:
-                    type = "Travel";
-                    break;
-                
-                case 4:
-                    type = "Other";
-                    break;
-                    
-                default:
-                    break;
-                
-             
-            }
-            //append reimb info
-
-            
-        }
-    
-    
-    </script>
-</div>
