@@ -5,9 +5,11 @@ public class Reimbursement {
     private int id;
     private int authId;
     private int resId;
+    private String receipt;
+    private String description;
     private String amount;
-    private String dateSubmitted;
-    private String dateResolved;
+    private String timeSubmitted;
+    private String timeResolved;
     private Category categoryId;
     private Status statusId;
 
@@ -28,24 +30,53 @@ public class Reimbursement {
         this.categoryId = categoryId;
     }
 
-    public Reimbursement(int id, int authId, String amount, String dateSubmitted, Category categoryId, Status statusId) {
+    public Reimbursement(int id, int authId, String amount, String timeSubmitted, Category categoryId, Status statusId) {
         this.id = id;
         this.authId = authId;
         this.amount = amount;
-        this.dateSubmitted = dateSubmitted;
+        this.timeSubmitted = timeSubmitted;
         this.categoryId = categoryId;
         this.statusId = statusId;
     }
 
-    public Reimbursement(int id, int authId, int resId, String amount, String dateSubmitted, String dateResolved, Category categoryId, Status statusId) {
+    public Reimbursement(int id, int authId, int resId, String amount, String timeSubmitted, String timeResolved, Category categoryId, Status statusId) {
         this.id = id;
         this.authId = authId;
         this.resId = resId;
         this.amount = amount;
-        this.dateSubmitted = dateSubmitted;
-        this.dateResolved = dateResolved;
+        this.timeSubmitted = timeSubmitted;
+        this.timeResolved = timeResolved;
         this.categoryId = categoryId;
         this.statusId = statusId;
+    }
+
+    public Reimbursement(int id, int authId, int resId, String receipt, String description, String amount, String timeSubmitted, String timeResolved, Category categoryId, Status statusId) {
+        this.id = id;
+        this.authId = authId;
+        this.resId = resId;
+        this.receipt = receipt;
+        this.description = description;
+        this.amount = amount;
+        this.timeSubmitted = timeSubmitted;
+        this.timeResolved = timeResolved;
+        this.categoryId = categoryId;
+        this.statusId = statusId;
+    }
+
+    public String getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(String receipt) {
+        this.receipt = receipt;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getId() {
@@ -80,20 +111,20 @@ public class Reimbursement {
         this.amount = amount;
     }
 
-    public String getDateSubmitted() {
-        return dateSubmitted;
+    public String getTimeSubmitted() {
+        return timeSubmitted;
     }
 
-    public void setDateSubmitted(String dateSubmitted) {
-        this.dateSubmitted = dateSubmitted;
+    public void setTimeSubmitted(String timeSubmitted) {
+        this.timeSubmitted = timeSubmitted;
     }
 
-    public String getDateResolved() {
-        return dateResolved;
+    public String getTimeResolved() {
+        return timeResolved;
     }
 
-    public void setDateResolved(String dateResolved) {
-        this.dateResolved = dateResolved;
+    public void setTimeResolved(String timeResolved) {
+        this.timeResolved = timeResolved;
     }
 
     public Category getCategoryId() {
