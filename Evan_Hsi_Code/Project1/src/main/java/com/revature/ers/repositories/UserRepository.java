@@ -144,7 +144,7 @@ public class UserRepository implements CrudRepository<User> {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE ERS_APP.ERS_USERS SET USER_ROLE_ID = 1 WHERE ERS_USERS_ID = ? AND USER_ROLE = 3";
+            String sql = "UPDATE ERS_APP.ERS_USERS SET USER_ROLE_ID = 1 WHERE ERS_USERS_ID = ? AND USER_ROLE_ID = 3";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             int rowsUpdated = pstmt.executeUpdate();

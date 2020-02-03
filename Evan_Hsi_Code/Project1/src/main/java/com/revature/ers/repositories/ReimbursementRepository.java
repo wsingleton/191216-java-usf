@@ -130,10 +130,11 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection(user.getRole())) {
             String sql = "UPDATE ERS_APP.ERS_REIMBURSEMENT SET REIMB_STATUS_ID = ?" +
-                    " WHERE REIMB_ID = ?";
+                    " WHERE REIMB_ID = ? AND NOT REIMB_AUTHOR = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, updatedObj.getStatus().getId());
             pstmt.setInt(2, updatedObj.getId());
+            pstmt.setInt(3, user.getId());
             updateSuccessful = pstmt.execute();
         } catch (SQLException e) {
             LOG.warn(e.getMessage());

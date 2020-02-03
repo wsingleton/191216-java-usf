@@ -35,7 +35,7 @@ public class RegisterServlet extends HttpServlet {
 
         try {
             User user = mapper.readValue(req.getInputStream(), User.class);
-            LOG.info("");
+            LOG.info("Registering User");
             userService.register(user, new User());
             String authUserJSON = mapper.writeValueAsString(user);
             writer.write(authUserJSON);
