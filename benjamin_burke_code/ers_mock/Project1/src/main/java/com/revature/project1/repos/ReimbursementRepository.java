@@ -126,28 +126,55 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
 
 
+//    @Override
+//    public boolean update(Reimbursement updatedObj) {
+//        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+//
+//            String sql = "UPDATE ers_reimbursement SET reimb_status_id = ? WHERE reimb_id = ?";
+//            PreparedStatement pstmt = conn.prepareCall(sql);
+//
+//            pstmt.setInt(1, updatedObj.getStatus().getStatusId());
+//
+//
+//            int rowsInserted = pstmt.executeUpdate();
+//
+//            if (rowsInserted == 0) return false;
+//
+//        } catch(SQLIntegrityConstraintViolationException e) {
+//            e.printStackTrace();
+//        }catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return true;
+//    }
+
     @Override
     public boolean update(Reimbursement updatedObj) {
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 
-            String sql = "UPDATE ers_reimbursement SET resolved = CURRENT_DATE, " +
-                    "resolver = ?, statusId = ? WHERE reimbId = ?";
-            PreparedStatement pstmt = conn.prepareCall(sql);
-            pstmt.setInt(1, updatedObj.getResolverId());
-            pstmt.setInt(2, updatedObj.getStatus().getStatusId());
-            pstmt.setInt(3, updatedObj.getId());
+            String sql = "UPDATE ers_reimbursement SET reimb_status_id = ?" +
+                    "WHERE reimb_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,updatedObj.getStatus().getStatusId());
+            pstmt.setInt(2,updatedObj.getId());
+//            pstmt.setInt(2, updatedObj.getResolverId());
+//            pstmt.setInt(3, updatedObj.getSubmitted());
 
-            int rowsInserted = pstmt.executeUpdate();
+            int rowsUpdated = pstmt.executeUpdate();
 
-            if (rowsInserted == 0) return false;
+            return true;
 
-        } catch(SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
-        }catch (SQLException e) {
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
+
+
+
+
+
 
     @Override
     public boolean deleteById(int id) {
@@ -166,5 +193,26 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             e.printStackTrace();
         }
         return true;
+    }
+
+    public Set<Reimbursement> findReimbursementsByStatus(Status status) {
+
+        Set<Reimbursement> reimbursements = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, status.getStatusId());
+
+            ResultSet rs = pstmt.executeQuery();
+            reimbursements = mapResultSet(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reimbursements;
+
     }
 }

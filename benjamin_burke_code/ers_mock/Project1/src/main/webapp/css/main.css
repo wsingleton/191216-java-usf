@@ -1,0 +1,35 @@
+
+
+h1 {
+  margin: 0 auto;
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+  width: 90%;
+  margin: 0 auto;
+}
+
+th {
+  border: 1px solid black;
+  text-align: center;
+  background-color: #c6c6d3;
+  /* color: white; */
+}
+
+.data {
+  border-top: 1px solid blue;
+  text-align: center;
+}
+
+#manBtn {
+    background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+}

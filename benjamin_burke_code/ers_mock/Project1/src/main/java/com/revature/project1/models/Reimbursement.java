@@ -58,6 +58,14 @@ public class Reimbursement {
         this.type = type;
     }
 
+    public Reimbursement(Status status) {
+        this.status = status;
+    }
+
+    public Reimbursement(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

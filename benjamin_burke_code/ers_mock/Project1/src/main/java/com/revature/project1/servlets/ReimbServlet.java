@@ -3,6 +3,7 @@ package com.revature.project1.servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.revature.project1.dtos.ErrorResponse;
+import com.revature.project1.exceptions.InvalidRequestException;
 import com.revature.project1.exceptions.ResourceNotFoundException;
 import com.revature.project1.models.Reimbursement;
 import com.revature.project1.models.Role;
@@ -43,7 +44,6 @@ public class ReimbServlet extends HttpServlet {
             }
 
             else {
-                System.out.println("not an admin");
                 Set<Reimbursement> reimbs = reimbService.getReimbByUser(user.getId());
                 String reimbsJSON = mapper.writeValueAsString(reimbs);
                 resp.getWriter().write(reimbsJSON);
@@ -114,4 +114,29 @@ public class ReimbServlet extends HttpServlet {
 //        }
 //    }
 
+
+
+    @Override
+    protected void doPut(HttpServletRequest req ,HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.setContentType("application/json");
+        ObjectMapper mapper = new ObjectMapper();
+        PrintWriter writer = resp.getWriter();
+        User user = (User) req.getSession().getAttribute("this-user");
+
+        try {
+            Reimbursement updateReimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
+            updateReimb.setResolverId(user.getId());
+            reimbService.updateReimbursement(updateReimb);
+            String updatedReimbJSON = mapper.writeValueAsString(updateReimb);
+            resp.setStatus(202); // accepted
+
+        } catch (MismatchedInputException e) {
+            resp.setStatus(400);
+        } catch (InvalidRequestException e) {
+
+        }
+    }
+
 }
+
