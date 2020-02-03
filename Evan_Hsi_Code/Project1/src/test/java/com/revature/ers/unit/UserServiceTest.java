@@ -32,6 +32,7 @@ import static org.mockito.Mockito.*;
 @PowerMockIgnore({"org.mockito.*"})
 
 public class UserServiceTest {
+    /*
 
     UserService sut;
     UserRepository userRepository = mock(UserRepository.class);
@@ -107,6 +108,8 @@ public class UserServiceTest {
 
 
 
+
+     */
 
     @Test
     public void placeholder() {

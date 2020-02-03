@@ -1,11 +1,9 @@
 window.onload = () => {
-    console.log("did js deploy");
     loadLogin();
 }
 
 
 function loadLogin() {
-    console.log('in loadLogin()');
 
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'login.view', true);
@@ -62,7 +60,6 @@ function login() {
 }
 
 function loadRegister() {
-    console.log('in loadRegister()');
 
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'register.view', true);
@@ -114,7 +111,6 @@ function register() {
 }
 
 function loadDashEmp() {
-    console.log('in loadDashEmp()');
 
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'dashemp.view', true);
@@ -145,7 +141,6 @@ function loadDashEmp() {
 }
 
 function loadDashMan() {
-    console.log('in loadDashMan()');
 
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'dashman.view', true);
@@ -178,7 +173,6 @@ function loadDashMan() {
 }
 
 function loadManage () {
-    console.log('in loadManage()');
 
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'manage.view', true);
@@ -291,14 +285,12 @@ function hexToBase64(str) {
 }
 
 function manTable(arr, tag) {
-    console.log('manTable');
     let elements = document.getElementsByClassName('table-entry');
     while(elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
     }
 
     for(let i = 0; i < arr.length; i++) {
-        console.log(arr[i]);
 
         let row = document.createElement('tr');
         row.setAttribute('id', ('row-'+i));
@@ -409,7 +401,6 @@ function createReimbursement() {
     let fileReader = new FileReader();
 
     fileReader.onload = function () {
-        console.log('in onload');
         receipt = fileReader.result;
 
         let reimb = {
@@ -470,7 +461,6 @@ function createReimbursement() {
 
 
 function approveReimbursement(id) {
-    console.log(id + " approved");
 
     let dto = {
         id:id,
@@ -492,7 +482,6 @@ function approveReimbursement(id) {
 }
 
 function denyReimbursement(id) {
-    console.log(id + " denied");
 
     let dto = {
         id:id,
@@ -519,7 +508,6 @@ function logout() {
     xhr.send();
     xhr.onreadystatechange = () => {
         if(xhr.readyState === 4 && xhr.status === 200) {
-        console.log('logout');
         loadLogin();
         }
     }

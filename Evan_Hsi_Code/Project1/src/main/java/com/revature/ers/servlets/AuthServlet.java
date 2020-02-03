@@ -1,5 +1,6 @@
 package com.revature.ers.servlets;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.revature.ers.dtos.Credentials;
@@ -30,10 +31,13 @@ public class AuthServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = resp.getWriter();
         resp.setContentType("application/json");
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         try {
 
             Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
+            System.out.println(creds.getUsername());
+            System.out.println(creds.getPassword());
             User authUser = userService.authenticate(creds.getUsername(), creds.getPassword());
 
             LOG.info("Attempting to validate user credentials");
