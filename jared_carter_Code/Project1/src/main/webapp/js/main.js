@@ -281,7 +281,7 @@ function approveReimbursement(reimbursements) {
     let reimbJSON = JSON.stringify(reimbursements);
 
     let xhr = new XMLHttpRequest();
-    xhr.open('PUT', 'reimb', send)
+    xhr.open('PUT', 'reimb', true)
     xhr.send(reimbJSON);
     xhr.onreadystatechange = () => {
         if(xhr.readyState === 4 && xhr.status === 201) {
@@ -326,7 +326,7 @@ function updateStatus(r_id, status) {
         if(xhr.readyState == 4 && xhr.status == 200) {
             
             $(`status${r_id}`).html(status);
-            refreshStatus();
+            loadManagerView();
             
         }
         

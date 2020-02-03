@@ -18,10 +18,10 @@ public class Reimbursement {
         super();
     }
 
-    public Reimbursement(int id, ReimbursementStatus reimbursementStatusId) {
-        this.id = id;
-        this.reimbursementStatusId = reimbursementStatusId;
-    }
+//    public Reimbursement(int id, ReimbursementStatus reimbursementStatusId) {
+//        this.id = id;
+//        this.reimbursementStatusId = reimbursementStatusId;
+//    }
 
     public Reimbursement(int id, ReimbursementType reimbursementTypeId) {
         this.id = id;
@@ -148,8 +148,12 @@ public class Reimbursement {
         return reimbursementTypeId;
     }
 
-    public void setReimbursementTypeId(ReimbursementType reimbursementTypeId) {
+    public void setReimbursementTypebyRole(ReimbursementType reimbursementTypeId) {
         this.reimbursementTypeId = reimbursementTypeId;
+    }
+
+    public void setReimbursementTypeId(int id) {
+        this.reimbursementTypeId = ReimbursementType.getReimbursementTypeById(id);
     }
 
     @Override

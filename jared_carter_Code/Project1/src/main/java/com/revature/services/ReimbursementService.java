@@ -16,12 +16,8 @@ public class ReimbursementService {
     private ReimbursementRepository reimbursementRepository;
 
     public ReimbursementService(ReimbursementRepository repo) {
-        super();
+
         this.reimbursementRepository = repo;
-    }
-
-    public ReimbursementService() {
-
     }
 
     public Reimbursement getReimbursementById(int id) {

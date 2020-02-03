@@ -24,6 +24,7 @@ import java.io.IOException;
 public class CreateReimbServlet extends HttpServlet {
 
     public final ReimbursementService reimbursementService = new ReimbursementService(new ReimbursementRepository());
+    public final UserRepository userRepository = new UserRepository();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
