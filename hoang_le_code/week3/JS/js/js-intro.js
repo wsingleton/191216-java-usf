@@ -653,13 +653,10 @@ fido.speak();
 
 //--------------------------------------------------
 
-/*
-    Spread/Rest Operator
-
-        Spread/rest syntax allows an iterable such as an array expression or string to be 
-        expanded in places where zero or more arguments (for function calls) or elements
-        (for array literals) are expected, or an object expression to be expanded in places
-        where zero or more key/value pairs (for object literals) are expected.
+/* Spread operator
+    Spead/rest sysntax allows an iterable such as an array expression or string to be
+    expanded in places where zero or more arguments (for function call) or elements 
+    (for array lterals )
 
 */
 function sum(x, y, z) {
@@ -679,11 +676,11 @@ let j, k, rest;
 console.log(j); // 10
 console.log(k); // 20
 
-// Combining the rest operator with the destructuring operator
+// Combining the spread operator with the destructuring operator
 [j, k, ...rest] = [10, 20, 30, 40, 50];
 console.log(j); // 10
 console.log(k); // 20
-console.log(rest); // [30, 40, 50]
+console.log(rest); 
 
 // Using the destructuring with objects
 let obj = {
@@ -720,48 +717,42 @@ let myError = new CustomError();
 console.dir(myError);
 
 /*
-    Prototypal Inheritance
 
-        JS's inheritance mechanism is not quite the same as Java's, which uses a 
-        class-based inheritance system. Instead, JS is known for its use of
-        "prototypal inheritance".
+    protypel inheritance 
 
-            - Each object has a private property which holds a link to another
-              object, called its "prototype" (represented by the __proto__ property)
+        js,s inheritance mechanism is not quite the same as java, which uses a
+        class-based inheritance system . Instead , js is know for its use og ptoyotypel inheritance
+            each object has a private property which holds a link to another 
+            oject, called it " prototype" .
+            the prototype object has a prototype of it own and so on ultiol an ojhect is reached that has null as its prototype
+            methods can be added to object as properties, and any object has accccc
 
-            - The prototype object has a prototype of its own, and so on until an
-              object is reached that has null as its prototype.
 
-            - Methods can be added to objects as properties, and any object has 
-              access to its prototype's properties. These properties can be
-              redclared with new implementation as a sort of "method overriding".
 */
 
 /*
-    for..of && for..in
+for..of and for..in 
+for..of 
+    uses an object specific interator and loop over its generated value
 
-        - for..of
-            + uses an object-specific iterator and loops over its generated value
-
-        - for..in
-            + loop over enumerated property names of an object
+for..in
+    loop over enumerated property name of an array 
 */
 
-
-// for..of
-const myArray = [10, 20, 30];
-
-for (const value of myArray) {
+const myArray = [10,20,30];
+for( const value of myArray){
     console.log(value);
 }
 
-// for..in
+
 let myObject = {
-    'my prop': 1,
-    y: 2,
-    z: 3
+    x:1,
+    y:2,
+    z:3
 };
 
-for (const property in myObject) {
-    console.log(`myObject.${property} = ${myObject[property]}`);
+for (const proper in myObject){
+    console.log('myObject.$(property)= $(myObject)')
 }
+
+

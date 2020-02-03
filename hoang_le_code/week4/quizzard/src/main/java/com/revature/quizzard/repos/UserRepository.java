@@ -1,5 +1,6 @@
 package com.revature.quizzard.repos;
 
+import com.revature.quizzard.exceptions.QuizzardException;
 import com.revature.quizzard.models.Role;
 import com.revature.quizzard.models.User;
 import com.revature.quizzard.util.ConnectionFactory;
@@ -10,6 +11,16 @@ import java.util.Optional;
 import java.util.Set;
 
 public class UserRepository implements CrudRepository<User> {
+
+    private static final UserRepository userRepo = new UserRepository();
+
+    public UserRepository() {
+        super();
+    }
+
+    public static UserRepository getInstance() {
+        return userRepo;
+    }
 
     public Set<User> findUsersByRole(Role role) {
 
@@ -25,7 +36,7 @@ public class UserRepository implements CrudRepository<User> {
             users = mapResultSet(rs);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new QuizzardException(e);
         }
 
         return users;
@@ -46,7 +57,7 @@ public class UserRepository implements CrudRepository<User> {
             user = mapResultSet(rs).stream().findFirst();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new QuizzardException(e);
         }
 
         return user;
@@ -68,10 +79,26 @@ public class UserRepository implements CrudRepository<User> {
             user = mapResultSet(rs).stream().findFirst();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new QuizzardException(e);
         }
 
         return user;
+
+    }
+
+    public void confirmAccount(int confirmedUserId) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+
+            String sql = "UPDATE app_user SET confirmed = ? WHERE user_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, 1);
+            pstmt.setInt(2, confirmedUserId);
+            System.out.println(pstmt.executeUpdate());
+
+        } catch (SQLException e) {
+            throw new QuizzardException(e);
+        }
 
     }
 
@@ -80,13 +107,14 @@ public class UserRepository implements CrudRepository<User> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO app_user VALUES (0, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO app_user VALUES (0, ?, ?, ?, ?, ?, ?, 0)";
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
             pstmt.setString(1, newObj.getUsername());
             pstmt.setString(2, newObj.getPassword());
             pstmt.setString(3, newObj.getFirstName());
             pstmt.setString(4, newObj.getLastName());
             pstmt.setInt(5, newObj.getRole().getId());
+            pstmt.setString(6, newObj.getEmail());
 
             int rowsInserted = pstmt.executeUpdate();
 
@@ -101,7 +129,7 @@ public class UserRepository implements CrudRepository<User> {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new QuizzardException(e);
         }
     }
 
@@ -118,7 +146,7 @@ public class UserRepository implements CrudRepository<User> {
             users = mapResultSet(rs);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new QuizzardException(e);
         }
 
         return users;
@@ -140,7 +168,7 @@ public class UserRepository implements CrudRepository<User> {
             user = mapResultSet(rs).stream().findFirst();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new QuizzardException(e);
         }
 
         return user;
@@ -148,58 +176,41 @@ public class UserRepository implements CrudRepository<User> {
     }
 
     @Override
-    public boolean update(User updatedObj) {
-
-        boolean updateSuccessful = false;
+    public void update(User updatedObj) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 
-            String sql = "UPDATE app_user SET username = ?, password = ?, first_name = ?, last_name = ? " +
+            String sql = "UPDATE app_user SET username = ?, password = ?, email = ?, first_name = ?, last_name = ? " +
                     "WHERE user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, updatedObj.getUsername());
             pstmt.setString(2, updatedObj.getPassword());
-            pstmt.setString(3, updatedObj.getFirstName());
-            pstmt.setString(4, updatedObj.getLastName());
-            pstmt.setInt(5, updatedObj.getId());
-
-            int rowsUpdated = pstmt.executeUpdate();
-
-            if (rowsUpdated > 0) {
-                updateSuccessful = true;
-            }
-
+            pstmt.setString(3, updatedObj.getEmail());
+            pstmt.setString(4, updatedObj.getFirstName());
+            pstmt.setString(5, updatedObj.getLastName());
+            pstmt.setInt(6, updatedObj.getId());
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new QuizzardException(e);
         }
-
-        return updateSuccessful;
 
     }
 
     @Override
-    public boolean deleteById(int id) {
-
-        boolean deleteSuccessful = false;
+    public void deleteById(int id) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 
             String sql = "DELETE FROM app_user WHERE user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
+            pstmt.executeUpdate();
 
-            int rowsDeleted = pstmt.executeUpdate();
-
-            if (rowsDeleted > 0) {
-                deleteSuccessful = true;
-            }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new QuizzardException(e);
         }
-
-        return deleteSuccessful;
 
     }
 
@@ -212,9 +223,11 @@ public class UserRepository implements CrudRepository<User> {
             temp.setId(rs.getInt("user_id"));
             temp.setUsername(rs.getString("username"));
             temp.setPassword(rs.getString("password"));
+            temp.setEmail(rs.getString("email"));
             temp.setFirstName(rs.getString("first_name"));
             temp.setLastName(rs.getString("last_name"));
             temp.setRole(Role.getById(rs.getInt("role_id")));
+            temp.setAccountConfirmed(rs.getInt("confirmed"));
             users.add(temp);
         }
 

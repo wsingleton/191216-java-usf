@@ -4,12 +4,12 @@ INSERT INTO user_role VALUES (0, 'BASIC_USER');
 INSERT INTO user_role VALUES (0, 'PREMIUM_USER');
 INSERT INTO user_role VALUES (0, 'LOCKED');
 
-INSERT INTO app_user VALUES (0, 'wsingleton', 'revature', 'Wezley', 'Singleton', 1);
-INSERT INTO app_user VALUES (0, 'rconnell', 'rolltide', 'Robert', 'Connell', 1);
-INSERT INTO app_user VALUES (0, 'skelsey', 'revasteve', 'Steven', 'Kelsey', 2);
-INSERT INTO app_user VALUES (0, 'mknighten', 'knifehand', 'Jason', 'Knighten', 3);
-INSERT INTO app_user VALUES (0, 'bkruppa', 'revature', 'Blake', 'Kruppa', 4);
-INSERT INTO app_user VALUES (0, 'trolluser', 'banned', 'Eric', 'Cartman', 5);
+INSERT INTO app_user VALUES (0, 'wsingleton', 'revature', 'Wezley', 'Singleton', 1, 'wezley.singleton@revature.com', 1);
+INSERT INTO app_user VALUES (0, 'rconnell', 'rolltide', 'Robert', 'Connell', 1, 'robert.connell@revature.com', 1);
+INSERT INTO app_user VALUES (0, 'skelsey', 'revasteve', 'Steven', 'Kelsey', 2, 'steven.kelsey@revature.com', 1);
+INSERT INTO app_user VALUES (0, 'mknighten', 'knifehand', 'Jason', 'Knighten', 3, 'jason.knighten@revature.com', 1);
+INSERT INTO app_user VALUES (0, 'bkruppa', 'revature', 'Blake', 'Kruppa', 4, 'blake.kruppa@revature.com', 1);
+INSERT INTO app_user VALUES (0, 'trolluser', 'banned', 'Eric', 'Cartman', 5, 'eric.cartman@gmail.com', 1);
 
 INSERT INTO category VALUES (0, 'Core Java');
 INSERT INTO category VALUES (0, 'Java Threads');
