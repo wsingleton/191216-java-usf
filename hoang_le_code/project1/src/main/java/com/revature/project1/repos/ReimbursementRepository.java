@@ -4,6 +4,7 @@ import com.revature.project1.models.Reimbursement;
 import com.revature.project1.models.Status;
 import com.revature.project1.models.Type;
 import com.revature.project1.util.ConnectionFactory;
+import oracle.jdbc.OracleTypes;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -51,9 +52,12 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM ers_reimbursement";
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+
+            String sql = "{CALL get_all_reimb(?)}";
+            CallableStatement cstmt = conn.prepareCall(sql);
+            cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            cstmt.execute();
+            ResultSet rs = (ResultSet)  cstmt.getObject(1);
             reimb = mapResultSet(rs);
 
         } catch (SQLException e) {

@@ -47,13 +47,17 @@ public class CreateReimbServlet extends HttpServlet {
 
             Status status = Status.getById(creds.getStatusID());
             Type type =Type.getById(creds.getTypeId());
+            if(creds.getAmount() == null || creds.getAmount().equalsIgnoreCase("0") || creds.getAmount().equalsIgnoreCase("")){
+                resp.setStatus(400);
+            }else {
+                Reimbursement reimb = new Reimbursement(creds.getAmount(),creds.getSubTime(),creds.getResTime(),creds.getDesc(),
+                        creds.getReceipt(),creds.getAuthId(),creds.getResolver(),status,type);
+                repo.save(reimb);
+                String newUserJSON = mapper.writeValueAsString(reimb);
+                writer.write(newUserJSON);
+                resp.setStatus(201);
+            }
 
-            Reimbursement reimb = new Reimbursement(creds.getAmount(),creds.getSubTime(),creds.getResTime(),creds.getDesc(),
-                                    creds.getReceipt(),creds.getAuthId(),creds.getResolver(),status,type);
-            repo.save(reimb);
-            String newUserJSON = mapper.writeValueAsString(reimb);
-            writer.write(newUserJSON);
-            resp.setStatus(201);
 
 
         }

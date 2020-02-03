@@ -55,7 +55,8 @@ public class RegisterServlet extends HttpServlet {
             repo.save(newUser);
             String newUserJSON = mapper.writeValueAsString(newUser);
             writer.write(newUserJSON);
-            resp.setStatus(201);
+
+            resp.setStatus(200);
 
 
         }

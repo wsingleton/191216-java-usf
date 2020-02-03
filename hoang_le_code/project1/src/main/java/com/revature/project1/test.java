@@ -34,9 +34,9 @@ public class test {
         for(Reimbursement stock : aaa){
             System.out.println(stock.toString());
         }
+        Reimbursement up = new Reimbursement(0,"qwe",null,null,"dasd",null,1,1,st,ty);
 
-
-        System.out.println();
+        System.out.println("update : " + re.update(up));
         System.out.println("hoang " + reimbJSON1);
     }
 }

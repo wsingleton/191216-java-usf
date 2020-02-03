@@ -1,7 +1,6 @@
 window.onload = () => {
     console.log('did the JS load?');
     loadLogin();
-    document.getElementById('logout').addEventListener('click', logout);
 }
 
 
@@ -80,7 +79,7 @@ function register() {
             }
 
             if (xhr.status === 401) {
-                document.getElementById('login-message').innerText = 'Login failed!';
+                document.getElementById('login-message').innerText = 'failed!';
             }
         }
     }
@@ -101,6 +100,10 @@ function getReimb(user) {
             document.getElementById('root').innerHTML = xhr.responseText;
             document.getElementById('summit1').addEventListener("click",() => {
                 createReimb(user)
+            });
+
+            document.getElementById('back').addEventListener("click",() => {
+                getEmp(user)
             });
         }
     }
@@ -178,7 +181,7 @@ function createReimb(user) {
             if (xhr.status === 401) {
                 document.getElementById('login-message').innerText = ' failed!';
             }
-            if (xhr.status === 401) {
+            if (xhr.status === 400) {
                 document.getElementById('login-message').innerText = 'failed!';
             }
         }
@@ -458,6 +461,7 @@ function getUpdate(user){
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
             document.getElementById('summit2').addEventListener("click",() => {createUpdate(user)});
+            document.getElementById('back2').addEventListener("click",() => {getMana(user)});
         }
     }
 

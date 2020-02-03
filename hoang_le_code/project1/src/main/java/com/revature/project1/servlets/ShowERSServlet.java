@@ -51,8 +51,9 @@ public class ShowERSServlet extends HttpServlet {
         try {
 
             IdCreds creds = mapper.readValue(req.getInputStream(), IdCreds.class);
+            Role a = Role.valueOf(creds.getRole());
             int id = creds.getId();
-            if (id == 1){
+            if (a.getId() == 1){
                  reimb =  repo.findAll();
             }
             else {

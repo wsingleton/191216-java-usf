@@ -50,10 +50,16 @@ public class UpdateReimbServlet extends HttpServlet {
 
             Reimbursement reimb = new Reimbursement(creds.getAuthId(),creds.getAmount(),creds.getSubTime(),creds.getResTime(),creds.getDesc(),
                     creds.getReceipt(),creds.getAuthId(),creds.getResolver(),status,type);
-            repo.update(reimb);
-            String newUserJSON = mapper.writeValueAsString(reimb);
-            writer.write(newUserJSON);
-            resp.setStatus(201);
+            if(creds.getAuthId() == 0){
+                resp.setStatus(400);
+
+            }else {
+                repo.update(reimb);
+                String newUserJSON = mapper.writeValueAsString(reimb);
+                writer.write(newUserJSON);
+                resp.setStatus(201);
+            }
+
 
 
         }
