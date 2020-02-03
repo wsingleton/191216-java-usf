@@ -226,8 +226,10 @@ function loadReimb(user){
     xhr.onreadystatechange = () =>{
     if (xhr.readyState===4 && xhr.status ===200){
         document.getElementById('root').innerHTML = xhr.responseText;
+document.getElementById('return').addEventListener('click', ()=>{
+               loadDashboard(user);
 
-        getReimbusements(user);
+               });        getReimbusements(user);
 
     }
    }
@@ -427,8 +429,9 @@ function loadEdit(user, reimbId, amount, description, status, type ){
                                                     xhr.onreadystatechange=()=>{
                                                      if(xhr.onreadystatechange===4 && xhr.status===201){
                                                      console.log('clicked ' + dataJSON )
-                                                         loadManager();
+
                                                      }
+                                                       loadManager(user);
                                                     }
                                                  })
 
