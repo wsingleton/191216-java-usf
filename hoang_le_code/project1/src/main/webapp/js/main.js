@@ -51,13 +51,6 @@ function register() {
         email: email
     };
 
-   
-        if(username.length > 0) { 
-            document.getElementById('register1').disabled = false; 
-        } else { 
-            document.getElementById('register1').disabled = true;
-        }
-    
 
     let credJSON = JSON.stringify(creds);
     let xhr = new XMLHttpRequest();
@@ -114,7 +107,9 @@ function getReimb(user) {
 }
 
 function createReimb(user) {
-    console.log('load create ')
+    console.log('load create ');
+    console.log(user);
+
 
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -159,8 +154,11 @@ function createReimb(user) {
 
                 let reimb = JSON.parse(xhr.responseText);
                 console.log(reimb.desc);
-                // loadDashboard();
-                loadRegisterSuccess();
+                if(user.id === 1){
+                    getMana(user);
+                }else{
+                    getEmp(user);
+                }
 
             }
             if (xhr.status === 201) {
@@ -168,15 +166,20 @@ function createReimb(user) {
                 let reimb = JSON.parse(xhr.responseText);
                 console.log(reimb.desc);
                 // loadDashboard();
-                loadRegisterSuccess();
+                if(user.id === 1){
+                    getMana(user);
+                }else{
+                    getEmp(user);
+                }
+               
 
             }
 
             if (xhr.status === 401) {
-                document.getElementById('login-message').innerText = 'Login failed!';
+                document.getElementById('login-message').innerText = ' failed!';
             }
             if (xhr.status === 401) {
-                document.getElementById('login-message').innerText = 'Login failed!';
+                document.getElementById('login-message').innerText = 'failed!';
             }
         }
     }
@@ -365,6 +368,7 @@ function loadMana(user, check) {
             document.getElementById('login').addEventListener("click", loadLogin);
             let name = "welcome back : " + user.username + " , your role is : " + user.role;
             document.getElementById('name').innerText = name;
+            
 
 
 
@@ -408,10 +412,41 @@ function loadMana(user, check) {
 
             document.getElementById("update").addEventListener("click", () => {getUpdate(user)});
 
+            let sId = document.getElementById('sId').value;
+            document.getElementById("search").addEventListener("click", () => {getSearch(user,sId)});
+            document.getElementById("seeall").addEventListener("click", () => {getMana(user)});
+
         }
     }
 
 }
+
+function getSearch(user,sId){
+
+    sId = document.getElementById('sId').value;
+    let creds = {
+        sId : sId,
+    };
+
+    console.log('in get search');
+    console.log(user);
+    console.log(sId);
+    let credJSON = JSON.stringify(creds);
+    console.log(credJSON);
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'searchId', true);
+    xhr.send(credJSON);
+    xhr.onreadystatechange = () => {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let a = JSON.parse(xhr.responseText);
+            loadMana(user, a);
+
+        }
+    }
+}
+
+
 
 function getUpdate(user){
     console.log('in get update');
@@ -476,7 +511,7 @@ function createUpdate(user){
                 let reimb = JSON.parse(xhr.responseText);
                 console.log(reimb.desc);
                 // loadDashboard();
-                loadRegisterSuccess();
+                getMana(user);
 
             }
             if (xhr.status === 201) {
@@ -484,7 +519,7 @@ function createUpdate(user){
                 let reimb = JSON.parse(xhr.responseText);
                 console.log(reimb.desc);
                 // loadDashboard();
-                loadRegisterSuccess();
+                getMana(user);
 
             }
 
@@ -512,3 +547,4 @@ function logout() {
         }
     }
 }
+

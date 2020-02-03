@@ -1,27 +1,39 @@
-<div class="container" id="login-component">
+<div class="container">
+    <h1 style="color: blue;" style="text-align: center;" class="display-3">Welcome To Reimbursement </h1>
+    <p class="lead" id="name" style="color: blue;" style="background-color: burlywood;"></p>
+
+    <div id="check"></div>
+
+    <br />
+    <br />
+   
     
-    <h1 style="color-interpolation-filters: linearRGB;">Hello</h1>
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          <h1   style="color: blue;"  style="text-align: center;" class="display-3">Welcome To Reimbursement </h1>
-          <p class="lead" id="name" ></p>
-
-          <div  id ="check"></div>
-        
-          <br/>
-               <br/><br/>
-               <button type="button"  id= "new" class="btn btn-primary btn-block">create new Reimbursement</button>
-               <br/>
-               <button type="button" id="update" class="btn btn-block btn-success" >Approve or Deny</button>
-               <br/>
-               <button type="button" id="login" class="btn btn-block btn-secondary" >back to login</button>
-
+        <div class="form-group">
+            <input type="number" min="0" class="form-control" id="sId" placeholder=0 required="required">
 
         </div>
-      
+        <br />
+        <div class="row">
 
-      </div>
- 
-
-
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <button type="button" id="search" class="btn btn-danger">Search by user Id</button>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <button type="button" id="seeall" class="btn btn-danger">See all</button>
+                </div>
+            </div>
+        </div>
+        
+        <br />
+        <br />
+        <button type="button" id="update" class="btn btn-block btn-success">Approve or Deny</button>
+        <br />
+        <button type="button" id="new" class="btn btn-primary btn-block">create new Reimbursement</button>
+        <br />
+        <button type="button" id="login" class="btn btn-block btn-secondary">back to login</button>
+        
 </div>
+
