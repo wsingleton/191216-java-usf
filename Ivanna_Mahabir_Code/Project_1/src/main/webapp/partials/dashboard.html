@@ -1,20 +1,42 @@
 
 <div class="container" id="dashboard-component">
+<div>
+    <h3 id="first"></h3> <h3 id="last"></h3>
+</div>
+ <br>
+    <div>
+        <h3>Reimburstment form</h3>
+        <br>
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" min="0" class="form-control" id="amount" placeholder="Amount">
+        </div>
 
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" placeholder="Description">
+        </div>
 
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" placeholder="Username">
+        <div class="form-group">
+            <label>Type</label>
+            <input type="radio" class="form-control" name="type" value="1" placeholder="role" checked>Lodging
+            <input type="radio" class="form-control" name="type" value="2" placeholder="role">Travel
+            <input type="radio" class="form-control" name="type" value="3" placeholder="role">Food
+            <input type="radio" class="form-control" name="type" value="4" placeholder="role">Other
+        </div>
+        <br><br>
+        <button class="btn btn-block btn-primary" id="reimb" onclick="reimb">Submit</button>
+        <br><br>
+        <button class="btn btn-block btn-primary" id="logout" onclick="logout">Logout</button>
+
+        <br><br>
     </div>
-
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password">
-    </div>
-
-    <button type="submit" class="btn btn-block btn-primary" id="login" onclick="login">Login</button>
     <br><br>
 
-    <br><br>
+    <div id="table">
+
+
+    </div>
+
 </div>
 

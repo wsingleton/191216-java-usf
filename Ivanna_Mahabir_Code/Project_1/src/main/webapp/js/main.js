@@ -16,6 +16,30 @@ function loadLogin() {
        }
     }
 
+    function loadDashboard() {
+        let xhr = new XMLHttpRequest();
+           xhr.open('GET', "dashboard.view", true);
+           xhr.send();
+           xhr.onreadystatechange = () => {
+               if(xhr.readyState === 4 && xhr.status === 200) {
+                   document.getElementById("root").innerHTML = xhr.responseText;
+                    dashboard(user);
+               }
+           }
+        }
+
+    function loadRegister() {
+        let xhr = new XMLHttpRequest();
+           xhr.open('GET', "register.view", true);
+           xhr.send();
+           xhr.onreadystatechange = () => {
+               if(xhr.readyState === 4 && xhr.status === 200) {
+                   document.getElementById("root").innerHTML = xhr.responseText;
+                   document.getElementById("register").addEventListener("click", register);
+               }
+           }
+        }
+
 
 function login() {
     let username = document.getElementById('username').value;
@@ -36,9 +60,8 @@ function login() {
             if(xhr.readyState === 4){
                 if(xhr.status === 200){
                 user = JSON.parse(xhr.responseText);
-                dashboard(user);
+                loadDashboard(user);
                 console.log(user);
-
 
                 }
                 if (xhr.status === 401) {
@@ -74,8 +97,9 @@ function login() {
                 if(xhr.readyState === 4){
                     if(xhr.status === 200){
                     let user = JSON.parse(xhr.responseText);
+                    dashboard(user);
                     console.log(user);
-                    loadLogin();
+                    loginLogin();
 
                     }
                     if (xhr.status === 401) {
@@ -88,9 +112,52 @@ function login() {
 
     }
 
-function dashboard(){
+function dashboard(user){
+console.log(user);
+let dashboard = document.getElementById('dashboard-component"');
+document.getElementById("first").innerText = user.first_name;
+document.getElementById("last").innerText = user.last_name;
 
 
+
+}
+
+function reimb() {
+//reimb form
+let amount = document.getElementById("amount");
+let submitted = new Date();
+let description = document.getElementById("description");
+let author = user.user_id;
+let type = document.getElementById("type");
+let status = 3;
+
+let reimb = {
+    amount: amount,
+    submitted: submitted,
+    description: description,
+    author: author,
+    type: type,
+    status: 3
+};
+
+    let reimbJSON = JSON.stringify(reimb);
+
+    let xhr = new XMLHttpRequest();
+        xhr.open('POST', "reimb", true);
+        xhr.send(reimbJSON);
+        xhr.onreadystatechange = () => {
+            if(xhr.readyState === 4){
+                if(xhr.status === 200){
+                reim = JSON.parse(xhr.responseText);
+                loadDashboard(reim);
+                console.log(reim);
+
+                }
+                if (xhr.status === 401) {
+                    document.getElementById('reimb-message').innerText = 'Submission failed!';
+                }
+            }
+        }
 }
 
     function logout() {
