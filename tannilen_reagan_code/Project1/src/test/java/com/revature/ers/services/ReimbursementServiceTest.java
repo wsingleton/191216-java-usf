@@ -37,13 +37,15 @@ public class ReimbursementServiceTest {
         sut=null;
         mockReimbs.removeAll(mockReimbs);
     }
-    @Test(expected = InvalidInputException.class)
+    @Test
     public void submitNewInvalidType(){
-        sut.submitNewReimbursement(500.66,85,2);
+        boolean result=sut.submitNewReimbursement(500.66,85,2);
+        assertEquals(false, result);
     }
-    @Test(expected = InvalidInputException.class)
+    @Test
     public void submitNewNegativeAmt(){
-        sut.submitNewReimbursement(-1.25,3,2);
+        boolean result=sut.submitNewReimbursement(-1.25,3,2);
+        assertEquals(false,result);
     }
     @Test
     public void submitNewValid(){
