@@ -23,6 +23,8 @@ public class Reimbursement {
         this.reimbursementTypeId = reimbursementTypeId;
     }
 
+
+
     public Reimbursement(int id, String amount, String timeSubmitted, String timeResolved, String description, String receipt, int authorById, int resolverById, ReimbursementStatus reimbursementStatusId, ReimbursementType reimbursementTypeId) {
         this.id = id;
         this.amount = amount;
@@ -59,6 +61,13 @@ public class Reimbursement {
         this.description = description;
         this.authorById = authorById;
         this.reimbursementTypeId = reimbursementTypeId;
+    }
+
+    public Reimbursement(String amount, String description, int reimbursementTypeId) {
+        System.out.println("My constructor");
+        this.amount = amount;
+        this.description = description;
+        this.reimbursementTypeId = ReimbursementType.getReimbursementTypeById(reimbursementTypeId);
     }
 
     public int getId() {
@@ -137,8 +146,12 @@ public class Reimbursement {
         return reimbursementTypeId;
     }
 
-    public void setReimbursementTypeId(ReimbursementType reimbursementTypeId) {
-        this.reimbursementTypeId = reimbursementTypeId;
+    public void setReimbursementTypeId(int reimbursementTypeId) {
+        this.reimbursementTypeId = ReimbursementType.getReimbursementTypeById(reimbursementTypeId);
+    }
+
+    public void setReimbursementTypebyRole(ReimbursementType reimbursementType) {
+        this.reimbursementTypeId = reimbursementType;
     }
 
     @Override

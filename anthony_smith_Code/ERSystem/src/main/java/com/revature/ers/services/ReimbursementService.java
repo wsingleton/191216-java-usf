@@ -5,21 +5,22 @@ import com.revature.ers.exceptions.ResourceNotFoundException;
 import com.revature.ers.models.Reimbursement;
 import com.revature.ers.repos.ReimbursementRepository;
 
-import java.util.Optional;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 public class ReimbursementService {
+
     private ReimbursementRepository reimbursementRepository;
 
     public ReimbursementService(ReimbursementRepository reimbursementRepository) {
         this.reimbursementRepository = reimbursementRepository;
     }
 
-    public void create(Reimbursement newReimbursement) {
-        if (!isReimbursementVaild(newReimbursement)) throw new InvalidRequestException();
+
+    public Reimbursement register(Reimbursement newReimbursement){
+        System.out.println(newReimbursement);
+        if(!isReimbursementValid(newReimbursement)) throw new InvalidRequestException();
         reimbursementRepository.save(newReimbursement);
+        return newReimbursement;
     }
 
     public Set<Reimbursement> getAllReimbursements() {
@@ -41,50 +42,13 @@ public class ReimbursementService {
         return reimbursementRepository.update(updateReimbursement);
     }
 
-    public boolean isReimbursementVaild(Reimbursement newReimbursment){
+    public boolean isReimbursementValid(Reimbursement newReimbursement){
+        System.out.println(newReimbursement);
+
+        if (newReimbursement == null) return  false;
+        if (newReimbursement.getAmount() == null || newReimbursement.getAmount().trim().equals("")) return false;
+
         return true;
     }
 
-
-
-
-
-//    public SortedSet<Reimbursement> sortUsers(String sortCriterion, Set<User> usersForSorting) {
-//
-//        SortedSet<User> users = new TreeSet<>(usersForSorting);
-//
-//        switch (sortCriterion.toLowerCase()) {
-//            case "username":
-//                users = users.stream()
-//                        .collect(Collectors.toCollection(() -> {
-//                            return new TreeSet<>(Comparator.comparing(User::getUsername, String::compareTo));
-//                        }));
-//                break;
-//            case "first":
-//                users = users.stream()
-//                        .collect(Collectors.toCollection(() -> {
-//                            return new TreeSet<>(Comparator.comparing(User::getFirstName, String::compareTo));
-//                        }));
-//                break;
-//            case "last":
-//                users = users.stream()
-//                        .collect(Collectors.toCollection(() -> {
-//                            return new TreeSet<>(Comparator.comparing(User::getLastName, String::compareTo));
-//                        }));
-//                break;
-//            case "role":
-//                users = users.stream()
-//                        .collect(Collectors.toCollection(() -> {
-//                            return new TreeSet<>(Comparator.comparing(User::getRole, Enum::compareTo));
-//                        }));
-//                break;
-//            default:
-//                throw new InvalidRequestException();
-//
-//        }
-//
-//        return users;
-//
-//    }
-//
 }

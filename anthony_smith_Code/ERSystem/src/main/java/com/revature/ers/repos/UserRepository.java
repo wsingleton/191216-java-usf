@@ -165,9 +165,9 @@ public class UserRepository implements CrudRepository <User> {
             pstmt.setString(5, updateObj.getEmail());
             pstmt.setInt(5, updateObj.getId());
 
-            int rowsUpdataed = pstmt.executeUpdate();
+            int rowsUpdated = pstmt.executeUpdate();
 
-            if (rowsUpdataed > 0){
+            if (rowsUpdated > 0){
                 updateSuccessful = true;
             }
 

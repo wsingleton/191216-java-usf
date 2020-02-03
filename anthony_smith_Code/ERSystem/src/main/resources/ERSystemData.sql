@@ -6,6 +6,10 @@ INSERT INTO ERS_USERS (ers_username, ers_password, user_first_name,
                         user_last_name, user_email, user_role_id)
 VALUES ('charris', 'p4ssw0rd2', 'Calvin', 'Harris', 'charris@ers.com', 2 );
 
+INSERT INTO ERS_USERS (ers_users_id ,ers_username, ers_password, user_first_name,
+                        user_last_name, user_email, user_role_id)
+VALUES ('0', 'dummy2','p4ssw0rd5', 'dummy2', 'dummy2', 'dummy2@dummy.com', 2 );
+
 
 
 INSERT INTO ers_reimbursement_type
@@ -38,3 +42,6 @@ VALUES(2, 'APPROVE');
 
 INSERT INTO ers_reimbursement_status
 VALUES(3, 'DENY');
+
+
+INSERT INTO ers_reimbursement VAULES

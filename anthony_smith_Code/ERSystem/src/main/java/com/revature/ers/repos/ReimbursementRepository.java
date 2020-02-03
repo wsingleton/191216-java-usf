@@ -53,23 +53,17 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public void save(Reimbursement newObj) {
+        System.out.println(newObj);
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = "INSERT INTO ers_reimbursement VALUES (0, ?, CURRENT_TIMESTAMP, null, ?, null, ?, 0, 1, ?)";
+            String sql = "INSERT INTO ers_reimbursement VALUES (0, ?, CURRENT_TIMESTAMP, null, ?, null, ?, null, 1, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, newObj.getAmount());
+            pstmt.setDouble(1, Double.parseDouble(newObj.getAmount()));
             pstmt.setString(2, newObj.getDescription());
             pstmt.setInt(3, newObj.getAuthorById());
-            pstmt.setInt(4, newObj.getReimbursementStatusId().getId());
-            pstmt.setInt(5, newObj.getReimbursementTypeId().getId());
-
-
+            pstmt.setInt(4, newObj.getReimbursementTypeId().getId());
             int rowsInserted = pstmt.executeUpdate();
-
             if (rowsInserted != 0) {
-
                 ResultSet rs = pstmt.getGeneratedKeys();
-
                 while (rs.next()) {
                     newObj.setId(rs.getInt(1));
                 }
@@ -142,7 +136,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
             temp.setAuthorById(rs.getInt("reimb_author"));
             temp.setDescription(rs.getString("reimb_description"));
             temp.setReimbursementStatusId(ReimbursementStatus.getReimbursementStatusById(rs.getInt("reimb_status_id")));
-            temp.setReimbursementTypeId(ReimbursementType.getReimbursementTypeById(rs.getInt("reimb_type_id")));
+            temp.setReimbursementTypebyRole(ReimbursementType.getReimbursementTypeById(rs.getInt("reimb_type_id")));
             reimbursement.add(temp);
         }
 
