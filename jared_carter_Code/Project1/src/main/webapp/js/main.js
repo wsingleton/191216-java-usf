@@ -69,6 +69,7 @@ function login() {
         xhr.onreadystatechange = () => {
             if(xhr.readyState == 4 && xhr.status == 200) {
                 document.getElementById('root').innerHTML = xhr.responseText
+                document.getElementById('refreshReimb').addEventListener('click', loadManagerView)
                 document.getElementById('logout').addEventListener('click', logout)
                 loadEmployeeReimb()
             }
@@ -92,7 +93,7 @@ function login() {
              
              document.getElementById('root').innerHTML = xhr.responseText
              
-             document.getElementById('submitReimb').addEventListener('click', createReimb)
+             document.getElementById('submitReimb').addEventListener('click', createReimb, loadEmployeeView)
              document.getElementById('refreshReimb').addEventListener('click', loadEmployeeView)
              document.getElementById('logout').addEventListener('click', logout)
             
