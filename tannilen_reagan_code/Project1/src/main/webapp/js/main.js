@@ -250,8 +250,8 @@ function makeMgrTable(req) {
         reimbDesc.innerText=req.desc;
         let appID="approve"+req.reimbID;
         let denID="deny"+req.reimbID;
-        approve.innerHTML="<button id=\""+appID+"\" class=\"approved\" title=\"Approve request\">✓</button>"
-        deny.innerHTML="<button id=\""+denID+"\" class=\"denied\" title=\"Deny request\">X</button>"
+        approve.innerHTML="<button id=\""+appID+"\" class=\"accepted\" title=\"Approve request\">O</button>"
+        deny.innerHTML="<button id=\""+denID+"\" class=\"rejected\" title=\"Deny request\">X</button>"
         document.getElementById(appID).addEventListener("click", ()=>resolve(req.reimbID, true));
         document.getElementById(denID).addEventListener("click", ()=>resolve(req.reimbID, false));
     }
@@ -349,8 +349,8 @@ function makeStandardTable(req) {
         reimbStatus.setAttribute("title", "Request pending.");
     }
     if (req.status==2){
-        reimbStatus.innerText="✓";
-        reimbStatus.setAttribute("class","approved");
+        reimbStatus.innerText="O";
+        reimbStatus.setAttribute("class","accepted");
         reimbStatus.setAttribute("alt", "Request approved.");
         reimbStatus.setAttribute("title", "Request approved.");
     }
