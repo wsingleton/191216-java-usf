@@ -2,6 +2,8 @@ package com.revature.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import com.revature.dtos.dto;
+import com.revature.expections.ResourceNotFoundException;
 import com.revature.expections.ResourcePersistenceException;
 import com.revature.models.Reimbursement;
 import com.revature.models.ReimbursementStatus;
@@ -65,25 +67,21 @@ public class ReimbursementServlet extends HttpServlet {
 
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter writer = resp.getWriter();
-
+        HttpSession session = req.getSession(false);
         resp.setContentType("application/json");
-        User thisUser = (User) req.getSession().getAttribute("this-user");
-
-
         try {
-            Reimbursement updatedReimbursement = mapper.readValue(req.getInputStream(), Reimbursement.class);
-            reimbursementService.updateReimbursement(updatedReimbursement);
-            resp.setStatus(201);
-        } catch (MismatchedInputException e) {
-            resp.setStatus(400);
-        } catch (ResourcePersistenceException e) {
-            resp.setStatus(409);
-        } catch (Exception e) {
-
-
+            dto transfer = mapper.readValue(req.getInputStream(), dto.class);
+            Reimbursement reimbursement = new Reimbursement();
+            reimbursement.setId(transfer.getId());
+            reimbursement.setReimbursementStatusId(ReimbursementStatus.getReimbursementStatusById(transfer.getStatus()));
+            System.out.println(reimbursement);
+            reimbursementService.update(reimbursement);
+        } catch (MismatchedInputException e){
+        } catch (ResourceNotFoundException e){
+        } catch (Exception e){
         }
     }
 }

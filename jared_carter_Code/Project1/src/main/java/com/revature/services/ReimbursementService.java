@@ -38,14 +38,8 @@ public class ReimbursementService {
         return reimbursementRepository.findAllById(id);
     }
 
-    public boolean updateReimbursement(Reimbursement updatedReimb ) {
-
-        Boolean reimbursementUpdated;
-
-        reimbursementUpdated = reimbursementRepository.update(updatedReimb);
-
-        return reimbursementUpdated;
-
+    public boolean update(Reimbursement updateReimbursement){
+        return reimbursementRepository.update(updateReimbursement);
     }
 
 

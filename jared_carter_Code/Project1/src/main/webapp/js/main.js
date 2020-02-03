@@ -259,8 +259,9 @@ function reimburseListsManager(reimbursements){
     deny.innerText = 'deny';
 
 
-    approve.addEventListener('click', () =>{updateStatus(reimbursements[i].reimbursementStatusId, 2) });
-    deny.addEventListener('click', () =>{updateStatus(reimbursements[i].reimbursementStatusId, 3) });
+    approve.addEventListener('click', () => {approveReimb(reimbursements[i].id)});
+    deny.addEventListener('click', () => {denyReimb(reimbursements[i].id)});
+
 
     buttonentry.appendChild(approve);
     buttonentry.appendChild(deny);
@@ -276,58 +277,35 @@ function reimburseListsManager(reimbursements){
     
 }
 
-function approveReimbursement(reimbursements) {
-
-    let reimbJSON = JSON.stringify(reimbursements);
-
+function approveReimb(id){
+    let dto = {
+        id:id,
+        status:2
+    };
+    let dtoJSON = JSON.stringify(dto)
     let xhr = new XMLHttpRequest();
     xhr.open('PUT', 'reimb', true)
-    xhr.send(reimbJSON);
+    xhr.send(dtoJSON);
     xhr.onreadystatechange = () => {
-        if(xhr.readyState === 4 && xhr.status === 201) {
-            let reimbursements = JSON.parse(xhr.responseText);
-            console.log(reimbursements);
-            loadManagerView();
-        }
-    }
-
-
-}
-
-function denyReimbursement(reimbursements) {
-
-    let reimbJSON = JSON.stringify(reimbursements);
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('PUT', 'reimb', true)
-    xhr.send(reimbJSON);
-    xhr.onreadystatechange = () => {
-        if(xhr.readyState === 4 && xhr.status === 201) {
-            let reimbursements = JSON.parse(xhr.responseText);
-            console.log(reimbursements);
+        if(xhr.readyState === 4 && xhr.status === 200) {
             loadManagerView();
         }
     }
 }
 
+function denyReimb(id){
+    let dto = {
+        id:id,
+        status:3
+    };
+    let dtoJSON = JSON.stringify(dto)
+    let xhr = new XMLHttpRequest();
+    xhr.open('PUT', 'reimb', true)
+    xhr.send(dtoJSON);
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState === 4 && xhr.status === 200) {
+            loadManagerView();
+        }
+    }
+}
 	
-function updateStatus(id,) {
-	let status = 	
-    xhr.open("PUT", "reimb", true);
-    xhr.setRequestHeader("Content-type", "application/json");
-    let toSend = JSON.stringify();
-    xhr.send(toSend);
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        
-        if(xhr.readyState == 4 && xhr.status == 200) {
-            
-                    
-            loadManagerView();
-            
-        }
-        
-    }
-    
-    
-}

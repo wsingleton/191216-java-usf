@@ -29,7 +29,7 @@ public class ApproveServlet extends HttpServlet {
 
             Reimbursement reimbursement = mapper.readValue(req.getInputStream(), Reimbursement.class);
             reimbursement.setReimbursementStatusId(ReimbursementStatus.APPROVED);
-            reimbursementService.updateReimbursement(reimbursement);
+            reimbursementService.update(reimbursement);
             resp.setStatus(201);
 
         } catch (MismatchedInputException e) {

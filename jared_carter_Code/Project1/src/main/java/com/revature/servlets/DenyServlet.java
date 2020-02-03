@@ -29,7 +29,7 @@ public class DenyServlet extends HttpServlet {
 
             Reimbursement reimbursement = mapper.readValue(req.getInputStream(), Reimbursement.class);
             reimbursement.setReimbursementStatusId(ReimbursementStatus.DENIED);
-            reimbursementService.updateReimbursement(reimbursement);
+            reimbursementService.update(reimbursement);
             resp.setStatus(201);
 
         } catch (MismatchedInputException e) {
