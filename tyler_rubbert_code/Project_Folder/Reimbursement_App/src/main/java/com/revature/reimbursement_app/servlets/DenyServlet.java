@@ -6,6 +6,8 @@ import com.revature.reimbursement_app.models.Reimbursement;
 import com.revature.reimbursement_app.models.ReimbursementStatus;
 import com.revature.reimbursement_app.repos.ReimbursementRepo;
 import com.revature.reimbursement_app.services.ReimbursementService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +19,8 @@ import java.io.IOException;
 @WebServlet("/deny")
 public class DenyServlet extends HttpServlet {
 
-    public final ReimbursementService reimbService = new ReimbursementService(new ReimbursementRepo());
+    private final ReimbursementService reimbService = new ReimbursementService(new ReimbursementRepo());
+    private static final Logger LOG = LogManager.getLogger(DenyServlet.class);
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,14 +30,17 @@ public class DenyServlet extends HttpServlet {
 
         try {
 
+            LOG.info("Updates the selected reimbursement to status: denied");
             Reimbursement reimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
             reimb.setStatus(ReimbursementStatus.DENIED);
             reimbService.updateReimbursement(reimb);
             resp.setStatus(201);
 
         } catch (MismatchedInputException e) {
+            LOG.warn(e.getMessage());
             resp.setStatus(400);
         } catch (Exception e) {
+            LOG.warn(e.getMessage());
             resp.setStatus(500);
         }
 

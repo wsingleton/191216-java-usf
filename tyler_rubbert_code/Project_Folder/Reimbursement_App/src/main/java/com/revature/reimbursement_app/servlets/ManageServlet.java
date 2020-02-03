@@ -8,6 +8,8 @@ import com.revature.reimbursement_app.models.Reimbursement;
 import com.revature.reimbursement_app.models.ReimbursementStatus;
 import com.revature.reimbursement_app.repos.ReimbursementRepo;
 import com.revature.reimbursement_app.services.ReimbursementService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +24,7 @@ import java.util.Set;
 public class ManageServlet extends HttpServlet {
 
     private final ReimbursementService reimbService = new ReimbursementService(new ReimbursementRepo());
+    private static final Logger LOG = LogManager.getLogger(ManageServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,16 +34,19 @@ public class ManageServlet extends HttpServlet {
 
         try {
 
+            LOG.info("Gets all reimbursements with a pending status");
             Set<Reimbursement> reimbursements = reimbService.getReimbursementsByStatus(ReimbursementStatus.PENDING);
             String reimbursementsJSON = mapper.writeValueAsString(reimbursements);
             resp.getWriter().write(reimbursementsJSON);
 
         } catch(Exception e) {
+            LOG.warn(e.getMessage());
             resp.setStatus(400);
         }
 
     }
 
+    // unused
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

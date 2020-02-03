@@ -7,6 +7,8 @@ import com.revature.reimbursement_app.exceptions.ResourcePersistenceException;
 import com.revature.reimbursement_app.models.User;
 import com.revature.reimbursement_app.repos.UserRepository;
 import com.revature.reimbursement_app.services.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +23,7 @@ import java.util.Set;
 public class UserServlet extends HttpServlet {
 
     private final UserService userService = new UserService(new UserRepository());
+    private static final Logger LOG = LogManager.getLogger(UserServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -61,6 +64,7 @@ public class UserServlet extends HttpServlet {
 
         try {
 
+            LOG.info("Registers a new user with the given values");
             User newUser = mapper.readValue(req.getInputStream(), User.class);
             userService.register(newUser);
             String newUserJSON = mapper.writeValueAsString(newUser);
@@ -68,13 +72,16 @@ public class UserServlet extends HttpServlet {
             resp.setStatus((201));
 
         } catch (MismatchedInputException e) {
+            LOG.warn(e.getMessage());
             resp.setStatus(400);
         } catch (ResourcePersistenceException e) {
+            LOG.warn(e.getMessage());
             resp.setStatus(409);
             ErrorResponse err = new ErrorResponse(409, System.currentTimeMillis());
             err.setMessage(e.getMessage());
             writer.write(mapper.writeValueAsString(err));
         } catch (Exception e) {
+            LOG.warn(e.getMessage());
             resp.setStatus(500);
         }
     }

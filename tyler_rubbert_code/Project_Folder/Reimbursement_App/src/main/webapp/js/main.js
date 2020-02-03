@@ -67,6 +67,7 @@ function loadDashboard() {
             document.getElementById('root').innerHTML = xhr.responseText;
             document.getElementById('toRecords').addEventListener('click', loadReimbView);
             document.getElementById('toReimbursement').addEventListener('click', loadReimbursement);
+            document.getElementById('logout').addEventListener('click',logout);
         }
     }
 
@@ -83,6 +84,7 @@ function loadReimbursement() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
             document.getElementById('submitReimb').addEventListener('click', submitReimb);
+            document.getElementById('dashboard').addEventListener('click',loadDashboard);
         }
     }
 
@@ -99,6 +101,7 @@ function loadReimbView() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
             populateUserReimbView();
+            document.getElementById('dashboard').addEventListener('click',loadDashboard);
 
         }
     }
@@ -116,6 +119,7 @@ function loadManagerDashboard() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
             document.getElementById('manageReimbursement').addEventListener('click', loadManageReimbursement);
+            document.getElementById('logout').addEventListener('click',logout);
         }
     }
 }
@@ -131,6 +135,7 @@ function loadManageReimbursement() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
             populateManagerReimbView();
+            document.getElementById('dashboard').addEventListener('click',loadManagerDashboard);
         }
     }
 
@@ -176,12 +181,14 @@ function login() {
 
 }
 
-function logout() {
+function logout(e) {
+    e.preventDefault();
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'auth', true);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
+            loadHome();
             console.log('logout successful!')
         }
     }
