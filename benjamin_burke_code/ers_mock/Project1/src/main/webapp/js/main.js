@@ -261,6 +261,7 @@ document.getElementById('return').addEventListener('click', ()=>{
 //   			    console.log(reimb[i].description)
 //   			    console.log(reimb[i].status)
 //   			    console.log(reimb[i].type)
+                     console.log(reimb[i].auth)
 
                 let number = i+1;
                 let reimbId = reimb[i].id;
@@ -310,6 +311,7 @@ document.getElementById('return').addEventListener('click', ()=>{
                 tableCell7.addClass('managerbtn')
                 const $manBtn = $('<btn>').text('Approve?')
                 $manBtn.attr('id', `manBtn${i}`)
+                $manBtn.addClass('btn')
                 tableCell7.append($manBtn)
 
                 //add button if you are manager
@@ -323,7 +325,7 @@ document.getElementById('return').addEventListener('click', ()=>{
                  tableCell6
                  )
                  $('.a').append(tableRow)
-                 }else{
+                 }if (user.role==="MANAGER" && status === "PENDING"){
 //                 $tableHead.append($('#column-names'))
 
                  tableRow.append(
@@ -341,7 +343,6 @@ document.getElementById('return').addEventListener('click', ()=>{
                     loadEdit(user, reimbId, amount, description, status, type)
                   })
 
-                  
 
    			  }
             }//end of the for loop
@@ -391,49 +392,48 @@ function loadEdit(user, reimbId, amount, description, status, type ){
 
                                document.getElementById('accept').addEventListener('click', (e)=>{
 
-                                                   e.preventDefault();
-                                                   let data = {
-                                                     id: reimbId,
-                                                     amount: amount,
-                                                     description: description,
-                                                     status: status,
-                                                     type: type
+                                e.preventDefault();
+                                let data = {
+                                id: reimbId,
+                                amount: amount,
+                                description: description,
+                                status: status,
+                                type: type
 
-                                                   }
-                                                   let dataJSON = JSON.stringify(data);
-                                                   let xhr = new XMLHttpRequest();
-                                                   xhr.open('PUT', 'approve', true);
-                                                   xhr.send(dataJSON);
-                                                   xhr.onreadystatechange=()=>{
-                                                    if(xhr.onreadystatechange===4 && xhr.status===201){
-                                                    console.log('clicked ' + dataJSON )
+                                }
+                                let dataJSON = JSON.stringify(data);
+                                let xhr = new XMLHttpRequest();
+                                xhr.open('PUT', 'approve', true);
+                                xhr.send(dataJSON);
+                                xhr.onreadystatechange=()=>{
+                                if(xhr.onreadystatechange===4 && xhr.status===201){
+                                console.log('clicked ' + dataJSON )
 
-                                                    }
-                                                    loadManager(user);
-                                                   }
-                                                 })
+                                 }
+                                 loadManager(user);
+                                 }
+                                 })
                                document.getElementById('deny').addEventListener('click', (e)=>{
-                                                    e.preventDefault();
-                                                    let data = {
-                                                      id: reimbId,
-                                                      amount: amount,
-                                                      description: description,
-                                                      status: status,
-                                                      type: type
+                                e.preventDefault();
+                                let data = {
+                                id: reimbId,
+                                amount: amount,
+                                description: description,
+                                status: status,
+                                type: type
 
-                                                    }
-                                                    let dataJSON = JSON.stringify(data);
-                                                    let xhr = new XMLHttpRequest();
-                                                    xhr.open('PUT', 'deny', true);
-                                                    xhr.send(dataJSON);
-                                                    xhr.onreadystatechange=()=>{
-                                                     if(xhr.onreadystatechange===4 && xhr.status===201){
-                                                     console.log('clicked ' + dataJSON )
-
-                                                     }
-                                                       loadManager(user);
-                                                    }
-                                                 })
+                                }
+                                let dataJSON = JSON.stringify(data);
+                                let xhr = new XMLHttpRequest();
+                                xhr.open('PUT', 'deny', true);
+                                xhr.send(dataJSON);
+                                xhr.onreadystatechange=()=>{
+                                if(xhr.onreadystatechange===4 && xhr.status===201){
+                                console.log('clicked ' + dataJSON )
+                                }
+                                  loadManager(user);
+                                 }
+                                })
 
 
                                 console.log('test');
