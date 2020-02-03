@@ -14,7 +14,7 @@ public class UserService {
      to do: make an instance of connection throughout in the user repo if necessary
      */
 
-    private  UserService(UserRepository repository) {
+    public UserService(UserRepository repository) {
         super();
         this.uRepo = repository;
     }

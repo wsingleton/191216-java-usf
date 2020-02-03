@@ -5,6 +5,7 @@ import com.revature.models.Reimbursement;
 import com.revature.models.Status;
 import com.revature.util.ConnectionFactory;
 
+import javax.security.auth.login.Configuration;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public class ReimbRepository implements CrudRepository<Reimbursement> {
+
     private Set<Reimbursement> mapResults(ResultSet results) throws SQLException {
         Set<Reimbursement> reimb = new HashSet<>();
         while (results.next()) {
@@ -33,12 +35,39 @@ public class ReimbRepository implements CrudRepository<Reimbursement> {
         } return reimb;
     }
 
+    public Set<Reimbursement> findByStatus(int statusId) {
+        Set<Reimbursement> reimb = new HashSet<>();
+
+        try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
+            String sql = "SELECT * FROM xnd_inc.ers_reimbursement WHERE reimb_status_id = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setInt(1, statusId);
+
+            ResultSet results = pstmt.executeQuery();
+            reimb = mapResults(results);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } return reimb;
+    }
+
+
     @Override
     public void save(Reimbursement reimb) {
         Connection connection = ConnectionFactory.getInstance().getConnection();
-
+        String sql = "INSERT INTO xnd_inc.ers_reimbursement VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            PreparedStatement pstmt =
+            PreparedStatement pstmt = connection.prepareStatement(sql, new String[] {"ers_reimbursement"});
+            pstmt.setString(1, reimb.getAmount());
+            pstmt.setString(2, reimb.getTimeResolved());
+            pstmt.setString(3, reimb.getTimeSubmitted());
+            pstmt.setString(4, reimb.getDescription());
+            pstmt.setString(5, reimb.getReceipt());
+            pstmt.setInt(6, reimb.getAuthId());
+            pstmt.setInt(7, reimb.getResId());
+            pstmt.setInt(8, reimb.getStatusId().getId());
+            pstmt.setInt(9, reimb.getCategoryId().getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
