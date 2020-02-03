@@ -22,5 +22,3 @@ let pokemonIMGElement = document.getElementById("pokemonImg");
 pokemonIMGElement.setAttribute("src", pokemon.sprites.front_default);
 pokemonIMGElement.setAttribute("alt", pokemon.name);
 }
-
-

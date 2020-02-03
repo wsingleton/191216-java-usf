@@ -15,16 +15,29 @@
     <nav>
         <div class="nav-logo">LIBERATION</div>
         <ul class="menu-bar">
-            <li><a class="nav-bar-options" href="">HOME</a></li>
+            <li><a  id="dashboard" class="nav-bar-options" href="">HOME</a></li>
             <li><a class="nav-bar-options" href="">TIMESHEET</a></li>
-            <li><a class="nav-bar-options" href="">EXPENSE REIMBURSEMENT</a></li>
-            <li><a class="nav-bar-options" href="">HELP</a></li>
+            <li><a  id="new-expense" class="nav-bar-options" href="">EXPENSE REIMBURSEMENT</a></li>
+            <li><a  id="help" class="nav-bar-options" href="">HELP</a></li>
             <li><a class="nav-bar-options" href=""> PROFILE SETTINGS</a></li>
             <li><a id="logout" class="nav-bar-options" href="">LOGOUT</a></li>
         </ul>
     </nav>
     </div>
     <div class="content-container">
+        <div>
+            <h5>ACTION</h5>
+            Reimbursement Id:<input id='reimb-id' readonly></input>
+            Reimbursement amount:<input id='amount' readonly></input> 
+            <select>
+                <option selected value="3">Pending</option>
+                <option  value="2">Approved</option>
+                <option value="1">Denied</option>
+            </select>
+            
+            
+            <button class="btn btn-outline-primary" id="reimbSubmit" >Submit</button>
+        </div>
         <div>
             <h4>CURRENTLY OPEN REIMBURSEMENT REQUESTS</h4>
             </div>
@@ -127,16 +140,21 @@
                          You
                         </td>
                         <td>
-                        <button class="btn btn-outline-primary" id="Approve">Approve</button>
+                        <select>
+                            <option selected value="3">Pending</option>
+                            <option  value="2">Approved</option>
+                            <option value="1">Denied</option>
+                        </select>
                         </td>
                         <td>
-                        <button class="btn btn-outline-primary" id="Denie">Denie</button>
+                        <button class="btn btn-outline-primary" id="reimbSubmit" >Submit</button>
                         </td>
                     </tr>
             </tbody>
         </table>
     </div>
     </div>
+
 </div>
 
     <script type="text/javascript" src="Project 1 JavaScript/"></script>

@@ -25,6 +25,18 @@ public class Reimbursement {
         super();
     }
 
+    public Reimbursement(Integer reimbId, ReimbursementStatus status){
+        this.reimbId = reimbId;
+        this.status = status;
+    }
+
+
+    public Reimbursement(Integer reimbId, Integer resolverId, ReimbursementStatus status){
+        this.reimbId = reimbId;
+        this.resolverId = resolverId;
+        this.status = status;
+    }
+
     public Reimbursement(Double amount, String description, ReimbursementType type ){
         this.amount = amount;
         this.type = type;
@@ -121,7 +133,7 @@ public class Reimbursement {
     }
 
     public void setAuthorId(Integer authorId) {
-        authorId = authorId;
+        this.authorId = authorId;
     }
 
     public Integer getResolverId() {

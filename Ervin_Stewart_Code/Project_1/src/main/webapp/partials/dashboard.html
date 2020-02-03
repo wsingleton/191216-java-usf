@@ -3,19 +3,34 @@
         <nav>
             <div class="nav-logo">LIBERATION</div>
             <ul class="menu-bar">
-                <li><a class="nav-bar-options" href="">HOME</a></li>
-                <li><a class="nav-bar-options" href="">TIMESHEET</a></li>
-                <li><a class="nav-bar-options" href="">EXPENSE REIMBURSEMENT</a></li>
-                <li><a class="nav-bar-options" href="">HELP</a></li>
-                <li><a class="nav-bar-options" href=""> PROFILE SETTINGS</a></li>
-                <li><a id="logout" class="nav-bar-options" href="">LOGOUT</a></li>
+                <li><a  id="dashboard" class="nav-bar-options" >HOME</a></li>
+                <li><a class="nav-bar-options" >TIMESHEET</a></li>
+                <li><a  id="new-expense" class="nav-bar-options" >EXPENSE REIMBURSEMENT</a></li>
+                <li><a  id="help" class="nav-bar-options" >HELP</a></li>
+                <li><a class="nav-bar-options" > PROFILE SETTINGS</a></li>
+                <li><a id="logout" class="nav-bar-options" >LOGOUT</a></li>
             </ul>
         </nav>
     </div>
     <div class="content-container">
         <div>
+            <h5>ACTION</h5>
+            Reimbursement Id:<input id='reimb-id' readonly></input>
+            Reimbursement amount:<input id='amount' readonly></input>
+            <select id ='newStatus'>
+                <option selected value="1">Pending</option>
+                <option  value="2">Approved</option>
+                <option value="3">Denied</option>
+            </select>
+
+
+            <button class="btn btn-outline-primary" id="reimbSubmit" >Submit</button>
+        </div>
+
+        <div>
             <h4>CURRENTLY OPEN REIMBURSEMENT REQUESTS</h4>
         </div>
+        <div><p>Please navigate to the REIMBURSEMENT window above to make a new request.</p></div>
         <div class="content">
             <table id="open-reimb" class="content-table">
                 <thead>
@@ -45,17 +60,14 @@
                         <h4>RESOLVER ID</h4>
                     </th>
                     <th scope="col">
+                        <h4>DATE RESOLVED</h4>
+                    </th>
+                    <th scope="col">
                         <h4>AUTHOR</h4>
                     </th>
-                    <th scope="col">
-                        <h4>ACTION</h4>
-                    </th>
-                    <th scope="col">
-
-                    </th>
-                </tr>
+                    </tr>
                 </thead>
-                <div><p>Please navigate to the REIMBURSEMENT window above to make a new request or view old requests</p></div>
+
                 <tbody>
                 </tbody>
             </table>

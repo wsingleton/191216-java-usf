@@ -1,0 +1,119 @@
+
+nav{
+    position: relative;
+    padding-top: 10px 20px 10px 10px;
+    text-align: right;
+    z-index: 1;
+    margin: 0 auto;
+    width:  calc(100% -60px);
+    background-size: cover;
+    background-position: center center;
+
+    border-bottom: .5px solid gold;
+    background-color:  silver;
+}
+nav:before{
+    position: absolute;
+    content:'';
+    left: 0;
+    top:100%;
+    border-top: 10px solid gold;
+    border-right: 10px solid gold;
+    border-left: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+
+}
+nav:after{position: absolute;
+content:'';
+border-top: 10px solid gold;
+border-left: 10px solid gold;
+border-right: 10px solid transparent;
+border-bottom: 10px solid transparent;
+top:100%;
+right:0;
+
+
+}
+a{border-right:10px thin #4169e1;}
+#welcome{color: royalblue;
+border-bottom:.5px groove gold;}
+div.content-container{
+   text-align: center;
+margin-top: 25px;
+
+}
+#login-message{background-color: ivory;
+border-color: ivory;}
+
+div.content{display:inline-block;}
+ *.content-spacer{
+
+    margin-top: 25px;
+
+}
+.content-table{
+border-collapse: collapse;
+margin: 25px 0;
+font-size: 0.9em;
+min-width: 400px;
+border-radius: 5px 5px 0 0;
+overflow: hidden;
+box-shadow: 0 0 20px rgb(0 , 0 ,0.15)
+}
+.content-table thead tr{
+    background-color: royalblue;
+    text-align: left;
+    font-weight: bold;
+}
+.content-table th, .content-table td{
+    padding: 12px 15px;
+}
+.content-table tbody tr{
+    border-bottom: 1px solid #dddddd;
+}
+.content-table tbody tr:nth-of-type(even){
+    background-color: #f4f4f4;
+}
+.content-table:last-of-type{
+    border-bottom: 2px solid gold;
+}
+.form-control{width:100px;}
+#email{margin-right:25px;}
+.form-control{width: 15%;
+display: inline-block;
+    padding-top: 15px;
+}
+body{
+
+    background-color: ivory;
+    color: black;
+}
+.menu-bar li a{
+    text-decoration: none;
+    color:royalblue;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    padding:0 25px;
+    font-size: 14px;
+    line-height: 30px;
+    position: relative;
+    z-index: 1;
+}
+.menu-bar li{
+    list-style: none;
+    display: inline-block;
+}
+.menu-bar li a:hover{
+    background: royalblue;
+    color:#333;
+}
+
+.nav-logo{ width: 15%;
+float: left;
+text-transform: uppercase;
+color:royalblue;
+font-size: 25px;
+text-align:left;
+padding-left: 2%;
+}

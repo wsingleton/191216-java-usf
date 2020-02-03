@@ -1,0 +1,62 @@
+<div>
+    <div class='nav-area'>
+        <nav>
+            <div class="nav-logo">LIBERATION</div>
+            <ul class="menu-bar">
+                <li><a  id="dashboard" class="nav-bar-options" >HOME</a></li>
+                <li><a class="nav-bar-options" >TIMESHEET</a></li>
+                <li><a  id="new-expense" class="nav-bar-options" >EXPENSE REIMBURSEMENT</a></li>
+                <li><a  id="help" class="nav-bar-options" >HELP</a></li>
+                <li><a class="nav-bar-options" > PROFILE SETTINGS</a></li>
+                <li><a id="logout" class="nav-bar-options" >LOGOUT</a></li>
+            </ul>
+        </nav>
+    </div>
+
+<div class="content-container">
+    <div>
+        <h4>NEW REIMBURSEMENT</h4>
+    </div>
+
+    <div class="content">
+        <table class="content-table">
+            <thead>
+            <tr>
+                <th>Enter Reimbursement Amount:</th>
+
+
+                <th>Choose the type of Reimbursement:</th>
+
+
+                <th>Description</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <input type="number" id="new-amount" placeholder="0.00" required pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$"></td>
+
+
+                <td>
+                    <select id=" new-reimb-type" required>
+                        <option value="1">LODGING</option>
+                        <option value="2">TRAVEL</option>
+                        <option value="3">FOOD</option>
+                        <option value="4" selected>OTHER</option>
+                    </select>
+                </td>
+
+
+                <td><textarea id="new-description" type="text"  maxlength="250"placeholder="Enter a description"></textarea></td>
+
+
+                <td><button id="reimb-sub" class="btn btn-outline-primary">Submit</button></td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="alert alert-danger" id="reimb-message"></div>
+</div>
+</div>

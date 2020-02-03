@@ -1,0 +1,62 @@
+<div>
+<div class='nav-area'>
+    <nav>
+        <div class="nav-logo">LIBERATION</div>
+        <ul class="menu-bar">
+            <li><a class="nav-bar-options" href="">HOME</a></li>
+            <li><a class="nav-bar-options" href="">TIMESHEET</a></li>
+            <li><a class="nav-bar-options" href="">EXPENSE REIMBURSEMENT</a></li>
+            <li><a class="nav-bar-options" href="">HELP</a></li>
+            <li><a class="nav-bar-options" href=""> PROFILE SETTINGS</a></li>
+            <li><a id="logout" class="nav-bar-options" href="">LOGOUT</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="content-container">
+    <h5>Content Coming soon...</h5>
+</div>
+<div class="content-container">
+    <div>
+        <h4>REIMBURSEMENT</h4>
+    </div>
+
+    <div class="content">
+        <table class="content-table">
+            <thead>
+            <tr>
+                <th>Enter Reimbursement Amount:</th>
+
+
+                <th>Choose the type of Reimbursement:</th>
+
+
+                <th>Description</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <input type="number" placeholder="0.00" required pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$"></td>
+
+
+                <td>
+                    <select id="reimbType" required>
+                        <option value="1">LODGING</option>
+                        <option value="2">TRAVEL</option>
+                        <option value="3">FOOD</option>
+                        <option value="4" selected>OTHER</option>
+                    </select>
+                </td>
+
+
+                <td><textarea type="text"  maxlength="250"placeholder="Enter a description"></textarea></td>
+
+
+                <td><button id="form-sub" class="btn btn-outline-primary">Submit</button></td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
