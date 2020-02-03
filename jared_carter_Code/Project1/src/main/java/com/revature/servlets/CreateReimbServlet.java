@@ -33,18 +33,18 @@ public class CreateReimbServlet extends HttpServlet {
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("this-user");
         System.out.println(u);
-        System.out.println("in create");
+        System.out.println("1 create");
         try {
-            System.out.println("in create 2");
+            System.out.println("2 create ");
             System.out.println(u.getId());
             Reimbursement reimbursement = mapper.readValue(req.getInputStream(), Reimbursement.class);
-            System.out.println("binding");
+
 
             reimbursement.setAuthorById(u.getId());
-            System.out.println("in create 3");
+            System.out.println("3 create ");
             System.out.println(reimbursement);
             reimbursementService.newReimbursement(reimbursement);
-            System.out.println("in create 4");
+            System.out.println("4 create");
             resp.setStatus(201);
         } catch (MismatchedInputException e) {
             resp.setStatus(400);

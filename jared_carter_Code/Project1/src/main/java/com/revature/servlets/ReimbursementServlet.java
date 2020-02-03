@@ -75,7 +75,6 @@ public class ReimbursementServlet extends HttpServlet {
 
         try {
             Reimbursement updatedReimbursement = mapper.readValue(req.getInputStream(), Reimbursement.class);
-
             reimbursementService.updateReimbursement(updatedReimbursement);
             resp.setStatus(201);
         } catch (MismatchedInputException e) {

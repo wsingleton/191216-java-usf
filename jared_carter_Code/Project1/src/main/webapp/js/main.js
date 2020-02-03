@@ -311,30 +311,23 @@ function denyReimbursement(reimbursements) {
 }
 
 	
-function updateStatus(r_id, status) {
-		
-    let stat = {
-            
-        id: r_id,
-        reimbursementStatusId: status
-            
-    }
-    
+function updateStatus(id,) {
+	let status = 	
+    xhr.open("PUT", "reimb", true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    let toSend = JSON.stringify();
+    xhr.send(toSend);
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         
         if(xhr.readyState == 4 && xhr.status == 200) {
             
-            $(`status${r_id}`).html(status);
+                    
             loadManagerView();
             
         }
         
     }
     
-    xhr.open("PUT", "reimb", true);
-    xhr.setRequestHeader("Content-type", "application/json");
-    let toSend = JSON.stringify(stat);
-    xhr.send(toSend);
     
 }
