@@ -41,6 +41,16 @@ public class ReimbursementService {
     public Set<Reimbursement> getByAuthorId(int id) {
         return reimbursementRepository.findAllById(id);
     }
+
+    public Boolean updateReimbursement(Reimbursement updatedReimb) {
+
+        Boolean reimbursementUpdated;
+
+        reimbursementUpdated = reimbursementRepository.update(updatedReimb);
+
+        return reimbursementUpdated;
+
+    }
 }
 
 

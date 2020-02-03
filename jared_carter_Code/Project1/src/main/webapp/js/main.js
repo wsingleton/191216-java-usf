@@ -71,7 +71,7 @@ function login() {
                 document.getElementById('root').innerHTML = xhr.responseText
                 document.getElementById('refreshReimb').addEventListener('click', loadManagerView)
                 document.getElementById('logout').addEventListener('click', logout)
-                loadEmployeeReimb()
+                loadManagerReimb()
             }
             
         }
@@ -122,7 +122,7 @@ function logout() {
 }
 
 	
-function loadEmployeeReimb() {
+function loadManagerReimb() {
     
     let xhr = new XMLHttpRequest();
     xhr.open("GET", 'reimb', true);
@@ -132,6 +132,24 @@ function loadEmployeeReimb() {
             let reimbursements = JSON.parse(xhr.responseText);
             console.log(reimbursements)
             reimburseListsManager(reimbursements)
+        }
+        
+    }
+    
+    
+    
+}
+	
+function loadEmployeeReimb() {
+    
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", 'reimb', true);
+    xhr.send();        
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            let reimbursements = JSON.parse(xhr.responseText);
+            console.log(reimbursements)
+            reimburseLists(reimbursements)
         }
         
     }
@@ -170,34 +188,6 @@ function getNewReimb () {
     return JSON.stringify(obj);
 }
 
-
-function updateStatus(reimb_id, status) {
-            
-    let obj = {
-            
-        id: reimb_id,
-        status_id: status
-            
-    }
-    
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        
-        if(xhr.readyState == 4 && xhr.status == 200) {
-            
-
-            refreshStatus();
-            
-        }
-        
-    }
-    
-    xhr.open("PUT", "login", true);
-    xhr.setRequestHeader("Content-type", "application/json");
-    let toSend = JSON.stringify(stat);
-    xhr.send(toSend);
-    
-}
 
 
 
@@ -256,36 +246,38 @@ function reimburseListsManager(reimbursements){
     
 }
 
+function approveReimbursement(reimbursements) {
 
-function refreshStatus() {
-		
-    console.log('inside refresh');
-    
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        
-        if(xhr.readyState == 4 && xhr.status == 200) {
-            
+    let reimbJSON = JSON.stringify(reimbursements);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('PUT', 'approves', send)
+    xhr.send(reimbJSON);
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState === 4 && xhr.status === 201) {
             let reimbursements = JSON.parse(xhr.responseText);
-            console.log('1', xhr.responseText);
-            for(let reims of reimbursements) {
-                
-                
-                 console.log(reims);
-                reimburseLists(reims);
-                
-                
-            }
-            $("#reimInfo tr").remove(); 
-            loadReimbursements();
-            
+            console.log(reimbursements);
+            loadManagerView();
         }
-        
     }
-    
-    xhr.open("GET", "manager", true);
-    xhr.send();
-    
+
+
+}
+
+function denyReimbursement(reimbursements) {
+
+    let reimbJSON = JSON.stringify(reimbursements);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('PUT', 'denied', true)
+    xhr.send(reimbJSON);
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState === 4 && xhr.status === 201) {
+            let reimbursements = JSON.parse(xhr.responseText);
+            console.log(reimbursements);
+            loadManagerView();
+        }
+    }
 }
 
 	
