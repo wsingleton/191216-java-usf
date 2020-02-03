@@ -17,6 +17,10 @@ public class Reimbursement {
         super();
     }
 
+    public Reimbursement(int id, ReimbursementStatus reimbursementStatusId) {
+        this.id = id;
+        this.reimbursementStatusId = reimbursementStatusId;
+    }
 
     public Reimbursement(int id, ReimbursementType reimbursementTypeId) {
         this.id = id;

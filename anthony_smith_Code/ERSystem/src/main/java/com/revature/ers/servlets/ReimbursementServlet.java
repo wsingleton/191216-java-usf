@@ -3,6 +3,7 @@ package com.revature.ers.servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 
+import com.revature.ers.dtos.dto;
 import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.exceptions.ResourceNotFoundException;
 import com.revature.ers.models.Reimbursement;
@@ -102,12 +103,17 @@ public class ReimbursementServlet extends HttpServlet {
         resp.setContentType("application/json");
 
         try {
-            Reimbursement reimbursement = mapper.readValue(req.getInputStream(), Reimbursement.class);
-        }catch (MismatchedInputException e){
+            dto transfer = mapper.readValue(req.getInputStream(), dto.class);
+            Reimbursement reimbursement = new Reimbursement();
+            reimbursement.setId(transfer.getId());
+            reimbursement.setReimbursementStatusId(ReimbursementStatus.getReimbursementStatusById(transfer.getStatus()));
+            System.out.println(reimbursement);
+            reimbursementService.update(reimbursement);
+        } catch (MismatchedInputException e){
 
-        }catch (ResourceNotFoundException e){
+        } catch (ResourceNotFoundException e){
 
-        }catch (Exception e){
+        } catch (Exception e){
 
         }
 

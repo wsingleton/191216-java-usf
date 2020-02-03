@@ -136,6 +136,8 @@ function loadUserReimb() {
             let reimbursements = JSON.parse(xhr.responseText);
             console.log(reimbursements)
 
+            document.getElementById('appove')
+
             reimburseLists(reimbursements)
         }
         
@@ -153,7 +155,6 @@ function createReimb() {
         if(xhr.readyState == 4 && xhr.status == 200) {
             let reimbursements = JSON.parse(xhr.responseText);
             console.log('in createReimb!')
-            alert('Reimbursemnt Submitted')
         }               
     } 
 }
@@ -170,6 +171,46 @@ function getNewReimb () {
     return JSON.stringify(obj);
 }
 
+
+function approveReimb(id){
+
+    let dto = {
+        id:id,
+        status:2
+
+    };
+
+    let dtoJSON = JSON.stringify(dto)
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('PUT', 'reimbursement', true)
+    xhr.send(dtoJSON);
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState === 4 && xhr.status === 200) {
+            loadManagerView();
+        }
+    }
+}
+
+function denyReimb(id){
+
+    let dto = {
+        id:id,
+        status:3
+
+    };
+
+    let dtoJSON = JSON.stringify(dto)
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('PUT', 'reimbursement', true)
+    xhr.send(dtoJSON);
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState === 4 && xhr.status === 200) {
+            loadManagerView();
+        }
+    }
+}
 
 
 
@@ -206,6 +247,7 @@ function reimburseLists(reimbursements){
     
 }
 
+
 function reimburseListsManager(reimbursements){
     let table = document.getElementById('reimInfo');
     let info
@@ -221,17 +263,38 @@ function reimburseListsManager(reimbursements){
                 <td>${reimbursements[i].authorById}</td>
                 <td>${reimbursements[i].reimbursementStatusId}</td>
                 <td>${reimbursements[i].reimbursementTypeId}</td>
-                <td>
-                <button class = "button1" onclick = "update(${reimbursements[i].reimbursementStatusId}, 1)">Approve</button>
-                <button class = "button2" onclick = "update(${reimbursements[i].reimbursementStatusId}, 2)">Deny</button>
-                </td>
+                
                 `
               )
-    info.innerHTML = te;
-    table.appendChild(info);
-    }
+
+              let buttonentry = document.createElement('td');
     
-}
+              let approve = document.createElement('button');
+              let deny = document.createElement('button');
+
+              approve.setAttribute('id', 'approve-button');
+              deny.setAttribute('id', 'deny-button');
+
+              approve.innerText = 'approve';
+              deny.innerText = 'deny';
+
+              approve.addEventListener('click', () => {approveReimb(reimbursements[i].id)});
+              deny.addEventListener('click', () => {denyReimb(reimbursements[i].id)});
+
+              buttonentry.appendChild(approve);
+              buttonentry.appendChild(deny);
+              
+              info.innerHTML = te;
+              info.appendChild(buttonentry);
+                      
+              table.appendChild(info); 
+              
+            }
+            
+        }
+    
+
+
 
 
 function logout() {
@@ -245,7 +308,4 @@ function logout() {
         }
     }
 }
-
-
-
 
