@@ -68,6 +68,7 @@ public class UserServlet extends HttpServlet {
             LOG.info("Attempting to register a new user.");
             User authUser = userService.register(newUser);
             String newUserJSON = mapper.writeValueAsString(newUser);
+
             resp.setStatus(201); // created
             LOG.info("New user, {}, created.", authUser.getUsername());
             HttpSession session = req.getSession();
@@ -85,7 +86,7 @@ public class UserServlet extends HttpServlet {
         } catch (ResourcePersistenceException e) {
             LOG.error(e.getMessage());
             resp.setStatus(401);
-        } catch(Exception e) {
+        } catch(Exception e) {  
             LOG.error(e.getMessage());
             resp.setStatus(500); // internal server error
         }

@@ -5,7 +5,7 @@ window.onload = () => {
     document.getElementById('signout').addEventListener('click', logout);
 }
 
-
+let currentUser = {};
 // +----------- Combined -----------+
 
 
@@ -92,6 +92,8 @@ function login() {
             if (xhr.status === 200) {
 
                 let user = JSON.parse(xhr.responseText);
+                currentUser = user;
+                console.log(currentUser);
 
                 if (user.role === 'EMPLOYEE'){
                     loadDashboard();
@@ -365,8 +367,6 @@ function register() {
                 console.log('success');
                 loadDashboard();
             }
-
-            
         }
     }
 }

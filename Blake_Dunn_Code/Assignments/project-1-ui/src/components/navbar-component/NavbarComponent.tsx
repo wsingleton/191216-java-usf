@@ -11,33 +11,43 @@ export const NavbarComponent = (props: any) => {
     return (
         <div>
             <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">Buhlakay UI</NavbarBrand>
+                <NavbarBrand href="/">Buhlakify EM</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
-                        <NavItem>
-                            <NavLink to='/login'>Login</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="https://github.com/wsingleton/191216-react-combo">GitHub</NavLink>
-                        </NavItem>
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
-                                Links
+                                Sign-In
                             </DropdownToggle>
-                            <DropdownMenu right>
+                            <DropdownMenu center>
                                 <DropdownItem>
-                                    
+                                    <Link to='/login'>Login</Link>
                                 </DropdownItem>
                                 <DropdownItem>
-                                    
+                                    <Link to='/register'>Register</Link>
                                 </DropdownItem>
                             </DropdownMenu>
-                        </UncontrolledDropdown>
+                            </UncontrolledDropdown>
+                            <NavItem>
+                                <NavLink href="https://github.com/wsingleton/191216-react-combo">GitHub</NavLink>
+                            </NavItem>
+                            <UncontrolledDropdown nav inNavbar>
+                                <DropdownToggle nav caret>
+                                    Links
+                                </DropdownToggle>
+                                <DropdownMenu right>
+                                    <DropdownItem>
+
+                                    </DropdownItem>
+                                    <DropdownItem>
+
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </UncontrolledDropdown>
                     </Nav>
-                    <NavbarText>Buhlakay UI is the Best</NavbarText>
+                        <NavbarText>Buhlakify is the Best</NavbarText>
                 </Collapse>
             </Navbar>
         </div>
-    )
+            )
 }

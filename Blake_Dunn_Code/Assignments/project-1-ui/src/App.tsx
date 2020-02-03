@@ -3,8 +3,9 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { store } from './Store';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { NavbarComponent } from './components/navbar-component/NavbarComponent';
+import  LoginComponent  from './components/login-component/LoginContainer';
 
 
 const App: React.FC = () => {
@@ -14,7 +15,7 @@ const App: React.FC = () => {
         <Router>
           <NavbarComponent/>
           <Switch>
-            
+            <Route path='/login' component={LoginComponent}/>
           </Switch>
           
         </Router>

@@ -1,4 +1,5 @@
-
+import { IUserState } from "."
+import { loginTypes } from "../action-mappers/login-actions";
 
 
 const initialState:IUserState = {
@@ -8,11 +9,18 @@ const initialState:IUserState = {
 
 export const loginReducer = (state = initialState, action:any) => {
     switch(action.type) {
-        case 'Login successful':{
-
+        case loginTypes.SUCCESSFUL_LOGIN:{
+            return {
+                ...state,
+                currentUser:action.payload.currentUser,
+                loginMessage: 'You have logged in'
+            }
         }
-        case 'unsuccessful':{
-
+        case loginTypes.UNSUCCESSFUL_LOGIN:{
+            return {
+                ...state,
+                loginMessage:action.payload.loginMessage
+            }
         }
         default:
             return state;

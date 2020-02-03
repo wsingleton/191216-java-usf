@@ -17,6 +17,6 @@ export class User {
         this.username = un;
         this.password = pw;
         this.firstName = fn;
-        this.lastName =ln;
+        this.lastName = ln;
     }
 }

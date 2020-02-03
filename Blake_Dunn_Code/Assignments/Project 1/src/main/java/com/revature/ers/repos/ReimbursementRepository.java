@@ -99,14 +99,13 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
         LOG.info("Establishing connection with database.");
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "UPDATE ers_reimbursement SET resolved = CURRENT_DATE, " +
-                    "resolver = ?, statusId = ? WHERE reimbId = ?";
-            PreparedStatement pstmt = conn.prepareCall(sql);
-            pstmt.setInt(1, updatedReimb.getResolverId());
-            pstmt.setInt(2, updatedReimb.getStatus().getStatusId());
-            pstmt.setInt(3, updatedReimb.getReimbId());
+            String sql = "{call update_reimb(?, ?, ?)}";
+            CallableStatement cstmt = conn.prepareCall(sql);
+            cstmt.setInt(1, updatedReimb.getResolverId());
+            cstmt.setInt(2, updatedReimb.getStatus().getStatusId());
+            cstmt.setInt(3, updatedReimb.getReimbId());
 
-            int rowsInserted = pstmt.executeUpdate();
+            int rowsInserted = cstmt.executeUpdate();
 
             if (rowsInserted == 0) return false;
 
@@ -171,7 +170,7 @@ public class ReimbursementRepository implements CrudRepository<Reimbursement> {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             LOG.info("Retrieving requests by, {}", ReimbursementStatus.getStatusById(statusId));
-            String sql = "SELECT * FROM ers_reimbursement WHERE typeId = ?";
+            String sql = "SELECT * FROM ers_reimbursement WHERE statusId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, statusId);
 

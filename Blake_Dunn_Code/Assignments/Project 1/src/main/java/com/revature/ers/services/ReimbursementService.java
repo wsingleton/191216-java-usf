@@ -34,6 +34,7 @@ public class ReimbursementService {
 
         Double amount = reimb.getAmount();
         amount = convertAmount(amount);
+        reimb.setAmount(amount);
 
         LOG.info("Validating reimbursement amount");
         if (amount <= 0) {

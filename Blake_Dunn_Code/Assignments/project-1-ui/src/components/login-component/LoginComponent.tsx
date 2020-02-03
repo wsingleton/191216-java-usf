@@ -1,6 +1,6 @@
 import React, { SyntheticEvent } from 'react';
 import { Form, FormGroup, Jumbotron, Label, Col, Input, Button } from 'reactstrap';
-
+// import './LoginComponent.css'
 
 interface ILoginState {
     username: string
@@ -49,10 +49,10 @@ export class LoginComponent extends React.Component<ILoginProps, ILoginState> {
                     </h2>
                     <p className="lead">Buhlakify: Here to service your reimbursement needs</p>
                 </Jumbotron>
-                <Form onSubmit={this.submitLogin}>
+                <div className="d-flex justify-content-center">
+                <Form  onSubmit={this.submitLogin}>
                     <FormGroup row>
-                        <Label for="exampleUsername" sm={2}>Username</Label>
-                        <Col sm={10}>
+                        <Col sm={12}>
                             <Input required
                                 type="text"
                                 name="Username"
@@ -63,9 +63,8 @@ export class LoginComponent extends React.Component<ILoginProps, ILoginState> {
                             {/* this is an example of data binding, we take data from the state and put it in our tsx */}
                         </Col>
                     </FormGroup>
-                    <FormGroup row>
-                        <Label for="examplePassword" sm={2}>Password</Label>
-                        <Col sm={10}>
+                    <FormGroup row >
+                        <Col sm={12}>
                             <Input required
                                 type="password"
                                 name="password"
@@ -77,6 +76,7 @@ export class LoginComponent extends React.Component<ILoginProps, ILoginState> {
                     </FormGroup>
                     <Button color="secondary">Login</Button>
                 </Form>
+                </div>
                 <p>{this.props.loginMessage}</p>
             </div>
         )

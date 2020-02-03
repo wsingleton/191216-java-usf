@@ -8,7 +8,7 @@ public class RequestViewHelper {
     private static final Logger LOG = LogManager.getLogger(RequestViewHelper.class);
 
     public static String process(String uri) {
-        LOG.info("URI received, attempting to redirect");
+        LOG.info("URI received, attempting to redirect to {}", uri);
         switch (uri) {
             case "/project_1_ERS/home.view":
                 return "partials/home.html";

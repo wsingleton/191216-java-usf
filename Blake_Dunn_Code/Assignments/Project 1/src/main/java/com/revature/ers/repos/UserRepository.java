@@ -160,7 +160,6 @@ public class UserRepository implements CrudRepository<User> {
             pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
-//            Set<User> set = mapResultSet(rs);
            _user =  mapResultSet(rs).stream().findFirst();
 
         }catch (SQLException e) {

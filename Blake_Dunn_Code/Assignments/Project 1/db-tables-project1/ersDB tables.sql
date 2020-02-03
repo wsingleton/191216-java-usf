@@ -175,3 +175,18 @@ INSERT INTO ers_user_roles VALUES (0, 'MANAGER');
 INSERT INTO ers_user_roles VALUES (0, 'EMPLOYEE');
 
 COMMIT;
+
+
+
+CREATE OR REPLACE PROCEDURE update_reimb (sId IN ers_reimbursement.statusId%TYPE, res IN ers_reimbursement.resolver%TYPE, 
+                            rId IN ers_reimbursement.reimbid%TYPE)
+IS
+BEGIN
+    UPDATE ers_reimbursement
+    SET resolved = CURRENT_DATE, resolver = res, statusId = sId
+    WHERE reimbId = rId;
+
+    COMMIT;
+END;
+
+update ers_reimbursement set amount = 275.09 where reimbId = 121;

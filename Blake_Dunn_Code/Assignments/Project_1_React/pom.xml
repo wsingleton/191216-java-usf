@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.revature</groupId>
-    <artifactId>project_1_ERS</artifactId>
+    <artifactId>project_1_ers_react</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -68,7 +68,7 @@
                     <configuration>
                         <url>http://localhost:8080/manager/text</url>
                         <server>LocalTomcat</server>
-                        <path>/project_1_ERS</path>
+                        <path>/project_1_ers_react</path>
                         <update>true</update>
                     </configuration>
                 </plugin>

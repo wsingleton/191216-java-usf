@@ -53,7 +53,7 @@ public class ReimbServlet extends HttpServlet {
         }
         else {
             try {
-                LOG.info("User, {}, is attempting to view a specific request.", user.getUsername());
+                LOG.info("User, {}, is attempting to view request with reimbId {}.", user.getUsername(), Integer.parseInt(reimbParam));
                 Reimbursement reimb = reimbService.getReimbById((Integer.parseInt(reimbParam)));
                 resp.getWriter().write(mapper.writeValueAsString(reimb));
             } catch (Exception e) {

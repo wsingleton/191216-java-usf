@@ -1,6 +1,7 @@
 import { updateCurrentUser } from '../../action-mappers/login-actions';
-import { connect } from 'tls';
+import { connect } from 'react-redux';
 import { LoginComponent } from './LoginComponent';
+import { IState } from '../../reducers';
 
 
 const mapStateToProps = (state:IState) => {
