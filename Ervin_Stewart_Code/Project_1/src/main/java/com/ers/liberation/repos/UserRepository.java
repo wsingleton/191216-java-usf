@@ -184,21 +184,14 @@ public class UserRepository implements CrudRepository<User>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 
-            String sql = "UPDATE ers_users SET ers_username = ?, ers_password = ?, user_first_name = ?, ers_last_name = ? " +
-                    "WHERE ers_users_id = ?";
+            CallableStatement callableStatement = conn.prepareCall("{call updated_ers_user(?, ?, ?, ?, ?)}");
+            callableStatement.setString(1, updatedObj.getUsername());
+            callableStatement.setString(2, updatedObj.getPassword());
+            callableStatement.setString(3, updatedObj.getFirstName());
+            callableStatement.setString(4, updatedObj.getLastName());
+            callableStatement.setInt(5, updatedObj.getId());
 
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, updatedObj.getUsername());
-            pstmt.setString(2, updatedObj.getPassword());
-            pstmt.setString(3, updatedObj.getFirstName());
-            pstmt.setString(4, updatedObj.getLastName());
-            pstmt.setInt(5, updatedObj.getId());
-
-            int rowsUpdated = pstmt.executeUpdate();
-
-            if (rowsUpdated > 0) {
-                updateSuccessful = true;
-            }
+            callableStatement.executeUpdate();
 
 
         } catch (SQLException e) {
