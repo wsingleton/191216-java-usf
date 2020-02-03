@@ -3,6 +3,8 @@ package com.revature.repos;
 import com.revature.models.Role;
 import com.revature.models.User;
 import com.revature.util.ConnectionFactory;
+import jdk.nashorn.internal.runtime.regexp.joni.Option;
+import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -26,6 +28,37 @@ public class UserRepository implements CrudRepository<User> {
             users.add(temp);
         }
         return users;
+    }
+
+    public Optional<User> findByCreds(String username, String password) {
+        Optional<User> _user = Optional.empty();
+
+        try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
+
+            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM xnd_inc.ers_user" +
+                    "WHERE ers_username = ? AND ers_password = ?"); // check syntax on this later
+            pstmt.setString(1,username);
+            pstmt.setString(2, password);
+
+            ResultSet results = pstmt.executeQuery();
+            _user = mapResults(results).stream().findFirst();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } return _user;
+    }
+
+    public Optional<User> findByUsername(String username) {
+        Optional<User> _user = Optional.empty();
+
+        try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
+
+            PreparedStatement pstmt =  connection.prepareStatement("SELECT * FROM xnd_inc.ers_user" +
+                    " WHERE ers_username = ?");
+            ResultSet results = pstmt.executeQuery();
+            _user = mapResults(results).stream().findFirst();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } return _user;
     }
 
     @Override
