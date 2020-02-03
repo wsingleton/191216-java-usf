@@ -50,7 +50,7 @@ function login() {
             }
 
             if (xhr.status === 401) {
-                document.getElementById('login-message').innerText = 'Login failed!';
+                document.getElementById('failed-login-message').innerText = 'Username or password is incorrect';
             }
         }
     }
@@ -131,7 +131,7 @@ function loadEmployeeReimb() {
         if(xhr.readyState == 4 && xhr.status == 200) {
             let reimbursements = JSON.parse(xhr.responseText);
             console.log(reimbursements)
-            reimburseLists(reimbursements)
+            reimburseListsManager(reimbursements)
         }
         
     }
@@ -217,7 +217,6 @@ function reimburseLists(reimbursements){
                 <td>${reimbursements[i].timeSubmitted}</td>
                 <td>${reimbursements[i].description}</td>
                 <td>${reimbursements[i].authorById}</td>
-                <td>${reimbursements[i].resolverById}</td>
                 <td>${reimbursements[i].reimbursementStatusId}</td>
                 <td>${reimbursements[i].reimbursementTypeId}</td>
                 `
@@ -229,6 +228,64 @@ function reimburseLists(reimbursements){
 }
 
 
+function reimburseListsManager(reimbursements){
+    let table = document.getElementById('reimInfo');
+    let info
+    for(let i = 0; i < reimbursements.length; i++) {
 
+        info = document.createElement('tr');
+  
+    
+              let te = ( `
+               <th>${reimbursements[i].id}</th>
+                <td>${reimbursements[i].amount}</td>
+                <td>${reimbursements[i].timeSubmitted}</td>
+                <td>${reimbursements[i].description}</td>
+                <td>${reimbursements[i].authorById}</td>
+                <td>${reimbursements[i].reimbursementStatusId}</td>
+                <td>${reimbursements[i].reimbursementTypeId}</td>
+                <td>
+                <button class = "button1" onclick = "update(${reimbursements[i].reimbursementStatusId}, 1)">Approve</button>
+                <button class = "button2" onclick = "update(${reimbursements[i].reimbursementStatusId}, 2)">Deny</button>
+                </td>
+                `
+              )
+    info.innerHTML = te;
+    table.appendChild(info);
+    }
+    
+}
+
+
+function refreshStatus() {
+		
+    console.log('inside refresh');
+    
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            
+            let reimbursements = JSON.parse(xhr.responseText);
+            console.log('1', xhr.responseText);
+            for(let reims of reimbursements) {
+                
+                
+                 console.log(reims);
+                reimburseLists(reims);
+                
+                
+            }
+            $("#reimInfo tr").remove(); 
+            loadReimbursements();
+            
+        }
+        
+    }
+    
+    xhr.open("GET", "manager", true);
+    xhr.send();
+    
+}
 
 	
