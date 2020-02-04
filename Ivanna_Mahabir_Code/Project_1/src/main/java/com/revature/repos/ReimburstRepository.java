@@ -75,6 +75,10 @@ public class ReimburstRepository implements CrudRepository<Reimburstment> {
                 ResultSet rs = pstmt.getGeneratedKeys();
                 while(rs.next()){
                     newObj.setId(rs.getInt(1));
+                    newObj.setResolver(0);
+                    newObj.setResolved(new Date(0));
+                    newObj.setType(3);
+
                 }
             }
         }

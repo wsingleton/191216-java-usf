@@ -18,19 +18,35 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Set;
 
 import static com.revature.utils.PageRouter.process;
 
-@WebServlet("/reimb")
+@WebServlet("/dashboard")
 public class ReimbServlet extends HttpServlet {
 
     public final ReimburstService reimburstService =  new ReimburstService(new ReimburstRepository());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        resp.setContentType("application/json");
+        String userIdParam = req.getParameter("reimb_author");
+
         if(req.getSession(false) != null){
             req.getSession().invalidate();
         }
+        else{
+            try{
+                Set<Reimburstment> reimb = reimburstService.getAllReimByAuthor(Integer.parseInt(userIdParam));
+                String reimbJSON = mapper.writeValueAsString(reimb);
+                resp.getWriter().write(reimbJSON);
+            }catch(Exception e){
+                resp.setStatus(400);
+            }
+        }
+
+
     }
 
     @Override
@@ -45,8 +61,9 @@ public class ReimbServlet extends HttpServlet {
             reimb = mapper.readValue(req.getInputStream(), Reimburstment.class);
             System.out.println("I'm here");
             reimburstService.createReimb(reimb);
-            String authUserJSON = mapper.writeValueAsString(reimb);
-            writer.write(authUserJSON);
+            System.out.println("creation");
+            String reimbJSON = mapper.writeValueAsString(reimb);
+            writer.write(reimbJSON);
             HttpSession session = req.getSession();
             session.setAttribute("this-reimb", reimb);
             process("/reimb.view");
@@ -60,6 +77,7 @@ public class ReimbServlet extends HttpServlet {
         }
         catch (Exception e){
             resp.setStatus(500);
+            e.printStackTrace();
         }
     }
 

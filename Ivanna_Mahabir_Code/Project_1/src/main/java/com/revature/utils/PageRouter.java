@@ -11,6 +11,7 @@ public class PageRouter {
                 return "./partials/register.html";
             case "/Project_1/dashboard.view":
                 return "./partials/dashboard.html";
+
             default:
                 return "";
         }

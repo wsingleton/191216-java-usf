@@ -1,6 +1,6 @@
 package com.revature.models;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 public class Reimburstment {
@@ -18,8 +18,8 @@ public class Reimburstment {
     public Reimburstment() {
         id = 0;
         amount = 0.0;
-        submitted = new Date();
-        resolved = new Date();
+        submitted = new Date(0);
+        resolved = new Date(0);
         description = "";
         author = 0;
         resolver = 0;

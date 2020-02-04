@@ -65,7 +65,7 @@ function login() {
 
                 }
                 if (xhr.status === 401) {
-                    document.getElementById('login-message').innerText = 'Login failed!';
+                    document.getElementById('login-message').innerText = 'Invalid Input: Login failed!';
                 }
             }
         }
@@ -112,23 +112,27 @@ function login() {
 
     }
 
+//employee dashboard
 function dashboard(user){
-console.log(user);
 let dashboard = document.getElementById('dashboard-component"');
 document.getElementById("first").innerText = user.first_name;
 document.getElementById("last").innerText = user.last_name;
+let user_id = document.getElementById("author").innerText - user.user_id;
 
 
 
+document.getElementById("reimb").addEventListener("click", reimb);
+document.getElementById("logout").addEventListener("click", logout);
 }
 
 function reimb() {
 //reimb form
-let amount = document.getElementById("amount");
+let amount = document.getElementById("amount").value;
 let submitted = new Date();
-let description = document.getElementById("description");
+let description = document.getElementById("description").value;
 let author = user.user_id;
-let type = document.getElementById("type");
+//let type = document.getElementById("type").value;
+let type = document.querySelector('input[name="type"]:checked').value;
 let status = 3;
 
 let reimb = {
@@ -140,10 +144,12 @@ let reimb = {
     status: 3
 };
 
+console.log(reimb);
+
     let reimbJSON = JSON.stringify(reimb);
 
     let xhr = new XMLHttpRequest();
-        xhr.open('POST', "reimb", true);
+        xhr.open('POST', "dashboard", true);
         xhr.send(reimbJSON);
         xhr.onreadystatechange = () => {
             if(xhr.readyState === 4){
@@ -160,6 +166,26 @@ let reimb = {
         }
 }
 
+
+function displayReimb(){
+let xhr = new XMLHttpRequest();
+xhr.open('GET', "dashboard", true);
+xhr.send();
+xhr.onreadystatechange = () =>{
+if(xhr.readyState === 4){
+    if(xhr.status === 200)
+            reim = JSON.parse(xhr.responseText);
+            loadDashboard(reim);
+            console.log(reim);
+
+            }
+            if (xhr.status === 401) {
+               document.getElementById('reimb-message').innerText = 'Submission failed!';
+            }
+    }
+}
+
+
     function logout() {
         let xhr = new XMLHttpRequest();
         xhr.open('GET', 'auth', true);
@@ -167,6 +193,7 @@ let reimb = {
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log('logout successful!')
+                loadLogin();
             }
         }
     }
