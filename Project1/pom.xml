@@ -55,7 +55,7 @@
                     <configuration>
                         <url>http://localhost:8080/manager/text</url>
                         <server>LocalTomcat</server>
-                        <path>/xnd_inc</path>
+                        <path>/XND_INC</path>
                         <update>true</update>
                     </configuration>
                 </plugin>
