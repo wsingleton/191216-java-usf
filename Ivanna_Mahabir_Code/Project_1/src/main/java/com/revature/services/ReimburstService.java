@@ -17,21 +17,10 @@ public class ReimburstService {
         this.reimbRepo = repo;
     }
 
-    public Reimburstment getReimbById(int id){
-        return reimbRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
-    }
+
 
     public Set<Reimburstment> getAllReimByAuthor(Integer id){
-        Set<Reimburstment> reimbs;
-        if(id == null){
-            throw new InvalidRequestException();
-        }
-        reimbs = reimbRepo.findAllByAuthor(id);
-
-        if(reimbs.isEmpty()){
-            throw new ResourceNotFoundException();
-        }
-        return reimbs;
+        return reimbRepo.findByALLId(id);
     }
 
     public Set<Reimburstment> getAllByStatus(Integer status){
@@ -47,6 +36,10 @@ public class ReimburstService {
         return reimbs;
     }
 
+    public Set<Reimburstment> getAllReim(){
+        return reimbRepo.findAll();
+    }
+
     public Set<Reimburstment> getAllByType(Integer type){
         Set<Reimburstment> reimbs;
         if(type == null) {
@@ -60,22 +53,23 @@ public class ReimburstService {
         return reimbs;
     }
 
-    public void createReimb(Reimburstment newReimb) {
+    public Reimburstment createReimb(Reimburstment newReimb) {
+        newReimb.setId(0);
         if(!isReimbValid(newReimb)) throw new InvalidRequestException();
-
         reimbRepo.save(newReimb);
+        return newReimb;
     }
-
 
     public Boolean isReimbValid(Reimburstment reimb){
         if(reimb == null) return false;
         if(reimb.getAmount() == null || reimb.getAmount() <= 0) return false;
-        if(reimb.getSubmitted() == null || reimb.getSubmitted().toString().equals("")) return false;
         if(reimb.getDescription() == null || reimb.getDescription().trim().equals("")) return false;
         if(reimb.getAuthor() == null || reimb.getAuthor().equals(0)) return false;
-        if(reimb.getStatus() == null || reimb.getStatus().equals(0)) return false;
         if(reimb.getType() == null || reimb.getType().equals(0)) return false;
         return true;
     }
 
+    public boolean update(Reimburstment updateReimburstment){
+        return reimbRepo.update(updateReimburstment);
+    }
 }

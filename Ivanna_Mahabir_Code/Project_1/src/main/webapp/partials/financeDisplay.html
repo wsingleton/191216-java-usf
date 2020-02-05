@@ -1,5 +1,5 @@
 
-<div class="container" id="reimbform-component">
+<div class="container" id="finance-component">
     <div>
         <h3 id="first"></h3> <h3 id="last"></h3>
     </div>
@@ -19,13 +19,13 @@
 
         <div class="form-group">
             <label>Type</label>
-            <input type="radio" class="form-control" name="type" value="1" placeholder="role" checked>Lodging
+            <input type="radio" class="form-control" name="type" value="1" placeholder="role">Lodging
             <input type="radio" class="form-control" name="type" value="2" placeholder="role">Travel
             <input type="radio" class="form-control" name="type" value="3" placeholder="role">Food
-            <input type="radio" class="form-control" name="type" value="4" placeholder="role">Other
+            <input type="radio" class="form-control" name="type" value="4" placeholder="role" checked>Other
         </div>
         <br><br>
-        <button type="submit" class="btn btn-block btn-primary" id="reimb" onclick="reimb">Submit</button>
+        <button type="submit" class="btn btn-block btn-primary" id="reimb" onclick="reimb">New Reimburstment</button>
         <br><br>
         <button type="submit" class="btn btn-block btn-primary" id="logout" onclick="logout">Logout</button>
 
@@ -33,8 +33,26 @@
     </div>
     <br><br>
 
-    <div id="table">
+    <div>
+        <table id = "employee" class = "table table-dark table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Reimb Id</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Time Submitted</th>
+                <th scope="col">Description</th>
+                <th scope="col">Author Id</th>
+                <th scope="col">Status</th>
+                <th scope="col">Type</th>
+                <th scope="col">Approve/Deny</th>
+            </tr>
+            </thead>
+            <tbody id='reimInfo'>
+            </tbody>
+        </table>
+    <table>
 
+    </table>
 
     </div>
 

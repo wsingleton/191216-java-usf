@@ -3,9 +3,13 @@ package com.revature.servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.revature.dtos.Credentials;
+import com.revature.dtos.dto;
 import com.revature.exceptions.AuthenticationException;
 import com.revature.exceptions.InvalidRequestException;
+import com.revature.exceptions.ResourceNotFoundException;
 import com.revature.models.Reimburstment;
+import com.revature.models.Role;
+import com.revature.models.Status;
 import com.revature.models.User;
 import com.revature.repos.ReimburstRepository;
 import com.revature.services.ReimburstService;
@@ -22,7 +26,8 @@ import java.util.Set;
 
 import static com.revature.utils.PageRouter.process;
 
-@WebServlet("/dashboard")
+
+@WebServlet("/reimb")
 public class ReimbServlet extends HttpServlet {
 
     public final ReimburstService reimburstService =  new ReimburstService(new ReimburstRepository());
@@ -31,22 +36,23 @@ public class ReimbServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
         resp.setContentType("application/json");
-        String userIdParam = req.getParameter("reimb_author");
-
-        if(req.getSession(false) != null){
-            req.getSession().invalidate();
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("this-user");
+        System.out.println("Arewe here??");
+        if(user.getRole() == Role.MANAGER){
+            System.out.println("Manager in if statement");
+            Set <Reimburstment> reimbs = reimburstService.getAllReim();
+            System.out.println(reimbs);
+            String reimbsJSON = mapper.writeValueAsString(reimbs);
+            resp.getWriter().write(reimbsJSON);
+        }else if(user.getRole() == Role.EMPLOYEE){
+            System.out.println("Employee");
+            Set <Reimburstment> reimbs = reimburstService.getAllReimByAuthor(user.getUser_id());
+            String reimbsJSON = mapper.writeValueAsString(reimbs);
+            resp.getWriter().write(reimbsJSON);
+        } else{
+            System.out.println(" none of the above");
         }
-        else{
-            try{
-                Set<Reimburstment> reimb = reimburstService.getAllReimByAuthor(Integer.parseInt(userIdParam));
-                String reimbJSON = mapper.writeValueAsString(reimb);
-                resp.getWriter().write(reimbJSON);
-            }catch(Exception e){
-                resp.setStatus(400);
-            }
-        }
-
-
     }
 
     @Override
@@ -57,16 +63,12 @@ public class ReimbServlet extends HttpServlet {
         resp.setContentType("application/json");
 
         try{
-            Reimburstment reimb = new Reimburstment();
-            reimb = mapper.readValue(req.getInputStream(), Reimburstment.class);
-            System.out.println("I'm here");
-            reimburstService.createReimb(reimb);
-            System.out.println("creation");
+            Reimburstment reimb = mapper.readValue(req.getInputStream(), Reimburstment.class);
+            reimburstService.createReimb(reimb); // hwy are you not working?
             String reimbJSON = mapper.writeValueAsString(reimb);
             writer.write(reimbJSON);
-            HttpSession session = req.getSession();
+            HttpSession session = req.getSession();//problem here?
             session.setAttribute("this-reimb", reimb);
-            process("/reimb.view");
 
         }
         catch (MismatchedInputException e){
@@ -78,6 +80,25 @@ public class ReimbServlet extends HttpServlet {
         catch (Exception e){
             resp.setStatus(500);
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        ObjectMapper mapper = new ObjectMapper();
+        PrintWriter writer = resp.getWriter();
+        HttpSession session = req.getSession(false);
+        resp.setContentType("application/json");
+        try {
+            dto transfer = mapper.readValue(req.getInputStream(), dto.class);
+            Reimburstment reimbursement = new Reimburstment();
+            reimbursement.setId(transfer.getId());
+            reimbursement.setStatus(Status.getStatusbyId(transfer.getStatus()));
+            System.out.println(reimbursement);
+            reimburstService.update(reimbursement);
+        } catch (MismatchedInputException e){
+        } catch (ResourceNotFoundException e){
+        } catch (Exception e){
         }
     }
 

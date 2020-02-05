@@ -12,22 +12,21 @@ public class Reimburstment {
 
     private Integer author;
     private Integer resolver;
-    private Integer status;
+    private Status status;
     private Integer type;
 
     public Reimburstment() {
-        id = 0;
-        amount = 0.0;
-        submitted = new Date(0);
-        resolved = new Date(0);
-        description = "";
-        author = 0;
-        resolver = 0;
-        status = 0;
-        type = 0;
+        super();
     }
 
-    public Reimburstment(Double amount, Date submitted, String description, Integer author, Integer status, Integer type) {
+    public Reimburstment(Double amount, String description, Integer author, Integer type) {
+        this.amount = amount;
+        this.description = description;
+        this.author = author;
+        this.type = type;
+    }
+
+    public Reimburstment(Double amount, Date submitted, String description, Integer author, Status status, Integer type) {
         this.amount = amount;
         this.submitted = submitted;
         this.description = description;
@@ -36,7 +35,17 @@ public class Reimburstment {
         this.type = type;
     }
 
-    public Reimburstment(Integer id, Double amount, Date submitted, Date resolved, String description, Integer author, Integer resolver, Integer status, Integer type) {
+    public Reimburstment(Integer id, Double amount, Date submitted, String description, Integer author, Status status, Integer type) {
+        this.id = id;
+        this.amount = amount;
+        this.submitted = submitted;
+        this.description = description;
+        this.author = author;
+        this.status = status;
+        this.type = type;
+    }
+
+    public Reimburstment(Integer id, Double amount, Date submitted, Date resolved, String description, Integer author, Integer resolver, Status status, Integer type) {
         this.id = id;
         this.amount = amount;
         this.submitted = submitted;
@@ -103,11 +112,11 @@ public class Reimburstment {
         this.resolver = resolver;
     }
 
-    public Integer getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

@@ -1,7 +1,7 @@
 package com.revature.models;
 
 public enum Role {
-    FINANCE_MANAGER(1, "Finance Manager"), EMPLOYEE(2, "Employee");
+    MANAGER(1, "Manager"), EMPLOYEE(2, "Employee");
 
     private int id;
     private String roleName;
@@ -12,18 +12,14 @@ public enum Role {
     }
 
     public static Role getRoleById(int id){
-        Role role = null;
-
-        switch(id){
-            case 1:
-                role = Role.FINANCE_MANAGER;
-                break;
-
-            default:
-                role = Role.EMPLOYEE;
+        for(Role role : Role.values()){
+            if(role.id == id){
+                return role;
+            }
         }
-        return role;
+        return Role.EMPLOYEE;
     }
+
 
     public int getId() {
         return id;
@@ -31,6 +27,9 @@ public enum Role {
 
     @Override
     public String toString() {
-        return roleName;
+        return "Role{" +
+                "id=" + id +
+                ", roleName='" + roleName + '\'' +
+                '}';
     }
 }
