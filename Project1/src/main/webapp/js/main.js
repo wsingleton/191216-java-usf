@@ -3,15 +3,16 @@ window.onload = () => {
 }
 
 function loadLogin() {
-    console.log('login intiializing');
+    console.log('login initializing');
 
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'login.view', true);
+    xhr.open('GET', 'XND_INC', true);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
             document.getElementById('login').addEventListener('click', login);
+            document.getElementById('register').addEventListener('click', register)
         }
     }
 }
@@ -28,7 +29,7 @@ function login() {
     let credsJson = JSON.stringify(creds);
 
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'authentication', true);
+    xhr.open('POST', 'auth', true);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -40,10 +41,22 @@ function login() {
         }
     }
 }
+function register () {
+    console.log('working in register');
+    let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'register', true);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                document.getElementById('root').innerHTML = xhr.responseText;
+                document.getElementById('register').addEventListener('click', () => {registration()});
+                }
+       }
+}
 
 function logout() {
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'authentication', true);
+    xhr.open('POST', 'auth', true);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -54,12 +67,55 @@ function logout() {
 
 let user;
 
+function savingTicket(user) {
+    console.log(user)
+
+    let amount = '';
+    let timeSubmitted = '';
+    let desc = '';
+    let timeResolved = new Date();
+    let receipt = '';
+    let authId = document.getElementById('authId').value;
+    let resolverId = user.id;
+    let statusId = document.getElementById('statusId').value;
+    let categoryId = document.getElementById('categoryId').value;
+
+    let creds = {
+        amount: amount,
+        timeSubmitted: timeSubmitted,
+        timeResolved: timeResolved,
+        desc: desc,
+        receipt: receipt,
+        authId: authId,
+        resolverId: resolverId,
+        statusId: statusId,
+        categoryId: categoryId,
+    };
+
+    console.log(creds);
+
+    let credsJSON = JSON.stringify(creds);
+    xhr.open('POST', 'auth', true);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let reimb = JSON.parse(xhr.responseText);
+                console.log(reimb.desc);
+            }
+            if (xhr.status === 201) {
+                let reimb = JSON.parse(xhr.response);
+                console.log(reimb.desc);
+            }
+        }
+
+}
+
 function registration() {
-    let password = document.getElementById('username').value;
+    let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
-    let password = document.getElementById('firstName').value;
-    let password = document.getElementById('lastName').value;
-    let password = document.getElementById('email').value;
+    let firstName = document.getElementById('firstName').value;
+    let lastName = document.getElementById('lastName').value;
+    let email = document.getElementById('email').value;
 
     // add input validation esp. for email
     let user = {

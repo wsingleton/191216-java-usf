@@ -90,4 +90,23 @@ public class ReimbRepository implements CrudRepository<Reimbursement> {
     public boolean deleteById(int id) {
         return false;
     }
+
+    public Set<Reimbursement> newFindById(int id) {
+        Set<Reimbursement> reimbursements = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+
+            String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+            reimbursements = mapResults(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reimbursements;
+    }
 }

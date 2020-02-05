@@ -8,6 +8,8 @@ import com.revature.models.Role;
 import com.revature.models.User;
 import com.revature.repos.UserRepository;
 
+import java.util.Set;
+
 public class UserService {
     private UserRepository uRepo;
     /*
@@ -26,6 +28,16 @@ public class UserService {
         }
         newUser.setRole(Role.EMPLOYEE);
         uRepo.save(newUser);
+    }
+
+    public Set<User> getAllUsers(){
+        Set<User> users;
+
+        users = uRepo.findAll();
+
+        if (users.isEmpty()) {
+            throw new ResourceNotFoundException();
+        } return users;
     }
 
     public void managerRegistration (User newUser) {

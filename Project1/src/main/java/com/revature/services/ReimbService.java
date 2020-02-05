@@ -4,6 +4,8 @@ import com.revature.exceptions.ResourceNotFoundException;
 import com.revature.models.Reimbursement;
 import com.revature.repos.ReimbRepository;
 
+import java.util.Set;
+
 public class ReimbService {
     private ReimbRepository rRepo;
 
@@ -11,13 +13,27 @@ public class ReimbService {
         this.rRepo = rRepo;
     }
 
-    public Reimbursement getById(int id) throws ResourceNotFoundException {
-        return rRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
+    public Set<Reimbursement> getById(int id) throws ResourceNotFoundException {
+        return rRepo.newFindById(id);
 
+    }
+
+    public Set<Reimbursement> getByAuthorId (int id) {
+        return rRepo.newFindById(id);
     }
 
     public Reimbursement addReimbReq(Reimbursement reimb) {
         rRepo.save(reimb);
         return reimb;
     }
+
+    public Set<Reimbursement> getAllReimb(){
+         return rRepo.findAll();
+    }
+
+    public boolean update(Reimbursement reimb) {
+        return rRepo.update(reimb);
+    }
+
+
 }

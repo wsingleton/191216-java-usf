@@ -27,7 +27,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ViewServlet</servlet-name>
-        <url-pattern>/view</url-pattern>
+        <url-pattern>/login.view</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
