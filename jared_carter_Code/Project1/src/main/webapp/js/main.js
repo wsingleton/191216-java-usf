@@ -236,14 +236,6 @@ function reimburseListsManager(reimbursements){
                 <td>${reimbursements[i].reimbursementTypeId}</td>
                 `
               )
-/*
-              <td>
-                <button id='approve-button">Approve</button>
-                <button id='deny-button">Deny</button>
-                </td>
-*/
-              //onclick = "updateStatus(${reimbursements[i].reimbursementStatusId}"
-                //= "updateStatus(${reimbursements[i].reimbursementStatusId}"
                 
 
     
