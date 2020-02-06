@@ -101,10 +101,17 @@ function getReimb(user) {
             document.getElementById('summit1').addEventListener("click",() => {
                 createReimb(user)
             });
+            if (user.role === 'MANAGER'){
+                document.getElementById('back').addEventListener("click",() => {
+                    getMana(user)
+                });
 
-            document.getElementById('back').addEventListener("click",() => {
-                getEmp(user)
-            });
+            }else{
+                document.getElementById('back').addEventListener("click",() => {
+                    getEmp(user)
+                });
+            }
+           
         }
     }
 }
