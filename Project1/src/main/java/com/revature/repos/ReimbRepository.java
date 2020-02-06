@@ -83,7 +83,17 @@ public class ReimbRepository implements CrudRepository<Reimbursement> {
     }
 
     @Override
-    public boolean update(Reimbursement updatedObj) {
+    public boolean update(Reimbursement reimb) {
+        try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
+            String sql = "UPDATE ers_reimbursement SET reimb_status_id = ? WHERE reimb_id = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            assert Status.newGetById() != null;
+            pstmt.setInt(1, reimb.getStatusId().getId());
+            pstmt.setInt(2, reimb.getId());
+            pstmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

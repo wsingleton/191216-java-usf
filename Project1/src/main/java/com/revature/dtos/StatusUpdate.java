@@ -3,15 +3,15 @@ package com.revature.dtos;
 public class StatusUpdate {
 
     private int id;
-    private int statusId;
+    private int status;
 
     public StatusUpdate() {
         super();
     }
 
-    public StatusUpdate(int id, int statusId) {
+    public StatusUpdate(int id, int status) {
         this.id = id;
-        this.statusId = statusId;
+        this.status = status;
     }
 
     public int getId() {
@@ -22,19 +22,19 @@ public class StatusUpdate {
         this.id = id;
     }
 
-    public int getStatusId() {
-        return statusId;
+    public int getStatus() {
+        return status;
     }
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
         return "StatusUpdate{" +
                 "id=" + id +
-                ", statusId=" + statusId +
+                ", status=" + status +
                 '}';
     }
 }

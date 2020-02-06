@@ -21,6 +21,10 @@ public enum Status {
         return Status.LOCKED;
     }
 
+    public static Status newGetById() {
+        return null;
+    }
+
     public int getId() {
         return id;
     }

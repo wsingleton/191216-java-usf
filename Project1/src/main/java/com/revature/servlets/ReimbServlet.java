@@ -93,7 +93,7 @@ public class ReimbServlet extends HttpServlet {
             StatusUpdate transfer = mapper.readValue(req.getInputStream(), StatusUpdate.class);
             Reimbursement reimbursement = new Reimbursement();
             reimbursement.setId(transfer.getId());
-            reimbursement.setStatusId(Status.getById(transfer.getStatusId()));
+            reimbursement.setStatusId(Status.getById(transfer.getStatus()));
             System.out.println(reimbursement);
             reimbService.update(reimbursement);
         } catch (MismatchedInputException e) {

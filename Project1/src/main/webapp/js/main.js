@@ -166,16 +166,16 @@ function reimbManagerTable(reimbs){
         data = document.createElement('tr');
 
         let ticket = ( `
-            <th>${reimbs.id}</th>
-            <td>${reimbs.amount}</td>
-            <td>${reimbs.timeSubmitted}</td>
-            <td>${reimbs.timeResolved}</td>
-            <td>${reimbs.description}</td>
-            <td>${reimbs.receipt}</td>
-            <td>${reimbs.authId}</td>
-            <td>${reimbs.resId}</td>
-            <td>${reimbs.statusId}</td>
-            <td>${reimbs.categoryId}</td>
+            <th>${reimbs[i].id}</th>
+            <td>${reimbs[i].amount}</td>
+            <td>${reimbs[i].timeSubmitted}</td>
+            <td>${reimbs[i].timeResolved}</td>
+            <td>${reimbs[i].description}</td>
+            <td>${reimbs[i].receipt}</td>
+            <td>${reimbs[i].authId}</td>
+            <td>${reimbs[i].resId}</td>
+            <td>${reimbs[i].statusId}</td>
+            <td>${reimbs[i].categoryId}</td>
 
               `
             )
@@ -214,12 +214,13 @@ function reimbUserTable(reimbs){
                <th>${reimbs[i].id}</th>
                 <td>${reimbs[i].amount}</td>
                 <td>${reimbs[i].timeSubmitted}</td>
+                <td>${reimbs[i].timeResolved}</td>
                 <td>${reimbs[i].description}</td>                
                 <td>${reimbs[i].recepit}</td>   
-                <td>${reimbs[i].authorById}</td>
-                <td>${reimbs[i].resolverById}</td>
-                <td>${reimbs[i].reimbursementStatusId}</td>
-                <td>${reimbs[i].reimbursementTypeId}</td>
+                <td>${reimbs[i].authId}</td>
+                <td>${reimbs[i].resId}</td>
+                <td>${reimbs[i].statusId}</td>
+                <td>${reimbs[i].categoryId}</td>
 
 
                 `
