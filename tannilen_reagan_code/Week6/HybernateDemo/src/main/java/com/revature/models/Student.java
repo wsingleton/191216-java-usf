@@ -1,11 +1,29 @@
 package com.revature.models;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@NamedQueries({
+        @NamedQuery(name="findStudentById_HQL", query="from Student s where s.id=:id"),
+        @NamedQuery(name="findStudentByName_HQL", query="from Student s where s.givenName = :fn AND s.familyName = :ln")
+})
+@NamedNativeQueries({
+        @NamedNativeQuery(name="getStudentByID_SQL", query="select * from students where id=:id", resultClass=Student.class)
+})
+
+@Entity
+@Table(name="STUDENTS")
+@SequenceGenerator(name="student_seq_gen", sequenceName = "student_seq", allocationSize = 1)
 public class Student {
+    @Id
+    @Column(name="ID")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "student_seq_gen")
     private int id;
+    @Column(name="FirstName", nullable=false)
     private String givenName;
+    @Column(name="LastName", nullable=false)
     private String familyName;
+    @Column(name="email", nullable=false, unique = true)
     private String email;
 
     public Student() {

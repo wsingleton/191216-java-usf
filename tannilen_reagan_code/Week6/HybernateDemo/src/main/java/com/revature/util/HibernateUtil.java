@@ -1,5 +1,6 @@
 package com.revature.util;
 
+import com.revature.models.Student;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -9,6 +10,7 @@ public class HibernateUtil {
         try {
             Configuration config=new Configuration();
             config.configure();
+            config.addAnnotatedClass(Student.class);
             return config.buildSessionFactory();
         }
         catch (Exception e) {
