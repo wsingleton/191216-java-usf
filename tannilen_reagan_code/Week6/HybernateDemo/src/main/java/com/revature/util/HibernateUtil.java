@@ -9,10 +9,14 @@ public class HibernateUtil {
         try {
             Configuration config=new Configuration();
             config.configure();
+            return config.buildSessionFactory();
         }
         catch (Exception e) {
             e.printStackTrace();
             throw new ExceptionInInitializerError(e);
         }
+    }
+    public static SessionFactory getSessionFactory() {
+        return (sessionFactory==null) ? sessionFactory=buildSessionFactory() : sessionFactory;
     }
 }
