@@ -70,12 +70,16 @@ function loadManagerView () {
     xhr.open("GET", "manager.view", true);
     xhr.send();
     xhr.onreadystatechange = () => {
+        console.log('print page')
+
         if(xhr.readyState == 4 && xhr.status == 200) {
             document.getElementById('root').innerHTML = xhr.responseText
             document.getElementById('refreshReimb').addEventListener('click', loadManagerView)
+            console.log('print page')
 
             document.getElementById('logout').addEventListener('click', logout);
             loadMangerReimb()
+    console.log('print page')
 
         
         }

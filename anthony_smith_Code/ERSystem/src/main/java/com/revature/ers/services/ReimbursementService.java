@@ -29,11 +29,6 @@ public class ReimbursementService {
     }
 
 
-    public Reimbursement getById(int id){
-        return reimbursementRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-    }
-
-
     public Set<Reimbursement> getByAuthorId(int id){
         return reimbursementRepository.findAllById(id);
     }

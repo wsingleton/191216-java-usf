@@ -26,17 +26,6 @@ public class UserServices {
     }
 
 
-//    public void register(User newUser){
-//
-//        if (!isUserValid(newUser)) throw new InvalidRequestStateException();
-//
-//        if (userRepo.findUserByUsername(newUser.getUsername()).isPresent()){
-//            throw new ResourceRequestDeniedException("Username is already in use!");
-//        }
-//
-//        newUser.setRole(Role.USER);
-//        userRepo.save(newUser);
-//    }
 
     public Set<User> getAllUsers(){
 
