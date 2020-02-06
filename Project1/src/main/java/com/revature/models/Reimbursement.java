@@ -1,11 +1,13 @@
 package com.revature.models;
 
+import java.sql.Blob;
+
 public class Reimbursement {
 
     private int id;
     private int authId;
     private int resId;
-    private String receipt;
+    private Blob receipt;
     private String description;
     private String amount;
     private String timeSubmitted;
@@ -50,7 +52,7 @@ public class Reimbursement {
         this.statusId = statusId;
     }
 
-    public Reimbursement(int id, int authId, int resId, String receipt, String description, String amount, String timeSubmitted, String timeResolved, Category categoryId, Status statusId) {
+    public Reimbursement(int id, int authId, int resId, Blob receipt, String description, String amount, String timeSubmitted, String timeResolved, Category categoryId, Status statusId) {
         this.id = id;
         this.authId = authId;
         this.resId = resId;
@@ -63,11 +65,17 @@ public class Reimbursement {
         this.statusId = statusId;
     }
 
-    public String getReceipt() {
+    public Reimbursement(String description, String amount, int categoryId) {
+        this.description = description;
+        this.amount = amount;
+        this.categoryId = Category.getById(categoryId);
+    }
+
+    public Blob getReceipt() {
         return receipt;
     }
 
-    public void setReceipt(String receipt) {
+    public void setReceipt(Blob receipt) {
         this.receipt = receipt;
     }
 
@@ -131,8 +139,8 @@ public class Reimbursement {
         return categoryId;
     }
 
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = Category.getById(categoryId);
     }
 
     public Status getStatusId() {

@@ -26,10 +26,10 @@ public class ReimbRepository implements CrudRepository<Reimbursement> {
             temp.setTimeSubmitted(results.getString("reimb_submitted"));
             temp.setTimeResolved(results.getString("reimb_resolved"));
             temp.setDescription(results.getString("reimb_description"));
-            temp.setReceipt(results.getString("reimb_receipt"));
+            temp.setReceipt(results.getBlob("reimb_receipt"));
             temp.setAmount(results.getString("reimb_amount"));
             temp.setStatusId(Status.getById(results.getInt("reimb_status_id")));
-            temp.setCategoryId(Category.getById(results.getInt("reimb_type_id")));
+            temp.setCategoryId(results.getInt("reimb_type_id"));
 
             reimb.add(temp);
         } return reimb;
@@ -53,19 +53,16 @@ public class ReimbRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public void save(Reimbursement reimb) {
+        System.out.println(reimb.getAmount() + " " + reimb.getDescription() + " " + reimb.getAuthId() + " " + reimb.getCategoryId().getId());
         Connection connection = ConnectionFactory.getInstance().getConnection();
-        String sql = "INSERT INTO xnd_inc.ers_reimbursement VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ers_reimbursement VALUES (0, ?, null, null, ?, null, ?, null, 3, ?)";
         try {
-            PreparedStatement pstmt = connection.prepareStatement(sql, new String[] {"ers_reimbursement"});
+            PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, reimb.getAmount());
-            pstmt.setString(2, reimb.getTimeResolved());
-            pstmt.setString(3, reimb.getTimeSubmitted());
-            pstmt.setString(4, reimb.getDescription());
-            pstmt.setString(5, reimb.getReceipt());
-            pstmt.setInt(6, reimb.getAuthId());
-            pstmt.setInt(7, reimb.getResId());
-            pstmt.setInt(8, reimb.getStatusId().getId());
-            pstmt.setInt(9, reimb.getCategoryId().getId());
+            pstmt.setString(2, reimb.getDescription());
+            pstmt.setInt(3, reimb.getAuthId());
+            pstmt.setInt(4, reimb.getCategoryId().getId());
+            pstmt.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }

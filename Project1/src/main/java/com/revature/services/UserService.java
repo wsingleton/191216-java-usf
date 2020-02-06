@@ -57,6 +57,7 @@ public class UserService {
         if(username == null || password == null || username.trim().equals("")|| password.trim().equals("")) {
             throw new AuthenticationException();
         }
+        System.out.println("valid");
         return uRepo.findByCreds(username, password).orElseThrow(AuthenticationException::new);
     }
 

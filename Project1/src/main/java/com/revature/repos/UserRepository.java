@@ -17,9 +17,9 @@ public class UserRepository implements CrudRepository<User> {
 
         while (results.next()) {
             User temp = new User();
-            temp.setId(results.getInt("ers_user_id"));
+            temp.setId(results.getInt("ers_users_id"));
             temp.setUsername(results.getString("ers_username"));
-            temp.setPassword(results.getString("ers_password"));
+            temp.setPassword(results.getString("password"));
             temp.setFirstName(results.getString("user_first_name"));
             temp.setLastName(results.getString("user_last_name"));
             temp.setEmail(results.getString("user_email"));
@@ -31,12 +31,12 @@ public class UserRepository implements CrudRepository<User> {
 
     public Optional<User> findByCreds(String username, String password) {
         Optional<User> _user = Optional.empty();
+        System.out.println(username + " " + password);
 
         try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
 
-            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM xnd_inc.ers_user" +
-                    "WHERE ers_username = ? AND ers_password = ?"); // check syntax on this later
-            pstmt.setString(1,username);
+            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM xnd_inc.ers_user WHERE ers_username = ? AND password = ?");
+            pstmt.setString(1, username);
             pstmt.setString(2, password);
 
             ResultSet results = pstmt.executeQuery();
@@ -51,8 +51,7 @@ public class UserRepository implements CrudRepository<User> {
 
         try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
 
-            PreparedStatement pstmt =  connection.prepareStatement("SELECT * FROM xnd_inc.ers_user" +
-                    " WHERE ers_username = ?");
+            PreparedStatement pstmt =  connection.prepareStatement("SELECT * FROM xnd_inc.ers_user WHERE ers_username = ?");
             ResultSet results = pstmt.executeQuery();
             _user = mapResults(results).stream().findFirst();
         } catch (SQLException e) {
@@ -91,9 +90,9 @@ public class UserRepository implements CrudRepository<User> {
             ResultSet results = stmt.executeQuery("SELECT * FROM xnd_inc.ers_user");
             while (results.next()) {
                 User temp = new User();
-                temp.setId(results.getInt("ers_user_id"));
+                temp.setId(results.getInt("ers_users_id"));
                 temp.setUsername(results.getString("ers_username"));
-                temp.setPassword(results.getString("ers_password"));
+                temp.setPassword(results.getString("password"));
                 temp.setFirstName(results.getString("user_first_name"));
                 temp.setLastName(results.getString("user_last_name"));
                 temp.setEmail(results.getString("user_email"));
@@ -112,7 +111,7 @@ public class UserRepository implements CrudRepository<User> {
         Connection connection = ConnectionFactory.getInstance().getConnection();
 
         try {
-            String sql = "SELECT * FROM xnd_inc.ers_user WHERE ers_user_id = ?";
+            String sql = "SELECT * FROM xnd_inc.ers_user WHERE ers_users_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet results = pstmt.executeQuery();

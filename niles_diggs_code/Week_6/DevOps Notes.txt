@@ -1,0 +1,24 @@
+DevOps
+
+Continuous Integration Delivery Deployment
+
+	- what is it
+
+Continuous Integration 
+	- build -> unit tests -> deploy to stage -> acceptance tests
+	
+
+vs Continuous Delivery 
+	- you need to have good CI in order to have good CD
+	build -> unit tests -> deploy to stage -> acceptance tests -> deploy to production
+	
+	- setting up the correct environment
+
+vs Continuous Deployment
+
+	- build -> unit tests -> deploy to stage -> acceptance tests -> deploy to production
+
+	the last step is set to deploy automatically, double-edged sword as improving devOps 
+		when things are not working, or things get broken
+
+	

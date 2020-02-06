@@ -10,7 +10,7 @@ public class ViewHelper {
                     return "partials/user.html";
 
             case "/XND_INC/manager.view":
-                return "partials/manger.html";
+                return "partials/manager.html";
 
             default:
                 return"";

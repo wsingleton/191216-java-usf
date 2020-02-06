@@ -3,16 +3,15 @@ window.onload = () => {
 }
 
 function loadLogin() {
-    console.log('login initializing');
+    console.log('login intiializing');
 
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'XND_INC', true);
+    xhr.open('GET', 'login.view', true);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
-            document.getElementById('login').addEventListener('click', login);
-            document.getElementById('register').addEventListener('click', register)
+            document.getElementById('login-bttn').addEventListener('click', login);
         }
     }
 }
@@ -26,221 +25,237 @@ function login() {
         password: password
     };
 
-    let credsJson = JSON.stringify(creds);
+    let credsJSON = JSON.stringify(creds);
 
     let xhr = new XMLHttpRequest();
     xhr.open('POST', 'auth', true);
-    xhr.send();
+    xhr.send(credsJSON);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let user = JSON.parse(xhr.responseText);
             console.log(user);
+            if (user.role === 'FINANCE_MANAGER') {
+                console.log(loadManager)
+                loadManager();
+            } else {
+                loadUser();
+            }
         }
         if (xhr.status === 401) {
             document.getElementById('login-message').innerText = 'Login failed';
         }
     }
 }
-function register () {
-    console.log('working in register');
-    let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'register', true);
-        xhr.send();
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById('root').innerHTML = xhr.responseText;
-                document.getElementById('register').addEventListener('click', () => {registration()});
-                }
-       }
-}
 
 function logout() {
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'auth', true);
+    xhr.open('GET', 'login.view', true);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log('logout successful')
-        }
-    }
-}
-
-let user;
-
-function savingTicket(user) {
-    console.log(user)
-
-    let amount = '';
-    let timeSubmitted = '';
-    let desc = '';
-    let timeResolved = new Date();
-    let receipt = '';
-    let authId = document.getElementById('authId').value;
-    let resolverId = user.id;
-    let statusId = document.getElementById('statusId').value;
-    let categoryId = document.getElementById('categoryId').value;
-
-    let creds = {
-        amount: amount,
-        timeSubmitted: timeSubmitted,
-        timeResolved: timeResolved,
-        desc: desc,
-        receipt: receipt,
-        authId: authId,
-        resolverId: resolverId,
-        statusId: statusId,
-        categoryId: categoryId,
-    };
-
-    console.log(creds);
-
-    let credsJSON = JSON.stringify(creds);
-    xhr.open('POST', 'auth', true);
-        xhr.send();
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let reimb = JSON.parse(xhr.responseText);
-                console.log(reimb.desc);
-            }
-            if (xhr.status === 201) {
-                let reimb = JSON.parse(xhr.response);
-                console.log(reimb.desc);
-            }
-        }
-
-}
-
-function registration() {
-    let username = document.getElementById('username').value;
-    let password = document.getElementById('password').value;
-    let firstName = document.getElementById('firstName').value;
-    let lastName = document.getElementById('lastName').value;
-    let email = document.getElementById('email').value;
-
-    // add input validation esp. for email
-    let user = {
-        username: username,
-        password: password,
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        role: 2
-
-    };
-
-    let userJSON = JSON.stringify(user);
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'registration', true);
-    xhr.send();
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 201) {
             loadLogin();
         }
-        else if (xhr.status === 409) {
-            document.getElementById('registration message').innerText = "The username provided is unavailable at this time"
-        }
-        console.log('failed to register');
     }
-
 }
 
-function navigation() {
-
+function loadManager(){
+    console.log('this is your manager speaking');
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'navigation', true);
+    xhr.open('GET', 'manager.view', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('this is your manager speaking');
+            document.getElementById('root').innerHTML = xhr.responseText;
+            document.getElementById('reloadReimb').addEventListener('click', loadManager);
+            document.getElementById('logout').addEventListener('click', logout);
+            loadManagerReimb();
+        }
+    }
+}
+
+function loadManagerReimb(){
+    console.log('this is your manager approving');
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'reimb', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let reimbs = JSON.parse(xhr.responseText);
+            console.log(reimbs);
+            reimbManagerTable(reimbs);
+        }
+    }
+}
+
+function loadUser(){
+    console.log('I am a grunt level employee');
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'user.view', true);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById('root').innerHTML = xhr.responseText;
-            document.getElementById('navigation').addEventListener('click', loadNavigation);
+            document.getElementById('submitR').addEventListener('click', createReimb)
+            document.getElementById('refreshReimb').addEventListener('click', loadUser)
             document.getElementById('logout').addEventListener('click', logout);
-            document.getElementById('new reimb req').addEventListener('click', loadReimbursment);
-            document.getElementById('remib submit').addEventListener('click', loadReimbursmentUpdates);
+            loadReimbs();
         }
     }
 }
-function values(reimbData) {
-    let reimbId = reimbData.reimbId;
-    let amount = reimbData.amount;
-    let submittedDate = reimbData.submittedDate;
-    let type = reimbData.type;
-    let status = reimbData.status;
-    let description = reimbData.description;
-    let receipt = reimbData.receipt;
-    let resolverId = reimbData.resolverId;
-    let authorId = reimbData.authorId;
-    let resolvedDate = reimbData.resolvedDate;
 
-    let row = document.createElement('tr');
-    let reimbIdCell = document.createElement('td');
-    let typeCell = document.createElement('td');
-    let statusCell = document.createElement('td');
-    let totalAmountCell = document.createElement('td');
-    let dateCreatedCell = document.createElement('td');
-    let resolvedDateCell = document.createElement('td');
-    let descriptionCell = document.createElement('td');
-    let receiptCell = document.createElement('td');
-    let resolverCell = document.createElement('td');
-    let authorIdCell = document.createElement('td');
-
-    row.appendChild(reimbIdCell);//1
-    row.appendChild(typeCell);//2
-    row.appendChild(statusCell);//3
-    row.appendChild(totalAmountCell);//4
-    row.appendChild(dateCreatedCell);//5
-    row.appendChild(descriptionCell);//7
-    row.appendChild(receiptCell);//8
-    row.appendChild(resolverCell);//9
-    row.appendChild(resolvedDateCell);//6
-    row.appendChild(authorIdCell);//10
-
-    reimbIdCell.innerText = reimbId;
-    typeCell.innerText = type;
-    statusCell.innerText = status;
-    amountCell.innerText = amount;
-    dateCreatedCell.innerText = submittedDate;
-    resolvedDateCell.innerText = resolvedDate;
-    descriptionCell.innerText = description;
-    receiptCell.innerText = receipt;
-    resolvedCell.innerText = resolverId;
-    authIdCell.innerText = authorId;
-    document.getElementById('open-reimb').appendChild(row);
-
-}
-
-function reimbTable() {
+function loadReimbs(){
+    console.log('Please accept my request');
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'navigation', true);
+    xhr.open('GET', 'reimb', true);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            let reimbData = JSON.parse(xhr.responseText);
-            for (let i=0; i<reimbData.length; i++) {
-                values(reimbData[i]);
-            }
+            let reimbs = JSON.parse(xhr.responseText);
+            console.log(reimbs);
+            document.getElementById('approve');
+            reimbUserTable(reimbs);
+            
         }
     }
 }
 
-function newReimbReq() {
-
-    let req_amount = document.getElementById('req_amount').value;
-    let reimb_category = document.getElementById('reimb_category').value;
-    let reimb_desc = document.getElementById('reimb_desc').value;
-
-    let newReimbRequest = {
-        amount: req_amount,
-        type: reimb_category,
-        description: reimb_desc
+function approveReimb(id) {
+    let Status = {
+        id:id,
+        status:1
     };
 
-    /*
+    let StatusJSON = JSON.stringify(Status);
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'navigation', true);
-    xhr.send();
+    xhr.open('PUT', 'reimb', true);
+    xhr.send(StatusJSON);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
+            loadManager();
+        }
+    }
 
-    */
 }
+
+function denyReimb(id) {
+    let Status = {
+        id:id,
+        status:2
+    };
+
+    let StatusJSON = JSON.stringify(Status);
+    let xhr = new XMLHttpRequest();
+    xhr.open('PUT', 'reimb', true);
+    xhr.send(StatusJSON);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            loadManager();
+        }
+    }
+
+}
+
+let reimb;
+
+function reimbManagerTable(reimbs){
+    let table = document.getElementById('reimbData');
+    let data;
+    for (let i =0; i<reimb.length; i++){
+        data = document.createElement('tr');
+
+        let ticket = ( `
+            <th>${reimbs.id}</th>
+            <td>${reimbs.amount}</td>
+            <td>${reimbs.timeSub}</td>
+            <td>${reimbs.description}</td>
+            <td>${reimbs.receipt}</td>
+            <td>${reimbs.authorId}</td>
+            <td>${reimbs.resolverId}</td>
+            <td>${reimbs.statusId}</td>
+            <td>${reimbs.typeId}</td>
+
+              `
+            )
+
+        let button = document.createElement('td');
+        let approve = document.createElement('button');
+        let deny = document.createElement('button');
+
+        approve.setAttribute('id', 'a-button');
+        approve.setAttribute('id', 'b-button');
+
+        approve.innerText = 'approve';
+        deny.innerText = 'deny';
+
+        approve.addEventListener('click', () => {approveReimb(reimb[i].id)});
+        deny.addEventListener('click', () => {denyReimb(reimb[i].id)});
+
+        button.appendChild(approve);
+        button.appendChild(deny);
+
+        data.innerHTML = ticket;
+        data.appendChild(button);
+
+        table.appendChild(data);
+    }
+}
+
+function reimbUserTable(reimbs){
+    let table = document.getElementById('reimInfo');
+    let data;
+    for(let i = 0; i <reimbs.length; i++) {
+        data = document.createElement('tr');
+
+
+              let ticket = ( `
+               <th>${reimbs[i].id}</th>
+                <td>${reimbs[i].amount}</td>
+                <td>${reimbs[i].timeSubmitted}</td>
+                <td>${reimbs[i].description}</td>                
+                <td>${reimbs[i].recepit}</td>   
+                <td>${reimbs[i].authorById}</td>
+                <td>${reimbs[i].resolverById}</td>
+                <td>${reimbs[i].reimbursementStatusId}</td>
+                <td>${reimbs[i].reimbursementTypeId}</td>
+
+
+                `
+              )
+
+
+    data.innerHTML = ticket;
+    table.appendChild(data);
+
+    
+    }
+}
+
+function createReimb(){
+    let reimb = getNewReimb()
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", 'reimb', true);
+    xhr.send(reimb);        
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            let reimbs = JSON.stringify(xhr.responseText);
+            reimbursement = JSON.parse(reimbs);
+            console.log('in createReimb!')
+        }               
+    } 
+}
+
+function getNewReimb() {
+    let obj = {
+
+        amount: document.getElementById('reimbamount').value,
+        description: document.getElementById('reimbDesc').value,
+        categoryId: parseInt(document.getElementById('reimbType').value)
+
+    }
+    console.log(obj)
+    return JSON.stringify(obj);
+}
+
+

@@ -52,14 +52,21 @@ public class ReimbServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         ObjectMapper mapper = new ObjectMapper();
         resp.setContentType("application/json");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("this-user");
 
+
         try {
             Reimbursement reimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
+            System.out.println(reimb.getAmount());
+            System.out.println(reimb.getDescription());
+            System.out.println(reimb.getCategoryId());
             reimb.setAuthId(user.getId());
+            reimbService.addReimbReq(reimb);
+
         } catch (MismatchedInputException e) {
             resp.setStatus(400);
         } catch (AuthenticationException e) {

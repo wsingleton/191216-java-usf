@@ -3,6 +3,7 @@ package com.revature.servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.revature.dtos.Credentials;
+import com.revature.exceptions.AuthenticationException;
 import com.revature.exceptions.ResourceNotFoundException;
 import com.revature.exceptions.ResourcePersistenceException;
 import com.revature.models.User;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/auth")
+@WebServlet("/auth1")
 public class AuthServlet extends HttpServlet {
     private final UserService uService = new UserService(new UserRepository());
 
@@ -39,7 +40,10 @@ public class AuthServlet extends HttpServlet {
         } catch (MismatchedInputException e) {
             resp.setStatus(400);
             System.err.println("ERROR");
-        } catch (ResourcePersistenceException e) {
+        } catch(AuthenticationException e) {
+            resp.setStatus(401);
+        }
+        catch (ResourcePersistenceException e) {
             resp.setStatus(409);
         } catch (Exception e) {
             resp.setStatus(500);

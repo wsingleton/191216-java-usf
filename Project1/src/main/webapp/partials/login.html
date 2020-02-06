@@ -1,16 +1,17 @@
-<div id="body">
-    <form class="login-form">
-        <h1>Login</h1>
-        <div id="inputUsername" class="txtb">
-            <input id="username" type="text">
-            <span id="user-text" data-name="Username"></span>
-        </div>
-        <div id="inputPassword" class="txtb">
-            <input id="password" type="password">
-            <span data-pw="Password"></span>
-        </div>
+<div>
+    <h1>Welcome to XND_INC -- Login Please</h1>
+</div>
 
-        <input id="login" type="submit" class="login-button" value="Login">
+<div>
+    <label for="username">Username</label>
+    <input type="text" id="username" class="form-control">
+    <label for="password">Password</label>
+    <input type="password" id="password" class="form-control">
+    <br><button id="login-bttn">Login</button>
 
-    </form>
+    <script>
+        document.getElementById('login-bttn').addEventListener('click', login)
+    </script>
+    <br>
+    <p id="login-message"></p>
 </div>
