@@ -162,19 +162,20 @@ let reimb;
 function reimbManagerTable(reimbs){
     let table = document.getElementById('reimbData');
     let data;
-    for (let i =0; i<reimb.length; i++){
+    for (let i =0; i<reimbs.length; i++){
         data = document.createElement('tr');
 
         let ticket = ( `
             <th>${reimbs.id}</th>
             <td>${reimbs.amount}</td>
-            <td>${reimbs.timeSub}</td>
+            <td>${reimbs.timeSubmitted}</td>
+            <td>${reimbs.timeResolved}</td>
             <td>${reimbs.description}</td>
             <td>${reimbs.receipt}</td>
-            <td>${reimbs.authorId}</td>
-            <td>${reimbs.resolverId}</td>
+            <td>${reimbs.authId}</td>
+            <td>${reimbs.resId}</td>
             <td>${reimbs.statusId}</td>
-            <td>${reimbs.typeId}</td>
+            <td>${reimbs.categoryId}</td>
 
               `
             )
@@ -189,8 +190,8 @@ function reimbManagerTable(reimbs){
         approve.innerText = 'approve';
         deny.innerText = 'deny';
 
-        approve.addEventListener('click', () => {approveReimb(reimb[i].id)});
-        deny.addEventListener('click', () => {denyReimb(reimb[i].id)});
+        approve.addEventListener('click', () => {approveReimb(reimbs[i].id)});
+        deny.addEventListener('click', () => {denyReimb(reimbs[i].id)});
 
         button.appendChild(approve);
         button.appendChild(deny);
@@ -203,7 +204,7 @@ function reimbManagerTable(reimbs){
 }
 
 function reimbUserTable(reimbs){
-    let table = document.getElementById('reimInfo');
+    let table = document.getElementById('reimbData');
     let data;
     for(let i = 0; i <reimbs.length; i++) {
         data = document.createElement('tr');

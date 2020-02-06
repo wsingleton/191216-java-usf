@@ -37,12 +37,16 @@ public class ReimbServlet extends HttpServlet {
 
         if (user.getRole() == Role.FINANCE_MANAGER) {
             Set<Reimbursement> reimb =  reimbService.getAllReimb();
+            System.out.println(reimb);
             String reimbJSON = mapper.writeValueAsString(reimb);
+            System.out.println();
             resp.getWriter().write(reimbJSON);
         } else {
             try {
                 Set<Reimbursement> reimb = reimbService.getByAuthorId(user.getId());
+                System.out.println(reimb);
                 String reimbJSON = mapper.writeValueAsString(reimb);
+                System.out.println(reimbJSON);
                 resp.getWriter().write(reimbJSON);
             } catch (Exception e) {
                 e.printStackTrace();

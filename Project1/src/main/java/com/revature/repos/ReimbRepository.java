@@ -6,10 +6,7 @@ import com.revature.models.Status;
 import com.revature.util.ConnectionFactory;
 
 import javax.security.auth.login.Configuration;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -53,7 +50,6 @@ public class ReimbRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public void save(Reimbursement reimb) {
-        System.out.println(reimb.getAmount() + " " + reimb.getDescription() + " " + reimb.getAuthId() + " " + reimb.getCategoryId().getId());
         Connection connection = ConnectionFactory.getInstance().getConnection();
         String sql = "INSERT INTO ers_reimbursement VALUES (0, ?, null, null, ?, null, ?, null, 3, ?)";
         try {
@@ -70,7 +66,15 @@ public class ReimbRepository implements CrudRepository<Reimbursement> {
 
     @Override
     public Set<Reimbursement> findAll() {
-        return null;
+        Set<Reimbursement> reimb = new HashSet<>();
+        try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
+            String sql = "SELECT * FROM ers_reimbursement";
+            Statement stmt = connection.createStatement();
+            ResultSet results = stmt.executeQuery(sql);
+            reimb = mapResults(results);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } return reimb;
     }
 
     @Override
