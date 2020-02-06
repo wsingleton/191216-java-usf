@@ -189,6 +189,11 @@ window.onload = () =>{
 
 }
     
+setTimeout(()=>{
+    console.log("the rows are " +rows + " after the 500 miliseconds") 
+    accesstable();
+          
+}, 500);
     
 function logout() {
         let xhr = new XMLHttpRequest();

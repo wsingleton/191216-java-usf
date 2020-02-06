@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <!--configure the Session factory gor our application-->
+<session-factory>
+    <!--Database connection properties:driver, url, username and password-->
+    <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+    <property name="connection.url">jdbc:oracle:thin:@java-usf-191216.c4dreftrbskq.us-east-2.rds.amazonaws.com:1521:ORCL</property>
+    <property name="connection.username">quizznomancer</property>
+    <property name="connection.password">revature</property>
+
+    <!--JDBC connection pool size-->
+    <property name="connection.pool_size">1</property>
+
+    <!--Database connection properties:driver, url, username and password-->
+    <property name="dialect">org.hibernate.dialect.Oracle12cDialect</property>
+
+    <!--Current session context-->
+    <property name="current_session_context_class">thread</property>
+
+    <property name="show_sql">true</property>
+
+    <property name="hbm2ddl.auto">update</property>
+    <mapping resource="employee.hbm.xml"/>
+    <mapping resource="get-employee-by-name.hbm.xml"/>
+</session-factory>
+
+</hibernate-configuration>
