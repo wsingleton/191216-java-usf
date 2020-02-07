@@ -19,4 +19,11 @@ body {
     align-content: center;
 }
 
+#table-div {
+    padding-bottom: 15%;
+}
+
+.container {
+    padding-bottom: 15%;
+}
 
