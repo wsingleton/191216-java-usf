@@ -1,5 +1,7 @@
 package com.revature.quizzard.dtos;
 
+import java.util.Objects;
+
 public class Credentials {
 
     private String username;
@@ -28,5 +30,27 @@ public class Credentials {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Credentials)) return false;
+        Credentials that = (Credentials) o;
+        return Objects.equals(getUsername(), that.getUsername()) &&
+                Objects.equals(getPassword(), that.getPassword());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUsername(), getPassword());
+    }
+
+    @Override
+    public String toString() {
+        return "Credentials{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
