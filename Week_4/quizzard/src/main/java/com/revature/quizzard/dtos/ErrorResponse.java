@@ -1,5 +1,8 @@
 package com.revature.quizzard.dtos;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.Objects;
 
 public class ErrorResponse {
@@ -10,11 +13,6 @@ public class ErrorResponse {
 
     public ErrorResponse() {
         super();
-    }
-
-    public ErrorResponse(int status, long timestamp) {
-        this.status = status;
-        this.timestamp = timestamp;
     }
 
     public ErrorResponse(int status, String message, long timestamp) {
@@ -48,6 +46,21 @@ public class ErrorResponse {
     public ErrorResponse setTimestamp(long timestamp) {
         this.timestamp = timestamp;
         return this;
+    }
+
+    public String toJSON() {
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+
+        try {
+            json = mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return json;
+
     }
 
     @Override

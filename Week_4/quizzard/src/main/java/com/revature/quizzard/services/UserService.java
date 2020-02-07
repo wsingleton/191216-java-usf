@@ -4,18 +4,25 @@ import com.revature.quizzard.exceptions.*;
 import com.revature.quizzard.models.Role;
 import com.revature.quizzard.models.User;
 import com.revature.quizzard.repos.UserRepository;
-import com.revature.quizzard.util.ConnectionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class UserService {
 
+    private static final UserService userService = new UserService(UserRepository.getInstance());
+    private static final Logger LOG = LogManager.getLogger(UserService.class);
     private UserRepository userRepo;
 
-    public UserService(UserRepository repo) {
+    private UserService(UserRepository repo) {
         super();
         this.userRepo = repo;
+    }
+
+    public static UserService getInstance() {
+        return userService;
     }
 
     public User getUserById(int id) {
@@ -75,6 +82,15 @@ public class UserService {
 
         return userRepo.findUserByUsername(username).orElseThrow(ResourceNotFoundException::new);
 
+    }
+
+    public void confirmAccount(int userId) {
+
+        if (userId <= 0) {
+            throw new InvalidRequestException();
+        }
+
+        userRepo.confirmAccount(userId);
 
     }
 
@@ -122,13 +138,17 @@ public class UserService {
             throw new InvalidRequestException();
         }
 
-        return userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+        User authUser = userRepo.findUserByCredentials(username, password).orElseThrow(AuthenticationException::new);
+
+        if (authUser.accountConfirmed()) {
+            return authUser;
+        } else {
+            throw new AuthenticationException("Account not confirmed.");
+        }
 
     }
 
-    public Boolean updateProfile(User updatedUser) {
-
-        Boolean profileUpdated;
+    public void updateProfile(User updatedUser) {
 
         if (!isUserValid(updatedUser)) {
             throw new InvalidRequestException();
@@ -139,13 +159,12 @@ public class UserService {
             throw new ResourcePersistenceException("That username is taken by someone else!");
         }
 
-        profileUpdated = userRepo.update(updatedUser);
-
-        return profileUpdated;
+        userRepo.update(updatedUser);
 
     }
 
     public Boolean isUserValid(User user) {
+        System.out.println(user);
         if (user == null) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;
         if (user.getLastName() == null || user.getLastName().trim().equals("")) return false;
