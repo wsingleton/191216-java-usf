@@ -50,17 +50,19 @@ ___
 
 **Week 4:** Servlets and AWS Cloud
 
-**Week 5:** DevOps Principals and Angular
+**Week 5:** TypeScript, React, and Redux
 
-**Week 6:** Spring Framework
+**Week 6:** DevOps Principals and Hibernate
 
-**Week 7:** Web Services & Microservices
+**Week 7:** Spring Framework
 
-**Week 8:** Panels and Project 3
+**Week 8:** Web Services & Microservices
 
 **Week 9:** Panels and Project 3
 
-**Week 10:** Project 3 Showcase & Promotion Ceremony
+**Week 10:** Panels and Project 3
+
+**Week 11:** Project 3 Showcase & Promotion Ceremony
 
 ___
 

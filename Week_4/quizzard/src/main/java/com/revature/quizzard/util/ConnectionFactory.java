@@ -15,19 +15,8 @@ public class ConnectionFactory {
 
     private static ConnectionFactory connFactory = new ConnectionFactory();
 
-    private Properties props = new Properties();
-
     private ConnectionFactory() {
         super();
-
-        try {
-            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            InputStream input = loader.getResourceAsStream("application.properties");
-            props.load(input);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public static ConnectionFactory getInstance() {
@@ -42,9 +31,9 @@ public class ConnectionFactory {
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
             conn = DriverManager.getConnection(
-                    props.getProperty("url"),
-                    props.getProperty("usr"),
-                    props.getProperty("pw")
+                    ApplicationProperties.APP_DB_URL,
+                    ApplicationProperties.APP_DB_USR,
+                    ApplicationProperties.APP_DB_PW
             );
 
 
