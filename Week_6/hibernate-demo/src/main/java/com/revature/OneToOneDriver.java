@@ -4,7 +4,6 @@ import com.revature.models.Instructor;
 import com.revature.models.InstructorDetails;
 import com.revature.util.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 public class OneToOneDriver {
 

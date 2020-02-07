@@ -97,8 +97,6 @@ public class InstructorDetails {
                 "id=" + id +
                 ", focus='" + focus + '\'' +
                 ", hobby='" + hobby + '\'' +
-                ", instructor=" + instructor +
                 '}';
     }
-
 }
