@@ -16,10 +16,10 @@ public class StudentDriver {
 
 
 //        addStudents();
-//        getStudentById();
+       getStudentById();
 //        loadStudentById();
 //        queryForStudent();
-        nameQueryForStudent();
+ //       nameQueryForStudent();
 
 
 

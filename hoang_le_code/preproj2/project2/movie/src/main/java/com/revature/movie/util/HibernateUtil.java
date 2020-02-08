@@ -1,6 +1,5 @@
-package com.revature.util;
+package com.revature.movie.util;
 
-import com.revature.models.Student;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.reflections.Reflections;
@@ -24,8 +23,8 @@ public class HibernateUtil {
 
             // Option #2 for "registering" JPA-annotated classes with Hibernate
 //            config.addAnnotatedClass(Student.class);
-            assignAnnotatedClasses(config);
 
+            assignAnnotatedClasses(config);
             // Using the provided configuration, build the SessionFactory
             return config.buildSessionFactory();
 
@@ -41,10 +40,11 @@ public class HibernateUtil {
     }
 
     private static void assignAnnotatedClasses(Configuration config) {
-
-        Reflections reflect = new Reflections("com.revature.models");
+        Reflections reflect = new Reflections("com.revature.movie.model");
         Set<Class<? extends Object>> entities = reflect.getTypesAnnotatedWith(Entity.class);
         entities.forEach(config::addAnnotatedClass);
+
+
     }
 
 }

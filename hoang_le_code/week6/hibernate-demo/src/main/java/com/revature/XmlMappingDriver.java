@@ -20,8 +20,8 @@ public class XmlMappingDriver {
         // Create the Employee object (it will first be in the TRANSIENT state)
         System.out.println("Creating transient Employee object");
         Employee emp = new Employee();
-        emp.setName("Steve");
-        emp.setRole("Manager");
+        emp.setName("Stev1e");
+        emp.setRole("Manag1er");
         emp.setInsertTime(new Date());
 
         System.out.println("Employee before being persisted: " + emp);
