@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table
 @SequenceGenerator(name="details_gen", sequenceName = "details_seq", allocationSize = 1)
 public class InstructorDetails {
     @Id
@@ -92,7 +93,6 @@ public class InstructorDetails {
                 "id=" + id +
                 ", focus='" + focus + '\'' +
                 ", hobby='" + hobby + '\'' +
-                ", instructor=" + instructor +
                 '}';
     }
 }

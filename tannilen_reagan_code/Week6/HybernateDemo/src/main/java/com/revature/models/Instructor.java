@@ -1,6 +1,8 @@
 package com.revature.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,6 +22,8 @@ public class Instructor {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="instructor_detail_id")
     private InstructorDetails details;
+    @OneToMany(mappedBy = "instructor")
+    private List<Course> courses;
 
     public Instructor(int id, String firstName, String lastName, String email, InstructorDetails details) {
         this.id = id;
@@ -87,6 +91,20 @@ public class Instructor {
         details.setInstructor(this);
     }
 
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public void addCourse(Course course) {
+        if (courses==null) courses=new ArrayList<>();
+        course.setInstructor(this);
+        courses.add(course);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,12 +114,13 @@ public class Instructor {
                 Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName) &&
                 Objects.equals(email, that.email) &&
-                Objects.equals(details, that.details);
+                Objects.equals(details, that.details) &&
+                Objects.equals(courses, that.courses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, details);
+        return Objects.hash(id, firstName, lastName, email, details, courses);
     }
 
     @Override
