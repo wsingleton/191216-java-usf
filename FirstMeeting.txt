@@ -1,0 +1,49 @@
+- Database Set up
+	-> We don't need to do pipeline right away, we can do that when
+	   we are closer to final version of app.
+	   (create an account where all people be added)
+- Setup Github, pipeline
+- Go over the erd
+- Finalize the user stories
+- Figure out what pages to work on
+- (For the UI, each have out own branch, 1 Dev branch, 1 Master branch)
+
+App name: MovieFriend
+description: MovieBook, a movie social media app.
+-------------------------------------------------------------------
+user stories:
+1.  User Login, Registration
+2.  Search movies by title
+3.  Can click on movie, view information
+4.  Favorite List, add movies
+5.  View other users favorite list
+6.  Write review for movie
+7.  Dislike Movie
+8.  Special Admin Priv
+9.  Too Many Logins -> results in account lockout
+10. Email Push Notification(maybe)
+11. Like a Movie
+12. Movie rating(amount of user likes)
+13. Friend List
+------stretch goals------
+ Post on users profile/movie page
+ Actor/director view with information bio, movies in
+ Count the number of likes for a movie list
+
+
+
+---------------------
+Jared and Andrew ---> Hibernate
+Ben and Le       ---> React
+
+
+
+Timeline
+---------
+2/8  Finish Database
+2/12 A MAJORITY OF THE UI SHOULD BE DONE(90ISH%)
+2/12 or 2/13 Set up the pipeline
+2/18 PowerPoint Finished/ Practice presentation
+
+
+

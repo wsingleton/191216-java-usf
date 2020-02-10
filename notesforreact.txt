@@ -1,0 +1,20 @@
+Redux ->view ->action -> object->
+
+
+view(component through connect makes a higher order component)src 
+ - Components - T3 (T3Compont.tsx, container.tsx) 
+
+
+popular growing rapidly developers are wanted
+render, lifecycle, virtual dom, state api -> sttate ->this.state, set.state, prop api
+state vs props, view components, smart components, display components, making a component, composition
+have a vs is a
+librarys what do you import, 
+react-router
+how to send someone to another page
+data binding, event binding
+synthetic events
+npm 
+node -> light weight server application
+boiler plate-> how do you make your react app
+typescript ->typescript types javascript vs typescript
