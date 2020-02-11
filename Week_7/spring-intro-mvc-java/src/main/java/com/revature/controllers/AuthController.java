@@ -4,6 +4,7 @@ import com.revature.dto.Credentials;
 import com.revature.dto.ErrorResponse;
 import com.revature.entities.AppUser;
 import com.revature.exceptions.AuthenticationException;
+import com.revature.exceptions.BadRequestException;
 import com.revature.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,16 @@ public class AuthController {
         ErrorResponse err = new ErrorResponse();
         err.setMessage(e.getMessage());
         err.setStatus(401);
+        err.setTimestamp(System.currentTimeMillis());
+        return err;
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleBadRequestException(BadRequestException e) {
+        ErrorResponse err = new ErrorResponse();
+        err.setMessage(e.getMessage());
+        err.setStatus(400);
         err.setTimestamp(System.currentTimeMillis());
         return err;
     }
