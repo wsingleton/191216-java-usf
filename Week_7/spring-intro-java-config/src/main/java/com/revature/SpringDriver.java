@@ -1,8 +1,9 @@
 package com.revature;
 
 import com.revature.models.Coach;
+import com.revature.models.CodeCoach;
 import com.revature.models.FootballCoach;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class SpringDriver {
 
@@ -10,7 +11,7 @@ public class SpringDriver {
 
         System.out.println("Creating the bean container...");
 
-        try (ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("beans.xml")) {
+        try (AnnotationConfigApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class)) {
 
             System.out.println("Bean container created!");
 
@@ -38,8 +39,16 @@ public class SpringDriver {
             System.out.println(footballCoach.getTeam());
             System.out.println(footballCoach.getEmail());
 
+            //----------------------------------------------------------
+
+            CodeCoach coder = container.getBean("codeCoach", CodeCoach.class);
+            System.out.println(coder.getDailyWorkout());
+            System.out.println(coder.getMotivation());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
+
 }
