@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd">
+    <bean id="myCoach" class="com.revature.models.BaseballCoach">
+        <constructor-arg ref="myMotivation"/>
+    </bean>
+    <bean id="myMotivation" class="com.revature.services.MotivationService"></bean>
+    <bean id="fbCoach" class="com.revature.models.FootballCoach" init-method="customInit" destroy-method="customDestroy">
+        <property name="motivationService" ref="myMotivation"/>
+        <property name="email" value="${coach.email}"/>
+        <property name="team" value="Sad Name Team"/>
+    </bean>
+    <context:property-placeholder location="classpath:app.properties"/>
+</beans>
