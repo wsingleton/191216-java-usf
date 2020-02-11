@@ -5,7 +5,6 @@ import com.revature.models.Instructor;
 import com.revature.models.Student;
 import com.revature.util.HibernateUtil;
 import org.hibernate.Session;
-
 public class ManyToManyDriver {
 
     public static void main(String[] args) {
