@@ -1,15 +1,15 @@
 package com.revature.models;
 
 import com.revature.services.MotivationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-@Component("fbCoach")
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class FootballCoach implements Coach {
     @Value("${coach.email}")
     private String email;
-    @Value("Sad Team Name")
+    @Value("Sad Name Team")
     private String team;
     private MotivationService motivationService;
     public FootballCoach() {
@@ -36,7 +36,7 @@ public class FootballCoach implements Coach {
     public MotivationService getMotivationService() {
         return motivationService;
     }
-    @Autowired
+
     public void setMotivationService(MotivationService motivationService) {
         this.motivationService = motivationService;
     }
@@ -45,6 +45,14 @@ public class FootballCoach implements Coach {
     }
     public void customDestroy(){
         System.out.println("FootballCoach.customDestroy invoked");
+    }
+    @PostConstruct
+    public void postConstruct(){
+        System.out.println("FootballCoach.postConstruct invoked.");
+    }
+    @PreDestroy
+    public void preDestroy() {
+        System.out.println("FootballCoach.preDestroy invoked.");
     }
     @Override
     public String getDailyWorkout() {

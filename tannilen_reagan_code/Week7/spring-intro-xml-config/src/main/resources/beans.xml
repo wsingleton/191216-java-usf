@@ -7,14 +7,23 @@
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/context
 						http://www.springframework.org/schema/context/spring-context.xsd">
-    <bean id="myCoach" class="com.revature.models.BaseballCoach">
-        <constructor-arg ref="myMotivation"/>
+    <!-- Provide the bean definition for our coach implementation
+    Specifying the scope allows us to change the way that Spring provides us w/ instances
+    <bean id="myCoach" class="com.revature.models.TrackCoach" scope="prototype">
+        Inject the MotivationService dependency into the constructor of our coach
+        <constructor-arg ref="myMotivationService"/>
     </bean>
-    <bean id="myMotivation" class="com.revature.services.MotivationService"/>
-    <bean id="fbCoach" class="com.revature.models.FootballCoach" init-method="customInit" destroy-method="customDestroy">
-        <property name="motivationService" ref="myMotivation"/>
-        <property name="email" value="coach@sadname.com"/>
+    Provide the bean definition for our service implementation
+    <bean id="myMotivationService" class="com.revature.services.MotivationService"></bean>
+    Provide the bean def. for FootballCoach
+    <bean id="myFootballCoach" class="com.revature.models.FootballCoach" init-method="customInit" destroy-method="customDestroy">
+        Setter-based dependency injection
+        <property name="motivationService" ref="myMotivationService"/>
+        Field value injection
         <property name="team" value="Sad Name Team"/>
+        <property name="email" value="${coach.email}"/>
     </bean>
+    -->
+    <context:component-scan base-package="com.revature"/>
     <context:property-placeholder location="classpath:app.properties"/>
 </beans>

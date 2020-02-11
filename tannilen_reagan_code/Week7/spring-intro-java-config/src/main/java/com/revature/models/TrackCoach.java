@@ -1,17 +1,13 @@
 package com.revature.models;
 
 import com.revature.services.MotivationService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
 public class TrackCoach implements Coach {
     private MotivationService motivationService;
     public TrackCoach() {
         super();
         System.out.println("TrackCoach no-args invoked");
     }
-    @Autowired
     public TrackCoach(MotivationService service) {
         super();
         this.motivationService=service;
