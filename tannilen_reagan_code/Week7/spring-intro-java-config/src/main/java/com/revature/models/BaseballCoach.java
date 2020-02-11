@@ -1,13 +1,19 @@
 package com.revature.models;
 
 import com.revature.services.MotivationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+@Component("coach")
+@Scope("prototype")
 public class BaseballCoach implements Coach {
     private MotivationService motivationService;
     public BaseballCoach() {
         super();
         System.out.println("BaseballCoach no-args invoked");
     }
+    @Autowired
     public BaseballCoach(MotivationService service) {
         super();
         this.motivationService=service;
