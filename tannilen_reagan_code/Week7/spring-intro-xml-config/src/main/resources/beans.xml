@@ -10,10 +10,10 @@
     <bean id="myCoach" class="com.revature.models.BaseballCoach">
         <constructor-arg ref="myMotivation"/>
     </bean>
-    <bean id="myMotivation" class="com.revature.services.MotivationService"></bean>
+    <bean id="myMotivation" class="com.revature.services.MotivationService"/>
     <bean id="fbCoach" class="com.revature.models.FootballCoach" init-method="customInit" destroy-method="customDestroy">
         <property name="motivationService" ref="myMotivation"/>
-        <property name="email" value="${coach.email}"/>
+        <property name="email" value="coach@sadname.com"/>
         <property name="team" value="Sad Name Team"/>
     </bean>
     <context:property-placeholder location="classpath:app.properties"/>
