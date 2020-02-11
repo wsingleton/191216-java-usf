@@ -2,28 +2,29 @@ package com.revature.models;
 
 import com.revature.services.MotivationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TrackCoach implements Coach {
+public class CodeCoach implements Coach {
     private MotivationService motivationService;
-    public TrackCoach() {
+    public CodeCoach() {
         super();
-        System.out.println("TrackCoach no-args invoked");
+        System.out.println("CodeCoach no-args invoked");
     }
     @Autowired
-    public TrackCoach(MotivationService service) {
+    public CodeCoach(@Qualifier("code") MotivationService service) {
         super();
         this.motivationService=service;
-        System.out.println("TrackCoach parameterized invoked");
+        System.out.println("CodeCoach parameterized invoked");
     }
     @Override
     public String getDailyWorkout() {
-        return "Today's workout: run a 30 minute 5k.";
+        return "Today's workout: Debug bad code.";
     }
 
     @Override
     public String getMotivation() {
-        return "The track coach says, \""+motivationService.getMotivation()+"\"";
+        return "The code coach says, \""+motivationService.getMotivation()+"\"";
     }
 }

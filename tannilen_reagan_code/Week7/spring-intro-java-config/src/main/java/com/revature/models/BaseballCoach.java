@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import com.revature.services.MotivationService;
+import com.revature.services.SportMotivationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ public class BaseballCoach implements Coach {
         System.out.println("BaseballCoach no-args invoked");
     }
     @Autowired
-    public BaseballCoach(MotivationService service) {
+    public BaseballCoach(SportMotivationService service) {
         super();
         this.motivationService=service;
         System.out.println("BaseballCoach parameterized invoked");

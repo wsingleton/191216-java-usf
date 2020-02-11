@@ -40,8 +40,8 @@ public class FootballCoach implements Coach {
         return motivationService;
     }
     @Autowired
-    public void setMotivationService(MotivationService motivationService) {
-        this.motivationService = motivationService;
+    public void setMotivationService(MotivationService sportMotivationService) {
+        this.motivationService = sportMotivationService;
     }
     public void customInit(){
         System.out.println("FootballCoach.customInit invoked");

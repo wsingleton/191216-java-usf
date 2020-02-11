@@ -1,6 +1,7 @@
 package com.revature;
 
 import com.revature.models.Coach;
+import com.revature.models.CodeCoach;
 import com.revature.models.FootballCoach;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -17,6 +18,9 @@ public class SpringDriver {
             System.out.println(footballCoach.getMotivation());
             System.out.println(footballCoach.getEmail());
             System.out.println(footballCoach.getTeam());
+            CodeCoach wezley=container.getBean("codeCoach", CodeCoach.class);
+            System.out.println(wezley.getDailyWorkout());
+            System.out.println(wezley.getMotivation());
         }
         catch (Exception e) {
             e.printStackTrace();
