@@ -1,0 +1,73 @@
+Review all day 1 notes on Wez's github
+
+Inversion of Control
+	 decoupling the execution of a task
+	easier to switch btwn implementation
+	easier testing and a result of greater modularity
+
+
+
+IoC container is represented by the interface ApplicationContext
+
+What does it do?
+	provides us with some bean factory methods, inheritable from ListableBeanFactory, avoids the need for applications to use singletons
+	
+	supports internationalization
+
+	ability to loadfile resources in a generic fashion
+
+	publish events, implementations provide a means of registering event listeners
+
+	Inheritance from parent context
+
+
+BeanFactory (Interface) [ApplicationContext extends BeanFactory]
+
+	-factory for beans
+		*either creates and independent instance, which is prototype, or a single shared instance, which is a singleton
+
+	- central registery of application contents
+
+Bean LifeCycle - See notes on Wez's github - Learn the cycle for QC
+
+	Constists of interfaces that the Beans can optionally implement, and in choosing to do so gives methods for you to override
+		+ a list of these is also given in the github notes
+
+ApplicationContext v BeanFactory
+
+ApplicationContext
+	does all functions of the BeanFactory, but does all of the additional previously mentioned
+
+Configuration more notes on this on the GitHub, some of this was covered on Day1, this will contain information from day2
+
+Component Scanning
+
+	- Everything managed by string is a component 
+
+	- things mannaged with the @Component or any of the other derivatives of annotations fall into this topic
+
+Java class configuration
+
+	See the notes on the Github
+
+
+Bean Wiring 
+
+	Difference between manual bean wiring and manual bean wiring 
+
+AutoWiring Modes - should know all of these for QC
+
+	by default there is none 
+
+	Otherwise there are a variety of ways to do this:
+
+	-byType -> look at the type and grab THE ONE bean that is in that container, if there is more than one a fatal exception is thrown, 
+		-> if there are no matching beans, the property is not set - use byType if it is optional
+
+
+	- byName
+
+	- constructor -> the same as byType but doesnt apply to setters
+			 if nothing is found a fatal error will be thrown, so use if it is mandatory
+
+	- @Qualifier
