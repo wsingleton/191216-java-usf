@@ -1,12 +1,20 @@
 package com.revature.models;
 
 import com.revature.services.MotivationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FootballCoach implements Coach {
 
+    @Value("${coach.email}")
     private String email;
+
+    @Value("Sad Name Team")
     private String team;
 
+    // putting the AutoWired annotation here is called field level injection, causes tightly coupling to the container, do not do this
     private MotivationService motivationService;
 
     public FootballCoach() {
@@ -41,6 +49,7 @@ public class FootballCoach implements Coach {
     }
 
     // setter-based dependency injection
+    @Autowired
     public void setMotivationService(MotivationService motivationService) {
         this.motivationService = motivationService;
     }

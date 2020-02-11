@@ -1,7 +1,12 @@
 package com.revature.models;
 
 import com.revature.services.MotivationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+@Scope("prototype")
+@Component// default name is baseballCoach and can be overridden here
 public class BaseballCoach implements Coach {
 
     //private MotivationService motivationService = new MotivationService(); - this is tight coupling, if you change class B class A breaks
@@ -9,12 +14,14 @@ public class BaseballCoach implements Coach {
     private MotivationService motivationService;
 
 
-    // constructor based dependency injection
+
     public BaseballCoach() {
         super();
         System.out.println("BaseballCoach no-args constructor invoked");
     }
 
+    // constructor based dependency injection
+    @Autowired //will be automatically able to detect this by both type and by name
     public BaseballCoach(MotivationService service) {
         super();
         this.motivationService = service;
