@@ -29,7 +29,7 @@ public class AuthController {
     }
 
     //exception handler
-    
+
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler
     public ErrorResponse handleFailedAuthentication(AuthenticationException e) {

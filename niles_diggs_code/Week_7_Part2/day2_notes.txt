@@ -71,3 +71,44 @@ AutoWiring Modes - should know all of these for QC
 			 if nothing is found a fatal error will be thrown, so use if it is mandatory
 
 	- @Qualifier
+
+
+
+------------------------------------------------------
+
+
+
+
+
+SpringBean Lifecycle
+
+
+
+-----------------------------------
+
+
+
+Spring MVC (Model Viewer Controller)
+
+
+	Abstraction of servlets, war packaging
+
+	Dispatcher Servlet
+
+		central servlet for request and processing, actual work performed by delegate controllers
+
+
+
+Spring MVC Annotations
+
+	@Controller - stereotype annotation
+
+	@RequestMapping - 
+	@GetMapping
+	@PostMapping
+	@PutMapping
+	@DeleteMapping
+	@PathVariable
+	@RequestParam
+	@RequestBody 
+(there are a couple more, all on the GitHub)
