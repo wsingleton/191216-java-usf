@@ -1,4 +1,4 @@
-package com.revature.exceptions;
+package com.revature.demos.exceptions;
 
 public class BadRequestException extends QuizzardException {
     public BadRequestException() {

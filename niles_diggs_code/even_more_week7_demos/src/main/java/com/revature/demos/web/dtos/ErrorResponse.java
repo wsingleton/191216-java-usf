@@ -1,4 +1,4 @@
-package com.revature.web.dtos;
+package com.revature.demos.web.dtos;
 
 import java.util.Date;
 import java.util.Objects;

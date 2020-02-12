@@ -1,4 +1,4 @@
-package com.revature.exceptions;
+package com.revature.demos.exceptions;
 
 public class AuthenticationException extends QuizzardException {
     public AuthenticationException() {

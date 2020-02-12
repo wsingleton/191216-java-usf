@@ -1,4 +1,4 @@
-package com.revature.entities;
+package com.revature.demos.entities;
 
 public enum UserRole {
     ADMIN("Admin"), DEV("Dev"), BASIC_USER("Basci_user"), LOCKED("Locked");

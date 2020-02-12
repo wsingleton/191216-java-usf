@@ -1,7 +1,6 @@
-package com.revature.web.dtos;
+package com.revature.demos.web.dtos;
 
-import com.revature.entities.UserRole;
-
+import com.revature.demos.entities.UserRole;
 import java.util.Objects;
 
 public class Principal {

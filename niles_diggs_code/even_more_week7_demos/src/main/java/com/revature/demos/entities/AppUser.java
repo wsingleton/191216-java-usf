@@ -1,13 +1,27 @@
-package com.revature.entities;
+package com.revature.demos.entities;
 
+import com.revature.demos.repositories.UserRepository;
+import com.revature.demos.web.dtos.Principal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class AppUser {
+@Entity
+public class AppUser implements Serializable {
 
+    @Id @Column
+    @GeneratedValue
     private int id;
+
+    @Column
     private String email;
     private String password;
     private String username;
+    private UserRole role;
 
     public AppUser() {
         super();
@@ -56,6 +70,18 @@ public class AppUser {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public Principal extractPrincipal() {
+        return new Principal(this.id, this.username, this.role);
     }
 
     @Override
