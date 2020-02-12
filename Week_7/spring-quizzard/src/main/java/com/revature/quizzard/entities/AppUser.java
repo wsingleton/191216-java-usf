@@ -1,14 +1,28 @@
 package com.revature.quizzard.entities;
 
+import com.revature.quizzard.web.dtos.Principal;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
 public class AppUser implements Serializable {
 
+    @Id @Column
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+
+    @Column(nullable=false,unique=true)
     private String email;
+
+    @Column(nullable=false,unique=true)
     private String username;
+
+    @Column(nullable=false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     public AppUser() {
@@ -68,6 +82,10 @@ public class AppUser implements Serializable {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public Principal extractPrincipal() {
+        return new Principal(this.id, this.username, this.role);
     }
 
     @Override
