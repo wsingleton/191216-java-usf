@@ -1,12 +1,17 @@
 package com.revature.models;
 
 import com.revature.services.MotivationService;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 @Component
-public class FootballCoach implements Coach {
+public class FootballCoach implements Coach, InitializingBean, DisposableBean {
 
     @Value("${coach.email}")
     private String email;
@@ -14,7 +19,6 @@ public class FootballCoach implements Coach {
     @Value("Sad Name Team")
     private String team;
 
-//    @Autowired // DO NOT USE FIELD-LEVEL INJECTION (MAKES UNIT TESTING VERY DIFFICULT)
     private MotivationService motivationService;
 
     public FootballCoach() {
@@ -44,8 +48,8 @@ public class FootballCoach implements Coach {
 
     // setter-based dependency injection
     @Autowired
-    public void setMotivationService(MotivationService motivationService) {
-        this.motivationService = motivationService;
+    public void setMotivationService(MotivationService sportMotivationService) {
+        this.motivationService = sportMotivationService;
     }
 
     public void customInit() {
@@ -54,6 +58,16 @@ public class FootballCoach implements Coach {
 
     public void customDestroy() {
         System.out.println("FootballCoach.customDestroy invoked!");
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        System.out.println("FootballCoach.postConstruct invoked!");
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        System.out.println("FootballCoach.preDestroy invoked!");
     }
 
     @Override
@@ -66,4 +80,13 @@ public class FootballCoach implements Coach {
         return "The football coach says: " + motivationService.getMotivation();
     }
 
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("FootballCoach.destroy invoked!");
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("FootballCoach.afterPropertiesSet invoked!");
+    }
 }
