@@ -1,8 +1,9 @@
 package com.revature.quizzard.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class FlashCard {
+public class FlashCard implements Serializable {
 
     private int id;
     private String question;

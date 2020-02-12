@@ -1,8 +1,9 @@
 package com.revature.quizzard.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class AppUser {
+public class AppUser implements Serializable {
 
     private int id;
     private String email;

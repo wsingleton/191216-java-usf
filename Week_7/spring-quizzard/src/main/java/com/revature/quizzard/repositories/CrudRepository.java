@@ -1,10 +1,10 @@
 package com.revature.quizzard.repositories;
 
-import java.util.Set;
+import java.util.List;
 
 public interface CrudRepository<T> {
 
-    Set<T> findAll();
+    List<T> findAll();
     T findById(int id);
     T save(T newObj);
     boolean update(T updatedObj);
