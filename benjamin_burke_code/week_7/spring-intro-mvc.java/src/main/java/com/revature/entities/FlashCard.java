@@ -1,4 +1,4 @@
-package entities;
+package com.revature.entities;
 
 public class FlashCard {
 }

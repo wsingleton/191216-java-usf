@@ -1,4 +1,10 @@
 package com.revature.exceptions;
 
-public class InvalidRequestException {
+import org.springframework.web.client.HttpClientErrorException;
+
+public class BadRequestException extends RuntimeException {
+
+    public BadRequestException(){
+        super("Bad Request Exception");
+    }
 }

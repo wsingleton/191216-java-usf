@@ -1,0 +1,5 @@
+insert into customer (customer_id,first_name,last_name,street_address,city,state,zip_code,phone_number) values ('04301549-b9bb-40a0-a5e7-97fe478451e5','George','Washington','120 Main St', 'Anytown', 'CA', '99121','555-555-0120');
+insert into customer (customer_id,first_name,last_name,street_address,city,state,zip_code,phone_number) values ('73b59e76-f44f-46a9-a63b-1cd4b3e9f403','John','Adams','121 Main St', 'Anytown', 'CA', '99121','555-555-0121');
+insert into customer (customer_id,first_name,last_name,street_address,city,state,zip_code,phone_number) values ('c2c1e8ac-b0d4-4083-8a42-9c8bfae50893','Thomas','Jefferson','122 Main St', 'Anytown', 'CA', '99121','555-555-0122');
+insert into customer (customer_id,first_name,last_name,street_address,city,state,zip_code,phone_number) values ('6f5bf802-01a2-4492-bb96-d216d158c82d','James','Madison','123 Main St', 'Anytown', 'CA', '99121','555-555-0123');
+insert into customer (customer_id,first_name,last_name,street_address,city,state,zip_code,phone_number) values ('dc0c3143-b60f-4ca5-8114-d139f30eda6e','James','Monroe','124 Main St', 'Anytown', 'CA', '99121','555-555-0124');

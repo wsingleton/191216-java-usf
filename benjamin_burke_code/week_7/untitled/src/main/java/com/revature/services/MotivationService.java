@@ -1,12 +1,14 @@
 package com.revature.services;
 
-public class MotivationalService {
-    public MotivationalService(){
+public class MotivationService {
+
+    public MotivationService(){
         super();
-        System.out.println("Motivation Service no args constructor");
+        System.out.println("MotivationService no-args constructor invoked!");
     }
 
     public String getMotivation(){
-        return "Don't quit. Suffer now and code the rest of your life.";
+        return "Don't quit. Suffer now and code the rest of your life like a boss!";
     }
+
 }
