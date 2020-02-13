@@ -1,0 +1,23 @@
+Spring:
+- core
+- beans
+- context
+- web
+- web mvc
+- orm
+
+aspectjweaver
+
+jackson
+
+javax servlet api
+
+ojdbc 8
+
+log4j
+    - core
+    - API
+
+hibernate-core
+
+commons - dbcp2
