@@ -1,6 +1,7 @@
 package com.revature.quizzard.services;
 
 import com.revature.quizzard.entities.AppUser;
+import com.revature.quizzard.entities.UserRole;
 import com.revature.quizzard.exceptions.AuthenticationException;
 import com.revature.quizzard.exceptions.BadRequestException;
 import com.revature.quizzard.exceptions.ResourceNotFoundException;
@@ -44,6 +45,16 @@ public class UserService {
         }
 
         return retrievedUser;
+
+    }
+
+    @Transactional
+    public AppUser register(AppUser newUser) {
+
+        // validation would go here...
+
+        newUser.setRole(UserRole.BASIC_USER);
+        return userRepo.save(newUser);
 
     }
 }
