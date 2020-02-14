@@ -1,6 +1,7 @@
 package com.revature.demos.services;
 
 import com.revature.demos.entities.AppUser;
+import com.revature.demos.entities.UserRole;
 import com.revature.demos.exceptions.AuthenticationException;
 import com.revature.demos.exceptions.BadRequestException;
 import com.revature.demos.repositories.UserRepository;
@@ -40,6 +41,14 @@ public class UserService {
         }
 
         return retrievedUser;
+    }
+
+    @Transactional
+    public AppUser register(AppUser newUser) {
+
+        //validation would go here... "VAaaalllIDaaationnnnn!!!!"
+        newUser.setRole(UserRole.BASIC_USER);
+        return userRepo.save(newUser);
     }
 
 

@@ -3,10 +3,7 @@ package com.revature.demos.entities;
 import com.revature.demos.repositories.UserRepository;
 import com.revature.demos.web.dtos.Principal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -17,10 +14,16 @@ public class AppUser implements Serializable {
     @GeneratedValue
     private int id;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false, unique = true)
     private String username;
+
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     public AppUser() {

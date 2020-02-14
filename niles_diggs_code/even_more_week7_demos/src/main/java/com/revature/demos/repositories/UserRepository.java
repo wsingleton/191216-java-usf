@@ -17,12 +17,11 @@ public class UserRepository implements CrudRepository {
 
     public AppUser findUserByCredentials(Credentials creds) {
 
-        try (Session session = sessionFactory.getCurrentSession()) {
+        Session session = sessionFactory.getCurrentSession();
            return session.createQuery("from AppUser au where au.username =: un and au.password = :pw", AppUser.class)
                     .setParameter("un",creds.getUsername()).setParameter("pw", creds.getPassword())
                     .getSingleResult();
         }
-    }
 
     @Autowired
     public UserRepository(SessionFactory factory) {
@@ -34,10 +33,9 @@ public class UserRepository implements CrudRepository {
     public List<AppUser> findAll() {
         List<AppUser> users = new ArrayList<>();
 
-        try (Session session = sessionFactory.getCurrentSession()) {
+        Session session = sessionFactory.getCurrentSession();
 
             users = session.createQuery("from AppUser", AppUser.class).getResultList();
-        }
 
         return users;
     }
@@ -45,18 +43,15 @@ public class UserRepository implements CrudRepository {
     @Override
     public Object findById(int id) {
 
-        try (Session session = sessionFactory.getCurrentSession()) {
-
+        Session session = sessionFactory.getCurrentSession();
             return session.get(AppUser.class, id);
-        }
     }
 
     @Override
     public AppUser save(Object newObj) {
-        try (Session session = sessionFactory.getCurrentSession()) {
+        Session session = sessionFactory.getCurrentSession();
             return (AppUser) session.save(newObj);
         }
-    }
 
     @Override
     public boolean update(Object updatedObJ) {

@@ -1,0 +1,26 @@
+Day3 Notes 
+
+Hibernate Envers - dependency on the class path
+		 - takes advantage of Hiberanates on class scanning or auto-scanning 
+
+------all this will be under the spring-orm-notes-------
+Contextual Sessions
+
+	session is in effect throughout the scope of a given context, 
+	Hibernate needs to manange the session and Spring needs to manage the scope of the transaction
+
+
+Config for hibernate and spring - 
+	What are the min number of beans, what are those beans, and what is the configuration of those beans
+
+Transaction Management -
+
+	allows us to have constistent transactions regardless of whichever option utilized in order to persist information
+
+Transaction Propogation - the etnire list on the github
+
+	- in general they define the properties and actions of a transaction when dealing with a pooling of connections 
+
+
+@CrossOrigin("*")
+	
