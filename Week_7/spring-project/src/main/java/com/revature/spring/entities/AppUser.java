@@ -14,8 +14,14 @@ public class AppUser implements Serializable {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false, unique = true)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     public AppUser() {

@@ -56,7 +56,7 @@ public class AppConfig implements WebMvcConfigurer, WebApplicationInitializer {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("com.revature.quizzard.entities");
+        sessionFactory.setPackagesToScan("com.revature.spring.entities");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -74,7 +74,7 @@ public class AppConfig implements WebMvcConfigurer, WebApplicationInitializer {
         hibernateProperties.setProperty(Environment.DIALECT, "org.hibernate.dialect.Oracle12cDialect");
         hibernateProperties.setProperty(Environment.SHOW_SQL, "true");
         hibernateProperties.setProperty(Environment.FORMAT_SQL, "true");
-        hibernateProperties.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+        //hibernateProperties.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
         hibernateProperties.setProperty(Environment.HBM2DDL_AUTO, "update");
         return hibernateProperties;
     }
