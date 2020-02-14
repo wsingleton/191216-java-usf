@@ -11,7 +11,7 @@ public class ManyToMany {
             session.beginTransaction();
 
             Instructor me =session.get(Instructor.class, 3);
-            
+
             Course
 
             session.getTransaction().commit();
