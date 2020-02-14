@@ -1,9 +1,16 @@
 package com.revature.quizzard.web.dtos;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class Credentials {
+    @NotNull
+    @NotEmpty
     private String username;
+    @NotNull
+    @NotEmpty
     private String password;
 
     public Credentials() {

@@ -8,4 +8,12 @@ public enum UserRole {
     private UserRole(String roleName) {
         this.roleName=roleName;
     }
+    public static UserRole getByName(String name) {
+        for (UserRole role : UserRole.values()) {
+            if (role.roleName == name) {
+                return role;
+            }
+        }
+        return LOCKED;
+    }
 }

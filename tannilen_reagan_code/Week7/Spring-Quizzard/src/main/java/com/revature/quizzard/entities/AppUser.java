@@ -1,8 +1,12 @@
 package com.revature.quizzard.entities;
 
+import com.revature.quizzard.util.RegexUtil;
 import com.revature.quizzard.web.dtos.Principal;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,9 +17,15 @@ public class AppUser implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     @Column(unique=true,nullable = false)
+    @NotNull
+    @Pattern(regexp = RegexUtil.emailRegex)
     private String email;
+    @NotNull
     @Column(unique=true,nullable = false)
+    @Min(3)
     private String username;
+    @NotNull
+    @Pattern(regexp = RegexUtil.passwordRegex)
     @Column(nullable = false)
     private String password;
     @Enumerated(EnumType.STRING)

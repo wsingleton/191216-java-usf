@@ -21,11 +21,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import java.util.Properties;
 
+@EnableWebMvc
 @Configuration
 @ComponentScan
-@EnableWebMvc
+@EnableAspectJAutoProxy(proxyTargetClass=true)
 @EnableTransactionManagement
-@EnableAspectJAutoProxy
 @PropertySource("classpath:app.properties")
 public class AppConfig implements WebMvcConfigurer, WebApplicationInitializer {
     @Value("${db.driver}")
