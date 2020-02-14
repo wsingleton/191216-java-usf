@@ -25,6 +25,12 @@ public class AppUser implements Serializable {
         super();
     }
 
+    public AppUser(String email, String username, String password) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
     public AppUser(String email, String username, String password, UserRole role) {
         this.email = email;
         this.username = username;
@@ -80,8 +86,8 @@ public class AppUser implements Serializable {
         this.role = role;
     }
 
-    public Principal extractPrincipal(AppUser u) {
-        return new Principal(u.id, u.username, u.role);
+    public Principal extractPrincipal() {
+        return new Principal(this.id, this.username, this.role);
     }
 
     @Override

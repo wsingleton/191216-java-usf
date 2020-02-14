@@ -4,10 +4,7 @@ import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -28,6 +25,7 @@ import java.util.Properties;
 @ComponentScan
 @EnableWebMvc
 @EnableTransactionManagement
+@EnableAspectJAutoProxy
 @PropertySource("classpath:app.properties")
 public class AppConfig implements WebMvcConfigurer, WebApplicationInitializer {
     @Value("${db.driver}")
@@ -60,7 +58,6 @@ public class AppConfig implements WebMvcConfigurer, WebApplicationInitializer {
         hibernateProperties.setProperty(Environment.DIALECT, "org.hibernate.dialect.Oracle12cDialect");
         hibernateProperties.setProperty(Environment.SHOW_SQL, "true");
         hibernateProperties.setProperty(Environment.FORMAT_SQL, "true");
-        hibernateProperties.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
         hibernateProperties.setProperty(Environment.HBM2DDL_AUTO, "update");
         return hibernateProperties;
     }

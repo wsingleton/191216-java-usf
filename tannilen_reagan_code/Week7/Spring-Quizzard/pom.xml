@@ -114,7 +114,7 @@
                     <configuration>
                         <url>http://localhost:8080/manager/text</url>
                         <server>LocalTomcat</server>
-                        <path>/springmvc</path>
+                        <path>/spring-quizzard</path>
                         <update>true</update>
                     </configuration>
                 </plugin>

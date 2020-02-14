@@ -35,4 +35,9 @@ public class UserService {
         }
         return u;
     }
+    @Transactional
+    public AppUser register(AppUser u) {
+        // unimplemented validation logic
+        return userRepo.save(u);
+    }
 }

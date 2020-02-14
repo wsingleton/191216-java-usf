@@ -3,12 +3,12 @@ package com.revature.quizzard.repositories;
 import com.revature.quizzard.entities.Flashcard;
 import org.springframework.stereotype.Repository;
 
-import java.util.Set;
+import java.util.List;
 
 @Repository
 public class FlashcardRepository implements CRUDRepository<Flashcard> {
     @Override
-    public Set<Flashcard> findAll() {
+    public List<Flashcard> findAll() {
         return null;
     }
 
