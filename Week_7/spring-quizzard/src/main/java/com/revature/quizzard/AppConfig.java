@@ -8,6 +8,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -23,8 +24,8 @@ import java.util.Properties;
 @EnableWebMvc
 @Configuration
 @ComponentScan
-@EnableAspectJAutoProxy(proxyTargetClass=true)
 @EnableTransactionManagement
+@EnableAspectJAutoProxy(proxyTargetClass=true)
 @PropertySource("classpath:app.properties")
 public class AppConfig implements WebMvcConfigurer, WebApplicationInitializer {
 
@@ -88,4 +89,5 @@ public class AppConfig implements WebMvcConfigurer, WebApplicationInitializer {
         dispatcher.addMapping("/");
 
     }
+
 }
