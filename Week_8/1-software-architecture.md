@@ -12,6 +12,10 @@ ISO/IEC/IEEE 42010:2011 defines software arechitecture as:
 
 An architectural pattern or style defines an organized structure of subsystems, a vocabulary of components and connectors, with constraints on how they can be combined. Common architectural patterns include:
 
+- Object Oriented Architecture
+- Component Based Architecture
+- Service Based Architecture
+
 #### Object Oriented Architecture
 
 Systems developed based on objectoriented methodologies, modeling notions, and programming languages are often structured as a kind of Object-Oriented Architecture (OOA). Major characteristics of OOA include: 
