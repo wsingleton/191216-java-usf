@@ -12,13 +12,13 @@ ISO/IEC/IEEE 42010:2011 defines software arechitecture as:
 
 An architectural pattern or style defines an organized structure of subsystems, a vocabulary of components and connectors, with constraints on how they can be combined. Common architectural patterns include:
 
-- Object Oriented Architecture
-- Component Based Architecture
-- Service Based Architecture
+- Object-Oriented Architecture
+- Component-Based Architecture
+- Service-Based Architecture
 
-#### Object Oriented Architecture
+#### Object-Oriented Architecture
 
-Systems developed based on objectoriented methodologies, modeling notions, and programming languages are often structured as a kind of Object-Oriented Architecture (OOA). Major characteristics of OOA include: 
+Systems developed based on object-oriented methodologies, modeling notions, and programming languages are often structured as a kind of Object-Oriented Architecture (OOA). Major characteristics of OOA include: 
 
 - Based on OO principles, most notably encapsulation, inheritance, and polymorphism.
 
@@ -51,7 +51,7 @@ Component-based application servers and integration servers based on component m
 
 ---
 
-#### Service-Oriented Architecture
+#### Service-Based Architecture
 
 Enterprise systems face a number of challenges including seamless integration of various systems, allowing data access from anywhere anytime, and providing services to customers and partners inside and outside the enterprise. In addition to system functionality, quality considerations like extensibility, flexibility, connectivity, and interoperability also demand enterprise functions to be easily accessed via published interfaces and to be easily composed in order to offer value-added services. Services are the software units of modeling, design and implementation. 
 
@@ -73,7 +73,7 @@ One way to meet these challenges and demands is to consider a system as a compos
   
   - Service definitions, descriptions, discovery, access protocols, and their quality aspects (e.g., security) are the central concerns in architectural design.
   
-  - Services are self-Describing. A service exposes its capabilities including functionality, data, and Quality of Services (QoS) characteristics through service descriptions in languages such as Web Services Description Language (WSDL).
+  - Services are self-describing. A service exposes its capabilities including functionality, data, and Quality of Services (QoS) characteristics through service descriptions in languages such as Web Services Description Language (WSDL).
   
 - ***Service Discovery***
   - Services can be independently and dynamically discovered and
