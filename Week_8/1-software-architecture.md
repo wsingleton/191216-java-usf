@@ -1,6 +1,6 @@
 # Software Architecture
 
-ISO /IEC/IEEE 42010:2011 defines software arechitecture as: 
+ISO/IEC/IEEE 42010:2011 defines software arechitecture as: 
 
 > The fundamental concepts or properties of a system in its environment embodied in its elements, relationships, and in the principles of its design and evolution. The environment of the system can be described as the context determining the setting and circumstances of all influences upon a system.
 
