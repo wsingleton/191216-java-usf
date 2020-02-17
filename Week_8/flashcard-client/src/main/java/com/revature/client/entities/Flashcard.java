@@ -1,35 +1,16 @@
-package com.revature.quizzard.flashcard.entities;
+package com.revature.client.entities;
 
-import org.springframework.stereotype.Component;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
 public class Flashcard implements Serializable {
 
-    @Id @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @NotEmpty
-    @Column(nullable = false, unique = true)
     private String question;
-
-    @NotEmpty
-    @Column(nullable = false)
     private String answer;
-
-    @NotEmpty
-    @ElementCollection
-    @CollectionTable(name = "flashcard_categories")
-    @Column(name="category")
-    @Enumerated(EnumType.STRING)
     private Set<Category> categories;
 
     public Flashcard() {

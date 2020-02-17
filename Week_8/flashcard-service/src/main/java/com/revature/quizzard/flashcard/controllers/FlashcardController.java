@@ -48,7 +48,7 @@ public class FlashcardController {
         return cardService.updateCard(updatedCard);
     }
 
-    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{id}")
     public void deleteCardById(@PathVariable int id) {
         cardService.deleteCardById(id);
     }
