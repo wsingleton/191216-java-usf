@@ -1,0 +1,6 @@
+﻿# SNS
+Amazon Simple Notification Service (Amazon SNS) is a web service that coordinates and manages the delivery or sending of messages to subscribing endpoints or clients. In Amazon SNS, there are two types of clients—publishers and subscribers—also referred to as producers and consumers. Publishers communicate asynchronously with subscribers by producing and sending a message to a topic, which is a logical access point and communication channel. Subscribers consume or receive the message or notification over one of the supported protocols when they are subscribed to the topic.
+
+With SNS we can send messages to topics and the topic will push that message out to all of its subscribers. We can have a variety of subscribers, such as: AWS Lambdas, AWS SQS queues, HTTP endpoints, email, etc. SNS will not store messages so if one of the subscribers is down at the time a message is published it will just be lost. However you will often see SNS in conjunction with SQS, where a messaged published by an SNS topic could be broadcasted to multiple SQS Queues.
+
+Amazon SNS has no upfront costs and you can pay as you go. You pay based on the number of notifications you publish, the number of notifications you deliver, and any additional API calls for managing topics and subscriptions. Delivery pricing varies by endpoint type, but is free when used with AWS SQS
