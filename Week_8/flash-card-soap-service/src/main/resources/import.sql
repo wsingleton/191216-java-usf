@@ -1,0 +1,23 @@
+INSERT INTO category (category_name) VALUES ('OOP');
+INSERT INTO category (category_name) VALUES ('JAVA');
+INSERT INTO category (category_name) VALUES ('SQL');
+INSERT INTO category (category_name) VALUES ('JDBC');
+INSERT INTO category (category_name) VALUES ('HTML');
+INSERT INTO category (category_name) VALUES ('CSS');
+INSERT INTO category (category_name) VALUES ('JAVASCRIPT');
+INSERT INTO category (category_name) VALUES ('SERVLETS');
+INSERT INTO category (category_name) VALUES ('ANGULAR');
+INSERT INTO category (category_name) VALUES ('DEVOPS');
+INSERT INTO category (category_name) VALUES ('HIBERNATE');
+INSERT INTO category (category_name) VALUES ('SPRING');
+INSERT INTO category (category_name) VALUES ('SOA');
+COMMIT;
+
+INSERT INTO flash_card (question, answer, category_id) VALUES ('test-question-1', 'test-answer-1', 1);
+INSERT INTO flash_card (question, answer, category_id) VALUES ('test-question-2', 'test-answer-2', 2);
+INSERT INTO flash_card (question, answer, category_id) VALUES ('test-question-3', 'test-answer-3', 3);
+INSERT INTO flash_card (question, answer, category_id) VALUES ('test-question-4', 'test-answer-4', 4);
+INSERT INTO flash_card (question, answer, category_id) VALUES ('test-question-5', 'test-answer-5', 5);
+INSERT INTO flash_card (question, answer, category_id) VALUES ('test-question-6', 'test-answer-6', 6);
+INSERT INTO flash_card (question, answer, category_id) VALUES ('test-question-7', 'test-answer-7', 7);
+COMMIT;
