@@ -1,10 +1,17 @@
 package com.revature.models;
 
 import com.revature.services.MotivationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FootballCoach implements Coach {
 
+    @Value("${coach.email}")
     private String email;
+
+    @Value("Buhlakays")
     private String team;
     private MotivationService motivationService;
 
@@ -33,6 +40,7 @@ public class FootballCoach implements Coach {
         return motivationService;
     }
 
+    @Autowired
     public void setMotivationService(MotivationService motivationService) {
         this.motivationService = motivationService;
     }

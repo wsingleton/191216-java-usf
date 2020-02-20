@@ -17,14 +17,14 @@ public class OneToManyDriver {
             Instructor blake = session.get(Instructor.class, 3);
             blake.getCourses().forEach(System.out::println);
 
-//            Course course1 = new Course("Hibernate Basics");
-//            Course course2 = new Course("Advanced Hibernate Mappings");
-//
-//            blake.addCourse(course1);
-//            blake.addCourse(course2);
-//
-//            session.save(course1);
-//            session.save(course2);
+            Course course1 = new Course("Hibernate Basics");
+            Course course2 = new Course("Advanced Hibernate Mappings");
+
+            blake.addCourse(course1);
+            blake.addCourse(course2);
+
+            session.save(course1);
+            session.save(course2);
             tx.commit();
 
         }catch (Exception e) {

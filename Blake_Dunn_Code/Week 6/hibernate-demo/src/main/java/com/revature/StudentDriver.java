@@ -127,7 +127,7 @@ public class StudentDriver {
             query3.setParameter("fn", "Blake");
             query3.setParameter("ln", "Stewart");
             students = query3.getResultList();
-            students.forEach(s -> System.out.println(s));
+            students.forEach(System.out::println);
 
             Query query4 = session.createQuery("from Student s where s.email like :email", Student.class);
             query4.setParameter("email", "%gmail.com");
@@ -161,7 +161,6 @@ public class StudentDriver {
             students.forEach(System.out::println);
         }
     }
-
     public static void criteriaQueryForStudents() {
 
         try (Session session = factory.getCurrentSession()) {
