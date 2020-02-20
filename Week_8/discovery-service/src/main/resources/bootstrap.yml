@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: discovery-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+# Properties file equivalent:
+# spring.application.name=discovery-service
+# spring.cloud.config.uri=http://localhost:8888
