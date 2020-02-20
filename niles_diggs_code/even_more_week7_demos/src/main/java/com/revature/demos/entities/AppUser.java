@@ -1,9 +1,12 @@
 package com.revature.demos.entities;
 
-import com.revature.demos.repositories.UserRepository;
+import com.revature.demos.util.RegexUtil;
 import com.revature.demos.web.dtos.Principal;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,12 +17,18 @@ public class AppUser implements Serializable {
     @GeneratedValue
     private int id;
 
+    @NotNull
+    @Pattern(regexp = RegexUtil.emailRegex)
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NotNull
+    @Pattern(regexp = RegexUtil.passwordRegex)
     @Column(nullable = false)
     private String password;
 
+    @NotEmpty
+    @NotNull
     @Column(nullable = false, unique = true)
     private String username;
 

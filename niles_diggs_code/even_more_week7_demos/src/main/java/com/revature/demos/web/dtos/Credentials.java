@@ -1,10 +1,17 @@
 package com.revature.demos.web.dtos;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class Credentials {
 
+    @NotEmpty
+    @NotNull
     private String username;
+
+    @NotEmpty
+    @NotNull
     private String password;
 
     public Credentials() {
