@@ -1,4 +1,4 @@
-package com.revature.controllers;
+package com.revature.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,11 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/tester")
+@RequestMapping("/test")
 public class TestController {
 
     @GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
-    public String tester() {
-        return "test works";
+    public String test() {
+        return "Hello, Spring Cloud Microservices!";
+    }
+
+    @GetMapping(value = "/colorHex",produces = MediaType.TEXT_PLAIN_VALUE)
+    public String getColorHex() {
+        return "ffa500";
     }
 }

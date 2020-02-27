@@ -21,7 +21,7 @@ public class StudentDriver {
 //        addStudents();
 //        getStudentById();
 //        loadStudentById();
-//        queryForStudent();
+        queryForStudent();
 //        namedQueryForStudents();
 //        namedNativeQueryForStudents();
 //        criteriaQueryForStudents();
