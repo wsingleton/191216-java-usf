@@ -1,0 +1,92 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:tns="http://revature.com" targetNamespace="http://revature.com"
+		   elementFormDefault="qualified">
+		  
+	<!-- Define the "shape" of our applications entities/POJOs/beans/types/models -->
+	<xs:complexType name="flashCard">
+		<xs:sequence>
+			<xs:element name="id" type="xs:int"/>
+			<xs:element name="question" type="xs:string"/>
+			<xs:element name="answer" type="xs:string"/>
+			<xs:element name="category" type="tns:category"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="category">
+		<xs:sequence>
+			<xs:element name="id" type="xs:int"/>
+			<xs:element name="categoryName" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Define the "shape" of our request operations -->
+   	<xs:element name="getAllFlashCardsRequest">
+   		<xs:complexType/>
+   	</xs:element>
+   	
+   	<xs:element name="getFlashCardByIdRequest">
+   		<xs:complexType>
+   			<xs:sequence>
+   				<xs:element name="id" type="xs:int"/>
+   			</xs:sequence>
+   		</xs:complexType>
+   	</xs:element>
+   	
+   	<xs:element name="getFlashCardByQuestionRequest">
+   		<xs:complexType>
+   			<xs:sequence>
+   				<xs:element name="question" type="xs:string"/>
+   			</xs:sequence>
+   		</xs:complexType>
+   	</xs:element>
+   	
+   	<xs:element name="postFlashCardRequest">
+   		<xs:complexType>
+   			<xs:sequence>
+   				<xs:element name="newCard" type="tns:flashCard"/>
+   			</xs:sequence>
+   		</xs:complexType>
+   	</xs:element>
+   
+   	<xs:element name="updateFlashCardRequest">
+   		<xs:complexType>
+   			<xs:sequence>
+   				<xs:element name="updatedCard" type="tns:flashCard"/>
+   			</xs:sequence>
+   		</xs:complexType>
+   	</xs:element>
+   	
+   	<xs:element name="deleteFlashCardByIdRequest">
+   		<xs:complexType>
+   			<xs:sequence>
+   				<xs:element name="id" type="xs:int"/>
+   			</xs:sequence>
+   		</xs:complexType>
+   	</xs:element>
+	 
+   	<!-- Define the "shape" of our response objects -->
+   	<xs:element name="getAllFlashCardsResponse">
+   		<xs:complexType>
+   			<xs:sequence>
+   				<xs:element name="cards" type="tns:flashCard" minOccurs="0" maxOccurs="unbounded"/>
+   			</xs:sequence>
+   		</xs:complexType>		
+   	</xs:element>
+   	
+   	<xs:element name="flashCardResponse">
+   		<xs:complexType>
+   			<xs:sequence>
+   				<xs:element name="card" type="tns:flashCard" minOccurs="0" />
+   			</xs:sequence>
+   		</xs:complexType>
+   	</xs:element>
+   	
+   	<xs:element name="deletedFlashCardResponse">
+   		<xs:complexType>
+   			<xs:sequence>
+   				<xs:element name="deleted" type="xs:boolean"/>
+   			</xs:sequence>
+   		</xs:complexType>
+   	</xs:element>
+   
+ </xs:schema>

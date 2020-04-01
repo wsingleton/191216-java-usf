@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <!-- Mapping logic for POJO <====> DB table -->
+    <class name="com.revature.models.Employee" table="EMPLOYEES">
+
+        <!-- Specify the field <====> column mappings -->
+        <id name="id" type="int">
+            <column name="ID"/>
+            <generator class="increment"/>
+        </id>
+
+        <property name="name" type="string">
+            <column name="NAME"/>
+        </property>
+
+        <property name="role" type="string">
+            <column name="ROLE"/>
+        </property>
+
+        <property name="insertTime" type="timestamp">
+            <column name="INSERT_TIME"/>
+        </property>
+
+    </class>
+
+</hibernate-mapping>

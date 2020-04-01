@@ -7,8 +7,8 @@
     <relativePath>pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>helloworld</groupId>
-  <artifactId>HelloWorld</artifactId>
+  <groupId>com.revature</groupId>
+  <artifactId>untitled</artifactId>
   <name>A sample Hello World created for SAM CLI.</name>
   <version>1.0</version>
   <build>

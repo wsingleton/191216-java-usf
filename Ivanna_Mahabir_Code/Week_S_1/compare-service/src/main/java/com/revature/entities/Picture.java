@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Image {
+public class Picture {
 
     @Id
     private int id;

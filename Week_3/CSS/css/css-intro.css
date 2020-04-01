@@ -1,0 +1,46 @@
+/*
+    CSS Selectors
+
+        * { }               Universal
+        p { }               Type/Tag
+        .className { }      Class
+        #idName { }         Id
+        h1, a { }           Multi-selector
+        h1, #idName { }     Multi-selector
+        li > a { }          Child
+        p a { }             Descendant
+        h1 + p { }          Sibling/Adjacent
+
+*/
+
+div {
+    border: 1px solid;
+    padding: 5px;
+    background-color: slategrey;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: blue;
+}
+
+#inheritance {
+    color: red;
+}
+
+.main-header {
+    border-radius: 5%;
+}
+
+div > a:visited {
+    color: salmon;
+}
+
+div > a:hover {
+    color: green;
+}
+
+
+div > a:active {
+    color: d;
+}

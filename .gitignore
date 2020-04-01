@@ -107,6 +107,17 @@ rbs-db-user-setup.sql
 # All .mp4 files
 *.mp4
 
+<<<<<<< HEAD
 #IntelliJ-specific files
 *.iml
 .idea/
+=======
+# IntelliJ-specific files
+*.iml
+.idea/
+
+# Gradle stuff
+gradlew
+gradlew.bat
+*.gradle
+>>>>>>> 321fb18e49973be4e9f269efaa58b8f232462e29
