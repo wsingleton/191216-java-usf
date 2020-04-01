@@ -5,8 +5,10 @@ import com.amazonaws.services.rekognition.AmazonRekognition;
 import com.amazonaws.services.rekognition.AmazonRekognitionClientBuilder;
 import com.amazonaws.services.rekognition.model.*;
 import com.amazonaws.util.IOUtils;
-import com.revature.controllers.ImageController;
+import com.revature.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
@@ -18,17 +20,31 @@ import java.util.List;
 
 @EnableEurekaClient
 @SpringBootApplication
-public class CompareFaces {
+public class CompareFaceApplication implements CommandLineRunner{
 
     @Autowired
-    private static ImageController imageController;
+    private ImageService imageService;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args)
+    {
+        SpringApplication.run(CompareFaceApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+
+        com.revature.entites.Image picA = new com.revature.entites.Image("1", "imgA.jpg");
+        com.revature.entites.Image picB = new com.revature.entites.Image("2", "imgB.jpg");
+        com.revature.entites.Image picC = new com.revature.entites.Image("3", "imgC.jpg");
+
+        imageService.save(picA);
+        imageService.save(picB);
+        imageService.save(picC);
 
         Float similarityThreshold = 70F;
-        String imgA = "";
-        String imgB = "";
-        String imgC = "";
+        String imgA = imageService.getLinkById("1");
+        String imgB = imageService.getLinkById("2");
+        String imgC = imageService.getLinkById("3");
         ByteBuffer imgABytes = null;
         ByteBuffer imgBBytes = null;
         ByteBuffer imgCBytes = null;
@@ -72,12 +88,12 @@ public class CompareFaces {
                 .withTargetImage(c).withSimilarityThreshold(similarityThreshold);
         CompareFacesResult compareFacesResultTwo=amazonRekognition.compareFaces(requestTwo);
 
-        List<CompareFacesMatch> faceDetails = compareFacesResultOne.getFaceMatches();
-        for (CompareFacesMatch match: faceDetails){
-            ComparedFace face= match.getFace();
-            BoundingBox position = face.getBoundingBox();
-            System.out.println("Face at " + position.getLeft().toString()
-                    + " " + position.getTop()
+        List<CompareFacesMatch> faceDetailsOne = compareFacesResultOne.getFaceMatches();
+        for (CompareFacesMatch match: faceDetailsOne){
+            ComparedFace faceOne= match.getFace();
+            BoundingBox positionOne = faceOne.getBoundingBox();
+            System.out.println("Face at " + positionOne.getLeft().toString()
+                    + " " + positionOne.getTop()
                     + " matches with " + match.getSimilarity().toString()
                     + "% confidence.");
 

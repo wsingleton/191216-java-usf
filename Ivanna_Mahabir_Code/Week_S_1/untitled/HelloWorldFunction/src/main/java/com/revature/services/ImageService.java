@@ -6,6 +6,7 @@ import com.revature.exceptions.ResourceNotFoundException;
 import com.revature.repositories.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
@@ -15,17 +16,17 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
-    public Optional<Image> findById(String id){
-        if(id.isEmpty() || (Integer.parseInt(id) <=0)){
+
+    public String getLinkById(String id){
+        if(id.isEmpty() || Integer.parseInt(id) <= 0){
             throw new InvalidInputException();
         }
-        Optional<Image> _img = imageRepository.findById(id);
-        if(!_img.isPresent()){
+        Optional<Image> _room = imageRepository.findById(id);
+        if(!_room.isPresent()){
             throw new ResourceNotFoundException();
         }
-        return _img;
+        return imageRepository.findById(id).get().getLink();
     }
-
 
     public Image save (Image img){
         if(img == null){

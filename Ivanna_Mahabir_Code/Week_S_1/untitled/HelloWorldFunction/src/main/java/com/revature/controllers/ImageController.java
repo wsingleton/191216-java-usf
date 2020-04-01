@@ -24,11 +24,7 @@ public class ImageController {
         if(id.isEmpty() || Integer.parseInt(id) <= 0){
             throw new InvalidInputException();
         }
-        Optional<Image> _room = imageService.findById(id);
-        if(!_room.isPresent()){
-            throw new ResourceNotFoundException();
-        }
-        return imageService.findById(id).get().getLink();
+        return imageService.getLinkById(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
