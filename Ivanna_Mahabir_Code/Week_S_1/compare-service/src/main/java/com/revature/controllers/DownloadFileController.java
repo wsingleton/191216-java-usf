@@ -7,14 +7,18 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.ByteArrayOutputStream;
 
+@RestController
+@RequestMapping("/down")
 public class DownloadFileController {
     @Autowired
     S3Services s3Services;
 
-    @GetMapping("/{name}")
+    @GetMapping("/api/file/{name}")
     public ResponseEntity<byte[]> downloadFile(@PathVariable String name) {
         ByteArrayOutputStream downloadInputStream = s3Services.downloadFile(name);
 

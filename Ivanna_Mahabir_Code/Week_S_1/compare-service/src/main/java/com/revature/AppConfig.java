@@ -34,6 +34,7 @@ public class AppConfig implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(AppConfig.class, args);
+
     }
 
     @Bean
@@ -51,6 +52,7 @@ public class AppConfig implements CommandLineRunner {
         Picture picA = new Picture("1", "imgA.jpg");
         Picture picB = new Picture("2", "imgB.jpg");
         Picture picC = new Picture("3", "imgC.jpg");
+
 
 
     }

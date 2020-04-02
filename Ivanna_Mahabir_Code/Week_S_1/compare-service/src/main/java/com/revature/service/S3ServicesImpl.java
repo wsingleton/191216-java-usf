@@ -25,8 +25,11 @@ public class S3ServicesImpl implements S3Services{
     @Autowired
     private AmazonS3 s3client;
 
-    @Value("${s3.bucket}")
+    @Value("${gkz.s3.bucket}")
     private String bucketName;
+
+    public S3ServicesImpl() {
+    }
 
     @Override
     public ByteArrayOutputStream downloadFile(String name) {

@@ -14,6 +14,7 @@ import java.util.List;
 @RequestMapping("/img")
 public class ImageController {
 
+    @Autowired
     private ImageService imageService;
 
     @Autowired
@@ -27,10 +28,10 @@ public class ImageController {
         return imageService.findImgById(id);
     }
 
-    @GetMapping(value = "/{idA}/{idB}", produces = MediaType.APPLICATION_JSON_VALUE)
+ /*   @GetMapping(value = "/{idA}/{idB}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void compareFacePics(@PathVariable String idA, @PathVariable String idB){
         imageService.compareFaces(idA, idB);
-    }
+    }*/
 
     @GetMapping
     public List<Picture> getAll(){
