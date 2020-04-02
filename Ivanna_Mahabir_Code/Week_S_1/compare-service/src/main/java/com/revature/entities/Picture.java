@@ -13,6 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Picture {
 
     @Id
-    private int id;
+    private String id;
     private String link;
 }

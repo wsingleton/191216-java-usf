@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/img")
 public class ImageController {
@@ -23,6 +25,16 @@ public class ImageController {
             throw new InvalidInputException();
         }
         return imageService.findImgById(id);
+    }
+
+    @GetMapping(value = "/{idA}/{idB}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void compareFacePics(@PathVariable String idA, @PathVariable String idB){
+        imageService.compareFaces(idA, idB);
+    }
+
+    @GetMapping
+    public List<Picture> getAll(){
+        return imageService.findAll();
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
