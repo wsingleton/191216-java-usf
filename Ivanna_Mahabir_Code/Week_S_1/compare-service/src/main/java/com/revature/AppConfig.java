@@ -53,8 +53,9 @@ public class AppConfig implements CommandLineRunner {
         Picture picB = new Picture("2", "imgB.jpg");
         Picture picC = new Picture("3", "imgC.jpg");
 
-
-
+        imageService.save(picA);
+        imageService.save(picB);
+        imageService.save(picC);
     }
 
 

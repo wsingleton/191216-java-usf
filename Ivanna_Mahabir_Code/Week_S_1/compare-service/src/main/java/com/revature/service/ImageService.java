@@ -8,7 +8,7 @@ import com.revature.controllers.DownloadFileController;
 import com.revature.entities.Picture;
 import com.revature.exceptions.InvalidInputException;
 import com.revature.exceptions.ResourceNotFoundException;
-import com.revature.repositories.ImageRepository;
+import com.revature.repositories.ImageMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,32 +26,32 @@ import java.util.Optional;
 public class ImageService {
 
     @Autowired
-    private ImageRepository imageRepository;
+    private ImageMongoRepository imageMongoRepository;
 
 
     @Autowired
     DownloadFileController downloadFileController;
 
     public List<Picture> findAll(){
-        return imageRepository.findAll();
+        return imageMongoRepository.findAll();
     }
 
     public String findImgById(String id){
         if(id.isEmpty() || Integer.parseInt(id) <=0){
             throw new InvalidInputException();
         }
-        Optional<Picture> _pic = imageRepository.findById(id);
+        Optional<Picture> _pic = imageMongoRepository.findById(id);
         if(!_pic.isPresent()){
             throw new ResourceNotFoundException();
         }
-        return imageRepository.findById(id).get().getLink();
+        return imageMongoRepository.findById(id).get().getLink();
     }
 
     public Picture save (Picture img){
         if(img == null){
             throw new ResourceNotFoundException();
         }
-        return imageRepository.save(img);
+        return imageMongoRepository.save(img);
     }
 
     public void compareFaces(String idA, String idB){

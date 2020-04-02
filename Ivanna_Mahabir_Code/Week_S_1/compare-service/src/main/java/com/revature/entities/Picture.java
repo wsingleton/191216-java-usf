@@ -15,4 +15,8 @@ public class Picture {
     @Id
     private String id;
     private String link;
+
+    public Picture(String link) {
+        this.link = link;
+    }
 }
